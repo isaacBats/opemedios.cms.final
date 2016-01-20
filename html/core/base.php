@@ -4,10 +4,14 @@ require_once('conn.php');
 
 //var_dump($pdo);
 
-if( !empty($_GET['lang']) ){
-	$lang = $_GET['lang'];
-	funcion($lang);
+if( !empty($_GET['lang']) && $_GET['lang'] == "en" ){
+	$lang = 'en';
 }
+else{
+	$lang = 'es';
+}
+
+noticias($lang);
 
 /**
  * Este es el template base para las funciones

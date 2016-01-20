@@ -9,56 +9,87 @@ class Noticias extends Controller
 {
 	
 	/**
-	 * Este es el template base para las funciones
+	 * Devuelve el detalle de la noticia
 	 * @param string $lang 
 	 * @param integer $id 
 	 * @return string
 	 */
-	function mostrarTodas($lang="es",$id=null){
+	function mostrarDetalle($lang="es", $slug=""){
+		echo $slug;
+	}
+	
+	/**
+	 * Este es el template base para las funciones
+	 * @param string $lang 
+	 * @return string
+	 */
+	function mostrarTodas($lang="es"){
 		
 		$html = $this->cabecera();
 
-		if( $id == null ){
-			if ($lang == "es"){
-				$sql = "SELECT * FROM noticias";
-				$query = $this->pdo->prepare($sql);
-				$rs = $query->execute();
-				if($rs!==false){
-					$nr = $query->rowCount();
-					if( $nr > 0 ){
-						$noticias = $query->fetchAll();
-						foreach ($noticias as $noticia) {
-							$html .= '<div class="listado">
-										<div class="list-item">
-							                <div class="img-listado">
-												<a href="noticias-detalle.html">
-							                    	<img src="../images/'.$noticia['imagen'].'" alt="">
-												</a>
-							                </div>
-							                <div class="texto-listado">
-							                    <a href="noticias-detalle.html"><h2>'.$noticia['titulo'].'</h2></a>
-							                    '.$noticia['extracto'].'
-							                    <p>
-							                    	<a href="noticias-detalle.html">[ + ] Leer Todo</a>
-							                    </p>
-							                </div>
-							                <br class="clear">
-							            </div>
-							         </div>';
-						}
+		if ($lang == "es"){
+			$sql = "SELECT * FROM noticias";
+			$query = $this->pdo->prepare($sql);
+			$rs = $query->execute();
+			if($rs!==false){
+				$nr = $query->rowCount();
+				if( $nr > 0 ){
+					$noticias = $query->fetchAll();
+					foreach ($noticias as $noticia) {
+						$html .= '<div class="listado">
+									<div class="list-item">
+						                <div class="img-listado">
+											<a href="noticias-detalle.html">
+						                    	<img src="../images/'.$noticia['imagen'].'" alt="">
+											</a>
+						                </div>
+						                <div class="texto-listado">
+						                    <a href="noticias-detalle.html"><h2>'.$noticia['titulo'].'</h2></a>
+						                    '.$noticia['extracto'].'
+						                    <p>
+						                    	<a href="'.$noticia['slug'].'">[ + ] Leer más </a>
+						                    </p>
+						                </div>
+						                <br class="clear">
+						            </div>
+						         </div>';
 					}
 				}
 			}
-			else if ($lang == "en") {
-				$html .= 'Devuelve en inglés';
-			}
-			else
-			{
-				$html .= 'No existe lang';
+		}
+		else if ($lang == "en") {
+			$sql = "SELECT * FROM noticias";
+			$query = $this->pdo->prepare($sql);
+			$rs = $query->execute();
+			if($rs!==false){
+				$nr = $query->rowCount();
+				if( $nr > 0 ){
+					$noticias = $query->fetchAll();
+					foreach ($noticias as $noticia) {
+						$html .= '<div class="listado">
+									<div class="list-item">
+						                <div class="img-listado">
+											<a href="noticias-detalle.html">
+						                    	<img src="../images/'.$noticia['imagen_thumbnail'].'" alt="">
+											</a>
+						                </div>
+						                <div class="texto-listado">
+						                    <a href="noticias-detalle.html"><h2>'.$noticia['titulo_en'].'</h2></a>
+						                    '.$noticia['extracto_en'].'
+						                    <p>
+						                    	<a href="'.$noticia['slug'].'">[ + ] Read more </a>
+						                    </p>
+						                </div>
+						                <br class="clear">
+						            </div>
+						         </div>';
+					}
+				}
 			}
 		}
-		else{
-			
+		else
+		{
+			$html .= 'No existe lang';
 		}
 
 		$html .= $this->footer();

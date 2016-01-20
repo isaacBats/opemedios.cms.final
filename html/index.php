@@ -22,6 +22,12 @@
 	    'methods' => 'GET'
 	)));
 
+	$collection->attachRoute(new Route('/news/:slug', array(
+	    '_controller' => 'Noticias::mostrarDetalle',
+	    'parameters' => array("lang" => $lang) ,
+	    'methods' => 'GET'
+	)));
+
 	$collection->attachRoute(new Route('/gallery', array(
 	    '_controller' => 'Languages::showGallery',
 	    'parameters' => array("lang" => $lang) ,

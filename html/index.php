@@ -27,6 +27,12 @@
 	)));
 
 	$collection->attachRoute(new Route('/gallery', array(
+	    '_controller' => 'Gallery::allGalleries',
+	    'parameters' => array("lang" => $lang) ,
+	    'methods' => 'GET'
+	)));
+
+	$collection->attachRoute(new Route('/gallery/:slug', array(
 	    '_controller' => 'Gallery::showGallery',
 	    'parameters' => array("lang" => $lang) ,
 	    'methods' => 'GET'
@@ -38,5 +44,8 @@
 	$router->setBasePath('/');
 	$route = $router->matchCurrentRequest();
 
+	if( !$route ){
+		echo "404";
+	}
 
 ?>

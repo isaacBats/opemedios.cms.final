@@ -26,26 +26,26 @@
 <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
      
 <!-- Iconos para el navegador (los íconos que aparecen en los tabs y en los bookmarks) -->
-<link rel="shortcut icon" href="images/icono.ico">
-<link rel="bookmark" href="images/icono.ico">
+<link rel="shortcut icon" href="/images/icono.ico">
+<link rel="bookmark" href="/images/icono.ico">
     
 <!-- Iconos para ipad e iphone (íconos que aparecen en el home al momento de guardar la página) -->
 <!-- Ícono usado para iphone 3gs para atrás -->
-<link rel="apple-touch-icon" href="images/icons/apple-touch-icon-precomposed.png">
+<link rel="apple-touch-icon" href="/images/icons/apple-touch-icon-precomposed.png">
 <!-- Ícono usado en ipads de anterior generación -->
-<link rel="apple-touch-icon" sizes="72x72" href="images/icons/apple-touch-icon-72x72-precomposed.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/images/icons/apple-touch-icon-72x72-precomposed.png">
 <!-- Ícono utilizado en iphone 4 para adelante -->
-<link rel="apple-touch-icon" sizes="114x114" href="images/icons/apple-touch-icon-114x114-precomposed.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/images/icons/apple-touch-icon-114x114-precomposed.png">
 <!-- Ícono utilizado para ipads de nueva generación -->
-<link rel="apple-touch-icon" sizes="144x144" href="images/icons/apple-touch-icon-144x144-precomposed.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/images/icons/apple-touch-icon-144x144-precomposed.png">
     
 <!-- Hojas de estilo base -->
-<link rel="stylesheet" type="text/css" href="../css/style.css"><!-- Hoja personalizada -->
+<link rel="stylesheet" type="text/css" href="/css/style.css"><!-- Hoja personalizada -->
 
 <!-- Librería de jquery que contiene también la librería de jquery tools -->
 
-<script src="../../bower_components/jquery/jquery.js"></script>
-<script src="../js/custom.js"></script>
+<script src="/bower_components/jquery/jquery.js"></script>
+<script src="/js/custom.js"></script>
 
 <!-- Código que sirve para que internet explorer rendereé correctamente las etiquetas de html5 -->
 <!--[if IE]>
@@ -61,25 +61,25 @@
 		<h1><a href="index.html">Alfonso Marina</a></h1>
 		<nav id="main-nav">
 			<ul>
-				<li><a href="index.html">Inicio</a></li>
-				<li><a href="quienes-somos.html">Acerca de</a></li>
-				<li><a href="portada.html">Catálogo</a></li>
-				<li><a href="noticias.html">Noticias</a></li>
-				<li><a href="galeria.html">Galería</a></li>
-                <li><a href="prensa.html">Prensa</a></li>
-				<li><a href="contacto.html">Contacto</a></li>
+				<li><a href="/">Inicio</a></li>
+				<li><a href="/about">Acerca de</a></li>
+				<li><a href="/catalog">Catálogo</a></li>
+				<li><a href="/news">Noticias</a></li>
+				<li><a href="/gallery">Galería</a></li>
+                <li><a href="/press">Prensa</a></li>
+				<li><a href="/contact">Contacto</a></li>
 			</ul>
 		</nav><!-- #main-nav -->
 		<div id="aux-nav">
 			<nav>
 				<ul>
-					<li><a href="login.html">Sign in</a></li>
-					<li><a href="javascript:void(0);">Registro</a></li>
+					<li><a href="/login">Sign in</a></li>
+					<li><a href="/register">Registro</a></li>
 	            </ul>
 	        </nav>
 	        <a href="javascript:void(0);">Mis Favoritos</a>
-	        <a href="javascript:void(0);" class="selected">ESP</a> -
-	        <a href="javascript:void(0);">ENG</a>
+	        <a href="<?php echo $this->url("es") ?>" class="selected">ESP</a> -
+	        <a href="<?php echo $this->url("en") ?>">ENG</a>
 	        <div class="search-box">
 	        	<form action="/" id="frmBuscar" novalidate="novalidate">
 	        	   	<input type="text" autocomplete="off" maxlength="50" id="q" name="q" placeholder="Búsqueda" class="text-label">
@@ -92,6 +92,6 @@
 	</header><!-- #main-header -->
 	<div id="wrapper">
 		<div class="breadcrumb vertical">
-			<a href="index.html">Inicio</a> <span class="breadPipe">|</span> Noticias
+			<?php $this->bread($lang ) ?>
 		</div>
 	

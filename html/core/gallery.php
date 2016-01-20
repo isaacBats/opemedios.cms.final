@@ -4,7 +4,7 @@
 	/**
 	* 
 	*/
-	class Languages
+	class Gallery extends Controller
 	{
 		
 		function __construct()
@@ -13,7 +13,7 @@
 		}
 
 		public function showGallery( $lang = "en" ){
-			print_r( $lang );
+			$this->header( $lang );
 		}
 	}
 

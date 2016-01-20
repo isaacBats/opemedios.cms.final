@@ -11,31 +11,65 @@ else{
 	$lang = 'es';
 }
 
-echo noticias($lang);
+if( !empty($_GET['id']) ){
+	echo noticias($lang,$_GET['id']);
+}
+else{
+	echo noticias($lang);
+}
+
 
 /**
  * Este es el template base para las funciones
  * @param string $lang 
- * @param array $args 
+ * @param integer $id 
  * @return string
  */
-function noticias($lang,$args){
-
-	$default = array();
-	
-	$args = array_merge($default,$args);
-
+function noticias($lang="es",$id=null){
+	global $pdo;
 	$html = cabecera();
 
-	if ($lang == "es"){
-		$html .= 'Devuelve en español';
+	if( $id == null ){
+		if ($lang == "es"){
+			$sql = "SELECT * FROM noticias";
+			$query = $pdo->prepare($sql);
+			$rs = $query->execute();
+			if($rs!==false){
+				$nr = $query->rowCount();
+				if( $nr > 0 ){
+					$noticias = $query->fetchAll();
+					foreach ($noticias as $noticia) {
+						$html .= '<div class="listado">
+									<div class="list-item">
+						                <div class="img-listado">
+											<a href="noticias-detalle.html">
+						                    	<img src="../images/'.$noticia['imagen'].'" alt="">
+											</a>
+						                </div>
+						                <div class="texto-listado">
+						                    <a href="noticias-detalle.html"><h2>'.$noticia['titulo'].'</h2></a>
+						                    '.$noticia['extracto'].'
+						                    <p>
+						                    	<a href="noticias-detalle.html">[ + ] Leer Todo</a>
+						                    </p>
+						                </div>
+						                <br class="clear">
+						            </div>
+						         </div>';
+					}
+				}
+			}
+		}
+		else if ($lang == "en") {
+			$html .= 'Devuelve en inglés';
+		}
+		else
+		{
+			$html .= 'No existe lang';
+		}
 	}
-	else if ($lang == "en") {
-		$html .= 'Devuelve en inglés';
-	}
-	else
-	{
-		$html .= 'No existe lang';
+	else{
+		
 	}
 
 	$html .= footer();
@@ -165,7 +199,11 @@ function cabecera(){
 					        </div><!-- .search-box -->
 					    </div><!-- #aux-nav -->
 					</header><!-- #main-header -->
-					<div id="wrapper">';
+					<div id="wrapper">
+						<div class="breadcrumb vertical">
+							<a href="index.html">Inicio</a> <span class="breadPipe">|</span> Noticias
+						</div>
+					';
 
 				return $html;
 

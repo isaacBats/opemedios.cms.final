@@ -9,13 +9,13 @@
 	use PHPRouter\Router;
 	use PHPRouter\Route;
 
-	$lang = $_GET["lang"];
+	$lang = isset($_GET["lang"])?$_GET["lang"]:"es";
 
 	$_SERVER["REQUEST_URI"] = str_replace( "/".$lang ,"",$_SERVER["REQUEST_URI"] );
 
 	$collection = new RouteCollection();
 	
-
+	
 	$collection->attachRoute(new Route('/news', array(
 	    '_controller' => 'Noticias::mostrarTodas',
 	    'parameters' => array("lang" => $lang) ,

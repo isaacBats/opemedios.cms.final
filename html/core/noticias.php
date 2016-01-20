@@ -63,7 +63,7 @@ class Noticias extends Controller
 
 		$html .= $this->footer();
 
-		return $html;
+		echo $html;
 	}
 
 	function footer(){

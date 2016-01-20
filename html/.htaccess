@@ -1,4 +1,8 @@
 Options +FollowSymLinks
 RewriteEngine On
-RewriteRule "^en\/(.*)$" index.php?lang=en [NC,L]
-RewriteRule "^es\/(.*)$" index.php?lang=es [NC,L]
+RewriteRule "^en\/(.*)$" index.php?lang=en [L]
+RewriteRule "^es\/(.*)$" index.php?lang=es [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule "^(.*)$" index.php?lang=es 
+

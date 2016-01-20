@@ -1,0 +1,84 @@
+/*//////////////////////// Estilos wrapper ////////////////////////*/
+#wrapper
+{
+    /*min-width: 1150px;*/
+    margin: 0 auto;
+    font-family: Georgia, "Times New Roman" , Times, serif;
+    clear: both;
+    position: relative;
+    /*min-height: 300px;*/
+    padding-bottom: 100px;
+}
+.breadcrumb
+{
+    margin: 0 0 25px 0;
+    font-size: 11px;
+}
+.breadcrumb.vertical
+{
+    margin: 25px 0 25px 10%;
+    
+}
+.breadcrumb span
+{
+    /*color: #807562; Modificado UB*/
+    color:#D4D1CB;
+}
+.breadcrumb select
+{
+    margin-top: 10px;
+    width: 235px;
+}
+.breadcrumb a
+{
+    color: #EAE6DF;
+    text-decoration: none;
+}
+.breadcrumb a:hover
+{
+    color: #807562;
+}
+.breadcrumb.vertical {
+    margin: 5px 0 30px 10%
+}
+/*//////////////////////// Estilos Acerca de ////////////////////////*/
+.acerca-principal p
+{
+    text-align: center;
+    font-family: Georgia,"Times New Roman",Times,serif;
+    font-size: 14px;
+    margin-bottom: 20px;
+    line-height: 1.5em;
+}
+.acerca-principal img
+{
+    margin-bottom: 20px;
+}
+/*/////// Cambios Generales ipad ///////*/
+@media only screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape) {
+    body {
+        padding: 0 2%;
+    }
+    #wrapper.fabrica{
+        
+    }
+    #wrapper.fabrica .breadcrumb.vertical{
+        margin: 0 0 20px;
+    }
+    #wrapper.fabrica .acercaPrincipal img {
+        margin-bottom: 10px;
+    }
+}
+        
+/*/////// Cambios FÃ¡brica ///////*/
+@media only screen and (min-width: 1560px) {
+    #wrapper.fabrica{
+        margin: 50px 5% 0;
+    }
+    .fabrica .acercaPrincipal{
+        margin-bottom: 65px;
+    }
+}
+#wrapper.fabrica .breadcrumb.vertical{
+        margin-left: 0;
+}

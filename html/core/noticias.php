@@ -1,112 +1,101 @@
 <?php
 
-require_once('conn.php');
-
-//var_dump($pdo);
-
-if( !empty($_GET['lang']) && $_GET['lang'] == "en" ){
-	$lang = 'en';
-}
-else{
-	$lang = 'es';
-}
-
-if( !empty($_GET['id']) ){
-	echo noticias($lang,$_GET['id']);
-}
-else{
-	echo noticias($lang);
-}
-
 
 /**
- * Este es el template base para las funciones
- * @param string $lang 
- * @param integer $id 
- * @return string
- */
-function noticias($lang="es",$id=null){
-	global $pdo;
-	$html = cabecera();
+*  Controlador de noticias
+*/
 
-	if( $id == null ){
-		if ($lang == "es"){
-			$sql = "SELECT * FROM noticias";
-			$query = $pdo->prepare($sql);
-			$rs = $query->execute();
-			if($rs!==false){
-				$nr = $query->rowCount();
-				if( $nr > 0 ){
-					$noticias = $query->fetchAll();
-					foreach ($noticias as $noticia) {
-						$html .= '<div class="listado">
-									<div class="list-item">
-						                <div class="img-listado">
-											<a href="noticias-detalle.html">
-						                    	<img src="../images/'.$noticia['imagen'].'" alt="">
-											</a>
-						                </div>
-						                <div class="texto-listado">
-						                    <a href="noticias-detalle.html"><h2>'.$noticia['titulo'].'</h2></a>
-						                    '.$noticia['extracto'].'
-						                    <p>
-						                    	<a href="noticias-detalle.html">[ + ] Leer Todo</a>
-						                    </p>
-						                </div>
-						                <br class="clear">
-						            </div>
-						         </div>';
+class Noticias extends Controller
+{
+	
+	/**
+	 * Este es el template base para las funciones
+	 * @param string $lang 
+	 * @param integer $id 
+	 * @return string
+	 */
+	function mostrarTodas($lang="es",$id=null){
+		
+		$html = $this->cabecera();
+
+		if( $id == null ){
+			if ($lang == "es"){
+				$sql = "SELECT * FROM noticias";
+				$query = $this->pdo->prepare($sql);
+				$rs = $query->execute();
+				if($rs!==false){
+					$nr = $query->rowCount();
+					if( $nr > 0 ){
+						$noticias = $query->fetchAll();
+						foreach ($noticias as $noticia) {
+							$html .= '<div class="listado">
+										<div class="list-item">
+							                <div class="img-listado">
+												<a href="noticias-detalle.html">
+							                    	<img src="../images/'.$noticia['imagen'].'" alt="">
+												</a>
+							                </div>
+							                <div class="texto-listado">
+							                    <a href="noticias-detalle.html"><h2>'.$noticia['titulo'].'</h2></a>
+							                    '.$noticia['extracto'].'
+							                    <p>
+							                    	<a href="noticias-detalle.html">[ + ] Leer Todo</a>
+							                    </p>
+							                </div>
+							                <br class="clear">
+							            </div>
+							         </div>';
+						}
 					}
 				}
 			}
+			else if ($lang == "en") {
+				$html .= 'Devuelve en inglés';
+			}
+			else
+			{
+				$html .= 'No existe lang';
+			}
 		}
-		else if ($lang == "en") {
-			$html .= 'Devuelve en inglés';
+		else{
+			
 		}
-		else
-		{
-			$html .= 'No existe lang';
-		}
+
+		$html .= $this->footer();
+
+		return $html;
 	}
-	else{
-		
+
+	function footer(){
+		$html = '
+				<br class="clear"/>
+	            </div>
+						<footer id="main-footer">
+							<footer id="inner-footer">
+								<form >    
+									<div id="newsletter">
+						        		<input type="email" value="" placeholder="Email" name="Email" id="Email" data-val-required="The Email field is required." data-val-regex-pattern="^(([A-Za-z0-9]+_+)|([A-Za-z0-9]+\-+)|([A-Za-z0-9]+\.+)|([A-Za-z0-9]+\++))*[A-Za-z0-9]+@((\w+\-+)|(\w+\.))*\w{1,63}\.[a-zA-Z]{2,6}$" data-val-regex="*" data-val="true" class="text-label">
+						        		<input type="submit" id="news-submit" value="Suscribir" name="Submit">
+						    		</div><!-- #newsletter --> 
+								</form>
+						        <p>&copy;Alfonso Marina Ebanista. Derechos Reservados 2015.</p>
+						        <div id="social-media">
+						        	<span class="tagline">Síguenos:</span>
+				                    <a class="btn-social facebook" href="https://www.facebook.com/pages/Alfonso-Marina-Ebanista/216426771801026?ref=aymt_homepage_panel" target="_blank">Facebook</a>
+				                    <a class="btn-social twitter" href="https://twitter.com/alfonsomarinamx" target="_blank">Twitter</a>
+				                    <a class="btn-social pinterest" href="http://pinterest.com/alfonsomarina/boards/" target="_blank">Pinterest</a>
+				                    <a class="btn-social instagram" href="http://instagram.com/alfonsomarinamx" target="_blank">Instagram</a>
+				                    <a class="btn-social dh" href="http://www.deringhall.com/designers/Alfonso-marina-ebanista" target="_blank">Dering Hall</a>
+				                </div><!-- #social-media -->
+				            </footer><!-- #main-footer -->
+				        </footer><!-- #inner-footer -->
+				</div><!-- #body -->
+				</body>
+				</html>';
+		return $html;
 	}
 
-	$html .= footer();
-
-	return $html;
-}
-
-function footer(){
-	$html = '
-			<br class="clear"/>
-            </div>
-					<footer id="main-footer">
-						<footer id="inner-footer">
-							<form >    
-								<div id="newsletter">
-					        		<input type="email" value="" placeholder="Email" name="Email" id="Email" data-val-required="The Email field is required." data-val-regex-pattern="^(([A-Za-z0-9]+_+)|([A-Za-z0-9]+\-+)|([A-Za-z0-9]+\.+)|([A-Za-z0-9]+\++))*[A-Za-z0-9]+@((\w+\-+)|(\w+\.))*\w{1,63}\.[a-zA-Z]{2,6}$" data-val-regex="*" data-val="true" class="text-label">
-					        		<input type="submit" id="news-submit" value="Suscribir" name="Submit">
-					    		</div><!-- #newsletter --> 
-							</form>
-					        <p>&copy;Alfonso Marina Ebanista. Derechos Reservados 2015.</p>
-					        <div id="social-media">
-					        	<span class="tagline">Síguenos:</span>
-			                    <a class="btn-social facebook" href="https://www.facebook.com/pages/Alfonso-Marina-Ebanista/216426771801026?ref=aymt_homepage_panel" target="_blank">Facebook</a>
-			                    <a class="btn-social twitter" href="https://twitter.com/alfonsomarinamx" target="_blank">Twitter</a>
-			                    <a class="btn-social pinterest" href="http://pinterest.com/alfonsomarina/boards/" target="_blank">Pinterest</a>
-			                    <a class="btn-social instagram" href="http://instagram.com/alfonsomarinamx" target="_blank">Instagram</a>
-			                    <a class="btn-social dh" href="http://www.deringhall.com/designers/Alfonso-marina-ebanista" target="_blank">Dering Hall</a>
-			                </div><!-- #social-media -->
-			            </footer><!-- #main-footer -->
-			        </footer><!-- #inner-footer -->
-			</div><!-- #body -->
-			</body>
-			</html>';
-	return $html;
-}
-
-function cabecera(){
+	function cabecera(){
 	$html = '<!doctype html>
 				<html><head>
 				<meta charset="UTF-8">
@@ -208,3 +197,6 @@ function cabecera(){
 				return $html;
 
 				}
+
+}
+

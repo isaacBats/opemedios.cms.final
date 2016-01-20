@@ -1,0 +1,74 @@
+/*///////////////////////// Nav styles /////////////////////////*/
+#main-nav {
+    display: 					block;
+    margin: 					0 auto;
+    padding: 					0 130px;
+}
+	#main-nav ul{
+		text-align: 				center;
+	}
+		#main-nav li{
+			display: 					inline-block;
+		}
+			#main-nav li a {
+			    border-left: 				1px solid #d4d1cb;
+			    color: 						#807562;
+			    display: 					block;
+			    font-size: 					12px;
+			    padding: 					0 16px 0 20px;
+			    text-decoration: 			none;
+			}
+			#main-nav li a:hover {
+			    color: 						#eae6df;
+			}
+			#main-nav li:first-child a {
+			    border-left: 				none;
+			}
+#aux-nav{
+    position: 			absolute;
+    right: 				0;
+    top: 				-14px;
+}
+	#aux-nav a {
+	    clear: 					both;
+	    color: 					#807562;
+	    display: 				inline-block;
+	    font-size: 				11px;
+	    padding-left: 			5px;
+	    text-decoration: 		none;
+	    &.selected{
+	    	color: 				#c8c1b6;
+	    }
+	}
+	#aux-nav a:hover{
+	    color: 					#eae6df;
+	}
+	#aux-nav li {
+	    float: 					left;
+	}
+		#aux-nav li a {
+		    color: 					#807562;
+		    padding: 				0 5px;
+		    text-decoration: 		none;
+		    border-left: 			1px solid #d4d1cb;
+		}
+		#aux-nav li:first-child a {
+			border-left: 			none;
+		}
+	#aux-nav input[type="text"] {
+	    border: 					1px solid #d4d1cb;
+	    height: 					24px;
+	    margin: 					4px 0 0;
+	    padding: 					0 10px;
+	    width: 						105px;
+	    border: 1px solid #d4d1cb;
+	}
+	#aux-nav input[type="submit"] {
+	    background: 				rgba(0, 0, 0, 0) url("../images/btn-busqueda.png") repeat scroll 0 0;
+	    border: 					none;
+	    display: 					inline-block;
+	    height: 					26px;
+	    margin: 					4px 0 0 -2px;
+	    text-indent: 				-9999px;
+	    width: 						26px;
+	}

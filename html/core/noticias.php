@@ -15,7 +15,43 @@ class Noticias extends Controller
 	 * @return string
 	 */
 	function mostrarDetalle($lang="es", $slug=""){
-		echo $slug;
+		if ( !empty($slug) ){
+
+			$html = $this->cabecera();
+
+			$sql = "SELECT * FROM noticias WHERE slug = :slug";
+			$query = $this->pdo->prepare($sql);
+			$query->bindParam(':slug', $slug);
+			$rs = $query->execute();
+			if( $rs ){
+				$noticia = $query->fetch();
+				$html .= '<div class="registro">
+					    	<div class="evento-principal full">
+						        <a href="javascript:void(0)" class="fancybox">
+						            <img alt="" src="../../images/'.$noticia['imagen'].'" />
+						        </a>
+					    	</div><!-- .evento-principal -->
+					    	<div class="eventoSecundario">
+						        <div class="nav-detalle">
+						            <a href="javascript:void(0)">Anterior</a> | <a href="javascript:void(0);">Siguiente</a>
+						            <a href="'.$this->url($lang,'/news').'" class="ver-todos">Ver todos</a>
+						        </div>
+					  			<!-- nav-detalle -->
+						        <h2 class="detalle-producto">'.$noticia['titulo'].'</h2>
+						        '.$noticia['contenido'].'
+							</div>
+							<!-- .eventoSecundario -->
+
+						</div>';
+			}
+
+			$html .= $this->footer();
+		}
+		else{
+
+		}
+		
+		echo $html;
 	}
 	
 	/**
@@ -39,15 +75,15 @@ class Noticias extends Controller
 						$html .= '<div class="listado">
 									<div class="list-item">
 						                <div class="img-listado">
-											<a href="noticias-detalle.html">
-						                    	<img src="../images/'.$noticia['imagen'].'" alt="">
+											<a href="'.$this->url($lang,'/news/'.$noticia['slug']).'">
+						                    	<img src="../images/'.$noticia['imagen_thumbnail'].'" alt="">
 											</a>
 						                </div>
 						                <div class="texto-listado">
-						                    <a href="noticias-detalle.html"><h2>'.$noticia['titulo'].'</h2></a>
+						                    <a href="'.$this->url($lang,'/news/'.$noticia['slug']).'"><h2>'.$noticia['titulo'].'</h2></a>
 						                    '.$noticia['extracto'].'
 						                    <p>
-						                    	<a href="'.$noticia['slug'].'">[ + ] Leer más </a>
+						                    	<a href="'.$this->url($lang,'/news/'.$noticia['slug']).'">[ + ] Leer más </a>
 						                    </p>
 						                </div>
 						                <br class="clear">
@@ -69,12 +105,12 @@ class Noticias extends Controller
 						$html .= '<div class="listado">
 									<div class="list-item">
 						                <div class="img-listado">
-											<a href="noticias-detalle.html">
+											<a href="'.$this->url($lang,'/news/'.$noticia['slug']).'">
 						                    	<img src="../images/'.$noticia['imagen_thumbnail'].'" alt="">
 											</a>
 						                </div>
 						                <div class="texto-listado">
-						                    <a href="noticias-detalle.html"><h2>'.$noticia['titulo_en'].'</h2></a>
+						                    <a href="'.$this->url($lang,'/news/'.$noticia['slug']).'"><h2>'.$noticia['titulo_en'].'</h2></a>
 						                    '.$noticia['extracto_en'].'
 						                    <p>
 						                    	<a href="'.$noticia['slug'].'">[ + ] Read more </a>
@@ -169,7 +205,7 @@ class Noticias extends Controller
 				<link rel="apple-touch-icon" sizes="144x144" href="images/icons/apple-touch-icon-144x144-precomposed.png">
 				    
 				<!-- Hojas de estilo base -->
-				<link rel="stylesheet" type="text/css" href="../css/style.css"><!-- Hoja personalizada -->
+				<link rel="stylesheet" type="text/css" href="../../css/style.css"><!-- Hoja personalizada -->
 
 				<!-- Librería de jquery que contiene también la librería de jquery tools -->
 

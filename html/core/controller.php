@@ -10,7 +10,7 @@
 		public $views = __DIR__."/../views/";
 		
 		public function url( $lang , $url){
-			return "/".$lang."/".$url;
+			return "/".$lang.$url;
 		}
 
 		function __construct()

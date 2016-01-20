@@ -4,6 +4,11 @@ require_once('conn.php');
 
 //var_dump($pdo);
 
+if( !empty($_GET['lang']) ){
+	$lang = $_GET['lang'];
+	funcion($lang);
+}
+
 /**
  * Este es el template base para las funciones
  * @param string $lang 
@@ -21,10 +26,13 @@ function funcion($lang,$args){
 	$args = array_merge($default,$args);
 
 	if ($lang == "es"){
-
 		//Devuelve en español
 	}
-	else{
-		//Obviii en inglés
+	elseif ($lang == "en") {
+		//Devuelve en inglés
+	}
+	else
+	{
+		//No existe lang
 	}
 }

@@ -1,13 +1,13 @@
 @charset "UTF-8";
 /*
-	HTML5 Reset :: style.css
-	----------------------------------------------------------
-	We have learned much from/been inspired by/taken code where offered from:
-	
-	Eric Meyer					:: http://ericmeyer.com
-	HTML5 Doctor				:: http://html5doctor.com
-	and the HTML5 Boilerplate	:: http://html5boilerplate.com
-	
+  HTML5 Reset :: style.css
+  ----------------------------------------------------------
+  We have learned much from/been inspired by/taken code where offered from:
+  
+  Eric Meyer          :: http://ericmeyer.com
+  HTML5 Doctor        :: http://html5doctor.com
+  and the HTML5 Boilerplate :: http://html5boilerplate.com
+  
 -------------------------------------------------------------------------------*/
 /* Let's default this puppy out
 -------------------------------------------------------------------------------*/
@@ -36,7 +36,7 @@ html {
   overflow-y: scroll; }
 
 /* we use a lot of ULs that aren't bulleted. 
-	don't forget to restore the bullets within content. */
+  don't forget to restore the bullets within content. */
 ul {
   list-style: none; }
 
@@ -116,7 +116,7 @@ table {
   font: 100%; }
 
 /* Accessible focus treatment
-	people.opera.com/patrickl/experiments/keyboard/test */
+  people.opera.com/patrickl/experiments/keyboard/test */
 a:hover, a:active {
   outline: none; }
 
@@ -130,7 +130,7 @@ td, td img {
   vertical-align: top; }
 
 /* Make sure sup and sub don't screw with your line-heights
-	gist.github.com/413930 */
+  gist.github.com/413930 */
 sub, sup {
   font-size: 75%;
   line-height: 0;
@@ -191,7 +191,7 @@ body {
   font: 13px Helmet, Freesans, sans-serif; }
 
 /* using local fonts? make sure to read up on Paul Irish's 
-	Bulletproof @font-face syntax: http://mky.be/font-face/bulletproof/ */
+  Bulletproof @font-face syntax: http://mky.be/font-face/bulletproof/ */
 /* we like off-black for text */
 body, select, input, textarea {
   color: #333; }
@@ -213,7 +213,7 @@ a:hover {
   color: #fff;
   text-shadow: none; }
 
-/*	j.mp/webkit-tap-highlight-color */
+/*  j.mp/webkit-tap-highlight-color */
 a:link {
   -webkit-tap-highlight-color: #fcd700; }
 
@@ -2516,14 +2516,11 @@ a.imprimir {
   text-align: center; }
 
 #main-nav li {
-  display: inline-block; 
-  padding: 10px 0px;
-  padding-top: 0px;
-  
-  position: relative;
-}
+  display: inline-block;
+  position: relative; }
 
-#main-nav li a {
+#main-nav li a,
+#main-nav li span {
   border-left: 1px solid #d4d1cb;
   color: #807562;
   display: block;
@@ -2531,40 +2528,48 @@ a.imprimir {
   padding: 0 16px 0 20px;
   text-decoration: none; }
 
-#main-nav ul > li:hover > ul ,
-#main-nav ul > li > ul:hover  {
-  display: inline-block;
-}
-#main-nav ul > li > ul  {
-  position: absolute;
-  width: 100%;
-  z-index: 10000;
-  left: 0px;
-  top: 25px;
-  display: none;
-}
-#main-nav ul > li > ul > li {
-  background-color: #fafafb;
-  color: #807562;
-  display: block;
-  text-align: left;
-  width: 180px;
-  font-size: 12px;
-  padding: 0 16px 0 5px;
-  text-decoration: none; 
-}
-#main-nav ul > li > ul > li > a{
-  border: 0px;
-  text-align: left;
-  font-size: 90%;
-  line-height: 25px;
-}
-
 #main-nav li a:hover {
   color: #eae6df; }
 
 #main-nav li:first-child a {
   border-left: none; }
+
+#main-nav > ul > li > ul {
+  position: absolute;
+  top: 10px;
+  padding: 15px 15px;
+  width: 145px;
+  display: none;
+  z-index: 2; }
+
+#main-nav > ul > li > ul > li ul {
+  position: absolute;
+  top: -15px;
+  left: 160px;
+  padding: 15px;
+  width: 145px;
+  display: none;
+  z-index: 2; }
+
+#main-nav > ul > li li.submenu > a {
+  background: url(../images/fondoSubmenu.png) no-repeat right center #fafafb; }
+
+#main-nav ul li:hover > ul {
+  display: block; }
+
+#main-nav ul li ul li {
+  width: 100%; }
+
+#main-nav li ul li a {
+  font-size: 11px;
+  color: #807562;
+  text-decoration: none;
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 5px 15px;
+  border-left: none;
+  background: #fafafb; }
 
 #aux-nav {
   position: absolute;
@@ -2978,35 +2983,6 @@ ul.thumbs li a {
       font-size: 11px;
       text-transform: uppercase;
       margin-left: 10px; }
-
-  .falta{
-    border: 1px dotted red;
-  }
-
-          label.error {
-          display: none;
-        }
-        div.field {
-          width: 230px;
-          float: left;
-          position: relative;
-        }
-        div.field input.error,
-        div.field select.error
-        {
-            border:1px solid red;
-        }
-        div.field label.error{
-        position:absolute;
-        color: red;
-        text-align: center;
-        background-color: white;
-        top: -5px;
-        right: 0px;
-        width: 50%;
-        font-size: 12px;
-        width: 50%;}
-
 
 @media only screen and (max-width: 1281px) {
   #wrapper #slideshow.slideshow img {
@@ -3643,6 +3619,9 @@ h2.tituloSeccion {
   margin: 0 1.8% 15px;
   width: 21.4%; }
 
+.item4Col > a > img {
+  min-width: 80%; }
+
 .itemDosCol a,
 .item4Col a,
 .item3Col a {
@@ -3716,5 +3695,23 @@ h2.tituloSeccion {
 @media only screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation: landscape) {
   #imgHome img {
     margin: -5px auto; } }
+#wrapper .registro .acerca-principal-quienes {
+  margin-left: 10%;
+  width: 45%; }
+
+.registro .acerca-secundario-quienes {
+  float: right;
+  margin-right: 10%;
+  width: 33%; }
+
+#page-404 {
+  text-align: center; }
+  #page-404 h1 {
+    font-size: 235px;
+    color: #c8c1b6;
+    font-weight: normal; }
+  #page-404 p {
+    font-size: 42px;
+    margin-bottom: 50px; }
 
 /*# sourceMappingURL=style.css.map */

@@ -138,7 +138,8 @@
 	$route = $router->matchCurrentRequest();
 
 	if( !$route ){
-		echo "404";
+		$notfound = new Plain();
+		$notfound->no_found( $lang );
 	}
 
 ?>

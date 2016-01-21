@@ -61,10 +61,9 @@
 			}
 			$this->header( $lang );
 
-			//$this->displayTumbs();
+			
 			require $this->views."gallery.php";
-
-			//$this->footer( $lang );
+			$this->footer( $lang );
 		}
 	}
 

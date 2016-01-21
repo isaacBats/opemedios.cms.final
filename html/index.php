@@ -56,6 +56,20 @@
 		'methods' => 'GET'
 		)));
 
+	$collection->attachRoute(new Route('/catalog/:slug', array(
+		'_controller' => 'Catalog::showListProducts',
+		'parameters' => array("lang" => $lang),
+		'methods' => 'GET'
+		)));
+
+	$collection->attachRoute(new Route('/product/:slug', array(
+		'_controller' => 'Catalog::detailProduct',
+		'parameters' => array("lang" => $lang),
+		'methods' => 'GET'
+		)));
+
+
+	
 
 	// Press
 

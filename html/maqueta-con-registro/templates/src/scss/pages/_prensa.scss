@@ -1,0 +1,70 @@
+/*///////////////// Prensa general styles /////////////////*/
+h2.tituloSeccion {
+    color: 					#b3aca1;
+    font-size: 				14px;
+    font-weight: 			bold;
+    margin-bottom: 			20px;
+}
+#content-press{
+}
+#main-aside{
+	width: 					200px;
+	position: 				absolute;
+	top: 					38px;
+	right: 					0;
+}
+
+/*///////////////// List Styles /////////////////*/
+.item4Col {
+    float: 					left;
+    margin: 				0 1.8% 15px;
+    width: 					21.4%;
+}
+.item4Col > a > img{
+	min-width: 				80%;
+}
+	.itemDosCol a, 
+	.item4Col a, 
+	.item3Col a {
+	    color: 					#807562;
+	    display: 				block;
+	    font-size: 				12px;
+	    text-align: 			center;
+	}
+
+
+/*///////////////// Filter Styles /////////////////*/
+#main-aside > ul{
+	background: 				#f0ede7;
+	border: 					1px solid #807562;
+}
+	#main-aside > ul > li > a{
+		background: 			#f0ede7;
+		padding: 				10px 15px;
+		text-transform:  		uppercase;
+		font-size:  			14px;
+		display: 				block;
+		border-top: 			1px solid #f6f5f2;
+		border-bottom: 			1px solid #f6f5f2;
+	}
+	#main-aside > ul > li > ul{
+		display: 				none;
+	}
+	#main-aside > ul > li > ul a{
+		padding: 				10px 30px;
+		font-size:  			12px;
+		display: 				block;
+		background:  			#f6f5f2 url(../images/bullet-press.png) no-repeat 15px center;
+	}
+
+/*///////////////// Press Gallery Styles /////////////////*/
+#slideshow {
+    display: 					block;
+    margin: 					0 auto;
+    min-height: 				300px;
+    text-align: 				center;
+}
+.prensa .navigation{
+	display:  					none;
+}
+

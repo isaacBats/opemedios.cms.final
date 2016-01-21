@@ -5,6 +5,8 @@
 	require_once( __DIR__.'/core/gallery.php' );
 	require_once( __DIR__.'/core/plain.php' );
 	require_once( __DIR__.'/core/Press.php' );
+	require_once( __DIR__.'/core/catalog.php' );
+
 
 	use PHPRouter\RouteCollection;
 	use PHPRouter\Config;
@@ -53,6 +55,7 @@
 		'methods' => 'GET'
 		)));
 
+<<<<<<< HEAD
 	// Press
 
 	$collection->attachRoute(new Route('/press', array(
@@ -77,6 +80,10 @@
 
 	$collection->attachRoute(new Route('/', array(
 		'_controller' => 'Plain::homeView',
+=======
+	$collection->attachRoute(new Route('/contact', array(
+		'_controller' => 'Contacto::showForm',
+>>>>>>> ffa7caf6bd48a73d59ee2fddc5d67ad4074ca4d7
 		'parameters' => array("lang" => $lang),
 		'methods' => 'GET'
 		)));

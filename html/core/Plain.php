@@ -34,6 +34,11 @@
 			require $this->views."fabric.php";
 		}
 
+		public function no_found( $lang ){
+			header("HTTP/1.0 404 Not Found");
+			require_once($this->views.'404.php' );
+		}
+
 	}
 
  ?>

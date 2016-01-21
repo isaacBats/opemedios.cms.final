@@ -8,6 +8,36 @@
 class Noticias extends Controller
 {
 	
+	private function slugs(){
+		$sql = "SELECT slug FROM noticias";
+		$query = $this->pdo->prepare($sql);
+		$rs = $query->execute();
+		if($rs!==false){
+			$nr = $query->rowCount();
+			if( $nr > 0 ){
+				$slugs = $query->fetchAll(PDO::FETCH_COLUMN);
+				return $slugs;
+			}
+		}
+	}
+
+	function navegacion($lang="es",$slug){
+		
+		$slugs = $this->slugs();
+
+		/************************************************************************************/
+		$key_actual = array_search($slug, $slugs);	
+		$key_final = key( array_slice( $slugs, -1, 1, TRUE ) );
+		/************************************************************************************/
+
+		$anterior = ( ($key_actual-1) < 0 ) ? '<a href="'.$slugs[$key_final].'">'.$this->trans($lang,'Anterior','Previous').'</a>' : '<a href="'.$slugs[$key_actual-1].'">'.$this->trans($lang,'Anterior','Previous').'</a>';
+		$siguiente = ( ($key_actual+1) > $key_final ) ? '<a href="'.$slugs[0].'">'.$this->trans($lang,'Siguiente','Next').'</a>' : '<a href="'.$slugs[$key_actual+1].'">'.$this->trans($lang,'Siguiente','Next').'</a>';
+		
+		$html =  $anterior.' | '.$siguiente;
+		
+		return $html;
+	}
+
 	/**
 	 * Devuelve el detalle de la noticia
 	 * @param string $lang 
@@ -34,7 +64,7 @@ class Noticias extends Controller
 					    	</div><!-- .evento-principal -->
 					    	<div class="eventoSecundario">
 						        <div class="nav-detalle">
-						            <a class="falta" href="javascript:void(0)">Previous</a> | <a class="falta" href="javascript:void(0);">Next</a>
+						            '.$this->navegacion($lang,$noticia['slug']).'
 						            <a href="'.$this->url($lang,'/news').'" class="ver-todos">Show all</a>
 						        </div>
 					  			<!-- nav-detalle -->
@@ -54,7 +84,7 @@ class Noticias extends Controller
 					    	</div><!-- .evento-principal -->
 					    	<div class="eventoSecundario">
 						        <div class="nav-detalle">
-						            <a class="falta" href="javascript:void(0)">Anterior</a> | <a class="falta" href="javascript:void(0);">Siguiente</a>
+						            '.$this->navegacion($lang,$noticia['slug']).'
 						            <a href="'.$this->url($lang,'/news').'" class="ver-todos">Ver todos</a>
 						        </div>
 					  			<!-- nav-detalle -->

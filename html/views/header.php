@@ -56,7 +56,21 @@
 				</li>
 				<li><a href="/news">Noticias</a></li>
 				<li><a href="/gallery">Galería</a></li>
-                <li><a href="/press">Prensa</a></li>
+                <li>
+                	<a href="/press">Prensa</a>
+                	<ul>
+						<li>
+							<a href="/press/publicity">
+								Publicidad
+							</a>
+						</li>
+						<li>
+							<a href="/press/brochures">
+								Brochures
+							</a>
+						</li>
+					</ul>
+                </li>
 				<li><a href="/contact">Contacto</a></li>
 			</ul>
 		</nav><!-- #main-nav -->

@@ -56,7 +56,23 @@
 				</li>
 				<li><a href="<?php echo $this->url($lang , "/news") ?>">News</a></li>
 				<li><a href="<?php echo $this->url($lang , "/gallery") ?>">Gallery</a></li>
-                <li><a href="<?php echo $this->url($lang , "/press") ?>">Press</a></li>
+                <li>
+                	<a href="<?php echo $this->url($lang , "/press") ?>">Press</a>
+            		<ul>
+            			<li>
+						<a href="<?php echo $this->url($lang , "/press/publicity") ?>">
+								Publicity
+							</a>
+						</li>
+						<li>
+							<a href="<?php echo $this->url($lang , "/press/brochures") ?>">
+								Brochures
+							</a>
+						</li>
+            		</ul>
+                </li>
+
+                
 				<li><a href="<?php echo $this->url($lang , "/contact") ?>">Contact</a></li>
 			</ul>
 		</nav><!-- #main-nav -->

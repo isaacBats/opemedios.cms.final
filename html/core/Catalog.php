@@ -42,10 +42,8 @@ class Catalog extends Controller{
 				$html .= 'No existe lang';
 		}	
 			$this->header( $lang );
-			
 			echo $html;
 			$this->footer( $lang );
-		
 	}
 
 
@@ -106,9 +104,8 @@ class Catalog extends Controller{
 		}
 		
 		$this->header( $lang );
-		$html .= $this->footer();
-
 		echo $html;
+		$this->footer( $lang );
 	}
 
 

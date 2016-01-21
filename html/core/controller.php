@@ -29,6 +29,22 @@
 			$this->pdo = new PDO($dsn, $nombre_usuario, $password, $opciones);
 		}
 
+		/**
+		 * Devuelve el string correcto dependiendo el LANG recibido
+		 * @param string $lang 
+		 * @param string $es 
+		 * @param string $en 
+		 * @return string
+		 */
+		public function trans($lang="es",$es,$en){
+			if ($lang == "en" ){
+				return $en;
+			}
+			else{
+				return $es;
+			}
+		}
+
 		public function bread( $lang ){
 			$out = "<a href=\"/\">Inicio</a>";
 			$size = sizeof( $this->bread );

@@ -45,6 +45,12 @@
 		'methods' => 'GET'
 		)));
 
+	$collection->attachRoute(new Route('/contact', array(
+		'_controller' => 'Contacto::showForm',
+		'parameters' => array("lang" => $lang),
+		'methods' => 'GET'
+		)));
+
 
 	
 	$router = new Router($collection);

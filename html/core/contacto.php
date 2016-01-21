@@ -129,6 +129,7 @@ class Contacto extends Controller
 		$this->header($lang);
 
 		echo $html;
+		$this->footer($lang);
 	}
 
 }

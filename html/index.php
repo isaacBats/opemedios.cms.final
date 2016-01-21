@@ -94,7 +94,7 @@
 		)));
 
 	$collection->attachRoute(new Route('/register', array(
-		'_controller' => 'User::register',
+		'_controller' => 'User::showForm',
 		'parameters' => array("lang" => $lang),
 		'methods' => 'GET'
 		)));

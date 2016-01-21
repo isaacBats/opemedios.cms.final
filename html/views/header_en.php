@@ -64,7 +64,7 @@
 				<li><a href="index.html">Home</a></li>
 				<li><a href="quienes-somos.html">About</a></li>
 				<li><a href="portada.html">Catalog</a></li>
-				<li><a href="noticias.html">New</a></li>
+				<li><a href="/en/News">News</a></li>
 				<li><a href="galeria.html">Gallery</a></li>
                 <li><a href="prensa.html">Press</a></li>
 				<li><a href="contacto.html">Contact</a></li>

@@ -30,45 +30,47 @@ class Contacto extends Controller
 					<br class="clear">
 				</div><!-- .coontact-info -->
 				<div class="contact-form">
-					<h2 class="product-title">'.$this->trans($lang,'Contactanos', 'Contact us').'</h2>
-					<div class="field name">
-						<input type="text" placeholder="'.$this->trans($lang,'Nombre','Name').'" class="required">				
-					</div><!-- .field-->
-					<div class="field">
-						<input type="text" placeholder="'.$this->trans($lang,'Compañía','Company').'" class="required">
-					</div><!-- .field -->
-					<div class="field">
-						<input type="text" placeholder="'.$this->trans($lang,'Puesto','Job title').'">
-					</div><!-- .field -->
-					<div class="field">
-						<select>
-							<option>'.$this->trans($lang,'País','Country').'</option>
-						</select>
-					</div><!-- .field -->
-					<div class="field">
-						<input type="text" placeholder="'.$this->trans($lang,'Estado / Municipio','State').'" class="required">
-					</div><!-- .field -->
-					<div class="field">
-						<input type="text" placeholder="'.$this->trans($lang,'Código Postal','Zip Code').'" class="required">
-					</div><!-- .field -->
-					<div class="field">
-						<input type="number" placeholder="'.$this->trans($lang,'Teléfono','Phone').'" class="required">
-					</div><!-- .field -->
-					<div class="field">
-						<input type="email" placeholder="'.$this->trans($lang,'Correo electrónico','E-Mail').'" class="required">
-					</div><!-- .field -->
-					<div class="field how">
-						<select class="required">
-							<option>'.$this->trans($lang,'¿Cómo se enteró de nosotros?','How did you find us?').'</option>
-						</select>
+					<form id="contact-form" name="contact-form" method="post">
+						<h2 class="product-title">'.$this->trans($lang,'Contactanos', 'Contact us').'</h2>
+						<div class="field name">
+							<input type="text" placeholder="'.$this->trans($lang,'Nombre','Name').'" class="required">				
+						</div><!-- .field-->
+						<div class="field">
+							<input type="text" placeholder="'.$this->trans($lang,'Compañía','Company').'" class="required">
+						</div><!-- .field -->
+						<div class="field">
+							<input type="text" placeholder="'.$this->trans($lang,'Puesto','Job title').'">
+						</div><!-- .field -->
+						<div class="field">
+							<select>
+								<option>'.$this->trans($lang,'País','Country').'</option>
+							</select>
+						</div><!-- .field -->
+						<div class="field">
+							<input type="text" placeholder="'.$this->trans($lang,'Estado / Municipio','State').'" class="required">
+						</div><!-- .field -->
+						<div class="field">
+							<input type="text" placeholder="'.$this->trans($lang,'Código Postal','Zip Code').'" class="required">
+						</div><!-- .field -->
+						<div class="field">
+							<input type="number" placeholder="'.$this->trans($lang,'Teléfono','Phone').'" class="required">
+						</div><!-- .field -->
+						<div class="field">
+							<input type="email" placeholder="'.$this->trans($lang,'Correo electrónico','E-Mail').'" class="required">
+						</div><!-- .field -->
+						<div class="field how">
+							<select class="required">
+								<option>'.$this->trans($lang,'¿Cómo se enteró de nosotros?','How did you find us?').'</option>
+							</select>
+							<br class="clear">
+						</div><!-- .field -->
 						<br class="clear">
-					</div><!-- .field -->
-					<br class="clear">
-					<div class="required-fields">
-						* Campos Obligatorios
-					</div><!-- .required-fields -->
-					<textarea  placeholder="Comentario"></textarea>
-					<input type="submit" class="general-btn" value="Enviar">
+						<div class="required-fields">
+							* '.$this->trans($lang,'Campos Obligatorios','Fields required').'
+						</div><!-- .required-fields -->
+						<textarea  placeholder="'.$this->trans($lang,'Comentario','Comment').'"></textarea>
+						<input type="submit" class="general-btn" value="'.$this->trans($lang,'Enviar','Send').'">
+					</form>
 				</div><!-- .contact-form -->';
 
 		$this->addbread( array("url"=>"/contact" , "label"=>"Contacto ") );

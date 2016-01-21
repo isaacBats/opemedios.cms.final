@@ -17,7 +17,10 @@ class Noticias extends Controller
 	function mostrarDetalle($lang="es", $slug=""){
 		if ( !empty($slug) ){
 
-			$html = $this->cabecera();
+			$html = '';
+
+			
+
 
 			$sql = "SELECT * FROM noticias WHERE slug = :slug";
 			$query = $this->pdo->prepare($sql);
@@ -45,6 +48,11 @@ class Noticias extends Controller
 						</div>';
 			}
 
+			$this->addbread( array("url"=>"/news" , "label"=>"News ") );
+			$this->addbread( array( "label"=>$noticia['titulo']) );
+
+			$this->header($lang);
+
 			$html .= $this->footer();
 		}
 		else{
@@ -61,7 +69,8 @@ class Noticias extends Controller
 	 */
 	function mostrarTodas($lang="es"){
 		
-		$html = $this->cabecera();
+		$html = '';
+		$this->header($lang);
 
 		if ($lang == "es"){
 			$sql = "SELECT * FROM noticias";

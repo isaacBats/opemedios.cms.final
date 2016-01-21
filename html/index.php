@@ -3,6 +3,8 @@
 	require_once( __DIR__.'/core/controller.php' );
 	require_once( __DIR__.'/core/noticias.php' );
 	require_once( __DIR__.'/core/gallery.php' );
+	require_once( __DIR__.'/core/plain.php' );
+	require_once( __DIR__.'/core/Press.php' );
 
 	use PHPRouter\RouteCollection;
 	use PHPRouter\Config;
@@ -14,6 +16,9 @@
 	$_SERVER["REQUEST_URI"] = str_replace( "/".$lang ,"",$_SERVER["REQUEST_URI"] );
 	$collection = new RouteCollection();
 	
+
+	// Noticias
+
 	$collection->attachRoute(new Route('/news', array(
 	    '_controller' => 'Noticias::mostrarTodas',
 	    'parameters' => array("lang" => $lang) ,
@@ -25,6 +30,8 @@
 	    'parameters' => array("lang" => $lang) ,
 	    'methods' => 'GET'
 	)));
+
+	//  Galerias 
 
 	$collection->attachRoute(new Route('/gallery', array(
 	    '_controller' => 'Gallery::allGalleries',
@@ -38,8 +45,38 @@
 	    'methods' => 'GET'
 	)));
 
+	// Catalogo
+
 	$collection->attachRoute(new Route('/catalog/lifestyles', array(
 		'_controller' => 'Catalog::showLifestyles',
+		'parameters' => array("lang" => $lang),
+		'methods' => 'GET'
+		)));
+
+	// Press
+
+	$collection->attachRoute(new Route('/press', array(
+		'_controller' => 'Press::showAll',
+		'parameters' => array("lang" => $lang),
+		'methods' => 'GET'
+		)));
+
+	// Vistas estaticas
+
+	$collection->attachRoute(new Route('/acerca-de/quienes-somos', array(
+		'_controller' => 'Plain::whoWeAreView',
+		'parameters' => array("lang" => $lang),
+		'methods' => 'GET'
+		)));
+
+	$collection->attachRoute(new Route('/acerca-de/fabrica-alfonso-marina', array(
+		'_controller' => 'Plain::fabricView',
+		'parameters' => array("lang" => $lang),
+		'methods' => 'GET'
+		)));
+
+	$collection->attachRoute(new Route('/', array(
+		'_controller' => 'Plain::homeView',
 		'parameters' => array("lang" => $lang),
 		'methods' => 'GET'
 		)));

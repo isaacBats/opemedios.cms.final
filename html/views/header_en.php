@@ -92,6 +92,6 @@
 	</header><!-- #main-header -->
 	<div id="wrapper">
 		<div class="breadcrumb vertical">
-			<?php $this->bread($lang ) ?>
+			<?php if( !$nobeard ) { $this->bread($lang ); } ?>
 		</div>
 	

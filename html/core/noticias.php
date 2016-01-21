@@ -9,56 +9,132 @@ class Noticias extends Controller
 {
 	
 	/**
-	 * Este es el template base para las funciones
+	 * Devuelve el detalle de la noticia
 	 * @param string $lang 
 	 * @param integer $id 
 	 * @return string
 	 */
-	function mostrarTodas($lang="es",$id=null){
-		
-		$html = $this->cabecera();
+	function mostrarDetalle($lang="es", $slug=""){
+		if ( !empty($slug) ){
 
-		if( $id == null ){
-			if ($lang == "es"){
-				$sql = "SELECT * FROM noticias";
-				$query = $this->pdo->prepare($sql);
-				$rs = $query->execute();
-				if($rs!==false){
-					$nr = $query->rowCount();
-					if( $nr > 0 ){
-						$noticias = $query->fetchAll();
-						foreach ($noticias as $noticia) {
-							$html .= '<div class="listado">
-										<div class="list-item">
-							                <div class="img-listado">
-												<a href="noticias-detalle.html">
-							                    	<img src="../images/'.$noticia['imagen'].'" alt="">
-												</a>
-							                </div>
-							                <div class="texto-listado">
-							                    <a href="noticias-detalle.html"><h2>'.$noticia['titulo'].'</h2></a>
-							                    '.$noticia['extracto'].'
-							                    <p>
-							                    	<a href="noticias-detalle.html">[ + ] Leer Todo</a>
-							                    </p>
-							                </div>
-							                <br class="clear">
-							            </div>
-							         </div>';
-						}
+			$html = '';
+
+			
+
+
+			$sql = "SELECT * FROM noticias WHERE slug = :slug";
+			$query = $this->pdo->prepare($sql);
+			$query->bindParam(':slug', $slug);
+			$rs = $query->execute();
+			if( $rs ){
+				$noticia = $query->fetch();
+				$html .= '<div class="registro">
+					    	<div class="evento-principal full">
+						        <a href="javascript:void(0)" class="fancybox">
+						            <img alt="" src="../../images/'.$noticia['imagen'].'" />
+						        </a>
+					    	</div><!-- .evento-principal -->
+					    	<div class="eventoSecundario">
+						        <div class="nav-detalle">
+						            <a href="javascript:void(0)">Anterior</a> | <a href="javascript:void(0);">Siguiente</a>
+						            <a href="'.$this->url($lang,'/news').'" class="ver-todos">Ver todos</a>
+						        </div>
+					  			<!-- nav-detalle -->
+						        <h2 class="detalle-producto">'.$noticia['titulo'].'</h2>
+						        '.$noticia['contenido'].'
+							</div>
+							<!-- .eventoSecundario -->
+
+						</div>';
+			}
+
+			$this->addbread( array("url"=>"/news" , "label"=>"News ") );
+			$this->addbread( array( "label"=>$noticia['titulo']) );
+
+			$this->header($lang);
+
+			$html .= $this->footer();
+		}
+		else{
+
+		}
+		
+		echo $html;
+	}
+	
+	/**
+	 * Este es el template base para las funciones
+	 * @param string $lang 
+	 * @return string
+	 */
+	function mostrarTodas($lang="es"){
+		
+		$html = '';
+		$this->header($lang);
+
+		if ($lang == "es"){
+			$sql = "SELECT * FROM noticias";
+			$query = $this->pdo->prepare($sql);
+			$rs = $query->execute();
+			if($rs!==false){
+				$nr = $query->rowCount();
+				if( $nr > 0 ){
+					$noticias = $query->fetchAll();
+					foreach ($noticias as $noticia) {
+						$html .= '<div class="listado">
+									<div class="list-item">
+						                <div class="img-listado">
+											<a href="'.$this->url($lang,'/news/'.$noticia['slug']).'">
+						                    	<img src="../images/'.$noticia['imagen_thumbnail'].'" alt="">
+											</a>
+						                </div>
+						                <div class="texto-listado">
+						                    <a href="'.$this->url($lang,'/news/'.$noticia['slug']).'"><h2>'.$noticia['titulo'].'</h2></a>
+						                    '.$noticia['extracto'].'
+						                    <p>
+						                    	<a href="'.$this->url($lang,'/news/'.$noticia['slug']).'">[ + ] Leer más </a>
+						                    </p>
+						                </div>
+						                <br class="clear">
+						            </div>
+						         </div>';
 					}
 				}
 			}
-			else if ($lang == "en") {
-				$html .= 'Devuelve en inglés';
-			}
-			else
-			{
-				$html .= 'No existe lang';
+		}
+		else if ($lang == "en") {
+			$sql = "SELECT * FROM noticias";
+			$query = $this->pdo->prepare($sql);
+			$rs = $query->execute();
+			if($rs!==false){
+				$nr = $query->rowCount();
+				if( $nr > 0 ){
+					$noticias = $query->fetchAll();
+					foreach ($noticias as $noticia) {
+						$html .= '<div class="listado">
+									<div class="list-item">
+						                <div class="img-listado">
+											<a href="'.$this->url($lang,'/news/'.$noticia['slug']).'">
+						                    	<img src="../images/'.$noticia['imagen_thumbnail'].'" alt="">
+											</a>
+						                </div>
+						                <div class="texto-listado">
+						                    <a href="'.$this->url($lang,'/news/'.$noticia['slug']).'"><h2>'.$noticia['titulo_en'].'</h2></a>
+						                    '.$noticia['extracto_en'].'
+						                    <p>
+						                    	<a href="'.$noticia['slug'].'">[ + ] Read more </a>
+						                    </p>
+						                </div>
+						                <br class="clear">
+						            </div>
+						         </div>';
+					}
+				}
 			}
 		}
-		else{
-			
+		else
+		{
+			$html .= 'No existe lang';
 		}
 
 		$html .= $this->footer();
@@ -138,7 +214,7 @@ class Noticias extends Controller
 				<link rel="apple-touch-icon" sizes="144x144" href="images/icons/apple-touch-icon-144x144-precomposed.png">
 				    
 				<!-- Hojas de estilo base -->
-				<link rel="stylesheet" type="text/css" href="../css/style.css"><!-- Hoja personalizada -->
+				<link rel="stylesheet" type="text/css" href="../../css/style.css"><!-- Hoja personalizada -->
 
 				<!-- Librería de jquery que contiene también la librería de jquery tools -->
 

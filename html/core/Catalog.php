@@ -3,10 +3,14 @@
 class Catalog extends Controller{
 
 	public function showLifestyles($lang="es"){
-		$this->header( $lang );
+
+		
+		
 		$html = "";
 
 		if ($lang == "es"){	
+			$this->addBread( array( "url"=>"/catalog", "label"=>"Catalogo" ));
+			$this->addBread( array( "label"=>"Estílo de vida" ));
 			$sql = "SELECT * FROM lifestyles";
 			$query = $this->pdo->prepare($sql);
 			$rs = $query->execute();
@@ -18,8 +22,8 @@ class Catalog extends Controller{
 						foreach ($styles as $style) {
 							$html .= '<div class="products-cover">
 										<div class="category">
-											<a href="#">
-												<img src="../images/'.$style['imagen'].'"><br>
+											<a href="'.$this->url($lang , "/catalog/".$style['name']).'">
+												<img src="/images/'.$style['image'].'"><br>
 													'.$style['name'].'
 											</a>
 										</div><!-- .category -->
@@ -30,9 +34,12 @@ class Catalog extends Controller{
 			}
 		}else if($lang == "en") {
 			$html .= 'Devuelve en inglés';
+			$this->addBread( array( "url"=>"/catalog", "label"=>"Catalog" ));
+			$this->addBread( array( "label"=>"Lifestyles" ));
 		}else{
 				$html .= 'No existe lang';
-		}
+		}	
+			$this->header( $lang );
 			$html .= $this->footer();
 			echo $html;
 		
@@ -43,14 +50,14 @@ class Catalog extends Controller{
 	
 	public function showListProducts($lang="es"){
 		
-		$html = $this->header();
+		$html = "";
 
 		if ($lang == "es"){
 			$sqlCatalogo = "select * from catalogo";
 			$queryCatalogo = $this->pdo->prepare($sqlCatalogo);
 			$rsCatalogo = $queryCatalogo->execute();
 
-			if( rsCatalogo !== false ){
+			if( $rsCatalogo !== false ){
 				$pr = $queryCatalogo->rowCount();
 				if($pr > 0){
 					$catalogo = $queryCatalogo->fetchAll();
@@ -59,7 +66,7 @@ class Catalog extends Controller{
 								<div class="product-list">
 									<h2>'.$c['tipo'].'</h2>
 									<a href="producto-detalle.html">
-										<img src="images/'.$c['imagen'].'"><br>
+										<img src="/images/'.$c['imagen'].'"><br>
 										Sofas y Loveseats
 									</a>
 								</div><!-- .product-list -->
@@ -77,6 +84,7 @@ class Catalog extends Controller{
 			$html .= 'No existe lang';
 		}
 		
+		$this->header( $lang );
 		$html .= $this->footer();
 
 		echo $html;

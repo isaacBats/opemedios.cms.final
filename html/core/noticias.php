@@ -34,7 +34,7 @@ class Noticias extends Controller
 					    	</div><!-- .evento-principal -->
 					    	<div class="eventoSecundario">
 						        <div class="nav-detalle">
-						            <a href="javascript:void(0)">Previous</a> | <a href="javascript:void(0);">Next</a>
+						            <a class="falta" href="javascript:void(0)">Previous</a> | <a class="falta" href="javascript:void(0);">Next</a>
 						            <a href="'.$this->url($lang,'/news').'" class="ver-todos">Show all</a>
 						        </div>
 					  			<!-- nav-detalle -->
@@ -54,7 +54,7 @@ class Noticias extends Controller
 					    	</div><!-- .evento-principal -->
 					    	<div class="eventoSecundario">
 						        <div class="nav-detalle">
-						            <a href="javascript:void(0)">Anterior</a> | <a href="javascript:void(0);">Siguiente</a>
+						            <a class="falta" href="javascript:void(0)">Anterior</a> | <a class="falta" href="javascript:void(0);">Siguiente</a>
 						            <a href="'.$this->url($lang,'/news').'" class="ver-todos">Ver todos</a>
 						        </div>
 					  			<!-- nav-detalle -->

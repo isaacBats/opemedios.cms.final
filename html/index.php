@@ -3,6 +3,7 @@
 	require_once( __DIR__.'/core/controller.php' );
 	require_once( __DIR__.'/core/noticias.php' );
 	require_once( __DIR__.'/core/gallery.php' );
+	require_once( __DIR__.'/core/contacto.php' );
 
 	use PHPRouter\RouteCollection;
 	use PHPRouter\Config;
@@ -40,6 +41,12 @@
 
 	$collection->attachRoute(new Route('/catalog/lifestyles', array(
 		'_controller' => 'Catalog::showLifestyles',
+		'parameters' => array("lang" => $lang),
+		'methods' => 'GET'
+		)));
+
+	$collection->attachRoute(new Route('/contact', array(
+		'_controller' => 'Contacto::showForm',
 		'parameters' => array("lang" => $lang),
 		'methods' => 'GET'
 		)));

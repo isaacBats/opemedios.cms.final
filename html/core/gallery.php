@@ -59,7 +59,7 @@
 			}else{
 				$this->addBread( array("url"=>"/gallery" , "label" => "Gallery"));	
 			}
-			$this->header( $lang );
+			$this->header( $lang , true );
 
 			
 			require $this->views."gallery.php";

@@ -5,24 +5,25 @@
  */
  class Press extends Controller
  {
+ 	
+
  	public function showAll( $lang ){
  		$this->addBread( array( "label"=> "Prensa" ) );
  		$this->header( $lang );
 
- 		$sql = "SELECT * FROM gallery WHERE ";
+ 		$sql = "SELECT * FROM gallery WHERE contexto != 'main' ";
  		$query = $this->pdo->prepare($sql);
 		$rs = $query->execute();
 		if($rs!==false){
 			$nr = $query->rowCount();
 			if( $nr > 0 ){
-				$images = $query->fetchAll();
+				$galleries = $query->fetchAll();
 				$count = 0;
-				foreach ($images as $image) {
-					$count++;
-				}
+				require $this->views."press.php";
 			}
 		}
- 		require $this->views."press.php";
+ 		
+ 		$this->footer($lang);
 
  	}
 
@@ -49,11 +50,15 @@
 			}
 		}
 
- 	public function detail( $lang , $slug ){
+ 	public function detail( $lang , $slug , $slug2 = ""){
+ 		$this->addBread( array( "label"=> $this->trans($lang , "Prensa" , "Press") , "url" => "/press") );
+ 		if( $slug2 != "" ){
+ 			$this->addBread( array( "url" => "/press/".$slug, "label"=> ucfirst( $slug ) ) );
+ 			$this->addBread( array( "label"=> ucfirst( $slug2 ) ) );
+ 		}else{
+ 			$this->addBread( array( "label"=> ucfirst( $slug ) ) );	
+ 		}
  		
-
- 		$this->addBread( array( "label"=> "Prensa" , "url" => "/press") );
- 		$this->addBread( array( "label"=> $slug ) );
  		$this->header( $lang );
  		require $this->views."press-detail.php";
  		$this->footer( $lang );

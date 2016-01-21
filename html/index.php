@@ -79,9 +79,21 @@
 		'parameters' => array("lang" => $lang),
 		'methods' => 'GET'
 		)));
+
 	$collection->attachRoute(new Route('/press/:slug', array(
 		'_controller' => 'Press::detail',
 		'parameters' => array("lang" => $lang),
+		'methods' => 'GET'
+		)));
+	
+	$collection->attachRoute(new Route('/press/publicity/:slug', array(
+		'_controller' => 'Press::detail',
+		'parameters' => array("lang" => $lang , "category"=>"publicity"),
+		'methods' => 'GET'
+		)));
+	$collection->attachRoute(new Route('/press/brochures/:slug', array(
+		'_controller' => 'Press::detail',
+		'parameters' => array("lang" => $lang , "category"=>"brochures"),
 		'methods' => 'GET'
 		)));
 

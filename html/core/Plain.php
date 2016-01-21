@@ -21,16 +21,17 @@
 
 			$this->header($lang);
 
-			
+			require $this->views."who-are-we.php";
 		}
 
 		public function  fabricView( $lang = "es" ){
 			
 			$this->addBread( array( "label"=> "Acerca de" , "url"=> "/acerca-de/fabrica-alfonso-marina" ) );
 			$this->addBread( array( "label" => "F&aacute;brica Alfonso Marina" , "url" => "/acerca-de/quienes-somos") );
-			
 
 			$this->header($lang);
+
+			require $this->views."fabric.php";
 		}
 
 	}

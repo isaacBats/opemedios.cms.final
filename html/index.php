@@ -7,6 +7,7 @@
 	require_once( __DIR__.'/core/Press.php' );
 	require_once( __DIR__.'/core/catalog.php' );
 	require_once( __DIR__.'/core/contacto.php' );
+	require_once( __DIR__.'/core/User.php' );
 
 
 	use PHPRouter\RouteCollection;
@@ -78,6 +79,25 @@
 		'parameters' => array("lang" => $lang),
 		'methods' => 'GET'
 		)));
+	$collection->attachRoute(new Route('/press/:slug', array(
+		'_controller' => 'Press::detail',
+		'parameters' => array("lang" => $lang),
+		'methods' => 'GET'
+		)));
+
+	// User
+
+	$collection->attachRoute(new Route('/login', array(
+		'_controller' => 'User::login',
+		'parameters' => array("lang" => $lang),
+		'methods' => 'GET'
+		)));
+
+	$collection->attachRoute(new Route('/register', array(
+		'_controller' => 'User::register',
+		'parameters' => array("lang" => $lang),
+		'methods' => 'GET'
+		)));
 
 	// Vistas estaticas
 
@@ -109,7 +129,7 @@
 		'_controller' => 'Contacto::saveForm',
 		'parameters' => array("lang" => $lang),
 		'methods' => 'POST'
-		)));
+	)));
 
 
 	

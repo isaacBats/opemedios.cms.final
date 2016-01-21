@@ -94,7 +94,7 @@
 		)));
 	$collection->attachRoute(new Route('/press/brochure/:slug', array(
 		'_controller' => 'Press::detail',
-		'parameters' => array("lang" => $lang , "category"=>"brochures"),
+		'parameters' => array("lang" => $lang , "category"=>"brochure"),
 		'methods' => 'GET'
 		)));
 

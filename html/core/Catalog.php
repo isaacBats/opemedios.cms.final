@@ -16,8 +16,8 @@ class Catalog extends Controller{
 					foreach ($styles as $style) {
 						$html .= '<div class="products-cover">
 									<div class="category">
-										<a href="'.$this->url($lang,'/'.$style['name'].')'>
-											<img src="../images/'.$style['imagen']'."><br>
+										<a href="'.$this->url($lang,'/catalog/lifestyles'.$style['name'].')'>
+											<img src="../images/'.$style['imagen'].'"><br>
 												'.$style['name'].'
 										</a>
 									</div><!-- .category -->

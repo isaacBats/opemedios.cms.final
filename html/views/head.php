@@ -40,7 +40,7 @@
     
 <!-- Hojas de estilo base -->
 <link rel="stylesheet" type="text/css" href="/css/gallerific.css"><!-- Hoja de reset -->
-<link rel="stylesheet" type="text/css" href="/bower_components/jquery.fancybox/fancybox/jquery.fancybox-1.3.4.css"><!-- Hoja de reset -->
+<link rel="stylesheet" type="text/css" href="/js/bower_components/jquery.fancybox/fancybox/jquery.fancybox-1.3.4.css"><!-- Hoja de reset -->
 
 <link rel="stylesheet" type="text/css" href="/css/style.css"><!-- Hoja personalizada -->
 

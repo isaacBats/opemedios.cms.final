@@ -11,27 +11,29 @@ class Catalog extends Controller{
 		if ($lang == "es"){	
 			$this->addBread( array( "url"=>"/catalog", "label"=>"Catalogo" ));
 			$this->addBread( array( "label"=>"Estílo de vida" ));
+
 			$sql = "SELECT * FROM lifestyles";
 			$query = $this->pdo->prepare($sql);
 			$rs = $query->execute();
+
+			$html .= '<div class="products-cover">';
 
 			if($rs !==false ){
 				$lr = $query->rowCount();
 				if( $lr > 0 ){
 					$styles = $query->fetchAll();
 						foreach ($styles as $style) {
-							$html .= '<div class="products-cover">
-										<div class="category">
+							$html .= '<div class="category">
 											<a href="'.$this->url($lang , "/catalog/".$style['name']).'">
 												<img src="/images/'.$style['image'].'"><br>
 													'.$style['name'].'
 											</a>
 										</div><!-- .category -->
-										<br class="clear">
-									</div><!-- .products-cover -->';
+										<br class="clear">';
 						}
 				}
 			}
+			$html .= '</div><!-- .products-cover -->';
 		}else if($lang == "en") {
 			$html .= 'Devuelve en inglés';
 			$this->addBread( array( "url"=>"/catalog", "label"=>"Catalog" ));
@@ -48,15 +50,15 @@ class Catalog extends Controller{
 
 
 	
-	public function showListProducts($lang="es"){
+	public function showListProducts($lang="es" ,$slug ){
 		
 		$html = "";
 
-		if ($lang == "es"){
-			$sqlCatalogo = "select * from catalogo";
-			$queryCatalogo = $this->pdo->prepare($sqlCatalogo);
-			$rsCatalogo = $queryCatalogo->execute();
+		$sqlCatalogo = "select * from catalogo WHERE estilo like '%".strtolower($slug)."%' GROUP by grupo ";
+		$queryCatalogo = $this->pdo->prepare($sqlCatalogo);
+		$rsCatalogo = $queryCatalogo->execute();
 
+		if ($lang == "es"){
 			if( $rsCatalogo !== false ){
 				$pr = $queryCatalogo->rowCount();
 				if($pr > 0){
@@ -65,9 +67,9 @@ class Catalog extends Controller{
 						$html .= '
 								<div class="product-list">
 									<h2>'.$c['tipo'].'</h2>
-									<a href="producto-detalle.html">
+									<a href="'.$this->url($lang , "/product/".$c["nombre"] ).'">
 										<img src="/images/'.$c['imagen'].'"><br>
-										Sofas y Loveseats
+										'.$c['nombre'].'
 									</a>
 								</div><!-- .product-list -->
 								';
@@ -77,7 +79,25 @@ class Catalog extends Controller{
 
 			}
 		}else if ($lang == "en") {
-			$html .= 'Devuelve en inglés';
+			if( $rsCatalogo !== false ){
+				$pr = $queryCatalogo->rowCount();
+				if($pr > 0){
+					$catalogo = $queryCatalogo->fetchAll();
+					foreach ($catalogo as $c) {
+						$html .= '
+								<div class="product-list">
+									<h2>'.$c['tipo'].'</h2>
+									<a href="'.$this->url($lang , "/product/".$c["name"] ).'">
+										<img src="/images/'.$c['imagen'].'"><br>
+										'.$c['name'].'
+									</a>
+								</div><!-- .product-list -->
+								';
+					}
+				}
+
+
+			}
 		}
 		else
 		{
@@ -90,6 +110,17 @@ class Catalog extends Controller{
 		echo $html;
 	}
 
+
+	public function detailProduct( $lang = "es" , $slug){
+		$this->header( $lang );
+
+		if( $lang == "es"){
+			echo "producto español";
+		}else{
+			echo "producto ingles";
+		}
+
+	}
 
 
 	public function footer(){

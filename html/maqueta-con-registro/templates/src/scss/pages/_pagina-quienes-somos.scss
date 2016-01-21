@@ -1,0 +1,103 @@
+/*//////////////////////// Estilos Acerca de ////////////////////////*/
+.acerca-principal-quienes
+{
+    float:          left;
+    width:          45%;
+    margin-left:    10%;
+    font-size:      14px;
+    text-align:     center;
+}
+.acerca-principal-quienes.full
+{
+    width: 55%;
+    float: left;
+    font-size: 21px;
+    margin-left: 0;
+}
+.acerca-secundario-quienes
+{
+    width: 40%;
+    float: right;
+	margin-bottom: 10px;
+}
+.acerca-secundario-quienes h2
+{
+    font-size: 24px;
+    padding: 15px 0;
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: normal;
+    /* Modificado UB border-top: 1px solid #a79a8e;
+    border-bottom: 1px solid #a79a8e;*/
+	border-top: 1px solid #D4D1CB;
+    border-bottom: 1px solid #D4D1CB;
+	text-transform: uppercase;
+}
+.acerca-secundario-quienes h2.detalleProducto
+{
+    font-size: 21px;
+    text-transform:none;
+}
+.acerca-secundario-quienes input[type="text"], .acerca-secundario-quienes input[type="email"], .acerca-secundario-quienes input[type="password"]
+{
+    width: 88%;
+}
+.acerca-secundario-quienes input.mediano[type="text"], .acerca-secundario-quienes input.mediano[type="email"]
+{
+    width: 60%;
+}
+.acerca-secundario-quienes input.mediano2[type="text"], .acerca-secundario-quienes input.mediano2[type="email"]
+{
+    width: 45%;
+}
+.acerca-secundario-quienes input.full[type="text"], .acerca-secundario-quienes input.full[type="email"]
+{
+    width: 98%;
+    padding-left: 1%;
+    padding-right: 1%;
+}
+.acerca-secundario-quienes textarea
+{
+    width: 98%;
+    padding: 1%;
+    color: #8c8c8c;
+    height: 170px;
+    margin-bottom: 10px;
+}
+
+/*//////////////////////// Estilos footer ////////////////////////*/
+
+.registro .acerca-secundario-quienes {
+    float: right;
+    margin-right: 10%;
+    width: 33% /*Modificado por UB 30%*/
+}
+
+/*Agregado por Duck*/
+.acerca-principal-quienes .contacto img {
+    max-height: 100%;
+    min-width: 100%;
+}
+.breadcrumb.vertical {
+    margin: 5px 0 30px 10%
+}
+
+.acerca-secundario-quienes textarea {
+    height: 65px;
+}
+
+.acerca-principal-quienes.quienes-somos p{
+	margin-top: 20px;
+}
+
+/*/////// Cambios Quienes Somos ///////*/
+@media only screen and (min-width: 1560px) {
+	.quienes-somos .registro .acerca-secundario-quienes {
+		width: 22% /*Modificado por UB 30%*/
+	}
+	#wrapper.quienes-somos .registro .acerca-principal-quienes {
+		margin-left: 10%;
+		width: 56%;
+	}
+}
+		

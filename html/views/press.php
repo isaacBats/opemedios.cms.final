@@ -1,79 +1,21 @@
+<div id="content-press">
+<?php 
 
-		<div id="content-press">
-			<article class="item4Col">
-	    	    <a href="/press/detail">
-	                <img style="width: 0%" alt="Veranda Nov-Dic 2015" src="/images/Noviembre-Diciembre_2015-02.jpg">
-	                <br class="clear">
-					<br class="clear">
-	                Veranda Nov-Dic 2015
-	            </a>
-	        </article>
-			<article class="item4Col">
-	    	    <a href="/press/detail">
-	                <img style="width: 0%" alt="Veranda Nov-Dic 2015" src="/images/Noviembre-Diciembre_2015-02.jpg">
-	                <br class="clear">
-					<br class="clear">
-	                Veranda Nov-Dic 2015
-	            </a>
-	        </article>
-			<article class="item4Col">
-	    	    <a href="/press/detail">
-	                <img style="width: 0%" alt="Veranda Nov-Dic 2015" src="/images/Noviembre-Diciembre_2015-02.jpg">
-	                <br class="clear">
-					<br class="clear">
-	                Veranda Nov-Dic 2015
-	            </a>
-	        </article>
-			<article class="item4Col">
-	    	    <a href="/press/detail">
-	                <img style="width: 0%" alt="Veranda Nov-Dic 2015" src="/images/Noviembre-Diciembre_2015-02.jpg">
-	                <br class="clear">
-					<br class="clear">
-	                Veranda Nov-Dic 2015
-	            </a>
-	        </article>
-			<article class="item4Col">
-	    	    <a href="/press/detail">
-	                <img style="width: 0%" alt="Veranda Nov-Dic 2015" src="/images/Noviembre-Diciembre_2015-02.jpg">
-	                <br class="clear">
-					<br class="clear">
-	                Veranda Nov-Dic 2015
-	            </a>
-	        </article>
-			<article class="item4Col">
-	    	    <a href="/press/detail">
-	                <img style="width: 0%" alt="Veranda Nov-Dic 2015" src="/images/Noviembre-Diciembre_2015-02.jpg">
-	                <br class="clear">
-					<br class="clear">
-	                Veranda Nov-Dic 2015
-	            </a>
-	        </article>
+foreach ($galleries as $press) {
+	echo '
+	<article class="item4Col">
+	    <a href="/press/'.strtolower( $press["contexto"] ).'/'.$press["slug"].'">
+            <img style="width: 0%" 
+            alt="'.$press["nombre"].'" 
+            src="/images/press/cover/'.$press["imagen"].'">
+            <br class="clear">
 			<br class="clear">
-		</div><!-- #contenido -->
-		<br class="clear">
-		
-	</div><!-- #wrapper -->
+            '.$press["nombre"].'
+        </a>
+    </article>
+	';
+}
 
-
-	<footer id="main-footer">
-		<footer id="inner-footer">
-			<form >    
-				<div id="newsletter">
-	        		<input type="email" value="" placeholder="Email" name="Email" id="Email" data-val-required="The Email field is required." data-val-regex-pattern="^(([A-Za-z0-9]+_+)|([A-Za-z0-9]+\-+)|([A-Za-z0-9]+\.+)|([A-Za-z0-9]+\++))*[A-Za-z0-9]+@((\w+\-+)|(\w+\.))*\w{1,63}\.[a-zA-Z]{2,6}$" data-val-regex="*" data-val="true" class="text-label">
-	        		<input type="submit" id="news-submit" value="Suscribir" name="Submit">
-	    		</div><!-- #newsletter --> 
-			</form>
-	        <p>&copy;Alfonso Marina Ebanista. Derechos Reservados 2015.</p>
-	        <div id="social-media">
-		        	<span class="tagline">Síguenos:</span>
-                    <a class="btn-social facebook" href="https://www.facebook.com/pages/Alfonso-Marina-Ebanista/216426771801026?ref=aymt_homepage_panel" target="_blank">Facebook</a>
-                    <a class="btn-social twitter" href="https://twitter.com/alfonsomarinamx" target="_blank">Twitter</a>
-                    <a class="btn-social pinterest" href="http://pinterest.com/alfonsomarina/boards/" target="_blank">Pinterest</a>
-                    <a class="btn-social instagram" href="http://instagram.com/alfonsomarinamx" target="_blank">Instagram</a>
-                    <a class="btn-social dh" href="http://www.deringhall.com/designers/Alfonso-marina-ebanista" target="_blank">Dering Hall</a>
-                </div><!-- #social-media -->
-            </footer><!-- #main-footer -->
-        </footer><!-- #inner-footer -->
-</div><!-- #body -->
-</body>
-</html>
+?>
+</div><!-- #contenido -->
+<br class="clear">

@@ -4,14 +4,26 @@ class Catalog extends Controller{
 
 	public function showLifestyles($lang="es"){
 
-		
-		
 		$html = "";
 
 		if ($lang == "es"){	
 			$this->addBread( array( "url"=>"/catalog", "label"=>"Catalogo" ));
 			$this->addBread( array( "label"=>"Estílo de vida" ));
 
+			
+		}else if($lang == "en") {
+			$html .= 'Devuelve en inglés';
+			$this->addBread( array( "url"=>"/catalog", "label"=>"Catalog" ));
+			$this->addBread( array( "label"=>"Lifestyles" ));
+		}else{
+				$html .= 'No existe lang';
+		}	
+			$this->header( $lang );
+			require $this->views."lifestyle.php";
+			$this->footer( $lang );
+	}
+
+	/*
 			$sql = "SELECT * FROM lifestyles";
 			$query = $this->pdo->prepare($sql);
 			$rs = $query->execute();
@@ -34,19 +46,8 @@ class Catalog extends Controller{
 				}
 			}
 			$html .= '</div><!-- .products-cover -->';
-		}else if($lang == "en") {
-			$html .= 'Devuelve en inglés';
-			$this->addBread( array( "url"=>"/catalog", "label"=>"Catalog" ));
-			$this->addBread( array( "label"=>"Lifestyles" ));
-		}else{
-				$html .= 'No existe lang';
-		}	
-			$this->header( $lang );
-			
-			echo $html;
-			$this->footer( $lang );
-		
-	}
+
+	*/
 
 
 
@@ -106,9 +107,8 @@ class Catalog extends Controller{
 		}
 		
 		$this->header( $lang );
-		$html .= $this->footer();
-
 		echo $html;
+		$this->footer( $lang );
 	}
 
 

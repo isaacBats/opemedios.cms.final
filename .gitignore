@@ -9,3 +9,8 @@ html/.DS_Store
 # phpintel
 
 .phpintel/
+
+html/images/press/*
+
+images/
+

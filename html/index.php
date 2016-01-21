@@ -38,6 +38,12 @@
 	    'methods' => 'GET'
 	)));
 
+	$collection->attachRoute(new Route('/catalog/lifestyles', array(
+		'_controller' => 'Catalog::showLifestyles',
+		'parameters' => array("lang" => $lang),
+		'methods' => 'GET'
+		)));
+
 
 	
 	$router = new Router($collection);

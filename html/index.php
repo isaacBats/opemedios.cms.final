@@ -99,6 +99,12 @@
 		'methods' => 'GET'
 		)));
 
+	$collection->attachRoute(new Route('/register', array(
+		'_controller' => 'User::saveRegistro',
+		'parameters' => array("lang" => $lang),
+		'methods' => 'POST'
+	)));
+
 	// Vistas estaticas
 
 	$collection->attachRoute(new Route('/acerca-de/quienes-somos', array(

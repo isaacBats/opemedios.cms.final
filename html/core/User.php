@@ -15,21 +15,39 @@
  	}
 
  	function saveRegistro($lang){
+		
+		$resultado = new stdClass();
+
 		if( !empty($_POST) ){
 
 			$resultado = new stdClass();
 
 			/*************************** INSERT DEL CONTACTO ****************************************/
 
-			$query = $this->pdo->prepare("INSERT INTO contactos (nombre, empresa,puesto,pais,estado,codigopostal,telefono,email,comoseentero) VALUES (:nombre, :empresa,:puesto,:pais,:estado,:codigopostal,:telefono,:email,:comoseentero);");
+			$sql = "INSERT INTO registros 
+						(nombre,apellidos,nombreusuario,pass,email,empresa,puesto,website,direccion1,direccion2,pais,estado,codigopostal,movil,telefono,organizacion,motivo,comoseentero) 
+						VALUES 
+						(:nombre,:apellidos,:nombreusuario,:pass,:email,:empresa,:puesto,:website,:direccion1,:direccion2,:pais,:estado,:codigopostal,:movil,:telefono,:organizacion,:motivo,:comoseentero);
+					";
+			$query = $this->pdo->prepare($sql);
 			$query->bindParam(':nombre', $_POST['nombre']);
+			$query->bindParam(':apellidos', $_POST['apellidos']);
+			$query->bindParam(':nombreusuario', $_POST['nombreusuario']);
+			$query->bindParam(':pass', $_POST['pass']);
+			$query->bindParam(':email', $_POST['email']);
 			$query->bindParam(':empresa', $_POST['empresa']);
 			$query->bindParam(':puesto', $_POST['puesto']);
+			$query->bindParam(':website', $_POST['website']);
+			$query->bindParam(':direccion1', $_POST['direccion1']);
+			$query->bindParam(':direccion2', $_POST['direccion2']);
 			$query->bindParam(':pais', $_POST['pais']);
 			$query->bindParam(':estado', $_POST['estado']);
 			$query->bindParam(':codigopostal', $_POST['codigopostal']);
+			$query->bindParam(':movil', $_POST['movil']);
 			$query->bindParam(':telefono', $_POST['telefono']);
-			$query->bindParam(':email', $_POST['email']);
+			$organizacion = implode(",", $_POST['organizacion'] );
+			$query->bindParam(':organizacion', $organizacion);
+			$query->bindParam(':motivo', $_POST['motivo']);
 			$query->bindParam(':comoseentero', $_POST['comoseentero']);
 
 			$registro = $query->execute();
@@ -42,7 +60,7 @@
 
 				if(mail('adan@denumiers.com','Ha recibido un nuevo contacto',$cuerpo_email,$cabeceras)){
 					$resultado->exito = true;
-					$resultado->mensaje = ( $lang == "en" ) ? 'Thank you, we will contact you as soon as possible' : "Gracias, te contactaremos lo más pronto posible";
+					$resultado->mensaje = ( $lang == "en" ) ? 'Thank you, we will check your info, and your will recive the confimation throug and email' : "Gracias, revisaremos tu información y recibirás la confirmación a través de un correo electrónico";
 				}
 				else{
 					$resultado->exito = false;
@@ -67,60 +85,65 @@
 	function showForm($lang="es"){
 		$html = '<div class="registro">        
 			<div class="acerca-principal-quienes acerca-principal-quienes-form">
-				<p><img alt="Registro" src="images/imgRegistro.jpg"></p>
+				<p><img alt="Registro" src="'.$this->url($lang,'/../').'images/imgRegistro.jpg"></p>
 			</div>		
 			<div class="acerca-secundario-quienes acerca-secundario-quienes-form">
-				
-				<form method="post" id="frmRegistro" data-ajax-update="#target" data-ajax-success="RFSuccess()" data-ajax-mode="replace" data-ajax-method="POST" data-ajax-failure="RFError()" data-ajax="true" action="/umbraco/Surface/Account/RegisterUser" novalidate="novalidate">    <h2>Registro<br>profesionistas</h2>
+				<h2>Registro<br>profesionistas</h2>
+				<p id="mensaje"></p>
+				<form method="post" id="frmRegistro" name="form-registro" action="/register"> 
+
+					
 				    <div class="separador">
-				        <input type="text" value="" placeholder="Nombre(s)" name="Nombre" id="Nombre" data-val-required="*" data-val="true" class="requerido text-label">
-				        <input type="text" value="" placeholder="Apellidos" name="Apellidos" id="Apellidos" data-val-required="*" data-val="true" class="requerido text-label">
-				        <input type="text" value="" placeholder="Nombre de usuario" name="NombreUsuario" id="NombreUsuario" data-val-required="*" data-val="true" class="requerido text-label">
-				        <input type="email" value="" placeholder="Correo electrónico" name="Email" id="Email" data-val-required="The Email field is required." data-val-regex-pattern="^(([A-Za-z0-9]+_+)|([A-Za-z0-9]+\-+)|([A-Za-z0-9]+\.+)|([A-Za-z0-9]+\++))*[A-Za-z0-9]+@((\w+\-+)|(\w+\.))*\w{1,63}\.[a-zA-Z]{2,6}$" data-val-regex="!" data-val="true" class="requerido text-label">
+				        <input type="text" value="" placeholder="'.$this->trans($lang, "Nombre(s)","First name").'" name="nombre" id="Nombre">
+				        <input type="text" value="" placeholder="'.$this->trans($lang, "Apellidos","Last name").'" name="apellidos" id="Apellidos">
+				        <input type="text" value="" placeholder="'.$this->trans($lang, "Nombre de usuario","Username").'" name="nombreusuario" id="NombreUsuario">
+				        <input type="text" value="" placeholder="'.$this->trans($lang, "Contraseña","Password").'" name="passworduno" id="passworduno">
+				        <input type="text" value="" placeholder="'.$this->trans($lang, "Confirmar contraseña","Confirm password").'" name="passworddos" id="passworddos">
+				        <input type="text" value="" placeholder="'.$this->trans($lang, "Correo electrónico","E-mail adress").'" name="email" id="Email" >
 				    </div>
 				    <div class="separador">
-				        <input type="text" value="" placeholder="Empresa" name="Empresa" id="Empresa" data-val-required="*" data-val="true" class="requerido text-label">
-				        <input type="text" value="" placeholder="Puesto" name="Puesto" id="Puesto" data-val-required="*" data-val="true" class="requerido text-label">
-				        <input type="text" value="" placeholder="Website empresa" name="Website" id="Website" data-val-required="*" data-val="true" class="requerido text-label">
+				        <input type="text" value="" placeholder="'.$this->trans($lang, "Empresa","Company").'" name="empresa" id="Empresa">
+				        <input type="text" value="" placeholder="'.$this->trans($lang, "Puesto","Job title").'" name="puesto" id="Puesto">
+				        <input type="text" value="" placeholder="'.$this->trans($lang, "Website empresa","Website company").'" name="website" id="Website">
 				    </div>
 				    <div class="separador">
-				        <input type="text" value="" placeholder="Dirección" name="Direccion1" id="Direccion1" data-val-required="*" data-val="true" class="requerido mediano text-label">
-				        <input type="text" value="" placeholder="Colonia" name="Direccion2" id="Direccion2" class="mediano text-label">
+				        <input type="text" value="" placeholder="'.$this->trans($lang, "Dirección","Address").'" name="direccion1" id="Direccion1">
+				        <input type="text" value="" placeholder="'.$this->trans($lang, "Colonia","Region").'" name="direccion2" id="Direccion2">
 				        <br>
-				        <select title="País" placeholder="País" name="Pais" id="Pais">
-					        <option value="0">País</option>
+				        <select title="País" placeholder="'.$this->trans($lang, "País","Country").'" name="pais" id="Pais">
+					        <option value="">País</option>
 							<option value="Mexico">Mexico</option>
 							<option value="Spain">Spain</option>
 						</select>
 				        <br>
-				        <input type="text" value="" placeholder="Estado / Municipio" name="Estado" id="Estado" data-val-required="*" data-val="true" class="requerido mediano2 text-label">
-				        <input type="text" value="" placeholder="Código Postal" name="CodigoPostal" id="CodigoPostal" class="mediano2 text-label">
-				        <input type="text" value="" placeholder="Mobil" name="Movil" id="Movil" class="mediano2 text-label">
-				        <input type="text" value="" placeholder="Teléfono" name="Telefono" id="Telefono" class="mediano2 text-label">
+				        <input type="text" value="" placeholder="'.$this->trans($lang, "Estado / Municipio","State").'" name="estado" id="Estado" class="mediano2">
+				        <input type="text" value="" placeholder="'.$this->trans($lang, "Código Postal","Zip code").'" name="codigopostal" id="CodigoPostal" class="mediano2">
+				        <input type="text" value="" placeholder="'.$this->trans($lang, "Mobil","Mobile").'" name="movil" id="Movil" class="mediano2">
+				        <input type="text" value="" placeholder="'.$this->trans($lang, "Teléfono","Phone").'" name="telefono" id="Telefono" class="mediano2">
 				    </div>
 				    <div class="separador">
 				        <label>
-				            Organización Profesional</label>
+				            '.$this->trans($lang, "Organización Profesional","Organization").'</label>
 				        <br>
 				        <label>
-				            <input type="checkbox" value="true" title="American Society of Interior Designers" name="RegistroAsid" id="RegistroAsid" data-val-required="The RegistroAsid field is required." data-val="true"><input type="hidden" value="false" name="RegistroAsid">
+				            <input type="checkbox" value="American Society of Interior Designers" name="organizacion[]" id="RegistroAsid" checked>
 				        ASID</label>
 				        <label>
-				            <input type="checkbox" value="true" title="American Institute of Architects" name="RegistroAia" id="RegistroAia" data-val-required="The RegistroAia field is required." data-val="true"><input type="hidden" value="false" name="RegistroAia">
+				            <input type="checkbox" value="American Institute of Architects" name="organizacion[]" id="RegistroAia">
 				            AIA</label>
 				        <label>
-				            <input type="checkbox" value="true" title="IBD" name="RegistroIbd" id="RegistroIbd" data-val-required="The RegistroIbd field is required." data-val="true"><input type="hidden" value="false" name="RegistroIbd">
+				            <input type="checkbox" value="IBD" name="organizacion[]" id="RegistroIbd">
 				            IBD</label>
 				        <br>
-				        <select title="Motivo de afiliación" placeholder="Motivo de afiliación" name="Motivo" id="Motivo">
-					        <option value="0">Motivo de afiliación</option>
+				        <select title="Motivo de afiliación" placeholder="'.$this->trans($lang, "Motivo de afiliación","Reason").'" name="motivo" id="Motivo">
+					        <option value="">'.$this->trans($lang, "Motivo de afiliación","Reason").'</option>
 							<option value="Soy Decorador">Soy Decorador</option>
 							<option value="Soy Arquitecto">Soy Arquitecto</option>
 							<option value="Soy Especificador">Soy Especificador</option>
 							<option value="Otro">Otro</option>
 						</select>
-				        <select title="¿Cómo se enteró de nosotros?" placeholder="¿Cómo se enteró de nosotros?" name="ComoSeEntero" id="ComoSeEntero">
-				        	<option value="0">Cómo se enteró de nosotros</option>
+				        <select title="¿Cómo se enteró de nosotros?" placeholder="'.$this->trans($lang, "¿Cómo se enteró de nosotros?","How did you find us?").'" name="comoseentero" id="ComoSeEntero">
+				        	<option value="0">'.$this->trans($lang, "¿Cómo se enteró de nosotros?","How did you find us?").'</option>
 							<option value="Revista">Revista</option>
 							<option value="Diseñador">Diseñador</option>
 							<option value="Arquitecto">Arquitecto</option>
@@ -140,17 +163,20 @@
 				            * Campos obligatorios</label>
 				        <br>
 				        <label>
-				            <input type="checkbox" value="true" name="RegistroFtk" id="RegistroFtk" data-val-required="The RegistroFtk field is required." data-val="true"><input type="hidden" value="false" name="RegistroFtk">
-				            Registrarme a <em>Be the First to know</em>
+				            <input type="checkbox" value="true" name="registroftk" id="RegistroFtk">
+				            '.$this->trans($lang, "Registrarme a", "Add me to the list").' <em>Be the First to know</em>
 				        </label><br>
 				        <label>
-				            <input type="checkbox" value="true" name="RegistroMailing" id="RegistroMailing" data-val-required="The RegistroMailing field is required." data-val="true"><input type="hidden" value="false" name="RegistroMailing">
-				            Añadirme a la <em>Lista de correo</em>
+				            <input type="checkbox" value="true" name="registromailing" id="RegistroMailing">
+				            '.$this->trans($lang, "Añadirme a la", "Add mi to the").' <em>'.$this->trans($lang, "Lista de correo","Email list").'</em>
 				        </label>
 				        <br>
 				    </div>
 				    <div class="separador">
-				        <a href="http://www.alfonsomarinaebanista.com/es/terminos.aspx">Leer términos y condiciones</a>
+				        <a href="http://www.alfonsomarinaebanista.com/es/terminos.aspx">'.$this->trans($lang, "Leer términos y condiciones", "Terms and conditions").'</a>
+				    </div>
+				    <div class="separador">
+				        <input id="btn-registro" type="submit" value="'.$this->trans($lang , "Enviar" , "Send").'">
 				    </div>
 				</form>
 			</div>

@@ -58,7 +58,7 @@
 
 <div id="body">
 	<header id="main-header">
-		<h1><a href="index.html">Alfonso Marina</a></h1>
+		<a href="/"><h1>Alfonso Marina</h1></a>
 		<nav id="main-nav">
 			<ul>
 				<li><a href="index.html">Home</a></li>

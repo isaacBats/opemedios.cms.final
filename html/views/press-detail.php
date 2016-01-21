@@ -1,9 +1,16 @@
 	<div class="prensa">
 		<div id="navigation" class="navigation">
 			<ul class="thumbs noscript">
-				<li style="float:left;">
-					<a href="/images/Resource_Guide_Abril_2015-03.jpg" original='/images/Resource_Guide_Abril_2015-03.jpg'><img src="/images/Resource_Guide_Abril_2015-03.jpg" /></a>
-				</li>
+				<?php 
+					foreach ($images as $img) {
+					echo '<li style="float:left;">
+							<a href="/images/press/'.$img["imagen"].'" original="/images/press/'.$img["imagen"].'">
+								<img src="/images/press/'.$img["imagen"].'" />
+							</a>
+						</li>';
+					}
+				?>
+				
 			</ul>
 		</div>
 		<div id="controls" class="controls"></div>

@@ -5,18 +5,18 @@ class Catalog extends Controller{
 	public function showLifestyles($lang="es"){
 		
 		$html = $this->header();
-		
+	if ($lang == "es"){	
 		$sql = "SELECT * FROM lifestyles";
 		$query = $this->pdo->prepare($sql);
 		$rs = $query->execute();
 		if($rs!==false){
-			$nr = $query->rowCount();
-			if( $nr > 0 ){
+			$lr = $query->rowCount();
+			if( $lr > 0 ){
 				$styles = $query->fetchAll();
 					foreach ($styles as $style) {
 						$html .= '<div class="products-cover">
 									<div class="category">
-										<a href="'.$this->url($lang,'/catalog/lifestyles'.$style['name'].')'>
+										<a href="#">
 											<img src="../images/'.$style['imagen'].'"><br>
 												'.$style['name'].'
 										</a>
@@ -26,7 +26,7 @@ class Catalog extends Controller{
 					}
 			}
 		}
-		else if ($lang == "en") {
+	}else if ($lang == "en") {
 				$html .= 'Devuelve en inglés';
 			}
 			else
@@ -34,19 +34,66 @@ class Catalog extends Controller{
 				$html .= 'No existe lang';
 			}
 		}
-		else{
-			
-		}
-
 		$html .= $this->footer();
 
 		echo $html;
 
 	}
 
+	private function types(){
+		$sql = "select tipo from catalogo";
+		$query = $this->pdo->prepare($sql);
+		$rs = $query->execute();
+		
+		$tipos = $query->fetchAll();
+
+		return $tipos;
+	}
+
+	public function showListProducts($lang="es"){
+		
+		$html = $this->header();
+
+		if ($lang == "es"){
+			$sqlCatalogo = "select * from catalogo";
+			$queryCatalogo = $this->pdo->prepare($sqlCatalogo);
+			$rsCatalogo = $queryCatalogo->execute();
+
+			if( rsCatalogo !== false ){
+				$pr = $queryCatalogo->rowCount();
+				if($pr > 0){
+					$catalogo = $queryCatalogo->fetchAll();
+					foreach ($catalogo as $c) {
+						$html. = '
+								<div class="product-list">
+									<h2>'.$c['tipo'].'</h2>
+									<a href="producto-detalle.html">
+										<img src="images/'.$c['imagen'].'"><br>
+										Sofas y Loveseats
+									</a>
+								</div><!-- .product-list -->
+								';
+					}
+				}
 
 
-	private function footer(){
+			}
+		}else if ($lang == "en") {
+				$html .= 'Devuelve en inglés';
+			}
+			else
+			{
+				$html .= 'No existe lang';
+			}
+		}
+		$html .= $this->footer();
+
+		echo $html;
+	}
+
+
+
+	function footer(){
 		$html = '
 				<br class="clear"/>
 	            </div>
@@ -75,7 +122,7 @@ class Catalog extends Controller{
 		return $html;
 	}
 
-	private function header(){
+	function header(){
 	$html = '<!doctype html>
 				<html><head>
 				<meta charset="UTF-8">

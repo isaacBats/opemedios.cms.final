@@ -6,8 +6,8 @@
 	class Controller
 	{
 		public $pdo = null;
-		public $views = __DIR__."/../views/" ;
 		public $bread = array();
+		public $views = "views/";
 
 		public function url( $lang , $url = ""){
 			if( $url == ""){
@@ -21,8 +21,8 @@
 		function __construct()
 		{
 			$dsn = 'mysql:host=localhost;dbname=amarinados';
-			$nombre_usuario = 'adanzilla';
-			$password = 'campanitas';
+			$nombre_usuario = 'root';
+			$password = 'root';
 			$opciones = array(
 			    PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8',
 			);
@@ -68,7 +68,7 @@
 			array_push( $this->bread  , $array );
 		}
 
-		public function header( $lang ){
+		public function header( $lang , $nobeard = false){
 			if( $lang == "es"){
 				require  $this->views."header.php";	
 			}else{

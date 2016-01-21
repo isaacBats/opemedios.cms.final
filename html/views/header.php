@@ -43,8 +43,10 @@
 <link rel="stylesheet" type="text/css" href="/css/style.css"><!-- Hoja personalizada -->
 
 <!-- Librería de jquery que contiene también la librería de jquery tools -->
-
-<script src="/bower_components/jquery/jquery.js"></script>
+<script src="/js/bower_components/jquery/jquery.js"></script>
+<script src="/js/bower_components/jquery.tools/src/tabs/tabs.js"></script>
+<script src="/js/bower_components/jquery.tools/src/tabs/tabs.slideshow.js"></script>
+<script src="/js/bower_components/jquery/jquery.js"></script>
 <script src="/js/custom.js"></script>
 
 <!-- Código que sirve para que internet explorer rendereé correctamente las etiquetas de html5 -->
@@ -58,11 +60,25 @@
 
 <div id="body">
 	<header id="main-header">
-		<h1><a href="index.html">Alfonso Marina</a></h1>
+		<a href="/"><h1>Alfonso Marina</h1></a>
 		<nav id="main-nav">
 			<ul>
 				<li><a href="/">Inicio</a></li>
-				<li><a href="/about">Acerca de</a></li>
+				<li>
+					<a href="javascript:void(0);">Acerca de</a>
+					<ul>
+						<li>
+							<a href="/acerca-de/quienes-somos">
+								Qui&eacute;nes Somos
+							</a>
+						</li>
+						<li>
+							<a href="/acerca-de/fabrica-alfonso-marina">
+								F&aacute;brica Alfonso Marina
+							</a>
+						</li>
+					</ul>
+				</li>
 				<li><a href="/catalog">Catálogo</a></li>
 				<li><a href="/news">Noticias</a></li>
 				<li><a href="/gallery">Galería</a></li>
@@ -92,6 +108,6 @@
 	</header><!-- #main-header -->
 	<div id="wrapper">
 		<div class="breadcrumb vertical">
-			<?php $this->bread($lang ) ?>
+			<?php if( !$nobeard ) { $this->bread($lang ); } ?>
 		</div>
 	

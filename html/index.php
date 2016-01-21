@@ -80,6 +80,9 @@
 
 	$collection->attachRoute(new Route('/', array(
 		'_controller' => 'Plain::homeView',
+		'parameters' => array("lang" => $lang),
+		'methods' => 'GET'
+	)));
 
 	$collection->attachRoute(new Route('/contact', array(
 		'_controller' => 'Contacto::showForm',

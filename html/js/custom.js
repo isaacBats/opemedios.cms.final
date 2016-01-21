@@ -41,7 +41,7 @@ jQuery(document).ready(function($){
 			'apellidos' : { required : '' },
 			'nombreusuario' : { required : '' },
 			'passworduno' : { required : true },
-			'passworddos' : { required : true, equalTo: "Debe coincidir la contraseña" },
+			'passworddos' : { required : true, equalTo: "" },
 			'email' : { required : '', email : '' },
 			'empresa' : { required : '' },
 			'puesto' : { required : '' },

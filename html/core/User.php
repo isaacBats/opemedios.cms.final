@@ -126,7 +126,7 @@
 				            '.$this->trans($lang, "Organización Profesional","Organization").'</label>
 				        <br>
 				        <label>
-				            <input type="checkbox" value="American Society of Interior Designers" name="organizacion[]" id="RegistroAsid" checked>
+				            <input type="checkbox" value="American Society of Interior Designers" name="organizacion[]" id="RegistroAsid">
 				        ASID</label>
 				        <label>
 				            <input type="checkbox" value="American Institute of Architects" name="organizacion[]" id="RegistroAia">
@@ -143,7 +143,7 @@
 							<option value="Otro">Otro</option>
 						</select>
 				        <select title="¿Cómo se enteró de nosotros?" placeholder="'.$this->trans($lang, "¿Cómo se enteró de nosotros?","How did you find us?").'" name="comoseentero" id="ComoSeEntero">
-				        	<option value="0">'.$this->trans($lang, "¿Cómo se enteró de nosotros?","How did you find us?").'</option>
+				        	<option value="">'.$this->trans($lang, "¿Cómo se enteró de nosotros?","How did you find us?").'</option>
 							<option value="Revista">Revista</option>
 							<option value="Diseñador">Diseñador</option>
 							<option value="Arquitecto">Arquitecto</option>
@@ -173,7 +173,7 @@
 				        <br>
 				    </div>
 				    <div class="separador">
-				        <a href="http://www.alfonsomarinaebanista.com/es/terminos.aspx">'.$this->trans($lang, "Leer términos y condiciones", "Terms and conditions").'</a>
+				        <a href="http://www.alfonsomarinaebanista.com/es/terminos.aspx" target="_blank">'.$this->trans($lang, "Leer términos y condiciones", "Terms and conditions").'</a>
 				    </div>
 				    <div class="separador">
 				        <input id="btn-registro" type="submit" value="'.$this->trans($lang , "Enviar" , "Send").'">

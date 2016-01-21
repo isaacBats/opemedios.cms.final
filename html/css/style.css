@@ -2984,6 +2984,28 @@ ul.thumbs li a {
       text-transform: uppercase;
       margin-left: 10px; }
 
+/********** NO LOS BORRES JULIO POR FIS ***********/
+
+form div.field{
+  position: relative;
+}
+div.field label.error{
+  width: 100%;
+  top:-10px;
+  right:-10px;
+  position: absolute;
+}
+
+div.separador input.error,
+div.separador select.error,
+div.field input.error,
+div.field select.error
+{
+  border:1px solid red;
+}
+
+/**************************************************/
+
 @media only screen and (max-width: 1281px) {
   #wrapper #slideshow.slideshow img {
     max-height: 370px; }

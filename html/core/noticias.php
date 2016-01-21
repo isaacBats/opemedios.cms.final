@@ -19,16 +19,34 @@ class Noticias extends Controller
 
 			$html = '';
 
-			
-
-
 			$sql = "SELECT * FROM noticias WHERE slug = :slug";
 			$query = $this->pdo->prepare($sql);
 			$query->bindParam(':slug', $slug);
 			$rs = $query->execute();
 			if( $rs ){
 				$noticia = $query->fetch();
-				$html .= '<div class="registro">
+				if( $lang == "en" ){
+					$html .= '<div class="registro">
+					    	<div class="evento-principal full">
+						        <a href="javascript:void(0)" class="fancybox">
+						            <img alt="" src="../../images/'.$noticia['imagen'].'" />
+						        </a>
+					    	</div><!-- .evento-principal -->
+					    	<div class="eventoSecundario">
+						        <div class="nav-detalle">
+						            <a href="javascript:void(0)">Previous</a> | <a href="javascript:void(0);">Next</a>
+						            <a href="'.$this->url($lang,'/news').'" class="ver-todos">Show all</a>
+						        </div>
+					  			<!-- nav-detalle -->
+						        <h2 class="detalle-producto">'.$noticia['titulo_en'].'</h2>
+						        '.$noticia['contenido_en'].'
+							</div>
+							<!-- .eventoSecundario -->
+
+						</div>';
+				}
+				else{
+					$html .= '<div class="registro">
 					    	<div class="evento-principal full">
 						        <a href="javascript:void(0)" class="fancybox">
 						            <img alt="" src="../../images/'.$noticia['imagen'].'" />
@@ -46,6 +64,7 @@ class Noticias extends Controller
 							<!-- .eventoSecundario -->
 
 						</div>';
+				}
 			}
 
 			$this->addbread( array("url"=>"/news" , "label"=>"News ") );
@@ -122,7 +141,7 @@ class Noticias extends Controller
 						                    <a href="'.$this->url($lang,'/news/'.$noticia['slug']).'"><h2>'.$noticia['titulo_en'].'</h2></a>
 						                    '.$noticia['extracto_en'].'
 						                    <p>
-						                    	<a href="'.$noticia['slug'].'">[ + ] Read more </a>
+						                    	<a href="'.$this->url($lang,'/news/'.$noticia['slug']).'">[ + ] Read more </a>
 						                    </p>
 						                </div>
 						                <br class="clear">

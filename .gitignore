@@ -1,7 +1,9 @@
 # archivo de conexion de base de datos
 
 html/core/conn.php
-
+html/maqueta/.DS_Store
+html/maqueta/templates/.DS_Store
+html/maqueta/templates/src/.DS_Store
 # phpintel
 
 .phpintel/

@@ -159,8 +159,8 @@
 
 		$this->addbread( array("url"=>"/register" , "label"=>"Registro ") );
 		$this->header($lang);
-
 		echo $html;
+		$this->footer( $lang );
 	}
 
  } 

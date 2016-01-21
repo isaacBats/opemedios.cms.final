@@ -108,7 +108,7 @@ class Noticias extends Controller
 
 		}
 		
-		echo $html.'<br class="clear">';
+		echo $html;
 		$this->footer( $lang );
 	}
 	

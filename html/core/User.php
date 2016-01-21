@@ -88,17 +88,17 @@
 				<p><img alt="Registro" src="'.$this->url($lang,'/../').'images/imgRegistro.jpg"></p>
 			</div>		
 			<div class="acerca-secundario-quienes acerca-secundario-quienes-form">
-				<h2>Registro<br>profesionistas</h2>
+				<h2>'.$this->trans($lang, "Registro<br>profesionistas","Register <br>to the trade").'</h2>
 				<p id="mensaje"></p>
-				<form method="post" id="frmRegistro" name="form-registro" action="/register"> 
+				<form method="post" id="frmRegistro" name="form-registro" action="/'.$lang.'/register"> 
 
 					
 				    <div class="separador">
 				        <input type="text" value="" placeholder="'.$this->trans($lang, "Nombre(s)","First name").'" name="nombre" id="Nombre">
 				        <input type="text" value="" placeholder="'.$this->trans($lang, "Apellidos","Last name").'" name="apellidos" id="Apellidos">
 				        <input type="text" value="" placeholder="'.$this->trans($lang, "Nombre de usuario","Username").'" name="nombreusuario" id="NombreUsuario">
-				        <input type="text" value="" placeholder="'.$this->trans($lang, "Contraseña","Password").'" name="passworduno" id="passworduno">
-				        <input type="text" value="" placeholder="'.$this->trans($lang, "Confirmar contraseña","Confirm password").'" name="passworddos" id="passworddos">
+				        <input type="password" value="" placeholder="'.$this->trans($lang, "Contraseña","Password").'" name="passworduno" id="passworduno">
+				        <input type="password" value="" placeholder="'.$this->trans($lang, "Confirmar contraseña","Confirm password").'" name="passworddos" id="passworddos">
 				        <input type="text" value="" placeholder="'.$this->trans($lang, "Correo electrónico","E-mail adress").'" name="email" id="Email" >
 				    </div>
 				    <div class="separador">

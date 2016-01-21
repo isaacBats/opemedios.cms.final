@@ -33,7 +33,7 @@
 			$query->bindParam(':nombre', $_POST['nombre']);
 			$query->bindParam(':apellidos', $_POST['apellidos']);
 			$query->bindParam(':nombreusuario', $_POST['nombreusuario']);
-			$query->bindParam(':pass', $_POST['pass']);
+			$query->bindParam(':pass', $_POST['passworduno']);
 			$query->bindParam(':email', $_POST['email']);
 			$query->bindParam(':empresa', $_POST['empresa']);
 			$query->bindParam(':puesto', $_POST['puesto']);

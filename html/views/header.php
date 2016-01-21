@@ -47,6 +47,7 @@
 <script src="/js/bower_components/jquery.tools/src/tabs/tabs.js"></script>
 <script src="/js/bower_components/jquery.tools/src/tabs/tabs.slideshow.js"></script>
 <script src="/js/bower_components/jquery/jquery.js"></script>
+<script src="/js/bower_components/jquery/jquery.validate.js"></script>
 <script src="/js/custom.js"></script>
 
 <!-- Código que sirve para que internet explorer rendereé correctamente las etiquetas de html5 -->

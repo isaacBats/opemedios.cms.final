@@ -6,6 +6,7 @@
 	require_once( __DIR__.'/core/plain.php' );
 	require_once( __DIR__.'/core/Press.php' );
 	require_once( __DIR__.'/core/catalog.php' );
+	require_once( __DIR__.'/core/contacto.php' );
 
 
 	use PHPRouter\RouteCollection;
@@ -88,6 +89,12 @@
 		'_controller' => 'Contacto::showForm',
 		'parameters' => array("lang" => $lang),
 		'methods' => 'GET'
+		)));
+
+	$collection->attachRoute(new Route('/contact', array(
+		'_controller' => 'Contacto::saveForm',
+		'parameters' => array("lang" => $lang),
+		'methods' => 'POST'
 		)));
 
 

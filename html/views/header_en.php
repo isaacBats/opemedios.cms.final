@@ -44,8 +44,10 @@
 
 <!-- Librería de jquery que contiene también la librería de jquery tools -->
 
-<script src="/bower_components/jquery/jquery.js"></script>
+<script src="/js/bower_components/jquery/jquery.js"></script>
+<script src="/js/bower_components/jquery/jquery.validate.js"></script>
 <script src="/js/custom.js"></script>
+
 
 <!-- Código que sirve para que internet explorer rendereé correctamente las etiquetas de html5 -->
 <!--[if IE]>

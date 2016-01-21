@@ -4,6 +4,8 @@ html/core/conn.php
 html/maqueta/.DS_Store
 html/maqueta/templates/.DS_Store
 html/maqueta/templates/src/.DS_Store
+html/js/.DS_Store
+html/.DS_Store
 # phpintel
 
 .phpintel/

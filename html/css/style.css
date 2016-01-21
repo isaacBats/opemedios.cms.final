@@ -2949,6 +2949,31 @@ ul.thumbs li a {
     border: 1px dotted red;
   }
 
+          label.error {
+          display: none;
+        }
+        div.field {
+          width: 230px;
+          float: left;
+          position: relative;
+        }
+        div.field input.error,
+        div.field select.error
+        {
+            border:1px solid red;
+        }
+        div.field label.error{
+        position:absolute;
+        color: red;
+        text-align: center;
+        background-color: white;
+        top: -5px;
+        right: 0px;
+        width: 50%;
+        font-size: 12px;
+        width: 50%;}
+
+
 @media only screen and (max-width: 1281px) {
   #wrapper #slideshow.slideshow img {
     max-height: 370px; }

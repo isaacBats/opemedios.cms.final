@@ -2516,7 +2516,12 @@ a.imprimir {
   text-align: center; }
 
 #main-nav li {
-  display: inline-block; }
+  display: inline-block; 
+  padding: 10px 0px;
+  padding-top: 0px;
+  
+  position: relative;
+}
 
 #main-nav li a {
   border-left: 1px solid #d4d1cb;
@@ -2525,6 +2530,35 @@ a.imprimir {
   font-size: 12px;
   padding: 0 16px 0 20px;
   text-decoration: none; }
+
+#main-nav ul > li:hover > ul ,
+#main-nav ul > li > ul:hover  {
+  display: inline-block;
+}
+#main-nav ul > li > ul  {
+  position: absolute;
+  width: 100%;
+  z-index: 10000;
+  left: 0px;
+  top: 25px;
+  display: none;
+}
+#main-nav ul > li > ul > li {
+  background-color: #fafafb;
+  color: #807562;
+  display: block;
+  text-align: left;
+  width: 180px;
+  font-size: 12px;
+  padding: 0 16px 0 5px;
+  text-decoration: none; 
+}
+#main-nav ul > li > ul > li > a{
+  border: 0px;
+  text-align: left;
+  font-size: 90%;
+  line-height: 25px;
+}
 
 #main-nav li a:hover {
   color: #eae6df; }

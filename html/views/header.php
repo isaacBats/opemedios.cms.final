@@ -80,7 +80,36 @@
 						</li>
 					</ul>
 				</li>
-				<li><a href="/catalog">Catálogo</a></li>
+				<li>
+					<a href="javascript:void(0)">Catálogo</a>
+					<ul>
+						<li>
+							<a href="/catalog/lifestyle">
+								Estílo de vida
+							</a>
+						</li>
+						<li>
+							<a href="/catalog/products">
+								Productos
+							</a>
+						</li>
+						<li>
+							<a href="/catalog/finishes">
+								Acabados
+							</a>
+						</li>
+						<li>
+							<a href="/catalog/product-care">
+								Cuidado de productos
+							</a>
+						</li>
+						<li>
+							<a href="/catalog/new-products">
+								Productos Nuevos
+							</a>
+						</li>
+					</ul>
+				</li>
 				<li><a href="/news">Noticias</a></li>
 				<li><a href="/gallery">Galería</a></li>
                 <li><a href="/press">Prensa</a></li>

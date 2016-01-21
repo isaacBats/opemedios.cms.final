@@ -40,14 +40,19 @@
 <link rel="apple-touch-icon" sizes="144x144" href="/images/icons/apple-touch-icon-144x144-precomposed.png">
     
 <!-- Hojas de estilo base -->
+<link rel="stylesheet" type="text/css" href="/css/gallerific.css"><!-- Hoja de reset -->
+<link rel="stylesheet" type="text/css" href="/bower_components/jquery.fancybox/fancybox/jquery.fancybox-1.3.4.css"><!-- Hoja de reset -->
+
 <link rel="stylesheet" type="text/css" href="/css/style.css"><!-- Hoja personalizada -->
 
 <!-- Librería de jquery que contiene también la librería de jquery tools -->
-
 <script src="/js/bower_components/jquery/jquery.js"></script>
+<script src="/js/bower_components/jquery.fancybox/fancybox/jquery.fancybox-1.3.4.js"></script>
+<script src="/js/bower_components/jquery.tools/src/tabs/tabs.js"></script>
+<script src="/js/bower_components/jquery.tools/src/tabs/tabs.slideshow.js"></script>
 <script src="/js/bower_components/jquery/jquery.validate.js"></script>
+<script src="/js/gallerific.js"></script>
 <script src="/js/custom.js"></script>
-
 
 <!-- Código que sirve para que internet explorer rendereé correctamente las etiquetas de html5 -->
 <!--[if IE]>
@@ -63,20 +68,63 @@
 		<a href="/"><h1>Alfonso Marina</h1></a>
 		<nav id="main-nav">
 			<ul>
-				<li><a href="index.html">Home</a></li>
-				<li><a href="quienes-somos.html">About</a></li>
-				<li><a href="portada.html">Catalog</a></li>
-				<li><a href="/en/News">News</a></li>
-				<li><a href="galeria.html">Gallery</a></li>
-                <li><a href="prensa.html">Press</a></li>
-				<li><a href="contacto.html">Contact</a></li>
+				<li><a href="<?php echo $this->url($lang , '/') ?>/">Home</a></li>
+				<li>
+					<a href="javascript:void(0);">About</a>
+					<ul>
+						<li>
+							<a href="<?php echo $this->url($lang , '/acerca-de/quienes-somos') ?>">
+								Who we are
+							</a>
+						</li>
+						<li>
+							<a href="<?php echo $this->url($lang , '/acerca-de/fabrica-alfonso-marina') ?>">
+								Factory Alfonso Marina
+							</a>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<a href="javascript:void(0) ?>">Catalog</a>
+					<ul>
+						<li>
+							<a href="<?php echo $this->url($lang , "/catalog/lifestyle") ?>">
+								Lifestyle
+							</a>
+						</li>
+						<li>
+							<a href="<?php echo $this->url($lang , "/catalog/products") ?>">
+								Products
+							</a>
+						</li>
+						<li>
+							<a href="<?php echo $this->url($lang , "/catalog/finishes") ?>">
+								Finishes
+							</a>
+						</li>
+						<li>
+							<a href="<?php echo $this->url($lang , "/catalog/product-care") ?>">
+								Product Care
+							</a>
+						</li>
+						<li>
+							<a href="<?php echo $this->url($lang , "/catalog/new-products") ?>">
+								New Products
+							</a>
+						</li>
+					</ul>
+				</li>
+				<li><a href="<?php echo $this->url($lang , "/news") ?>">News</a></li>
+				<li><a href="<?php echo $this->url($lang , "/gallery") ?>">Gallery</a></li>
+                <li><a href="<?php echo $this->url($lang , "/press") ?>">Press</a></li>
+				<li><a href="<?php echo $this->url($lang , "/contact") ?>">Contact</a></li>
 			</ul>
 		</nav><!-- #main-nav -->
 		<div id="aux-nav">
 			<nav>
 				<ul>
-					<li><a href="login.html">Sign in</a></li>
-					<li><a href="javascript:void(0);">Registro</a></li>
+					<li><a href="<?php echo $this->url($lang , "/login") ?>">Sign in</a></li>
+					<li><a href="<?php echo $this->url($lang , "/register") ?>">Registro</a></li>
 	            </ul>
 	        </nav>
 	        <a href="javascript:void(0);">Mis Favoritos</a>

@@ -6,8 +6,8 @@
 	class Controller
 	{
 		public $pdo = null;
-		public $views = __DIR__."/../views/" ;
 		public $bread = array();
+		public $views = "views/";
 
 		public function url( $lang , $url = ""){
 			if( $url == ""){

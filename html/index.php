@@ -3,6 +3,7 @@
 	require_once( __DIR__.'/core/controller.php' );
 	require_once( __DIR__.'/core/noticias.php' );
 	require_once( __DIR__.'/core/gallery.php' );
+	require_once( __DIR__.'/core/catalog.php' );
 
 	use PHPRouter\RouteCollection;
 	use PHPRouter\Config;

@@ -56,7 +56,7 @@ class Catalog extends Controller{
 		
 		$html = "";
 
-		$sqlCatalogo = "select * from catalogo WHERE estilo like '%".strtolower($slug)."%' GROUP by grupo ";
+		$sqlCatalogo = "select * from product WHERE estilo like '%".strtolower($slug)."%' GROUP by grupo ";
 		$queryCatalogo = $this->pdo->prepare($sqlCatalogo);
 		$rsCatalogo = $queryCatalogo->execute();
 

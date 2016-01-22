@@ -5,6 +5,59 @@ class Catalog extends Controller{
 
 
 	//  PLAIN
+	public function menuCatalog( $lang, $estilo = ""){
+			$tipos = $this->tipos($estilo);
+			
+			/*echo "<pre>";
+			print_r($tipos);*/
+
+			require $this->views."header-catalogo.php";
+
+	}
+	
+	private function tipos($estilo = ""){
+		if( $estilo != ""){
+			$sql = "SELECT distinct(tipo) FROM product WHERE estilo = :estilo ";
+		}else{
+			$sql = "SELECT distinct(tipo) FROM product";
+		}
+
+		$query = $this->pdo->prepare($sql);
+		$query->bindParam(':estilo', $estilo);
+		$rs = $query->execute();
+		if($rs!==false){
+			$nr = $query->rowCount();
+			if( $nr > 0 ){
+				$tipos = $query->fetchAll(PDO::FETCH_COLUMN);
+				$tiposOut = array();
+				foreach( $tipos as $t ){
+					array_push( $tiposOut , array( $t => $this->grupos( $estilo , $t ) )  );
+				}
+				return $tiposOut;
+			}
+		}
+	}
+
+	private function grupos($estilo = "" , $tipo = ""){
+		if( $estilo != ""){
+			$sql = "SELECT distinct(grupo) FROM product WHERE estilo = :estilo && tipo LIKE '{$tipo}'";
+		}else{
+			$sql = "SELECT distinct(grupo) FROM product WHERE tipo LIKE '{$tipo}' ";
+		}
+		
+		$query = $this->pdo->prepare($sql);
+		$query->bindParam(':estilo', $estilo);
+		$rs = $query->execute();
+		if($rs!==false){
+			$nr = $query->rowCount();
+			if( $nr > 0 ){
+				$grupos = $query->fetchAll(PDO::FETCH_COLUMN);
+				return $grupos;
+			}
+		}
+	}	
+
+
 
 	public function productCare($lang = "es"){
 

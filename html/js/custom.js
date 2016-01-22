@@ -13,6 +13,15 @@ function controllProgressBtn(){
 
 jQuery(document).ready(function($){
 
+	jQuery('#news-submit').on('click', function(event) {
+		event.preventDefault();
+		if( jQuery('#Email').val() != "" ){
+			jQuery('#newsletter')
+				.find('input').remove();
+				jQuery('#newsletter').find('p').fadeIn();
+
+		}
+	});
 
 	jQuery('#frmRegistro').validate({
 		rules: {

@@ -5,8 +5,9 @@
 		<footer id="inner-footer">
 			<form >
 				<div id="newsletter">
-	        		<input type="email" value="" placeholder="Email" name="Email" id="Email" data-val-required="The Email field is required." data-val-regex-pattern="^(([A-Za-z0-9]+_+)|([A-Za-z0-9]+\-+)|([A-Za-z0-9]+\.+)|([A-Za-z0-9]+\++))*[A-Za-z0-9]+@((\w+\-+)|(\w+\.))*\w{1,63}\.[a-zA-Z]{2,6}$" data-val-regex="*" data-val="true" class="text-label">
-	        		<input type="submit" id="news-submit" value="Suscribir" name="Submit">
+	        		<input type="email" value="" placeholder="Email" name="Email" id="Email" class="text-label">
+	        		<input type="submit" id="news-submit" value="<?php echo $this->trans($lang,"Suscribirse","Subscribe"); ?>" name="Submit">
+	        		<p><?php echo $this->trans($lang,"Gracias por suscribirte","Thank your for subscribe"); ?></p>
 	    		</div><!-- #newsletter --> 
 			</form>
 	        <p>&copy;Alfonso Marina Ebanista. <?php echo $this->trans($lang,"Derechos Reservados","All Rights Reserved"); ?></p>

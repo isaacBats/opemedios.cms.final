@@ -11,6 +11,7 @@
 		public function  homeView( $lang = "es" ){
 			$this->header($lang , true );
 			require  $this->views."home.php";	
+			$this->footer( $lang );
 
 		}
 
@@ -22,6 +23,8 @@
 			$this->header($lang);
 
 			require $this->views."who-are-we.php";
+
+			$this->footer( $lang );
 		}
 
 		public function  fabricView( $lang = "es" ){
@@ -32,6 +35,8 @@
 			$this->header($lang);
 
 			require $this->views."fabric.php";
+
+			$this->footer( $lang );
 		}
 
 		public function no_found( $lang ){

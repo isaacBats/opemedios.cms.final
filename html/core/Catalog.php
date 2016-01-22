@@ -71,6 +71,15 @@ class Catalog extends Controller{
 
 	}
 
+	public function productCare($lang = "es"){
+		
+		$this->addBread( array(  "label"=>$this->trans( $lang  , "Cuidado de productos" , "Product Care") ));
+		$this->header( $lang );
+		require $this->views."product-care.php";
+		$this->footer( $lang );
+
+	}
+
 	public function showLifestyles($lang="es"){
 
 		$html = "";
@@ -91,6 +100,7 @@ class Catalog extends Controller{
 		require $this->views."lifestyle.php";
 		$this->footer( $lang );
 	}
+
 
 	/*
 			$sql = "SELECT * FROM lifestyles";

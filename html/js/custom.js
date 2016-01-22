@@ -13,6 +13,20 @@ function controllProgressBtn(){
 
 jQuery(document).ready(function($){
 
+	jQuery('#btn-fav').on('click', function(event) {
+		event.preventDefault();
+		var id = jQuery(this).data('id');
+		jQuery.post('/product/addFav',{'id':id},function(json){
+			if( json.exito ){
+
+			}
+			else{
+
+			}
+		},'json');
+
+	});
+
 	jQuery('#news-submit').on('click', function(event) {
 		event.preventDefault();
 		if( jQuery('#Email').val() != "" ){

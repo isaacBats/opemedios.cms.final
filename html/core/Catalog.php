@@ -25,6 +25,25 @@ class Catalog extends Controller{
 	
 	//  CATALOG
 
+	public function addProductFavorite($lang){
+
+		$resultado = new stdClass();
+		
+		if( !empty($_POST) ){
+			if( !isset($_SESSION['favoritos']) ){
+				$_SESSION['favoritos'] = array();
+			}
+			array_push($_SESSION['favoritos'], $_POST['id']);
+			$resultado->exito = true;
+			$resultado->mensaje = "Se agregó el ID al contenedor de FAVORITOS";
+		}
+		else{
+			$resultado->exito = false;
+		}
+
+		header('Content-type: text/json');
+		echo json_encode($resultado);
+	}
 
 	public function showAll( $lang ){
 

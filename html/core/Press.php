@@ -8,7 +8,7 @@
  	
 
  	public function showAll( $lang ){
- 		$this->addBread( array( "label"=> "Prensa" ) );
+ 		$this->addBread( array( "label"=> $this->trans($lang,"Prensa","Press") ) );
  		$this->header( $lang );
 
  		$sql = "SELECT * FROM gallery WHERE contexto != 'main' ";

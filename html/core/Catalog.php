@@ -208,7 +208,7 @@ class Catalog extends Controller{
 	/*
 	| by adanzilla ...
 	 */
-	function navegacion($lang="es",$slug){
+	function navProduct($lang="es",$slug){
 		
 		$slugs = $this->idProducts();
 
@@ -243,7 +243,7 @@ class Catalog extends Controller{
 								</div><!-- #product-image-->
 								<div id="product-info">
 									<div class="nav-detalle">
-						            '.$this->navegacion($lang,$product['id']).'
+						            '.$this->navProduct($lang,$product['id']).'
 						            <a href="'.$this->url($lang,'/catalog/finishes').'" class="ver-todos">Show all</a>
 						        </div>
 									<h2 class="product-title">'.$product['nombre'].'</h2>

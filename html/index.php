@@ -65,6 +65,17 @@
 		'methods' => 'GET'
 		)));
 
+	$collection->attachRoute(new Route('/catalog/painted', array(
+		'_controller' => 'Finish::filterFinishes',
+		'parameters' => array("lang" => $lang , "type" => "painted"),
+		'methods' => 'GET'
+		)));
+	$collection->attachRoute(new Route('/catalog/wood', array(
+		'_controller' => 'Finish::filterFinishes',
+		'parameters' => array("lang" => $lang , "type" => "wood"),
+		'methods' => 'GET'
+		)));
+
 	$collection->attachRoute(new Route('/catalog/finishes/:codigo', array(
 		'_controller' => 'Finish::detailFinish',
 		'parameters' => array("lang" => $lang),

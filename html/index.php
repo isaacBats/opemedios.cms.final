@@ -85,20 +85,28 @@
 		'methods' => 'GET'
 	)));
 
-	$collection->attachRoute(new Route('/catalog/lifestyles', array(
-		'_controller' => 'Catalog::showLifestyles',
-		'parameters' => array("lang" => $lang),
-		'methods' => 'GET'
-		)));
-
-
-	$collection->attachRoute(new Route('/catalog/:slug', array(
+	$collection->attachRoute(new Route('/catalog/:style', array(
 		'_controller' => 'Catalog::showListProducts',
 		'parameters' => array("lang" => $lang),
 		'methods' => 'GET'
 		)));
 
-	
+	$collection->attachRoute(new Route('/catalog/:style/:type', array(
+		'_controller' => 'Catalog::showListProducts',
+		'parameters' => array("lang" => $lang),
+		'methods' => 'GET'
+		)));
+
+	$collection->attachRoute(new Route('/catalog/:style/:type/:use', array(
+		'_controller' => 'Catalog::showListProducts',
+		'parameters' => array("lang" => $lang),
+		'methods' => 'GET'
+		)));
+
+
+
+	//  PRODUCT 
+
 	$collection->attachRoute(new Route('/product/:slug', array(
 		'_controller' => 'Catalog::detailProduct',
 		'parameters' => array("lang" => $lang),

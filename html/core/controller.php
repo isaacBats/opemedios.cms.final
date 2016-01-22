@@ -114,10 +114,32 @@
 		}	
 
 
+		public function catMenu( $lang , $style ){
+			$tipos = $this->tipos( $style );
+			$style = $style != "" ?$style.'/':$style;
+			if ( !empty($tipos) ){
+				$html = '<ul>';
+				foreach ($tipos as $tipo) {
+					foreach ($tipo as $key => $value) {
+						$html .= '<li><a href="'.$this->url($lang, '/catalog/'.$style.strtolower($key)).'">'.ucwords(strtolower($key)).'</a><ul>';
+						foreach ($value as $subvalue) {
+							$html .= '<li><a href="'.$this->url($lang, '/catalog/'.$style.strtolower($key)."/".strtolower(str_replace(" ", "-" , $subvalue))).'">'.ucwords(strtolower($subvalue)).'</a></li>';
+						}
+						$html .= '</ul></li>';
+					}
+				}
+				$html .= '</ul>';
+
+				return $html;
+			}
+				
+		}					
+									
+
 		public function header( $lang , $nobeard = false){
 			if( $lang == "es"){
 				// require  $this->views."header.php";	
-				$tipos = $this->tipos("");
+				
 				require $this->views."header-catalogo.php";
 			}else{
 				require  $this->views."header_en.php";	

@@ -36,47 +36,13 @@
 									<a href="/catalog/casual">
 										Casual
 									</a>
-									<?php 
-									if ( !empty($tipos) ){
-										$html = '<ul>';
-										foreach ($tipos as $tipo) {
-											foreach ($tipo as $key => $value) {
-												$html .= '<li><a href="'.$this->url($lang, '/catalog/casual/'.strtolower($key)).'">'.ucwords(strtolower($key)).'</a><ul>';
-												foreach ($value as $subvalue) {
-													$html .= '<li><a href="'.$this->url($lang, '/catalog/casual/'.strtolower($key)."/".strtolower(str_replace(" ", "-" , $subvalue))).'">'.ucwords(strtolower($subvalue)).'</a></li>';
-												}
-												$html .= '</ul></li>';
-											}
-										}
-										$html .= '</ul>';
-
-										echo $html;
-									}
-									
-									?>
+									<?php echo $this->catMenu( $lang ,  "casual" ) ?>
 								</li>
 								<li>
 									<a href="/catalog/metro">
 										Metro
 									</a>
-									<?php 
-									if ( !empty($tipos) ){
-										$html = '<ul>';
-										foreach ($tipos as $tipo) {
-											foreach ($tipo as $key => $value) {
-												$html .= '<li><a href="'.$this->url($lang, '/catalog/metro/'.strtolower($key)).'">'.ucwords(strtolower($key)).'</a><ul>';
-												foreach ($value as $subvalue) {
-													$html .= '<li><a href="'.$this->url($lang, '/catalog/casual/'.strtolower($key)."/".strtolower(str_replace(" ", "-" , $subvalue))).'">'.ucwords(strtolower($subvalue)).'</a></li>';
-												}
-												$html .= '</ul></li>';
-											}
-										}
-										$html .= '</ul>';
-
-										echo $html;
-									}
-									
-									?>
+									<?php echo $this->catMenu( $lang ,  "metro" ) ?>
 								</li>
 							</ul>
 						</li>
@@ -84,28 +50,24 @@
 							<a href="/catalog/productos">
 								Productos
 							</a>
-							<?php 
-								if ( !empty($tipos) ){
-									$html = '<ul>';
-									foreach ($tipos as $tipo) {
-										foreach ($tipo as $key => $value) {
-											$html .= '<li><a href="'.$this->url($lang, '/catalog/productos/'.strtolower($key)).'">'.ucwords(strtolower($key)).'</a><ul>';
-											foreach ($value as $subvalue) {
-												$html .= '<li><a href="'.$this->url($lang, '/catalog/productos/'.strtolower($subvalue)).'">'.ucwords(strtolower($subvalue)).'</a></li>';
-											}
-											$html .= '</ul></li>';
-										}
-									}
-									$html .= '</ul>';
-									echo $html;
-								}
-									
-						    ?>
+							<?php echo $this->catMenu( $lang ,  "" ) ?>
 						</li>
 						<li>
 							<a href="/catalog/finishes">
 								Acabados
 							</a>
+							<ul>
+								<li>
+									<a href="/catalog/wood">
+									Acabados Madera
+									</a>
+								</li>
+								<li>
+									<a href="/catalog/painted">
+									Acabados Pintados
+									</a>
+								</li>
+							</ul>
 						</li>
 						<li>
 							<a href="/catalog/product-care">

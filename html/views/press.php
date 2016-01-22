@@ -30,7 +30,13 @@ foreach ($galleries as $press) {
 	
 }
 
-echo '<p class="tituloSeccion Publicidad">'.$this->trans($lang,'Publicidad', 'Publicity').'</p>'.$publicidad.'<br class="clear"><p class="tituloSeccion Publicidad">Brochures</p>'.$brochures;
+if( $publicidad ){
+    echo '<p class="tituloSeccion Publicidad">'.$this->trans($lang,'Publicidad', 'Publicity').'</p>'.$publicidad;    
+}
+
+if( $brochures ){
+    echo '<br class="clear"><p class="tituloSeccion Publicidad">Brochures</p>'.$brochures;
+}
 
 ?>
 </div><!-- #contenido -->

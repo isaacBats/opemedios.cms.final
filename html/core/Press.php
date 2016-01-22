@@ -5,8 +5,6 @@
  */
  class Press extends Controller
  {
- 	
-
  	public function showAll( $lang ){
  		$this->addBread( array( "label"=> $this->trans($lang,"Prensa","Press") ) );
  		$this->header( $lang );

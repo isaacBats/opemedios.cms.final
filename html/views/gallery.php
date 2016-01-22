@@ -38,7 +38,7 @@
 				</a>
 			</div>
 			<div class="aux-tools">
-				<a href="javascript:void(0);"><i class="fa fa-envelope-o fa-lg"></i> Enviar por correo</a>
-				<a href="javascript:void(0);"><i class="fa fa-print fa-lg"></i> Imprimir</a>
+				<a href="javascript:void(0);"><i class="fa fa-envelope-o fa-lg"></i> <?php echo $this->trans($lang,"Enviar por correo","Send it by e-mail"); ?></a>
+				<a href="javascript:void(0);"><i class="fa fa-print fa-lg"></i> <?php echo $this->trans($lang,"Imprimir","Print"); ?></a>
 			</div>
 		</div>

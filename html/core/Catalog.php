@@ -126,12 +126,13 @@ class Catalog extends Controller{
 				$html .= '<p class="tituloSeccion">'.str_replace( "-" , " " , urldecode( ucfirst( end( $this->bread )["label"] ) ) ).'</p>';
 
 				foreach ($catalogo as $product) {
+					$product["imagen"] = $product["imagen"] != "null"?"/images/product/".$product["imagen"]:"http://placehold.it/200x200/f4f4f4/ccc?text=product";
 					$html .= '
 							<article class="item4Col">
 						        <a href="'.$this->url($lang, "/product/".$product['ur']).'">
 						            <img style="width: 100%" 
 						            alt="'.$product["nombre"].'" 
-						            src="/images/product/'.$product["imagen"].'">
+						            src="'.$product["imagen"].'">
 						            <br class="clear">
 						            <br class="clear">
 						            <p>

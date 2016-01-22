@@ -3093,9 +3093,29 @@ div.field select.error
   margin-left: 0; }
 
 .acerca-secundario-quienes {
-  width: 40%;
+  width: 30%;
   float: right;
-  margin-bottom: 10px; }
+  margin-bottom: 10px; 
+}
+
+.product-cc .acerca-secundario-quienes {
+  float: right;
+  margin-right: 15%;
+  width: 30%; 
+}
+
+.product-care-image {
+  width: 30%;
+  float: left;
+  margin-left: 20%;
+}
+
+.product-care{
+  float: right;
+  width: 30%; 
+  margin-right: 15%;
+}
+
 
 .acerca-secundario-quienes h2 {
   font-size: 24px;

@@ -57,6 +57,25 @@
 		'methods' => 'GET'
 		)));
 
+	$collection->attachRoute(new Route('/catalog/finishes', array(
+		'_controller' => 'Catalog::showFinishes',
+		'parameters' => array("lang" => $lang),
+		'methods' => 'GET'
+		)));
+
+	$collection->attachRoute(new Route('/catalog/finishes/:codigo', array(
+		'_controller' => 'Catalog::detailFinish',
+		'parameters' => array("lang" => $lang),
+		'methods' => 'GET'
+		)));
+
+	
+	$collection->attachRoute(new Route('/catalog/product-care', array(
+		'_controller' => 'Catalog::productCare',
+		'parameters' => array("lang" => $lang),
+		'methods' => 'GET'
+		)));
+
 	$collection->attachRoute(new Route('/catalog/:slug', array(
 		'_controller' => 'Catalog::showListProducts',
 		'parameters' => array("lang" => $lang),
@@ -104,6 +123,17 @@
 		'_controller' => 'User::login',
 		'parameters' => array("lang" => $lang),
 		'methods' => 'GET'
+		)));
+	$collection->attachRoute(new Route('/logout', array(
+		'_controller' => 'User::logout',
+		'parameters' => array("lang" => $lang),
+		'methods' => 'GET'
+		)));
+
+	$collection->attachRoute(new Route('/login', array(
+		'_controller' => 'User::loginAction',
+		'parameters' => array("lang" => $lang),
+		'methods' => 'POST'
 		)));
 
 	$collection->attachRoute(new Route('/register', array(

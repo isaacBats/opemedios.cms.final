@@ -65,8 +65,8 @@
 							</a>
 						</li>
 						<li>
-							<a href="<?php echo $this->url($lang , "/press/brochures") ?>">
-								Brochures
+							<a href="<?php echo $this->url($lang , "/press/brochure") ?>">
+								Brochure
 							</a>
 						</li>
             		</ul>
@@ -78,12 +78,23 @@
 		</nav><!-- #main-nav -->
 		<div id="aux-nav">
 			<nav>
-				<ul>
-					<li><a href="<?php echo $this->url($lang , "/login") ?>">Sign in</a></li>
-					<li><a href="<?php echo $this->url($lang , "/register") ?>">Registro</a></li>
-	            </ul>
+				
+					
+
+					<ul>
+						<?php if( isset( $_SESSION["user"] ) ) {?>
+							<li>Greetings - <?php echo $_SESSION["user"]["nombre"] ?> &nbsp;</li>
+							<li> <a href="/logout">Logout</a></li>
+						<?php }else{
+						?>	
+							<li><a href="<?php echo $this->url($lang , "/login") ?>">Sign in</a></li>
+							<li><a href="<?php echo $this->url($lang , "/register") ?>">Registro</a></li>
+						<?php
+							} 
+						?>
+		            </ul>
 	        </nav>
-	        <a href="javascript:void(0);">Mis Favoritos</a>
+	        <a href="javascript:void(0);">My Favorites</a>
 	        <a href="<?php echo $this->url("es") ?>" >ESP</a> -
 	        <a href="<?php echo $this->url("en") ?>" class="selected">ENG</a>
 	        <div class="search-box">

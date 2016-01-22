@@ -7,10 +7,50 @@
  {
  	
 
+ 	public function loginAction( $lang ){
+ 		$user = $this->pdo->quote( $_POST["username"] );
+ 		$pass = $_POST["password"];
+ 			
+ 			$sql =  "SELECT * FROM registros WHERE nombreusuario LIKE LOWER(".$user.") ";
+ 			
+ 			$query = $this->pdo->prepare($sql);
+			$rs = $query->execute();
+			if($rs!==false){
+				$nr = $query->rowCount();
+				if( $nr > 0 ){
+					$user = $query->fetchAll(PDO::FETCH_ASSOC);
+					if( isset( $user[0]["nombreusuario"] ) ){
+						if($user[0]["pass"] == $pass){
+							$_SESSION[ "user"] = $user[0];	
+							header('Location: .');
+						}else{
+							header('Location: ./login');
+						}
+					}else{
+						header('Location: ./login');
+					}
+				}
+			}
+
+		
+ 		
+ 	}
+ 	public function logout( $lang ){
+ 		session_destroy();
+ 		header('Location: ./login');
+ 	}
+
  	public function login( $lang ){
+
+ 		if( isset($_SESSION["user"] ) ){
+
+ 			header('Location: .');
+ 			exit;
+
+ 		}
+
  		$this->addBread( array( "label"=> "Login" ) );
  		$this->header( $lang );
-
  		require $this->views."login.php";
  	}
 
@@ -33,7 +73,7 @@
 			$query->bindParam(':nombre', $_POST['nombre']);
 			$query->bindParam(':apellidos', $_POST['apellidos']);
 			$query->bindParam(':nombreusuario', $_POST['nombreusuario']);
-			$query->bindParam(':pass', $_POST['pass']);
+			$query->bindParam(':pass', $_POST['passworduno']);
 			$query->bindParam(':email', $_POST['email']);
 			$query->bindParam(':empresa', $_POST['empresa']);
 			$query->bindParam(':puesto', $_POST['puesto']);

@@ -22,6 +22,7 @@
 
 		function __construct()
 		{
+			session_start();
 			$dsn = 'mysql:host=localhost;dbname=amarinados';
 			$nombre_usuario = 'adanzilla';
 			$password = 'campanitas';

@@ -63,25 +63,30 @@ class Catalog extends Controller{
 			require $this->views."lifestyle.php";
 			$this->footer( $lang );
 	}
-
-
-
-
 	
 	public function showListProducts($lang="es" , $style = "", $type = "" , $group  = ""){
+
+		if( $style != "casual" && $style != "metro" ){
+			$group  = $type ;
+			$type = $style ; 
+			
+		}else{
+			$this->addBread( array(  "label"=>ucwords(strtolower($style)), "url"=> "/catalog/".$style  ) );
+			if( $type != "")
+				$this->addBread( array(  "label"=>ucwords(strtolower($type)) , "url"=> "/catalog/".implode( "/" , array( $style , $type )  ) ) );
+			if( $group != "")
+				$this->addBread( array(  "label"=>ucwords(strtolower($group))  ) );	
+		}
 		
-		$this->addBread( array(  "label"=>ucwords(strtolower($style)), "url"=> "/catalog/".$style  ) );
-		if( $type != "")
-			$this->addBread( array(  "label"=>ucwords(strtolower($type)) , "url"=> "/catalog/".implode( "/" , array( $style , $type )  ) ) );
-		if( $group != "")
-			$this->addBread( array(  "label"=>ucwords(strtolower($group))  ) );
+		
 
 		$html = "";
-		$style =  $style!= ""? "estilo LIKE '{$style}' " :" 1=1 ";
+		$style =  $style == "casual" || $style == "metro" ? "estilo LIKE '{$style}' " :"1=1 ";
 		$type =  $type != ""?"tipo LIKE '{$type}' ":" 1=1 ";
 		$group =  $group != ""?"LOWER( grupo ) LIKE '%".str_replace("-" , " " , urldecode($group))."%' ":" 1=1 ";
 		$where = implode( " AND " , array( $style , $type ,  $group ) );
 		
+		echo $where;
 
 		$sqlCatalogo = "SELECT * FROM product WHERE {$where} LIMIT 40";
 		$queryCatalogo = $this->pdo->prepare($sqlCatalogo);

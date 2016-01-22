@@ -36,28 +36,21 @@
 									<a href="/catalog/casual">
 										Casual
 									</a>
-									<ul>
-										<li><a href="/catalog/casual/tapiceria">Tapicería</a></li>
-										<li><a href="/catalog/casual/muebles">Muebles</a></li>
-										<li><a href="/catalog/casual/accesorios">Accesorios</a></li>
-									</ul>
+									<?php echo $this->catMenu( $lang ,  "casual" ) ?>
 								</li>
 								<li>
 									<a href="/catalog/metro">
 										Metro
 									</a>
-									<ul>
-										<li><a href="/catalog/metro/tapiceria">Tapicería</a></li>
-										<li><a href="/catalog/metro/muebles">Muebles</a></li>
-										<li><a href="/catalog/metro/accesorios">Accesorios</a></li>
-									</ul>
+									<?php echo $this->catMenu( $lang ,  "metro" ) ?>
 								</li>
 							</ul>
 						</li>
 						<li>
-							<a href="/catalog">
+							<a href="/catalog/productos">
 								Productos
 							</a>
+							<?php echo $this->catMenu( $lang ,  "" ) ?>
 						</li>
 						<li>
 							<a href="/catalog/finishes">
@@ -65,10 +58,14 @@
 							</a>
 							<ul>
 								<li>
-									<a href="/catalog/finishes/wood">Acabados Madera</a>
+									<a href="/catalog/wood">
+									Acabados Madera
+									</a>
 								</li>
 								<li>
-									<a href="/catalog/finishes/painted">Acabados Pintados</a>
+									<a href="/catalog/painted">
+									Acabados Pintados
+									</a>
 								</li>
 							</ul>
 						</li>

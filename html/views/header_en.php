@@ -31,16 +31,40 @@
 							<a href="<?php echo $this->url($lang , "/catalog/lifestyle") ?>">
 								Lifestyle
 							</a>
+							<ul>
+								<li>
+									<a href="<?php echo $this->url( $lang , "/catalog/casual" ) ?>">Casual</a>
+									<?php echo $this->catMenu( $lang ,  "casual" ) ?>
+								</li>
+								<li>
+									<a href="<?php echo $this->url( $lang , "/catalog/metro" ) ?>">Metro</a>
+									<?php echo $this->catMenu( $lang ,  "metro" ) ?>
+								</li>
+							</ul>
+
 						</li>
 						<li>
 							<a href="<?php echo $this->url($lang , "/catalog/products") ?>">
 								Products
 							</a>
+							<?php echo $this->catMenu( $lang ,  "" ) ?>
 						</li>
 						<li>
 							<a href="<?php echo $this->url($lang , "/catalog/finishes") ?>">
 								Finishes
 							</a>
+							<ul>
+								<li>
+									<a href="<?php echo $this->url($lang , "/catalog/wood") ?>">
+									Wood Finishes
+									</a>
+								</li>
+								<li>
+									<a href="<?php echo $this->url($lang , "/catalog/painted") ?>">
+									Painted Finishes
+									</a>
+								</li>
+							</ul>
 						</li>
 						<li>
 							<a href="<?php echo $this->url($lang , "/catalog/product-care") ?>">

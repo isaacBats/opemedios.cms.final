@@ -71,11 +71,12 @@
 			array_push( $this->bread  , $array );
 		}
 
-		private function tipos($estilo = ""){
+		private function tipos($estilo = "" , $lang ){
+
 			if( $estilo != ""){
-				$sql = "SELECT distinct(tipo) FROM product WHERE estilo = :estilo ";
+				$sql = "SELECT distinct(".$this->trans($lang , "tipo" , "_type").") FROM product WHERE estilo = :estilo ";
 			}else{
-				$sql = "SELECT distinct(tipo) FROM product";
+				$sql = "SELECT distinct(".$this->trans($lang , "tipo" , "_type").") FROM product";
 			}
 
 			$query = $this->pdo->prepare($sql);
@@ -87,18 +88,20 @@
 					$tipos = $query->fetchAll(PDO::FETCH_COLUMN);
 					$tiposOut = array();
 					foreach( $tipos as $t ){
-						array_push( $tiposOut , array( $t => $this->grupos( $estilo , $t ) )  );
+						array_push( $tiposOut , array( $t => $this->grupos( $estilo , $t , $lang ) )  );
 					}
 					return $tiposOut;
 				}
 			}
 		}
 
-		private function grupos($estilo = "" , $tipo = ""){
+		private function grupos($estilo = "" , $tipo = "" , $lang){
+			$grp = $this->trans($lang , "grupo" , "_group");
+			$tp = $this->trans($lang , "tipo" , "_type");
 			if( $estilo != ""){
-				$sql = "SELECT distinct(grupo) FROM product WHERE grupo NOT LIKE \"%,%\" AND estilo = :estilo && tipo LIKE '{$tipo}'";
+				$sql = "SELECT distinct(".$grp.") FROM product WHERE $grp NOT LIKE \"%,%\" AND estilo = :estilo && {$tp} LIKE '{$tipo}'";
 			}else{
-				$sql = "SELECT distinct(grupo) FROM product WHERE grupo NOT LIKE \"%,%\" AND tipo LIKE '{$tipo}' ";
+				$sql = "SELECT distinct(".$grp.") FROM product WHERE $grp NOT LIKE \"%,%\" AND {$tp} LIKE '{$tipo}' ";
 			}
 			
 			$query = $this->pdo->prepare($sql);
@@ -115,7 +118,7 @@
 
 
 		public function catMenu( $lang , $style ){
-			$tipos = $this->tipos( $style );
+			$tipos = $this->tipos( $style , $lang );
 			$style = $style != "" ?$style.'/':$style;
 			if ( !empty($tipos) ){
 				$html = '<ul>';

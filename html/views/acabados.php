@@ -7,7 +7,7 @@ foreach ($acabados as $acabado) {
 	    <a href="'.$this->url($lang, "/catalog/finishes/".$acabado['codigo']).'">
             <img style="width: 0%" 
             alt="'.$acabado["nombre"].'" 
-            src="/images/acabados/'.$acabado["imagen"].'">
+            src="/images/finishes/'.$acabado["imagen"].'">
             <br class="clear">
 			<br class="clear">
             '.$acabado["codigo"]. ' ' .$acabado["nombre"].'

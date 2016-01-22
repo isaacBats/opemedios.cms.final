@@ -3013,6 +3013,11 @@ div.field select.error
   border:1px dotted red;
 }
 
+#newsletter p{
+  padding: 0;
+  display: none;
+  font-size: 14px;
+}
 
 /**************************************************/
 

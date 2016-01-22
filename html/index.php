@@ -105,6 +105,17 @@
 		'parameters' => array("lang" => $lang),
 		'methods' => 'GET'
 		)));
+	$collection->attachRoute(new Route('/logout', array(
+		'_controller' => 'User::logout',
+		'parameters' => array("lang" => $lang),
+		'methods' => 'GET'
+		)));
+
+	$collection->attachRoute(new Route('/login', array(
+		'_controller' => 'User::loginAction',
+		'parameters' => array("lang" => $lang),
+		'methods' => 'POST'
+		)));
 
 	$collection->attachRoute(new Route('/register', array(
 		'_controller' => 'User::showForm',

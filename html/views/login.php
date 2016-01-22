@@ -4,28 +4,42 @@
 					<p class="login"><img src="/images/imgInicioSesion.jpg"/></p>
 				</div>
 
-				<form>    
+				<form action="<?php echo $this->url( $lang , "/login" ); ?>" method="POST">    
 					<div class="acerca-secundario-quienes">
 	        			<div class="inicio-sesion">
-		            		<h2>DISE&#209;ADORES Y ARQUITECTOS</h2>
-		            		<p>Bienvenidos a Alfonso Marina para profesionistas.</p>
+		            		<h2><?php echo $this->trans( $lang  , "DISE&#209;ADORES Y ARQUITECTOS" , "DESIGNERS & ARCHITECTS") ?></h2>
+		            		<p><?php echo $this->trans( $lang , "Bienvenidos a Alfonso Marina para profesionistas." , "Welcome to Alfonso Marina for professionals.") ?></p>
 		            		<div class="registrarse">
-		                		<p>&#191;Todav&#237;a no te has registrado?</p>
-		                		<a href="<?php echo $this->url($lang , "/register"); ?>">Reg&#237;strate ahora</a>
+
+		                		<p><?php echo $this->trans( $lang  , "&#191;Todav&#237;a no te has registrado?" , "¿Not registered yet?" ) ?></p>
+		                		<a href="<?php echo $this->url($lang , "/register"); ?>">
+		                		<?php echo $this->trans( $lang , "Reg&#237;strate ahora" , "Register Now"); ?>
+		                		</a>
 		            		</div>
 		            		<div class="iniciar-sesion">
 		                		<hgroup>
-		                    		<h2>Iniciar Sesi&#243;n</h2>
-		                    		<h3>Acceso a Miembros</h3>
+		                    		<h2>
+		                    			<?php echo $this->trans( $lang , "Iniciar Sesi&#243;n" , "LOGIN") ?>
+		                    		</h2>
+		                    		<h3>
+		                    		<?php echo $this->trans( $lang , "Acceso a Miembros" , "MEMBER ACCESS") ?>
+		                    		</h3>
 		                		</hgroup>
-		                		<input data-val="true" data-val-required="The Username field is required." id="Username" name="Username" placeholder="Usuario" type="text" value=""/>
+		                		<input data-val="true" data-val-required="The Username field is required." id="Username" name="username" placeholder="<?php echo $this->trans( $lang , "Usuario" , "Username") ?>" type="text" value=""/>
 		                		<br>
-		                		<input data-val="true" data-val-required="The Password field is required." id="Password" name="Password" placeholder="Contraseña" type="password" />
+		                		<input data-val="true" data-val-required="The Password field is required." id="Password" name="password" placeholder="<?php echo $this->trans( $lang , "Contraseña" , "Password") ?>" type="password" />
 		                		<br>
-		                		<label><input data-val="true" data-val-required="The RememberMe field is required." id="RememberMe" name="RememberMe" type="checkbox" value="true" /><input name="RememberMe" type="hidden" value="false" />Recordar mi contrase&#241;a</label>
+		                		<label><input data-val="true"  id="RememberMe" name="RememberMe" type="checkbox" value="true" />
+		                		<input name="RememberMe" type="hidden" value="false" />
+		                		<?php echo $this->trans( $lang , "Recordar mi contrase&#241;a" , "Remember my password ") ?>
+		                		
+		                		</label>
 		                		<br>
 		                		<input type="submit" value="Iniciar Sesi&#243;n">
-		                		<a class="trigger-popup-login olvidoContrasenia" href="#"><strong>Olvid&#233; mi contrase&#241;a</strong></a>
+		                		<a class="trigger-popup-login olvidoContrasenia" href="#"><strong>
+		                		<?php echo $this->trans( $lang , "Olvid&#233; mi contrase&#241;a" , "I forgot my password") ?>
+
+		                		</strong></a>
 		               			<input data-val="true" data-val-number="The field PaginaRegistroId must be a number." data-val-required="The PaginaRegistroId field is required." id="PaginaRegistroId" name="PaginaRegistroId" type="hidden" value="8158"/>
 		            		</div>
 	        			</div>

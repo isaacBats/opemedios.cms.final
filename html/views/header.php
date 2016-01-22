@@ -77,10 +77,20 @@
 		<div id="aux-nav">
 			<nav>
 				<ul>
-					<li><a href="/login">Sign in</a></li>
-					<li><a href="/register">Registro</a></li>
+					<?php if( isset( $_SESSION["user"] ) ) {?>
+						<li>Saludos - <?php echo $_SESSION["user"]["nombre"] ?> &nbsp;</li>
+						<li> <a href="/logout">Salir</a></li>
+					<?php }else{
+					?>	
+						<li><a href="/register">Registro</a></li>
+						<li><a href="/login">Sign in</a></li>
+					<?php
+						} 
+					?>
+					
 	            </ul>
 	        </nav>
+	        <br class="clear" />
 	        <a href="javascript:void(0);">Mis Favoritos</a>
 	        <a href="<?php echo $this->url("es") ?>" class="selected">ESP</a> -
 	        <a href="<?php echo $this->url("en") ?>">ENG</a>

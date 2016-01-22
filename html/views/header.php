@@ -47,7 +47,7 @@
 							</ul>
 						</li>
 						<li>
-							<a href="/catalog/productos">
+							<a href="/catalog">
 								Productos
 							</a>
 							<?php echo $this->catMenu( $lang ,  "" ) ?>

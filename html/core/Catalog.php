@@ -7,7 +7,6 @@ class Catalog extends Controller{
 		$this->addBread( array(  "label"=>$this->trans( $lang  , "Cuidado de productos" , "Product Care") ));
 		$this->header( $lang );
 		require $this->views."product-care.php";
-		exit;
 		$this->footer( $lang );
 
 	}

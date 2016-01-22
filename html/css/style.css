@@ -3671,8 +3671,13 @@ h2.tituloSeccion {
   margin: 0 1.8% 15px;
   width: 21.4%; }
 
+.item4Col > a  {
+  min-height: 350px;
+}
 .item4Col > a > img {
-  min-width: 80%; }
+  min-width: 80%; 
+
+}
 
 .item4Col > a > p {
   display: block;

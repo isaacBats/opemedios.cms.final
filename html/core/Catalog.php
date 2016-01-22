@@ -7,17 +7,28 @@ class Catalog extends Controller{
 	//  PLAIN
 
 	public function productCare($lang = "es"){
+
+		$this->updateProducts();
 		$this->addBread( array(  "label"=>$this->trans( $lang  , "Cuidado de productos" , "Product Care") ));
 		$this->header( $lang );
 		require $this->views."product-care.php";
 		$this->footer( $lang );
 	}
 
+	public function updateProducts(){
+			$images = scandir( "images/product" );
+			foreach ($images as $image) {
+				$ur = explode( "_", $image );
+				$sql = "UPDATE `amarinados`.`product` SET `imagen` = '{$image}' WHERE `product`.`ur` LIKE '{$ur[0]}';";
+				$query = $this->pdo->prepare($sql);
+				$rs = $query->execute();
+			}
+			
+			exit;
 
-
+	}
 
 	//  FINISHES
-
 
 	private function codigos(){
 		$sql = "SELECT codigo FROM acabados";
@@ -98,7 +109,7 @@ class Catalog extends Controller{
 	public function showAll( $lang ){
 
 		$this->header( $lang );
-		$sql = "SELECT * FROM product";
+		$sql = "SELECT * FROM product LIMIT 50";
  		$query = $this->pdo->prepare($sql);
 		$rs = $query->execute();
 		if($rs!==false){

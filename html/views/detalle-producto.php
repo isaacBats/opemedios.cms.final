@@ -1,7 +1,7 @@
 <div class="product">
     <div id="product-image">
-        <img src="http://placehold.it/500x600/f4f4f4/807562?text=product">
-        <!-- <img src="images/'.$product['imagen'].'"> -->
+        
+        <img src="<?php echo $product["imagen"]== "null"?"http://placehold.it/500x600/f4f4f4/807562?text=product":'/images/product/'.$product['imagen'].'' ?>">
     </div><!-- #product-image-->
     <div id="product-info">
         <div class="nav-detalle">
@@ -26,14 +26,14 @@
         <a href="javascript:void(0);" class="general-btn">Añadir a Favoritos</a>
         <div class="sec-features related">
             <h2>Productos Relacionados</h2>
-            <!-- <a href="javascript:void(0);" class="rel"><img src="images/relacionado1.jpg"></a>
-            <a href="javascript:void(0);" class="rel"><img src="images/relacionado2.jpg"></a>
-            <a href="javascript:void(0);" class="rel"><img src="images/relacionado3.jpg"></a> -->
+            <!-- <a href="javascript:void(0);" class="rel"><img src="/images/relacionado1.jpg"></a>
+            <a href="javascript:void(0);" class="rel"><img src="/images/relacionado2.jpg"></a>
+            <a href="javascript:void(0);" class="rel"><img src="/images/relacionado3.jpg"></a> -->
         </div><!-- .sec-features -->
         <div class="share-product">
-            <a href="javascript:void(0);"><img src="images/share-it.png"></a>
-            <a href="javascript:void(0);"><img src="images/tweet-it.png"></a>
-            <a href="javascript:void(0);"><img src="images/pin-it.png"></a>
+            <a href="javascript:void(0);"><img src="/images/share-it.png"></a>
+            <a href="javascript:void(0);"><img src="/images/tweet-it.png"></a>
+            <a href="javascript:void(0);"><img src="/images/pin-it.png"></a>
         </div><!-- .share-product -->
         <div class="product-note">
             <p><strong>NOTA:</strong> Debido a variaciones en los monitores, los colores como se muestran no pueden representar la calidad y el tono exacto.</p>

@@ -134,21 +134,21 @@
 
 					
 				    <div class="separador">
-				        <input type="text" value="" placeholder="'.$this->trans($lang, "Nombre(s)","First name").'" name="nombre" id="Nombre">
-				        <input type="text" value="" placeholder="'.$this->trans($lang, "Apellidos","Last name").'" name="apellidos" id="Apellidos">
-				        <input type="text" value="" placeholder="'.$this->trans($lang, "Nombre de usuario","Username").'" name="nombreusuario" id="NombreUsuario">
-				        <input type="password" value="" placeholder="'.$this->trans($lang, "Contraseña","Password").'" name="passworduno" id="passworduno">
-				        <input type="password" value="" placeholder="'.$this->trans($lang, "Confirmar contraseña","Confirm password").'" name="passworddos" id="passworddos">
-				        <input type="text" value="" placeholder="'.$this->trans($lang, "Correo electrónico","E-mail adress").'" name="email" id="Email" >
+				        <input type="text" class="requerido" value="" placeholder="'.$this->trans($lang, "Nombre(s)","First name").'" name="nombre" id="Nombre">
+				        <input type="text" class="requerido" value="" placeholder="'.$this->trans($lang, "Apellidos","Last name").'" name="apellidos" id="Apellidos">
+				        <input type="text" class="requerido" value="" placeholder="'.$this->trans($lang, "Nombre de usuario","Username").'" name="nombreusuario" id="NombreUsuario">
+				        <input type="password" value="" class="requerido" placeholder="'.$this->trans($lang, "Contraseña","Password").'" name="passworduno" id="passworduno">
+				        <input type="password" value="" class="requerido" placeholder="'.$this->trans($lang, "Confirmar contraseña","Confirm password").'" name="passworddos" id="passworddos">
+				        <input type="text" class="requerido" value="" placeholder="'.$this->trans($lang, "Correo electrónico","E-mail adress").'" name="email" id="Email" >
 				    </div>
 				    <div class="separador">
-				        <input type="text" value="" placeholder="'.$this->trans($lang, "Empresa","Company").'" name="empresa" id="Empresa">
-				        <input type="text" value="" placeholder="'.$this->trans($lang, "Puesto","Job title").'" name="puesto" id="Puesto">
-				        <input type="text" value="" placeholder="'.$this->trans($lang, "Website empresa","Website company").'" name="website" id="Website">
+				        <input type="text" class="requerido" value="" placeholder="'.$this->trans($lang, "Empresa","Company").'" name="empresa" id="Empresa">
+				        <input type="text" class="requerido" value="" placeholder="'.$this->trans($lang, "Puesto","Job title").'" name="puesto" id="Puesto">
+				        <input type="text" class="requerido" value="" placeholder="'.$this->trans($lang, "Website empresa","Website company").'" name="website" id="Website">
 				    </div>
 				    <div class="separador">
-				        <input type="text" value="" placeholder="'.$this->trans($lang, "Dirección","Address").'" name="direccion1" id="Direccion1">
-				        <input type="text" value="" placeholder="'.$this->trans($lang, "Colonia","Region").'" name="direccion2" id="Direccion2">
+				        <input type="text" class="requerido" value="" placeholder="'.$this->trans($lang, "Dirección","Address").'" name="direccion1" id="Direccion1">
+				        <input type="text" class="requerido" value="" placeholder="'.$this->trans($lang, "Colonia","Region").'" name="direccion2" id="Direccion2">
 				        <br>
 				        <select title="País" placeholder="'.$this->trans($lang, "País","Country").'" name="pais" id="Pais">
 					        <option value="">País</option>
@@ -156,7 +156,7 @@
 							<option value="Spain">Spain</option>
 						</select>
 				        <br>
-				        <input type="text" value="" placeholder="'.$this->trans($lang, "Estado / Municipio","State").'" name="estado" id="Estado" class="mediano2">
+				        <input type="text" value="" placeholder="'.$this->trans($lang, "Estado / Municipio","State").'" name="estado" id="Estado" class="mediano2 requerido">
 				        <input type="text" value="" placeholder="'.$this->trans($lang, "Código Postal","Zip code").'" name="codigopostal" id="CodigoPostal" class="mediano2">
 				        <input type="text" value="" placeholder="'.$this->trans($lang, "Mobil","Mobile").'" name="movil" id="Movil" class="mediano2">
 				        <input type="text" value="" placeholder="'.$this->trans($lang, "Teléfono","Phone").'" name="telefono" id="Telefono" class="mediano2">

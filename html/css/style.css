@@ -3004,6 +3004,13 @@ div.field select.error
   border:1px solid red;
 }
 
+.tituloSeccion{
+  font-size: 14px;
+  font-weight: bold;
+  color: #B3ACA1;  
+}
+
+
 /**************************************************/
 
 @media only screen and (max-width: 1281px) {

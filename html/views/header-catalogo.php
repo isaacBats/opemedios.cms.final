@@ -36,28 +36,71 @@
 									<a href="/catalog/casual">
 										Casual
 									</a>
-									<ul>
-										<li><a href="/catalog/casual/tapiceria">Tapicería</a></li>
-										<li><a href="/catalog/casual/muebles">Muebles</a></li>
-										<li><a href="/catalog/casual/accesorios">Accesorios</a></li>
-									</ul>
+									<?php 
+									if ( !empty($tipos) ){
+										$html = '<ul>';
+										foreach ($tipos as $tipo) {
+											foreach ($tipo as $key => $value) {
+												$html .= '<li><a href="'.$this->url($lang, '/catalog/casual/'.strtolower($key)).'">'.ucwords(strtolower($key)).'</a><ul>';
+												foreach ($value as $subvalue) {
+													$html .= '<li><a href="'.$this->url($lang, '/catalog/casual/'.strtolower($subvalue)).'">'.ucwords(strtolower($subvalue)).'</a></li>';
+												}
+												$html .= '</ul></li>';
+											}
+										}
+										$html .= '</ul>';
+
+										echo $html;
+									}
+									
+									?>
 								</li>
 								<li>
 									<a href="/catalog/metro">
 										Metro
 									</a>
-									<ul>
-										<li><a href="/catalog/metro/tapiceria">Tapicería</a></li>
-										<li><a href="/catalog/metro/muebles">Muebles</a></li>
-										<li><a href="/catalog/metro/accesorios">Accesorios</a></li>
-									</ul>
+									<?php 
+									if ( !empty($tipos) ){
+										$html = '<ul>';
+										foreach ($tipos as $tipo) {
+											foreach ($tipo as $key => $value) {
+												$html .= '<li><a href="'.$this->url($lang, '/catalog/metro/'.strtolower($key)).'">'.ucwords(strtolower($key)).'</a><ul>';
+												foreach ($value as $subvalue) {
+													$html .= '<li><a href="'.$this->url($lang, '/catalog/metro/'.strtolower($subvalue)).'">'.ucwords(strtolower($subvalue)).'</a></li>';
+												}
+												$html .= '</ul></li>';
+											}
+										}
+										$html .= '</ul>';
+
+										echo $html;
+									}
+									
+									?>
 								</li>
 							</ul>
 						</li>
 						<li>
-							<a href="/catalog">
+							<a href="/catalog/productos">
 								Productos
 							</a>
+							<?php 
+								if ( !empty($tipos) ){
+									$html = '<ul>';
+									foreach ($tipos as $tipo) {
+										foreach ($tipo as $key => $value) {
+											$html .= '<li><a href="'.$this->url($lang, '/catalog/productos/'.strtolower($key)).'">'.ucwords(strtolower($key)).'</a><ul>';
+											foreach ($value as $subvalue) {
+												$html .= '<li><a href="'.$this->url($lang, '/catalog/productos/'.strtolower($subvalue)).'">'.ucwords(strtolower($subvalue)).'</a></li>';
+											}
+											$html .= '</ul></li>';
+										}
+									}
+									$html .= '</ul>';
+									echo $html;
+								}
+									
+						    ?>
 						</li>
 						<li>
 							<a href="/catalog/finishes">

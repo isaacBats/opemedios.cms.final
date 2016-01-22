@@ -2,14 +2,86 @@
 
 class Catalog extends Controller{
 
-	public function productCare($lang = "es"){
+
+
+	//  PLAIN
+	public function menuCatalog( $lang, $estilo = ""){
+			$tipos = $this->tipos($estilo);
+			
+			/*echo "<pre>";
+			print_r($tipos);*/
+
+			require $this->views."header-catalogo.php";
+
+	}
+	
+	private function tipos($estilo = ""){
+		if( $estilo != ""){
+			$sql = "SELECT distinct(tipo) FROM product WHERE estilo = :estilo ";
+		}else{
+			$sql = "SELECT distinct(tipo) FROM product";
+		}
+
+		$query = $this->pdo->prepare($sql);
+		$query->bindParam(':estilo', $estilo);
+		$rs = $query->execute();
+		if($rs!==false){
+			$nr = $query->rowCount();
+			if( $nr > 0 ){
+				$tipos = $query->fetchAll(PDO::FETCH_COLUMN);
+				$tiposOut = array();
+				foreach( $tipos as $t ){
+					array_push( $tiposOut , array( $t => $this->grupos( $estilo , $t ) )  );
+				}
+				return $tiposOut;
+			}
+		}
+	}
+
+	private function grupos($estilo = "" , $tipo = ""){
+		if( $estilo != ""){
+			$sql = "SELECT distinct(grupo) FROM product WHERE estilo = :estilo && tipo LIKE '{$tipo}'";
+		}else{
+			$sql = "SELECT distinct(grupo) FROM product WHERE tipo LIKE '{$tipo}' ";
+		}
 		
+		$query = $this->pdo->prepare($sql);
+		$query->bindParam(':estilo', $estilo);
+		$rs = $query->execute();
+		if($rs!==false){
+			$nr = $query->rowCount();
+			if( $nr > 0 ){
+				$grupos = $query->fetchAll(PDO::FETCH_COLUMN);
+				return $grupos;
+			}
+		}
+	}	
+
+
+
+	public function productCare($lang = "es"){
+
+		$this->updateProducts();
 		$this->addBread( array(  "label"=>$this->trans( $lang  , "Cuidado de productos" , "Product Care") ));
 		$this->header( $lang );
 		require $this->views."product-care.php";
 		$this->footer( $lang );
+	}
+
+	public function updateProducts(){
+			$images = scandir( "images/product" );
+			foreach ($images as $image) {
+				$ur = explode( "_", $image );
+				$sql = "UPDATE `amarinados`.`product` SET `imagen` = '{$image}' WHERE `product`.`ur` LIKE '{$ur[0]}';";
+				$query = $this->pdo->prepare($sql);
+				$rs = $query->execute();
+			}
+			
+			exit;
 
 	}
+
+	//  FINISHES
 
 	private function codigos(){
 		$sql = "SELECT codigo FROM acabados";
@@ -59,6 +131,7 @@ class Catalog extends Controller{
 		
 		$this->footer($lang);
 	}
+	
 
 	public function showFinishes($lang){
 		$this->addBread( array( "label"=> "Prensa" ) );
@@ -78,6 +151,29 @@ class Catalog extends Controller{
  		
  		$this->footer($lang);
 
+	}
+
+
+
+
+	//  CATALOG
+
+
+	public function showAll( $lang ){
+
+		$this->header( $lang );
+		$sql = "SELECT * FROM product LIMIT 50";
+ 		$query = $this->pdo->prepare($sql);
+		$rs = $query->execute();
+		if($rs!==false){
+			$nr = $query->rowCount();
+			if( $nr > 0 ){
+				$productList = $query->fetchAll();
+				$count = 0;
+				require $this->views."catalog.php";
+			}
+		}
+		$this->footer( $lang );
 	}
 
 	public function showLifestyles($lang="es"){
@@ -101,31 +197,6 @@ class Catalog extends Controller{
 			$this->footer( $lang );
 	}
 
-	/*
-			$sql = "SELECT * FROM lifestyles";
-			$query = $this->pdo->prepare($sql);
-			$rs = $query->execute();
-
-			$html .= '<div class="products-cover">';
-
-			if($rs !==false ){
-				$lr = $query->rowCount();
-				if( $lr > 0 ){
-					$styles = $query->fetchAll();
-						foreach ($styles as $style) {
-							$html .= '<div class="category">
-											<a href="'.$this->url($lang , "/catalog/".$style['name']).'">
-												<img src="/images/'.$style['image'].'"><br>
-													'.$style['name'].'
-											</a>
-										</div><!-- .category -->
-										<br class="clear">';
-						}
-				}
-			}
-			$html .= '</div><!-- .products-cover -->';
-
-	*/
 
 
 
@@ -235,68 +306,29 @@ class Catalog extends Controller{
 	}
 
 	function detailProduct($lang="es", $slug){
-		$this->header( $lang );
+		
 		if ( !empty($slug) ){
 
-			$html = '';
+			$this->addBread( array(  "label"=>$this->trans( $lang  , "Catalogo" , "Catalog") , "url"=>"" ) );
+			$this->addBread( array(  "label"=>$this->trans( $lang  , "Productos" , "Products") , "url"=>"" ) );
 
-			$sql = "SELECT * FROM product WHERE id = $slug";
+			
+			$sql = "SELECT * FROM product WHERE ur LIKE '$slug'";
 			$query = $this->pdo->prepare($sql);
 			$rs = $query->execute();
 			if( $rs ){
 				$product = $query->fetch();
-				if( $lang == "es" ){
-					$html .= '<div class="product">
-								<div id="product-image">
-									<img src="images/'.$product['imagen'].'">
-								</div><!-- #product-image-->
-								<div id="product-info">
-									<div class="nav-detalle">
-						            '.$this->navProduct($lang,$product['id']).'
-						            <a href="'.$this->url($lang,'/catalog').'" class="ver-todos">Show all</a>
-						        </div>
-									<h2 class="product-title">'.$product['nombre'].'</h2>
-									<div class="features">
-										<p><strong>'.$product['ur'].'</strong><br>
-										<strong>Medidas cm:</strong> W '.$product['frente'].' D '.$product['fondo'].' H '.$product['altura'].' cm<br>
-										<strong>Medidas in:</strong> W '.$product['frentre_plg'].' D '.$product['fondo_plg'].' H '.$product['altura_plg'].' in<br>
-										<strong>Carácter:</strong> '.$product['caracter'].'<br>
-										<strong>Como se muestra:</strong> '.$product['como_se_muestra'].'<br>
-										<strong>Precio:</strong> <a href="javascript:void(0);" class="general-link">Iniciar sesión</a></p>
-									</div><!-- .features -->
-									<a href="javascript:void(0);" class="general-btn">Añadir a Favoritos</a>
-									<div class="sec-features related">
-										<h2>Productos Relacionados</h2>
-										<a href="javascript:void(0);" class="rel"><img src="images/relacionado1.jpg"></a>
-										<a href="javascript:void(0);" class="rel"><img src="images/relacionado2.jpg"></a>
-										<a href="javascript:void(0);" class="rel"><img src="images/relacionado3.jpg"></a>
-									</div><!-- .sec-features -->
-									<div class="share-product">
-										<a href="javascript:void(0);"><img src="images/share-it.png"></a>
-										<a href="javascript:void(0);"><img src="images/tweet-it.png"></a>
-										<a href="javascript:void(0);"><img src="images/pin-it.png"></a>
-									</div><!-- .share-product -->
-									<div class="product-note">
-										<p><strong>NOTA:</strong> Debido a variaciones en los monitores, los colores como se muestran no pueden representar la calidad y el tono exacto.</p>
-										<p>Si desea más información, favor de contactar a nuestra área de Servicio al Clientes.</p>
-									</div><!-- .product-note -->
-									<div class="post-actions">
-										<a href="javascript:void(0);"><i class="fa fa-envelope-o fa-lg"></i> Enviar por correo</a>
-										<a href="javascript:void(0);"><i class="fa fa-print fa-lg"></i> Imprimir</a>
-										<a href="javascript:void(0);"><i class="fa fa-file-o fa-lg"></i> Imprimir hoja de catálogo</a>
-									</div><!-- .post-actions -->
-								</div><!-- #product-info -->
-								<br class="clear">
-							</div><!-- .product-->';
-				}
-				else{
-					$html .= 'echo "producto ingles";';
-				}
+				$this->addBread( array(  "label"=>ucwords(strtolower($this->trans( $lang  , $product["tipo"] , $product["_type"]))), "url"=>"" ) );
+				$this->addBread( array(  "label"=>ucwords(strtolower($this->trans( $lang  , $product["grupo"] , $product["_group"]))) , "url"=>"" ) );
+				$this->addBread( array(  "label"=>ucwords(strtolower($this->trans( $lang  , $product["uso"] , $product["_use"]))) , "url"=>"" ) );
+
+
+
+				$this->header( $lang );
+				require $this->views."detalle-producto.php";
 			}
 		}		
-		echo $html;
 		$this->footer( $lang );
-
 	}
 
 

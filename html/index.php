@@ -37,6 +37,13 @@
 
 	//  Galerias 
 
+	$collection->attachRoute(new Route('/menu', array(
+	    '_controller' => 'Catalog::menuCatalog',
+	    'parameters' => array("lang" => $lang) ,
+	    'methods' => 'GET'
+	)));
+
+
 	$collection->attachRoute(new Route('/gallery', array(
 	    '_controller' => 'Gallery::allGalleries',
 	    'parameters' => array("lang" => $lang) ,

@@ -57,6 +57,12 @@
 		'methods' => 'GET'
 		)));
 
+	$collection->attachRoute(new Route('/catalog/product-care', array(
+		'_controller' => 'Catalog::productCare',
+		'parameters' => array("lang" => $lang),
+		'methods' => 'GET'
+		)));
+
 	$collection->attachRoute(new Route('/catalog/:slug', array(
 		'_controller' => 'Catalog::showListProducts',
 		'parameters' => array("lang" => $lang),

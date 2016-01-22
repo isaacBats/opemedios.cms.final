@@ -65,8 +65,8 @@
 							</a>
 						</li>
 						<li>
-							<a href="<?php echo $this->url($lang , "/press/brochures") ?>">
-								Brochures
+							<a href="<?php echo $this->url($lang , "/press/brochure") ?>">
+								Brochure
 							</a>
 						</li>
             		</ul>

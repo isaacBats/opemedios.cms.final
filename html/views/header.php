@@ -65,8 +65,8 @@
 							</a>
 						</li>
 						<li>
-							<a href="/press/brochures">
-								Brochures
+							<a href="/press/brochure">
+								Brochure
 							</a>
 						</li>
 					</ul>

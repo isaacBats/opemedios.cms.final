@@ -68,7 +68,7 @@ class Catalog extends Controller{
 						$html .= '
 								<div class="product-list">
 									<h2>'.$c['tipo'].'</h2>
-									<a href="'.$this->url($lang , "/product/".$c["nombre"] ).'">
+									<a href="'.$this->url($lang , "/product/".$c["id"] ).'">
 										<img src="/images/'.$c['imagen'].'"><br>
 										'.$c['nombre'].'
 									</a>
@@ -118,137 +118,106 @@ class Catalog extends Controller{
 	// 	}else{
 	// 		echo "producto ingles";
 	// 	}
+	
+	/*
+	| by adanzilla ...
+	 */
+	private function idProducts(){
+		$sql = "SELECT id FROM products";
+		$query = $this->pdo->prepare($sql);
+		$rs = $query->execute();
+		if($rs!==false){
+			$nr = $query->rowCount();
+			if( $nr > 0 ){
+				$slugs = $query->fetchAll(PDO::FETCH_COLUMN);
+				return $slugs;
+			}
+		}
+	}
+
+
+	/*
+	| by adanzilla ...
+	 */
+	function navegacion($lang="es",$slug){
+		
+		$slugs = $this->idProducts();
+
+		/************************************************************************************/
+		$key_actual = array_search($slug, $slugs);	
+		$key_final = key( array_slice( $slugs, -1, 1, TRUE ) );
+		/************************************************************************************/
+
+		$anterior = ( ($key_actual-1) < 0 ) ? '<a href="'.$slugs[$key_final].'">'.$this->trans($lang,'Anterior','Previous').'</a>' : '<a href="'.$slugs[$key_actual-1].'">'.$this->trans($lang,'Anterior','Previous').'</a>';
+		$siguiente = ( ($key_actual+1) > $key_final ) ? '<a href="'.$slugs[0].'">'.$this->trans($lang,'Siguiente','Next').'</a>' : '<a href="'.$slugs[$key_actual+1].'">'.$this->trans($lang,'Siguiente','Next').'</a>';
+		
+		$html =  $anterior.' | '.$siguiente;
+		
+		return $html;
+	}
+
 	function detailProduct($lang="es", $slug){
 		$this->header( $lang );
 		if ( !empty($slug) ){
 
 			$html = '';
 
-			$sql = "SELECT * FROM product WHERE nombre like '%".strtolower($slug)."%'";
+			$sql = "SELECT * FROM product WHERE id = $slug";
 			$query = $this->pdo->prepare($sql);
 			$rs = $query->execute();
 			if( $rs ){
 				$product = $query->fetch();
 				if( $lang == "es" ){
 					$html .= '<div class="product">
-			<div id="product-image">
-				<img src="images/'.product['imagen'].'">
-			</div><!-- #product-image-->
-			<div id="product-info">
-				<div class="detail-nav">
-					<a href="javascript:void(0);">Anterior</a>
-					<span>|</span>
-					<a href="javascript:void(0);">Siguiente</a>
-					<a href="javascript:void(0);" class="see-all">Ver Todos</a>
-					<br class="clear">
-				</div><!-- .detail-nav -->
-				<h2 class="product-title">'.product['nombre'].'</h2>
-				<div class="features">
-					<p><strong>'.product['ur'].'</strong><br>
-					<strong>Medidas cm:</strong> W '.product['frente'].' D '.product['fondo'].' H '.product['altura'].' cm<br>
-					<strong>Medidas in:</strong> W '.product['frente_plg'].' D '.product['fondo_plg'].' H '.product['altura_plg'].' in<br>
-					<strong>Carácter:</strong> '.product['caracter'].'<br>
-					<strong>Como se muestra:</strong> '.product['como_se_mestra'].'<br>
-					<strong>Precio:</strong> <a href="javascript:void(0);" class="general-link">Iniciar sesión</a></p>
-				</div><!-- .features -->
-				<a href="javascript:void(0);" class="general-btn">Añadir a Favoritos</a>
-				<div class="sec-features related">
-					<h2>Productos Relacionados</h2>
-					<a href="javascript:void(0);" class="rel"><img src="images/relacionado1.jpg"></a>
-					<a href="javascript:void(0);" class="rel"><img src="images/relacionado2.jpg"></a>
-					<a href="javascript:void(0);" class="rel"><img src="images/relacionado3.jpg"></a>
-				</div><!-- .sec-features -->
-				<div class="share-product">
-					<a href="javascript:void(0);"><img src="images/share-it.png"></a>
-					<a href="javascript:void(0);"><img src="images/tweet-it.png"></a>
-					<a href="javascript:void(0);"><img src="images/pin-it.png"></a>
-				</div><!-- .share-product -->
-				<div class="product-note">
-					<p><strong>NOTA:</strong> Debido a variaciones en los monitores, los colores como se muestran no pueden representar la calidad y el tono exacto.</p>
-					<p>Si desea más información, favor de contactar a nuestra área de Servicio al Clientes.</p>
-				</div><!-- .product-note -->
-				<div class="post-actions">
-					<a href="javascript:void(0);"><i class="fa fa-envelope-o fa-lg"></i> Enviar por correo</a>
-					<a href="javascript:void(0);"><i class="fa fa-print fa-lg"></i> Imprimir</a>
-					<a href="javascript:void(0);"><i class="fa fa-file-o fa-lg"></i> Imprimir hoja de catálogo</a>
-				</div><!-- .post-actions -->
-			</div><!-- #product-info -->
-			<br class="clear">
-		</div><!-- .product-->';
+								<div id="product-image">
+									<img src="images/'.$product['imagen'].'">
+								</div><!-- #product-image-->
+								<div id="product-info">
+									<div class="nav-detalle">
+						            '.$this->navegacion($lang,$product['id']).'
+						            <a href="'.$this->url($lang,'/catalog/finishes').'" class="ver-todos">Show all</a>
+						        </div>
+									<h2 class="product-title">'.$product['nombre'].'</h2>
+									<div class="features">
+										<p><strong>'.$product['ur'].'</strong><br>
+										<strong>Medidas cm:</strong> W '.$product['frente'].' D '.$product['fondo'].' H '.$product['altura'].' cm<br>
+										<strong>Medidas in:</strong> W '.$product['frentre_plg'].' D '.$product['fondo_plg'].' H '.$product['altura_plg'].' in<br>
+										<strong>Carácter:</strong> '.$product['caracter'].'<br>
+										<strong>Como se muestra:</strong> '.$product['como_se_muestra'].'<br>
+										<strong>Precio:</strong> <a href="javascript:void(0);" class="general-link">Iniciar sesión</a></p>
+									</div><!-- .features -->
+									<a href="javascript:void(0);" class="general-btn">Añadir a Favoritos</a>
+									<div class="sec-features related">
+										<h2>Productos Relacionados</h2>
+										<a href="javascript:void(0);" class="rel"><img src="images/relacionado1.jpg"></a>
+										<a href="javascript:void(0);" class="rel"><img src="images/relacionado2.jpg"></a>
+										<a href="javascript:void(0);" class="rel"><img src="images/relacionado3.jpg"></a>
+									</div><!-- .sec-features -->
+									<div class="share-product">
+										<a href="javascript:void(0);"><img src="images/share-it.png"></a>
+										<a href="javascript:void(0);"><img src="images/tweet-it.png"></a>
+										<a href="javascript:void(0);"><img src="images/pin-it.png"></a>
+									</div><!-- .share-product -->
+									<div class="product-note">
+										<p><strong>NOTA:</strong> Debido a variaciones en los monitores, los colores como se muestran no pueden representar la calidad y el tono exacto.</p>
+										<p>Si desea más información, favor de contactar a nuestra área de Servicio al Clientes.</p>
+									</div><!-- .product-note -->
+									<div class="post-actions">
+										<a href="javascript:void(0);"><i class="fa fa-envelope-o fa-lg"></i> Enviar por correo</a>
+										<a href="javascript:void(0);"><i class="fa fa-print fa-lg"></i> Imprimir</a>
+										<a href="javascript:void(0);"><i class="fa fa-file-o fa-lg"></i> Imprimir hoja de catálogo</a>
+									</div><!-- .post-actions -->
+								</div><!-- #product-info -->
+								<br class="clear">
+							</div><!-- .product-->';
 				}
 				else{
-					$html .= '<div class="product">
-			<div id="product-image">
-				<img src="images/product-bargueno-espanol.jpg">
-			</div><!-- #product-image-->
-			<div id="product-info">
-				<div class="detail-nav">
-					<a href="javascript:void(0);">Anterior</a>
-					<span>|</span>
-					<a href="javascript:void(0);">Siguiente</a>
-					<a href="javascript:void(0);" class="see-all">Ver Todos</a>
-					<br class="clear">
-				</div><!-- .detail-nav -->
-				<h2 class="product-title">Bargueño Español</h2>
-				<div class="features">
-					<p><strong>501-325-02</strong><br>
-					<strong>Medidas cm:</strong> W 212 D 104 H 102 cm<br>
-					<strong>Medidas in:</strong> W 83 1/2 D 41 H 40 in<br>
-					<strong>Carácter:</strong> Antiqued<br>
-					<strong>Como se muestra:</strong> 31 FRANZ MAYER<br>
-					<strong>Precio:</strong> <a href="javascript:void(0);" class="general-link">Iniciar sesión</a></p>
-				</div><!-- .features -->
-				<a href="javascript:void(0);" class="general-btn">Añadir a Favoritos</a>
-				<div class="sec-features">
-					<h2 class="product-title">Base para Bargueño Español</h2>
-					<div class="features">
-						<p><strong>507-209-03</strong><br>
-						<strong>Medidas cm:</strong> W 69 D 45 H 58 cm <br>
-						<strong>Medidas in:</strong> W 27 1/4 D 17 3/4 H 22 3/4 in<br>
-						<strong>Carácter:</strong> Rústico<br>
-						<strong>Como se muestra:</strong> 02 FRUTAL<br>
-						<strong>Precio:</strong> <a href="javascript:void(0);" class="general-link">Iniciar sesión</a></p>
-						
-					</div><!-- .features -->
-				</div><!-- .sec-features -->
-				
-				<div class="sec-features related">
-					<h2>Productos Relacionados</h2>
-					<a href="javascript:void(0);" class="rel"><img src="images/relacionado1.jpg"></a>
-					<a href="javascript:void(0);" class="rel"><img src="images/relacionado2.jpg"></a>
-					<a href="javascript:void(0);" class="rel"><img src="images/relacionado3.jpg"></a>
-				</div><!-- .sec-features -->
-				<div class="share-product">
-					<a href="javascript:void(0);"><img src="images/share-it.png"></a>
-					<a href="javascript:void(0);"><img src="images/tweet-it.png"></a>
-					<a href="javascript:void(0);"><img src="images/pin-it.png"></a>
-				</div><!-- .share-product -->
-				<div class="product-note">
-					<p><strong>NOTA:</strong> Debido a variaciones en los monitores, los colores como se muestran no pueden representar la calidad y el tono exacto.</p>
-					<p>Si desea más información, favor de contactar a nuestra área de Servicio al Clientes.</p>
-				</div><!-- .product-note -->
-				<div class="post-actions">
-					<a href="javascript:void(0);"><i class="fa fa-envelope-o fa-lg"></i> Enviar por correo</a>
-					<a href="javascript:void(0);"><i class="fa fa-print fa-lg"></i> Imprimir</a>
-					<a href="javascript:void(0);"><i class="fa fa-file-o fa-lg"></i> Imprimir hoja de catálogo</a>
-				</div><!-- .post-actions -->
-			</div><!-- #product-info -->
-			<br class="clear">
-		</div><!-- .product-->';
+					$html .= 'echo "producto ingles";';
 				}
 			}
-			$this->header($lang);
-
-			
-		}
-		else{
-
-		}
-		
+		}		
 		echo $html;
 		$this->footer( $lang );
-	}
-	
 
 	}
 

@@ -28,6 +28,8 @@ class Catalog extends Controller{
 
 	public function showAll( $lang ){
 
+		$this->addBread( array("label" => $this->trans($lang , "Catalogo" , "Catalog") ) );
+
 		$this->header( $lang );
 		$sql = "SELECT * FROM product LIMIT 50";
  		$query = $this->pdo->prepare($sql);
@@ -66,9 +68,16 @@ class Catalog extends Controller{
 	
 	public function showListProducts($lang="es" , $style = "", $type = "" , $group  = ""){
 
+		$this->addBread( array("label" => $this->trans($lang , "Catalogo" , "Catalog") , "url" => "/catalog/lifestyle") );
+
 		if( $style != "casual" && $style != "metro" ){
 			$group  = $type ;
 			$type = $style ; 
+			$this->addBread( array(  "label"=>$this->trans($lang , "Catalogo" , "Catalog" ), "url"=> "/catalog/lifestyle"  ) );
+			if( $type != "")
+				$this->addBread( array(  "label"=>ucwords(strtolower($type)) , "url"=> "/catalog/".implode( "/" , array( $style , $type )  ) ) );
+			if( $group != "")
+				$this->addBread( array(  "label"=>ucwords(strtolower($group))  ) );	
 			
 		}else{
 			$this->addBread( array(  "label"=>ucwords(strtolower($style)), "url"=> "/catalog/".$style  ) );
@@ -86,7 +95,7 @@ class Catalog extends Controller{
 		$group =  $group != ""?"LOWER( grupo ) LIKE '%".str_replace("-" , " " , urldecode($group))."%' ":" 1=1 ";
 		$where = implode( " AND " , array( $style , $type ,  $group ) );
 		
-		echo $where;
+		
 
 		$sqlCatalogo = "SELECT * FROM product WHERE {$where} LIMIT 40";
 		$queryCatalogo = $this->pdo->prepare($sqlCatalogo);
@@ -96,7 +105,7 @@ class Catalog extends Controller{
 			if($pr > 0){
 				$catalogo = $queryCatalogo->fetchAll();
 				$html .= '<div id="content-press">';
-				$html .= '<p class="tituloSeccion">'.$where.'</p>';
+				$html .= '<p class="tituloSeccion">'.ucfirst( end( $this->bread )["label"] ).'</p>';
 
 				foreach ($catalogo as $product) {
 					$html .= '

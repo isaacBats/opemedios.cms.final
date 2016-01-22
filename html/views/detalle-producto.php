@@ -1,12 +1,12 @@
 <div class="product">
     <div id="product-image">
-        
         <img src="<?php echo $product["imagen"]== "null"?"http://placehold.it/500x600/f4f4f4/807562?text=product":'/images/product/'.$product['imagen'].'' ?>">
     </div><!-- #product-image-->
     <div id="product-info">
         <div class="nav-detalle">
         <?php  //$this->navProduct($lang,$product['id']) ?>
-        <a href="<?php  $this->url($lang,'/catalog') ?>" class="ver-todos">Show all</a>
+        <a href="<?php echo $this->url($lang,'/catalog') ?>" class="ver-todos">Show all</a>
+        <br class="clear">
     </div>
         <h2 class="product-title"><?php echo  $product['nombre'] ?></h2>
         <div class="features">

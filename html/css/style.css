@@ -3664,6 +3664,11 @@ h2.tituloSeccion {
 .item4Col > a > img {
   min-width: 80%; }
 
+.item4Col > a > p {
+  display: block;
+  min-height: 50px;
+  font-size: 11px;
+}
 .itemDosCol a,
 .item4Col a,
 .item3Col a {

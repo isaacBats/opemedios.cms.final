@@ -51,8 +51,34 @@
 
 	// Catalogo
 
+	$collection->attachRoute(new Route('/catalog', array(
+		'_controller' => 'Catalog::showAll',
+		'parameters' => array("lang" => $lang),
+		'methods' => 'GET'
+	)));
+
+	$collection->attachRoute(new Route('/catalog/product-care', array(
+		'_controller' => 'Catalog::productCare',
+		'parameters' => array("lang" => $lang),
+		'methods' => 'GET'
+	)));
+
 	$collection->attachRoute(new Route('/catalog/lifestyles', array(
 		'_controller' => 'Catalog::showLifestyles',
+		'parameters' => array("lang" => $lang),
+		'methods' => 'GET'
+		)));
+
+
+	$collection->attachRoute(new Route('/catalog/:slug', array(
+		'_controller' => 'Catalog::showListProducts',
+		'parameters' => array("lang" => $lang),
+		'methods' => 'GET'
+		)));
+
+
+	$collection->attachRoute(new Route('/catalog/product-care', array(
+		'_controller' => 'Catalog::productCare',
 		'parameters' => array("lang" => $lang),
 		'methods' => 'GET'
 		)));
@@ -69,18 +95,6 @@
 		'methods' => 'GET'
 		)));
 
-	
-	$collection->attachRoute(new Route('/catalog/product-care', array(
-		'_controller' => 'Catalog::productCare',
-		'parameters' => array("lang" => $lang),
-		'methods' => 'GET'
-		)));
-
-	$collection->attachRoute(new Route('/catalog/:slug', array(
-		'_controller' => 'Catalog::showListProducts',
-		'parameters' => array("lang" => $lang),
-		'methods' => 'GET'
-		)));
 
 	$collection->attachRoute(new Route('/product/:slug', array(
 		'_controller' => 'Catalog::detailProduct',

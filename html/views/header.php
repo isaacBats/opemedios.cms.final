@@ -33,7 +33,7 @@
 							</a>
 						</li>
 						<li>
-							<a href="/catalog/products">
+							<a href="/catalog">
 								Productos
 							</a>
 						</li>

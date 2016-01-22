@@ -2,6 +2,15 @@
 
 class Catalog extends Controller{
 
+	public function productCare($lang = "es"){
+		
+		$this->addBread( array(  "label"=>$this->trans( $lang  , "Cuidado de productos" , "Product Care") ));
+		$this->header( $lang );
+		require $this->views."product-care.php";
+		$this->footer( $lang );
+
+	}
+
 	private function codigos(){
 		$sql = "SELECT codigo FROM acabados";
 		$query = $this->pdo->prepare($sql);
@@ -46,7 +55,7 @@ class Catalog extends Controller{
 		$this->addBread( array( "label"=> $acabado['codigo'].' '.$acabado['nombre'] ) );
  		$this->header( $lang );
 		
-		require $this->views."detalle-producto.php";
+		require $this->views."detalle-finish.php";
 		
 		$this->footer($lang);
 	}
@@ -244,7 +253,7 @@ class Catalog extends Controller{
 								<div id="product-info">
 									<div class="nav-detalle">
 						            '.$this->navProduct($lang,$product['id']).'
-						            <a href="'.$this->url($lang,'/catalog/finishes').'" class="ver-todos">Show all</a>
+						            <a href="'.$this->url($lang,'/catalog').'" class="ver-todos">Show all</a>
 						        </div>
 									<h2 class="product-title">'.$product['nombre'].'</h2>
 									<div class="features">

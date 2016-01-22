@@ -118,7 +118,7 @@
 	            </ul>
 	        </nav>
 	        <br class="clear" />
-	        <a href="javascript:void(0);">Mis Favoritos</a>
+	        <a href="<?php echo $this->url($lang, '/favs'); ?>">Mis Favoritos</a>
 	        <a href="<?php echo $this->url("es") ?>" class="selected">ESP</a> -
 	        <a href="<?php echo $this->url("en") ?>">ENG</a>
 	        <div class="search-box">

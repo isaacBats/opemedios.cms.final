@@ -15,15 +15,30 @@ jQuery(document).ready(function($){
 
 	jQuery('#btn-fav').on('click', function(event) {
 		event.preventDefault();
-		var id = jQuery(this).data('id');
-		jQuery.post('/product/addFav',{'id':id},function(json){
-			if( json.exito ){
+		var boton = jQuery(this);
+		var id = boton.data('id');
+		if( boton.hasClass('eliminar') ){
+			jQuery.post('/product/removeFav',{'id':id},function(json){
+				if( json.exito ){
+					boton.removeClass('eliminar');
+					boton.html(json.mensaje);
+				}
+				else{
+					boton.addClass('eliminar');
+					boton.html(json.mensaje);
+				}
+			},'json');
+		}else{
+			jQuery.post('/product/addFav',{'id':id},function(json){
+				if( json.exito ){
+					
+				}
+				else{
 
-			}
-			else{
+				}
+			},'json');
+		}
 
-			}
-		},'json');
 
 	});
 

@@ -146,7 +146,7 @@
 			if( $lang == "es"){
 				// require  $this->views."header.php";	
 				
-				require $this->views."header-catalogo.php";
+				require $this->views."header.php";
 			}else{
 				require  $this->views."header_en.php";	
 			}

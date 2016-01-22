@@ -25,6 +25,31 @@ class Catalog extends Controller{
 	
 	//  CATALOG
 
+	public function removeProductFavorite($lang){
+
+		$resultado = new stdClass();
+		
+		if( !empty($_POST) ){
+			if( !isset($_SESSION['favoritos']) ){
+				$_SESSION['favoritos'] = array();
+			}
+			
+			if (($key = array_search($_POST['id'], $_SESSION['favoritos'])) !== false) {
+			    unset($_SESSION['favoritos'][$key]);
+			}
+
+			$resultado->exito = true;
+			$resultado->log = "Se removió el ID al contenedor de FAVORITOS";
+			$resultado->mensaje = $this->trans($lang , 'Añadir a Favoritos' , 'Add to Favorites' );
+		}
+		else{
+			$resultado->exito = false;
+		}
+
+		header('Content-type: text/json');
+		echo json_encode($resultado);
+	}
+
 	public function addProductFavorite($lang){
 
 		$resultado = new stdClass();
@@ -35,7 +60,8 @@ class Catalog extends Controller{
 			}
 			array_push($_SESSION['favoritos'], $_POST['id']);
 			$resultado->exito = true;
-			$resultado->mensaje = "Se agregó el ID al contenedor de FAVORITOS";
+			$resultado->log = "Se agregó el ID al contenedor de FAVORITOS";
+			$resultado->mensaje = $this->trans($lang , 'Eliminar de Favoritos' , 'Remove from Favorites' );
 		}
 		else{
 			$resultado->exito = false;
@@ -44,6 +70,36 @@ class Catalog extends Controller{
 		header('Content-type: text/json');
 		echo json_encode($resultado);
 	}
+
+	public function showFavs( $lang ){
+
+		$this->header( $lang );
+
+		if( isset($_SESSION['favoritos']) && sizeof($_SESSION['favoritos']) > 0 ){
+			
+			
+			$ids = implode(",", $_SESSION['favoritos']);
+
+			$sql = "SELECT * FROM product WHERE id in (".$ids.")";
+	 		$query = $this->pdo->prepare($sql);
+			$rs = $query->execute();
+			if($rs!==false){
+				$nr = $query->rowCount();
+				if( $nr > 0 ){
+					$productList = $query->fetchAll();
+					$count = 0;
+					require $this->views."catalog.php";
+				}
+
+			}
+		}
+		else{
+			echo "<h3>No cuentas con favoritos</h3>";
+			
+		}
+		$this->footer( $lang );
+	}
+
 
 	public function showAll( $lang ){
 

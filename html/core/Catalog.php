@@ -7,10 +7,11 @@ class Catalog extends Controller{
 		$this->addBread( array(  "label"=>$this->trans( $lang  , "Cuidado de productos" , "Product Care") ));
 		$this->header( $lang );
 		require $this->views."product-care.php";
+		exit;
 		$this->footer( $lang );
 
 	}
-	
+
 	private function codigos(){
 		$sql = "SELECT codigo FROM acabados";
 		$query = $this->pdo->prepare($sql);

@@ -16,9 +16,9 @@
 		}
 
 		public function  whoWeAreView( $lang = "es" ){
-			
-			$this->addBread( array( "label" => "Acerca de" , "url" => "/acerca-de/quienes-somos") );
-			$this->addBread( array( "label"=> "Quiénes Somos"  ) );
+
+			$this->addBread( array( "label"=> $this->trans($lang,"Acerca de","About") , "url"=> "/acerca-de/quienes-somos" ) );
+			$this->addBread( array( "label" => $this->trans($lang,"Quiénes Somos","About Us") , "url" => "/acerca-de/quienes-somos") );
 
 			$this->header($lang);
 
@@ -29,8 +29,8 @@
 
 		public function  fabricView( $lang = "es" ){
 			
-			$this->addBread( array( "label"=> "Acerca de" , "url"=> "/acerca-de/fabrica-alfonso-marina" ) );
-			$this->addBread( array( "label" => "F&aacute;brica Alfonso Marina" , "url" => "/acerca-de/quienes-somos") );
+			$this->addBread( array( "label"=> $this->trans($lang,"Acerca de","About") , "url"=> "/acerca-de/fabrica-alfonso-marina" ) );
+			$this->addBread( array( "label" => $this->trans($lang,"F&aacute;brica","Factory")." Alfonso Marina" , "url" => "/acerca-de/quienes-somos") );
 
 			$this->header($lang);
 

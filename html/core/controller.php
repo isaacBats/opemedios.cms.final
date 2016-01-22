@@ -10,12 +10,15 @@
 		public $views = "views/";
 
 		public function url( $lang , $url = ""){
+
+
 			if( $url == ""){
 				return "/".$lang.$_SERVER["REQUEST_URI"];
 			}else{
-				return "/".$lang.$url;	
+				$ur = explode( "/" , $url );
+				$url = implode( "/" , array_map( function($s){return urlencode($s); } , $ur ) );
+				return "/".$lang.$url;
 			}
-			
 		}
 
 		

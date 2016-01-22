@@ -91,25 +91,24 @@ class Catalog extends Controller{
 
 		if( $style != "casual" && $style != "metro" ){
 			$group  = $type ;
-			$type = $style ; 
-			$this->addBread( array(  "label"=>$this->trans($lang , "Catalogo" , "Catalog" ), "url"=> "/catalog/lifestyle"  ) );
+			$type = $style ;
 			if( $type != "")
-				$this->addBread( array(  "label"=>ucwords(strtolower($type)) , "url"=> "/catalog/".implode( "/" , array( $style , $type )  ) ) );
+				$this->addBread( array(  "label"=>ucwords(strtolower($type)) , "url"=> "/catalog/".$style )  );
 			if( $group != "")
-				$this->addBread( array(  "label"=>ucwords(strtolower($group))  ) );	
+				$this->addBread( array(  "label"=>ucwords(strtolower(str_replace("-" , " " , urldecode($group))))  ) );	
 			
 		}else{
+
 			$this->addBread( array(  "label"=>ucwords(strtolower($style)), "url"=> "/catalog/".$style  ) );
+
 			if( $type != "")
 				$this->addBread( array(  "label"=>ucwords(strtolower($type)) , "url"=> "/catalog/".implode( "/" , array( $style , $type )  ) ) );
 			if( $group != "")
-				$this->addBread( array(  "label"=>ucwords(strtolower($group))  ) );	
+				$this->addBread( array(  "label"=>ucwords(strtolower(str_replace("-" , " " , urldecode($group))))  ) );	
 		}
-		
-		
 
 		$html = "";
-		$style =  $style == "casual" || $style == "metro" ? "estilo LIKE '{$style}' " :"1=1 ";
+		$style =  $style == "casual" || $style == "metro" ? "estilo LIKE '{$style}' " :" 1=1 ";
 		$type =  $type != ""?"tipo LIKE '{$type}' ":" 1=1 ";
 		$group =  $group != ""?"LOWER( grupo ) LIKE '%".str_replace("-" , " " , urldecode($group))."%' ":" 1=1 ";
 		$where = implode( " AND " , array( $style , $type ,  $group ) );
@@ -124,7 +123,7 @@ class Catalog extends Controller{
 			if($pr > 0){
 				$catalogo = $queryCatalogo->fetchAll();
 				$html .= '<div id="content-press">';
-				$html .= '<p class="tituloSeccion">'.ucfirst( end( $this->bread )["label"] ).'</p>';
+				$html .= '<p class="tituloSeccion">'.str_replace( "-" , " " , urldecode( ucfirst( end( $this->bread )["label"] ) ) ).'</p>';
 
 				foreach ($catalogo as $product) {
 					$html .= '
@@ -204,8 +203,8 @@ class Catalog extends Controller{
 		
 		if ( !empty($slug) ){
 
-			$this->addBread( array(  "label"=>$this->trans( $lang  , "Catalogo" , "Catalog") , "url"=>"" ) );
-			$this->addBread( array(  "label"=>$this->trans( $lang  , "Productos" , "Products") , "url"=>"" ) );
+			$this->addBread( array(  "label"=>$this->trans( $lang  , "Catalogo" , "Catalog") , "url"=>"/catalog/lifestyle" ) );
+			$this->addBread( array(  "label"=>$this->trans( $lang  , "Productos" , "Products") , "url"=>"/catalog/lifestyle" ) );
 
 			
 			$sql = "SELECT * FROM product WHERE ur LIKE '$slug'";
@@ -213,9 +212,14 @@ class Catalog extends Controller{
 			$rs = $query->execute();
 			if( $rs ){
 				$product = $query->fetch();
-				$this->addBread( array(  "label"=>ucwords(strtolower($this->trans( $lang  , $product["tipo"] , $product["_type"]))), "url"=>"" ) );
-				$this->addBread( array(  "label"=>ucwords(strtolower($this->trans( $lang  , $product["grupo"] , $product["_group"]))) , "url"=>"" ) );
-				$this->addBread( array(  "label"=>ucwords(strtolower($this->trans( $lang  , $product["uso"] , $product["_use"]))) , "url"=>"" ) );
+
+				$t = $this->trans( $lang  , $product["tipo"] , $product["_type"] );
+				$g = $this->trans( $lang  , $product["grupo"] , $product["_group"] );
+				$u = $this->trans( $lang  , $product["uso"] , $product["_use"] );
+
+				$this->addBread( array(  "label"=>ucwords(strtolower($t)) , "url"=>"/catalog/".strtolower($t) ) );
+				$this->addBread( array(  "label"=>ucwords(strtolower($g)) , "url"=>"/catalog/".strtolower($t)."/".strtolower(str_replace(" ", "-" , $g)) ) );
+				$this->addBread( array(  "label"=>ucwords(strtolower($u)) ) );
 
 
 

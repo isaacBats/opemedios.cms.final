@@ -2561,11 +2561,11 @@ a.imprimir {
   width: 100%; }
 
 #main-nav li ul li a {
-  font-size: 11px;
+  font-size: 10px;
   color: #807562;
   text-decoration: none;
   display: block;
-  width: 100%;
+  width: 120%;
   text-align: left;
   padding: 5px 15px;
   border-left: none;
@@ -3672,7 +3672,7 @@ h2.tituloSeccion {
   width: 21.4%; }
 
 .item4Col > a  {
-  min-height: 350px;
+  min-height: 280px;
 }
 .item4Col > a > img {
   min-width: 80%; 

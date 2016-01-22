@@ -15,71 +15,28 @@ class Catalog extends Controller{
 
 	}
 	
-	private function tipos($estilo = ""){
-		if( $estilo != ""){
-			$sql = "SELECT distinct(tipo) FROM product WHERE estilo = :estilo ";
-		}else{
-			$sql = "SELECT distinct(tipo) FROM product";
-		}
-
-		$query = $this->pdo->prepare($sql);
-		$query->bindParam(':estilo', $estilo);
-		$rs = $query->execute();
-		if($rs!==false){
-			$nr = $query->rowCount();
-			if( $nr > 0 ){
-				$tipos = $query->fetchAll(PDO::FETCH_COLUMN);
-				$tiposOut = array();
-				foreach( $tipos as $t ){
-					array_push( $tiposOut , array( $t => $this->grupos( $estilo , $t ) )  );
-				}
-				return $tiposOut;
-			}
-		}
-	}
-
-	private function grupos($estilo = "" , $tipo = ""){
-		if( $estilo != ""){
-			$sql = "SELECT distinct(grupo) FROM product WHERE estilo = :estilo && tipo LIKE '{$tipo}'";
-		}else{
-			$sql = "SELECT distinct(grupo) FROM product WHERE tipo LIKE '{$tipo}' ";
-		}
-		
-		$query = $this->pdo->prepare($sql);
-		$query->bindParam(':estilo', $estilo);
-		$rs = $query->execute();
-		if($rs!==false){
-			$nr = $query->rowCount();
-			if( $nr > 0 ){
-				$grupos = $query->fetchAll(PDO::FETCH_COLUMN);
-				return $grupos;
-			}
-		}
-	}	
-
+	
 
 
 	public function productCare($lang = "es"){
-
-		$this->updateProducts();
 		$this->addBread( array(  "label"=>$this->trans( $lang  , "Cuidado de productos" , "Product Care") ));
 		$this->header( $lang );
 		require $this->views."product-care.php";
 		$this->footer( $lang );
 	}
 
-	public function updateProducts(){
-			$images = scandir( "images/product" );
-			foreach ($images as $image) {
-				$ur = explode( "_", $image );
-				$sql = "UPDATE `amarinados`.`product` SET `imagen` = '{$image}' WHERE `product`.`ur` LIKE '{$ur[0]}';";
-				$query = $this->pdo->prepare($sql);
-				$rs = $query->execute();
-			}
+	// public function updateProducts(){
+	// 		$images = scandir( "images/product" );
+	// 		foreach ($images as $image) {
+	// 			$ur = explode( "_", $image );
+	// 			$sql = "UPDATE `amarinados`.`product` SET `imagen` = '{$image}' WHERE `product`.`ur` LIKE '{$ur[0]}';";
+	// 			$query = $this->pdo->prepare($sql);
+	// 			$rs = $query->execute();
+	// 		}
 			
-			exit;
+	// 		exit;
 
-	}
+	// }
 
 	//  FINISHES
 

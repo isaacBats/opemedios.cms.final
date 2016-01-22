@@ -43,7 +43,7 @@
 											foreach ($tipo as $key => $value) {
 												$html .= '<li><a href="'.$this->url($lang, '/catalog/casual/'.strtolower($key)).'">'.ucwords(strtolower($key)).'</a><ul>';
 												foreach ($value as $subvalue) {
-													$html .= '<li><a href="'.$this->url($lang, '/catalog/casual/'.strtolower($subvalue)).'">'.ucwords(strtolower($subvalue)).'</a></li>';
+													$html .= '<li><a href="'.$this->url($lang, '/catalog/casual/'.strtolower($key)."/".strtolower(str_replace(" ", "-" , $subvalue))).'">'.ucwords(strtolower($subvalue)).'</a></li>';
 												}
 												$html .= '</ul></li>';
 											}
@@ -66,7 +66,7 @@
 											foreach ($tipo as $key => $value) {
 												$html .= '<li><a href="'.$this->url($lang, '/catalog/metro/'.strtolower($key)).'">'.ucwords(strtolower($key)).'</a><ul>';
 												foreach ($value as $subvalue) {
-													$html .= '<li><a href="'.$this->url($lang, '/catalog/metro/'.strtolower($subvalue)).'">'.ucwords(strtolower($subvalue)).'</a></li>';
+													$html .= '<li><a href="'.$this->url($lang, '/catalog/casual/'.strtolower($key)."/".strtolower(str_replace(" ", "-" , $subvalue))).'">'.ucwords(strtolower($subvalue)).'</a></li>';
 												}
 												$html .= '</ul></li>';
 											}

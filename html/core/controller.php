@@ -24,8 +24,8 @@
 		{
 			session_start();
 			$dsn = 'mysql:host=localhost;dbname=amarinados';
-			$nombre_usuario = 'adanzilla';
-			$password = 'campanitas';
+			$nombre_usuario = 'root';
+			$password = 'root';
 			$opciones = array(
 			    PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8',
 			);
@@ -71,9 +71,54 @@
 			array_push( $this->bread  , $array );
 		}
 
+		private function tipos($estilo = ""){
+			if( $estilo != ""){
+				$sql = "SELECT distinct(tipo) FROM product WHERE estilo = :estilo ";
+			}else{
+				$sql = "SELECT distinct(tipo) FROM product";
+			}
+
+			$query = $this->pdo->prepare($sql);
+			$query->bindParam(':estilo', $estilo);
+			$rs = $query->execute();
+			if($rs!==false){
+				$nr = $query->rowCount();
+				if( $nr > 0 ){
+					$tipos = $query->fetchAll(PDO::FETCH_COLUMN);
+					$tiposOut = array();
+					foreach( $tipos as $t ){
+						array_push( $tiposOut , array( $t => $this->grupos( $estilo , $t ) )  );
+					}
+					return $tiposOut;
+				}
+			}
+		}
+
+		private function grupos($estilo = "" , $tipo = ""){
+			if( $estilo != ""){
+				$sql = "SELECT distinct(grupo) FROM product WHERE grupo NOT LIKE \"%,%\" AND estilo = :estilo && tipo LIKE '{$tipo}'";
+			}else{
+				$sql = "SELECT distinct(grupo) FROM product WHERE grupo NOT LIKE \"%,%\" AND tipo LIKE '{$tipo}' ";
+			}
+			
+			$query = $this->pdo->prepare($sql);
+			$query->bindParam(':estilo', $estilo);
+			$rs = $query->execute();
+			if($rs!==false){
+				$nr = $query->rowCount();
+				if( $nr > 0 ){
+					$grupos = $query->fetchAll(PDO::FETCH_COLUMN);
+					return $grupos;
+				}
+			}
+		}	
+
+
 		public function header( $lang , $nobeard = false){
 			if( $lang == "es"){
-				require  $this->views."header.php";	
+				// require  $this->views."header.php";	
+				$tipos = $this->tipos("");
+				require $this->views."header-catalogo.php";
 			}else{
 				require  $this->views."header_en.php";	
 			}
@@ -82,8 +127,6 @@
 		public function footer( $lang ){
 			
 			require  $this->views."footer.php";	
-			
-			
 		}
 	}
 

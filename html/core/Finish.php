@@ -22,6 +22,38 @@
 		}
 	}
 
+	function filterFinishes( $lang , $type ){
+		$this->addBread( array( "label"=> $this->trans( $lang , "Catalogo" , "Catalog") , "url"=>$this->url($lang , "/catalog") ) );
+		//$this->addBread( array( "label"=> $this->trans($lang , "Acabados" ,"Finishes") ) );
+		
+ 		
+
+ 		if( $type == "painted" ){
+ 			$this->addBread( array( "label"=> $this->trans($lang , "Acabados Pintados" ,"Painted Finishes") ) );
+ 			$tipo = "2";
+ 		}else{
+ 			$tipo = "1";
+ 			$this->addBread( array( "label"=> $this->trans($lang , "Acabados Madera" ,"Wood Finishes") ) );
+ 		}
+
+ 		$this->header( $lang );
+
+ 		$sql = "SELECT * FROM acabados WHERE tipo = :tipo";
+ 		$query = $this->pdo->prepare($sql);
+ 		$query->bindParam(':tipo',$tipo);
+		$rs = $query->execute();
+		if($rs!==false){
+			$nr = $query->rowCount();
+			if( $nr > 0 ){
+				$acabados = $query->fetchAll();
+				$count = 0;
+				require $this->views."acabados.php";
+			}
+		}
+ 		
+ 		$this->footer($lang);
+	}
+
 	function navegacion($lang="es",$codigo){
 		
 		$codigos = $this->codigos();

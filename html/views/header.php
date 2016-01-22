@@ -63,6 +63,14 @@
 							<a href="/catalog/finishes">
 								Acabados
 							</a>
+							<ul>
+								<li>
+									<a href="/catalog/finishes/wood">Acabados Madera</a>
+								</li>
+								<li>
+									<a href="/catalog/finishes/painted">Acabados Pintados</a>
+								</li>
+							</ul>
 						</li>
 						<li>
 							<a href="/catalog/product-care">

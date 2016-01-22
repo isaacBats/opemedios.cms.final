@@ -59,7 +59,6 @@ class Catalog extends Controller{
 		$sqlCatalogo = "select * from product WHERE estilo like '%".strtolower($slug)."%' GROUP by grupo ";
 		$queryCatalogo = $this->pdo->prepare($sqlCatalogo);
 		$rsCatalogo = $queryCatalogo->execute();
-
 		if ($lang == "es"){
 			if( $rsCatalogo !== false ){
 				$pr = $queryCatalogo->rowCount();
@@ -110,7 +109,6 @@ class Catalog extends Controller{
 		echo $html;
 		$this->footer( $lang );
 	}
-
 
 	public function detailProduct( $lang = "es" , $slug){
 		$this->header( $lang );

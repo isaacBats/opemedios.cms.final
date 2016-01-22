@@ -57,6 +57,18 @@
 		'methods' => 'GET'
 		)));
 
+	$collection->attachRoute(new Route('/catalog/finishes', array(
+		'_controller' => 'Catalog::showFinishes',
+		'parameters' => array("lang" => $lang),
+		'methods' => 'GET'
+		)));
+
+	$collection->attachRoute(new Route('/catalog/finishes/:codigo', array(
+		'_controller' => 'Catalog::detailFinish',
+		'parameters' => array("lang" => $lang),
+		'methods' => 'GET'
+		)));
+
 	$collection->attachRoute(new Route('/catalog/:slug', array(
 		'_controller' => 'Catalog::showListProducts',
 		'parameters' => array("lang" => $lang),

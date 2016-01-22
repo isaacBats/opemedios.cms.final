@@ -46,7 +46,7 @@ class Catalog extends Controller{
 		$this->addBread( array( "label"=> $acabado['codigo'].' '.$acabado['nombre'] ) );
  		$this->header( $lang );
 		
-		require $this->views."detalle-producto.php";
+		require $this->views."detalle-finish.php";
 		
 		$this->footer($lang);
 	}
@@ -244,7 +244,7 @@ class Catalog extends Controller{
 								<div id="product-info">
 									<div class="nav-detalle">
 						            '.$this->navProduct($lang,$product['id']).'
-						            <a href="'.$this->url($lang,'/catalog/finishes').'" class="ver-todos">Show all</a>
+						            <a href="'.$this->url($lang,'/catalog').'" class="ver-todos">Show all</a>
 						        </div>
 									<h2 class="product-title">'.$product['nombre'].'</h2>
 									<div class="features">

@@ -3009,6 +3009,9 @@ div.field select.error
   font-weight: bold;
   color: #B3ACA1;  
 }
+.falta{
+  border:1px dotted red;
+}
 
 
 /**************************************************/

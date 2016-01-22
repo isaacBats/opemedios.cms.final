@@ -71,7 +71,7 @@ class Contacto extends Controller
 				México, D.F., 11700<br>
 				(+52) 55 5596-8364</p>
 				<a href="mailto:centroam@alfonsomarinaebanista.com?subject=Contácto">centroam@alfonsomarinaebanista.com</a>
-				<a href="javascript:void(0);" class="falta"><i class="fa fa-plus-square-o fa-lg"></i> Ver mapa</a>
+				<a href="https://maps.google.com/maps?q=19.407274,-99.239815&num=1&t=m&z=17" target="_blank" class=""><i class="fa fa-plus-square-o fa-lg"></i> Ver mapa</a>
 				<select class="falta">
 					<option>Showroom México</option>
 				</select>

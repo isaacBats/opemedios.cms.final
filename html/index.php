@@ -6,6 +6,7 @@
 	require_once( __DIR__.'/core/plain.php' );
 	require_once( __DIR__.'/core/Press.php' );
 	require_once( __DIR__.'/core/catalog.php' );
+	require_once( __DIR__.'/core/Finish.php' );
 	require_once( __DIR__.'/core/contacto.php' );
 	require_once( __DIR__.'/core/User.php' );
 
@@ -56,6 +57,20 @@
 	    'methods' => 'GET'
 	)));
 
+	//  FINISH
+
+	$collection->attachRoute(new Route('/catalog/finishes', array(
+		'_controller' => 'Finish::showFinishes',
+		'parameters' => array("lang" => $lang),
+		'methods' => 'GET'
+		)));
+
+	$collection->attachRoute(new Route('/catalog/finishes/:codigo', array(
+		'_controller' => 'Finish::detailFinish',
+		'parameters' => array("lang" => $lang),
+		'methods' => 'GET'
+		)));
+
 	// Catalogo
 
 	$collection->attachRoute(new Route('/catalog', array(
@@ -83,31 +98,14 @@
 		'methods' => 'GET'
 		)));
 
-
-	$collection->attachRoute(new Route('/catalog/product-care', array(
-		'_controller' => 'Catalog::productCare',
-		'parameters' => array("lang" => $lang),
-		'methods' => 'GET'
-		)));
-
-	$collection->attachRoute(new Route('/catalog/finishes', array(
-		'_controller' => 'Catalog::showFinishes',
-		'parameters' => array("lang" => $lang),
-		'methods' => 'GET'
-		)));
-
-	$collection->attachRoute(new Route('/catalog/finishes/:codigo', array(
-		'_controller' => 'Catalog::detailFinish',
-		'parameters' => array("lang" => $lang),
-		'methods' => 'GET'
-		)));
-
-
+	
 	$collection->attachRoute(new Route('/product/:slug', array(
 		'_controller' => 'Catalog::detailProduct',
 		'parameters' => array("lang" => $lang),
 		'methods' => 'GET'
 		)));
+
+	
 
 
 	

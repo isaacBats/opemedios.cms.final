@@ -8,7 +8,7 @@
 		<a href="/"><h1>Alfonso Marina</h1></a>
 		<nav id="main-nav">
 			<ul>
-				<li><a href="<?php echo $this->url($lang , '/') ?>/">Home</a></li>
+				<li><a href="<?php echo $this->url($lang , '/') ?>">Home</a></li>
 				<li>
 					<a href="javascript:void(0);">About</a>
 					<ul>

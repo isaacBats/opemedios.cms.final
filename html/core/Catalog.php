@@ -68,57 +68,52 @@ class Catalog extends Controller{
 
 
 	
-	public function showListProducts($lang="es" ,$slug ){
+	public function showListProducts($lang="es" , $style = "", $type = "" , $group  = ""){
 		
-		$html = "";
+		$this->addBread( array(  "label"=>ucwords(strtolower($style)), "url"=> "/catalog/".$style  ) );
+		if( $type != "")
+			$this->addBread( array(  "label"=>ucwords(strtolower($type)) , "url"=> "/catalog/".implode( "/" , array( $style , $type )  ) ) );
+		if( $group != "")
+			$this->addBread( array(  "label"=>ucwords(strtolower($group))  ) );
 
-		$sqlCatalogo = "select * from product WHERE estilo like '%".strtolower($slug)."%' GROUP by grupo ";
+		$html = "";
+		$style =  $style!= ""? "estilo LIKE '{$style}' " :" 1=1 ";
+		$type =  $type != ""?"tipo LIKE '{$type}' ":" 1=1 ";
+		$group =  $group != ""?"LOWER( grupo ) LIKE '%".str_replace("-" , " " , urldecode($group))."%' ":" 1=1 ";
+		$where = implode( " AND " , array( $style , $type ,  $group ) );
+		
+
+		$sqlCatalogo = "SELECT * FROM product WHERE {$where} LIMIT 40";
 		$queryCatalogo = $this->pdo->prepare($sqlCatalogo);
 		$rsCatalogo = $queryCatalogo->execute();
-		if ($lang == "es"){
-			if( $rsCatalogo !== false ){
-				$pr = $queryCatalogo->rowCount();
-				if($pr > 0){
-					$catalogo = $queryCatalogo->fetchAll();
-					foreach ($catalogo as $c) {
-						$html .= '
-								<div class="product-list">
-									<h2>'.$c['tipo'].'</h2>
-									<a href="'.$this->url($lang , "/product/".$c["id"] ).'">
-										<img src="/images/'.$c['imagen'].'"><br>
-										'.$c['nombre'].'
-									</a>
-								</div><!-- .product-list -->
-								';
-					}
+		if( $rsCatalogo !== false ){
+			$pr = $queryCatalogo->rowCount();
+			if($pr > 0){
+				$catalogo = $queryCatalogo->fetchAll();
+				$html .= '<div id="content-press">';
+				$html .= '<p class="tituloSeccion">'.$where.'</p>';
+
+				foreach ($catalogo as $product) {
+					$html .= '
+							<article class="item4Col">
+						        <a href="'.$this->url($lang, "/product/".$product['ur']).'">
+						            <img style="width: 100%" 
+						            alt="'.$product["nombre"].'" 
+						            src="/images/product/'.$product["imagen"].'">
+						            <br class="clear">
+						            <br class="clear">
+						            <p>
+						            '.$product["nombre"].'
+						            </p>
+						        </a>
+						    </article>
+							';
+
 				}
-
-
+				$html .= "</div><!-- .product-list -->";
 			}
-		}else if ($lang == "en") {
-			if( $rsCatalogo !== false ){
-				$pr = $queryCatalogo->rowCount();
-				if($pr > 0){
-					$catalogo = $queryCatalogo->fetchAll();
-					foreach ($catalogo as $c) {
-						$html .= '
-								<div class="product-list">
-									<h2>'.$c['tipo'].'</h2>
-									<a href="'.$this->url($lang , "/product/".$c["name"] ).'">
-										<img src="/images/'.$c['imagen'].'"><br>
-										'.$c['name'].'
-									</a>
-								</div><!-- .product-list -->
-								';
-					}
-				}
 
 
-			}
-		}
-		else
-		{
-			$html .= 'No existe lang';
 		}
 		
 		$this->header( $lang );

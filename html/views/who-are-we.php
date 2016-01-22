@@ -17,6 +17,3 @@
 <p>&nbsp;</p>
 </div>         
 <br class="clear">
-</div>
-
-    

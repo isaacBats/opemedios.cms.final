@@ -136,6 +136,18 @@
 		'methods' => 'POST'
 		)));
 
+	$collection->attachRoute(new Route('/product/removeFav', array(
+		'_controller' => 'Catalog::removeProductFavorite',
+		'parameters' => array("lang" => $lang),
+		'methods' => 'POST'
+		)));
+
+	$collection->attachRoute(new Route('/favs/', array(
+		'_controller' => 'Catalog::showFavs',
+		'parameters' => array("lang" => $lang),
+		'methods' => 'GET'
+		)));
+
 	// Press
 	
 

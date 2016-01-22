@@ -83,13 +83,13 @@ class Contacto extends Controller
 			<form id="contact-form" name="contact-form" action="'.$this->url($lang , "/contact").'" method="post">
 				<h2 class="product-title">'.$this->trans($lang,'Contactanos', 'Contact us').'</h2>
 				<div class="field name">
-					<input name="nombre" type="text" placeholder="'.$this->trans($lang,'Nombre','Name').'">				
+					<input name="nombre" class="requerido" type="text" placeholder="'.$this->trans($lang,'Nombre','Name').'">				
 				</div><!-- .field-->
 				<div class="field">
-					<input name="empresa" type="text" placeholder="'.$this->trans($lang,'Empresa','Company').'">
+					<input name="empresa" class="requerido" type="text" placeholder="'.$this->trans($lang,'Empresa','Company').'">
 				</div><!-- .field -->
 				<div class="field">
-					<input name="puesto" type="text" placeholder="'.$this->trans($lang,'Puesto','Job title').'">
+					<input name="puesto" type="text" placeholder="'.$this->trans($lang,'Puesto','Position').'">
 				</div><!-- .field -->
 				<div class="field">
 					<select name="pais">
@@ -98,27 +98,27 @@ class Contacto extends Controller
 					</select>
 				</div><!-- .field -->
 				<div class="field">
-					<input name="estado" type="text" placeholder="'.$this->trans($lang,'Estado / Municipio','State').'">
+					<input name="estado" class="requerido" type="text" placeholder="'.$this->trans($lang,'Estado / Municipio','City / State').'">
 				</div><!-- .field -->
 				<div class="field">
-					<input name="codigopostal" type="text" placeholder="'.$this->trans($lang,'Código Postal','Zip Code').'">
+					<input name="codigopostal" class="requerido" type="text" placeholder="'.$this->trans($lang,'Código Postal','Zip Code').'">
 				</div><!-- .field -->
 				<div class="field">
-					<input name="telefono" type="text" placeholder="'.$this->trans($lang,'Teléfono','Phone').'">
+					<input name="telefono" class="requerido" type="text" placeholder="'.$this->trans($lang,'Teléfono','Phone').'">
 				</div><!-- .field -->
 				<div class="field">
-					<input name="email" type="email" placeholder="'.$this->trans($lang,'Correo electrónico','E-Mail').'">
+					<input name="email" type="email" class="requerido" placeholder="'.$this->trans($lang,'Correo electrónico','EMail').'">
 				</div><!-- .field -->
 				<div class="field how">
 					<select name="comoseentero">
-						<option value="">'.$this->trans($lang,'¿Cómo se enteró de nosotros?','How did you find us?').'</option>
+						<option value="">'.$this->trans($lang,'¿Cómo se enteró de nosotros?','How did you hear of us?').'</option>
 						<option value="un amigo">A través de un amigo</option>
 					</select>
 					<br class="clear">
 				</div><!-- .field -->
 				<br class="clear">
 				<div class="required-fields">
-					* '.$this->trans($lang,'Campos Obligatorios','Fields required').'
+					* '.$this->trans($lang,'Campos Obligatorios','Required').'
 				</div><!-- .required-fields -->
 				<textarea name="comentario" placeholder="'.$this->trans($lang,'Comentario','Comment').'"></textarea>
 				<input name="enviar" id="btn-submit" type="submit" class="general-btn" value="'.$this->trans($lang,'Enviar','Send').'">

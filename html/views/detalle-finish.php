@@ -1,11 +1,11 @@
 <div class="product">
     <div id="product-image">
-        <img src="/images/acabados/<?php echo $acabado['imagen']; ?>">
+        <img src="/images/finishes/<?php echo $acabado['imagen']; ?>">
     </div><!-- #product-image-->
     <div id="product-info">
         <div class="detail-nav">
             <?php echo $this->navegacion($lang,$acabado['codigo']); ?>
-            <a href="<?php echo $this->url($lang, '/Catalog/finishes'); ?>" class="see-all">Ver Todos</a>
+            <a href="<?php echo $this->url($lang, '/catalog/finishes'); ?>" class="see-all">Ver Todos</a>
             <br class="clear">
         </div><!-- .detail-nav -->
         <h2 class="product-title"><?php echo $acabado['codigo'].' '.$acabado['nombre']; ?></h2>

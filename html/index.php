@@ -130,10 +130,11 @@
 		'methods' => 'GET'
 		)));
 
-	
-
-
-	
+	$collection->attachRoute(new Route('/product/addFav', array(
+		'_controller' => 'Catalog::addProductFavorite',
+		'parameters' => array("lang" => $lang),
+		'methods' => 'POST'
+		)));
 
 	// Press
 	

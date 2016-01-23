@@ -13,6 +13,34 @@ function controllProgressBtn(){
 
 jQuery(document).ready(function($){
 
+	try{
+	var gallery = $('#gallery').galleriffic('#navigation', {
+		delay: 300,
+		numThumbs: 13,
+		preloadAhead: 0,
+		imageContainerSel: '#slideshow',
+		controlsContainerSel: '#controls',
+		fixedNavigation: true,
+		galleryKeyboardNav: true,
+		autoPlay: false,
+		enableHistory: false,
+		enableTopPager: false,
+		enableBottomPager: true,
+		renderSSControls: false,
+		nextLinkText: '>',
+		prevLinkText: '<'
+	});
+	gallery.onFadeOut = function () {
+		$('#details').fadeOut('fast');
+	};
+	gallery.onFadeIn = function () {
+		$('#details').fadeIn('fast');
+	};
+
+}catch(e){
+	console.log(e);
+}
+
 	jQuery('#btn-fav').on('click', function(event) {
 		event.preventDefault();
 		var boton = jQuery(this);
@@ -162,33 +190,7 @@ jQuery('#contact-form').validate({
 	}
 });
 
-try{
-	var gallery = $('#gallery').galleriffic('#navigation', {
-		delay: 300,
-		numThumbs: 13,
-		preloadAhead: 0,
-		imageContainerSel: '#slideshow',
-		controlsContainerSel: '#controls',
-		fixedNavigation: true,
-		galleryKeyboardNav: true,
-		autoPlay: false,
-		enableHistory: false,
-		enableTopPager: false,
-		enableBottomPager: true,
-		renderSSControls: false,
-		nextLinkText: '>',
-		prevLinkText: '<'
-	});
-	gallery.onFadeOut = function () {
-		$('#details').fadeOut('fast');
-	};
-	gallery.onFadeIn = function () {
-		$('#details').fadeIn('fast');
-	};
 
-}catch(e){
-	console.log(e);
-}
 try{
 	var imgHeight = $('#imgHome > img').height();
 	var imgWidth = $('#imgHome > img').width();
@@ -219,6 +221,8 @@ try{
 }
 
 
+
+
 var anchoNav;
 var anchoTotal = 0;
 
@@ -236,6 +240,7 @@ try {
 $('#main-aside > ul > li > a').on('click', function(){
 	$(this).next('ul').slideToggle();
 });
+
 try{
 	// $("#gallery").on("focusin", function(){
 	// 	$("a.fancybox").fancybox({

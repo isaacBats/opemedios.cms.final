@@ -2,16 +2,17 @@
 <meta charset="UTF-8">
 <title>Alfonso Marina</title>
 
+<?php if (isset( $product )){ ?>
 <!-- Meta tags de Facebook (Open Graph) -->
 <!-- Con esta etiqueta declaramos el título que queremos que contenga al darle share -->
-<meta property="og:title" content="Denumeris" />
+<meta property="og:title" content="<?php echo $product["name"] ?>" />
 <!-- Con esta etiqueta mostramos una imagen al momento de dar share en facebook -->
-<meta property="og:image" content="" />
+<meta property="og:image" content="http://amarinav2.denumeris.com/<?php echo '/images/product/'.$product['imagen']; ?>" />
 <!-- Con esta etiqueta mostramos el nombre de nuestro sitio web al momento de dar share en facebook -->
-<meta property="og:site_name" content="Denumeris Interactive" />
+<meta property="og:site_name" content="<?php echo $product["name"] ?>" />
 <!-- Con esta etiqueta mostramos una descripción acerca de lo que trata nuestra página web al momento de dar share en facebook -->
-<meta property="og:description" content="En Denumeris hacemos cosas" />
-
+<meta property="og:description" content="<?php echo $product["name"] ?>" />
+<?php } ?>
 <!-- Corre el sitio en modo full-screen dentro de los móbiles que lo soportan. -->
 <meta name="apple-mobile-web-app-capable" content="yes">
 

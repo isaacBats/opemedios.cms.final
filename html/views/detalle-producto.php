@@ -39,16 +39,16 @@
             <a href="javascript:void(0);" class="rel"><img src="/images/relacionado3.jpg"></a> -->
         </div><!-- .sec-features -->
         <div class="share-product">
-            <a href="javascript:void(0);"><img src="/images/share-it.png"></a>
-            <a href="javascript:void(0);"><img src="/images/tweet-it.png"></a>
-            <a href="javascript:void(0);"><img src="/images/pin-it.png"></a>
+            <a href="javascript:void(0);" onclick="window.open('http://www.facebook.com/sharer/sharer.php?u=http://amarinav2.denumeris.com/<?php echo $this->url($lang); ?>&amp;t=<?php echo $product["nombre"] ?>', 'facebook_share', 'height=320, width=640, toolbar=no, menubar=no, scrollbars=no, resizable=no, location=no, directories=no, status=no');" ><img src="/images/share-it.png"></a>
+            <a href="javascript:void(0);" onclick="window.open('https://twitter.com/intent/tweet?text=<?php echo $product["nombre"] ?>&amp;url=<?php echo $this->url($lang); ?>', 'twitter_share', 'height=320, width=640, toolbar=no, menubar=no, scrollbars=no, resizable=no, location=no, directories=no, status=no');"  ><img src="/images/tweet-it.png"></a>
+            <a href="javascript:void(0);" onclick="window.open('http://pinterest.com/pin/create/button/?url=http://amarinav2.denumeris.com/<?php echo $this->url($lang); ?>&amp;media=http://amarinav2.denumeris.com/<?php echo '/images/product/'.$product['imagen']; ?>&amp;description=<?php echo $product["nombre"] ?>', 'pint_it_share', 'height=320, width=640, toolbar=no, menubar=no, scrollbars=no, resizable=no, location=no, directories=no, status=no');"  ><img src="/images/pin-it.png"></a>
         </div><!-- .share-product -->
         <div class="product-note">
             <p><strong>NOTA:</strong> Debido a variaciones en los monitores, los colores como se muestran no pueden representar la calidad y el tono exacto.</p>
             <p>Si desea más información, favor de contactar a nuestra área de Servicio al Clientes.</p>
         </div><!-- .product-note -->
         <div class="post-actions">
-            <a href="mailto:?body=http://www.alfonsomarinaebanista.com/<?php $this->url($lang); ?> --- <?php echo $product["nombre"] ?>">
+            <a href="mailto:?body=http://amarinav2.denumeris.com/<?php $this->url($lang); ?> --- <?php echo $product["nombre"] ?>">
             <i class="fa fa-envelope-o fa-lg"></i> Enviar por correo</a>
             <a href="javascript:window.print()"><i class="fa fa-print fa-lg"></i> Imprimir</a>
             <a href="javascript:void(0);"><i class="fa fa-file-o fa-lg"></i> Imprimir hoja de catálogo</a>

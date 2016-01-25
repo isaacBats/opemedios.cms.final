@@ -48,8 +48,9 @@
             <p>Si desea más información, favor de contactar a nuestra área de Servicio al Clientes.</p>
         </div><!-- .product-note -->
         <div class="post-actions">
-            <a href="javascript:void(0);"><i class="fa fa-envelope-o fa-lg"></i> Enviar por correo</a>
-            <a href="javascript:void(0);"><i class="fa fa-print fa-lg"></i> Imprimir</a>
+            <a href="mailto:?body=http://www.alfonsomarinaebanista.com/<?php $this->url($lang); ?> --- <?php echo $product["nombre"] ?>">
+            <i class="fa fa-envelope-o fa-lg"></i> Enviar por correo</a>
+            <a href="javascript:window.print()"><i class="fa fa-print fa-lg"></i> Imprimir</a>
             <a href="javascript:void(0);"><i class="fa fa-file-o fa-lg"></i> Imprimir hoja de catálogo</a>
         </div><!-- .post-actions -->
     </div><!-- #product-info -->

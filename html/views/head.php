@@ -2,7 +2,7 @@
 <meta charset="UTF-8">
 <title>Alfonso Marina</title>
 
-<?php if (isset( $product )){ ?>
+<?php if ( $product ){ ?>
 <!-- Meta tags de Facebook (Open Graph) -->
 <!-- Con esta etiqueta declaramos el título que queremos que contenga al darle share -->
 <meta property="og:title" content="<?php echo $product["name"] ?>" />

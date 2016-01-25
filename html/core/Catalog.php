@@ -302,7 +302,7 @@ class Catalog extends Controller{
 
 
 
-				$this->header( $lang );
+				$this->header( $lang , false , $product );
 				require $this->views."detalle-producto.php";
 			}
 		}		

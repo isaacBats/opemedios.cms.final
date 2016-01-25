@@ -142,7 +142,7 @@
 		}					
 									
 
-		public function header( $lang , $nobeard = false){
+		public function header( $lang , $nobeard = false , $product = false){
 			if( $lang == "es"){
 				// require  $this->views."header.php";	
 				

@@ -74,10 +74,12 @@ jQuery(document).ready(function($){
 		}else{
 			jQuery.post('/product/addFav',{'id':id},function(json){
 				if( json.exito ){
-					
+					boton.addClass('eliminar');
+					boton.html(json.mensaje);
 				}
 				else{
-
+					boton.removeClass('eliminar');
+					boton.html(json.mensaje);
 				}
 			},'json');
 		}

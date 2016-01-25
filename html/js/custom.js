@@ -14,6 +14,21 @@ function controllProgressBtn(){
 jQuery(document).ready(function($){
 
 	try{
+		$("img").load(function(){
+	    	var $this = $(this);
+		    if ($this.width() > $this.height()) {
+		        $this.parent().addClass("horizontal");
+		        console.log( $this.width() , $this.height())
+		    }
+		});
+		
+	}catch(e){
+		console.log( e )
+	}
+
+	try{
+
+	
 	var gallery = $('#gallery').galleriffic('#navigation', {
 		delay: 300,
 		numThumbs: 13,

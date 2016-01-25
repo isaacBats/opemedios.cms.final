@@ -7,9 +7,11 @@ foreach ($productList as $product) {
     echo '
     <article class="item4Col">
         <a href="'.$this->url($lang, "/product/".$product['ur']).'">
-            <img style="width: 100%" 
-            alt="'.$product["nombre"].'" 
-            src="'.$product["imagen"].'">
+            <div class="imageHolder">
+                <img style="width: 100%" 
+                alt="'.$product["nombre"].'" 
+                src="'.$product["imagen"].'">
+            </div>
             <br class="clear">
             <br class="clear">
             <p>

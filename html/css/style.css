@@ -3677,11 +3677,37 @@ h2.tituloSeccion {
   width: 21.4%; }
 
 .item4Col > a  {
-  min-height: 320px;
+  
 }
-.item4Col > a > img {
-  min-width: 80%; 
 
+.item4Col .imageHolder{
+    height: 200px;
+    max-height: 200px;
+    float: none;
+    width: 100%;
+    position: relative;
+    vertical-align: middle;
+    display:inline-block;
+    min-width: 100%;
+    text-align: center;
+    padding: 0px 0px;
+    overflow: hidden;
+}
+.item4Col .imageHolder.horizontal{
+  display:table-cell;
+  float: right;
+}
+.item4Col .imageHolder.horizontal img {
+  width: 80%;
+}
+
+.item4Col .imageHolder img {
+  width: auto;
+  min-width: auto;
+  margin: auto;
+  position: relative;
+  vertical-align: middle;
+  max-height: 190px;
 }
 
 .item4Col > a > p {

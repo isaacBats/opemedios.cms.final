@@ -164,11 +164,10 @@ class Catalog extends Controller{
 		}
 
 		$html = "";
-		$style =  $style == "casual" || $style == "metro" ? "estilo LIKE '{$style}' " :" 1=1 ";
-		$type =  $type != ""?"tipo LIKE '{$type}' ":" 1=1 ";
-		$group =  $group != ""?"LOWER( grupo ) LIKE '%".str_replace("-" , " " , urldecode($group))."%' ":" 1=1 ";
+		$style =  $style == "casual" || $style == "metro" ? $this->trans($lang , "estilo" , "style")." LIKE '{$style}' " :" 1=1 ";
+		$type =  $type != ""?$this->trans($lang , "tipo" , "_type")." LIKE '{$type}' ":" 1=1 ";
+		$group =  $group != ""?"LOWER( ".$this->trans($lang , "grupo" , "_group")." ) LIKE '%".str_replace("-" , " " , urldecode($group))."%' ":" 1=1 ";
 		$where = implode( " AND " , array( $style , $type ,  $group ) );
-		
 		
 
 		$sqlCatalogo = "SELECT * FROM product WHERE {$where} LIMIT 40";
@@ -186,9 +185,11 @@ class Catalog extends Controller{
 					$html .= '
 							<article class="item4Col">
 						        <a href="'.$this->url($lang, "/product/".$product['ur']).'">
-						            <img style="width: 100%" 
-						            alt="'.$product["nombre"].'" 
-						            src="'.$product["imagen"].'">
+						        	<div class="imageHolder">
+							            <img 
+							            alt="'.$product["nombre"].'" 
+							            src="'.$product["imagen"].'">
+							         </div>
 						            <br class="clear">
 						            <br class="clear">
 						            <p>

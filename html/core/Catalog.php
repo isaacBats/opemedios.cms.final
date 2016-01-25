@@ -143,11 +143,18 @@ class Catalog extends Controller{
 	
 	public function showListProducts($lang="es" , $style = "", $type = "" , $group  = ""){
 
+		$ostyle =  $style; 
+		$otype =  $type; 
+		$ogroup  = $group;
+
 		$this->addBread( array("label" => $this->trans($lang , "Catalogo" , "Catalog") , "url" => "/catalog/lifestyle") );
 
 		if( $style != "casual" && $style != "metro" ){
+			$ogroup  = $type ;
+			$otype = $style ;
 			$group  = $type ;
 			$type = $style ;
+
 			if( $type != "")
 				$this->addBread( array(  "label"=>ucwords(strtolower($type)) , "url"=> "/catalog/".$style )  );
 			if( $group != "")
@@ -156,7 +163,6 @@ class Catalog extends Controller{
 		}else{
 
 			$this->addBread( array(  "label"=>ucwords(strtolower($style)), "url"=> "/catalog/".$style  ) );
-
 			if( $type != "")
 				$this->addBread( array(  "label"=>ucwords(strtolower($type)) , "url"=> "/catalog/".implode( "/" , array( $style , $type )  ) ) );
 			if( $group != "")
@@ -173,6 +179,21 @@ class Catalog extends Controller{
 		$sqlCatalogo = "SELECT * FROM product WHERE {$where} LIMIT 40";
 		$queryCatalogo = $this->pdo->prepare($sqlCatalogo);
 		$rsCatalogo = $queryCatalogo->execute();
+
+
+		if( $queryCatalogo->rowCount() == "0" ){
+			$lang = $lang=="es"?"en":"es";
+			$style =  $ostyle == "casual" || $ostyle == "metro" ? $this->trans($lang , "estilo" , "style")." LIKE '{$ostyle}' " :" 1=1 ";
+			$type =  $otype != ""?$this->trans($lang , "tipo" , "_type")." LIKE '{$otype}' ":" 1=1 ";
+			$group =  $ogroup != ""?"LOWER( ".$this->trans($lang , "grupo" , "_group")." ) LIKE '%".str_replace("-" , " " , urldecode($ogroup))."%' ":" 1=1 ";
+			$where = implode( " AND " , array( $style , $type ,  $group ) );
+			$lang = $lang=="en"?"es":"en";
+			$sqlCatalogo = "SELECT * FROM product WHERE {$where} LIMIT 40";
+			$queryCatalogo = $this->pdo->prepare($sqlCatalogo);
+			$rsCatalogo = $queryCatalogo->execute();
+		}
+
+
 		if( $rsCatalogo !== false ){
 			$pr = $queryCatalogo->rowCount();
 			if($pr > 0){

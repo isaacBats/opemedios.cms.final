@@ -6,6 +6,7 @@ html/core/conn.php
 
 .phpintel/
 
+/html/config.php
 html/assets/images/press/*
 html/assets/images/product
 /images/

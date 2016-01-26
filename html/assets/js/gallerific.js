@@ -966,7 +966,7 @@
 						this.$thumbsContainer.append('<div class="bottom pagination"></div>');
 						this.buildPager(this.$thumbsContainer.find('div.bottom'));
 					}
-                    this.$thumbsContainer.append('<div id="navByImage"><a href="#" id="navLeftThum"><img src="/images/PrevImageStrip.png" /></a><a href="#" id="navRightThumb"><img src="/images/NextImageStrip.png"/></a></div>');
+                    this.$thumbsContainer.append('<div id="navByImage"><a href="#" id="navLeftThum"><img src="/assets/images/PrevImageStrip.png" /></a><a href="#" id="navRightThumb"><img src="/assets/images/NextImageStrip.png"/></a></div>');
                     var gallery = this;
                     document.getElementById('navLeftThum').href="#"+gallery.data[gallery.getPrevIndex(gallery.currentIndex)].hash;
                     document.getElementById('navRightThumb').href="#"+gallery.data[gallery.getNextIndex(gallery.currentIndex)].hash;
@@ -985,7 +985,7 @@
 				if (this.currentPage > 0) {
 					var prevPage = startIndex - this.settings.numThumbs;
 					//pager.append('<a rel="history" href="#'+this.data[prevPage].hash+'" title="'+this.settings.prevPageLinkText+'">'+this.settings.prevPageLinkText+'</a>');
-                    pager.append('<a rel="history" href="#'+this.data[prevPage].hash+'" title="'+this.settings.prevPageLinkText+'"><img src="/images/PrevPage1.png"/></a>');
+                    pager.append('<a rel="history" href="#'+this.data[prevPage].hash+'" title="'+this.settings.prevPageLinkText+'"><img src="/assets/images/PrevPage1.png"/></a>');
 				}
 				
 				// Page Index Links
@@ -1007,7 +1007,7 @@
 				var nextPage = startIndex+this.settings.numThumbs;
 				if (nextPage < this.data.length) {
 					//pager.append('<a rel="history" href="#'+this.data[nextPage].hash+'" title="'+this.settings.nextPageLinkText+'">'+this.settings.nextPageLinkText+'</a>');
-                    pager.append('<a rel="history" href="#'+this.data[nextPage].hash+'" title="'+this.settings.nextPageLinkText+'"><img src="/images/NextPage1.png"/></a>');
+                    pager.append('<a rel="history" href="#'+this.data[nextPage].hash+'" title="'+this.settings.nextPageLinkText+'"><img src="/assets/images/NextPage1.png"/></a>');
 				}
 				
 				return this;

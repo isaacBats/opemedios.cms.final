@@ -1,7 +1,7 @@
 <div class="product-cc">
 	
 	<div class="product-care-image">
-		<img src="/images/imgVertical.jpg">
+		<img src="/assets/images/imgVertical.jpg">
 	</div>
 
 	<div class="acerca-secundario-quienes">

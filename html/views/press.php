@@ -8,7 +8,7 @@ foreach ($galleries as $press) {
                         <a href="/press/'.strtolower( $press["contexto"] ).'/'.$press["slug"].'">
                             <img style="width: 0%" 
                             alt="'.$press["nombre"].'" 
-                            src="/images/press/cover/'.$press["imagen"].'">
+                            src="/assets/images/press/cover/'.$press["imagen"].'">
                             <br class="clear">
                             <br class="clear">
                             '.$press["nombre"].'
@@ -20,7 +20,7 @@ foreach ($galleries as $press) {
                         <a href="/press/'.strtolower( $press["contexto"] ).'/'.$press["slug"].'">
                             <img style="width: 0%" 
                             alt="'.$press["nombre"].'" 
-                            src="/images/press/cover/'.$press["imagen"].'">
+                            src="/assets/images/press/cover/'.$press["imagen"].'">
                             <br class="clear">
                             <br class="clear">
                             '.$press["nombre"].'

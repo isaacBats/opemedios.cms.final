@@ -267,7 +267,7 @@ try{
 	// 		showNavArrows: true
 	// 	});
 	// });
-	// $('#fancybox-content').after('<div class="share-product gallery" style="text-align:center; margin-top:10px; position:absolute; left:0; right: 0;"><a href="javascript:void(0);" style="font-size:18px;"><img src="/images/share-it.png"></a><a href="javascript:void(0);" style="font-size:18px;"><img src="/images/tweet-it.png"></a><a href="javascript:void(0);" style="font-size:18px;"><img src="/images/pin-it.png"></a></div>');
+	// $('#fancybox-content').after('<div class="share-product gallery" style="text-align:center; margin-top:10px; position:absolute; left:0; right: 0;"><a href="javascript:void(0);" style="font-size:18px;"><img src="/assets/images/share-it.png"></a><a href="javascript:void(0);" style="font-size:18px;"><img src="/assets/images/tweet-it.png"></a><a href="javascript:void(0);" style="font-size:18px;"><img src="/assets/images/pin-it.png"></a></div>');
 }catch(e){
 	console.log(e);
 }

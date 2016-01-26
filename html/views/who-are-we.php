@@ -1,6 +1,6 @@
 
 <div class="registro">
-	<div class="acerca-principal-quienes quienes-somos"><img src="/images/quienes.jpg">
+	<div class="acerca-principal-quienes quienes-somos"><img src="/assets/images/quienes.jpg">
 		<?php if( $lang == "es"){ ?>
 		<p>“Gran parte de la belleza en la línea es la calidad del diseño,<br> el trabajo artesanal y el carácter único de cada pieza.”</p>
 		<?php }else{?>

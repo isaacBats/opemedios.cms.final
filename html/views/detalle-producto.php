@@ -1,6 +1,6 @@
 <div class="product">
     <div id="product-image">
-        <img src="<?php echo $product["imagen"]== "null"?"http://placehold.it/500x600/f4f4f4/807562?text=product":'/images/product/'.$product['imagen'].'' ?>">
+        <img src="<?php echo $product["imagen"]== "null"?"http://placehold.it/500x600/f4f4f4/807562?text=product":'/assets/images/product/'.$product['imagen'].'' ?>">
     </div><!-- #product-image-->
     <div id="product-info">
         <div class="nav-detalle">
@@ -26,14 +26,14 @@
         <a href="javascript:void(0);" class="general-btn">Añadir a Favoritos</a>
         <div class="sec-features related">
             <h2>Productos Relacionados</h2>
-            <!-- <a href="javascript:void(0);" class="rel"><img src="/images/relacionado1.jpg"></a>
-            <a href="javascript:void(0);" class="rel"><img src="/images/relacionado2.jpg"></a>
-            <a href="javascript:void(0);" class="rel"><img src="/images/relacionado3.jpg"></a> -->
+            <!-- <a href="javascript:void(0);" class="rel"><img src="/assets/images/relacionado1.jpg"></a>
+            <a href="javascript:void(0);" class="rel"><img src="/assets/images/relacionado2.jpg"></a>
+            <a href="javascript:void(0);" class="rel"><img src="/assets/images/relacionado3.jpg"></a> -->
         </div><!-- .sec-features -->
         <div class="share-product">
-            <a href="javascript:void(0);" onclick="window.open('http://www.facebook.com/sharer/sharer.php?u=http://amarinav2.denumeris.com/<?php echo $this->url($lang); ?>&amp;t=<?php echo $product["nombre"] ?>', 'facebook_share', 'height=320, width=640, toolbar=no, menubar=no, scrollbars=no, resizable=no, location=no, directories=no, status=no');" ><img src="/images/share-it.png"></a>
-            <a href="javascript:void(0);" onclick="window.open('https://twitter.com/intent/tweet?text=<?php echo $product["nombre"] ?>&amp;url=<?php echo $this->url($lang); ?>', 'twitter_share', 'height=320, width=640, toolbar=no, menubar=no, scrollbars=no, resizable=no, location=no, directories=no, status=no');"  ><img src="/images/tweet-it.png"></a>
-            <a href="javascript:void(0);" onclick="window.open('http://pinterest.com/pin/create/button/?url=http://amarinav2.denumeris.com/<?php echo $this->url($lang); ?>&amp;media=http://amarinav2.denumeris.com/<?php echo '/images/product/'.$product['imagen']; ?>&amp;description=<?php echo $product["nombre"] ?>', 'pint_it_share', 'height=320, width=640, toolbar=no, menubar=no, scrollbars=no, resizable=no, location=no, directories=no, status=no');"  ><img src="/images/pin-it.png"></a>
+            <a href="javascript:void(0);" onclick="window.open('http://www.facebook.com/sharer/sharer.php?u=http://amarinav2.denumeris.com/<?php echo $this->url($lang); ?>&amp;t=<?php echo $product["nombre"] ?>', 'facebook_share', 'height=320, width=640, toolbar=no, menubar=no, scrollbars=no, resizable=no, location=no, directories=no, status=no');" ><img src="/assets/images/share-it.png"></a>
+            <a href="javascript:void(0);" onclick="window.open('https://twitter.com/intent/tweet?text=<?php echo $product["nombre"] ?>&amp;url=<?php echo $this->url($lang); ?>', 'twitter_share', 'height=320, width=640, toolbar=no, menubar=no, scrollbars=no, resizable=no, location=no, directories=no, status=no');"  ><img src="/assets/images/tweet-it.png"></a>
+            <a href="javascript:void(0);" onclick="window.open('http://pinterest.com/pin/create/button/?url=http://amarinav2.denumeris.com/<?php echo $this->url($lang); ?>&amp;media=http://amarinav2.denumeris.com/<?php echo '/images/product/'.$product['imagen']; ?>&amp;description=<?php echo $product["nombre"] ?>', 'pint_it_share', 'height=320, width=640, toolbar=no, menubar=no, scrollbars=no, resizable=no, location=no, directories=no, status=no');"  ><img src="/assets/images/pin-it.png"></a>
         </div><!-- .share-product -->
         <div class="product-note">
             <p><strong>NOTA:</strong> Debido a variaciones en los monitores, los colores como se muestran no pueden representar la calidad y el tono exacto.</p>

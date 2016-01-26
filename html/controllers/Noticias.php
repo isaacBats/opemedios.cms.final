@@ -59,7 +59,7 @@ class Noticias extends Controller
 					$html .= '<div class="registro">
 					    	<div class="evento-principal full">
 						        <a href="javascript:void(0)" class="fancybox">
-						            <img alt="" src="../../images/'.$noticia['imagen'].'" />
+						            <img alt="" src="/assets/images/'.$noticia['imagen'].'" />
 						        </a>
 					    	</div><!-- .evento-principal -->
 					    	<div class="eventoSecundario">
@@ -79,7 +79,7 @@ class Noticias extends Controller
 					$html .= '<div class="registro">
 					    	<div class="evento-principal full">
 						        <a href="javascript:void(0)" class="fancybox">
-						            <img alt="" src="../../images/'.$noticia['imagen'].'" />
+						            <img alt="" src="/assets/images/'.$noticia['imagen'].'" />
 						        </a>
 					    	</div><!-- .evento-principal -->
 					    	<div class="eventoSecundario">
@@ -137,7 +137,7 @@ class Noticias extends Controller
 									<div class="list-item">
 						                <div class="img-listado">
 											<a href="'.$this->url($lang,'/news/'.$noticia['slug']).'">
-						                    	<img src="../images/'.$noticia['imagen_thumbnail'].'" alt="">
+						                    	<img src="/assets/images/'.$noticia['imagen_thumbnail'].'" alt="">
 											</a>
 						                </div>
 						                <div class="texto-listado">
@@ -168,7 +168,7 @@ class Noticias extends Controller
 									<div class="list-item">
 						                <div class="img-listado">
 											<a href="'.$this->url($lang,'/news/'.$noticia['slug']).'">
-						                    	<img src="../images/'.$noticia['imagen_thumbnail'].'" alt="">
+						                    	<img src="/assets/images/'.$noticia['imagen_thumbnail'].'" alt="">
 											</a>
 						                </div>
 						                <div class="texto-listado">

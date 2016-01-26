@@ -309,6 +309,53 @@ class Catalog extends Controller{
 		$this->footer( $lang );
 	}
 
+	public function browserProductByName($lang="es"){
+		
+		$this->addBread( array("label" => $this->trans($lang, "Buscador", "Browser"), "url" => "/catalog/browser"));
+
+		$html = "";
+		if( !empty($_POST) ){
+
+
+			$sql = "SELECT * FROM product WHERE nombre LIKE :name OR _name LIKE :name";
+			$query = $this->pdo->prepare($sql);
+			$palabra = $_POST["q"];
+			// $name = "%$palabra%";
+			$name = "%{$_POST["q"]}%";
+			echo $name ;
+	 		$query->bindParam(':name',$name, \PDO::PARAM_STR);
+
+			$rs = $query->execute();
+			
+			$products = $query->fetchAll();
+			$html .= '<div id="content-press">';
+			foreach ($products as $product) {
+				$product["imagen"] = $product["imagen"] != "null"?"/images/product/".$product["imagen"]:"http://placehold.it/200x200/f4f4f4/ccc?text=product";
+				$html .= '
+						<article class="item4Col">
+					        <a href="'.$this->url($lang, "/product/".$product['ur']).'">
+					        	<div class="imageHolder">
+						            <img 
+						            alt="'.$product["nombre"].'" 
+						            src="'.$product["imagen"].'">
+						         </div>
+					            <br class="clear">
+					            <br class="clear">
+					            <p>
+					            '.$product["nombre"].'
+					            </p>
+					        </a>
+					    </article>
+						';
+
+				}
+				$html .= "</div>";
+		}
+		$this->header( $lang );
+		echo $html;
+		$this->footer( $lang );
+	}
+
 
 	
 

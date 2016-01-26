@@ -12,3 +12,5 @@ html/assets/images/product
 
 html/vendor/*
 /html/assets/images/press.zip
+
+/html/composer.phar

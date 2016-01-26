@@ -12,7 +12,6 @@
  		$pass = $_POST["password"];
  			
  			$sql =  "SELECT * FROM registros WHERE nombreusuario LIKE LOWER(".$user.") ";
- 			
  			$query = $this->pdo->prepare($sql);
 			$rs = $query->execute();
 			if($rs!==false){
@@ -43,7 +42,6 @@
  	public function login( $lang ){
 
  		if( isset($_SESSION["user"] ) ){
-
  			header('Location: .');
  			exit;
 

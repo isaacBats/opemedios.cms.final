@@ -299,7 +299,7 @@ textarea {
   border: 1px solid #dcd9d4; }
 
 input.requerido {
-  background: #FFF url(/images/fondoRequerido.jpg) top right no-repeat; }
+  background: #FFF url(/assets/images/fondoRequerido.jpg) top right no-repeat; }
 
 .clear {
   clear: both; }
@@ -355,7 +355,7 @@ a.botonFavoritos:hover {
   color: #807562; }
 
 a.autocad {
-  background: url(/images/iconoImprimir.jpg);
+  background: url(/assets/images/iconoImprimir.jpg);
   height: 33px;
   display: inline-block;
   width: 79px;
@@ -365,7 +365,7 @@ a.autocad {
   margin-top: -10px; }
 
 a.pdf {
-  background: url(/images/iconoImprimir.jpg) -79px 0;
+  background: url(/assets/images/iconoImprimir.jpg) -79px 0;
   height: 33px;
   display: inline-block;
   width: 25px;
@@ -375,7 +375,7 @@ a.pdf {
   margin-top: -10px; }
 
 a.imprimir {
-  background: url(/images/iconoImprimir.jpg) -104px 0;
+  background: url(/assets/images/iconoImprimir.jpg) -104px 0;
   height: 33px;
   display: inline-block;
   width: 26px;
@@ -2474,7 +2474,7 @@ a.imprimir {
   border: none !important; }
 
 #fancybox-close {
-  background: url(/images/btn-close.png);
+  background: url(/assets/images/btn-close.png);
   width: 22px;
   height: 22px;
   right: 20px;
@@ -2482,13 +2482,13 @@ a.imprimir {
 
 #fancybox-left-ico {
   left: -50px !important;
-  background: url(/images/Prev1.png);
+  background: url(/assets/images/Prev1.png);
   background-size: 30px; }
 
 #fancybox-right-ico {
   right: -30px !important;
   left: auto;
-  background: url(/images/Next1.png);
+  background: url(/assets/images/Next1.png);
   background-size: 30px; }
 
 /*///////////////////////// Header styles /////////////////////////*/
@@ -2500,7 +2500,7 @@ a.imprimir {
   position: relative; }
 
 #main-header h1 {
-  background: url(/images/logo.png) repeat scroll 0 0;
+  background: url(/assets/images/logo.png) repeat scroll 0 0;
   height: 29px;
   margin: 30px auto 20px;
   text-indent: -9999px;
@@ -2552,7 +2552,7 @@ a.imprimir {
   z-index: 2; }
 
 #main-nav > ul > li li.submenu > a {
-  background: url(/images/fondoSubmenu.png) no-repeat right center #fafafb; }
+  background: url(/assets/images/fondoSubmenu.png) no-repeat right center #fafafb; }
 
 #main-nav ul li:hover > ul {
   display: block; }
@@ -2610,7 +2610,7 @@ a.imprimir {
   border: 1px solid #d4d1cb; }
 
 #aux-nav input[type="submit"] {
-  background: transparent url("/images/btn-busqueda.png") repeat scroll 0 0;
+  background: transparent url("/assets/images/btn-busqueda.png") repeat scroll 0 0;
   border: none;
   display: inline-block;
   height: 26px;
@@ -2651,7 +2651,7 @@ a.imprimir {
   position: relative; }
 
 #newsletter {
-  background: transparent url("/images/logo-be-the-first.png") no-repeat scroll left top;
+  background: transparent url("/assets/images/logo-be-the-first.png") no-repeat scroll left top;
   height: 60px;
   left: 25px;
   padding-left: 104px;
@@ -2701,7 +2701,7 @@ a.imprimir {
   width: 29px;
   height: 28px;
   display: block;
-  background: url(/images/btn-redes-sociales.png);
+  background: url(/assets/images/btn-redes-sociales.png);
   float: left;
   text-indent: -9999px;
   clear: none;
@@ -2900,7 +2900,7 @@ a {
   left: 0;
   right: 0;
   bottom: 0;
-  background: url(/images/covers/AM_Portadilla.jpg) no-repeat center center fixed;
+  background: url(/assets/images/covers/AM_Portadilla.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -2916,7 +2916,7 @@ a {
   top: 50%;
   width: 999px; }
   #cover-inside h1 {
-    background: url(/images/logo-portadilla.png) center no-repeat;
+    background: url(/assets/images/logo-portadilla.png) center no-repeat;
     height: 417px;
     margin-bottom: 35px;
     text-indent: -9999px;
@@ -3487,7 +3487,7 @@ div.field select.error
   margin: 30px 0; }
 
 .inicio-sesion .registrarse {
-  background: url(/images/fondoModuloRegistrarse.png) top center no-repeat;
+  background: url(/assets/images/fondoModuloRegistrarse.png) top center no-repeat;
   height: 68px;
   padding: 25px 0;
   margin-bottom: 45px; }
@@ -3526,7 +3526,7 @@ div.field select.error
   font-size: 18px;
   text-align: center;
   font-weight: normal;
-  background: url(/images/fondoTituloModuloInicioSesion.png) bottom repeat-x;
+  background: url(/assets/images/fondoTituloModuloInicioSesion.png) bottom repeat-x;
   padding-bottom: 5px; }
 
 .iniciar-sesion input[type="submit"] {
@@ -3547,7 +3547,7 @@ div.field select.error
   display: block;
   color: #FFF;
   text-align: center;
-  background: url(/images/fondoTituloModuloInicioSesion.png) top repeat-x;
+  background: url(/assets/images/fondoTituloModuloInicioSesion.png) top repeat-x;
   margin: 5px 0 10px;
   padding-top: 5px; }
 
@@ -3564,7 +3564,7 @@ div.field select.error
 
 .popup-am h2 {
   font-family: Georgia, "Times New Roman" ,Times,serif;
-  background: url("/images/fondoTituloModuloInicioSesion.png") repeat-x scroll center bottom transparent;
+  background: url("/assets/images/fondoTituloModuloInicioSesion.png") repeat-x scroll center bottom transparent;
   border: medium none;
   font-size: 26px;
   font-weight: normal;
@@ -3633,7 +3633,7 @@ div.field select.error
     width: 98%;
     font-family: Georgia, "Times New Roman", Times, serif; }
     .contact-form input[type="text"].required, .contact-form input[type="number"].required, .contact-form input[type="email"].required {
-      background: url(/images/icon-required.jpg) no-repeat top right; }
+      background: url(/assets/images/icon-required.jpg) no-repeat top right; }
   .contact-form select {
     border: 1px solid #dcd9d4;
     width: 103%;
@@ -3744,7 +3744,7 @@ h2.tituloSeccion {
   padding: 10px 30px;
   font-size: 12px;
   display: block;
-  background: #f6f5f2 url(/images/bullet-press.png) no-repeat 15px center; }
+  background: #f6f5f2 url(/assets/images/bullet-press.png) no-repeat 15px center; }
 
 /*///////////////// Press Gallery Styles /////////////////*/
 #slideshow {

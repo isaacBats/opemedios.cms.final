@@ -10,10 +10,9 @@
 		public $views = "views/";
 
 		public function url( $lang , $url = ""){
-
-
 			if( $url == ""){
 				return "/".$lang.$_SERVER["REQUEST_URI"];
+				
 			}else{
 				$ur = explode( "/" , $url );
 				$url = implode( "/" , array_map( function($s){return urlencode($s); } , $ur ) );
@@ -158,5 +157,12 @@
 		}
 	}
 
-
+	//  AUTOLOAD CONTROLLERS
+	foreach( scandir( __DIR__ ) as $class ){
+		$buffer = explode("." , $class);
+		if( end( $buffer ) == "php"){
+			require_once( __DIR__.'/'.$class );
+		}
+	}
+	
 ?>

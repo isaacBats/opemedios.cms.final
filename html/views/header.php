@@ -5,7 +5,7 @@
 
 <div id="body">
 	<header id="main-header">
-		<a href="/"><h1>Alfonso Marina</h1></a>
+		<a href="<?php echo $this->url($lang , "/"); ?>"><h1>Alfonso Marina</h1></a>
 		<nav id="main-nav">
 			<ul>
 				<li><a href="/">Inicio</a></li>

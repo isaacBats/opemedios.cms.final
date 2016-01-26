@@ -3,7 +3,7 @@
 
 foreach ($productList as $product) {
 
-    $product["imagen"] = $product["imagen"]== "null" ?"http://placehold.it/200x200/f4f4f4/ccc?text=product":"/images/product/".$product["imagen"];
+    $product["imagen"] = $product["imagen"]== "null" ?"http://placehold.it/200x200/f4f4f4/ccc?text=product":"/assets/images/product/".$product["imagen"];
     echo '
     <article class="item4Col">
         <a href="'.$this->url($lang, "/product/".$product['ur']).'">

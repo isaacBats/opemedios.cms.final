@@ -42,10 +42,10 @@
 					foreach ($images as $image) {
 						$count++;
 						echo '<li style="float:left;">
-							<a href="/images/galeria/'.$image["imagen"].'" 
-							original="/images/galeria/'.$image["imagen"].'" 
+							<a href="/assets/images/galeria/'.$image["imagen"].'" 
+							original="/assets/images/galeria/'.$image["imagen"].'" 
 							href="#'.$count.'" rel="history">
-							<img src="/images/galeria/'.$image["thumb"].'" alt="image'.$count.'" /></a>
+							<img src="/assets/images/galeria/'.$image["thumb"].'" alt="image'.$count.'" /></a>
 							</li>'."\n";
 					}
 				}

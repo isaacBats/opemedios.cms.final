@@ -1,7 +1,7 @@
 
 			<div class="registro">
 				<div class="acerca-principal-quienes" class="inicio-sesion">
-					<p class="login"><img src="/images/imgInicioSesion.jpg"/></p>
+					<p class="login"><img src="/assets/images/imgInicioSesion.jpg"/></p>
 				</div>
 
 				<form action="<?php echo $this->url( $lang , "/login" ); ?>" method="POST">    

@@ -1,6 +1,6 @@
 <div class="product">
     <div id="product-image">
-        <img src="/images/finishes/<?php echo $acabado['imagen']; ?>">
+        <img src="/assets/images/finishes/<?php echo $acabado['imagen']; ?>">
     </div><!-- #product-image-->
     <div id="product-info">
         <div class="detail-nav">

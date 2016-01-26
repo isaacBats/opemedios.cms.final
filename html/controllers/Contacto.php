@@ -59,9 +59,9 @@ class Contacto extends Controller
 
 	function showForm($lang="es"){
 		$html = '<div class="contact-info">
-		<img src="'.$this->url($lang,'/../').'images/contacto.jpg">
+		<img src="/assets/images/contacto.jpg">
 		<div class="info">
-			<img src="'.$this->url($lang,'/../').'images/mapa.jpg">
+			<img src="/assets/images/mapa.jpg">
 		</div><!-- .info -->
 		<div class="info">
 			<h2>Showroom México</h2>

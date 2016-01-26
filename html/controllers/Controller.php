@@ -8,6 +8,8 @@
 		public $pdo = null;
 		public $bread = array();
 		public $views = "views/";
+		public $adminviews = "admin/";
+
 
 		public function url( $lang , $url = ""){
 			if( $url == ""){
@@ -154,6 +156,14 @@
 		public function footer( $lang ){
 			
 			require  $this->views."footer.php";	
+		}
+
+		public function header_admin(){
+			require  $this->adminviews."header.php";	
+		}
+
+		public function footer_admin(){
+			require  $this->adminviews."footer.php";	
 		}
 	}
 

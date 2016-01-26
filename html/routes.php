@@ -206,7 +206,17 @@
 		'methods' => 'POST'
 	)));
 	
+	$collection->attachRoute(new Route('/admin/', array(
+		'_controller' => 'Admin::dashboard',
+		'parameters' => array("lang" => $lang),
+		'methods' => 'GET'
+	)));
 
+	$collection->attachRoute(new Route('/admin/contacts/list', array(
+		'_controller' => 'AdminContacto::showContacts',
+		'parameters' => array("lang" => $lang),
+		'methods' => 'GET'
+	)));
 
 
 ?>

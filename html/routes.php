@@ -64,6 +64,12 @@
 
 
 	// CATALOG
+	$collection->attachRoute(new Route('/catalog/browser', array(
+		'_controller' => 'Catalog::browserProductByName',
+		'parameters' => array("lang" => $lang),
+		'methods' => 'POST'
+		)));
+	
 	$collection->attachRoute(new Route('/catalog', array(
 		'_controller' => 'Catalog::showAll',
 		'parameters' => array("lang" => $lang),
@@ -94,6 +100,8 @@
 		'parameters' => array("lang" => $lang),
 		'methods' => 'GET'
 		)));
+	
+
 
 
 	//  PRODUCT

@@ -28,8 +28,8 @@
 		{
 			session_start();
 			$dsn = 'mysql:host=localhost;dbname=amarinados';
-			$nombre_usuario = 'root';
-			$password = 'root';
+			$nombre_usuario = 'adanzilla';
+			$password = 'campanitas';
 			$opciones = array(
 			    PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8',
 			);
@@ -147,7 +147,7 @@
 			if( $lang == "es"){
 				// require  $this->views."header.php";	
 				
-				require $this->views."header.php";
+				require $this->views."header-catalogo.php";
 			}else{
 				require  $this->views."header_en.php";	
 			}

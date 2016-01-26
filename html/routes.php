@@ -218,6 +218,12 @@
 		'methods' => 'GET'
 	)));
 
+	$collection->attachRoute(new Route('/admin/contacts/export', array(
+		'_controller' => 'AdminContacto::exportContacts',
+		'parameters' => array("lang" => $lang),
+		'methods' => 'GET'
+	)));
+
 	$collection->attachRoute(new Route('/admin/news/list', array(
 		'_controller' => 'AdminNoticias::showNews',
 		'parameters' => array("lang" => $lang),

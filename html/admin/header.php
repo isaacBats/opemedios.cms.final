@@ -77,7 +77,7 @@
               <a href=""><i class="fa fa-check-square"></i> <span>Contactos</span></a>
               <ul class="children">
                 <li><a href="/admin/contacts/list">Listar contactos</a></li>
-                <li><a href="javascript:void(0);">Exportar contactos</a></li>
+                <li><a href="/admin/contacts/export">Exportar contactos</a></li>
               </ul>
             </li>
             <li class="nav-parent"><a href=""><i class="fa fa-suitcase"></i> <span>Noticias</span></a>

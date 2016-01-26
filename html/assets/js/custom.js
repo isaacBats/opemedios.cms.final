@@ -13,6 +13,80 @@ function controllProgressBtn(){
 
 jQuery(document).ready(function($){
 
+	try{
+		$("img").load(function(){
+	    	var $this = $(this);
+		    if ($this.width() > $this.height()) {
+		        $this.parent().addClass("horizontal");
+		        console.log( $this.width() , $this.height())
+		    }
+		});
+		
+	}catch(e){
+		console.log( e )
+	}
+
+	try{
+
+	
+	var gallery = $('#gallery').galleriffic('#navigation', {
+		delay: 300,
+		numThumbs: 13,
+		preloadAhead: 0,
+		imageContainerSel: '#slideshow',
+		controlsContainerSel: '#controls',
+		fixedNavigation: true,
+		galleryKeyboardNav: true,
+		autoPlay: false,
+		enableHistory: false,
+		enableTopPager: false,
+		enableBottomPager: true,
+		renderSSControls: false,
+		nextLinkText: '>',
+		prevLinkText: '<'
+	});
+	gallery.onFadeOut = function () {
+		$('#details').fadeOut('fast');
+	};
+	gallery.onFadeIn = function () {
+		$('#details').fadeIn('fast');
+	};
+
+}catch(e){
+	console.log(e);
+}
+
+	jQuery('#btn-fav').on('click', function(event) {
+		event.preventDefault();
+		var boton = jQuery(this);
+		var id = boton.data('id');
+		if( boton.hasClass('eliminar') ){
+			jQuery.post('/product/removeFav',{'id':id},function(json){
+				if( json.exito ){
+					boton.removeClass('eliminar');
+					boton.html(json.mensaje);
+				}
+				else{
+					boton.addClass('eliminar');
+					boton.html(json.mensaje);
+				}
+			},'json');
+		}else{
+			jQuery.post('/product/addFav',{'id':id},function(json){
+				if( json.exito ){
+					boton.addClass('eliminar');
+					boton.html(json.mensaje);
+				}
+				else{
+					boton.removeClass('eliminar');
+					boton.html(json.mensaje);
+				}
+			},'json');
+		}
+
+
+	});
+
 	jQuery('#news-submit').on('click', function(event) {
 		event.preventDefault();
 		if( jQuery('#Email').val() != "" ){
@@ -133,33 +207,7 @@ jQuery('#contact-form').validate({
 	}
 });
 
-try{
-	var gallery = $('#gallery').galleriffic('#navigation', {
-		delay: 300,
-		numThumbs: 13,
-		preloadAhead: 0,
-		imageContainerSel: '#slideshow',
-		controlsContainerSel: '#controls',
-		fixedNavigation: true,
-		galleryKeyboardNav: true,
-		autoPlay: false,
-		enableHistory: false,
-		enableTopPager: false,
-		enableBottomPager: true,
-		renderSSControls: false,
-		nextLinkText: '>',
-		prevLinkText: '<'
-	});
-	gallery.onFadeOut = function () {
-		$('#details').fadeOut('fast');
-	};
-	gallery.onFadeIn = function () {
-		$('#details').fadeIn('fast');
-	};
 
-}catch(e){
-	console.log(e);
-}
 try{
 	var imgHeight = $('#imgHome > img').height();
 	var imgWidth = $('#imgHome > img').width();
@@ -190,6 +238,8 @@ try{
 }
 
 
+
+
 var anchoNav;
 var anchoTotal = 0;
 
@@ -207,6 +257,7 @@ try {
 $('#main-aside > ul > li > a').on('click', function(){
 	$(this).next('ul').slideToggle();
 });
+
 try{
 	// $("#gallery").on("focusin", function(){
 	// 	$("a.fancybox").fancybox({

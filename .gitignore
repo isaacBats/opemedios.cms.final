@@ -1,17 +1,14 @@
 # archivo de conexion de base de datos
 
 html/core/conn.php
-html/maqueta/.DS_Store
-html/maqueta/templates/.DS_Store
-html/maqueta/templates/src/.DS_Store
-html/js/.DS_Store
-html/.DS_Store
+.DS_Store
 # phpintel
 
 .phpintel/
 
-html/images/press/*
-html/images/product
-
+html/assets/images/press/*
+html/assets/images/product
 /images/
 
+html/vendor/*
+/html/assets/images/press.zip

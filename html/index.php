@@ -18,6 +18,9 @@
 	$lang = isset($_GET["lang"])?$_GET["lang"]:"es";
 	$_SERVER["REQUEST_URI"] = str_replace( "/".$lang ,"",$_SERVER["REQUEST_URI"] );
 
+	// CONFIG
+	require_once( __DIR__.'/config.php' );
+
 	//  REQUIRE CONTROLLERS
 	require_once( __DIR__.'/controllers/Controller.php' );
 

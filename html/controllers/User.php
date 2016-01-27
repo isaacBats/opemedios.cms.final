@@ -29,8 +29,9 @@
 						header('Location: ./login');
 					}
 				}
+			}else{
+				header('Location: ./login');
 			}
-
 		
  		
  	}
@@ -44,7 +45,6 @@
  		if( isset($_SESSION["user"] ) ){
  			header('Location: .');
  			exit;
-
  		}
 
  		$this->addBread( array( "label"=> "Login" ) );

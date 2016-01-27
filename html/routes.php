@@ -251,5 +251,17 @@
 		'methods' => 'GET'
 	)));
 
+	$collection->attachRoute(new Route('/admin/news/add', array(
+		'_controller' => 'AdminNoticias::addNew',
+		'parameters' => array("lang" => $lang),
+		'methods' => 'GET'
+	)));
+
+	$collection->attachRoute(new Route('/admin/news/add', array(
+		'_controller' => 'AdminNoticias::saveNew',
+		'parameters' => array("lang" => $lang),
+		'methods' => 'POST'
+	)));
+
 
 ?>

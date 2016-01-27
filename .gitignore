@@ -15,3 +15,4 @@ html/vendor/*
 /html/assets/images/press.zip
 
 /html/composer.phar
+html/config.php

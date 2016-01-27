@@ -319,10 +319,7 @@ class Catalog extends Controller{
 
 			$sql = "SELECT * FROM product WHERE nombre LIKE :name OR _name LIKE :name";
 			$query = $this->pdo->prepare($sql);
-			$palabra = $_POST["q"];
-			// $name = "%$palabra%";
 			$name = "%{$_POST["q"]}%";
-			echo $name ;
 	 		$query->bindParam(':name',$name, \PDO::PARAM_STR);
 
 			$rs = $query->execute();
@@ -350,15 +347,37 @@ class Catalog extends Controller{
 
 				}
 				$html .= "</div>";
+		}else{
+			$html .= '
+						<div id="content-press">
+							<h3>Buscar Muebles</h3>
+						</div>
+					';
 		}
+
 		$this->header( $lang );
 		echo $html;
 		$this->footer( $lang );
 	}
 
+	public function browserProductByName_Json($lang="es", $name = "ROVELLO"){
+		
+		// if( !empty($_POST) ){
+		if( !empty($name) ){
+			$sql = "SELECT * FROM product WHERE nombre LIKE :name OR _name LIKE :name";
+			$query = $this->pdo->prepare($sql);
+			// $name = "%{$_POST["q"]}%";
+			$name = "%$name%";
+	 		$query->bindParam(':name',$name, \PDO::PARAM_STR);
 
-	
+			$rs = $query->execute();
+			
+			$products = $query->fetchAll();
 
-	
+			// print_r($products);
+			header('Content-type: text/json');
+			echo json_encode($products, JSON_PRETTY_PRINT);
+		}
+	}	
 
 }

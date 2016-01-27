@@ -69,6 +69,12 @@
 		'parameters' => array("lang" => $lang),
 		'methods' => 'POST'
 		)));
+
+	$collection->attachRoute(new Route('/catalog/browser/json', array(
+		'_controller' => 'Catalog::browserProductByName_Json',
+		'parameters' => array("lang" => $lang),
+		'methods' => 'GET'
+		)));
 	
 	$collection->attachRoute(new Route('/catalog', array(
 		'_controller' => 'Catalog::showAll',
@@ -229,6 +235,12 @@
 
 	$collection->attachRoute(new Route('/admin/contacts/export', array(
 		'_controller' => 'AdminContacto::exportContacts',
+		'parameters' => array("lang" => $lang),
+		'methods' => 'GET'
+	)));
+
+	$collection->attachRoute(new Route('/admin/users/list', array(
+		'_controller' => 'AdminUsuario::showUsers',
 		'parameters' => array("lang" => $lang),
 		'methods' => 'GET'
 	)));

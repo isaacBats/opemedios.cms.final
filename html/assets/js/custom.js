@@ -24,8 +24,8 @@ function controllProgressBtn(){
 		_progressBar += ".";
 	}
 	jQuery("#btn-registro").val(_progressBar);
-
 }
+
 
 jQuery(document).ready(function($){
 

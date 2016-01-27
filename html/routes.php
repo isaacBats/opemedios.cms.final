@@ -221,34 +221,46 @@
 	)));
 	
 	//  ADMIN
-	$collection->attachRoute(new Route('/admin/', array(
+	$collection->attachRoute(new Route('/panel', array(
 		'_controller' => 'Admin::dashboard',
 		'parameters' => array("lang" => $lang),
 		'methods' => 'GET'
 	)));
 
-	$collection->attachRoute(new Route('/admin/contacts/list', array(
+	$collection->attachRoute(new Route('/panel/contacts/list', array(
 		'_controller' => 'AdminContacto::showContacts',
 		'parameters' => array("lang" => $lang),
 		'methods' => 'GET'
 	)));
 
-	$collection->attachRoute(new Route('/admin/contacts/export', array(
+	$collection->attachRoute(new Route('/panel/contacts/export', array(
 		'_controller' => 'AdminContacto::exportContacts',
 		'parameters' => array("lang" => $lang),
 		'methods' => 'GET'
 	)));
 
-	$collection->attachRoute(new Route('/admin/users/list', array(
+	$collection->attachRoute(new Route('/panel/users/list', array(
 		'_controller' => 'AdminUsuario::showUsers',
 		'parameters' => array("lang" => $lang),
 		'methods' => 'GET'
 	)));
 
-	$collection->attachRoute(new Route('/admin/news/list', array(
+	$collection->attachRoute(new Route('/panel/news/list', array(
 		'_controller' => 'AdminNoticias::showNews',
 		'parameters' => array("lang" => $lang),
 		'methods' => 'GET'
+	)));
+
+	$collection->attachRoute(new Route('/panel/news/add', array(
+		'_controller' => 'AdminNoticias::addNew',
+		'parameters' => array("lang" => $lang),
+		'methods' => 'GET'
+	)));
+
+	$collection->attachRoute(new Route('/panel/news/add', array(
+		'_controller' => 'AdminNoticias::saveNew',
+		'parameters' => array("lang" => $lang),
+		'methods' => 'POST'
 	)));
 
 

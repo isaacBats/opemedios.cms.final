@@ -16,3 +16,5 @@ html/vendor/*
 
 /html/composer.phar
 html/config.php
+
+assets/images/

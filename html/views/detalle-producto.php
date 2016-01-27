@@ -23,7 +23,15 @@
             <?php } ?>
             </p>
         </div><!-- .features -->
-        <a href="javascript:void(0);" class="general-btn">Añadir a Favoritos</a>
+         <?php if( isset($_SESSION['favoritos']) && in_array($product['id'], $_SESSION['favoritos'])){ ?>
+            <a href="javascript:void(0);" id="btn-fav" class="general-btn eliminar" data-id="<?php echo $product['id']; ?>">
+            <?php echo $this->trans($lang,"Eliminar de Favoritos","Remove from Favorites"); ?>
+        </a>
+        <?php } else { ?>
+            <a href="javascript:void(0);" id="btn-fav" class="general-btn" data-id="<?php echo $product['id']; ?>">
+            <?php echo $this->trans($lang,"Añadir a Favoritos","Add to Favorites"); ?>
+        </a>
+        <?php } ?>
         <div class="sec-features related">
             <h2>Productos Relacionados</h2>
             <!-- <a href="javascript:void(0);" class="rel"><img src="/assets/images/relacionado1.jpg"></a>

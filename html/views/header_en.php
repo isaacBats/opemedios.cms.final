@@ -102,9 +102,6 @@
 		</nav><!-- #main-nav -->
 		<div id="aux-nav">
 			<nav>
-				
-					
-
 					<ul>
 						<?php if( isset( $_SESSION["user"] ) ) {?>
 							<li>Greetings - <?php echo $_SESSION["user"]["nombre"] ?> &nbsp;</li>
@@ -118,7 +115,7 @@
 						?>
 		            </ul>
 	        </nav>
-	        <a href="javascript:void(0);">My Favorites</a>
+	        <a href="<?php echo $this->url($lang , "/favs") ?>">My Favorites</a>
 	        <a href="<?php echo $this->url("es") ?>" >ESP</a> -
 	        <a href="<?php echo $this->url("en") ?>" class="selected">ENG</a>
 	        <?php require "browser.php" ?>

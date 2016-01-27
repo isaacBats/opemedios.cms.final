@@ -16,6 +16,7 @@
 		</div>
 	    <div id="controls" class="controls"></div>
 	    <div id="gallery" class="content">
+	    <!--  TODO: Arreglar error de altura on next slide -->
 	        <div style="left: 18%;position: absolute;top:50%;margin-top:-15px;width: 30px;"><a href="#" id="navLeft"><img src="/assets/images/Prev1.png" alt=">>"/></a></div>
 	        <div id="slideshow" class="slideshow"></div>
 	        <div style="float: right;position: absolute;right: 18%;top:50%;margin-top:-15px;width: 30px;"><a href="#" id="navRight"><img src="/assets/images/Next1.png" alt="<<"/></a></div>

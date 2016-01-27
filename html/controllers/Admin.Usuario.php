@@ -47,13 +47,12 @@ class AdminUsuario extends Controller{
 		
         $sql = "SELECT * FROM registros";
 		$query = $this->pdo->prepare($sql);
-		$query->bindParam(':id_tabla', $id_tabla);
 		$rs = $query->execute();
 		if($rs!==false){
 			$nr = $query->rowCount();
 			if( $nr > 0 ){
 				$rows = $query->fetchAll();
-				
+				require $this->adminviews."list-users.php";
 			}
 		}
 		$this->footer_admin($lang="es");

@@ -17,7 +17,11 @@
 <script src="/admin/lib/flot-spline/jquery.flot.spline.js"></script>
 
 <script src="/admin/lib/jquery-knob/jquery.knob.js"></script>
+<script src="/admin/lib/summernote/summernote.js"></script>
+<script src="/assets/js/jquery.validate.js"></script>
+<script src="http://jqueryvalidation.org/files/dist/additional-methods.min.js"></script>
 
+<script src="/admin/js/custom.js"></script>
 <script src="/admin/js/quirk.js"></script>
 <script src="/admin/js/dashboard.js"></script>
 

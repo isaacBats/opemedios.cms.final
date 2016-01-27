@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="/admin/lib/ionicons/css/ionicons.css">
   <link rel="stylesheet" href="/admin/lib/jquery-toggles/toggles-full.css">
   <link rel="stylesheet" href="/admin/lib/morrisjs/morris.css">
+  <link rel="stylesheet" href="/admin/lib/summernote/summernote.css">
 
   <link rel="stylesheet" href="/admin/css/quirk.css">
 
@@ -83,7 +84,7 @@
             <li class="nav-parent"><a href=""><i class="fa fa-suitcase"></i> <span>Noticias</span></a>
               <ul class="children">
                 <li><a href="/admin/news/list">Listar noticias</a></li>
-                <li><a href="javascript:void(0);">Agregar noticia</a></li>
+                <li><a href="/admin/news/add">Agregar noticia</a></li>
               </ul>
             </li>
             <li class="nav-parent"><a href=""><i class="fa fa-th-list"></i> <span>Catálogo</span></a>

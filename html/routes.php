@@ -73,7 +73,7 @@
 	$collection->attachRoute(new Route('/catalog/browser/json', array(
 		'_controller' => 'Catalog::browserProductByName_Json',
 		'parameters' => array("lang" => $lang),
-		'methods' => 'GET'
+		'methods' => 'POST'
 		)));
 	
 	$collection->attachRoute(new Route('/catalog', array(

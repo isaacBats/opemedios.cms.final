@@ -360,23 +360,35 @@ class Catalog extends Controller{
 		$this->footer( $lang );
 	}
 
-	public function browserProductByName_Json($lang="es", $name = "ROVELLO"){
+	public function browserProductByName_Json($lang="es"){
 		
-		// if( !empty($_POST) ){
-		if( !empty($name) ){
-			$sql = "SELECT * FROM product WHERE nombre LIKE :name OR _name LIKE :name";
+		if( !empty($_POST) ){
+			$table = "product";
+			$database = "amarinados";
+
+			$lastWhere = $this->describe($database, $table, $_POST["q"]);
+
+			$where = substr($lastWhere, 0, -3);	
+
+			$sql = "SELECT nombre, ur FROM $table WHERE ".$where." LIMIT 10";
+			echo $sql;
+			
 			$query = $this->pdo->prepare($sql);
 			// $name = "%{$_POST["q"]}%";
-			$name = "%$name%";
-	 		$query->bindParam(':name',$name, \PDO::PARAM_STR);
+			// echo $this->describe( "product" , $name );
+	 		// $query->bindParam(':name',$name, \PDO::PARAM_STR);
 
 			$rs = $query->execute();
-			
-			$products = $query->fetchAll();
+			$this->lang = $lang;
+			$products = $query->fetchAll(\PDO::FETCH_ASSOC);
+			$products = array_map(function($element){
+				$element["url"] = $this->url($this->lang , "/product/".$element["ur"]);
+				return $element;
+			}, $products);
 
 			// print_r($products);
-			header('Content-type: text/json');
-			echo json_encode($products, JSON_PRETTY_PRINT);
+			header('Content-type: application/json; charset=utf-8');
+			json_encode($products);
 		}
 	}	
 

@@ -28,9 +28,12 @@
 					}else{
 						header('Location: ./login');
 					}
+				}else{
+					header('Location: ./login');
 				}
+			}else{
+				header('Location: ./login');
 			}
-
 		
  		
  	}
@@ -44,7 +47,6 @@
  		if( isset($_SESSION["user"] ) ){
  			header('Location: .');
  			exit;
-
  		}
 
  		$this->addBread( array( "label"=> "Login" ) );
@@ -123,7 +125,7 @@
 	function showForm($lang="es"){
 		$html = '<div class="registro">        
 			<div class="acerca-principal-quienes acerca-principal-quienes-form">
-				<p><img alt="Registro" src="'.$this->url($lang,'/../').'images/imgRegistro.jpg"></p>
+				<p><img alt="Registro" src="/assets/images/imgRegistro.jpg"></p>
 			</div>		
 			<div class="acerca-secundario-quienes acerca-secundario-quienes-form">
 				<h2>'.$this->trans($lang, "Registro<br>profesionistas","Register <br>to the trade").'</h2>

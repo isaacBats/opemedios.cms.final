@@ -279,13 +279,13 @@ class Catalog extends Controller{
 	}
 
 	function detailProduct($lang="es", $slug){
+		//  TODO: Crear slugs optimizadas para seo
 		
 		if ( !empty($slug) ){
 
 			$this->addBread( array(  "label"=>$this->trans( $lang  , "Catalogo" , "Catalog") , "url"=>"/catalog/lifestyle" ) );
 			$this->addBread( array(  "label"=>$this->trans( $lang  , "Productos" , "Products") , "url"=>"/catalog/lifestyle" ) );
 
-			
 			$sql = "SELECT * FROM product WHERE ur LIKE '$slug'";
 			$query = $this->pdo->prepare($sql);
 			$rs = $query->execute();

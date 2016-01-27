@@ -28,6 +28,8 @@
 					}else{
 						header('Location: ./login');
 					}
+				}else{
+					header('Location: ./login');
 				}
 			}else{
 				header('Location: ./login');

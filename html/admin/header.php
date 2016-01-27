@@ -101,7 +101,7 @@
             </li>
             <li class="nav-parent"><a href=""><i class="fa fa-file-text"></i> <span>Usuarios</span></a>
               <ul class="children">
-                <li><a href="javascript:void(0);">Listar usuarios</a></li>
+                <li><a href="/admin/users/list">Listar usuarios</a></li>
                 <li><a href="javascript:void(0);">Autorizar usuarios</a></li>
                 <li><a href="javascript:void(0);">Editar usuario</a></li>
               </ul>

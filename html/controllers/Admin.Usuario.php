@@ -4,7 +4,7 @@ require_once(__DIR__.'/../admin/ForceUTF8/Encoding.php');
 use ForceUTF8\Encoding; 
 
 
-class AdminContacto extends Controller{
+class AdminUsuario extends Controller{
 
 	public function exportContacts(){
 		
@@ -42,9 +42,10 @@ class AdminContacto extends Controller{
 		
 	}
 
-	public function showContacts(){
+	public function showUsers(){
 		$this->header_admin($lang="es");
-        $sql = "SELECT * FROM contactos";
+		
+        $sql = "SELECT * FROM registros";
 		$query = $this->pdo->prepare($sql);
 		$query->bindParam(':id_tabla', $id_tabla);
 		$rs = $query->execute();
@@ -52,7 +53,7 @@ class AdminContacto extends Controller{
 			$nr = $query->rowCount();
 			if( $nr > 0 ){
 				$rows = $query->fetchAll();
-				require $this->adminviews."list-contacts.php";
+				
 			}
 		}
 		$this->footer_admin($lang="es");

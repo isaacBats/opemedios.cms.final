@@ -232,6 +232,12 @@
 		'methods' => 'GET'
 	)));
 
+	$collection->attachRoute(new Route('/admin/users/list', array(
+		'_controller' => 'AdminUsuario::showUsers',
+		'parameters' => array("lang" => $lang),
+		'methods' => 'GET'
+	)));
+
 	$collection->attachRoute(new Route('/admin/news/list', array(
 		'_controller' => 'AdminNoticias::showNews',
 		'parameters' => array("lang" => $lang),

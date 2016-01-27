@@ -102,9 +102,6 @@
 		</nav><!-- #main-nav -->
 		<div id="aux-nav">
 			<nav>
-				
-					
-
 					<ul>
 						<?php if( isset( $_SESSION["user"] ) ) {?>
 							<li>Greetings - <?php echo $_SESSION["user"]["nombre"] ?> &nbsp;</li>

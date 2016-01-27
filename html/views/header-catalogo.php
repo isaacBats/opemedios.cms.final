@@ -118,7 +118,7 @@
 	            </ul>
 	        </nav>
 	        <br class="clear" />
-	        <a href="<?php echo $this->url($lagn , "/favs") ?>">Mis Favoritos</a>
+	        <a href="<?php echo $this->url($lang , "/favs") ?>">Mis Favoritos</a>
 	        <a href="<?php echo $this->url("es") ?>" class="selected">ESP</a> -
 	        <a href="<?php echo $this->url("en") ?>">ENG</a>
 	        <?php require "browser.php" ?>

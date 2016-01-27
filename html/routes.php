@@ -214,6 +214,7 @@
 		'methods' => 'POST'
 	)));
 	
+	//  ADMIN
 	$collection->attachRoute(new Route('/admin/', array(
 		'_controller' => 'Admin::dashboard',
 		'parameters' => array("lang" => $lang),

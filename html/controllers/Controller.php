@@ -10,11 +10,9 @@
 		public $views = "views/";
 		public $adminviews = "admin/";
 
-
 		public function url( $lang , $url = ""){
 			if( $url == ""){
 				return "/".$lang.$_SERVER["REQUEST_URI"];
-				
 			}else{
 				$ur = explode( "/" , $url );
 				$url = implode( "/" , array_map( function($s){return urlencode($s); } , $ur ) );

@@ -28,13 +28,13 @@ class Contacto extends Controller
 			$contacto = $query->execute();
 			if($contacto){
 				$cuerpo_email = 'HTML del correo';
-				$cabeceras='From: adan@denumeris.com ' . "\r\n" .
-				'Reply-To: adan@denumeris.com ' . "\r\n" .
+				$cabeceras='From: dbautista@denumeris.com ' . "\r\n" .
+				'Reply-To: dbautista@denumeris.com ' . "\r\n" .
 				'Content-type: text/html; charset=utf-8' . "\r\n".
 				'X-Mailer: PHP/' . phpversion();
 
 				// TODO: AGREGAR LA FUNCION PARA ENVIAR LOS CORREOS CON SMTP
-				if(mail('adan@denumeris.com','Ha recibido un nuevo contacto',$cuerpo_email,$cabeceras)){
+				if(mail('dbautista@denumeris.com','Ha recibido un nuevo contacto',$cuerpo_email,$cabeceras)){
 					$resultado->exito = true;
 					$resultado->mensaje = ( $lang == "en" ) ? 'Thank you, we will contact you as soon as possible' : "Gracias, te contactaremos lo más pronto posible";
 				}

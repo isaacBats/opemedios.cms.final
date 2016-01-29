@@ -245,6 +245,12 @@
 		'methods' => 'GET'
 	)));
 
+	$collection->attachRoute(new Route('/panel/contact/remove/:id', array(
+		'_controller' => 'AdminContacto::removeContact',
+		'parameters' => array("lang" => $lang),
+		'methods' => 'GET'
+	)));
+
 	$collection->attachRoute(new Route('/panel/users/list', array(
 		'_controller' => 'AdminUsuario::showUsers',
 		'parameters' => array("lang" => $lang),
@@ -294,7 +300,7 @@
 		'methods' => 'GET'
 	)));
 
-	$collection->attachRoute(new Route('/panel/galleries/list', array(
+	$collection->attachRoute(new Route('/panel/gallery/list', array(
 		'_controller' => 'AdminGallery::showImages',
 		'parameters' => array("lang" => $lang , "id" => 1),
 		'methods' => 'GET'

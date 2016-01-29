@@ -77,7 +77,7 @@ class AdminNoticias extends Controller{
 			
 			$query = $query->execute();
 			if( $sql!=false ){
-				header("Location: /admin/news/list");
+				header("Location: /panel/news/list");
 			}
 		}
 	}
@@ -127,6 +127,20 @@ class AdminNoticias extends Controller{
 
 	}
 
-	// @TODO: Falta crear el metodo de editNew y removeNew
+	// @TODO: Falta crear el metodo de editNew
+	public function removeNew($lang="es", $id){
+
+		if( !empty($id) ){
+			$sql = "DELETE FROM noticias WHERE id_noticia = :id";
+			$query = $this->pdo->prepare($sql);
+			$query->bindParam(':id', $id, \PDO::PARAM_INT);
+			$rs = $query->execute();
+			if( $rs != false ){
+				echo "<span>Usuario eliminado</span>";
+				header("Location: /panel/news/list");
+			}
+
+		}
+	}
 	
 }

@@ -98,5 +98,22 @@ class AdminContacto extends Controller{
 		$this->footer_admin($lang);
 
 	}
+
+	public function removeContact($lang="es", $id){
+
+		if( !empty($id) ){
+			$sql = "DELETE FROM contactos WHERE id_contacto = :id";
+			$query = $this->pdo->prepare($sql);
+			$query->bindParam(':id', $id, \PDO::PARAM_INT);
+			$rs = $query->execute();
+			// if($rs == true)
+			// 	echo "<span>Usuario eliminado</span>";
+			if( $rs != false ){
+				echo "<span>Usuario eliminado</span>";
+				header("Location: /panel/contacts/list");
+			}
+
+		}
+	}
 	
 }

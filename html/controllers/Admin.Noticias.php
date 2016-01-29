@@ -82,7 +82,7 @@ class AdminNoticias extends Controller{
 		}
 	}
 
-	public function showNews(){
+	public function showListNews(){
 		$this->header_admin($lang="es");
 		
 		$sql = "SELECT * FROM noticias";
@@ -98,7 +98,35 @@ class AdminNoticias extends Controller{
 		}
 		$this->footer_admin($lang="es");
 	}
+
+	public function detailNew($lang="es", $id){
+
+		$this->header_admin($lang);
+
+		$sql = "SELECT 
+					id_noticia,
+					titulo, 
+					titulo_en, 
+					extracto, 
+					extracto_en, 
+					contenido, 
+					contenido_en,
+					imagen_thumbnail,
+					imagen,
+					fecha 
+				FROM noticias 
+				WHERE id_noticia = :id";
+		$query = $this->pdo->prepare($sql);
+		$query->bindParam(':id', $id, \PDO::PARAM_INT);
+		$rs = $query->execute();
+		if($rs !==false){
+			$new = $query->fetch(\PDO::FETCH_ASSOC);
+			require $this->adminviews."view-new.php";
+		}
+		$this->footer_admin($lang);
+
+	}
+
+	// @TODO: Falta crear el metodo de editNew y removeNew
 	
 }
-
-?>

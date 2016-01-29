@@ -17,7 +17,7 @@
          <td>'.$row['extracto'].'</td>
          <td>'.$row['fecha'].'</td>
          <td class="text-right">
-          <button class="btn btn-default btn-sm">Ver</button>
+          <a class="btn btn-default btn-sm" href="/panel/new/'.$row['id_noticia'].'">Ver</a>
         </td>
       </tr>';
     }

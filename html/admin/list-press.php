@@ -3,21 +3,19 @@
     <thead class="success">
       <tr>
         <th>Nombre</th>
-        <th>Teléfono</th>
-        <th>Email</th>
+        <th>Imagen</th>
         <th class="text-right">Acciones</th>
       </tr>
     </thead>
     <tbody>
     <?php
-    foreach ($rows as $row) {
+    foreach ($press as $p) {
         echo '
         <tr>
-         <td>'.$row['nombre'].' '.$row['apellidos'].'</td>
-         <td>'.$row['telefono'].'</td>
-         <td>'.$row['email'].'</td>
+         <td>'.$p['nombre'].'</td>
+         <td><img height="150" width="150" alt="" src="/assets/images/galeria/'.$p['imagen'].'"/> </td>
          <td class="text-right">
-          <a class="btn btn-default btn-sm" href="/panel/user/'.$row['id_registro'].'">Ver</a>
+          <a class="btn btn-default btn-sm" href="/panel/press/'.$p['id'].'">Ver</a>
         </td>
       </tr>';
     }

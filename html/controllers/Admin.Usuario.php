@@ -57,7 +57,42 @@ class AdminUsuario extends Controller{
 		}
 		$this->footer_admin($lang="es");
 	}
+
+	public function detailUser($lang="es", $id){
+
+		$this->header_admin($lang);
+
+		$sql = "SELECT 
+					id_registro,
+					nombre,        
+					apellidos,     
+					nombreusuario, 
+					pass,          
+					email,         
+					empresa,       
+					puesto,        
+					website,       
+					direccion1,    
+					direccion2,    
+					pais,          
+					estado,        
+					codigopostal,  
+					movil,         
+					telefono,      
+					organizacion,  
+					status,        
+					fecha 
+				FROM registros 
+				WHERE id_registro = :id";
+		$query = $this->pdo->prepare($sql);
+		$query->bindParam(':id', $id, \PDO::PARAM_INT);
+		$rs = $query->execute();
+		if($rs !==false){
+			$user = $query->fetch(\PDO::FETCH_ASSOC);
+			require $this->adminviews."view-user.php";
+		}
+		$this->footer_admin($lang);
+
+	}
 	
 }
-
-?>

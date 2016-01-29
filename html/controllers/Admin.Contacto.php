@@ -82,7 +82,21 @@ class AdminContacto extends Controller{
 		}
 		$this->footer_admin($lang="es");
 	}
+
+	public function detailContact($lang="es", $id){
+
+		$this->header_admin($lang);
+
+		$sql = "SELECT * FROM contactos	WHERE id_contacto = :id";
+		$query = $this->pdo->prepare($sql);
+		$query->bindParam(':id', $id, \PDO::PARAM_INT);
+		$rs = $query->execute();
+		if($rs !==false){
+			$contact = $query->fetch(\PDO::FETCH_ASSOC);
+			require $this->adminviews."view-contact.php";
+		}
+		$this->footer_admin($lang);
+
+	}
 	
 }
-
-?>

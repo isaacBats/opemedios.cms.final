@@ -35,7 +35,7 @@ if( $publicidad ){
 }
 
 if( $brochures ){
-    echo '<br class="clear"><p class="tituloSeccion Publicidad">Brochures</p>'.$brochures;
+    echo '<div class="clear"></div><p class="tituloSeccion Publicidad">Brochures</p>'.$brochures;
 }
 
 ?>

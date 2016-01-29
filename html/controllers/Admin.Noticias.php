@@ -70,19 +70,19 @@ class AdminNoticias extends Controller{
 			$query->bindParam(':extracto_en', $_POST['extracto_en']);
 			$query->bindParam(':contenido', $_POST['contenido']);
 			$query->bindParam(':contenido_en', $_POST['contenido_en']);
-			// @TODO: agregar funcionalidad de tumbnails
+			// TODO: @Noticias agregar funcionalidad de tumbnails (4)
 			$query->bindParam(':imagen_thumbnail', $_FILES['imagen_thumbnail']['name']);
 			$query->bindParam(':imagen', $_FILES['imagen']['name']);
 			$query->bindParam(':fecha', $_POST['fecha']);
 			
 			$query = $query->execute();
 			if( $sql!=false ){
-				header("Location: /admin/news/list");
+				header("Location: /panel/news/list");
 			}
 		}
 	}
 
-	public function showNews(){
+	public function showListNews(){
 		$this->header_admin($lang="es");
 		
 		$sql = "SELECT * FROM noticias";
@@ -98,7 +98,49 @@ class AdminNoticias extends Controller{
 		}
 		$this->footer_admin($lang="es");
 	}
+
+	public function detailNew($lang="es", $id){
+
+		$this->header_admin($lang);
+
+		$sql = "SELECT 
+					id_noticia,
+					titulo, 
+					titulo_en, 
+					extracto, 
+					extracto_en, 
+					contenido, 
+					contenido_en,
+					imagen_thumbnail,
+					imagen,
+					fecha 
+				FROM noticias 
+				WHERE id_noticia = :id";
+		$query = $this->pdo->prepare($sql);
+		$query->bindParam(':id', $id, \PDO::PARAM_INT);
+		$rs = $query->execute();
+		if($rs !==false){
+			$new = $query->fetch(\PDO::FETCH_ASSOC);
+			require $this->adminviews."view-new.php";
+		}
+		$this->footer_admin($lang);
+
+	}
+
+	// @TODO: @admin [ Noticias ] Falta crear el metodo de editNew
+	public function removeNew($lang="es", $id){
+
+		if( !empty($id) ){
+			$sql = "DELETE FROM noticias WHERE id_noticia = :id";
+			$query = $this->pdo->prepare($sql);
+			$query->bindParam(':id', $id, \PDO::PARAM_INT);
+			$rs = $query->execute();
+			if( $rs != false ){
+				echo "<span>Usuario eliminado</span>";
+				header("Location: /panel/news/list");
+			}
+
+		}
+	}
 	
 }
-
-?>

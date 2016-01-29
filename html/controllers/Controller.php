@@ -20,6 +20,27 @@
 			}
 		}
 
+		function describe($database, $table , $value){
+			$sql = "SELECT column_name , column_type
+			FROM information_schema.columns
+			WHERE  table_name = '{$table}'
+			   AND table_schema = '{$database}'";
+			
+			$query = $this->pdo->prepare($sql);
+			$rs = $query->execute();
+			$fields = $query->fetchAll(\PDO::FETCH_ASSOC);
+			$end = "";
+			foreach( $fields as $f){
+
+				if( str_replace("varchar", "", $f["column_type"]) != $f["column_type"]){
+					$end .= " {$f['column_name']} LIKE %{$value}% OR ";	
+				}
+				
+			}
+
+			return $end;
+
+		}
 
 		function __construct()
 		{
@@ -138,7 +159,7 @@
 		public function header( $lang , $nobeard = false , $product = false){
 			if( $lang == "es"){
 				// require  $this->views."header.php";	
-				
+				// TODO: @GLOBAL Crear solo un archivo de [ Header ] para el menu(2)
 				require $this->views."header-catalogo.php";
 			}else{
 				require  $this->views."header_en.php";	

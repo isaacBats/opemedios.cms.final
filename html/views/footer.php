@@ -10,7 +10,7 @@
 	        		<p><?php echo $this->trans($lang,"Gracias por suscribirte","Thank your for subscribe"); ?></p>
 	    		</div><!-- #newsletter --> 
 			</form>
-	        <p>&copy;Alfonso Marina Ebanista. <?php echo $this->trans($lang,"Derechos Reservados","All Rights Reserved"); ?></p>
+	        <p>&copy;Alfonso Marina Ebanista. <?php echo $this->trans($lang,"Derechos Reservados","All Rights Reserved"); ?> 2016 </p>
 	        <div id="social-media">
 		        	<span class="tagline"><?php echo $this->trans($lang,"Síguenos","Follow us"); ?>:</span>
                     <a class="btn-social facebook" href="https://www.facebook.com/pages/Alfonso-Marina-Ebanista/216426771801026?ref=aymt_homepage_panel" target="_blank">Facebook</a>
@@ -22,5 +22,19 @@
             </footer><!-- #main-footer -->
         </footer><!-- #inner-footer -->
 </div><!-- #body -->
+
+<!-- Librería de jquery que contiene también la librería de jquery tools -->
+<script src="/assets/js/bower_components/jquery/jquery.js"></script>
+<script src="/assets/js/bower_components/jquery.tools/src/tabs/tabs.js"></script>
+<script src="/assets/js/bower_components/jquery.tools/src/tabs/tabs.slideshow.js"></script>
+<!-- 
+<script src="/assets/js/bower_components/jquery.fancybox/fancybox/jquery.fancybox-1.3.4.js"></script>
+
+ -->
+<script src="/assets/js/bower_components/jquery/jquery.validate.js"></script>
+<!-- <script src="/assets/js/gallerific.js"></script> -->
+<script src="/assets/js/main.js"></script>
+
+
 </body>
 </html>

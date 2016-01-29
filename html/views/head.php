@@ -2,7 +2,7 @@
 <meta charset="UTF-8">
 <title>Alfonso Marina</title>
 
-<?php if ( $product ){ ?>
+<?php if ( isset( $product ) ){ ?>
 <!-- Meta tags de Facebook (Open Graph) -->
 <!-- Con esta etiqueta declaramos el título que queremos que contenga al darle share -->
 <meta property="og:title" content="<?php echo $product["nombre"] ?>" />
@@ -45,14 +45,6 @@
 
 <link rel="stylesheet" type="text/css" href="/assets/css/style.css"><!-- Hoja personalizada -->
 
-<!-- Librería de jquery que contiene también la librería de jquery tools -->
-<script src="/assets/js/bower_components/jquery/jquery.js"></script>
-<script src="/assets/js/bower_components/jquery.fancybox/fancybox/jquery.fancybox-1.3.4.js"></script>
-<script src="/assets/js/bower_components/jquery.tools/src/tabs/tabs.js"></script>
-<script src="/assets/js/bower_components/jquery.tools/src/tabs/tabs.slideshow.js"></script>
-<script src="/assets/js/bower_components/jquery/jquery.validate.js"></script>
-<script src="/assets/js/gallerific.js"></script>
-<script src="/assets/js/custom.js"></script>
 
 <!-- Código que sirve para que internet explorer rendereé correctamente las etiquetas de html5 -->
 <!--[if IE]>

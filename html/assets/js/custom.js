@@ -1,3 +1,19 @@
+  try{
+		function getSearch( value ){
+		      jQuery.post("/catalog/browser/json", {q:value} , function(json){
+		        var temp = "";
+		        for( p in json ){
+		          temp += "<li><a href='"+json[p].url+"'>"+json[p].nombre+"</a></li>";
+		        }
+		        jQuery("#autocomplete").html( temp );
+		      },"json");
+		    }
+		    
+    
+  } catch(e ){
+    console.log(e )
+  } 
+  
 var _progressBar = "";
 
 function controllProgressBtn(){

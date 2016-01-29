@@ -4,7 +4,7 @@
     <p>Llena estos campos para crear la noticia.</p>
   </div>
   <div class="panel-body">
-    <form method="post" action="/admin/news/add" id="addNew" enctype="multipart/form-data">
+    <form method="post" action="/panel/news/add" id="addNew" enctype="multipart/form-data">
       <div class="form-group">
         <input type="text" placeholder="Título (en español)" class="form-control" name="titulo">
       </div>

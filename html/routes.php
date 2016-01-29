@@ -73,7 +73,7 @@
 	$collection->attachRoute(new Route('/catalog/browser/json', array(
 		'_controller' => 'Catalog::browserProductByName_Json',
 		'parameters' => array("lang" => $lang),
-		'methods' => 'GET'
+		'methods' => 'POST'
 		)));
 	
 	$collection->attachRoute(new Route('/catalog', array(
@@ -233,8 +233,20 @@
 		'methods' => 'GET'
 	)));
 
+	$collection->attachRoute(new Route('/panel/contact/:id', array(
+		'_controller' => 'AdminContacto::detailContact',
+		'parameters' => array("lang" => $lang),
+		'methods' => 'GET'
+	)));
+
 	$collection->attachRoute(new Route('/panel/contacts/export', array(
 		'_controller' => 'AdminContacto::exportContacts',
+		'parameters' => array("lang" => $lang),
+		'methods' => 'GET'
+	)));
+
+	$collection->attachRoute(new Route('/panel/contact/remove/:id', array(
+		'_controller' => 'AdminContacto::removeContact',
 		'parameters' => array("lang" => $lang),
 		'methods' => 'GET'
 	)));
@@ -245,8 +257,14 @@
 		'methods' => 'GET'
 	)));
 
+	$collection->attachRoute(new Route('/panel/user/:id', array(
+		'_controller' => 'AdminUsuario::detailUser',
+		'parameters' => array("lang" => $lang),
+		'methods' => 'GET'
+	)));
+
 	$collection->attachRoute(new Route('/panel/news/list', array(
-		'_controller' => 'AdminNoticias::showNews',
+		'_controller' => 'AdminNoticias::showListNews',
 		'parameters' => array("lang" => $lang),
 		'methods' => 'GET'
 	)));
@@ -257,11 +275,55 @@
 		'methods' => 'GET'
 	)));
 
+
 	$collection->attachRoute(new Route('/panel/news/add', array(
 		'_controller' => 'AdminNoticias::saveNew',
 		'parameters' => array("lang" => $lang),
 		'methods' => 'POST'
 	)));
+
+	$collection->attachRoute(new Route('/panel/new/:id_noticia', array(
+		'_controller' => 'AdminNoticias::detailNew',
+		'parameters' => array("lang" => $lang),
+		'methods' => 'GET'
+	)));
+
+	$collection->attachRoute(new Route('/panel/new/edit/:id', array(
+		'_controller' => 'AdminNoticias::editNew',
+		'parameters' => array("lang" => $lang),
+		'methods' => 'GET'
+	)));
+
+	$collection->attachRoute(new Route('/panel/new/remove/:id', array(
+		'_controller' => 'AdminNoticias::removeNew',
+		'parameters' => array("lang" => $lang),
+		'methods' => 'GET'
+	)));
+
+	$collection->attachRoute(new Route('/panel/gallery/list', array(
+		'_controller' => 'AdminGallery::showImages',
+		'parameters' => array("lang" => $lang , "id" => 1),
+		'methods' => 'GET'
+	)));
+	
+	$collection->attachRoute(new Route('/panel/gallery/:id', array(
+		'_controller' => 'AdminGallery::showImages',
+		'parameters' => array("lang" => $lang),
+		'methods' => 'GET'
+	)));
+
+	$collection->attachRoute(new Route('/panel/press/list', array(
+		'_controller' => 'AdminPress::showListPress',
+		'parameters' => array("lang" => $lang),
+		'methods' => 'GET'
+	)));
+
+	$collection->attachRoute(new Route('/panel/press/list/:id', array(
+		'_controller' => 'AdminGallery::showImages',
+		'parameters' => array("lang" => $lang),
+		'methods' => 'GET'
+	)));
+
 
 
 ?>

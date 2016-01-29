@@ -394,8 +394,8 @@ a.imprimir {
  * -------------------------- */
 @font-face {
   font-family: 'FontAwesome';
-  src: url("/fonts/font-awesome/fontawesome-webfont.eot?v=4.5.0");
-  src: url("/fonts/font-awesome/fontawesome-webfont.eot?#iefix&v=4.5.0") format("embedded-opentype"), url("/fonts/font-awesome/fontawesome-webfont.woff2?v=4.5.0") format("woff2"), url("/fonts/font-awesome/fontawesome-webfont.woff?v=4.5.0") format("woff"), url("/fonts/font-awesome/fontawesome-webfont.ttf?v=4.5.0") format("truetype"), url("/fonts/font-awesome/fontawesome-webfont.svg?v=4.5.0#fontawesomeregular") format("svg");
+  src: url("/assets/fonts/font-awesome/fontawesome-webfont.eot?v=4.5.0");
+  src: url("/assets/fonts/font-awesome/fontawesome-webfont.eot?#iefix&v=4.5.0") format("embedded-opentype"), url("/assets/fonts/font-awesome/fontawesome-webfont.woff2?v=4.5.0") format("woff2"), url("/assets/fonts/font-awesome/fontawesome-webfont.woff?v=4.5.0") format("woff"), url("/assets/fonts/font-awesome/fontawesome-webfont.ttf?v=4.5.0") format("truetype"), url("/assets/fonts/font-awesome/fontawesome-webfont.svg?v=4.5.0#fontawesomeregular") format("svg");
   font-weight: normal;
   font-style: normal; }
 .fa {
@@ -2493,7 +2493,6 @@ a.imprimir {
 
 /*///////////////////////// Header styles /////////////////////////*/
 #main-header {
-  height: 80px;
   margin: 0 auto;
   max-width: 1560px;
   min-width: 900px;
@@ -2509,8 +2508,9 @@ a.imprimir {
 /*///////////////////////// Nav styles /////////////////////////*/
 #main-nav {
   display: block;
+  max-width: 650px;
   margin: 0 auto;
-  padding: 0 130px; }
+  margin-bottom: 16px;}
 
 #main-nav ul {
   text-align: center; }
@@ -2574,7 +2574,7 @@ a.imprimir {
 #aux-nav {
   position: absolute;
   right: 0;
-  top: -14px; }
+  bottom: 2px; }
 
 #aux-nav a {
   clear: both;
@@ -2633,7 +2633,6 @@ a.imprimir {
 /*///////////////////////// Footer styles /////////////////////////*/
 #main-footer {
   bottom: 0;
-  height: 100px;
   left: 0;
   position: absolute;
   width: 100%;
@@ -2656,7 +2655,7 @@ a.imprimir {
   left: 25px;
   padding-left: 104px;
   position: absolute;
-  top: 10px;
+  top: 14px;
   width: 96px; }
 
 #newsletter input[type="email"] {
@@ -2785,6 +2784,7 @@ a {
   width: 53%; }
   #product-image img {
     min-width: 50%;
+    width: 50%;
     margin: 0 auto;
     display: block; }
   #product-image .imgCuadrada {
@@ -3060,7 +3060,7 @@ div.field select.error
   color: #807562; }
 
 .breadcrumb.vertical {
-  margin: 5px 0 30px 10%; }
+  margin: 5px 0 20px 10%; }
 
 /*//////////////////////// Estilos Acerca de ////////////////////////*/
 .acerca-principal p {
@@ -3307,8 +3307,6 @@ div.field select.error
   margin: 0 0 25px 0;
   font-size: 11px; }
 
-.breadcrumb.vertical {
-  margin: 25px 0 25px 10%; }
 
 .breadcrumb span {
   color: #D4D1CB; }
@@ -3413,7 +3411,7 @@ div.field select.error
   font-size: 11px; }
 
 .breadcrumb.vertical {
-  margin: 25px 0 25px 10%; }
+  margin: 25px 0 20px 6%; }
 
 .breadcrumb span {
   color: #D4D1CB; }
@@ -3596,10 +3594,14 @@ div.field select.error
   margin-left: 10%; }
   .contact-info > img {
     margin-bottom: 20px; }
+
   .contact-info .info {
     float: left;
     width: 50%;
     margin-bottom: 20px; }
+    .contact-info .info.alt {
+      width: 210px;
+    }
     .contact-info .info img {
       min-width: initial; }
     .contact-info .info h2 {
@@ -3702,12 +3704,17 @@ h2.tituloSeccion {
 }
 
 .item4Col .imageHolder img {
+  opacity: 0;
   width: auto;
   min-width: auto;
   margin: auto;
   position: relative;
   vertical-align: middle;
   max-height: 190px;
+}
+
+.item4Col > a > img{
+    min-width: 80%;
 }
 
 .item4Col > a > p {
@@ -3759,10 +3766,11 @@ h2.tituloSeccion {
 /*///////////////////////// Cover styles /////////////////////////*/
 #imgHome {
   overflow: hidden;
-  margin-bottom: -62px; }
+  margin-bottom: -65px; }
 
 #imgHome div img {
-  max-height: 100%; }
+  max-height: 100%; 
+}
 
 #imgHome img {
   min-width: 0;
@@ -3808,3 +3816,6 @@ h2.tituloSeccion {
     margin-bottom: 50px; }
 
 /*# sourceMappingURL=style.css.map */
+#mensaje{
+  margin-bottom: 0px;
+}

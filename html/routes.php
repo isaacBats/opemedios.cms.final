@@ -295,8 +295,8 @@
 	)));
 
 	$collection->attachRoute(new Route('/panel/galleries/list', array(
-		'_controller' => 'AdminGallery::showGalleries',
-		'parameters' => array("lang" => $lang),
+		'_controller' => 'AdminGallery::showImages',
+		'parameters' => array("lang" => $lang , "id" => 1),
 		'methods' => 'GET'
 	)));
 	
@@ -308,6 +308,12 @@
 
 	$collection->attachRoute(new Route('/panel/press/list', array(
 		'_controller' => 'AdminPress::showListPress',
+		'parameters' => array("lang" => $lang),
+		'methods' => 'GET'
+	)));
+
+	$collection->attachRoute(new Route('/panel/press/list/:id', array(
+		'_controller' => 'AdminGallery::showImages',
 		'parameters' => array("lang" => $lang),
 		'methods' => 'GET'
 	)));

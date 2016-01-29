@@ -20,6 +20,8 @@
          <td>'.$row['email'].'</td>
          <td class="text-right">
           <a class="btn btn-default btn-sm" href="/panel/contact/'.$row['id_contacto'].'" >Ver</a>
+          <a class="btn btn-success btn-sm" href="/panel/contact/edit/'.$row['id_contacto'].'" >Editar</a>
+          <a class="btn btn-danger btn-sm" href="/panel/contact/delete/'.$row['id_contacto'].'" >Eliminar</a>
         </td>
       </tr>';
     }

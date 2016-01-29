@@ -18,7 +18,5 @@
     }
   } 
 ?>  
-    <a class="btn btn-success" href="/panel/new/edit/<?php echo $new['id_noticia']; ?>">Editar</a>
-    <a class="btn btn-success" href="/panel/new/remove/<?php echo $new['id_noticia']; ?>">Eliminar</a> 
   </div>
 </div>

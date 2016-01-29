@@ -14,7 +14,5 @@
     echo '<p>'.$value.'</p>';      
   } 
 ?>  
-    <a class="btn btn-success" href="/panel/contact/edit/<?php echo $contact['id_contacto']; ?>">Editar</a>
-    <a class="btn btn-success" href="/panel/contact/remove/<?php echo $contact['id_contacto']; ?>">Eliminar</a> 
   </div>
 </div>

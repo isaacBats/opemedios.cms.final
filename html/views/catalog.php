@@ -10,7 +10,7 @@ foreach ($productList as $product) {
             <div class="imageHolder">
                 <img style="width: 100%" 
                 alt="'.$product["nombre"].'" 
-                src="'.$product["imagen"].'">
+                src="http://www.alfonsomarinaebanista.com/images/'.$product["ur"].'/'.$product["ur"].'_alta2.jpg">
             </div>
             <br class="clear">
             <br class="clear">

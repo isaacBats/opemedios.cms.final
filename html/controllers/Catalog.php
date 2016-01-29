@@ -209,7 +209,7 @@ class Catalog extends Controller{
 						        	<div class="imageHolder">
 							            <img 
 							            alt="'.$product["nombre"].'" 
-							            src="'.$product["imagen"].'">
+							            src="http://www.alfonsomarinaebanista.com/images/'.$product["ur"].'/'.$product["ur"].'_alta1.jpg">
 							         </div>
 						            <br class="clear">
 						            <br class="clear">
@@ -279,7 +279,9 @@ class Catalog extends Controller{
 	}
 
 	function detailProduct($lang="es", $slug){
-		//  TODO: Crear slugs optimizadas para seo
+		// TODO: @Catalogo Crear slugs optimizadas para seo(5)
+		// TODO: @Catalogo Agregar la vista de dos productos en el mismo (1)
+		// TODO: @Catalogo Agrega vista de variaciones del producto (3)
 		
 		if ( !empty($slug) ){
 
@@ -334,7 +336,7 @@ class Catalog extends Controller{
 					        	<div class="imageHolder">
 						            <img 
 						            alt="'.$product["nombre"].'" 
-						            src="'.$product["imagen"].'">
+						            src="http://www.alfonsomarinaebanista.com/images/'.$product["ur"].'/'.$product["ur"].'_alta2.jpg">
 						         </div>
 					            <br class="clear">
 					            <br class="clear">

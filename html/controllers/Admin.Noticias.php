@@ -70,7 +70,7 @@ class AdminNoticias extends Controller{
 			$query->bindParam(':extracto_en', $_POST['extracto_en']);
 			$query->bindParam(':contenido', $_POST['contenido']);
 			$query->bindParam(':contenido_en', $_POST['contenido_en']);
-			// @TODO: agregar funcionalidad de tumbnails
+			// TODO: @Noticias agregar funcionalidad de tumbnails (4)
 			$query->bindParam(':imagen_thumbnail', $_FILES['imagen_thumbnail']['name']);
 			$query->bindParam(':imagen', $_FILES['imagen']['name']);
 			$query->bindParam(':fecha', $_POST['fecha']);

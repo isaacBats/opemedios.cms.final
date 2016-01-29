@@ -125,7 +125,9 @@
 	    </div><!-- #aux-nav -->
 	</header><!-- #main-header -->
 	<div id="wrapper">
+		<?php if( isset( $this ) ){ if( !$nobeard ) {?>
 		<div class="breadcrumb vertical">
-			<?php if( isset( $this ) ){ if( !$nobeard ) { $this->bread($lang ); } }?>
+			 <?php $this->bread($lang ); ?>
 		</div>
+		<?php } }	?>
 	

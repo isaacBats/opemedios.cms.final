@@ -33,7 +33,7 @@ class Contacto extends Controller
 				'Content-type: text/html; charset=utf-8' . "\r\n".
 				'X-Mailer: PHP/' . phpversion();
 
-				// TODO: AGREGAR LA FUNCION PARA ENVIAR LOS CORREOS CON SMTP
+				// TODO: @Contacto AGREGAR LA FUNCION PARA ENVIAR LOS CORREOS CON SMTP (4)
 				if(mail('adan@denumeris.com','Ha recibido un nuevo contacto',$cuerpo_email,$cabeceras)){
 					$resultado->exito = true;
 					$resultado->mensaje = ( $lang == "en" ) ? 'Thank you, we will contact you as soon as possible' : "Gracias, te contactaremos lo más pronto posible";
@@ -61,7 +61,7 @@ class Contacto extends Controller
 	function showForm($lang="es"){
 		$html = '<div class="contact-info">
 		<img src="/assets/images/contacto.jpg">
-		<div class="info">
+		<div class="info alt">
 			<img src="/assets/images/mapa.jpg">
 		</div><!-- .info -->
 		<div class="info">
@@ -82,7 +82,7 @@ class Contacto extends Controller
 		<div class="contact-form">
 			<p id="mensaje"></p>
 			<form id="contact-form" name="contact-form" action="'.$this->url($lang , "/contact").'" method="post">
-				<h2 class="product-title">'.$this->trans($lang,'Contactanos', 'Contact us').'</h2>
+				<h2 class="product-title">'.$this->trans($lang,'Contacto', 'Contact us').'</h2>
 				<div class="field name">
 					<input name="nombre" class="requerido" type="text" placeholder="'.$this->trans($lang,'Nombre','Name').'">				
 				</div><!-- .field-->

@@ -25,6 +25,6 @@
 </table>
 <br class="clear">
 <div class="text-right">
-  <a class="btn btn-primary btn-sm" href="/panel/gallery/add" >Agregar nueva imagen</a>  
+  <a class="btn btn-primary btn-sm" href="/panel/galleries/add" >Agregar nueva imagen</a>  
 </div>
 </div>

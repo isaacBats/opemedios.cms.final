@@ -98,7 +98,7 @@
             <li class="nav-parent"><a href=""><i class="fa fa-picture-o"></i> <span>Galeria</span></a>
               <ul class="children">
                 <li><a href="/panel/gallery/list">Lista de imagenes</a></li>
-                <li><a href="/panel/gallery/add;">Agregar imagen</a></li>
+                <li><a href="/panel/galleries/add">Agregar imagen</a></li>
               </ul>
             </li>
             <li class="nav-parent"><a href=""><i class="fa fa-newspaper-o"></i> <span>Prensa</span></a>

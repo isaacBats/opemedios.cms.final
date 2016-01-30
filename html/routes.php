@@ -312,6 +312,12 @@
 		'methods' => 'GET'
 	)));
 
+	$collection->attachRoute(new Route('/panel/galleries/add', array(
+		'_controller' => 'AdminGallery::addImage',
+		'parameters' => array("lang" => $lang),
+		'methods' => 'GET'
+	)));
+
 	$collection->attachRoute(new Route('/panel/press/list', array(
 		'_controller' => 'AdminPress::showListPress',
 		'parameters' => array("lang" => $lang),

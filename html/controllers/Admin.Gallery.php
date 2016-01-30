@@ -31,4 +31,19 @@ class AdminGallery extends Controller{
 		}
 		$this->footer_admin($lang);
 	}
+
+	public function addImage($lang="es"){
+
+		$this->header_admin($lang);
+
+		require $this->adminviews."add-image.php";
+		$this->footer_admin($lang);
+		//Query para sacar el nombre de la galeria y el nombre de la imagen
+		//SELECT g.nombre, gi.imagen 
+		//FROM gallery_image gi 
+		//INNER JOIN gallery g 
+		//ON gi.gallery_id = g.id 
+		//WHERE g.id = 1;
+
+	}
 }

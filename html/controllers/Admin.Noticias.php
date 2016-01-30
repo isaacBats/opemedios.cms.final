@@ -127,7 +127,7 @@ class AdminNoticias extends Controller{
 
 	}
 
-	// @TODO: Falta crear el metodo de editNew
+	// @TODO: @admin [ Noticias ] Falta crear el metodo de editNew
 	public function removeNew($lang="es", $id){
 
 		if( !empty($id) ){

@@ -223,7 +223,7 @@
 			<br class="clear">
 		</div>';
 
-		$this->addbread( array("url"=>"/register" , "label"=>"Registro ") );
+		$this->addbread( array("url"=>"/register" , "label"=>$this->trans($lang , "Registro" , "Register")) );
 		$this->header($lang);
 		echo $html;
 		$this->footer( $lang );

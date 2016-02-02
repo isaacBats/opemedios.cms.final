@@ -229,6 +229,25 @@
 		$this->footer( $lang );
 	}
 
- } 
+	public function getProfile($lang = "es"){
+		
+		$this->addbread( array("url"=>"/profile" , "label"=>"Mi Perfil") );
+		$this->header($lang);
+			if( isset($_SESSION["user"])){
+				$sqlUser = "SELECT * FROM usuarios WHERE id_registro = :id";
+				$query = $this->pdo->prepare($sqlUser);
+				$query->bindParam(
+					':id', 
+					$_SESSION['user']['id_registro'], 
+					\PDO::PARAM_INT
+				);
+				$rs = $query->execute();
+				$user =  $query->fetch();
+			}
+			print_r($user);
+		require $this->views."profile.php";
+		print_r($_SESSION);
+		$this->footer( $lang );	
+	}
 
- ?>
+} 

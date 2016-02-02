@@ -86,8 +86,8 @@
 		'parameters' => array("lang" => $lang),
 		'methods' => 'GET'
 	)));
-	$collection->attachRoute(new Route('/catalog/lifestyle', array(
-		'_controller' => 'Catalog::showLifestyles',
+	$collection->attachRoute(new Route('/catalog/products', array(
+		'_controller' => 'Catalog::types',
 		'parameters' => array("lang" => $lang),
 		'methods' => 'GET'
 	)));
@@ -106,8 +106,6 @@
 		'parameters' => array("lang" => $lang),
 		'methods' => 'GET'
 		)));
-	
-
 
 
 	//  PRODUCT

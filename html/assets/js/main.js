@@ -5,16 +5,17 @@
 jQuery(document).ready(function($){
 
 
-	
-
 	//  HOME 
 	startHomeSlide();
 
 	//  CATALOGO
-	startCatalog();
+	startCatalog( );
 
 	//  NEWSLETTER
 	startNewsletter();
+
+	// FAVORITES
+	startFav();
 
 	
 
@@ -39,7 +40,16 @@ function startNewsletter(){
 }
 //  HOME
 function startHomeSlide(){
-	try{
+		$(".slidetabs").tabs(".images > div", {
+	      effect: 'fade',
+	      fadeOutSpeed: "slow",
+	      rotate: true
+	  }).slideshow({
+	  	interval: 2000,
+	  	autoplay: true,
+	  	clickable: false
+	  });
+	
 		var imgHeight = $('#imgHome > img').height();
 		var imgWidth = $('#imgHome > img').width();
 
@@ -49,23 +59,12 @@ function startHomeSlide(){
 		$(window).resize(function(){
 			var imgHeight = $('#imgHome > img').height();
 			var imgWidth = $('#imgHome > img').width();
-
 			$('#imgHome').css('height', imgHeight*0.92);
 			$('#imgHome').css('width', imgWidth);
 		});
 
-		$(".slidetabs").tabs(".images > div", {
-	      effect: 'fade',
-	      fadeOutSpeed: "slow",
-	      rotate: true
-	  }).slideshow({
-	  	interval: 3000,
-	  	autoplay: true,
-	  	clickable: false
-	  });
-	}catch(e){
-
-	}
+		
+	
 }
 
 
@@ -74,7 +73,7 @@ function startHomeSlide(){
 function startCatalog(){
 	
 	try{
-		$("img").each(function(){
+		$(".imageHolder img").each(function(){
 			var $this = $(this);
 		    if ($this.width() > $this.height()) {
 		        $this.parent().addClass("horizontal");
@@ -88,6 +87,38 @@ function startCatalog(){
 	}
 	
 } 
+
+// DETALLE DE PRODUCTO
+function startFav(){
+jQuery('#btn-fav').on('click', function(event) {
+		event.preventDefault();
+		var boton = jQuery(this);
+		var id = boton.data('id');
+		if( boton.hasClass('eliminar') ){
+			jQuery.post('/product/removeFav',{'id':id},function(json){
+				if( json.exito ){
+					boton.removeClass('eliminar');
+					boton.html(json.mensaje);
+				}
+				else{
+					boton.addClass('eliminar');
+					boton.html(json.mensaje);
+				}
+			},'json');
+		}else{
+			jQuery.post('/product/addFav',{'id':id},function(json){
+				if( json.exito ){
+					boton.addClass('eliminar');
+					boton.html(json.mensaje);
+				}
+				else{
+					boton.removeClass('eliminar');
+					boton.html(json.mensaje);
+				}
+			},'json');
+		}
+	});
+}
 
 //  CONTACTO 
 var _progressBar = "";

@@ -2737,12 +2737,12 @@ a.imprimir {
   clear: both; }
 
 h2.product-title {
-  font-size: 22px;
+  font-size: 21px;
   text-transform: uppercase;
   border-top: 1px solid #D4D1CB;
   border-bottom: 1px solid #D4D1CB;
   text-align: center;
-  padding: 20px 0;
+  padding: 15px 0;
   margin-bottom: 20px;
   font-weight: lighter; }
 
@@ -2767,6 +2767,14 @@ a {
   .general-btn:hover {
     background: #f1efea;
     color: #807562; }
+  a.general-btn.half {
+    border: 1px solid #d2d1cb;
+    width: calc( 50% - 25px );
+    float: left;
+  }
+    a.general-btn.half:last-child {
+    float: right;
+    }
 
 .breadcrumb {
   margin: 0 0 25px 0;
@@ -2776,25 +2784,34 @@ a {
     .breadcrumb a:hover, .breadcrumb span:hover {
       color: #5f4b2b; }
 
-.product {
-  padding: 20px; }
 
 #product-image {
   float: left;
-  width: 53%; }
+  margin-left: 5%;
+  width: 50%;
+}
   #product-image img {
     min-width: 50%;
-    width: 50%;
+    width: 100%;
     margin: 0 auto;
+    margin-top: 50px;
     display: block; }
   #product-image .imgCuadrada {
     margin-top: 50px; }
 
 #product-info {
   float: right;
-  width: 45%; }
+  margin-right: 10%;
+  width: 33%; }
   #product-info .features {
     font-family: Verdana, Geneva, sans-serif; }
+    #product-info .line {
+    border-top: 1px solid #D4D1CB;
+    padding-top: 10px;
+    }
+      #product-info p.small{
+        font-size: 70%;
+      }
   #product-info .sec-features {
     border-bottom: 1px solid #D4D1CB;
     padding-bottom: 10px;
@@ -2815,6 +2832,9 @@ a {
       width: 20.33%;
       display: inline-block;
       margin: 0 20px; }
+      #product-info p{
+      padding: 0 5px;
+      }
 
 .detail-nav {
   margin-bottom: 20px;
@@ -3411,7 +3431,8 @@ div.field select.error
   font-size: 11px; }
 
 .breadcrumb.vertical {
-  margin: 25px 0 20px 6%; }
+  margin: 21px 0 20px 20px; 
+  }
 
 .breadcrumb span {
   color: #D4D1CB; }
@@ -3721,6 +3742,11 @@ h2.tituloSeccion {
   display: block;
   min-height: 50px;
   font-size: 11px;
+}
+.item4Col > a > p.fav {
+  min-height: 20px;
+  text-transform: capitalize;
+  margin-top: 10px;
 }
 .itemDosCol a,
 .item4Col a,

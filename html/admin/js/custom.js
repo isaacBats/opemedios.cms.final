@@ -55,4 +55,37 @@ $('#addNew').validate({
     }
   });
 	
+    jQuery('.thmb').hover(function(){
+      var t = jQuery(this);
+      t.find('.ckbox').show();
+      t.find('.fm-group').show();
+    }, function() {
+      var t = jQuery(this);
+      if(!t.closest('.thmb').hasClass('checked')) {
+        t.find('.ckbox').hide();
+        t.find('.fm-group').hide();
+      }
+    });
+
+    jQuery('.ckbox').each(function(){
+      var t = jQuery(this);
+      var parent = t.parent();
+      if(t.find('input').is(':checked')) {
+        t.show();
+        parent.find('.fm-group').show();
+        parent.addClass('checked');
+      }
+    });
+
+
+    jQuery('.ckbox').click(function(){
+      var t = jQuery(this);
+      if(!t.find('input').is(':checked')) {
+        t.closest('.thmb').removeClass('checked');
+        enable_itemopt(false);
+      } else {
+        t.closest('.thmb').addClass('checked');
+        enable_itemopt(true);
+      }
+    });
 });

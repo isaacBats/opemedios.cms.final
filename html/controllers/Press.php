@@ -5,6 +5,9 @@
  */
  class Press extends Controller
  {
+
+ 	//  Mostrar todas las galerias de prensa
+ 	
  	public function showAll( $lang ){
  		$this->addBread( array( "label"=> $this->trans($lang,"Prensa","Press") ) );
  		$this->header( $lang );
@@ -53,12 +56,11 @@
  	}
 
  	
+ 	//  Vista detalle de prensa
+
  	public function detail( $lang , $slug , $slug2 = ""){
 
  		$this->addBread( array( "label"=> $this->trans($lang , "Prensa" , "Press") , "url" => "/press") );
-
-
- 		
 
  		if( $slug2 != "" ){
 

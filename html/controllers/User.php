@@ -11,7 +11,7 @@
  		$user = $this->pdo->quote( $_POST["username"] );
  		$pass = $_POST["password"];
  			
- 			$sql =  "SELECT * FROM registros WHERE nombreusuario LIKE LOWER(".$user.") ";
+ 			$sql =  "SELECT * FROM usuarios WHERE nombreusuario LIKE LOWER(".$user.") ";
  			$query = $this->pdo->prepare($sql);
 			$rs = $query->execute();
 			if($rs!==false){
@@ -64,7 +64,7 @@
 
 			/*************************** INSERT DEL CONTACTO ****************************************/
 
-			$sql = "INSERT INTO registros 
+			$sql = "INSERT INTO usuarios 
 						(nombre,apellidos,nombreusuario,pass,email,empresa,puesto,website,direccion1,direccion2,pais,estado,codigopostal,movil,telefono,organizacion,motivo,comoseentero) 
 						VALUES 
 						(:nombre,:apellidos,:nombreusuario,:pass,:email,:empresa,:puesto,:website,:direccion1,:direccion2,:pais,:estado,:codigopostal,:movil,:telefono,:organizacion,:motivo,:comoseentero);

@@ -152,8 +152,7 @@
 
 				return $html;
 			}
-				
-		}					
+		}
 									
 
 		public function header( $lang , $nobeard = false , $product = false){

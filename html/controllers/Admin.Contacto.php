@@ -1,10 +1,11 @@
 <?php
 
 require_once(__DIR__.'/../admin/ForceUTF8/Encoding.php');
+require_once(__DIR__.'/Admin.php');
 use ForceUTF8\Encoding; 
 
 
-class AdminContacto extends Controller{
+class AdminContacto extends AdminController{
 
 	public function exportContacts(){
 		

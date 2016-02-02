@@ -221,8 +221,26 @@
 	)));
 	
 	//  ADMIN
+	$collection->attachRoute(new Route('/panel/logout', array(
+		'_controller' => 'AdminController::logout',
+		'parameters' => array("lang" => $lang),
+		'methods' => 'GET'
+	)));
+
+	$collection->attachRoute(new Route('/panel/login', array(
+		'_controller' => 'AdminController::login',
+		'parameters' => array("lang" => $lang),
+		'methods' => 'GET'
+	)));
+
+		$collection->attachRoute(new Route('/panel/login', array(
+			'_controller' => 'AdminController::saveLogin',
+			'parameters' => array("lang" => $lang),
+			'methods' => 'POST'
+		)));
+
 	$collection->attachRoute(new Route('/panel', array(
-		'_controller' => 'Admin::dashboard',
+		'_controller' => 'AdminController::dashboard',
 		'parameters' => array("lang" => $lang),
 		'methods' => 'GET'
 	)));

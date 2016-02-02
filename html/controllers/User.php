@@ -244,9 +244,7 @@
 				$rs = $query->execute();
 				$user =  $query->fetch();
 			}
-			print_r($user);
 		require $this->views."profile.php";
-		print_r($_SESSION);
 		$this->footer( $lang );	
 	}
 

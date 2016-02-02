@@ -194,6 +194,12 @@
 		'methods' => 'GET'
 	)));
 
+	$collection->attachRoute(new Route('/profile/update', array(
+		'_controller' => 'User::updateProfile',
+		'parameters' => array("lang" => $lang),
+		'methods' => 'POST'
+	)));
+
 	// Vistas estaticas
 
 	$collection->attachRoute(new Route('/acerca-de/quienes-somos', array(

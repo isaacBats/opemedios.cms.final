@@ -243,7 +243,7 @@
 
 		foreach ($countries as $country) {
 			if( $pais == $country['nombre'] ){
-				return '<option value="$pais" selected >'.$pais.'</option>';	
+				return '<option value="'.$pais.'" selected >'.$pais.'</option>';	
 			}
 		}
 	}
@@ -272,6 +272,76 @@
 			else{
 				header('Location: ./login');
 			}
+	}
+
+	public function updateProfile($lang = "es"){
+		print_r($_POST);
+		$resultado = new stdClass();
+
+		if( !empty($_POST) ){
+
+			$resultado = new stdClass();
+
+			$sql = "UPDATE usuarios SET
+						nombre = :nombre, 
+						apellidos = :apellidos,
+						empresa = :empresa,
+						puesto = :puesto,
+						website = :website,
+						direccion1 = :direccion1,
+						direccion2 = :direccion2,
+						pais = :pais,
+						estado = :estado,
+						codigopostal = :codigopostal,
+						movil = :movil,
+						telefono = :telefono
+					WHERE id_registro = :id
+					LIMIT 1;
+					";
+			$query = $this->pdo->prepare($sql);
+			$query->bindParam(':nombre', $_POST['nombre']);
+			$query->bindParam(':apellidos', $_POST['apellidos']);
+			$query->bindParam(':empresa', $_POST['empresa']);
+			$query->bindParam(':puesto', $_POST['puesto']);
+			$query->bindParam(':website', $_POST['website']);
+			$query->bindParam(':direccion1', $_POST['direccion1']);
+			$query->bindParam(':direccion2', $_POST['direccion2']);
+			$query->bindParam(':pais', $_POST['pais']);
+			$query->bindParam(':estado', $_POST['estado']);
+			$query->bindParam(':codigopostal', $_POST['codigopostal']);
+			$query->bindParam(':movil', $_POST['movil']);
+			$query->bindParam(':telefono', $_POST['telefono']);
+			$query->bindParam(':id', $_POST['id']);
+
+			$registro = $query->execute();
+			if($registro){
+				$cuerpo_email = 'HTML del correo';
+				$cabeceras='From: dbautista@denumeris.com ' . "\r\n" .
+				'Reply-To: dbautista@denumeris.com ' . "\r\n" .
+				'Content-type: text/html; charset=utf-8' . "\r\n".
+				'X-Mailer: PHP/' . phpversion();
+
+				if(mail('dbautista@denumiers.com','Se actualizo un contacto',$cuerpo_email,$cabeceras)){
+					$resultado->exito = true;
+					$resultado->mensaje = ( $lang == "en" ) ? 'Thank you, profile updated' : "Gracias, perfil actualizado";
+				}
+				else{
+					$resultado->exito = false;
+					$resultado->mensaje = "Se guardó el contacto pero no mandó el MAIL";	
+				}
+			}
+			else{
+				$resultado->exito = false;
+				$resultado->error = 'No se actualizo el registro';
+			}
+		}
+		else{
+			$resultado->exito = false;
+			$resultado->error = 'El mensaje contiene valores vacios';
+		}
+
+		header('Content-type: text/json');
+		echo json_encode($resultado);
 	}
 
 } 

@@ -20,6 +20,7 @@
   <link rel="stylesheet" href="/admin/css/quirk.css">
 
   <script src="/admin/lib/modernizr/modernizr.js"></script>
+  
 
   <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!--[if lt IE 9]>
@@ -34,24 +35,37 @@
   <div class="headerpanel">
 
     <div class="logopanel">
-      <h2><a href="javascript:void(0);">ADMIN</a></h2>
+      <h2><a href="javascript:void(0);">Alfonso Marina</a></h2>
     </div><!-- logopanel -->
 
     <div class="headerbar">
 
       <a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a>
 
-      <div class="searchpanel">
+     <!--  <div class="searchpanel">
         <div class="input-group">
           <input type="text" class="form-control" placeholder="Buscar...">
           <span class="input-group-btn">
             <button class="btn btn-default" type="button"><i class="fa fa-search"></i></button>
           </span>
-        </div><!-- input-group -->
-      </div>
+        </div>
+      </div>-->
 
       <div class="header-right">
-        
+        <ul class="headermenu">
+        <li>
+          <div class="btn-group">
+            <button type="button" class="btn btn-logged" data-toggle="dropdown" aria-expanded="true">
+              <img src="/assets/maquetas/quirk/images/photos/loggeduser.png" alt="">
+              <?php echo @$_SESSION["admin"]["name"]; ?>
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu pull-right">
+              <li><a href="/panel/logout"><i class="glyphicon glyphicon-log-out"></i> Log Out</a></li>
+            </ul>
+          </div>
+        </li>
+      </ul>
       </div><!-- header-right -->
     </div><!-- headerbar -->
   </div><!-- header-->
@@ -129,3 +143,8 @@
     </div>-->
 
     <div class="contentpanel">
+      <ol class="breadcrumb breadcrumb-quirk">
+          <li><a href="index.html"><i class="fa fa-home mr5"></i> Panel </a></li>
+          <!-- <li><a href="buttons.html">Pages</a></li>
+          <li class="active">Asset Manager</li> -->
+        </ol>

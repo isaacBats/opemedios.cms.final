@@ -45,7 +45,7 @@ class AdminUsuario extends Controller{
 	public function showUsers(){
 		$this->header_admin($lang="es");
 		
-        $sql = "SELECT * FROM registros";
+        $sql = "SELECT * FROM usuarios";
 		$query = $this->pdo->prepare($sql);
 		$rs = $query->execute();
 		if($rs!==false){
@@ -82,7 +82,7 @@ class AdminUsuario extends Controller{
 					organizacion,  
 					status,        
 					fecha 
-				FROM registros 
+				FROM usuarios 
 				WHERE id_registro = :id";
 		$query = $this->pdo->prepare($sql);
 		$query->bindParam(':id', $id, \PDO::PARAM_INT);

@@ -27,7 +27,7 @@
 				<li>
 					<a href="javascript:void(0) ?>">Catalog</a>
 					<ul>
-						<li>
+						<!-- <li>
 							<a href="<?php echo $this->url($lang , "/catalog/lifestyle") ?>">
 								Lifestyle
 							</a>
@@ -42,7 +42,7 @@
 								</li>
 							</ul>
 
-						</li>
+						</li> -->
 						<li>
 							<a href="<?php echo $this->url($lang , "/catalog/products") ?>">
 								Products

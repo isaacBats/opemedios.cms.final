@@ -30,12 +30,19 @@ foreach ($galleries as $press) {
 	
 }
 
-if( $publicidad ){
+if( $publicidad != ""&& $brochures != "" ){
     echo '<p class="tituloSeccion Publicidad">'.$this->trans($lang,'Publicidad', 'Publicity').'</p>'.$publicidad;    
-}
 
-if( $brochures ){
     echo '<div class="clear"></div><p class="tituloSeccion Publicidad">Brochures</p>'.$brochures;
+}else{
+
+    if( $publicidad != ""){
+        echo $publicidad;    
+    }
+
+    if( $brochures != "" ){
+        echo $brochures;
+    }
 }
 
 ?>

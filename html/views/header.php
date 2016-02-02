@@ -5,100 +5,86 @@
 
 <div id="body">
 	<header id="main-header">
-		<a href="<?php echo $this->url($lang , "/"); ?>"><h1>Alfonso Marina</h1></a>
+		<a href="/"><h1>Alfonso Marina</h1></a>
 		<nav id="main-nav">
 			<ul>
-				<li><a href="<?php echo $this->url($lang , "/"); ?>">Inicio</a></li>
+				<li><a href="/"><?php echo $this->trans($lang , "Inicio" , "Home") ?></a></li>
 				<li>
-					<a href="javascript:void(0);">Acerca de</a>
+					<a href="javascript:void(0);"><?php echo $this->trans($lang , "About" , "Acerca de") ?></a>
 					<ul>
 						<li>
-							<a href="/acerca-de/quienes-somos">
-								Qui&eacute;nes Somos
+							<a href="<?php echo $this->url($lang , '/acerca-de/quienes-somos') ?>">
+								<?php echo $this->trans($lang , "Qui&eacute;nes Somos" , "Who we are") ?>
 							</a>
 						</li>
 						<li>
-							<a href="/acerca-de/fabrica-alfonso-marina">
-								F&aacute;brica Alfonso Marina
+							<a href="<?php echo $this->url($lang , '/acerca-de/fabrica-alfonso-marina') ?>">
+								<?php echo $this->trans($lang , "F&aacute;brica Alfonso Marina" , "Factory Alfonso Marina") ?>
 							</a>
 						</li>
 					</ul>
 				</li>
 				<li>
-					<a href="javascript:void(0)">Catálogo</a>
+					<a href="javascript:void(0)"><?php echo $this->trans($lang , "Catálogo" , "Catalog") ?></a>
 					<ul>
 						<li>
-							<a href="/catalog/lifestyle">
-								Estílo de vida
-							</a>
-							<ul>
-								<li>
-									<a href="/catalog/casual">
-										Casual
-									</a>
-									<?php echo $this->catMenu( $lang ,  "casual" ) ?>
-								</li>
-								<li>
-									<a href="/catalog/metro">
-										Metro
-									</a>
-									<?php echo $this->catMenu( $lang ,  "metro" ) ?>
-								</li>
-							</ul>
-						</li>
-						<li>
-							<a href="/catalog/productos">
-								Productos
+							<a href="<?php echo $this->url($lang , "/catalog/products") ?>">
+								<?php echo $this->trans($lang , "Productos" , "Products") ?>
 							</a>
 							<?php echo $this->catMenu( $lang ,  "" ) ?>
 						</li>
 						<li>
-							<a href="/catalog/finishes">
-								Acabados
+							<a href="<?php echo $this->url($lang , "/catalog/finishes") ?>">
+								<?php echo $this->trans($lang , "Acabados" , "Finishes") ?>
 							</a>
 							<ul>
 								<li>
-									<a href="/catalog/wood">
-									Acabados Madera
+									<a href="<?php echo $this->url($lang , "/catalog/wood") ?>">
+									<?php echo $this->trans($lang , "Acabados Madera" , "Wood Finishes") ?>
 									</a>
 								</li>
 								<li>
-									<a href="/catalog/painted">
-									Acabados Pintados
+									<a href="<?php echo $this->url($lang , "/catalog/painted") ?>">
+									<?php echo $this->trans($lang , "Acabados Pintados" , "Painted Finishes") ?>
 									</a>
 								</li>
 							</ul>
 						</li>
 						<li>
-							<a href="/catalog/product-care">
-								Cuidado de productos
+							<a href="<?php echo $this->url($lang , "/catalog/product-care") ?>">
+								<?php echo $this->trans($lang , "Cuidado de productos" , "Product Care") ?>
 							</a>
 						</li>
 						<li>
-							<a href="/catalog/new-products">
-								Productos Nuevos
+							<a href="<?php echo $this->url($lang , "/catalog/new-products") ?>">
+								<?php echo $this->trans($lang , "Productos Nuevos" , "New Products") ?>
 							</a>
 						</li>
 					</ul>
 				</li>
-				<li><a href="/news">Noticias</a></li>
-				<li><a href="/gallery">Galería</a></li>
+				<li>
+					<a href="<?php echo $this->url($lang , "/news") ?>">
+						<?php echo $this->trans($lang , "Noticias" , "News") ?>
+					</a>
+				</li>
+				<li><a href="<?php echo $this->url($lang , "/gallery") ?>">
+				<?php echo $this->trans($lang , "Galería" , "Gallery") ?></a></li>
                 <li>
-                	<a href="/press">Prensa</a>
+                	<a href="/press"><?php echo $this->trans($lang , "Prensa" , "Catalog") ?></a>
                 	<ul>
 						<li>
 							<a href="/press/publicity">
-								Publicidad
+								<?php echo $this->trans($lang , "Publicidad" , "Catalog") ?>
 							</a>
 						</li>
 						<li>
 							<a href="/press/brochure">
-								Brochure
+								<?php echo $this->trans($lang , "Brochure" , "Catalog") ?>
 							</a>
 						</li>
 					</ul>
                 </li>
-				<li><a href="/contact">Contacto</a></li>
+				<li><a href="/contact"><?php echo $this->trans($lang , "Contacto" , "Catalog") ?></a></li>
 			</ul>
 		</nav><!-- #main-nav -->
 		<div id="aux-nav">
@@ -118,7 +104,7 @@
 	            </ul>
 	        </nav>
 	        <br class="clear" />
-	        <a href="<?php echo $this->url($lagn , "/favs") ?>">Mis Favoritos</a>
+	        <a href="<?php echo $this->url($lang , "/favs") ?>">Mis Favoritos</a>
 	        <a href="<?php echo $this->url("es") ?>" class="selected">ESP</a> -
 	        <a href="<?php echo $this->url("en") ?>">ENG</a>
 	        <?php require "browser.php" ?>
@@ -130,3 +116,4 @@
 			 <?php $this->bread($lang ); ?>
 		</div>
 		<?php } }	?>
+	

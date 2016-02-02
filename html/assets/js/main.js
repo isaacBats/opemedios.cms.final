@@ -1,0 +1,103 @@
+
+
+
+//  HOME
+jQuery(document).ready(function($){
+
+
+	
+
+	//  HOME 
+	startHomeSlide();
+
+	//  CATALOGO
+	startCatalog();
+
+	//  NEWSLETTER
+	startNewsletter();
+
+	
+
+});
+
+//  GLOBAL 
+function startNewsletter(){
+	try{
+		jQuery('#news-submit').on('click', function(event) {
+			event.preventDefault();
+			if( jQuery('#Email').val() != "" ){
+				jQuery('#newsletter')
+					.find('input').remove();
+					jQuery('#newsletter').find('p').fadeIn();
+
+			}
+		});	
+	}catch(e){
+		
+	}
+	
+}
+//  HOME
+function startHomeSlide(){
+	try{
+		var imgHeight = $('#imgHome > img').height();
+		var imgWidth = $('#imgHome > img').width();
+
+		$('#imgHome').css('height', imgHeight*0.92);
+		$('#imgHome').css('width', imgWidth);
+
+		$(window).resize(function(){
+			var imgHeight = $('#imgHome > img').height();
+			var imgWidth = $('#imgHome > img').width();
+
+			$('#imgHome').css('height', imgHeight*0.92);
+			$('#imgHome').css('width', imgWidth);
+		});
+
+		$(".slidetabs").tabs(".images > div", {
+	      effect: 'fade',
+	      fadeOutSpeed: "slow",
+	      rotate: true
+	  }).slideshow({
+	  	interval: 3000,
+	  	autoplay: true,
+	  	clickable: false
+	  });
+	}catch(e){
+
+	}
+}
+
+
+//  CATALOG
+
+function startCatalog(){
+	
+	try{
+		$("img").each(function(){
+			var $this = $(this);
+		    if ($this.width() > $this.height()) {
+		        $this.parent().addClass("horizontal");
+		        $this.css("opacity" , "1");
+		    }else{
+		    	$this.css("opacity" , "1");
+		    }
+		});
+	}catch(e){
+		
+	}
+	
+} 
+
+//  CONTACTO 
+var _progressBar = "";
+
+function controllProgressBtn(){
+	
+	if( _progressBar.length > 5  ){
+		_progressBar = ".";
+	}else{
+		_progressBar += ".";
+	}
+	jQuery("#btn-registro").val(_progressBar);
+}

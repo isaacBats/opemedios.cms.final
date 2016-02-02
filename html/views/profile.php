@@ -10,7 +10,8 @@
 				</ul>
 			</div>		
 			<div class="acerca-secundario-quienes acerca-secundario-quienes-form">
-				<p id="mensaje"></p>	
+				<p id="mensaje"></p>
+				<form method="post" id="frmRegistro" name="form-registro" action="/update">	
 				    <div class="separador">
 				        <label><?php echo $this->trans($lang, "Nombre(s):","First Name:") ?></label><input type="text" class="requerido" value="<?= $user['nombre'] ?>" name="nombre" id="Nombre">
 				        <label><?php echo $this->trans($lang, "Apellidos:","Last Name") ?></label><input type="text" class="requerido" value="<?= $user['apellidos'] ?>" name="apellidos" id="Apellidos">
@@ -24,8 +25,10 @@
 				        <label><?php echo $this->trans($lang, "Dirección","Address") ?></label><input type="text" class="requerido" value="<?= $user['direccion1']?>" name="direccion1" id="Direccion1">
 				        <label><?php echo $this->trans($lang, "Colonia:","Region") ?></label><input type="text" class="requerido" value="<?= $user['direccion2']?>" name="direccion2" id="Direccion2">
 				        <br>
-				        <label><?php echo $this->trans($lang, "País:","Country") ?></label><select title="País" value="<?= $user['pais']?>" name="pais" id="Pais">
+				        <label><?php echo $this->trans($lang, "País:","Country") ?></label>
+				        <select title="País" name="pais" id="Pais">
 					        <option value="">País</option>
+					        <?php echo $country ?>
 							<option value="Mexico">Mexico</option>
 							<option value="Spain">Spain</option>
 						</select>
@@ -38,6 +41,7 @@
 				    <div class="separador">
 				        <input id="btn-registro" type="submit" value="<?php echo $this->trans($lang , "Actualizar mi perfil" , "Update profile") ?>">
 				    </div>
+				</form>
 			</div>
 			<br class="clear">
 </div>

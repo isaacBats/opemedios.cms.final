@@ -229,11 +229,32 @@
 		$this->footer( $lang );
 	}
 
+	private function getCountries(){
+		$sql = "SELECT * FROM countries ";
+		$query = $this->pdo->prepare($sql);
+		$rs = $query->execute();
+
+		return $query->fetchAll(\PDO::FETCH_ASSOC);
+	}
+
+
+	private function getUserCountry($pais){
+		$countries = $this->getCountries();
+
+		foreach ($countries as $country) {
+			if( $pais == $country['nombre'] ){
+				return '<option value="$pais" selected >'.$pais.'</option>';	
+			}
+		}
+	}
+
 	public function getProfile($lang = "es"){
 		
-		$this->addbread( array("url"=>"/profile" , "label"=>"Mi Perfil") );
-		$this->header($lang);
 			if( isset($_SESSION["user"])){
+				$this->addbread( array("url"=>"/profile" , "label"=>"Mi Perfil") );
+				$this->header($lang);
+				
+
 				$sqlUser = "SELECT * FROM usuarios WHERE id_registro = :id";
 				$query = $this->pdo->prepare($sqlUser);
 				$query->bindParam(
@@ -241,11 +262,16 @@
 					$_SESSION['user']['id_registro'], 
 					\PDO::PARAM_INT
 				);
+
 				$rs = $query->execute();
 				$user =  $query->fetch();
+				$country = $this->getUserCountry($user['pais']);
+				require $this->views."profile.php";
+				$this->footer( $lang );	
 			}
-		require $this->views."profile.php";
-		$this->footer( $lang );	
+			else{
+				header('Location: ./login');
+			}
 	}
 
 } 

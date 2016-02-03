@@ -374,6 +374,12 @@
 		'methods' => 'GET'
 	)));
 
+	$collection->attachRoute(new Route('/panel/galleries/save', array(
+		'_controller' => 'AdminGallery::saveImageAction',
+		'parameters' => array("lang" => $lang),
+		'methods' => 'POST'
+	)));
+
 	$collection->attachRoute(new Route('/panel/press/list', array(
 		'_controller' => 'AdminPress::showListPress',
 		'parameters' => array("lang" => $lang),

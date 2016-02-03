@@ -1,17 +1,15 @@
 <div class="panel">
   <div class="panel-heading">
     <h4 class="panel-title">Agregar nueva imagen</h4>
-  <div>
+  </div>
   <div class="panel-body">
-    <form method="post" action="/panel/news/add" id="addNew" enctype="multipart/form-data">
+    <form method="post" action="/panel/galleries/save" id="addNew" enctype="multipart/form-data">
       <div class="form-group">
         <label><?php echo $this->trans($lang, "Contexto:","Context") ?></label>
-				        <select title="Contexto" name="contexto" id="Contexto">
-					        <option value="">Contexto</option>
-					        <?php echo $context ?>
-							<option value="Mexico">Mexico</option>
-							<option value="Spain">Spain</option>
-						</select>
+				  <select title="Contexto" name="contexto" id="Contexto">
+					   <option value="">Contexto</option>
+					   <?php echo $context ?>
+					</select>
       </div>
       <div class="form-group">
         <input type="file" name="imagen_thumbnail">

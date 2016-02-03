@@ -279,7 +279,6 @@
 	}
 
 	public function updateProfile($lang = "es"){
-		print_r($_POST);
 		$resultado = new stdClass();
 
 		if( !empty($_POST) ){

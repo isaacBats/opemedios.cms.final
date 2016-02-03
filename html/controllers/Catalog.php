@@ -364,9 +364,9 @@ class Catalog extends Controller{
 		$this->footer( $lang );
 	}
 
-	public function browserProductByName($lang="es"){
+	public function searchProductByName($lang="es"){
 		
-		$this->addBread( array("label" => $this->trans($lang, "Buscador", "Browser"), "url" => "/catalog/browser"));
+		$this->addBread( array("label" => $this->trans($lang, "Buscador", "Search"), "url" => "/search"));
 
 		$html = "";
 		if( !empty($_POST) ){
@@ -415,24 +415,18 @@ class Catalog extends Controller{
 		$this->footer( $lang );
 	}
 
-	public function browserProductByName_Json($lang="es"){
+	public function searchProductByName_Json($lang="es"){
 		
 		if( !empty($_POST) ){
 			$table = "product";
 			$database = "amarinados";
 
 			$lastWhere = $this->describe($database, $table, $_POST["q"]);
-
-			$where = substr($lastWhere, 0, -3);	
+			$where = substr($lastWhere, 0, -3);
 
 			$sql = "SELECT nombre, ur FROM $table WHERE ".$where." LIMIT 10";
-			echo $sql;
-			
 			$query = $this->pdo->prepare($sql);
-			// $name = "%{$_POST["q"]}%";
-			// echo $this->describe( "product" , $name );
-	 		// $query->bindParam(':name',$name, \PDO::PARAM_STR);
-
+			
 			$rs = $query->execute();
 			$this->lang = $lang;
 			$products = $query->fetchAll(\PDO::FETCH_ASSOC);
@@ -440,10 +434,8 @@ class Catalog extends Controller{
 				$element["url"] = $this->url($this->lang , "/product/".$element["ur"]);
 				return $element;
 			}, $products);
-
-			// print_r($products);
 			header('Content-type: application/json; charset=utf-8');
-			json_encode($products);
+			echo json_encode($products);
 		}
 	}	
 

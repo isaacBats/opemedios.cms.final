@@ -3845,3 +3845,23 @@ h2.tituloSeccion {
 #mensaje{
   margin-bottom: 0px;
 }
+#autocomplete{
+  position: absolute;
+  display: none;
+  z-index: 1000;
+  width: 150%;
+  right: 20px;
+  border:1px solid #D4D1CB;
+}
+#autocomplete ul {
+  
+}
+#autocomplete ul li {
+  width: 100%;
+}
+#autocomplete ul li a{
+  background-color: #FFF;
+  border-left: 0px;
+  display: block;
+  width: 100%;
+}

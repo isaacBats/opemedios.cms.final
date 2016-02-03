@@ -124,7 +124,6 @@ jQuery('#btn-fav').on('click', function(event) {
 var _progressBar = "";
 
 function controllProgressBtn(){
-	
 	if( _progressBar.length > 5  ){
 		_progressBar = ".";
 	}else{
@@ -132,3 +131,30 @@ function controllProgressBtn(){
 	}
 	jQuery("#btn-registro").val(_progressBar);
 }
+
+//  SEARCH 
+var searchStatus = null;
+function activateSearch(){
+	window.clearTimeout( window.searchStatus );
+	jQuery("#autocomplete").show();
+}
+function deactivateSearch( tmr ){
+	if( tmr != undefined ){
+		window.searchStatus = setTimeout( function(){ 
+			jQuery("#autocomplete").hide();
+		},1000);
+	}else{
+		jQuery("#autocomplete").hide();
+	}
+	
+}
+function getSearch( value ){
+  jQuery.post("/search/json", {q:value} , function(json){
+    var temp = "";
+    for( p in json ){
+      temp += "<li><a href='"+json[p].url+"'>"+json[p].nombre+"</a></li>";
+    }
+    jQuery("#autocomplete").find("ul").html( temp );
+  },"json");
+}
+    

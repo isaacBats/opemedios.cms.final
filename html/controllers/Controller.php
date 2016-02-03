@@ -33,7 +33,7 @@
 			foreach( $fields as $f){
 
 				if( str_replace("varchar", "", $f["column_type"]) != $f["column_type"]){
-					$end .= " {$f['column_name']} LIKE %{$value}% OR ";	
+					$end .= " {$f['column_name']} LIKE '%{$value}%' OR ";	
 				}
 				
 			}

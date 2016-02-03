@@ -55,6 +55,7 @@ class AdminGallery extends Controller{
 		$query = $this->pdo->prepare($sql);
 		$rs = $query->execute();
 		if( $rs !== false)
-			return $query->fetchAll();
+			return $query->fetchAll(\PDO::FETCH_ASSOC);
 	}
+
 }

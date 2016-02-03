@@ -186,6 +186,8 @@
 		'methods' => 'POST'
 	)));
 
+	
+	// Profile User
 	$collection->attachRoute(new Route('/profile', array(
 		'_controller' => 'User::getProfile',
 		'parameters' => array("lang" => $lang),
@@ -197,6 +199,32 @@
 		'parameters' => array("lang" => $lang),
 		'methods' => 'POST'
 	)));
+
+	$collection->attachRoute(new Route('/profile/account', array(
+		'_controller' => 'Profile::accountStatusAction',
+		'parameters' => array("lang" => $lang),
+		'methods' => 'GET'
+	)));
+
+	$collection->attachRoute(new Route('/profile/prices-list', array(
+		'_controller' => 'Profile::pricesListAction',
+		'parameters' => array("lang" => $lang),
+		'methods' => 'GET'
+	)));
+
+	$collection->attachRoute(new Route('/profile/download-catalog', array(
+		'_controller' => 'Profile::downloadCatalogAction',
+		'parameters' => array("lang" => $lang),
+		'methods' => 'GET'
+	)));
+
+	$collection->attachRoute(new Route('/profile/my-quote', array(
+		'_controller' => 'Profile::myQuoteAction',
+		'parameters' => array("lang" => $lang),
+		'methods' => 'GET'
+	)));
+
+
 
 	// Vistas estaticas
 

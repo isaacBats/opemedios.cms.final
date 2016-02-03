@@ -16,8 +16,12 @@
 	
 	// LANG  MANNAGER
 	$lang = isset($_GET["lang"])?$_GET["lang"]:"es";
-	$_SERVER["REQUEST_URI"] = str_replace( "/".$lang ,"",$_SERVER["REQUEST_URI"] );
+	if( str_replace( "/".$lang ,"",$_SERVER["REQUEST_URI"] ) != $_SERVER["REQUEST_URI"] ){
+		$_SERVER["REQUEST_URI"] = substr( $_SERVER["REQUEST_URI"], 3 );	
+	}
+	
 
+	
 	// CONFIG
 	require_once( __DIR__.'/config.php' );
 

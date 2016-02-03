@@ -64,14 +64,14 @@
 
 
 	// CATALOG
-	$collection->attachRoute(new Route('/catalog/browser', array(
-		'_controller' => 'Catalog::browserProductByName',
+	$collection->attachRoute(new Route('/search', array(
+		'_controller' => 'Catalog::searchProductByName',
 		'parameters' => array("lang" => $lang),
 		'methods' => 'POST'
 		)));
 
-	$collection->attachRoute(new Route('/catalog/browser/json', array(
-		'_controller' => 'Catalog::browserProductByName_Json',
+	$collection->attachRoute(new Route('/search/json', array(
+		'_controller' => 'Catalog::searchProductByName_Json',
 		'parameters' => array("lang" => $lang),
 		'methods' => 'POST'
 		)));
@@ -86,8 +86,8 @@
 		'parameters' => array("lang" => $lang),
 		'methods' => 'GET'
 	)));
-	$collection->attachRoute(new Route('/catalog/lifestyle', array(
-		'_controller' => 'Catalog::showLifestyles',
+	$collection->attachRoute(new Route('/catalog/products', array(
+		'_controller' => 'Catalog::types',
 		'parameters' => array("lang" => $lang),
 		'methods' => 'GET'
 	)));
@@ -106,8 +106,6 @@
 		'parameters' => array("lang" => $lang),
 		'methods' => 'GET'
 		)));
-	
-
 
 
 	//  PRODUCT

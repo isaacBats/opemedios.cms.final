@@ -5,12 +5,12 @@
 
 <div id="body">
 	<header id="main-header">
-		<a href="/"><h1>Alfonso Marina</h1></a>
+		<a href="<?php echo $this->url( $lang , "/"); ?>"><h1>Alfonso Marina</h1></a>
 		<nav id="main-nav">
 			<ul>
-				<li><a href="/"><?php echo $this->trans($lang , "Inicio" , "Home") ?></a></li>
+				<li><a href="<?php echo $this->url( $lang , "/"); ?>"><?php echo $this->trans($lang , "Inicio" , "Home") ?></a></li>
 				<li>
-					<a href="javascript:void(0);"><?php echo $this->trans($lang , "About" , "Acerca de") ?></a>
+					<a href="javascript:void(0);"><?php echo $this->trans($lang ,  "Acerca de" ,  "About") ?></a>
 					<ul>
 						<li>
 							<a href="<?php echo $this->url($lang , '/acerca-de/quienes-somos') ?>">
@@ -66,6 +66,18 @@
 					<a href="<?php echo $this->url($lang , "/news") ?>">
 						<?php echo $this->trans($lang , "Noticias" , "News") ?>
 					</a>
+					<ul>
+						<li>
+							<a href="<?php echo $this->url($lang , "/news") ?>">
+								<?php echo $this->trans($lang , "Noticias y Próximos Eventos" , "News and Events") ?>
+							</a>
+						</li>
+						<li>
+							<a href="<?php echo $this->url($lang , "/news") ?>">
+								<?php echo $this->trans($lang , "Nuevos Lanzamientos" , "News Releases") ?>
+							</a>
+						</li>
+					</ul>
 				</li>
 				<li><a href="<?php echo $this->url($lang , "/gallery") ?>">
 					<?php echo $this->trans($lang , "Galería" , "Gallery") ?></a></li>
@@ -92,7 +104,7 @@
 			<nav>
 				<ul>
 					<?php if( isset( $_SESSION["user"] ) ) {?>
-						<li>Saludos - <?php echo $_SESSION["user"]["nombre"] ?> &nbsp;</li>
+						<li><a href="<?php echo $this->url($lang , "/profile") ?>"><?php echo $_SESSION["user"]["nombre"] ?> </a> </li>
 						<li> <a href="<?php echo $this->url($lang , "/logout") ?>"> <?php echo $this->trans($lang , "Salir", "Logout"); ?></a></li>
 					<?php }else{
 					?>	

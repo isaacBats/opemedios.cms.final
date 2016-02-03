@@ -5,7 +5,7 @@ $brochures = "";
 foreach ($galleries as $press) {
     if( $press['contexto'] == "publicity" ){
         $publicidad .= '<article class="item4Col">
-                        <a href="/press/'.strtolower( $press["contexto"] ).'/'.$press["slug"].'">
+                        <a href="'.$this->url($lang , '/press/'.strtolower( $press["contexto"] ).'/'.$press["slug"] ).'">
                             <img style="width: 0%" 
                             alt="'.$press["nombre"].'" 
                             src="/assets/images/press/cover/'.$press["imagen"].'">
@@ -17,7 +17,7 @@ foreach ($galleries as $press) {
     }
     else{
         $brochures .= '<article class="item4Col">
-                        <a href="/press/'.strtolower( $press["contexto"] ).'/'.$press["slug"].'">
+                        <a href="'.$this->url($lang , '/press/'.strtolower( $press["contexto"] ).'/'.$press["slug"] ).'">
                             <img style="width: 0%" 
                             alt="'.$press["nombre"].'" 
                             src="/assets/images/press/cover/'.$press["imagen"].'">

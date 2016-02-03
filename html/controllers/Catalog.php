@@ -2,6 +2,11 @@
 
 class Catalog extends Controller{
 	
+	// Check numbers 
+	private function nmb( $number ){
+		return number_format(str_replace( ",",".", $number ),1);
+	}
+
 	public function productCare($lang = "es"){
 		$this->addBread( array(  "label"=>$this->trans( $lang  , "Cuidado de productos" , "Product Care") ));
 		$this->header( $lang );
@@ -73,6 +78,8 @@ class Catalog extends Controller{
 
 	public function showFavs( $lang ){
 
+
+		$this->addBread( array("label" => $this->trans($lang , "Mis Favoritos" , "My Favorites") ) );
 		$this->header( $lang );
 
 		if( isset($_SESSION['favoritos']) && sizeof($_SESSION['favoritos']) > 0 ){
@@ -88,7 +95,7 @@ class Catalog extends Controller{
 				if( $nr > 0 ){
 					$productList = $query->fetchAll();
 					$count = 0;
-					require $this->views."catalog.php";
+					require $this->views."favs.php";
 				}
 
 			}
@@ -100,44 +107,53 @@ class Catalog extends Controller{
 		$this->footer( $lang );
 	}
 
-
 	public function showAll( $lang ){
-
-		$this->addBread( array("label" => $this->trans($lang , "Catalogo" , "Catalog") ) );
-
-		$this->header( $lang );
-		$sql = "SELECT * FROM product LIMIT 50";
- 		$query = $this->pdo->prepare($sql);
-		$rs = $query->execute();
-		if($rs!==false){
-			$nr = $query->rowCount();
-			if( $nr > 0 ){
-				$productList = $query->fetchAll();
-				$count = 0;
-				require $this->views."catalog.php";
-			}
-		}
-		$this->footer( $lang );
+		header("Location: ./catalog/product");
 	}
 
-	public function showLifestyles($lang="es"){
+	public function types($lang="es"){
 
 		$html = "";
-
 		if ($lang == "es"){	
 			$this->addBread( array( "url"=>"/catalog", "label"=>"Catalogo" ));
-			$this->addBread( array( "label"=>"Estílo de vida" ));
-
-			
+			$this->addBread( array( "label"=>"Productos" ));
 		}else if($lang == "en") {
-			$html .= 'Devuelve en inglés';
 			$this->addBread( array( "url"=>"/catalog", "label"=>"Catalog" ));
-			$this->addBread( array( "label"=>"Lifestyles" ));
+			$this->addBread( array( "label"=>"Products" ));
 		}else{
 				$html .= 'No existe lang';
 		}	
 			$this->header( $lang );
-			require $this->views."lifestyle.php";
+			
+			$sqlCatalogo = "SELECT * FROM product GROUP BY ".$this->trans($lang , "grupo" , "_group")." ORDER BY ".$this->trans($lang , "tipo" , "_type")." DESC";
+			
+			$queryCatalogo = $this->pdo->prepare($sqlCatalogo);
+			$rsCatalogo = $queryCatalogo->execute();
+			$catalogo = $queryCatalogo->fetchAll();
+			$html .= '<div id="content-press">';
+			$tipo = "";
+			foreach ($catalogo as $product) {
+				if( $tipo != $product[$this->trans($lang , "tipo" , "_type")]){
+					$tipo = $product[$this->trans($lang , "tipo" , "_type")];
+					$html .= '<div class="tituloSeccion clear">'.ucfirst(strtolower($tipo)).'</div>';
+				}
+				$html .= '<article class="item4Col">
+						        <a href="'.$this->url($lang, "/catalog/".strtolower($tipo)."/".strtolower(str_replace(" " , "-" , $product[$this->trans($lang , "grupo" , "_group")]))).'">
+						        	<div class="imageHolder">
+							            <img 
+							            alt="'.$product["nombre"].'" 
+							            src="http://www.alfonsomarinaebanista.com/images/'.$product["ur"].'/'.$product["ur"].'_alta1.jpg">
+							         </div>
+						            <br class="clear">
+						            <br class="clear">
+						            <p>
+						            '.$product[$this->trans($lang , "grupo" , "_group")].'
+						            </p>
+						        </a>
+						    </article>';
+			}
+			$html .= "</div><!-- .product-list -->";
+			echo $html;
 			$this->footer( $lang );
 	}
 	
@@ -147,7 +163,7 @@ class Catalog extends Controller{
 		$otype =  $type; 
 		$ogroup  = $group;
 
-		$this->addBread( array("label" => $this->trans($lang , "Catalogo" , "Catalog") , "url" => "/catalog/lifestyle") );
+		$this->addBread( array("label" => $this->trans($lang , "Catalogo" , "Catalog") , "url" => "/catalog/products") );
 
 		if( $style != "casual" && $style != "metro" ){
 			$ogroup  = $type ;
@@ -176,22 +192,34 @@ class Catalog extends Controller{
 		$where = implode( " AND " , array( $style , $type ,  $group ) );
 		
 
-		$sqlCatalogo = "SELECT * FROM product WHERE {$where} LIMIT 40";
+		$groupBy = ( $group == " 1=1 " )?" GROUP BY ".$this->trans($lang , "grupo" , "_group")." ":"";
+
+
+
+		$grouping = ($groupBy!="")?$this->trans($lang , "grupo" , "_group"):false;
+
+
+		$sqlCatalogo = "SELECT * FROM product WHERE {$where} {$groupBy} ";
+		
 		$queryCatalogo = $this->pdo->prepare($sqlCatalogo);
 		$rsCatalogo = $queryCatalogo->execute();
 
 
+		// CHECK IN OTHER LANGUEJAS
 		if( $queryCatalogo->rowCount() == "0" ){
+			
 			$lang = $lang=="es"?"en":"es";
 			$style =  $ostyle == "casual" || $ostyle == "metro" ? $this->trans($lang , "estilo" , "style")." LIKE '{$ostyle}' " :" 1=1 ";
 			$type =  $otype != ""?$this->trans($lang , "tipo" , "_type")." LIKE '{$otype}' ":" 1=1 ";
 			$group =  $ogroup != ""?"LOWER( ".$this->trans($lang , "grupo" , "_group")." ) LIKE '%".str_replace("-" , " " , urldecode($ogroup))."%' ":" 1=1 ";
 			$where = implode( " AND " , array( $style , $type ,  $group ) );
 			$lang = $lang=="en"?"es":"en";
-			$sqlCatalogo = "SELECT * FROM product WHERE {$where} LIMIT 40";
+			$sqlCatalogo = "SELECT * FROM product WHERE {$where} {$groupBy}";
 			$queryCatalogo = $this->pdo->prepare($sqlCatalogo);
 			$rsCatalogo = $queryCatalogo->execute();
 		}
+
+
 
 
 		if( $rsCatalogo !== false ){
@@ -201,26 +229,51 @@ class Catalog extends Controller{
 				$html .= '<div id="content-press">';
 				$html .= '<p class="tituloSeccion">'.str_replace( "-" , " " , urldecode( ucfirst( end( $this->bread )["label"] ) ) ).'</p>';
 
-				foreach ($catalogo as $product) {
-					$product["imagen"] = $product["imagen"] != "null"?"/assets/images/product/".$product["imagen"]:"http://placehold.it/200x200/f4f4f4/ccc?text=product";
-					$html .= '
-							<article class="item4Col">
-						        <a href="'.$this->url($lang, "/product/".$product['ur']).'">
-						        	<div class="imageHolder">
-							            <img 
-							            alt="'.$product["nombre"].'" 
-							            src="http://www.alfonsomarinaebanista.com/images/'.$product["ur"].'/'.$product["ur"].'_alta1.jpg">
-							         </div>
-						            <br class="clear">
-						            <br class="clear">
-						            <p>
-						            '.$product["nombre"].'
-						            </p>
-						        </a>
-						    </article>
-							';
+				if($grouping){
+					foreach ($catalogo as $product) {
+						$stype = strtolower($this->trans( $lang , $product["tipo"] , $product["_type"]));
+						$product["imagen"] = $product["imagen"] != "null"?"/assets/images/product/".$product["imagen"]:"http://placehold.it/200x200/f4f4f4/ccc?text=product";
+						$html .= '
+								<article class="item4Col">
+							        <a href="'.$this->url($lang, "/catalog/".$stype."/".strtolower(str_replace(" ", "-" ,$product[$grouping] )) ).'">
+							        	<div class="imageHolder">
+								            <img 
+								            alt="'.$product["nombre"].'" 
+								            src="http://www.alfonsomarinaebanista.com/images/'.$product["ur"].'/'.$product["ur"].'_alta1.jpg">
+								         </div>
+							            <br class="clear">
+							            <br class="clear">
+							            <p>
+							            '.$product[$grouping].'
+							            </p>
+							        </a>
+							    </article>
+								';
 
+					}
+				}else{
+					foreach ($catalogo as $product) {
+						$product["imagen"] = $product["imagen"] != "null"?"/assets/images/product/".$product["imagen"]:"http://placehold.it/200x200/f4f4f4/ccc?text=product";
+						$html .= '
+								<article class="item4Col">
+							        <a href="'.$this->url($lang, "/product/".$product['ur']).'">
+							        	<div class="imageHolder">
+								            <img 
+								            alt="'.$product["nombre"].'" 
+								            src="http://www.alfonsomarinaebanista.com/images/'.$product["ur"].'/'.$product["ur"].'_alta1.jpg">
+								         </div>
+							            <br class="clear">
+							            <br class="clear">
+							            <p>
+							            '.$product["nombre"].'
+							            </p>
+							        </a>
+							    </article>
+								';
+
+					}
 				}
+				
 				$html .= "</div><!-- .product-list -->";
 			}
 
@@ -285,8 +338,8 @@ class Catalog extends Controller{
 		
 		if ( !empty($slug) ){
 
-			$this->addBread( array(  "label"=>$this->trans( $lang  , "Catalogo" , "Catalog") , "url"=>"/catalog/lifestyle" ) );
-			$this->addBread( array(  "label"=>$this->trans( $lang  , "Productos" , "Products") , "url"=>"/catalog/lifestyle" ) );
+			$this->addBread( array(  "label"=>$this->trans( $lang  , "Catalogo" , "Catalog") , "url"=>"/catalog/products" ) );
+			$this->addBread( array(  "label"=>$this->trans( $lang  , "Productos" , "Products") , "url"=>"/catalog/products" ) );
 
 			$sql = "SELECT * FROM product WHERE ur LIKE '$slug'";
 			$query = $this->pdo->prepare($sql);
@@ -296,7 +349,7 @@ class Catalog extends Controller{
 
 				$t = $this->trans( $lang  , $product["tipo"] , $product["_type"] );
 				$g = $this->trans( $lang  , $product["grupo"] , $product["_group"] );
-				$u = $this->trans( $lang  , $product["uso"] , $product["_use"] );
+				$u = $this->trans( $lang  , $product["nombre"] , $product["_name"] );
 
 				$this->addBread( array(  "label"=>ucwords(strtolower($t)) , "url"=>"/catalog/".strtolower($t) ) );
 				$this->addBread( array(  "label"=>ucwords(strtolower($g)) , "url"=>"/catalog/".strtolower($t)."/".strtolower(str_replace(" ", "-" , $g)) ) );
@@ -311,9 +364,9 @@ class Catalog extends Controller{
 		$this->footer( $lang );
 	}
 
-	public function browserProductByName($lang="es"){
+	public function searchProductByName($lang="es"){
 		
-		$this->addBread( array("label" => $this->trans($lang, "Buscador", "Browser"), "url" => "/catalog/browser"));
+		$this->addBread( array("label" => $this->trans($lang, "Buscador", "Search"), "url" => "/search"));
 
 		$html = "";
 		if( !empty($_POST) ){
@@ -362,24 +415,18 @@ class Catalog extends Controller{
 		$this->footer( $lang );
 	}
 
-	public function browserProductByName_Json($lang="es"){
+	public function searchProductByName_Json($lang="es"){
 		
 		if( !empty($_POST) ){
 			$table = "product";
 			$database = "amarinados";
 
 			$lastWhere = $this->describe($database, $table, $_POST["q"]);
-
-			$where = substr($lastWhere, 0, -3);	
+			$where = substr($lastWhere, 0, -3);
 
 			$sql = "SELECT nombre, ur FROM $table WHERE ".$where." LIMIT 10";
-			echo $sql;
-			
 			$query = $this->pdo->prepare($sql);
-			// $name = "%{$_POST["q"]}%";
-			// echo $this->describe( "product" , $name );
-	 		// $query->bindParam(':name',$name, \PDO::PARAM_STR);
-
+			
 			$rs = $query->execute();
 			$this->lang = $lang;
 			$products = $query->fetchAll(\PDO::FETCH_ASSOC);
@@ -387,10 +434,8 @@ class Catalog extends Controller{
 				$element["url"] = $this->url($this->lang , "/product/".$element["ur"]);
 				return $element;
 			}, $products);
-
-			// print_r($products);
 			header('Content-type: application/json; charset=utf-8');
-			json_encode($products);
+			echo json_encode($products);
 		}
 	}	
 

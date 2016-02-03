@@ -240,12 +240,16 @@
 
 	private function getUserCountry($pais){
 		$countries = $this->getCountries();
-
+		$html = "";
 		foreach ($countries as $country) {
+
 			if( $pais == $country['nombre'] ){
-				return '<option value="'.$pais.'" selected >'.$pais.'</option>';	
+				$html .= '<option value="'.$pais.'" selected >'.$pais.'</option>';
+			}else{
+				$html .= '<option value="'.$country['nombre'].'" >'.$country['nombre'].'</option>';
 			}
 		}
+		return $html;
 	}
 
 	public function getProfile($lang = "es"){

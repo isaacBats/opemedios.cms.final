@@ -4,108 +4,59 @@ class Profile extends Controller{
 
 	public function accountStatusAction($lang = "es"){
 		if( isset($_SESSION["user"])){
-				$this->addbread( array("url"=>"/profile/acount" , "label"=>"Estado de Cuenta") );
-				$this->header($lang);
-
-				$sqlUser = "SELECT * FROM usuarios WHERE id_registro = :id";
-				$query = $this->pdo->prepare($sqlUser);
-				$query->bindParam(
-					':id', 
-					$_SESSION['user']['id_registro'], 
-					\PDO::PARAM_INT
-				);
-
-				$rs = $query->execute();
-				$user =  $query->fetch();
-
-				$contentd = 'Hello contentd';
-				
-
-				require $this->views."profile.php";
-				$this->footer( $lang );	
-			}
-			else{
-				header('Location: ./login');
-			}
+			$this->addbread( array("url"=>"/profile" , "label"=>$this->trans($lang , "Usuario" , "User")) );
+			$this->addbread( array( "label"=>$this->trans($lang ,"Estado de Cuenta" , "Statement") ) );
+			$this->header($lang);
+			require $this->views."profile.account.php";
+			$this->footer( $lang );	
+		}
+		else{
+			header( "Location: http://{$_SERVER["HTTP_HOST"]}/login");
+		}
 	}
 
 	public function pricesListAction($lang = "es"){
 		if( isset($_SESSION["user"])){
-				$this->addbread( array("url"=>"/profile/prices-list" , "label"=>"Lista de precios") );
+				$this->addbread( array("url"=>"/profile" , "label"=>$this->trans($lang , "Usuario" , "User")) );
+				$this->addbread( array( "label"=>$this->trans($lang , "Lista de precios" , "Price List")) );
 				$this->header($lang);
-
-				$sqlUser = "SELECT * FROM usuarios WHERE id_registro = :id";
-				$query = $this->pdo->prepare($sqlUser);
-				$query->bindParam(
-					':id', 
-					$_SESSION['user']['id_registro'], 
-					\PDO::PARAM_INT
-				);
-
-				$rs = $query->execute();
-				$user =  $query->fetch();
-
-				$contentd = 'Hello contentd';
-				
-
-				require $this->views."profile.php";
+				require $this->views."profile.price-list.php";
 				$this->footer( $lang );	
 			}
 			else{
-				header('Location: ./login');
+				header( "Location: http://{$_SERVER["HTTP_HOST"]}/login");
 			}
+
+
 	}
 
 	public function downloadCatalogAction($lang = "es"){
 		if( isset($_SESSION["user"])){
-				$this->addbread( array("url"=>"/profile/download-catalog" , "label"=>"Descargar Catálogo") );
+				$this->addbread( array("url"=>"/profile" , "label"=>$this->trans($lang ,"Usuario" , "User" )) );
+				$this->addbread( array( "label"=>$this->trans($lang , "Descargar Catálogo" , "Download Catalog")) );
 				$this->header($lang);
-
-				$sqlUser = "SELECT * FROM usuarios WHERE id_registro = :id";
-				$query = $this->pdo->prepare($sqlUser);
-				$query->bindParam(
-					':id', 
-					$_SESSION['user']['id_registro'], 
-					\PDO::PARAM_INT
-				);
-
-				$rs = $query->execute();
-				$user =  $query->fetch();
-
-				$contentd = 'Hello contentd';
-				
-
-				require $this->views."profile.php";
+				require $this->views."profile.catalog.php";
 				$this->footer( $lang );	
 			}
 			else{
-				header('Location: ./login');
-			}	}
+				header( "Location: http://{$_SERVER["HTTP_HOST"]}/login");
+			}
+
+	}
 
 	public function myQuoteAction($lang = "es"){
-		if( isset($_SESSION["user"])){
-				$this->addbread( array("url"=>"/profile/my-quote" , "label"=>"Mis cotizaciones") );
+
+			if( isset($_SESSION["user"])){
+				$this->addbread( array("url"=>"/profile" , "label"=>$this->trans($lang ,"Usuario" , "User" )) );
+				$this->addbread( array("label"=>$this->trans($lang , "Mis cotizaciones" , "My quotes ")) );
 				$this->header($lang);
-
-				$sqlUser = "SELECT * FROM usuarios WHERE id_registro = :id";
-				$query = $this->pdo->prepare($sqlUser);
-				$query->bindParam(
-					':id', 
-					$_SESSION['user']['id_registro'], 
-					\PDO::PARAM_INT
-				);
-
-				$rs = $query->execute();
-				$user =  $query->fetch();
-
-				$contentd = 'Hello contentd';				
-
-				require $this->views."profile.php";
+				require $this->views."profile.quotes.php";
 				$this->footer( $lang );	
 			}
 			else{
-				header('Location: ./login');
+				header( "Location: http://{$_SERVER["HTTP_HOST"]}/login");
 			}
+		
 	}
 
 }

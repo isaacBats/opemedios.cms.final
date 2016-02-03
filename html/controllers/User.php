@@ -270,6 +270,44 @@
 				$rs = $query->execute();
 				$user =  $query->fetch();
 				$country = $this->getUserCountry($user['pais']);
+
+				$contentd = '
+								<form method="post" id="frmRegistro" name="form-registro" action="/profile/update">	
+								    <div class="separador">
+								        <label>ID:</label><input type="text" value="'.$user['id_registro'].'" readonly="true" name="id" id="ID" >
+								        <label>'. $this->trans($lang, "Nombre(s):","First Name:").'</label><input type="text" class="requerido" value="'. $user['nombre'].'" name="nombre" id="Nombre">
+								        <label>'. $this->trans($lang, "Apellidos:","Last Name").'</label><input type="text" class="requerido" value="'. $user['apellidos'].'" name="apellidos" id="Apellidos">
+								        </div>
+								    <div class="separador">
+								        <label>'. $this->trans($lang, "Empresa:","Company").'</label><input type="text" class="requerido" value="'. $user['empresa'].'" name="empresa" id="Empresa">
+								        <label>'. $this->trans($lang, "Puesto:","Job title").'</label><input type="text" class="requerido" value="'. $user['puesto'].'" name="puesto" id="Puesto">
+								        <label>'. $this->trans($lang, "Website Empresa:","Website company").'</label><input type="text" class="requerido" value="'. $user['website'].'"  name="website" id="Website">
+								    </div>
+								    <div class="separador">
+								        <label>'. $this->trans($lang, "Dirección","Address").'</label><input type="text" class="requerido" value="'. $user['direccion1'].'" name="direccion1" id="Direccion1">
+								        <label>'. $this->trans($lang, "Colonia:","Region").'</label><input type="text" class="requerido" value="'. $user['direccion2'].'" name="direccion2" id="Direccion2">
+								        <br>
+								        <label>'. $this->trans($lang, "País:","Country").'</label>
+								        <select title="País" name="pais" id="Pais">
+									        <option value="">País</option>
+									        '. $country.'
+											<option value="Mexico">Mexico</option>
+											<option value="Spain">Spain</option>
+										</select>
+								        <br>
+								        <label>'. $this->trans($lang, "Estado / Municipio: ","State: ").'</label><input type="text" value="'. $user['estado'].'" name="estado" id="Estado" class="mediano2 requerido">
+								        <label>'. $this->trans($lang, "Código Postal: ","Zip code: ").'</label><input type="text" value="'. $user['codigopostal'].'" name="codigopostal" id="CodigoPostal" class="mediano2">
+								        <label>'. $this->trans($lang, "Mobil: ","Mobile: ").'</label><input type="text" value="'. $user['movil'].'" name="movil" id="Movil" class="mediano2">
+								        <label>'. $this->trans($lang, "Teléfono: ","Phone: ").'</label><input type="text" value="'. $user['telefono'].'" name="telefono" id="Telefono" class="mediano2">
+								    </div>
+								    <div class="separador">
+								        <input id="btn-registro" type="submit" value="'.  $this->trans($lang , "Actualizar mi perfil" , "Update profile").'">
+								    </div>
+								</form>
+				';
+
+
+
 				require $this->views."profile.php";
 				$this->footer( $lang );	
 			}

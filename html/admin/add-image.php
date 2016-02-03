@@ -5,7 +5,13 @@
   <div class="panel-body">
     <form method="post" action="/panel/news/add" id="addNew" enctype="multipart/form-data">
       <div class="form-group">
-        <input type="text" placeholder="Título (en español)" class="form-control" name="titulo">
+        <label><?php echo $this->trans($lang, "Contexto:","Context") ?></label>
+				        <select title="Contexto" name="contexto" id="Contexto">
+					        <option value="">Contexto</option>
+					        <?php echo $context ?>
+							<option value="Mexico">Mexico</option>
+							<option value="Spain">Spain</option>
+						</select>
       </div>
       <div class="form-group">
         <input type="file" name="imagen_thumbnail">

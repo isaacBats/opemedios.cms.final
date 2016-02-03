@@ -13,7 +13,7 @@
       </div>
       <div class="form-group">
         <input type="file" name="imagen">
-        <span class="help-block">Imagen principal de la noticia</span>
+        <span class="help-block">Imagen principal</span>
       </div>
       <br>
       <div class="form-group">

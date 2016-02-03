@@ -3915,7 +3915,9 @@ h2.tituloSeccion {
                 color: #807562; 
             }
 
-
+.info.headquarters , .info.highPoint{
+  display: none;
+}
 
 
 

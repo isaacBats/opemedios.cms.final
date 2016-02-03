@@ -156,20 +156,13 @@
 									
 
 		public function header( $lang , $nobeard = false , $product = false){
-			if( $lang == "es"){
-				// require  $this->views."header.php";	
-				// TODO: @GLOBAL Crear solo un archivo de [ Header ] para el menu(2)
-				require $this->views."header-catalogo.php";
-			}else{
-				require  $this->views."header_en.php";	
-			}
-			
+			require $this->views."header.php";
 		}
 		public function footer( $lang ){
-			
 			require  $this->views."footer.php";	
 		}
 
+		//  TODO: Put this on admin controller
 		public function header_admin(){
 			require  $this->adminviews."header.php";	
 		}

@@ -68,23 +68,24 @@
 					</a>
 				</li>
 				<li><a href="<?php echo $this->url($lang , "/gallery") ?>">
-				<?php echo $this->trans($lang , "Galería" , "Gallery") ?></a></li>
+					<?php echo $this->trans($lang , "Galería" , "Gallery") ?></a></li>
                 <li>
-                	<a href="/press"><?php echo $this->trans($lang , "Prensa" , "Catalog") ?></a>
+                	<a href="<?php echo $this->url($lang , "/press") ?>">
+                	<?php echo $this->trans($lang , "Prensa" , "Press") ?></a>
                 	<ul>
 						<li>
-							<a href="/press/publicity">
-								<?php echo $this->trans($lang , "Publicidad" , "Catalog") ?>
+							<a href="<?php echo $this->url($lang , "/press/publicity") ?>">
+								<?php echo $this->trans($lang , "Publicidad" , "Publicity") ?>
 							</a>
 						</li>
 						<li>
-							<a href="/press/brochure">
-								<?php echo $this->trans($lang , "Brochure" , "Catalog") ?>
+							<a href="<?php echo $this->url($lang , "/press/brochure") ?>">
+								<?php echo $this->trans($lang , "Brochure" , "Brochure") ?>
 							</a>
 						</li>
 					</ul>
                 </li>
-				<li><a href="/contact"><?php echo $this->trans($lang , "Contacto" , "Catalog") ?></a></li>
+				<li><a href="<?php echo $this->url($lang , "/contact") ?>"><?php echo $this->trans($lang , "Contacto" , "Contact") ?></a></li>
 			</ul>
 		</nav><!-- #main-nav -->
 		<div id="aux-nav">
@@ -92,11 +93,11 @@
 				<ul>
 					<?php if( isset( $_SESSION["user"] ) ) {?>
 						<li>Saludos - <?php echo $_SESSION["user"]["nombre"] ?> &nbsp;</li>
-						<li> <a href="/logout">Salir</a></li>
+						<li> <a href="<?php echo $this->url($lang , "/logout") ?>"> <?php echo $this->trans($lang , "Salir", "Logout"); ?></a></li>
 					<?php }else{
 					?>	
-						<li><a href="/register">Registro</a></li>
-						<li><a href="/login">Sign in</a></li>
+						<li><a href="<?php echo $this->url($lang , "/register") ?>"><?php echo $this->trans($lang , "Registro", "Register"); ?></a></li>
+						<li><a href="<?php echo $this->url($lang , "/login") ?>"><?php echo $this->trans($lang , "Iniciar Sesión", "Sign in"); ?></a></li>
 					<?php
 						} 
 					?>
@@ -104,9 +105,15 @@
 	            </ul>
 	        </nav>
 	        <br class="clear" />
-	        <a href="<?php echo $this->url($lang , "/favs") ?>">Mis Favoritos</a>
-	        <a href="<?php echo $this->url("es") ?>" class="selected">ESP</a> -
-	        <a href="<?php echo $this->url("en") ?>">ENG</a>
+	        <a href="<?php echo $this->url($lang , "/favs") ?>"><?php echo $this->trans($lang , "Mis Favoritos", "My Favorites"); ?></a>
+	        <?php if( $lang == "es") {?>
+	        <a href="javascript:void(0)" class="selected">ESP</a> -
+	        <a href="<?php echo $this->url("en") ?>" >ENG</a>
+	        <?php }else{ ?>
+	        <a href="<?php echo $this->url("es") ?>" >ESP</a> -
+	        <a href="javascript:void(0)" class="selected" >ENG</a>
+	        <?php } ?>
+	        
 	        <?php require "browser.php" ?>
 	    </div><!-- #aux-nav -->
 	</header><!-- #main-header -->

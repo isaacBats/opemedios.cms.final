@@ -239,7 +239,7 @@ class Catalog extends Controller{
 							        	<div class="imageHolder">
 								            <img 
 								            alt="'.$product["nombre"].'" 
-								            src="http://www.alfonsomarinaebanista.com/images/'.$product["ur"].'/'.$product["ur"].'_alta1.jpg">
+								            src="'.$product["imagen"].'">
 								         </div>
 							            <br class="clear">
 							            <br class="clear">
@@ -260,7 +260,7 @@ class Catalog extends Controller{
 							        	<div class="imageHolder">
 								            <img 
 								            alt="'.$product["nombre"].'" 
-								            src="http://www.alfonsomarinaebanista.com/images/'.$product["ur"].'/'.$product["ur"].'_alta1.jpg">
+								            src="'.$product["imagen"].'">
 								         </div>
 							            <br class="clear">
 							            <br class="clear">

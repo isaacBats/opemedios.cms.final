@@ -62,9 +62,11 @@ class Contacto extends Controller
 		$html = '<div class="contact-info">
 		<img src="/assets/images/contacto.jpg">
 		<div class="info alt">
-			<img src="/assets/images/mapa.jpg">
+			<img class="mexico" src="/assets/images/mapa.jpg">
+			<img class="headquarters" src="/assets/images/headquarters.png">
+			<img class="highPoint" src="/assets/images/highpoint.png">
 		</div><!-- .info -->
-		<div class="info">
+		<div class="info mexico">
 			<h2>Showroom México</h2>
 			<p>Bosques de Duraznos 187 local 33,<br>
 				Col. Bosques de las Lomas,<br>
@@ -74,7 +76,35 @@ class Contacto extends Controller
 				<a href="mailto:centroam@alfonsomarinaebanista.com?subject=Contácto">centroam@alfonsomarinaebanista.com</a>
 				<a href="https://maps.google.com/maps?q=19.407274,-99.239815&num=1&t=m&z=17" target="_blank" class=""><i class="fa fa-plus-square-o fa-lg"></i> Ver mapa</a>
 				<select class="falta">
-					<option>Showroom México</option>
+					<option data-geo-lat=\'19.407274\' data-geo-long=\'-99.239815\' mapaUb="https://maps.google.com/maps?q=19.407274,-99.239815&amp;num=1&amp;t=m&amp;z=17" value="Showroom México">Showroom México</option>
+                    <option data-geo-lat=\'19.403378\' data-geo-long=\'-99.076898\' mapaUb="https://maps.google.com.mx/maps?q=19.403378,-99.076898&amp;num=1&amp;t=m&amp;z=17" value="Headquarters">Headquarters</option>
+                    <option data-geo-lat=\'35.9609696\' data-geo-long=\'-80.006355\' mapaUb="https://maps.google.com/maps?q=35.9609696,-80.006355" value="High Point">High Point</option>
+				</select>
+			</div><!-- .info -->
+			<div class="info headquarters">
+			<h2>Headquarters</h2>
+			<p>Oriente 233 No. 151<br>
+				México, D.F., 08500<br>
+				1 888 489 38 39<br>
+				(+52)55 5716 - 9275</p>
+				<a href="mailto:info@alfonsomarinaebanista.com?subject=Contácto">info@alfonsomarinaebanista.com</a>
+				<a href="https://maps.google.com.mx/maps?q=19.403378,-99.076898&amp;num=1&amp;t=m&amp;z=17" target="_blank" class=""><i class="fa fa-plus-square-o fa-lg"></i> Ver mapa</a>
+				<select class="falta">
+					<option data-geo-lat=\'19.407274\' data-geo-long=\'-99.239815\' mapaUb="https://maps.google.com/maps?q=19.407274,-99.239815&amp;num=1&amp;t=m&amp;z=17" value="Showroom México">Showroom México</option>
+                    <option data-geo-lat=\'19.403378\' data-geo-long=\'-99.076898\' mapaUb="https://maps.google.com.mx/maps?q=19.403378,-99.076898&amp;num=1&amp;t=m&amp;z=17" value="Headquarters">Headquarters</option>
+                    <option data-geo-lat=\'35.9609696\' data-geo-long=\'-80.006355\' mapaUb="https://maps.google.com/maps?q=35.9609696,-80.006355" value="High Point">High Point</option>
+				</select>
+			</div><!-- .info -->
+			<div class="info highPoint">
+			<h2>High Point</h2>
+			<p>301 North Hamilton Street<br>
+				High Point, NC 27260<br>
+				Phone: 336 887 9320</p>
+				<a href="https://maps.google.com/maps?q=35.9609696,-80.006355" target="_blank" class=""><i class="fa fa-plus-square-o fa-lg"></i> Ver mapa</a>
+				<select class="falta">
+					<option data-geo-lat=\'19.407274\' data-geo-long=\'-99.239815\' mapaUb="https://maps.google.com/maps?q=19.407274,-99.239815&amp;num=1&amp;t=m&amp;z=17" value="Showroom México">Showroom México</option>
+                    <option data-geo-lat=\'19.403378\' data-geo-long=\'-99.076898\' mapaUb="https://maps.google.com.mx/maps?q=19.403378,-99.076898&amp;num=1&amp;t=m&amp;z=17" value="Headquarters">Headquarters</option>
+                    <option data-geo-lat=\'35.9609696\' data-geo-long=\'-80.006355\' mapaUb="https://maps.google.com/maps?q=35.9609696,-80.006355" value="High Point">High Point</option>
 				</select>
 			</div><!-- .info -->
 			<br class="clear">

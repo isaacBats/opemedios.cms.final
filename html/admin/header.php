@@ -14,10 +14,13 @@
   <link rel="stylesheet" href="/admin/lib/weather-icons/css/weather-icons.css">
   <link rel="stylesheet" href="/admin/lib/ionicons/css/ionicons.css">
   <link rel="stylesheet" href="/admin/lib/jquery-toggles/toggles-full.css">
+  
   <link rel="stylesheet" href="/admin/lib/morrisjs/morris.css">
   <link rel="stylesheet" href="/admin/lib/summernote/summernote.css">
 
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
   <link rel="stylesheet" href="/admin/css/quirk.css">
+  <link rel="stylesheet" href="/admin/css/admin.css">
 
   <script src="/admin/lib/modernizr/modernizr.js"></script>
   
@@ -30,7 +33,10 @@
 </head>
 
 <body>
-
+<div class="alert alert-info fade in nomargin" id="confirmacion" title="">
+  <span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>
+  <p></p>
+</div>
 <header>
   <div class="headerpanel">
 

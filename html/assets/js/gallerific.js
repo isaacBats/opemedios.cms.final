@@ -96,10 +96,11 @@
 	}
 	
 	function historyCheck() {
+		// 
 		if ($.browser.safari) {
+
 			if (!dontCheck) {
 				var historyDelta = history.length - historyBackStack.length;
-				
 				if (historyDelta) { // back or forward button has been pushed
 					isFirst = false;
 					if (historyDelta < 0) { // back button has been pushed
@@ -115,12 +116,16 @@
 						historyCallback();
 					}
 				} else if (historyBackStack[historyBackStack.length - 1] == undefined && !isFirst) {
+
 					historyCallback();
 					isFirst = true;
 				}
+			}else{
+
 			}
 		} else {
 			// otherwise, check for location.hash
+
 			var current_hash = location.hash;
 			if(current_hash != historyCurrentHash) {
 				historyCurrentHash = current_hash;
@@ -319,7 +324,10 @@
 			//	clear onLoad, IE behaves irratically with animated gifs otherwise
 			objImagePreloader.onload=function(){};
 		};
-		objImagePreloader.src = defaults.imageArray[defaults.activeImage][0];
+		
+		objImagePreloader.src = defaults.imageArray[defaults.activeImage][0];	
+		
+		
 	};
 	
 	/**

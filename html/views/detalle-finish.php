@@ -10,8 +10,8 @@
         </div><!-- .detail-nav -->
         <h2 class="product-title"><?php echo $acabado['codigo'].' '.$acabado['nombre']; ?></h2>
         <div class="features">
-            <p><b>Nota:</b> 
-                <?php echo $acabado['descripcion']; ?>
+            <p><b><?php echo $this->trans($lang , "Nota" , "Note"); ?>:</b> 
+                <?php echo $this->trans($lang , $acabado['descripcion'] , $acabado['_description']); ?>
             </p>
         </div><!-- .features -->
     </div><!-- #product-info -->

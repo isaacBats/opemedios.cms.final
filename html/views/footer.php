@@ -27,12 +27,11 @@
 <script src="/assets/js/bower_components/jquery/jquery.js"></script>
 <script src="/assets/js/bower_components/jquery.tools/src/tabs/tabs.js"></script>
 <script src="/assets/js/bower_components/jquery.tools/src/tabs/tabs.slideshow.js"></script>
-<!-- 
+
 <script src="/assets/js/bower_components/jquery.fancybox/fancybox/jquery.fancybox-1.3.4.js"></script>
 
- -->
 <script src="/assets/js/bower_components/jquery/jquery.validate.js"></script>
-<!-- <script src="/assets/js/gallerific.js"></script> -->
+<script src="/assets/js/gallerific.js"></script>
 <script src="/assets/js/main.js"></script>
 
 

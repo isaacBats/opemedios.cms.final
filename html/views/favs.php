@@ -28,7 +28,7 @@ foreach ($productList as $product) {
             echo $this->trans($lang,"Eliminar de Cotización","Remove from Quotation");
         }else{
             echo '<a href="javascript:void(0);" id="btn-cot" class="general-btn half" data-id="'.$product['id'].'">';
-            echo $this->trans($lang,"Agregar a Cotización","Add to Quotation");
+            echo $this->trans($lang,"Agregar a Cotización","Add to <br>Quotation");
         }
         echo '</a>';
     }else{

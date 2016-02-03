@@ -17,9 +17,48 @@ jQuery(document).ready(function($){
 	// FAVORITES
 	startFav();
 
+	// START
+	startGallery()
 	
 
 });
+
+
+//  START GALLERY
+
+function startGallery(){
+
+	try{
+	window.gallery = $('#gallery').galleriffic('#navigation', {
+      delay: 300,
+      numThumbs: 13,
+      preloadAhead: 0,
+      imageContainerSel: '#slideshow',
+      controlsContainerSel: '#controls',
+      fixedNavigation: true,
+      galleryKeyboardNav: true,
+      autoPlay: false,
+      enableHistory: false,
+      enableTopPager: false,
+      enableBottomPager: true,
+      renderSSControls: false,
+      nextLinkText: '>',
+      prevLinkText: '<'
+    });
+    window.gallery.onFadeOut = function () {
+      $('#details').fadeOut('fast');
+    };
+    window.gallery.onFadeIn = function () {
+      $('#details').fadeIn('fast');
+    };
+
+	}catch(e){
+		console.log(e);
+	}
+}
+
+		
+
 
 //  GLOBAL 
 function startNewsletter(){
@@ -38,30 +77,29 @@ function startNewsletter(){
 	}
 	
 }
+
+function ImageRezise(){
+	var imgHeight = $('#imgHome > img').height();
+	var imgWidth = $('#imgHome > img').width();
+
+	$('#imgHome').css('height', imgHeight*0.92);
+	$('#imgHome').css('width', imgWidth);
+}
 //  HOME
 function startHomeSlide(){
-		$(".slidetabs").tabs(".images > div", {
-	      effect: 'fade',
-	      fadeOutSpeed: "slow",
-	      rotate: true
-	  }).slideshow({
-	  	interval: 2000,
-	  	autoplay: true,
-	  	clickable: false
-	  });
 	
-		var imgHeight = $('#imgHome > img').height();
-		var imgWidth = $('#imgHome > img').width();
+		setTimeout( ImageRezise , 100 );
+		$(window).resize(ImageRezise);
 
-		$('#imgHome').css('height', imgHeight*0.92);
-		$('#imgHome').css('width', imgWidth);
-
-		$(window).resize(function(){
-			var imgHeight = $('#imgHome > img').height();
-			var imgWidth = $('#imgHome > img').width();
-			$('#imgHome').css('height', imgHeight*0.92);
-			$('#imgHome').css('width', imgWidth);
-		});
+		$(".slidetabs").tabs(".images > div", {
+		      effect: 'fade',
+		      fadeOutSpeed: "slow",
+		      rotate: true
+		  }).slideshow({
+		  	interval: 2000,
+		  	autoplay: true,
+		  	clickable: false
+		  });
 
 		
 	

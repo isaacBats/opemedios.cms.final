@@ -50,7 +50,6 @@ jQuery(document).ready(function($){
 		numThumbs: 13,
 		preloadAhead: 0,
 		imageContainerSel: '#slideshow',
-		controlsContainerSel: '#controls',
 		fixedNavigation: true,
 		galleryKeyboardNav: true,
 		autoPlay: false,

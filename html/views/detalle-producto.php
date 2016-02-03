@@ -39,14 +39,10 @@
                 <a href="mailto:centro@alfonsomarinaebanista.com"><strong>Servicio al Clientes</strong></a>
             </p>
             <?php }else{ ?>
-
-            <p><strong>NOTE:</strong> Due to variations in monitors, the colors shown here cannot absolutely represent true quality and hue.</p>
             <p>
                 For more information, please contact 
                 <a href="mailto:centro@alfonsomarinaebanista.com"><strong>customer service</strong></a>
             </p>
-            
-            
             <?php } ?>
             <!-- <a href="javascript:void(0);" class="rel"><img src="/assets/images/relacionado1.jpg"></a>
             <a href="javascript:void(0);" class="rel"><img src="/assets/images/relacionado2.jpg"></a>
@@ -83,7 +79,11 @@
         </div><!-- .share-product -->
 
         <div class="features line ">
+        <?php if( $lang == "es") {?>
             <p class="small"><strong>NOTA:</strong> Debido a variaciones en los monitores, los colores como se muestran no pueden representar la calidad y el tono exacto.</p>
+            <?php }else{ ?>
+            <p class="small"><strong>NOTE:</strong> Due to variations in monitors, the colors shown here cannot absolutely represent true quality and hue.</p>
+            <?php } ?>
         </div>
     </div><!-- #product-info -->
     <br class="clear">

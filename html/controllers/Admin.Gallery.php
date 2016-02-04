@@ -59,76 +59,72 @@ class AdminGallery extends Controller{
 		print_r($_FILES);
 
 		if( !empty($_POST) ){
-
-			$extensiones_permitidas = array("jpg", "jpeg", "gif", "png","JPG","JPEG","PNG");
-			$explode = explode(".", $_FILES['imagen']["name"]);
-			$extension = end($explode);
-			if ((($_FILES['imagen']["type"] == "image/png")
-				|| ($_FILES['imagen']["type"] == "image/jpeg")
-				|| ($_FILES['imagen']["type"] == "image/jpg")
-				|| ($_FILES['imagen']["type"] == "image/PNG"))
-				&& in_array($extension, $extensiones_permitidas))
-			{
-				if ($_FILES['imagen']["error"] > 0)
+			if($_POST['contexto'] == 'Gallery'){
+				$extensiones_permitidas = array("jpg", "jpeg", "gif", "png","JPG","JPEG","PNG");
+				$explode = explode(".", $_FILES['imagen']["name"]);
+				$extension = end($explode);
+				if ((($_FILES['imagen']["type"] == "image/png")
+					|| ($_FILES['imagen']["type"] == "image/jpeg")
+					|| ($_FILES['imagen']["type"] == "image/jpg")
+					|| ($_FILES['imagen']["type"] == "image/PNG"))
+					&& in_array($extension, $extensiones_permitidas))
 				{
-					echo "ERROR: " . $_FILES['imagen']["error"] . "<br>";
-				}
-				else
-				{
-					$_FILES['imagen']["name"]= uniqid().'.'.$extension;
-					$path=__DIR__."/../assets/images/galeria/". $_FILES['imagen']["name"];
-					$move = move_uploaded_file($_FILES['imagen']["tmp_name"],$path);
+					if ($_FILES['imagen']["error"] > 0)
+					{
+						echo "ERROR: " . $_FILES['imagen']["error"] . "<br>";
+					}
+					else
+					{
+						$_FILES['imagen']["name"]= uniqid().'.'.$extension;
+						$path=__DIR__."/../assets/images/galeria/". $_FILES['imagen']["name"];
+						$move = move_uploaded_file($_FILES['imagen']["tmp_name"],$path);
 
-					if(!$move){
-						throw new Exception("Error al mover el archivo", 1);
+						if(!$move){
+							throw new Exception("Error al mover el archivo", 1);
+						}
 					}
 				}
-			}
 
-			$explode = explode(".", $_FILES['imagen_thumbnail']["name"]);
-			$extension = end($explode);
-			if ((($_FILES['imagen_thumbnail']["type"] == "image/png")
-				|| ($_FILES['imagen_thumbnail']["type"] == "image/jpeg")
-				|| ($_FILES['imagen_thumbnail']["type"] == "image/jpg")
-				|| ($_FILES['imagen_thumbnail']["type"] == "image/PNG"))
-				&& in_array($extension, $extensiones_permitidas))
-			{
-				if ($_FILES['imagen_thumbnail']["error"] > 0)
+				$explode = explode(".", $_FILES['imagen_thumbnail']["name"]);
+				$extension = end($explode);
+				if ((($_FILES['imagen_thumbnail']["type"] == "image/png")
+					|| ($_FILES['imagen_thumbnail']["type"] == "image/jpeg")
+					|| ($_FILES['imagen_thumbnail']["type"] == "image/jpg")
+					|| ($_FILES['imagen_thumbnail']["type"] == "image/PNG"))
+					&& in_array($extension, $extensiones_permitidas))
 				{
-					echo "ERROR: " . $_FILES['imagen_thumbnail']["error"] . "<br>";
-				}
-				else
-				{
-					$_FILES['imagen_thumbnail']["name"]= uniqid().'.'.$extension;
-					$path=__DIR__."/../assets/images/galeria/". $_FILES['imagen_thumbnail']["name"];
-					$move = move_uploaded_file($_FILES['imagen_thumbnail']["tmp_name"],$path);
+					if ($_FILES['imagen_thumbnail']["error"] > 0)
+					{
+						echo "ERROR: " . $_FILES['imagen_thumbnail']["error"] . "<br>";
+					}
+					else
+					{
+						$_FILES['imagen_thumbnail']["name"]= uniqid().'.'.$extension;
+						$path=__DIR__."/../assets/images/galeria/". $_FILES['imagen_thumbnail']["name"];
+						$move = move_uploaded_file($_FILES['imagen_thumbnail']["tmp_name"],$path);
 
-					if(!$move){
-						throw new Exception("Error al mover el archivo", 1);
+						if(!$move){
+							throw new Exception("Error al mover el archivo", 1);
+						}
 					}
 				}
-			}
 
 
-			$sql = 'INSERT INTO noticias (titulo,titulo_en,slug,extracto,extracto_en,contenido,contenido_en,imagen_thumbnail,imagen,fecha) VALUES (:titulo,:titulo_en,:slug,:extracto,:extracto_en,:contenido,:contenido_en,:imagen_thumbnail,:imagen,:fecha)';
-			$query = $this->pdo->prepare($sql);
-			$query->bindParam(':titulo', $_POST['titulo']);
-			$query->bindParam(':titulo_en', $_POST['titulo_en']);
-			$query->bindParam(':slug', $_POST['slug']);
-			$query->bindParam(':extracto', $_POST['extracto']);
-			$query->bindParam(':extracto_en', $_POST['extracto_en']);
-			$query->bindParam(':contenido', $_POST['contenido']);
-			$query->bindParam(':contenido_en', $_POST['contenido_en']);
-			// TODO: @Noticias agregar funcionalidad de tumbnails (4)
-			$query->bindParam(':imagen_thumbnail', $_FILES['imagen_thumbnail']['name']);
-			$query->bindParam(':imagen', $_FILES['imagen']['name']);
-			$query->bindParam(':fecha', $_POST['fecha']);
-			
-			$query = $query->execute();
-			if( $sql!=false ){
-				header("Location: /panel/news/list");
-			}
-		}	
+				$sql = 'INSERT INTO gallery_image (gallery_id,imagen,thumb) VALUES (:gallery_id,:imagen,:thumb)';
+				$query = $this->pdo->prepare($sql);
+				$gallery_id = '1';
+				$query->bindParam(':gallery_id', $gallery_id);
+				$query->bindParam(':imagen_thumbnail', $_FILES['imagen_thumbnail']['name']);
+				$query->bindParam(':imagen', $_FILES['imagen']['name']);
+				
+				$rs = $query->execute();
+				if( $rs!=false ){
+					echo "Error al subir la imagen";
+					//header("Location: /panel/gallery/list");
+				}
+			}	
+				
+		}
 	}
 
 }

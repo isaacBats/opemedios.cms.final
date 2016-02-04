@@ -368,7 +368,7 @@
 		'methods' => 'GET'
 	)));
 
-	$collection->attachRoute(new Route('/panel/galleries/add', array(
+	$collection->attachRoute(new Route('/panel/galleries/add/:id_gallery', array(
 		'_controller' => 'AdminGallery::addImage',
 		'parameters' => array("lang" => $lang),
 		'methods' => 'GET'
@@ -388,6 +388,13 @@
 
 	$collection->attachRoute(new Route('/panel/press/list/:id', array(
 		'_controller' => 'AdminGallery::showImages',
+		'parameters' => array("lang" => $lang),
+		'methods' => 'GET'
+	)));
+
+	//temp: Function adminGallery:cleanDB
+	$collection->attachRoute(new Route('/cleanDB', array(
+		'_controller' => 'AdminGallery::cleanDB',
 		'parameters' => array("lang" => $lang),
 		'methods' => 'GET'
 	)));

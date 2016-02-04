@@ -124,7 +124,7 @@
             <li class="nav-parent"><a href=""><i class="fa fa-newspaper-o"></i> <span>Prensa</span></a>
               <ul class="children">
                 <li><a href="/panel/press/list">Lista de Galerias</a></li>
-                <li><a href="/panel/press/add;">Agregar Galeria</a></li>
+                <li><a href="/panel/press/add">Agregar Galeria</a></li>
               </ul>
             </li>
             <li class="nav-parent"><a href=""><i class="fa fa-user"></i> <span>Usuarios</span></a>

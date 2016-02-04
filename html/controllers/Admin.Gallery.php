@@ -54,11 +54,21 @@ class AdminGallery extends Controller{
 			return $query->fetchAll(\PDO::FETCH_ASSOC);
 	}
 
-	public function saveImageAction($lang = "es"){
-		// print_r($_POST);
-		// print_r($_FILES);
+	private function getGalleryId($nombre){
 
-		if( !empty($_POST) ){
+		$sql = "SELECT id FROM gallery WHERE nombre = :nombre";
+		$query = $this->pdo->prepare($sql);
+		$query->bindParam(':nombre', $nombre, \PDO::PARAM_STR);
+		$rs = $query->execute();
+		if($rs)
+			return $query->fetch(\PDO::FETCH_ASSOC);
+	}
+
+	public function saveImageAction($lang = "es"){
+		 if( !empty($_POST) ){
+
+		 	print_r($gallery_id = $this->getGalleryId($_POST['contexto'])); 
+		 	print_r($gallery_id['id']);
 			if($_POST['contexto'] == 'Gallery'){
 				$extensiones_permitidas = array("jpg", "jpeg", "gif", "png","JPG","JPEG","PNG");
 				$explode = explode(".", $_FILES['imagen']["name"]);
@@ -108,12 +118,12 @@ class AdminGallery extends Controller{
 				}
 
 
-				$gallery_id = 1;
+				$gallery_id = $this->getGalleryId($_POST['contexto']);
 				$sql = 'INSERT INTO gallery_image (gallery_id,imagen,thumb) 
 				             VALUES              (:gallery_id,:imagen,:thumb);
 				       ';
 				$query = $this->pdo->prepare($sql);
-				$query->bindParam(':gallery_id', $gallery_id);
+				$query->bindParam(':gallery_id', $gallery_id['id']);
 				$query->bindParam(':thumb', $_FILES['imagen_thumbnail']['name']);
 				$query->bindParam(':imagen', $_FILES['imagen']['name']);
 				$newImagen = $query->execute();
@@ -122,7 +132,7 @@ class AdminGallery extends Controller{
 				}
 			}	
 				
-		}
+		 }
 	}
 
 }

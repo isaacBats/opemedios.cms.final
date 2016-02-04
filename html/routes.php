@@ -301,10 +301,10 @@
 		'methods' => 'GET'
 	)));
 
-	$collection->attachRoute(new Route('/panel/contact/remove/:id', array(
+	$collection->attachRoute(new Route('/panel/contact/remove', array(
 		'_controller' => 'AdminContacto::removeContact',
 		'parameters' => array("lang" => $lang),
-		'methods' => 'GET'
+		'methods' => 'POST'
 	)));
 
 	$collection->attachRoute(new Route('/panel/users/list', array(

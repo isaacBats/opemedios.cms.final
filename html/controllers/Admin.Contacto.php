@@ -100,20 +100,21 @@ class AdminContacto extends AdminController{
 
 	}
 
-	public function removeContact($lang="es", $id){
-
-		if( !empty($id) ){
-			$sql = "DELETE FROM contactos WHERE id_contacto = :id";
+	public function removeContact($lang="es"){
+		if( !empty($_POST) ){
+			$resultado = new stdClass();
+			$sql = 'DELETE FROM contactos WHERE id_contacto=:id_contacto';
 			$query = $this->pdo->prepare($sql);
-			$query->bindParam(':id', $id, \PDO::PARAM_INT);
+			$query->bindParam(':id_contacto',$_POST['id_borrar']);
 			$rs = $query->execute();
-			// if($rs == true)
-			// 	echo "<span>Usuario eliminado</span>";
-			if( $rs != false ){
-				echo "<span>Usuario eliminado</span>";
-				header("Location: /panel/contacts/list");
+			if($rs!=false){
+				$resultado->exito = true;
 			}
-
+			else{
+				$resultado->exito = false;
+			}
+			header('Content-type: text/json');
+			echo json_encode($resultado); 
 		}
 	}
 	

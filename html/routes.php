@@ -392,13 +392,6 @@
 		'methods' => 'GET'
 	)));
 
-	//temp: Function adminGallery:cleanDB
-	$collection->attachRoute(new Route('/cleanDB', array(
-		'_controller' => 'AdminGallery::cleanDB',
-		'parameters' => array("lang" => $lang),
-		'methods' => 'GET'
-	)));
-
 
 
 ?>

@@ -5,11 +5,7 @@
   <div class="panel-body">
     <form method="post" action="/panel/galleries/save" id="addNew" enctype="multipart/form-data">
       <div class="form-group">
-        <label><?php echo $this->trans($lang, "Contexto:","Context") ?></label>
-				  <select title="Contexto" name="contexto" id="Contexto">
-					   <option value="">Contexto</option>
-					   <?php echo $context ?>
-					</select>
+        <input type="text" name="gallery_id" value="<?php echo $id_gallery; ?>">
       </div>
       <div class="form-group">
         <input type="file" name="imagen_thumbnail">

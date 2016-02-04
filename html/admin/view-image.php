@@ -1,4 +1,4 @@
-<!-- <div class="col-sm-8 col-md-9 col-lg-10">
+ <!-- <div class="col-sm-8 col-md-9 col-lg-10">
   <div class="table-responsive"> 
     <table class="table table-bordered table-default table-striped nomargin">
       <thead class="success">
@@ -28,7 +28,7 @@
 </div> -->
 
 <div class="clear-fix col-sm-3 pull-right">
-  <a href="/panel/galleries/add" class="btn btn-danger btn-quirk btn-block mb20">Agregar nueva imagen</a>
+  <a href="/panel/galleries/add/<?php echo $id; ?>" class="btn btn-danger btn-quirk btn-block mb20">Agregar nueva imagen</a>
 </div>
 <div class="clearfix"></div>
 <div class="row filemanager">

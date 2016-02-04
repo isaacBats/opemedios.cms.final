@@ -15,40 +15,7 @@ class AdminGallery extends Controller{
 		}
 		$this->footer_admin($lang);
 	}
-	public function cleanDB(){
-
-		$query = $this->pdo->prepare("select * from gallery_image where gallery_id <> 1");
-		$rs = $query->execute();
-
-		$images = $query->fetchAll(\PDO::FETCH_ASSOC);
-
-		foreach ($images as $image){
-			$stringImage = explode( "/" , $image['imagen'] ); // directory/image_name => [ direcry , imagen_name ]
-
-			$galleryUpdate = $this->pdo->prepare("UPDATE gallery SET directory = \"$stringImage[0]\" WHERE id = {$image['gallery_id']}");
-			// print_r($galleryUpdate);
-			$rs = $galleryUpdate->execute();
-			if($rs){
-				echo "exito ".$stringImage[0]; 	 
-			}else{
-				echo "no se agrego :'(";
-			}
-			$galleryImageUpdate = $this->pdo->prepare("UPDATE gallery_image SET imagen = \"$stringImage[1]\" WHERE gallery_id = {$image['gallery_id']}");
-			// print_r($galleryImageUpdate);
-			$rs2 = $galleryImageUpdate->execute();
-			if($rs2){
-				echo "exito directory ".$stringImage[1]; 			
-			}else{
-				echo "no se agrego :'(";
-			}
-			print_r($stringImage[1]);
-		}
-
-
-
-
-
-	}
+	
 	public function showImages($lang="es", $id){
 
 		$this->header_admin($lang);

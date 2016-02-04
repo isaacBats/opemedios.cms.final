@@ -55,8 +55,8 @@ class AdminGallery extends Controller{
 	}
 
 	public function saveImageAction($lang = "es"){
-		print_r($_POST);
-		print_r($_FILES);
+		// print_r($_POST);
+		// print_r($_FILES);
 
 		if( !empty($_POST) ){
 			if($_POST['contexto'] == 'Gallery'){
@@ -75,7 +75,6 @@ class AdminGallery extends Controller{
 					}
 					else
 					{
-						$_FILES['imagen']["name"]= uniqid().'.'.$extension;
 						$path=__DIR__."/../assets/images/galeria/". $_FILES['imagen']["name"];
 						$move = move_uploaded_file($_FILES['imagen']["tmp_name"],$path);
 
@@ -99,7 +98,6 @@ class AdminGallery extends Controller{
 					}
 					else
 					{
-						$_FILES['imagen_thumbnail']["name"]= uniqid().'.'.$extension;
 						$path=__DIR__."/../assets/images/galeria/". $_FILES['imagen_thumbnail']["name"];
 						$move = move_uploaded_file($_FILES['imagen_thumbnail']["tmp_name"],$path);
 
@@ -110,17 +108,17 @@ class AdminGallery extends Controller{
 				}
 
 
-				$sql = 'INSERT INTO gallery_image (gallery_id,imagen,thumb) VALUES (:gallery_id,:imagen,:thumb)';
+				$gallery_id = 1;
+				$sql = 'INSERT INTO gallery_image (gallery_id,imagen,thumb) 
+				             VALUES              (:gallery_id,:imagen,:thumb);
+				       ';
 				$query = $this->pdo->prepare($sql);
-				$gallery_id = '1';
 				$query->bindParam(':gallery_id', $gallery_id);
-				$query->bindParam(':imagen_thumbnail', $_FILES['imagen_thumbnail']['name']);
+				$query->bindParam(':thumb', $_FILES['imagen_thumbnail']['name']);
 				$query->bindParam(':imagen', $_FILES['imagen']['name']);
-				
-				$rs = $query->execute();
-				if( $rs!=false ){
-					echo "Error al subir la imagen";
-					//header("Location: /panel/gallery/list");
+				$newImagen = $query->execute();
+				if( $newImagen != false ){
+					header("Location: /panel/gallery/list");
 				}
 			}	
 				

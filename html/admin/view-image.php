@@ -53,7 +53,7 @@
         <div class="thmb-prev">
           <img src="<?php echo $url.$image['imagen']; ?>" class="img-responsive" alt="">
         </div>
-        <h5 class="fm-title"><a href="">Imagen 1</a></h5>
+        <h5 class="fm-title"><a href=""><?php echo $image['imagen'] ?></a></h5>
         <small class="text-muted">Added: July 1, 2015</small>
       </div><!-- thmb -->
     </div>

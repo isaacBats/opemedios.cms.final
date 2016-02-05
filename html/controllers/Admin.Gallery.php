@@ -15,7 +15,7 @@ class AdminGallery extends Controller{
 		}
 		$this->footer_admin($lang);
 	}
-	
+
 	public function showImages($lang="es", $id){
 
 		$this->header_admin($lang);
@@ -68,8 +68,9 @@ class AdminGallery extends Controller{
 	}
 
 	public function saveImageAction($lang = "es"){
+		print_r($_POST);
 		 if( !empty($_POST) ){
-			if($_POST['contexto'] == 'Gallery'){
+			if($_POST['gallery_id'] == '1'){
 				$extensiones_permitidas = array("jpg", "jpeg", "gif", "png","JPG","JPEG","PNG");
 				$explode = explode(".", $_FILES['imagen']["name"]);
 				$extension = end($explode);
@@ -118,12 +119,12 @@ class AdminGallery extends Controller{
 				}
 
 
-				$gallery_id = $this->getGalleryId($_POST['contexto']);
+				$gallery_id = $_POST['gallery_id'];
 				$sql = 'INSERT INTO gallery_image (gallery_id,imagen,thumb) 
 				             VALUES              (:gallery_id,:imagen,:thumb);
 				       ';
 				$query = $this->pdo->prepare($sql);
-				$query->bindParam(':gallery_id', $gallery_id['id']);
+				$query->bindParam(':gallery_id', $gallery_id);
 				$query->bindParam(':thumb', $_FILES['imagen_thumbnail']['name']);
 				$query->bindParam(':imagen', $_FILES['imagen']['name']);
 				$newImagen = $query->execute();

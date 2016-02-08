@@ -155,7 +155,7 @@
 		}
 									
 
-		public function header( $lang , $nobeard = false , $product = false){
+		public function header( $lang , $nobeard = false , $product = false , $bread_class = ""){
 			require $this->views."header.php";
 		}
 		public function footer( $lang ){

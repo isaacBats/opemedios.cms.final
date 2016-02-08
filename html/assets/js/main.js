@@ -20,6 +20,8 @@ jQuery(document).ready(function($){
 	// START
 	startGallery()
 	
+	// CONTACTO
+	startContactForm();
 
 });
 
@@ -28,32 +30,34 @@ jQuery(document).ready(function($){
 
 function startGallery(){
 
-	try{
-	window.gallery = $('#gallery').galleriffic('#navigation', {
-      delay: 300,
-      numThumbs: 13,
-      preloadAhead: 0,
-      imageContainerSel: '#slideshow',
-      controlsContainerSel: '#controls',
-      fixedNavigation: true,
-      galleryKeyboardNav: true,
-      autoPlay: false,
-      enableHistory: false,
-      enableTopPager: false,
-      enableBottomPager: true,
-      renderSSControls: false,
-      nextLinkText: '>',
-      prevLinkText: '<'
-    });
-    window.gallery.onFadeOut = function () {
-      $('#details').fadeOut('fast');
-    };
-    window.gallery.onFadeIn = function () {
-      $('#details').fadeIn('fast');
-    };
+	if( $('#gallery').length > 0 ){
+		try{
+		window.gallery = $('#gallery').galleriffic('#navigation', {
+	      delay: 300,
+	      numThumbs: 13,
+	      preloadAhead: 0,
+	      imageContainerSel: '#slideshow',
+	      controlsContainerSel: '#controls',
+	      fixedNavigation: true,
+	      galleryKeyboardNav: true,
+	      autoPlay: false,
+	      enableHistory: false,
+	      enableTopPager: false,
+	      enableBottomPager: true,
+	      renderSSControls: false,
+	      nextLinkText: '>',
+	      prevLinkText: '<'
+	    });
+	    window.gallery.onFadeOut = function () {
+	      $('#details').fadeOut('fast');
+	    };
+	    window.gallery.onFadeIn = function () {
+	      $('#details').fadeIn('fast');
+	    };
 
-	}catch(e){
-		console.log(e);
+		}catch(e){
+			console.log(e);
+		}
 	}
 }
 
@@ -169,6 +173,49 @@ function controllProgressBtn(){
 	}
 	jQuery("#btn-registro").val(_progressBar);
 }
+
+
+function startContactForm(){
+	jQuery('#contact-form').validate({
+		rules: {
+			'nombre':{required:true},
+			'empresa':{required:true},
+			'puesto':{required:true},
+			'pais':{required:true},
+			'estado':{required:true},
+			'codigopostal':{required:true},
+			'telefono':{required:true},
+			'email':{required:true,email:true},
+			'comoseentero':{required:true}
+		},
+		messages: {
+			'nombre':{required:''},
+			'empresa':{required:''},
+			'puesto':{required:''},
+			'pais':{required:''},
+			'estado':{required:''},
+			'codigopostal':{required:''},
+			'telefono':{required:''},
+			'email':{required:'',email:''},
+			'comoseentero':{required:''}
+		},
+		errorClass : "error",
+		debug: true,
+		submitHandler: function(form){ 
+			var formulario = jQuery(form);
+			var datos = formulario.serialize();
+			jQuery('#btn-submit').attr("disabled","disabled").val('Enviando...');
+			jQuery.post(formulario.attr('action'),datos,function(json){
+				if (json.exito) {
+					jQuery('#alertMessage').html(json.mensaje);	
+					jQuery('#alertHolder').fadeIn().click(function(){jQuery(this).fadeOut(function(){window.location.reload();});  });
+				}
+			}); 
+		}
+	});
+}
+
+
 
 //  SEARCH 
 var searchStatus = null;

@@ -7,6 +7,17 @@
 
 class Contacto extends Controller
 {
+	private function getCountries(){
+		$sql = "SELECT * FROM countries ";
+		$query = $this->pdo->prepare($sql);
+		$rs = $query->execute();
+		$html = "";
+		foreach ($query->fetchAll(\PDO::FETCH_ASSOC) as $country) {
+			$html .= '<option value="'.$country['nombre'].'" >'.$country['nombre'].'</option>';
+			
+		}
+		return $html;
+	}
 	function saveForm($lang){
 		if( !empty($_POST) ){
 
@@ -59,8 +70,9 @@ class Contacto extends Controller
 	}
 
 	function showForm($lang="es"){
-		$this->addbread( array("url"=>"/contact" , "label"=>"Contacto ") );
-		$this->header($lang);
+		$this->addbread( array("url"=>"/contact" , "label"=>$this->trans($lang , "Contacto " , "Contact Us ")) );
+		$countries = $this->getCountries();
+		$this->header($lang ,false , false , "contacto");
 		require $this->views."formulario-contacto.php";
 		$this->footer($lang);
 	}

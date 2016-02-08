@@ -1,9 +1,9 @@
 <div class="contact-info">
 	<img src="/assets/images/contacto.jpg">
 	<div class="info alt">
-		<img class="mexico" src="/assets/images/mapa.jpg">
-		<img class="headquarters" src="/assets/images/headquarters.png">
-		<img class="highPoint" src="/assets/images/highpoint.png">
+		<img class="infoM mexico" src="/assets/images/mapa.jpg">
+		<img class="infoM headquarters" src="/assets/images/headquarters.png">
+		<img class="infoM highPoint" src="/assets/images/highpoint.png">
 	</div><!-- .info -->
 	<div class="info mexico">
 		<h2>Showroom México</h2>
@@ -14,11 +14,11 @@
 			(+52) 55 5596-8364
 		</p>
 		<a href="mailto:centroam@alfonsomarinaebanista.com?subject=Contácto">centroam@alfonsomarinaebanista.com</a>
-		<a href="https://maps.google.com/maps?q=19.407274,-99.239815&num=1&t=m&z=17" target="_blank" class=""><i class="fa fa-plus-square-o fa-lg"></i> Ver mapa</a>
-		<select class="falta">
-			<option data-geo-lat=\'19.407274\' data-geo-long=\'-99.239815\' mapaUb="https://maps.google.com/maps?q=19.407274,-99.239815&amp;num=1&amp;t=m&amp;z=17" value="Showroom México">Showroom México</option>
-			<option data-geo-lat=\'19.403378\' data-geo-long=\'-99.076898\' mapaUb="https://maps.google.com.mx/maps?q=19.403378,-99.076898&amp;num=1&amp;t=m&amp;z=17" value="Headquarters">Headquarters</option>
-			<option data-geo-lat=\'35.9609696\' data-geo-long=\'-80.006355\' mapaUb="https://maps.google.com/maps?q=35.9609696,-80.006355" value="High Point">High Point</option>
+		<a href="https://maps.google.com/maps?q=19.407274,-99.239815&num=1&t=m&z=17" target="_blank" class=""><i class="fa fa-plus-square-o fa-lg"></i> <?php echo $this->trans($lang,'Ver mapa','View map'); ?></a>
+		<select  onchange="$('.info select').val( this.value);$('.info:not(.alt) , .infoM').hide();$('.info.'+this.value+' , '+'.infoM.'+this.value).show();">
+			<option value="mexico">Showroom México</option>
+			<option value="headquarters">Headquarters</option>
+			<option value="highPoint">High Point</option>
 		</select>
 	</div><!-- .info -->
 	<div class="info headquarters">
@@ -28,11 +28,11 @@
 			1 888 489 38 39<br>
 			(+52)55 5716 - 9275</p>
 			<a href="mailto:info@alfonsomarinaebanista.com?subject=Contácto">info@alfonsomarinaebanista.com</a>
-			<a href="https://maps.google.com.mx/maps?q=19.403378,-99.076898&amp;num=1&amp;t=m&amp;z=17" target="_blank" class=""><i class="fa fa-plus-square-o fa-lg"></i> Ver mapa</a>
-			<select class="falta">
-				<option data-geo-lat=\'19.407274\' data-geo-long=\'-99.239815\' mapaUb="https://maps.google.com/maps?q=19.407274,-99.239815&amp;num=1&amp;t=m&amp;z=17" value="Showroom México">Showroom México</option>
-				<option data-geo-lat=\'19.403378\' data-geo-long=\'-99.076898\' mapaUb="https://maps.google.com.mx/maps?q=19.403378,-99.076898&amp;num=1&amp;t=m&amp;z=17" value="Headquarters">Headquarters</option>
-				<option data-geo-lat=\'35.9609696\' data-geo-long=\'-80.006355\' mapaUb="https://maps.google.com/maps?q=35.9609696,-80.006355" value="High Point">High Point</option>
+			<a href="https://maps.google.com.mx/maps?q=19.403378,-99.076898&amp;num=1&amp;t=m&amp;z=17" target="_blank" class=""><i class="fa fa-plus-square-o fa-lg"></i> <?php echo $this->trans($lang,'Ver mapa','View map'); ?></a>
+			<select  onchange="$('.info select').val( this.value);$('.info:not(.alt) , .infoM').hide();$('.info.'+this.value+' , '+'.infoM.'+this.value).show();">
+				<option value="mexico">Showroom México</option>
+				<option value="headquarters">Headquarters</option>
+				<option value="highPoint">High Point</option>
 			</select>
 		</div><!-- .info -->
 		<div class="info highPoint">
@@ -41,11 +41,11 @@
 				High Point, NC 27260<br>
 				Phone: 336 887 9320
 			</p>
-			<a href="https://maps.google.com/maps?q=35.9609696,-80.006355" target="_blank" class=""><i class="fa fa-plus-square-o fa-lg"></i> Ver mapa</a>
-			<select class="falta">
-				<option data-geo-lat=\'19.407274\' data-geo-long=\'-99.239815\' mapaUb="https://maps.google.com/maps?q=19.407274,-99.239815&amp;num=1&amp;t=m&amp;z=17" value="Showroom México">Showroom México</option>
-				<option data-geo-lat=\'19.403378\' data-geo-long=\'-99.076898\' mapaUb="https://maps.google.com.mx/maps?q=19.403378,-99.076898&amp;num=1&amp;t=m&amp;z=17" value="Headquarters">Headquarters</option>
-				<option data-geo-lat=\'35.9609696\' data-geo-long=\'-80.006355\' mapaUb="https://maps.google.com/maps?q=35.9609696,-80.006355" value="High Point">High Point</option>
+			<a href="https://maps.google.com/maps?q=35.9609696,-80.006355" target="_blank" class=""><i class="fa fa-plus-square-o fa-lg"></i> <?php echo $this->trans($lang,'Ver mapa','View map'); ?></a>
+			<select  onchange="$('.info select').val( this.value);$('.info:not(.alt) , .infoM').hide();$('.info.'+this.value+' , '+'.infoM.'+this.value).show();">
+				<option value="mexico">Showroom México</option>
+				<option value="headquarters">Headquarters</option>
+				<option value="highPoint">High Point</option>
 			</select>
 		</div><!-- .info -->
 		<br class="clear">
@@ -66,7 +66,7 @@
 			<div class="field">
 				<select name="pais">
 					<option value=""><?php echo $this->trans($lang,'País','Country'); ?></option>
-					<option value="mexico">México</option>
+					<?php echo $countries;?>
 				</select>
 			</div><!-- .field -->
 			<div class="field">
@@ -96,3 +96,10 @@
 			<input name="enviar" id="btn-submit" type="submit" class="general-btn" value="<?php echo $this->trans($lang,'Enviar','Send'); ?>">
 		</form>
 		</div><!-- .contact-form -->
+		<div class="alert" id="alertHolder">
+			<div class="message">
+				<h2>CONTACTO</h2>
+				<p id="alertMessage"> Gracias, te contactaremos lo más pronto posible </p>
+				<span><?php echo $this->trans($lang , "Continuar" , "Continue"); ?></span>
+			</div>
+		</div>

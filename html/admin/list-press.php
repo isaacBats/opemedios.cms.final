@@ -16,7 +16,7 @@
         echo '
         <tr>
          <td>'.$p['nombre'].'</td>
-         <td><img height="150" width="150" alt="" src="/assets/images/press/'.$p['slug'].'/'.$p['imagen'].'"/> </td>
+         <td><img height="150" width="150" alt="" src="/assets/images/press/cover/'.$p['imagen'].'"/> </td>
          <td class="text-right">
           <a class="btn btn-default btn-sm" href="/panel/gallery/'.$p['id'].'">Ver</a>
         </td>

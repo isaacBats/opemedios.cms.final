@@ -38,8 +38,8 @@ class AdminPress extends Controller{
 						echo "ERROR: " . $_FILES['imagen']["error"] . "<br>";
 					}
 					else{
-						$pathname .= $_FILES['imagen']["name"];
-						$move = move_uploaded_file($_FILES['imagen']["tmp_name"],$pathname);
+						$path = __DIR__."/../assets/images/press/cover/".$_FILES['imagen']["name"];
+						$move = move_uploaded_file($_FILES['imagen']["tmp_name"],$path);
 						if(!$move){
 							throw new Exception("Error al mover el archivo", 1);
 						}

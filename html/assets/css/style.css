@@ -3434,6 +3434,10 @@ div.field select.error
   margin: 21px 0 20px 20px; 
   }
 
+    .breadcrumb.vertical.contacto{
+      margin: 25px 0 25px 10%;
+    }
+
 .breadcrumb span {
   color: #D4D1CB; }
 
@@ -3619,14 +3623,17 @@ div.field select.error
   .contact-info .info {
     float: left;
     width: 50%;
-    margin-bottom: 20px; }
+    margin-bottom: 10px;
+    margin-left:  28px;
+  }
     .contact-info .info.alt {
       width: 210px;
+      margin-left:  0px;
     }
     .contact-info .info img {
       min-width: initial; }
     .contact-info .info h2 {
-      margin-bottom: 15px; }
+      margin-bottom: 8px; }
     .contact-info .info p {
       font-family: Georgia, "Times New Roman", Times, serif; }
     .contact-info .info a {
@@ -3919,7 +3926,60 @@ h2.tituloSeccion {
   display: none;
 }
 
+div.alert{
+  display: none;
+  background-color: rgba( 100,100,100,0.3);
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
 
+div.alert .message{
+    position: absolute;
+    top:calc( 50% - 70px );
+    left:calc( 50% - 120px );
+    background-color: #c9c3ba;
+    display: inline-block;
+    width:240px;
+    height:140px;
+    -webkit-box-shadow: 5px 5px 25px 0px rgba( 0,0,0,0.4);
+    -moz-box-shadow: 5px 5px 25px 0px rgba( 0,0,0,0.4);
+    box-shadow: 5px 5px 25px 0px rgba( 0,0,0,0.4);
+}
+  div.alert .message h2{
+    color: #FFF;
+    width: 80%;
+    margin-left: 10%;
+    font-size: 30px;
+    text-align: center;
+    padding: 10px 0px;
+    margin-top: 5px;
+    border-bottom: 1px solid #FFF;
+    font-weight: lighter;
+  }
+  div.alert .message p {
+    border-top: 1px solid #FFF;
+    width: 80%;
+    margin-left: 10%;
+    margin-top: 1px;
+    color: #FFF;
+    text-align: center;
+    padding-top: 15px;
+    line-height: 14px;
+    font-family: Verdana, Geneva, sans-serif;
+  }
+  div.alert .message span{
+    width: 80%;
+    display: inline-block;
+    cursor: pointer;
+    text-decoration: underline;
+    margin-left: 10%;
+    color: #FFF;
+    text-align: center;
+    font-family: Verdana, Geneva, sans-serif;
+  }
 
 
 

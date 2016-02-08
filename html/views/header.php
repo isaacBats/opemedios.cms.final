@@ -131,7 +131,7 @@
 	</header><!-- #main-header -->
 	<div id="wrapper">
 		<?php if( isset( $this ) ){ if( !$nobeard ) {?>
-		<div class="breadcrumb vertical">
+		<div class="breadcrumb vertical <?php echo isset( $bread_class )?$bread_class:""; ?>">
 			 <?php $this->bread($lang ); ?>
 		</div>
 		<?php } }	?>

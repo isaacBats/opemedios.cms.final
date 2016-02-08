@@ -84,7 +84,7 @@
 					
 				}
 			}
-	 		require $this->views."press-detail.php";
+			require $this->views."press-detail.php";
  		}else{
 
  			$this->addBread( array( "label"=> ucfirst( $slug ) ) );	

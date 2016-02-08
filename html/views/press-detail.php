@@ -4,8 +4,8 @@
 				<?php 
 					foreach ($images as $img) {
 					echo '<li style="float:left;">
-							<a href="/assets/images/press/'.$img["imagen"].'" original="/assets/images/press/'.$img["imagen"].'">
-								<img src="/assets/images/press/'.$img["imagen"].'" />
+							<a href="/assets/images/press/'.$gallery[0]['slug'].'/'.$img["imagen"].'" original="/assets/images/press/'.$gallery[0]['slug'].'/'.$img["imagen"].'">
+								<img src="/assets/images/press/'.$gallery[0]['slug'].'/'.$img["imagen"].'" />
 							</a>
 						</li>';
 					}

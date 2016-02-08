@@ -380,6 +380,7 @@
 		'methods' => 'POST'
 	)));
 
+	//Admin Press
 	$collection->attachRoute(new Route('/panel/press/list', array(
 		'_controller' => 'AdminPress::showListPress',
 		'parameters' => array("lang" => $lang),
@@ -390,6 +391,18 @@
 		'_controller' => 'AdminGallery::showImages',
 		'parameters' => array("lang" => $lang),
 		'methods' => 'GET'
+	)));
+
+	$collection->attachRoute(new Route('/panel/add/gallery', array(
+		'_controller' => 'AdminPress::addGalleryAction',
+		'parameters' => array("lang" => $lang),
+		'methods' => 'GET'
+	)));
+
+	$collection->attachRoute(new Route('/panel/save/gallery', array(
+		'_controller' => 'AdminPress::saveGalleryAction',
+		'parameters' => array("lang" => $lang),
+		'methods' => 'POST'
 	)));
 
 

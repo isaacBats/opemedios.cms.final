@@ -1,6 +1,6 @@
 <div class="panel">
   <div class="panel-heading">
-    <h4 class="panel-title">Agregar nueva imagen</h4>
+    <h2 class="panel-title">Agregar nueva imagen</h2>
   </div>
   <div class="panel-body">
     <form method="post" action="/panel/galleries/save" id="addNew" enctype="multipart/form-data">

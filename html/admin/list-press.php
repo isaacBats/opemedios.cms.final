@@ -1,4 +1,7 @@
 <div class="table-responsive">
+  <div class="clear-fix col-sm-3 pull-right">
+    <a href="/panel/add/gallery" class="btn btn-danger btn-quirk btn-block mb20">Nueva Galeria</a>
+  </div>
   <table class="table table-bordered table-default table-striped nomargin">
     <thead class="success">
       <tr>
@@ -13,7 +16,7 @@
         echo '
         <tr>
          <td>'.$p['nombre'].'</td>
-         <td><img height="150" width="150" alt="" src="/assets/images/press/'.$p['imagen'].'"/> </td>
+         <td><img height="150" width="150" alt="" src="/assets/images/press/'.$p['slug'].'/'.$p['imagen'].'"/> </td>
          <td class="text-right">
           <a class="btn btn-default btn-sm" href="/panel/gallery/'.$p['id'].'">Ver</a>
         </td>

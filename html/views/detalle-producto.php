@@ -1,8 +1,8 @@
 <div class="product">
     <div id="product-image">
-        <img src="<?php echo $product["imagen"]== "null"?"http://placehold.it/500x600/f4f4f4/807562?text=product":'http://www.alfonsomarinaebanista.com/images/'.$product["ur"].'/'.$product["ur"].'_alta1.jpg'; ?>">
+        <img src="<?php echo $product["imagen"]== "-"?"http://placehold.it/500x600/f4f4f4/807562?text=product":'http://www.alfonsomarinaebanista.com/images/'.$product["ur"].'/'.$product["ur"].'_alta1.jpg'; ?>">
         
-        <!-- <img src="<?php echo $product["imagen"]== "null"?"http://placehold.it/500x600/f4f4f4/807562?text=product":'/assets/images/product/'.$product['imagen'].'' ?>"> -->
+        <!-- <img src="<?php echo $product["imagen"]== "-"?"http://placehold.it/500x600/f4f4f4/807562?text=product":'/assets/images/product/'.$product['imagen'].'' ?>"> -->
     </div><!-- #product-image-->
     <div id="product-info">
         <div class="nav-detalle">
@@ -10,28 +10,19 @@
         <a href="<?php echo $this->url($lang,'/catalog') ?>" class="ver-todos"><?php echo $this->trans($lang , "Ver todos" , "Show all") ?></a>
         <br class="clear">
     </div>
-        <h2 class="product-title"><?php echo  $product['nombre'] ?></h2>
-        <div class="features">
-            <p>
-                <strong><?php echo $product['ur'] ?></strong>
-            </p>
-            <p>
-                <?php  echo $this->trans($lang , 'Medidas cm' , 'Dimensions cm').': <b>W</b> '.$this->nmb($product['frente']).' <b>D</b> '.$this->nmb($product['fondo']).' <b>H</b> '.$this->nmb($product['altura']).' <b>cm</b><br>';?>
-                <?php echo  $this->trans($lang , 'Medidas in' , 'Dimensions in').': <b>W</b> '.$product['frentre_plg'].' <b>D</b> '.$product['fondo_plg'].' <b>H</b> '.$product['altura_plg'].' <b>in</b><br>';?>
+        
+        <?php 
+            if (isset( $match )) {
+                $tmp = $product;
+                $product = $match;
+                require "features.php"; 
+                $product = $tmp;
+            }
+            
+            require "features.php"; 
 
-                <?php if( $product["acabado"] != "null"){ echo $this->trans( $lang , "Acabado:" , "Finishes:"); ?><?php echo $product["acabado"]."<br>"; }?>
-                <?php if( $product["caracter"] != "null"){ echo $this->trans( $lang , "Carácter:" , "Character:");?> <?php echo $product['caracter']."<br>";} ?>
-                <?php if( $product["como_se_muestra"] != "null"){ echo $this->trans( $lang , "Como se muestra:" , "As shown:") ?><?php echo $product['como_se_muestra']."<br>"; }?>
-
-                <?php echo $this->trans( $lang , "Price:" , "Precio:") ?>
-
-                <?php if( isset( $_SESSION["user"] ) ){ 
-                        echo $this->trans( $lang , " $ ".$product["precio"]." MX" , " $ ".$product["_price"]." DLS" );
-                    }else{ ?>
-                        <a href="<?php echo $this->url( $lang , "/login") ?>" class="general-link">Iniciar sesión</a>
-                <?php } ?>
-            </p>
-        </div><!-- .features -->
+        ?>
+        
         <div class="features line">
             <?php if( $lang == "es") {?>
             <p>
@@ -44,10 +35,8 @@
                 <a href="mailto:centro@alfonsomarinaebanista.com"><strong>customer service</strong></a>
             </p>
             <?php } ?>
-            <!-- <a href="javascript:void(0);" class="rel"><img src="/assets/images/relacionado1.jpg"></a>
-            <a href="javascript:void(0);" class="rel"><img src="/assets/images/relacionado2.jpg"></a>
-            <a href="javascript:void(0);" class="rel"><img src="/assets/images/relacionado3.jpg"></a> -->
         </div><!-- .sec-features -->
+
         <div class="features line">
         <?php if( isset($_SESSION['favoritos']) && in_array($product['id'], $_SESSION['favoritos'])){ ?>
             <a href="javascript:void(0);" id="btn-fav" class="general-btn eliminar" data-id="<?php echo $product['id']; ?>">
@@ -64,9 +53,17 @@
             <p>
                 <?php echo $this->trans( $lang , "Productos Relacionados" , "Related Products") ?>
             </p>
+            <?php
+            foreach ($relacionados as $pro) {
+                echo '<a href="'.$this->url($lang, "/product/".$pro['ur']).'" class="rel_product">';
+                echo '<img src="'.($pro["imagen"]== "-"?"http://placehold.it/500x600/f4f4f4/807562?text=product":'/assets/images/product/'.$pro['imagen']).'"></a>';
+             } 
+            ?>
+            <br class="clear">
         </div>
         <?php } ?>
         <div class="post-actions">
+
             <a href="mailto:?body=http://amarinav2.denumeris.com/<?php $this->url($lang); ?> --- <?php echo $product["nombre"] ?>">
             <i class="fa fa-envelope-o fa-lg"></i> <?php echo $this->trans($lang , "Enviar por correo" , "Email it") ?></a>
             <a href="javascript:window.print()"><i class="fa fa-print fa-lg"></i>  <?php echo $this->trans($lang , "Imprimir" , "Print") ?></a>

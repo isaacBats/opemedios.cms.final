@@ -393,6 +393,23 @@
 		'methods' => 'GET'
 	)));
 
+	//Admin Press
+	$collection->attachRoute(new Route('/panel/export', array(
+		'_controller' => 'Catalog::export',
+		'parameters' => array("lang" => $lang),
+		'methods' => 'GET'
+	)));
+	$collection->attachRoute(new Route('/panel/import', array(
+		'_controller' => 'Catalog::import',
+		'parameters' => array("lang" => $lang),
+		'methods' => 'GET'
+	)));
+	$collection->attachRoute(new Route('/panel/import', array(
+		'_controller' => 'Catalog::import',
+		'parameters' => array("lang" => $lang),
+		'methods' => 'POST'
+	)));
+
 	$collection->attachRoute(new Route('/panel/press/list/:id', array(
 		'_controller' => 'AdminGallery::showImages',
 		'parameters' => array("lang" => $lang),

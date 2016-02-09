@@ -15,7 +15,7 @@
 		</p>
 		<a href="mailto:centroam@alfonsomarinaebanista.com?subject=Contácto">centroam@alfonsomarinaebanista.com</a>
 		<a href="https://maps.google.com/maps?q=19.407274,-99.239815&num=1&t=m&z=17" target="_blank" class=""><i class="fa fa-plus-square-o fa-lg"></i> <?php echo $this->trans($lang,'Ver mapa','View map'); ?></a>
-		<select  onchange="$('.info select').val( this.value);$('.info:not(.alt) , .infoM').hide();$('.info.'+this.value+' , '+'.infoM.'+this.value).show();">
+		<select  onchange="$('.info select').val( this.value);$('.info:not(.alt) , .infoM').hide(); $('.info.'+this.value+' , '+'.infoM.'+this.value).show();">
 			<option value="mexico">Showroom México</option>
 			<option value="headquarters">Headquarters</option>
 			<option value="highPoint">High Point</option>

@@ -4,7 +4,9 @@ class Catalog extends Controller{
 	
 	// Check numbers 
 	private function nmb( $number ){
-		return number_format(str_replace( ",",".", $number ),1);
+		if( $number != "-"){
+			return number_format(str_replace( ",",".", $number ),1);	
+		}
 	}
 
 	public function productCare($lang = "es"){
@@ -125,7 +127,7 @@ class Catalog extends Controller{
 		}	
 			$this->header( $lang );
 			
-			$sqlCatalogo = "SELECT * FROM product GROUP BY ".$this->trans($lang , "grupo" , "_group")." ORDER BY ".$this->trans($lang , "tipo" , "_type")." DESC";
+			$sqlCatalogo = "SELECT * FROM product GROUP BY ".$this->trans($lang , "categoria" , "_category")." ORDER BY ".$this->trans($lang , "tipo" , "_type")." DESC";
 			
 			$queryCatalogo = $this->pdo->prepare($sqlCatalogo);
 			$rsCatalogo = $queryCatalogo->execute();
@@ -138,7 +140,7 @@ class Catalog extends Controller{
 					$html .= '<div class="tituloSeccion clear">'.ucfirst(strtolower($tipo)).'</div>';
 				}
 				$html .= '<article class="item4Col">
-						        <a href="'.$this->url($lang, "/catalog/".strtolower($tipo)."/".strtolower(str_replace(" " , "-" , $product[$this->trans($lang , "grupo" , "_group")]))).'">
+						        <a href="'.$this->url($lang, "/catalog/".strtolower($tipo)."/".strtolower(str_replace(" " , "-" , $product[$this->trans($lang , "categoria" , "_category")]))).'">
 						        	<div class="imageHolder">
 							            <img 
 							            alt="'.$product["nombre"].'" 
@@ -147,7 +149,7 @@ class Catalog extends Controller{
 						            <br class="clear">
 						            <br class="clear">
 						            <p>
-						            '.$product[$this->trans($lang , "grupo" , "_group")].'
+						            '.$product[$this->trans($lang , "categoria" , "_category")].'
 						            </p>
 						        </a>
 						    </article>';
@@ -188,15 +190,15 @@ class Catalog extends Controller{
 		$html = "";
 		$style =  $style == "casual" || $style == "metro" ? $this->trans($lang , "estilo" , "style")." LIKE '{$style}' " :" 1=1 ";
 		$type =  $type != ""?$this->trans($lang , "tipo" , "_type")." LIKE '{$type}' ":" 1=1 ";
-		$group =  $group != ""?"LOWER( ".$this->trans($lang , "grupo" , "_group")." ) LIKE '%".str_replace("-" , " " , urldecode($group))."%' ":" 1=1 ";
+		$group =  $group != ""?"LOWER( ".$this->trans($lang , "categoria" , "_category")." ) LIKE '%".str_replace("-" , " " , urldecode($group))."%' ":" 1=1 ";
 		$where = implode( " AND " , array( $style , $type ,  $group ) );
 		
 
-		$groupBy = ( $group == " 1=1 " )?" GROUP BY ".$this->trans($lang , "grupo" , "_group")." ":"";
+		$groupBy = ( $group == " 1=1 " )?" GROUP BY ".$this->trans($lang , "categoria" , "_category")." ":"";
 
 
 
-		$grouping = ($groupBy!="")?$this->trans($lang , "grupo" , "_group"):false;
+		$grouping = ($groupBy!="")?$this->trans($lang , "categoria" , "_category"):false;
 
 
 		$sqlCatalogo = "SELECT * FROM product WHERE {$where} {$groupBy} ";
@@ -211,7 +213,7 @@ class Catalog extends Controller{
 			$lang = $lang=="es"?"en":"es";
 			$style =  $ostyle == "casual" || $ostyle == "metro" ? $this->trans($lang , "estilo" , "style")." LIKE '{$ostyle}' " :" 1=1 ";
 			$type =  $otype != ""?$this->trans($lang , "tipo" , "_type")." LIKE '{$otype}' ":" 1=1 ";
-			$group =  $ogroup != ""?"LOWER( ".$this->trans($lang , "grupo" , "_group")." ) LIKE '%".str_replace("-" , " " , urldecode($ogroup))."%' ":" 1=1 ";
+			$group =  $ogroup != ""?"LOWER( ".$this->trans($lang , "categoria" , "_category")." ) LIKE '%".str_replace("-" , " " , urldecode($ogroup))."%' ":" 1=1 ";
 			$where = implode( " AND " , array( $style , $type ,  $group ) );
 			$lang = $lang=="en"?"es":"en";
 			$sqlCatalogo = "SELECT * FROM product WHERE {$where} {$groupBy}";
@@ -232,7 +234,7 @@ class Catalog extends Controller{
 				if($grouping){
 					foreach ($catalogo as $product) {
 						$stype = strtolower($this->trans( $lang , $product["tipo"] , $product["_type"]));
-						$product["imagen"] = $product["imagen"] != "null"?"/assets/images/product/".$product["imagen"]:"http://placehold.it/200x200/f4f4f4/ccc?text=product";
+						$product["imagen"] = $product["imagen"] != "-"?"/assets/images/product/".$product["imagen"]:"http://placehold.it/200x200/f4f4f4/ccc?text=product";
 						$html .= '
 								<article class="item4Col">
 							        <a href="'.$this->url($lang, "/catalog/".$stype."/".strtolower(str_replace(" ", "-" ,$product[$grouping] )) ).'">
@@ -253,7 +255,7 @@ class Catalog extends Controller{
 					}
 				}else{
 					foreach ($catalogo as $product) {
-						$product["imagen"] = $product["imagen"] != "null"?"/assets/images/product/".$product["imagen"]:"http://placehold.it/200x200/f4f4f4/ccc?text=product";
+						$product["imagen"] = $product["imagen"] != "-"?"/assets/images/product/".$product["imagen"]:"http://placehold.it/200x200/f4f4f4/ccc?text=product";
 						$html .= '
 								<article class="item4Col">
 							        <a href="'.$this->url($lang, "/product/".$product['ur']).'">
@@ -331,12 +333,168 @@ class Catalog extends Controller{
 		return $html;
 	}
 
+
+	function importRow( $fields , $Row , $c){
+		
+		$query = $this->pdo->prepare("SELECT * FROM product WHERE `ur` LIKE '{$Row[0]}' ");
+		$rs = $query->execute();
+		$product = $query->fetch( PDO::FETCH_ASSOC);
+		
+		if( $product ){
+			$this->importUpdate( $fields , $Row);
+			$c[0]++;
+		}else{
+			$this->importCreate( $fields , $Row);
+			$c[1]++;
+		}
+		return $c;
+
+		
+	}
+
+	function importUpdate( $fields , $Row){
+		$out = "UPDATE `product` SET ";
+		foreach ($fields as $key => $value) $out .= "`".$value."` = '".@mysql_real_escape_string($Row[$key]).($key == count($fields)-1?"":"',\n\t");
+		$out .= "' \r WHERE `ur` LIKE '{$Row[0]}';\n\n";
+		if( !$this->pdo->prepare($out)->execute() ){
+			echo "<pre>";
+			echo "error\n";
+			echo $out ;
+			exit;
+		}
+	}
+
+	function importCreate( $fields , $Row){
+		$out = "INSERT INTO `product` (";
+		foreach ($fields as $key => $value) $out .= "`".$value.($key == count($fields)-1?"":"`,\n");
+		$out .= "`) VALUES (";
+		foreach ($Row as $key => $d) $out .= "'".@mysql_real_escape_string($d).($key == count($fields)-1?"":"',\n");
+		// $out .= "`".$value."` = '".$Row[$key].($key == count($fields)-1?"":"',\n\t");
+		$out .= "');\n\n";
+		if( !$this->pdo->prepare($out)->execute() ){
+			echo "<pre>";
+			echo "error\n";
+			echo $out ;
+			exit;
+		}
+	}
+
+
+	function import(){
+		if(isset( $_FILES["excel"] )){
+
+			$file = $_FILES["excel"]["tmp_name"];
+			$f = utf8_encode( file_get_contents( $file ) );
+			$Data = str_getcsv($f, "\n");
+			foreach($Data as &$Row) $Row = str_getcsv($Row, ","); 
+			$c=0;
+			$flag = false;
+			$counters = [0,0];
+			$fields = $Data[0];
+			unset( $Data[0] );
+			foreach($Data as $Row){
+				if(!$flag){
+					$flag = true;
+				}else{
+					if(count($Row) != count( $fields )){
+						echo "inconsistencia en la linea ".$c;print_r($Row);
+					}else{ $counters = $this->importRow(  $fields , $Row , $counters );}
+				}
+				$c++;
+			}
+			echo "Updated : ".$counters[0];
+			echo "Created : ".$counters[1];
+
+		}else{
+			$this->header_admin();
+			require $this->adminviews."import.php";
+			$this->footer_admin();
+		}
+		
+
+
+	}
+
+	function export(){
+
+		 // filename for download
+  		$filename = "website_data_" . date('Ymd-hs') . ".csv";
+
+		header("Content-Disposition: attachment; filename=\"$filename\"");
+		header('Content-Type: text/plain; charset=iso-8859-1');
+
+		$sql = "SELECT `ur`,`nombre`,`_name`,`caracter`,`_character`,`acabado`,`tipo_acabado`,`como_se_muestra`,
+		`current_finish`,`precio`,`familia`,`original`,`created`,`match`,`_price`,`precio_pintado`,`price_painted`,
+		`tipo`,`_type`,`categoria`,`_category`,`uso`,`_use`,`frente`,`fondo`,`altura`,`diametro`,`frentre_plg`,
+		`fondo_plg`,`altura_plg`,`diametro_plg`
+		FROM product ";
+
+
+		$query = $this->pdo->prepare($sql);
+		$rs = $query->execute();
+		if( $rs ){
+			$product = $query->fetchAll( PDO::FETCH_ASSOC);
+		}
+
+		$flag = false;
+		  foreach($product as $row) {
+		    if(!$flag) {
+		      
+		      echo '"'.implode('","', array_keys($row)) .'"'. "\r\n";
+		      $flag = true;
+		    }
+		    array_walk($row, function(&$data){
+		      	$data = str_replace(['"',"null"] ,["" , "-"] , $data);
+		      	$data = ( $data== "")?"-":$data;
+		      });
+		    //echo utf8_decode(implode(",", array_values($row)) ). "\r\n";
+		    echo utf8_decode('"'.implode('","', array_values($row)) .'"')."\r\n";
+		  }
+	}
+
+	function findMatch( $slug ){
+
+		$sql = "SELECT * FROM product WHERE ur LIKE '$slug'";
+		$query = $this->pdo->prepare($sql);
+		$rs = $query->execute();
+		if( $rs ){
+			return $query->fetch();
+		}
+
+		return false;
+	}
+
+	function findRelated( $pro ){
+
+		$ur =  $pro["original"] == "-"?$pro["ur"]:$pro["original"];
+		$fam = $pro["familia"] != "-"? "OR `familia` LIKE '{$pro["familia"]}' ":"";
+		$match = $pro["match"] != "-"? "OR `ur` LIKE '{$pro["match"]}' ":"";
+
+		// ORIGINAL 
+		$sql = "SELECT * FROM product WHERE ur LIKE '%$ur%' OR `original` LIKE '%$ur%' {$fam} OR `match` LIKE '%{$pro["ur"]}%' {$match}";
+		$query = $this->pdo->prepare($sql);
+		$rs = $query->execute();
+		$buffer = [];
+		if( $rs ){
+			$products = $query->fetchAll();
+			foreach ( $products as $product ) {
+				if( ! array_search($product , $buffer )  &&  $product["ur"] != $pro["ur"]){
+					array_push( $buffer , $product ) ;
+				}
+				
+			}
+			return $buffer;
+		}
+		return [];
+	}
+
 	function detailProduct($lang="es", $slug){
 		// TODO: @Catalogo Crear slugs optimizadas para seo(5)
 		// TODO: @Catalogo Agregar la vista de dos productos en el mismo (1)
 		// TODO: @Catalogo Agrega vista de variaciones del producto (3)
 		
 		if ( !empty($slug) ){
+
 
 			$this->addBread( array(  "label"=>$this->trans( $lang  , "Catalogo" , "Catalog") , "url"=>"/catalog/products" ) );
 			$this->addBread( array(  "label"=>$this->trans( $lang  , "Productos" , "Products") , "url"=>"/catalog/products" ) );
@@ -348,14 +506,20 @@ class Catalog extends Controller{
 				$product = $query->fetch();
 
 				$t = $this->trans( $lang  , $product["tipo"] , $product["_type"] );
-				$g = $this->trans( $lang  , $product["grupo"] , $product["_group"] );
+				$g = $this->trans( $lang  , $product["categoria"] , $product["_category"] );
 				$u = $this->trans( $lang  , $product["nombre"] , $product["_name"] );
 
 				$this->addBread( array(  "label"=>ucwords(strtolower($t)) , "url"=>"/catalog/".strtolower($t) ) );
 				$this->addBread( array(  "label"=>ucwords(strtolower($g)) , "url"=>"/catalog/".strtolower($t)."/".strtolower(str_replace(" ", "-" , $g)) ) );
 				$this->addBread( array(  "label"=>ucwords(strtolower($u)) ) );
 
+				$relacionados = $this->findRelated( $product );
 
+				if( $product["match"] != "-"){
+					$match =  $this->findMatch( $product["match"] );
+				}
+				
+				
 
 				$this->header( $lang , false , $product );
 				require $this->views."detalle-producto.php";
@@ -376,13 +540,11 @@ class Catalog extends Controller{
 			$query = $this->pdo->prepare($sql);
 			$name = "%{$_POST["q"]}%";
 	 		$query->bindParam(':name',$name, \PDO::PARAM_STR);
-
 			$rs = $query->execute();
-			
 			$products = $query->fetchAll();
 			$html .= '<div id="content-press">';
 			foreach ($products as $product) {
-				$product["imagen"] = $product["imagen"] != "null"?"/images/product/".$product["imagen"]:"http://placehold.it/200x200/f4f4f4/ccc?text=product";
+				$product["imagen"] = $product["imagen"] != "-"?"/images/product/".$product["imagen"]:"http://placehold.it/200x200/f4f4f4/ccc?text=product";
 				$html .= '
 						<article class="item4Col">
 					        <a href="'.$this->url($lang, "/product/".$product['ur']).'">

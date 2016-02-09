@@ -105,15 +105,15 @@
 					$tipos = $query->fetchAll(PDO::FETCH_COLUMN);
 					$tiposOut = array();
 					foreach( $tipos as $t ){
-						array_push( $tiposOut , array( $t => $this->grupos( $estilo , $t , $lang ) )  );
+						array_push( $tiposOut , array( $t => $this->categorias( $estilo , $t , $lang ) )  );
 					}
 					return $tiposOut;
 				}
 			}
 		}
 
-		private function grupos($estilo = "" , $tipo = "" , $lang){
-			$grp = $this->trans($lang , "grupo" , "_group");
+		private function categorias($estilo = "" , $tipo = "" , $lang){
+			$grp = $this->trans($lang , "categoria" , "_category");
 			$tp = $this->trans($lang , "tipo" , "_type");
 			if( $estilo != ""){
 				$sql = "SELECT distinct(".$grp.") FROM product WHERE $grp NOT LIKE \"%,%\" AND estilo = :estilo && {$tp} LIKE '{$tipo}'";
@@ -127,8 +127,8 @@
 			if($rs!==false){
 				$nr = $query->rowCount();
 				if( $nr > 0 ){
-					$grupos = $query->fetchAll(PDO::FETCH_COLUMN);
-					return $grupos;
+					$categorias = $query->fetchAll(PDO::FETCH_COLUMN);
+					return $categorias;
 				}
 			}
 		}	

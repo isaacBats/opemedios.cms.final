@@ -3981,8 +3981,24 @@ div.alert .message{
     font-family: Verdana, Geneva, sans-serif;
   }
 
-
-
+.rel_product{
+  width: 100px;
+  display: inline-block;
+  border: 1px solid #CCC;
+  height: 100px;
+  float: left;
+  margin: 5px;
+  text-align: center;
+  overflow: hidden;
+}
+.rel_product img{
+  display: inline-block;
+  height: 80%;
+  max-width: 200%;
+  min-width: auto;
+  margin: auto;
+  margin-top: 10%;
+}
 
 
 

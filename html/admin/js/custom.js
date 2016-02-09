@@ -134,4 +134,9 @@ $('#addNew').validate({
 	      }
 	    });	
 	}
+
+	function changeState(){
+		$('#input-imagen_thumbnail').show();
+		$('#img-thumbnail').hide();
+	}
 });

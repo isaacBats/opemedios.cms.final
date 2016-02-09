@@ -127,7 +127,6 @@ class AdminNoticias extends Controller{
 
 	}
 
-	// @TODO: @admin [ Noticias ] Falta crear el metodo de editNew
 	public function removeNew($lang="es", $id){
 
 		if( !empty($id) ){
@@ -136,11 +135,57 @@ class AdminNoticias extends Controller{
 			$query->bindParam(':id', $id, \PDO::PARAM_INT);
 			$rs = $query->execute();
 			if( $rs != false ){
-				echo "<span>Usuario eliminado</span>";
+				echo "<span>Noticia eliminada</span>";
 				header("Location: /panel/news/list");
 			}
 
 		}
+	}
+
+	/**
+	 *  Para editar una noticia ya publicada
+	 * @param  string $lang lenguaje
+	 * @param  int    $id   identificador de la noticia a editar
+	 */
+	public function editNewAction($lang="es", $id){
+		$this->header_admin($lang);
+		$new = $this->findNewById($id);
+		require $this->adminviews."edit-new.php";
+		$this->footer_admin($lang);
+
+	}
+
+	/**
+	 * Busca una noticia por su id
+	 * @param  int $id identificador unico de la noticia
+	 * @return Array[] Un array con el resultado de la consulta     
+	 */
+	private function findNewById($id){
+		$query = $this->pdo->prepare("SELECT * FROM noticias WHERE id_noticia = :id");
+		$query->bindParam(':id', $id, \PDO::PARAM_INT);
+		$query->execute();
+
+		return $query->fetch(\PDO::FETCH_ASSOC);
+	}
+
+	/*
+	 * Guarda los datos que se modificaron 
+	 * en la noticia a editar
+	 */
+	public function saveNewChangesAction(){
+		echo "<pre>";
+		print_r($_POST);
+		print_r($_FILES);
+		//$new = $this->findNewById($id);
+
+		if( isset( $_FILES["imagen"]["name"] ) && $_FILES["imagen"]["name"] != "" ){
+			echo "<br> with image";
+		}
+
+		if(isset($_FILES["imagen_thumbnail"]["name"]) && $_FILES["imagen_thumbnail"]["name"] != ""){
+			echo "<br> whit thumbnail";
+		}
+
 	}
 	
 }

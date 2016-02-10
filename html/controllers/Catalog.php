@@ -354,7 +354,10 @@ class Catalog extends Controller{
 
 	function importUpdate( $fields , $Row){
 		$out = "UPDATE `product` SET ";
-		foreach ($fields as $key => $value) $out .= "`".$value."` = '".@mysql_real_escape_string($Row[$key]).($key == count($fields)-1?"":"',\n\t");
+		foreach ($fields as $key => $value){
+			$d = str_replace("'","\'", $Row[$key] );
+			$out .= "`".$value."` = '".$d.($key == count($fields)-1?"":"',\n\t");	
+		} 
 		$out .= "' \r WHERE `ur` LIKE '{$Row[0]}';\n\n";
 		if( !$this->pdo->prepare($out)->execute() ){
 			echo "<pre>";
@@ -368,7 +371,10 @@ class Catalog extends Controller{
 		$out = "INSERT INTO `product` (";
 		foreach ($fields as $key => $value) $out .= "`".$value.($key == count($fields)-1?"":"`,\n");
 		$out .= "`) VALUES (";
-		foreach ($Row as $key => $d) $out .= "'".@mysql_real_escape_string($d).($key == count($fields)-1?"":"',\n");
+		foreach ($Row as $key => $d){
+			$d = str_replace("'", "\'", $d );
+			$out .= "'".$d.($key == count($fields)-1?"":"',\n");
+		}
 		// $out .= "`".$value."` = '".$Row[$key].($key == count($fields)-1?"":"',\n\t");
 		$out .= "');\n\n";
 		if( !$this->pdo->prepare($out)->execute() ){

@@ -319,6 +319,7 @@
 		'methods' => 'GET'
 	)));
 
+	// Admin news
 	$collection->attachRoute(new Route('/panel/news/list', array(
 		'_controller' => 'AdminNoticias::showListNews',
 		'parameters' => array("lang" => $lang),
@@ -330,7 +331,6 @@
 		'parameters' => array("lang" => $lang),
 		'methods' => 'GET'
 	)));
-
 
 	$collection->attachRoute(new Route('/panel/news/add', array(
 		'_controller' => 'AdminNoticias::saveNew',
@@ -345,9 +345,15 @@
 	)));
 
 	$collection->attachRoute(new Route('/panel/new/edit/:id', array(
-		'_controller' => 'AdminNoticias::editNew',
+		'_controller' => 'AdminNoticias::editNewAction',
 		'parameters' => array("lang" => $lang),
 		'methods' => 'GET'
+	)));
+
+	$collection->attachRoute(new Route('/panel/news/save-changes', array(
+		'_controller' => 'AdminNoticias::saveNewChangesAction',
+		'parameters' => array("lang" => $lang),
+		'methods' => 'POST'
 	)));
 
 	$collection->attachRoute(new Route('/panel/new/remove/:id', array(

@@ -38,3 +38,7 @@
     padding: 10px;
     width: 300px !important;
 }
+
+#input-imagen_thumbnail, #input-imagen{
+    display: none;
+}

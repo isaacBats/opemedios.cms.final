@@ -134,4 +134,14 @@ $('#addNew').validate({
 	      }
 	    });	
 	}
+
+	jQuery('#js-panel-body').on('click', 'a.borrar.atributo.imagen', function(event) {
+	var boton = jQuery(this);
+	var contenedor = boton.parent();
+	contenedor.find('img').remove();
+	contenedor.find('input.inp-thum').attr('disabled', false).show();
+	var input = contenedor.find('input.imagen');
+	input.attr('value', '');
+	boton.remove();
+	});
 });

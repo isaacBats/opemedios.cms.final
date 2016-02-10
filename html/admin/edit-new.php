@@ -2,8 +2,11 @@
   <div class="panel-heading">
     <h4 class="panel-title">Edita noticia</h4>
   </div>
-  <div class="panel-body">
+  <div class="panel-body" id="js-panel-body">
     <form method="post" action="/panel/news/save-changes" id="addNew" enctype="multipart/form-data">
+      <div class="form-group">
+        <input type="hidden" value="<?php echo $new['id_noticia'] ?>" class="form-control" name="id">
+      </div>
       <div class="form-group">
         <input type="text" value="<?php echo $new['titulo'] ?>" class="form-control" name="titulo">
       </div>
@@ -26,15 +29,15 @@
       </div>
       <div class="form-group">
         <img src="/assets/images/news/<?php echo $new['imagen_thumbnail']?>" height="80" width="80" id="img-thumbnail">
-        <a  id="btn-changeThumbnail" class="btn btn-default" onclick="changeState()">Cambiar</a>
+        <input type="file" name="imagen_thumbnail" id="input-imagen_thumbnail" class="inp-thum">
+        <a href="javascript:void(0);" id="btn-changeThumbnail" class="borrar atributo imagen btn btn-default" ><i class="fa fa-pencil-square-o"> Cambiar</i></a>
         <span class="help-block">Imagen en tamaño THUMBNAIL (200*200px)</span>
-        <input type="file" name="imagen_thumbnail" id="input-imagen_thumbnail">
       </div>
       <div class="form-group">
         <img src="/assets/images/news/<?php echo $new['imagen']?>" height="150" width="150">
-        <a  id="btn-changeImage" class="btn btn-default" >Cambiar</a>
+        <input type="file" name="imagen" id="input-imagen" class="inp-thum">
+        <a href="javascript:void(0);" id="btn-changeImage" class="borrar atributo imagen btn btn-default" ><i class="fa fa-pencil-square-o"> Cambiar</i></a>
         <span class="help-block">Imagen principal de la noticia</span>
-        <input type="file" name="imagen" id="input-imagen">
       </div>
       <br>
       <div class="form-group">

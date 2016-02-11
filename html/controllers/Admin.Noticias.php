@@ -302,19 +302,20 @@ class AdminNoticias extends Controller{
 	}
 
 	/**
-	 * Actualiza en la base de datos
-	 * @param  int $id               
-	 * @param  String $titulo           
-	 * @param  String $slug             
-	 * @param  String $titulo_en        
-	 * @param  String $extracto         
-	 * @param  String $extracto_en      
-	 * @param  String $contenido        
-	 * @param  String $contenido_en     
-	 * @param  file $imagen_thumbnail 
-	 * @param  file $imagen           
-	 * @param  Date $fecha            
-	 * @return Boolean                   Resultado del Query
+	 * Actualiza en la base de datos un registro para una noticia nueva
+	 * 
+	 * @param  int $id               	Id de la noticia
+	 * @param  String $titulo           El titulo en español
+	 * @param  String $slug             El segmento que se usara para la URL
+	 * @param  String $titulo_en        El titulo en ingles
+	 * @param  String $extracto         Resumen en español
+	 * @param  String $extracto_en      Resumen en ingles
+	 * @param  String $contenido        El cuerpo de la noticia en español
+	 * @param  String $contenido_en     El cuerpo de la noticia en ingles
+	 * @param  file $imagen_thumbnail 	Se usa para la lista de noticias
+	 * @param  file $imagen           	Imagen principal en el cuerpo de la nota
+	 * @param  Date $fecha            	Fecha de publicacion
+	 * @return Boolean                  Resultado del Query
 	 */
 	private function updateNew($id, $titulo, $slug, $titulo_en, $extracto, $extracto_en, $contenido, $contenido_en, $imagen_thumbnail, $imagen, $fecha){
 		$sql = "UPDATE noticias SET titulo    		= :titulo,

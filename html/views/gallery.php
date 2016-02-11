@@ -21,8 +21,12 @@
 		<a href="javascript:void(0);"><i class="fa fa-twitter fa-lg"></i> Tweet it</a>
 		<a href="javascript:void(0);"><i class="fa fa-pinterest-p fa-lg"></i> Pin it</a>
 	</div>
+		<!--    
+			El metodo ya fue creado, falta implementar 
+			metod name: Gallery::showRelatedAction	
+		-->
 	<div class="gallery-products">
-		<!-- <a href="javascript:void(0);" class="rel"><img src="/assets/images/relacionado1.jpg">
+		<a href="javascript:void(0);" class="rel"><img src="/assets/images/relacionado1.jpg">
 			<h2>Cama Hudson King</h2>
 		</a>
 		<a href="javascript:void(0);" class="rel"><img src="/assets/images/relacionado3.jpg">
@@ -30,7 +34,7 @@
 		</a>
 		<a href="javascript:void(0);" class="rel"><img src="/assets/images/relacionado2.jpg">
 			<h2>Banqueta Varent</h2>
-		</a> -->
+		</a>
 	</div>
 	<div class="aux-tools">
 		<!-- <a href="javascript:void(0);"><i class="fa fa-envelope-o fa-lg"></i> <?php echo $this->trans($lang,"Enviar por correo","Send it by e-mail"); ?></a>

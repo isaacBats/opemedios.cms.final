@@ -38,7 +38,7 @@
 		 * @param  string $imagen Image name
 		 * @return Array[]        Return result set of query
 		 */
-		private function getRelatedProductsId($imagen){
+		private function getRelatedProducts($imagen){
 
 			$sql = "SELECT pro.product_id  
 					FROM gallery_image_product as pro, 
@@ -65,7 +65,7 @@
 
 			//$("#slideshow").find("img").attr("src").split("/").pop()
 
-			$related = $this->getRelatedProductsId($imagen);
+			$related = $this->getRelatedProducts($imagen);
 			if( !empty($related) ){
 				$productsID = array_column($related, 'product_id');
 				$products = $this->getRelated($productsID);

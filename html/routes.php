@@ -386,28 +386,42 @@
 		'methods' => 'POST'
 	)));
 
+	// Admin Catalog
+	$collection->attachRoute(new Route('/panel/catalog/export', array(
+		'_controller' => 'Catalog::export',
+		'parameters' => array("lang" => $lang),
+		'methods' => 'GET'
+	)));
+	
+	$collection->attachRoute(new Route('/panel/catalog/import', array(
+		'_controller' => 'Catalog::import',
+		'parameters' => array("lang" => $lang),
+		'methods' => 'GET'
+	)));
+	
+	$collection->attachRoute(new Route('/panel/catalog/import', array(
+		'_controller' => 'Catalog::import',
+		'parameters' => array("lang" => $lang),
+		'methods' => 'POST'
+	)));
+
+	$collection->attachRoute(new Route('/panel/catalog/categories/list', array(
+		'_controller' => 'AdminCatalog::listCategoriesAction',
+		'parameters'  => array("lang" => $lang),
+		'methods'     => 'GET' 
+	)));
+
+	$collection->attachRoute(new Route('/panel/catalog/:category/:name', array(
+		'_controller' => 'AdminCatalog::listRelatedProductAction',
+		'parameters'  => array("lang" => $lang),
+		'methods'     => 'GET' 
+	)));
+
 	//Admin Press
 	$collection->attachRoute(new Route('/panel/press/list', array(
 		'_controller' => 'AdminPress::showListPress',
 		'parameters' => array("lang" => $lang),
 		'methods' => 'GET'
-	)));
-
-	//Admin Press
-	$collection->attachRoute(new Route('/panel/export', array(
-		'_controller' => 'Catalog::export',
-		'parameters' => array("lang" => $lang),
-		'methods' => 'GET'
-	)));
-	$collection->attachRoute(new Route('/panel/import', array(
-		'_controller' => 'Catalog::import',
-		'parameters' => array("lang" => $lang),
-		'methods' => 'GET'
-	)));
-	$collection->attachRoute(new Route('/panel/import', array(
-		'_controller' => 'Catalog::import',
-		'parameters' => array("lang" => $lang),
-		'methods' => 'POST'
 	)));
 
 	$collection->attachRoute(new Route('/panel/press/list/:id', array(

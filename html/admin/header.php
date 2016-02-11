@@ -111,8 +111,9 @@
               <ul class="children">
                 <li><a href="javascript:void(0);">Listar productos</a></li>
                 <li><a href="javascript:void(0);">Agregar producto</a></li>
-                <li><a href="javascript:void(0);">Exportar productos</a></li>
-                <li><a href="javascript:void(0);">Importar productos</a></li>
+                <li><a href="/panel/catalog/export">Exportar productos</a></li>
+                <li><a href="/panel/catalog/import">Importar productos</a></li>
+                <li><a href="/panel/catalog/categories/list">Listar Categorias</a></li>
               </ul>
             </li>
             <li class="nav-parent"><a href=""><i class="fa fa-picture-o"></i> <span>Galeria</span></a>
@@ -150,7 +151,7 @@
 
     <div class="contentpanel">
       <ol class="breadcrumb breadcrumb-quirk">
-          <li><a href="index.html"><i class="fa fa-home mr5"></i> Panel </a></li>
+          <li><a href="/panel"><i class="fa fa-home mr5"></i> Panel </a></li>
           <!-- <li><a href="buttons.html">Pages</a></li>
           <li class="active">Asset Manager</li> -->
         </ol>

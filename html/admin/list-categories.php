@@ -38,7 +38,7 @@
 	        <tr>
 	         <td>'.$type['tipo'].'</td>
 	         <td class="text-right">
-	          <a class="btn btn-default btn-sm" href="/panel/catalog/type/'.urlencode(strtolower($type['tipo'])).'" >Ver</a>
+	          <a class="btn btn-default btn-sm" href="/panel/catalog/type/'.str_replace(" ", "-",strtolower($type['tipo'])).'" >Ver</a>
 	        </td>
 	      </tr>';
 	    }
@@ -62,7 +62,7 @@
 	        <tr>
 	         <td>'.$use['uso'].'</td>
 	         <td class="text-right">
-	          <a class="btn btn-default btn-sm" href="/panel/catalog/use/'.strtolower($use['uso']).'" >Ver</a>
+	          <a class="btn btn-default btn-sm" href="/panel/catalog/use/'.str_replace(" ", "-", strtolower($use['uso'])).'" >Ver</a>
 	        </td>
 	      </tr>';
 	    }

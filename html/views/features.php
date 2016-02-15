@@ -10,16 +10,16 @@
                 <?php if( $product["acabado"] != "-"){ echo $this->trans( $lang , "Acabado:" , "Finishes:"); ?><?php echo $product["acabado"]."<br>"; }?>
                 <?php if( $product["caracter"] != "-"){ echo $this->trans( $lang , "Carácter:" , "Character:");?> <?php echo $product['caracter']."<br>";} ?>
                 <?php if( $product["como_se_muestra"] != "-"){ echo $this->trans( $lang , "Como se muestra: " , "As shown: ") ?><?php echo $product['como_se_muestra']."<br>"; }?>
-
+    
                 <?php echo $this->trans( $lang , "Precio:" , "Price:"); ?>
 
                 <?php if( isset( $_SESSION["user"] ) ){ 
-
-                        echo $this->trans( $lang , " $ ".$product["precio"]." MX" , " $ ".$product["_price"]." DLS" );
+                        echo  "$ ".$product[$_SESSION["user"]["precio"]].($_SESSION["user"]["precio"]=="precio"?" MX":" DLS");
                         echo "<br>";
                         if( $product["precio_pintado"] != "-"){
                             echo $this->trans( $lang , "Precio Pintado:" , "Painted price:");
-                            echo $this->trans( $lang , " $ ".$product["precio_pintado"]." MX" , " $ ".$product["price_painted"]." DLS" );    
+
+                            echo  "$ ".$product[$_SESSION["user"]["precio"]].($_SESSION["user"]["precio"]=="precio"?" MX":" DLS");
                         }
 
                     }else{ ?>

@@ -7,8 +7,10 @@ html/core/conn.php
 .phpintel/
 
 /html/config.php
-html/assets/images/press/*
-html/assets/images/product
+html/assets/images/press/
+html/assets/images/product/
+html/assets/images/news/
+html/assets/images/galeria/
 /images/
 
 html/vendor/*
@@ -17,4 +19,4 @@ html/vendor/*
 /html/composer.phar
 html/config.php
 
-assets/images/
+/html/assets/images/

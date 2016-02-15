@@ -12,7 +12,7 @@
  		$this->addBread( array( "label"=> $this->trans($lang,"Prensa","Press") ) );
  		$this->header( $lang );
 
- 		$sql = "SELECT * FROM gallery WHERE contexto != 'main' ";
+ 		$sql = "SELECT * FROM gallery WHERE contexto IN ('brochure', 'publicity')";
  		$query = $this->pdo->prepare($sql);
 		$rs = $query->execute();
 		if($rs!==false){

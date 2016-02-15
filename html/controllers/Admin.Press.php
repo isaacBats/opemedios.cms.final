@@ -6,7 +6,7 @@ class AdminPress extends Controller{
 
 		$this->header_admin($lang);
 		
-		$sql = "SELECT * FROM gallery WHERE contexto in ('brochure', 'publicity')";
+		$sql = "SELECT * FROM gallery WHERE contexto IN ('brochure', 'publicity')";
 		$query = $this->pdo->prepare($sql);
 		$rs = $query->execute();
 		if($rs!==false){

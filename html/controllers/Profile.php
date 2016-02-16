@@ -50,6 +50,20 @@ class Profile extends Controller{
 				$this->addbread( array("url"=>"/profile" , "label"=>$this->trans($lang ,"Usuario" , "User" )) );
 				$this->addbread( array("label"=>$this->trans($lang , "Mis cotizaciones" , "My quotes ")) );
 				$this->header($lang);
+				$sqlCotizaciones = "SELECT * FROM usuarios_cotizacion WHERE usuarios_id = :user_id;";
+				$queryCotizacion = $this->pdo->prepare($sqlCotizaciones);
+				$queryCotizacion->bindParam(':user_id', $_SESSION['user']['id_registro']);
+				$rsCotizacion = $queryCotizacion->execute();
+				if($rsCotizacion){
+					$numCotizaciones = $queryCotizacion->rowCount();
+					if($numCotizaciones == null || $numCotizaciones == "" || $numCotizaciones == 0){
+						//Mostrar los productos que se han agregado a la variable $_SESSION['cotizacion']
+						
+					}else{
+						$cotizaciones = $queryCotizacion->fetchAll(\PDO::FETCH_ASSOC);
+					}
+				}
+
 				require $this->views."profile.quotes.php";
 				$this->footer( $lang );	
 			}

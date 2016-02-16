@@ -124,7 +124,8 @@ class Noticias extends Controller
 		
 
 		if ($lang == "es"){
-			$this->addBread(array("label"=>"Noticias"));
+			$this->addBread(array("url" => "javascript:void(0);" , "label"=>"Noticias"));
+			$this->addBread(array("label"=>"Noticias y Próximos Eventos"));
 			$sql = "SELECT * FROM noticias";
 			$query = $this->pdo->prepare($sql);
 			$rs = $query->execute();
@@ -190,7 +191,7 @@ class Noticias extends Controller
 			$html .= 'No existe lang';
 		}
 
-		$this->header($lang);
+		$this->header($lang , false , false , "who" );
 		echo $html;
 		$this->footer( $lang );
 	}

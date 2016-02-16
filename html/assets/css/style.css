@@ -3437,6 +3437,13 @@ div.field select.error
     .breadcrumb.vertical.contacto{
       margin: 25px 0 25px 10%;
     }
+    .breadcrumb.vertical.who{
+      margin: 5px 0 30px 10%;
+    }
+    .breadcrumb.vertical.fabric{
+      
+      margin-left:0px;
+    }
 
 .breadcrumb span {
   color: #D4D1CB; }

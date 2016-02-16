@@ -2,30 +2,7 @@ $(document).ready(function(){
 
 	'use strict';
 
-	var m1 = new Morris.Line({
-		// ID of the element in which to draw the chart.
-		element: 'line-chart',
-		// Chart data records -- each entry in this array corresponds to a point on
-		// the chart.
-		data: [
-		{ y: '2009', a: 30,  b: 20 },
-		{ y: '2010', a: 75,  b: 65 },
-		{ y: '2011', a: 50,  b: 40 },
-		{ y: '2012', a: 75,  b: 65 },
-		{ y: '2013', a: 50,  b: 40 },
-		{ y: '2014', a: 75,  b: 65 },
-		{ y: '2015', a: 100, b: 90 }
-		],
-		xkey: 'y',
-		ykeys: ['a', 'b'],
-		labels: ['Weekly', 'Monthly'],
-		lineColors: ['#D9534F', '#5BC0DE'],
-		//pointFillColors: ['#fff', '#000'],
-		lineWidth: '3px',
-		hideHover: true,
-		gridTextColor: '#fff',
-		grid: false
-	});
+	
 
 
 	// Tooltip for flot chart

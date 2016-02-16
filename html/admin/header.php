@@ -15,10 +15,10 @@
   <link rel="stylesheet" href="/admin/lib/ionicons/css/ionicons.css">
   <link rel="stylesheet" href="/admin/lib/jquery-toggles/toggles-full.css">
   
-  <link rel="stylesheet" href="/admin/lib/morrisjs/morris.css">
+  <!-- <link rel="stylesheet" href="/admin/lib/morrisjs/morris.css"> -->
   <link rel="stylesheet" href="/admin/lib/summernote/summernote.css">
 
-  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+  <link rel="stylesheet" href="/admin/lib/jquery-ui/jquery-ui.css">
   <link rel="stylesheet" href="/admin/css/quirk.css">
   <link rel="stylesheet" href="/admin/css/admin.css">
 
@@ -33,10 +33,6 @@
 </head>
 
 <body>
-<div class="alert alert-info fade in nomargin" id="confirmacion" title="">
-  <span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>
-  <p></p>
-</div>
 <header>
   <div class="headerpanel">
 
@@ -144,11 +140,6 @@
   </div><!-- leftpanel -->
 
   <div class="mainpanel">
-
-    <!--<div class="pageheader">
-      <h2><i class="fa fa-home"></i> Dashboard</h2>
-    </div>-->
-
     <div class="contentpanel">
       <ol class="breadcrumb breadcrumb-quirk">
           <li><a href="/panel"><i class="fa fa-home mr5"></i> Panel </a></li>

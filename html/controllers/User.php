@@ -50,7 +50,7 @@
  		}
 
  		$this->addBread( array( "label"=> "Login" ) );
- 		$this->header( $lang );
+ 		$this->header($lang , false , false , "who" );
  		require $this->views."login.php";
  	}
 
@@ -124,7 +124,7 @@
 
 	function showForm($lang="es"){
 		$this->addbread( array("url"=>"/register" , "label"=>$this->trans($lang , "Registro" , "Register")) );
-		$this->header($lang);
+		$this->header($lang , false , false , "who" );
 		$countries = "";
 		foreach ($this->getCountries() as $country) {
 			$countries .= '<option value="'.$country['nombre'].'" >'.$country['nombre'].'</option>';

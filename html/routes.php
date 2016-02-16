@@ -234,6 +234,13 @@
 		'methods' => 'GET'
 		)));
 
+	$collection->attachRoute(new Route('/terms', array(
+		'_controller' => 'Plain::terminos',
+		'parameters' => array("lang" => $lang),
+		'methods' => 'GET'
+		)));
+
+
 	$collection->attachRoute(new Route('/acerca-de/fabrica-alfonso-marina', array(
 		'_controller' => 'Plain::fabricView',
 		'parameters' => array("lang" => $lang),

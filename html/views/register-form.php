@@ -85,7 +85,7 @@
 			        <br>
 			    </div>
 			    <div class="separador">
-			        <a href="http://www.alfonsomarinaebanista.com/es/terminos.aspx" target="_blank"><?php echo $this->trans($lang, 'Leer términos y condiciones', 'Terms and conditions') ?></a>
+			        <a href="/terms" target="_blank"><?php echo $this->trans($lang, 'Leer términos y condiciones', 'Terms and conditions') ?></a>
 			    </div>
 			    <div class="separador">
 			        <input id="btn-registro" type="submit" value="<?php echo $this->trans($lang , 'Enviar' , 'Send') ?>">

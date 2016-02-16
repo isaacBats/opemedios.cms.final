@@ -39,6 +39,10 @@
         <a href="javascript:void(0);" id="btn-changeImage" class="borrar atributo imagen btn btn-default" ><i class="fa fa-pencil-square-o"> Cambiar</i></a>
         <span class="help-block">Imagen principal de la noticia</span>
       </div>
+      <div class="input-group">
+        <input type="text" name="fecha" class="form-control medium" placeholder="Fecha de la noticia" id="fecha">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+      </div>
       <br>
       <div class="form-group">
         <button type="submit" id="btn-submit" class="btn btn-success">Guardar cambios</button>

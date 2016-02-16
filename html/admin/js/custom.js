@@ -1,7 +1,16 @@
 $(document).ready(function() {
-	$('#contenido, #contenido_en').summernote();
+	$('#contenido, #contenido_en').summernote({
+		toolbar:[
+		 ['style', ['bold', 'italic', 'underline', 'clear']],
+		 ['fontsize', ['fontsize' , 'link']],
+		 ['color', ['color']],
+		 ['para', ['ul', 'ol', 'paragraph', 'hr']]
+		 
+		]
+	});
+	
 	$('#fecha').datepicker();
-
+	
 	/* Cambia el lenguaje del datepicker a espaÃ±ol */
 	$.datepicker.regional['es'] = {
 	    closeText: 'Cerrar',
@@ -32,8 +41,8 @@ $('#addNew').validate({
 		'extracto_en': { required : true },
 		'contenido': { required : true },
 		'contenido_en': { required : true },
-		'imagen_thumbnail': { required : true, extension: "jpg" },
-		'imagen': { required : true, extension: "jpg" },
+		// 'imagen_thumbnail': { required : true, extension: "jpg" },
+		// 'imagen': { required : true, extension: "jpg" },
 		'fecha': { required : true }
     },
     messages: {
@@ -44,8 +53,8 @@ $('#addNew').validate({
 		'extracto_en' : { required : '' },
 		'contenido' : { required : '' },
 		'contenido_en' : { required : '' },
-		'imagen_thumbnail' : { required : '', extension:''},
-		'imagen' : { required : '', extension:''},
+		// 'imagen_thumbnail' : { required : '', extension:''},
+		// 'imagen' : { required : '', extension:''},
 		'fecha' : { required : '' }
     },
     errorClass : "error",
@@ -135,13 +144,13 @@ $('#addNew').validate({
 	    });	
 	}
 
-	jQuery('#js-panel-body').on('click', 'a.borrar.atributo.imagen', function(event) {
-	var boton = jQuery(this);
-	var contenedor = boton.parent();
-	contenedor.find('img').remove();
-	contenedor.find('input.inp-thum').attr('disabled', false).show();
-	var input = contenedor.find('input.imagen');
-	input.attr('value', '');
-	boton.remove();
+	jQuery('a.borrar.atributo.imagen').on('click', function(event) {
+		var boton = jQuery(this);
+		var contenedor = boton.parent();
+		contenedor.find('img').remove();
+		contenedor.find('input.inp-thum').attr('disabled', false).show();
+		var input = contenedor.find('input.imagen');
+		input.attr('value', '');
+		boton.remove();
 	});
 });

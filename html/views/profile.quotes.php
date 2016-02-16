@@ -26,20 +26,39 @@
 				        <tbody>
 				";
 				foreach ($cotizaciones as $cotizacion) {
+					$date = date_create($cotizacion['created']);
 					$html .= "
 								<tr>
 				                    <td>
-				                        ".$cotizacion['created']."
+				                        ".date_format($date, 'd/m/y')."
 				                    </td>
-				                    <td ><a href=\"#\">Ver Detalles</a></td>
+				                    <td ><a href=\"javascript:void(0);\">Ver Detalles</a></td>
 				                </tr>
 					";
-
-
-
-					 // "Fecha: ". $cotizacion['created']."<br>";
 				}
-				echo $html;
+			echo $html;
+			}elseif($products != null){
+				foreach ($products as $product) {
+					$html = '<div class="listado">
+										<div class="list-item">
+							                <div class="img-listado">
+												<a href="'.$this->url($lang,'/product/'.$product['id']).'">
+							                    	<img 
+											            alt="'.$product["nombre"].'" 
+											            src="http://www.alfonsomarinaebanista.com/images/'.$product["ur"].'/'.$product["ur"].'_alta2.jpg">
+												</a>
+							                </div>
+							                <div class="texto-listado">
+							                    <a href="'.$this->url($lang,'/product/'.$product['ur']).'"><h2>'.$product['nombre'].'</h2></a>
+							                    '.$product['ur'].'
+							                </div>
+							                <br class="clear">
+							            </div>
+							         </div>';
+					echo $html;
+				}
+			}else{
+				echo $this->trans($lang , "No cuentas con cotizaciones" , "*Not have Quotes");
 			}
 		?>
 		

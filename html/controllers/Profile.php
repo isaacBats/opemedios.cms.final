@@ -44,12 +44,20 @@ class Profile extends Controller{
 
 	}
 
+	/**
+	 * View my quotes list
+	 * @param  string $lang language
+	 */
 	public function myQuoteAction($lang = "es"){
-
 			if( isset($_SESSION["user"])){
+				
+				$cotizaciones = "";
+				$products = "";
+				
 				$this->addbread( array("url"=>"/profile" , "label"=>$this->trans($lang ,"Usuario" , "User" )) );
 				$this->addbread( array("label"=>$this->trans($lang , "Mis cotizaciones" , "My quotes ")) );
 				$this->header($lang);
+				
 				$sqlCotizaciones = "SELECT * FROM usuarios_cotizacion WHERE usuarios_id = :user_id;";
 				$queryCotizacion = $this->pdo->prepare($sqlCotizaciones);
 				$queryCotizacion->bindParam(':user_id', $_SESSION['user']['id_registro']);
@@ -58,6 +66,15 @@ class Profile extends Controller{
 					$numCotizaciones = $queryCotizacion->rowCount();
 					if($numCotizaciones == null || $numCotizaciones == "" || $numCotizaciones == 0){
 						//Mostrar los productos que se han agregado a la variable $_SESSION['cotizacion']
+						if( isset($_SESSION['cotizacion']) && sizeof($_SESSION['cotizacion']) > 0 ){
+							$ids = implode(",", $_SESSION['cotizacion']);
+							$sqlQuoteProduct = "SELECT * FROM product WHERE id in (".$ids.")";
+							$queryQuoteProduct = $this->pdo->prepare($sqlQuoteProduct);
+							$rsQuoteProduct = $queryQuoteProduct->execute();
+							if($rsQuoteProduct){
+								$products = $queryQuoteProduct->fetchAll(\PDO::FETCH_ASSOC);
+							}
+						}
 						
 					}else{
 						$cotizaciones = $queryCotizacion->fetchAll(\PDO::FETCH_ASSOC);

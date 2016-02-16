@@ -66,9 +66,24 @@ class Catalog extends Controller{
 				$_SESSION['favoritos'] = array();
 			}
 			array_push($_SESSION['favoritos'], $_POST['id']);
-			$resultado->exito = true;
+			if(isset($_SESSION['user'])){
+				$sql = "INSERT INTO usuarios_fav (producto_id, usuarios_id)
+										VALUES  (:product_id, :user_id);
+							
+						";
+				$query = $this->pdo->prepare($sql);
+				$query->bindParam(':product_id',$_POST['id']);
+				$query->bindParam(':user_id',$_SESSION["user"]['id_registro']);
+				$rs = $query->execute();
+				if(!$rs){
+					echo "No se agrego a la base de datos";
+					$resultado->exito = false;
+					return false;
+				}									
+			}
 			$resultado->log = "Se agregó el ID al contenedor de FAVORITOS";
 			$resultado->mensaje = $this->trans($lang , 'Eliminar de Favoritos' , 'Remove from Favorites' );
+			return $resultado->exito = true;
 		}
 		else{
 			$resultado->exito = false;
@@ -83,9 +98,9 @@ class Catalog extends Controller{
 
 		$this->addBread( array("label" => $this->trans($lang , "Mis Favoritos" , "My Favorites") ) );
 		$this->header( $lang );
+		$productList = "";
 
 		if( isset($_SESSION['favoritos']) && sizeof($_SESSION['favoritos']) > 0 ){
-			
 			
 			$ids = implode(",", $_SESSION['favoritos']);
 
@@ -97,15 +112,33 @@ class Catalog extends Controller{
 				if( $nr > 0 ){
 					$productList = $query->fetchAll();
 					$count = 0;
-					require $this->views."favs.php";
 				}
 
 			}
+		}elseif(isset($_SESSION['user'])){
+			$queryFav = $this->pdo->prepare("SELECT * FROM usuarios_fav 
+									WHERE usuarios_id = {$_SESSION['user']['id_registro']}
+									GROUP BY producto_id;");
+			$rsFav = $queryFav->execute();
+			if($rsFav){
+				$favDB = $queryFav->fetchAll(\PDO::FETCH_ASSOC);
+				$idFavoritos = array_column($favDB, 'producto_id');
+				$ids = implode(",", $idFavoritos);
+				$queryUserFav = $this->pdo->prepare("SELECT * FROM product WHERE id IN (".$ids.")");
+				$rs = $queryUserFav->execute();
+				if($rs!==false){
+					$productList = $queryUserFav->fetchAll();
+				}
+			}
+
+
+
 		}
 		else{
 			echo "<h3>No cuentas con favoritos</h3>";
 			
 		}
+		require $this->views."favs.php";
 		$this->footer( $lang );
 	}
 

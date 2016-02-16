@@ -59,4 +59,60 @@ class Profile extends Controller{
 		
 	}
 
+	/**
+	 * Add a product to the user session to list quote 
+	 * @param string $lang language
+	 */
+	public function addProductQuoteAction( $lang="es" ){
+
+		$resultado = new stdClass();
+		if( !empty($_POST) ){
+			if( !isset($_SESSION['cotizacion']) ){
+				$_SESSION['cotizacion'] = array();
+			}
+			array_push($_SESSION['cotizacion'], $_POST['id']);
+			$resultado->exito = true;
+			$resultado->log = "Se agregó el ID al contenedor de Cotizaciones";
+			$resultado->mensaje = $this->trans($lang , 'Eliminar de Cotizacion' , 'Remove from Quotes' );
+		}
+		else{
+			$resultado->exito = false;
+		}
+
+		header('Content-type: text/json');
+		echo json_encode($resultado);
+	}
+
+	/**
+	 * Remove a product to the user session to list quote
+	 * @param  string $lang language
+	 */
+	public function removeProductQuoteAction( $lang="es" ){
+
+		$resultado = new stdClass();
+		
+		echo "<pre>";
+		print_r($_SESSION);
+		print_r($_POST);
+		if( !empty($_POST) ){
+			if( !isset($_SESSION['cotizacion']) ){
+				$_SESSION['cotizacion'] = array();
+			}
+			
+			if (($key = array_search($_POST['id'], $_SESSION['cotizacion'])) !== false) {
+			    unset($_SESSION['cotizacion'][$key]);
+			}
+
+			$resultado->exito = true;
+			$resultado->log = "Se removió el ID de la Cotización";
+			$resultado->mensaje = $this->trans($lang , 'Agregar a cotización' , 'Add to Quote' );
+		}
+		else{
+			$resultado->exito = false;
+		}
+
+		header('Content-type: text/json');
+		echo json_encode($resultado);	
+	}
+
 }

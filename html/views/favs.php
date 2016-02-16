@@ -18,16 +18,16 @@ foreach ($productList as $product) {
             </p>
             
             ';
-    if( isset( $_SESSION["user"] ) ){
-        echo '<a href="javascript:void(0);" id="btn-fav" class="general-btn half" data-id="'.$product['id'].'">
+    if( isset( $_SESSION["user"] ) && $_SESSION["favoritos"] ){
+        echo '<a href="javascript:void(0);" id="btn-fav" class="general-btn half eliminar" data-id="'.$product['id'].'">
                  '.$this->trans($lang,"Eliminar de Favoritos","Remove from Favorites").'
             </a>';
         
-        if( isset($_SESSION['cotiza']) && in_array($product['id'], $_SESSION['cotiza'])){ 
-            echo '<a href="javascript:void(0);" id="btn-fav" class="general-btn half" data-id="'.$product['id'].'">';
+        if( isset($_SESSION['cotizacion']) && in_array($product['id'], $_SESSION['cotizacion'])){ 
+            echo '<a href="javascript:void(0);" id="btn-fav" class="general-btn half eliminar" data-id="'.$product['id'].'">';
             echo $this->trans($lang,"Eliminar de Cotización","Remove from Quotation");
         }else{
-            echo '<a href="javascript:void(0);" id="btn-cot" class="general-btn half" data-id="'.$product['id'].'">';
+            echo '<a href="javascript:void(0);" id="btn-cot" class="general-btn half btn-cotiza" data-id="'.$product['id'].'">';
             echo $this->trans($lang,"Agregar a Cotización","Add to <br>Quotation");
         }
         echo '</a>';

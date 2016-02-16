@@ -124,7 +124,7 @@
 		'parameters' => array("lang" => $lang),
 		'methods' => 'POST'
 		)));
-	$collection->attachRoute(new Route('/favs/', array(
+	$collection->attachRoute(new Route('/favs', array(
 		'_controller' => 'Catalog::showFavs',
 		'parameters' => array("lang" => $lang),
 		'methods' => 'GET'
@@ -220,6 +220,18 @@
 
 	$collection->attachRoute(new Route('/profile/my-quote', array(
 		'_controller' => 'Profile::myQuoteAction',
+		'parameters' => array("lang" => $lang),
+		'methods' => 'GET'
+	)));
+
+	$collection->attachRoute(new Route('/profile/add-quote', array(
+		'_controller' => 'Profile::addProductQuoteAction',
+		'parameters' => array("lang" => $lang),
+		'methods' => 'POST'
+	)));
+
+	$collection->attachRoute(new Route('/profile/remove-quote', array(
+		'_controller' => 'Profile::removeProductQuoteAction',
 		'parameters' => array("lang" => $lang),
 		'methods' => 'GET'
 	)));

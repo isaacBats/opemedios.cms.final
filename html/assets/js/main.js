@@ -23,6 +23,9 @@ jQuery(document).ready(function($){
 	// CONTACTO
 	startContactForm();
 
+	//Quotes
+	startQuo();
+
 });
 
 
@@ -149,6 +152,38 @@ jQuery('#btn-fav').on('click', function(event) {
 			},'json');
 		}else{
 			jQuery.post('/product/addFav',{'id':id},function(json){
+				if( json.exito ){
+					boton.addClass('eliminar');
+					boton.html(json.mensaje);
+				}
+				else{
+					boton.removeClass('eliminar');
+					boton.html(json.mensaje);
+				}
+			},'json');
+		}
+	});
+}
+
+// Add Quotes
+function startQuo(){ 
+jQuery('.btn-cotiza').on('click', function(event) {
+		event.preventDefault();
+		var boton = jQuery(this);
+		var id = boton.data('id');
+		if( boton.hasClass('eliminar') ){
+			jQuery.post('/profile/remove-quote',{'id':id},function(json){
+				if( json.exito ){
+					boton.removeClass('eliminar');
+					boton.html(json.mensaje);
+				}
+				else{
+					boton.addClass('eliminar');
+					boton.html(json.mensaje);
+				}
+			},'json');
+		}else{
+			jQuery.post('/profile/add-quote',{'id':id},function(json){
 				if( json.exito ){
 					boton.addClass('eliminar');
 					boton.html(json.mensaje);

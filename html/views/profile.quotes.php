@@ -9,7 +9,9 @@
 			<?php echo $this->trans($lang , "*Mis contizaciones" , "*My Quotes"); ?>
 		</p> -->
 		<h1>Mis cotizaciones</h1>
-		<?php
+		<?php 
+			echo $quote; 
+
 			if ($cotizaciones != null) {
 				$html = "
 					<table>
@@ -27,38 +29,20 @@
 				";
 				foreach ($cotizaciones as $cotizacion) {
 					$date = date_create($cotizacion['created']);
-					$html .= "
+					$html .= '
 								<tr>
 				                    <td>
-				                        ".date_format($date, 'd/m/y')."
+				                        '.date_format($date, 'd/m/Y').'
 				                    </td>
-				                    <td ><a href=\"javascript:void(0);\">Ver Detalles</a></td>
+				                    <td ><a href="/profile/my-quote/detail/'.$cotizacion['id'].'">Ver Detalles</a></td>
 				                </tr>
-					";
+					';
 				}
-			echo $html;
-			}elseif($products != null){
-				foreach ($products as $product) {
-					$html = '<div class="listado">
-										<div class="list-item">
-							                <div class="img-listado">
-												<a href="'.$this->url($lang,'/product/'.$product['id']).'">
-							                    	<img 
-											            alt="'.$product["nombre"].'" 
-											            src="http://www.alfonsomarinaebanista.com/images/'.$product["ur"].'/'.$product["ur"].'_alta2.jpg">
-												</a>
-							                </div>
-							                <div class="texto-listado">
-							                    <a href="'.$this->url($lang,'/product/'.$product['ur']).'"><h2>'.$product['nombre'].'</h2></a>
-							                    '.$product['ur'].'
-							                </div>
-							                <br class="clear">
-							            </div>
-							         </div>';
-					echo $html;
-				}
-			}else{
-				echo $this->trans($lang , "No cuentas con cotizaciones" , "*Not have Quotes");
+				echo $html;
+			}
+
+			if(empty($quote) && empty($cotizaciones)){
+				echo $this->trans($lang , "No cuentas con cotizaciones.<br> Los puedes seleccionar de favoritos!!!" , "*Not have Quotes. <br> Add of Favorites");
 			}
 		?>
 		

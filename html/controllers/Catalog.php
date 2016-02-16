@@ -463,7 +463,7 @@ class Catalog extends Controller{
 		header('Content-Type: text/plain; charset=iso-8859-1');
 
 		$sql = "SELECT `ur`,`nombre`,`_name`,`caracter`,`_character`,`acabado`,`tipo_acabado`,`como_se_muestra`,
-		`current_finish`,`precio`,`familia`,`original`,`created`,`match`,`_price`,`precio_pintado`,`price_painted`,
+		`current_finish`,`precio`,`familia`,`original`,`created`,`_match`,`_price`,`precio_pintado`,`price_painted`,
 		`tipo`,`_type`,`categoria`,`_category`,`uso`,`_use`,`frente`,`fondo`,`altura`,`diametro`,`frentre_plg`,
 		`fondo_plg`,`altura_plg`,`diametro_plg`
 		FROM product ";
@@ -507,10 +507,10 @@ class Catalog extends Controller{
 
 		$ur =  $pro["original"] == "-"?$pro["ur"]:$pro["original"];
 		$fam = $pro["familia"] != "-"? "OR `familia` LIKE '{$pro["familia"]}' ":"";
-		$match = $pro["match"] != "-"? "OR `ur` LIKE '{$pro["match"]}' ":"";
+		$match = $pro["_match"] != "-"? "OR `ur` LIKE '{$pro["_match"]}' ":"";
 
 		// ORIGINAL 
-		$sql = "SELECT * FROM product WHERE ur LIKE '%$ur%' OR `original` LIKE '%$ur%' {$fam} OR `match` LIKE '%{$pro["ur"]}%' {$match}";
+		$sql = "SELECT * FROM product WHERE ur LIKE '%$ur%' OR `original` LIKE '%$ur%' {$fam} OR `_match` LIKE '%{$pro["ur"]}%' {$match}";
 		$query = $this->pdo->prepare($sql);
 		$rs = $query->execute();
 		$buffer = [];
@@ -554,8 +554,8 @@ class Catalog extends Controller{
 
 				$relacionados = $this->findRelated( $product );
 
-				if( $product["match"] != "-"){
-					$match =  $this->findMatch( $product["match"] );
+				if( $product["_match"] != "-"){
+					$match =  $this->findMatch( $product["_match"] );
 				}
 				
 				

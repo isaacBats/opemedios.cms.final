@@ -90,10 +90,6 @@ class Profile extends Controller{
 	public function removeProductQuoteAction( $lang="es" ){
 
 		$resultado = new stdClass();
-		
-		echo "<pre>";
-		print_r($_SESSION);
-		print_r($_POST);
 		if( !empty($_POST) ){
 			if( !isset($_SESSION['cotizacion']) ){
 				$_SESSION['cotizacion'] = array();

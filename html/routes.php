@@ -233,7 +233,7 @@
 	$collection->attachRoute(new Route('/profile/remove-quote', array(
 		'_controller' => 'Profile::removeProductQuoteAction',
 		'parameters' => array("lang" => $lang),
-		'methods' => 'GET'
+		'methods' => 'POST'
 	)));
 
 

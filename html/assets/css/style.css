@@ -3935,8 +3935,17 @@ h2.tituloSeccion {
 
 div.alert{
   display: none;
-  background-color: rgba( 100,100,100,0.3);
   position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+
+div.alert div.bg{
+  
+  background-color: rgba( 100,100,100,0.3);
+  position: absolute;
   top: 0;
   bottom: 0;
   left: 0;

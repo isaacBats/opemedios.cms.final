@@ -162,6 +162,13 @@
 		'parameters' => array("lang" => $lang),
 		'methods' => 'GET'
 		)));
+        
+        $collection->attachRoute(new Route('/login/resetPass', array(
+		'_controller' => 'User::resetPass',
+		'parameters' => array("lang" => $lang),
+		'methods' => 'POST'
+	)));
+        
 	$collection->attachRoute(new Route('/logout', array(
 		'_controller' => 'User::logout',
 		'parameters' => array("lang" => $lang),

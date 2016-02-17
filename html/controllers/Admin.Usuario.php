@@ -1,68 +1,89 @@
 <?php
+use ForceUTF8\Encoding;
 
-require_once(__DIR__.'/../admin/ForceUTF8/Encoding.php');
-use ForceUTF8\Encoding; 
+class AdminUsuario extends Controller {
+
+    public function updateStatus($lang) {
+        if (!empty($_POST)) {
+            $resultado = new stdClass();
+            $sql = 'UPDATE usuarios SET status=:status  WHERE id_registro =:id_registro';
+            
+            $query = $this->pdo->prepare($sql);
+            
+            $datos= explode(":", $_POST['id_registro']);
+            
+            $status=$datos[0];
+            $id_registro=$datos[1];
+	    $query->bindParam(':status',$status);
+            $query->bindParam(':id_registro',$id_registro);
+            
+            $rs = $query->execute();
+            if ($rs != false) {
+                $resultado->exito = true;
+            } else {
+                $resultado->exito = false;
+            }
+            header('Content-type: text/json');
+            echo json_encode($resultado);
+        }
+    }
+
+    public function exportContacts() {
 
 
-class AdminUsuario extends Controller{
+        $sql = "SELECT * FROM contactos";
+        $query = $this->pdo->prepare($sql);
+        $rs = $query->execute();
+        if ($rs !== false) {
+            $nr = $query->rowCount();
+            if ($nr > 0) {
 
-	public function exportContacts(){
-		
-		
-		$sql = "SELECT * FROM contactos";
-		$query = $this->pdo->prepare($sql);
-		$rs = $query->execute();
-		if($rs!==false){
-			$nr = $query->rowCount();
-			if( $nr > 0 ){
-				
-				$header = "NOMBRE\tEMAIL\tEMPRESA\tPUESTO\tPAIS\tESTADO\tCODIGO POSTAL\tTELEFONO\tEMAIL\tCOMO SE ENTERO\tFECHA\t";
-				$line = '';
-				
-				$rows = $query->fetchAll();
-				foreach ($rows as $row) {
-					$nombre = str_replace('"', '""', $row['nombre']);
-				    $nombre = '"' . $nombre . '"' . "\t";
-				}
+                $header = "NOMBRE\tEMAIL\tEMPRESA\tPUESTO\tPAIS\tESTADO\tCODIGO POSTAL\tTELEFONO\tEMAIL\tCOMO SE ENTERO\tFECHA\t";
+                $line = '';
 
-				$line .= $nombre."\n";
-			}
+                $rows = $query->fetchAll();
+                foreach ($rows as $row) {
+                    $nombre = str_replace('"', '""', $row['nombre']);
+                    $nombre = '"' . $nombre . '"' . "\t";
+                }
 
-		$data = str_replace("\r", "", $line);
-		$data = Encoding::toUTF8($data);
-		//$data = Encoding::toISO8859($data);
-		}
-		
-		header("Content-type: application/vnd.ms-excel; charset=utf-8");
-		header("Content-Disposition: attachment; filename=exporta_contactos_".date('y-m-d').".xls");
-		header("Pragma: no-cache");
-		header("Expires: 0");
+                $line .= $nombre . "\n";
+            }
 
-		echo $header."\n".$data;
-		
-	}
+            $data = str_replace("\r", "", $line);
+            $data = Encoding::toUTF8($data);
+            //$data = Encoding::toISO8859($data);
+        }
 
-	public function showUsers(){
-		$this->header_admin($lang="es");
-		
+        header("Content-type: application/vnd.ms-excel; charset=utf-8");
+        header("Content-Disposition: attachment; filename=exporta_contactos_" . date('y-m-d') . ".xls");
+        header("Pragma: no-cache");
+        header("Expires: 0");
+
+        echo $header . "\n" . $data;
+    }
+
+    public function showUsers() {
+        $this->header_admin($lang = "es");
+
         $sql = "SELECT * FROM usuarios";
-		$query = $this->pdo->prepare($sql);
-		$rs = $query->execute();
-		if($rs!==false){
-			$nr = $query->rowCount();
-			if( $nr > 0 ){
-				$rows = $query->fetchAll();
-				require $this->adminviews."list-users.php";
-			}
-		}
-		$this->footer_admin($lang="es");
-	}
+        $query = $this->pdo->prepare($sql);
+        $rs = $query->execute();
+        if ($rs !== false) {
+            $nr = $query->rowCount();
+            if ($nr > 0) {
+                $rows = $query->fetchAll();
+                require $this->adminviews . "list-users.php";
+            }
+        }
+        $this->footer_admin($lang = "es");
+    }
 
-	public function detailUser($lang="es", $id){
+    public function detailUser($lang = "es", $id) {
 
-		$this->header_admin($lang);
+        $this->header_admin($lang);
 
-		$sql = "SELECT 
+        $sql = "SELECT 
 					id_registro,
 					nombre,        
 					apellidos,     
@@ -84,15 +105,14 @@ class AdminUsuario extends Controller{
 					fecha 
 				FROM usuarios 
 				WHERE id_registro = :id";
-		$query = $this->pdo->prepare($sql);
-		$query->bindParam(':id', $id, \PDO::PARAM_INT);
-		$rs = $query->execute();
-		if($rs !==false){
-			$user = $query->fetch(\PDO::FETCH_ASSOC);
-			require $this->adminviews."view-user.php";
-		}
-		$this->footer_admin($lang);
+        $query = $this->pdo->prepare($sql);
+        $query->bindParam(':id', $id, \PDO::PARAM_INT);
+        $rs = $query->execute();
+        if ($rs !== false) {
+            $user = $query->fetch(\PDO::FETCH_ASSOC);
+            require $this->adminviews . "view-user.php";
+        }
+        $this->footer_admin($lang);
+    }
 
-	}
-	
 }

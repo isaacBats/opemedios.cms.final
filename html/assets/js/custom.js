@@ -1,5 +1,6 @@
   try{
 		function getSearch( value ){
+			console.log("A");
 		      jQuery.post("/catalog/browser/json", {q:value} , function(json){
 		        var temp = "";
 		        for( p in json ){

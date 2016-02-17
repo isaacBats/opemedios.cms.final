@@ -20,3 +20,4 @@ html/vendor/*
 html/config.php
 
 /html/assets/images/
+/html/nbproject/private/

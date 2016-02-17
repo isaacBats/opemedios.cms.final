@@ -626,6 +626,7 @@ class Catalog extends Controller{
 			$where = substr($lastWhere, 0, -3);
 
 			$sql = "SELECT nombre, ur FROM $table WHERE ".$where." LIMIT 10";
+			
 			$query = $this->pdo->prepare($sql);
 			
 			$rs = $query->execute();

@@ -343,6 +343,12 @@
 		'parameters' => array("lang" => $lang),
 		'methods' => 'GET'
 	)));
+        
+        $collection->attachRoute(new Route('/panel/users/updateStatus', array(
+		'_controller' => 'AdminUsuario::updateStatus',
+		'parameters' => array("lang" => $lang),
+		'methods' => 'POST'
+	)));
 
 	$collection->attachRoute(new Route('/panel/user/:id', array(
 		'_controller' => 'AdminUsuario::detailUser',

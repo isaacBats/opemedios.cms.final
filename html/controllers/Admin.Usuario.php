@@ -42,7 +42,7 @@ class AdminUsuario extends Controller {
                     $mail->Host = 'smtp.gmail.com';
                     $mail->Port = 465;
                     $mail->Username = "dcepero@denumeris.com";
-                    $mail->Password = "elsamaria83";
+                    $mail->Password = "";
                     $mail->SetFrom("dcepero@denumeris.com", "dcepero@denumeris.com");
                     $mail->AddAddress($user['email']);
 

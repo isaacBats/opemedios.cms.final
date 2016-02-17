@@ -1,0 +1,14 @@
+<?php 
+	global $_config;
+	$_config = new stdClass();
+
+	$_config->db = array(
+		"dsn"			 => 'mysql:host=localhost;dbname=DB_name',
+		"nombre_usuario" => 'DB_user',
+		"password" 		 => 'DB_password',
+		"opciones" 		 => array(
+		    				 PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8',
+						  )
+	);
+
+?>

@@ -9,7 +9,9 @@
 			<?php echo $this->trans($lang , "*Mis contizaciones" , "*My Quotes"); ?>
 		</p> -->
 		<h1>Mis cotizaciones</h1>
-		<?php
+		<?php 
+			echo $quote; 
+
 			if ($cotizaciones != null) {
 				$html = "
 					<table>
@@ -26,20 +28,21 @@
 				        <tbody>
 				";
 				foreach ($cotizaciones as $cotizacion) {
-					$html .= "
+					$date = date_create($cotizacion['created']);
+					$html .= '
 								<tr>
 				                    <td>
-				                        ".$cotizacion['created']."
+				                        '.date_format($date, 'd/m/Y').'
 				                    </td>
-				                    <td ><a href=\"#\">Ver Detalles</a></td>
+				                    <td ><a href="/profile/my-quote/detail/'.$cotizacion['id'].'">Ver Detalles</a></td>
 				                </tr>
-					";
-
-
-
-					 // "Fecha: ". $cotizacion['created']."<br>";
+					';
 				}
 				echo $html;
+			}
+
+			if(empty($quote) && empty($cotizaciones)){
+				echo $this->trans($lang , "No cuentas con cotizaciones.<br> Los puedes seleccionar de favoritos!!!" , "*Not have Quotes. <br> Add of Favorites");
 			}
 		?>
 		

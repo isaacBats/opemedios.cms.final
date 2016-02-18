@@ -48,29 +48,6 @@
             </div>
         </div>
     </form>
-    <div class="iniciar-sesion popup-am hide" id="login-popup" style="height:230px">
-        <form action="/umbraco/Surface/Account/Recovery" data-ajax="true" data-ajax-failure="PLError()" data-ajax-method="POST" data-ajax-mode="replace" data-ajax-success="PLSuccess()" data-ajax-update="#login-popup-target" id="frmRecoveryPopup" method="post"><hgroup>    
-                <h2>Olvid&#233; mi contrase&#241;a</h2>
-            </hgroup>
-            <div style="width:250px">
-                <p>Si olvidaste tu contrase&#241;a, por favor llena el campo con tu nombre de usuario y te enviaremos tu nueva contrase&#241;a al correo electr&#243;nico que registraste.</p>
-            </div>
-            <div>
-                <input data-val="true" data-val-required="The Username field is required." id="Username" name="Username" placeholder="Usuario" style="float:left;" type="text" value=""/>
-                <input type="submit" value="Enviar">
-            </div>
-            <div id="login-popup-target" style="width:250px;clear:both;"></div>
-            <script type="text/javascript">
-                function PLError() {
-                    $('#login-popup-target').text('No fue posible recuperar tu password');
-                }
-                function PLSuccess() {
-                    $('#login-popup-target').text('Tu nuevo password ha sido enviado al correo registrado');
-                }
-            </script>
-        </form>
-    </div>
-
 </div><!-- .registro -->
 
 

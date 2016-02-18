@@ -487,10 +487,10 @@
 	)));
 
 	//TEMP Relacionados link temporal
-	$collection->attachRoute(new Route('/relacionadoss', array(
+	$collection->attachRoute(new Route('/gallery/relatedImgs', array(
 		'_controller' => 'Gallery::showRelatedAction',
-		'parameters' => array("lang" => $lang, "imagen" => "6-metz_etagere_alt1.jpg"),
-		'methods' => 'GET'
+		'parameters' => array("lang" => $lang),
+		'methods' => 'POST'
 	)));
 
 

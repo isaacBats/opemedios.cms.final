@@ -58,16 +58,32 @@ function startGallery() {
                 prevLinkText: '<'
             });
             window.gallery.onFadeOut = function () {
-                $('#details').fadeOut('fast');
+                $('#details').fadeOut('slow');
             };
             window.gallery.onFadeIn = function () {
-                $('#details').fadeIn('fast');
+                $('#details').fadeIn('slow');
+                getGalleryRelated();
             };
 
         } catch (e) {
             console.log(e);
         }
     }
+}
+
+function getGalleryRelated() {
+    var datos = {};
+//    datos.img = $("#slideshow").find("img").attr("src").split("/").pop();
+    datos.img = "6-metz_etagere_alt1.jpg";
+    jQuery.post('/gallery/relatedImgs', datos, function (json) {
+        jQuery("#galleryRelated").html('');
+        $.each(json, function () {
+            jQuery("#galleryRelated").append(' <a href="product/' + this.ur + '" alt="' + this.ur + '" class="rel">\n\
+                                               <img src="http://www.alfonsomarinaebanista.com/images/' + this.ur +
+                    '/' + this.ur + '_alta1.jpg"> <h2>' + this.nombre + '</h2></a>');
+        });
+    }, "json");
+
 }
 
 
@@ -270,7 +286,7 @@ function resetPass() {
                 jQuery('#resetPassBtn').val('Enviar');
                 jQuery('#alertMessageS').text(json.mensaje);
                 $('#alertHolder').fadeOut(4000);
-                
+
             } else {
                 jQuery('#resetPassBtn').removeAttr('disabled');
                 jQuery('#alertMessageS').text(json.mensaje);

@@ -59,7 +59,7 @@
             te enviaremos tu nueva contrase&#241;a al correo electr&#243;nico que registraste.
         </p>
         <div>
-            <input data-val="true" id="resetUsername" name="resetUsername" placeholder="Usuario" style="margin-left: 110px" type="text" value="Isaac4"/>
+            <input data-val="true" id="resetUsername" name="resetUsername" placeholder="Usuario" style="margin-left: 110px" type="text" value=""/>
             <input type="submit" onclick="resetPass()" value="Enviar" style="height: 23px; width: 70px" id="resetPassBtn">
             <p id="alertMessageS"></p>
         </div>

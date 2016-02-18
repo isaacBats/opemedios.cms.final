@@ -149,13 +149,16 @@ class Profile extends Controller{
 		$this->addbread( array("label"=>$this->trans($lang , "Detalle cotización" , "Quote Detail")) );
 		$this->header( $lang );
 
-		$ids = implode(",", $_SESSION['cotizacion']);
-		$sqlQuoteProduct = "SELECT * FROM product WHERE id in (".$ids.")";
-		$queryQuoteProduct = $this->pdo->prepare($sqlQuoteProduct);
-		$rsQuoteProduct = $queryQuoteProduct->execute();
-		if($rsQuoteProduct){
-			$products = $queryQuoteProduct->fetchAll(\PDO::FETCH_ASSOC);
-		}
+		// $ids = implode(",", $_SESSION['cotizacion']);
+		// $sqlQuoteProduct = "SELECT * FROM product WHERE id in (".$ids.")";
+		// $queryQuoteProduct = $this->pdo->prepare($sqlQuoteProduct);
+		// $rsQuoteProduct = $queryQuoteProduct->execute();
+		// if($rsQuoteProduct){
+		// 	$products = $queryQuoteProduct->fetchAll(\PDO::FETCH_ASSOC);
+		// }
+		// 
+		
+		$products = $_SESSION['cotizacion'];
 
 		require $this->views."detail_session_quote.php";
 
@@ -210,6 +213,7 @@ class Profile extends Controller{
 
 	/**
 	 * Add a product to the user session to list quote 
+	 * 
 	 * @param string $lang language
 	 */
 	public function addProductQuoteAction( $lang="es" ){
@@ -219,7 +223,22 @@ class Profile extends Controller{
 			if( !isset($_SESSION['cotizacion']) ){
 				$_SESSION['cotizacion'] = array();
 			}
-			array_push($_SESSION['cotizacion'], $_POST['id']);
+
+			$sql = "SELECT * FROM product WHERE id = :id;";
+			$query = $this->pdo->prepare($sql);
+			$query->bindParam(':id', $_POST['id']);
+			$rs = $query->execute();
+			if( $rs )
+				$product = $query->fetch(\PDO::FETCH_ASSOC);
+
+			$cotizacion = array(
+						'id'		=> $_POST['id'],
+						'idUser' 	=> $_SESSION['user']['id_registro'],
+						'field'  	=> $_SESSION['user']['precio'], 
+						'quantity'	=> 1 ,
+						'product'	=> $product,
+					);
+			array_push($_SESSION['cotizacion'], $cotizacion);
 			$resultado->exito = true;
 			$resultado->log = "Se agregó el ID al contenedor de Cotizaciones";
 			$resultado->mensaje = $this->trans($lang , 'Eliminar de Cotizacion' , 'Remove from Quotes' );
@@ -243,10 +262,15 @@ class Profile extends Controller{
 			if( !isset($_SESSION['cotizacion']) ){
 				$_SESSION['cotizacion'] = array();
 			}
-			
-			if (($key = array_search($_POST['id'], $_SESSION['cotizacion'])) !== false) {
-			    unset($_SESSION['cotizacion'][$key]);
-			}
+
+			$cotizaciones = $_SESSION['cotizacion'];
+
+			$numCotizaciones= count($cotizaciones);
+			for ($c=0; $c < $numCotizaciones; $c++) { 
+				if( $_SESSION['cotizacion'][$c]['id'] == $_POST['id']){
+					unset($_SESSION['cotizacion'][$c]);
+				}
+			}	
 
 			$resultado->exito = true;
 			$resultado->log = "Se removió el ID de la Cotización";

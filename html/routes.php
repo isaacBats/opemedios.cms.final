@@ -448,6 +448,16 @@
 		'methods' => 'POST'
 	)));
 
+	// $collection->attachRoute(new Route('/update', array(
+	// 	'_controller' => 'Catalog::updateProducts',
+	// 	'parameters' => array("lang" => $lang),
+	// 	'methods' => 'GET'
+	// )));
+
+	
+
+
+
 	$collection->attachRoute(new Route('/panel/catalog/categories/list', array(
 		'_controller' => 'AdminCatalog::listCategoriesAction',
 		'parameters'  => array("lang" => $lang),

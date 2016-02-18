@@ -24,25 +24,31 @@
 						        <div class="separador">
 						            <table width="100%">
 						                <tbody><tr>
-						                    <td><strong>'.$product['ur'].'</strong></td>
-						                    <td>Precio: <strong>'.$product['Precio cotizado'].'</strong></td>
-						                </tr>
+						                    <td><strong>'.$product['ur'].'</strong></td>';
+						                    if ( $_SESSION["user"]["precio"] == "precio" ){
+						                    	$html .= '<td>Precio: <strong>'.$product['precio'].'</strong></td>';
+						                    }elseif ( $_SESSION["user"]["precio"] == "_price" ){
+						                    	$html .= '<td>Precio: <strong>'.$product['_price'].'</strong></td>';
+											}
+						      $html .= '</tr>
 						                <tr>
 						                    <td>
 						                        Acabado: <strong>'.$product['acabado'].'</strong>
 						                    </td>
 						                    <td>Cantidad:
-						                            <input text="'.$product['quantity'].'" value="'.$product['quantity'].'" class="cant-quote">
+						                            <input text="1" value="1" class="cant-quote">
 						                    </td>
 						                </tr>
 						            </tbody></table>
 						        </div>
-						            <a class="boton removeFromCotz" href="#">Eliminar de Cotización</a>
+						            <a href="javascript:void(0);" id="btn-cot" class="general-btn half btn-cotiza eliminar" data-id="'.$product['id'].'">Eliminar de Cotización</a>
 						    </div>
 						    <br class="clear">
 						</div>';
 				echo $html;
 			}
+				echo "<pre>";
+				print_r($_SESSION);
 		?>
 		<div class="texto-listado">
 		    <table style="width: 100%;">
@@ -55,7 +61,7 @@
 		            </td>
 		        </tr><tr>
 		                 <td>
-		                     <a href="#" class="boton">Guardar</a>
+		                     <a href="/profile/my-quote/detail-session/save" class="boton">Guardar</a>
 		                     &nbsp;
 		                 </td>
 		                 <td>

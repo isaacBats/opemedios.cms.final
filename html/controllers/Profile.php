@@ -119,6 +119,7 @@ class Profile extends Controller{
 						p.acabado, 
 						p.precio as 'Precion producto', 
 						cu.price as 'Precio cotizado', 
+						cu.field,
 						cu.quantity 
 				FROM product p 
 				INNER JOIN usuarios_cotizacion_producto cu 
@@ -156,9 +157,55 @@ class Profile extends Controller{
 			$products = $queryQuoteProduct->fetchAll(\PDO::FETCH_ASSOC);
 		}
 
-		require $this->views."detail_quote.php";
+		require $this->views."detail_session_quote.php";
 
 		$this->footer( $lang );
+	}
+
+	public function detailSessionSaveQuoteAction( $lang = "es" ){
+		if( isset( $_SESSION["user"] ) && isset( $_SESSION["cotizacion"] ) ){
+			$id_user = $_SESSION["user"]["id_registro"];
+			// if($this->addQuote($id_user)){
+
+			// 	$id_quote = $this->maxQuote();
+			// 	$sql = "INSERT INTO usuarios_cotizacion_producto( usuarios_id, cotizacion_id, product_id, price, field, quantity )
+			// 					VALUES ( :id_user, :id_quote, :id_product, :price, :field, :quantity )";
+
+			// 	$query = $this->pdo->prepare($sql);
+			// 	$query->bindParam(':id_user', $id_user);
+			// 	$query->bindParam(':id_quote', $id_quote);
+			// 	$query->bindParam(':id_product', $_SESSION['cotizacion'][$c]);
+			// 	$query->bindParam(':price', $price);
+			// 	$query->bindParam(':field', $_SESSION['user']["precio"]);
+			// 	$query->bindParam(':quantity', $quantity);
+
+			// }
+		}
+	}
+
+	/**
+	 * Add a new Quote
+	 * 
+	 * @param int $idUser User identified
+	 */
+	private function addQuote( $idUser ){
+		$query = $this->pdo->prepare( "INSERT INTO usuarios_cotizacion( usuarios_id ) VALUES($idUser);" );
+		$rs = $query->execute();
+		( $rs == true )? $exito = true : $exito = false;		
+		return $exito;
+	}
+
+	/**
+	 * Return the last quote
+	 * 
+	 * @return int id of quote
+	 */
+	private function maxQuote(){
+
+		$query = $this->pdo->prepare( "SELECT MAX(id) FROM usuarios_cotizacion;" );
+		$rs = $query->execute();
+
+		return current($query->fetch(\PDO::FETCH_ASSOC));
 	}
 
 	/**

@@ -24,7 +24,7 @@ foreach ($productList as $product) {
             </a>';
         
         if( isset($_SESSION['cotizacion']) && in_array($product['id'], $_SESSION['cotizacion'])){ 
-            echo '<a href="javascript:void(0);" id="btn-cot" class="general-btn half btn-cotiza" data-id="'.$product['id'].'">';
+            echo '<a href="javascript:void(0);" id="btn-cot" class="general-btn half btn-cotiza eliminar" data-id="'.$product['id'].'">';
             echo $this->trans($lang,"Eliminar de Cotización","Remove from Quotation");
         }else{
             echo '<a href="javascript:void(0);" id="btn-cot" class="general-btn half btn-cotiza" data-id="'.$product['id'].'">';

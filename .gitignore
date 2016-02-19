@@ -20,4 +20,8 @@ html/vendor/*
 html/config.php
 
 /html/assets/images/
-/html/nbproject/private/
+/html/nbproject/*
+
+._.DS_Store
+html/._.DS_Store
+nbproject/

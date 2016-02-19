@@ -86,15 +86,14 @@ $(document).ready(function () {
         }
     });
 
-    jQuery('#user_status').change(function(){
+    jQuery('#user_status').change(function () {
         var datos = {};
-        datos.id_registro= $(this).val();   
+        datos.id_registro = $(this).val();
         jQuery.post('/panel/users/updateStatus', datos, function (json) {
-                        console.log(json);
-                        if (json.exito) {
-                            window.location.href = "../users/list";
-                        }
-                    });
+            if (json.exito) {
+                window.location.href = "../users/list";
+            }
+        });
     });
     jQuery('.ckbox').click(function () {
         var t = jQuery(this);

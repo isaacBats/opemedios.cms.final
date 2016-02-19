@@ -9,6 +9,8 @@ $(document).ready(function () {
         ]
     });
 
+ 
+
     $('#fecha').datepicker();
 
     /* Cambia el lenguaje del datepicker a espaÃ±ol */
@@ -86,6 +88,13 @@ $(document).ready(function () {
         }
     });
 
+    jQuery('.product').click(function () {
+        var datos = {};
+        datos.id = $(this).attr("id");
+        jQuery.post('/panel/catalog/mainproductbycat', datos, function (json) {
+            location.reload();
+        });
+    });
     jQuery('#user_status').change(function () {
         var datos = {};
         datos.id_registro = $(this).val();

@@ -187,7 +187,8 @@ class Profile extends Controller{
 			// }
 			
 			echo "<pre>";
-			print_r($_POST);
+			foreach( $_POST as $key => $value){$_SESSION["cotizacion"][$key]["quantity"] = $value;}
+			print_r($_SESSION);
 		}
 	}
 
@@ -243,7 +244,7 @@ class Profile extends Controller{
 						'quantity'	=> 1 ,
 						'product'	=> $product,
 					);
-			array_push($_SESSION['cotizacion'], $cotizacion);
+			$_SESSION['cotizacion'][$product["id"]] = $cotizacion;
 			$resultado->exito = true;
 			$resultado->log = "Se agregó el ID al contenedor de Cotizaciones";
 			$resultado->mensaje = $this->trans($lang , 'Eliminar de Cotizacion' , 'Remove from Quotes' );
@@ -268,14 +269,8 @@ class Profile extends Controller{
 				$_SESSION['cotizacion'] = array();
 			}
 
-			$cotizaciones = $_SESSION['cotizacion'];
-
-			$numCotizaciones= count($cotizaciones);
-			for ($c=0; $c < $numCotizaciones; $c++) { 
-				if( $_SESSION['cotizacion'][$c]['id'] == $_POST['id']){
-					unset($_SESSION['cotizacion'][$c]);
-				}
-			}	
+			
+			unset( $_SESSION['cotizacion'][$_POST['id']] ) ;
 
 			$resultado->exito = true;
 			$resultado->log = "Se removió el ID de la Cotización";

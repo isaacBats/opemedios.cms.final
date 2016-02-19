@@ -23,7 +23,7 @@ foreach ($productList as $product) {
                  '.$this->trans($lang,"Eliminar de Favoritos","Remove from Favorites").'
             </a>';
         
-        if( isset($_SESSION['cotizacion']) && in_array($product['id'], $_SESSION['cotizacion'])){ 
+        if( isset($_SESSION['cotizacion']) && isset($_SESSION['cotizacion'][$product['id']]) ){ 
             echo '<a href="javascript:void(0);" id="btn-cot" class="general-btn half btn-cotiza eliminar" data-id="'.$product['id'].'">';
             echo $this->trans($lang,"Eliminar de Cotización","Remove from Quotation");
         }else{

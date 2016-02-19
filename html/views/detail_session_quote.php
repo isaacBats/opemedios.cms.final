@@ -1,11 +1,11 @@
 <div class="profile">
+	<form method="POST" action="/profile/my-quote/detail-session/save">
 	<div class="profile_menu">
 		
 		<h2><?php echo $_SESSION["user"]['nombre'].' '.$_SESSION["user"]['apellidos'] ?></h2>
 		<?php require "profile.menu.php"; ?>
 	</div>		
 	<div class=" profile_form ">
-	<form method="POST" action="/profile/my-quote/detail-session/save">
 		<?php 
 			foreach ($products as $product) {
 				$html = '<div class="list-item">
@@ -17,7 +17,7 @@
 						        </a>
 						    </div>
 						    <div class="texto-listado">
-						        <h2>
+						    	<h2>
 						            <a href="'.$this->url($lang,'/product/'.$product['product']['ur']).'">
 						                <h2>'.$product['product']['nombre'].'</h2>
 						            </a>
@@ -37,7 +37,7 @@
 						                        Acabado: <strong>'.$product['product']['acabado'].'</strong>
 						                    </td>
 						                    <td>Cantidad:
-						                            <input type="number" value="'.$product['quantity'].'" class="cant-quote" name="cantidad">
+						                            <input type="number" value="'.$product['quantity'].'" class="cant-quote" name="'.$product['id'].'">
 						                    </td>
 						                </tr>
 						            </tbody></table>
@@ -48,8 +48,6 @@
 						</div>';
 				echo $html;
 			}
-			echo "<pre>";
-			print_r($_SESSION);
 		?>
 		<div class="texto-listado">
 		    <table style="width: 100%;">
@@ -74,6 +72,6 @@
 		    </tbody></table>
 		</div>		
 	</div>
-	</form>
 	<br class="clear">
+	</form>
 </div>

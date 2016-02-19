@@ -16,12 +16,26 @@ class Catalog extends Controller {
         $this->footer($lang);
     }
 
-    //  ESTO SIRVE PARA lEER LAS CARPETAS Y PONER LAS IMAGENES CORRECTAS
+    // ESTO SIRVE PARA lEER LAS CARPETAS Y PONER LAS IMAGENES CORRECTAS
     // public function updateProducts(){
     // 		$images = scandir( "images/product" );
     // 		foreach ($images as $image) {
     // 			$ur = explode( "_", $image );
     // 			$sql = "UPDATE `amarinados`.`product` SET `imagen` = '{$image}' WHERE `product`.`ur` LIKE '{$ur[0]}';";
+    // 			$query = $this->pdo->prepare($sql);
+    // 			$rs = $query->execute();
+    // 		}
+    // 		exit;
+    // }
+    //  UPDATE gallery_image nombre de imagenes
+    // public function updateProducts(){
+    // 		$sql = "SELECT * FROM gallery_image";
+    // 		$query = $this->pdo->prepare($sql);
+    // 		$query->execute();
+    // 		$imagenes = $query->fetchAll();
+    // 		foreach ($imagenes as $image) {
+    // 			$img = array_pop(explode( "/", $image["imagen"] ));
+    // 			$sql = "UPDATE `gallery_image` SET `imagen` = '{$img}' WHERE `id` LIKE '{$image["id"]}';";
     // 			$query = $this->pdo->prepare($sql);
     // 			$rs = $query->execute();
     // 		}

@@ -5,44 +5,51 @@
 		<?php require "profile.menu.php"; ?>
 	</div>		
 	<div class=" profile_form ">
+	<form method="POST" action="/profile/my-quote/detail-session/save">
 		<?php 
 			foreach ($products as $product) {
 				$html = '<div class="list-item">
 						    <div class="img-listado">
-						        <a href="'.$this->url($lang,'/product/'.$product['ur']).'">
+						        <a href="'.$this->url($lang,'/product/'.$product['product']['ur']).'">
 						            <img 
-						                alt="'.$product["nombre"].'" 
-						                src="http://www.alfonsomarinaebanista.com/images/'.$product["ur"].'/'.$product["ur"].'_alta2.jpg">
+						                alt="'.$product['product']['nombre'].'" 
+						                src="http://www.alfonsomarinaebanista.com/images/'.$product['product']['ur'].'/'.$product['product']['ur'].'_alta2.jpg">
 						        </a>
 						    </div>
 						    <div class="texto-listado">
 						        <h2>
-						            <a href="'.$this->url($lang,'/product/'.$product['ur']).'">
-						                <h2>'.$product['nombre'].'</h2>
+						            <a href="'.$this->url($lang,'/product/'.$product['product']['ur']).'">
+						                <h2>'.$product['product']['nombre'].'</h2>
 						            </a>
 						        </h2>
 						        <div class="separador">
 						            <table width="100%">
 						                <tbody><tr>
-						                    <td><strong>'.$product['ur'].'</strong></td>
-						                    <td>Precio: <strong>'.$product['Precio cotizado'].'</strong></td>
-						                </tr>
+						                    <td><strong>'.$product['product']['ur'].'</strong></td>';
+						                    if ( $_SESSION["user"]["precio"] == "precio" ){
+						                    	$html .= '<td>Precio: <strong>'.$product['product']['precio'].'</strong></td>';
+						                    }elseif ( $_SESSION["user"]["precio"] == "_price" ){
+						                    	$html .= '<td>Precio: <strong>'.$product['product']['_price'].'</strong></td>';
+											}
+						      $html .= '</tr>
 						                <tr>
 						                    <td>
-						                        Acabado: <strong>'.$product['acabado'].'</strong>
+						                        Acabado: <strong>'.$product['product']['acabado'].'</strong>
 						                    </td>
 						                    <td>Cantidad:
-						                            <input text="'.$product['quantity'].'" value="'.$product['quantity'].'" class="cant-quote">
+						                            <input type="number" value="'.$product['quantity'].'" class="cant-quote" name="cantidad">
 						                    </td>
 						                </tr>
 						            </tbody></table>
 						        </div>
-						            <a class="boton removeFromCotz" href="#">Eliminar de Cotización</a>
+						            <a href="javascript:void(0);" id="btn-cot" class="general-btn half btn-cotiza eliminar" data-id="'.$product['product']['id'].'">Eliminar de Cotización</a>
 						    </div>
 						    <br class="clear">
 						</div>';
 				echo $html;
 			}
+			echo "<pre>";
+			print_r($_SESSION);
 		?>
 		<div class="texto-listado">
 		    <table style="width: 100%;">
@@ -55,7 +62,7 @@
 		            </td>
 		        </tr><tr>
 		                 <td>
-		                     <a href="#" class="boton">Guardar</a>
+		                     <input class="boton" type="submit" value="Guardar">
 		                     &nbsp;
 		                 </td>
 		                 <td>
@@ -67,5 +74,6 @@
 		    </tbody></table>
 		</div>		
 	</div>
+	</form>
 	<br class="clear">
 </div>

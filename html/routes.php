@@ -1,7 +1,6 @@
 <?php
 
 use PHPRouter\RouteCollection;
-use PHPRouter\Router;
 use PHPRouter\Route;
 
 $collection = new RouteCollection();
@@ -133,7 +132,6 @@ $collection->attachRoute(new Route('/favs', array(
 )));
 
 
-
 // PRESS
 $collection->attachRoute(new Route('/press', array(
     '_controller' => 'Press::showAll',
@@ -244,6 +242,12 @@ $collection->attachRoute(new Route('/profile/my-quote/detail-session', array(
     '_controller' => 'Profile::detailSessionQuoteAction',
     'parameters' => array("lang" => $lang),
     'methods' => 'GET'
+)));
+
+$collection->attachRoute(new Route('/profile/my-quote/detail-session/save', array(
+    '_controller' => 'Profile::detailSessionSaveQuoteAction',
+    'parameters' => array("lang" => $lang),
+    'methods' => 'POST'
 )));
 
 $collection->attachRoute(new Route('/profile/add-quote', array(
@@ -452,6 +456,16 @@ $collection->attachRoute(new Route('/panel/catalog/import', array(
     'methods' => 'POST'
 )));
 
+// $collection->attachRoute(new Route('/update', array(
+// 	'_controller' => 'Catalog::updateProducts',
+// 	'parameters' => array("lang" => $lang),
+// 	'methods' => 'GET'
+// )));
+
+
+
+
+
 $collection->attachRoute(new Route('/panel/catalog/categories/list', array(
     '_controller' => 'AdminCatalog::listCategoriesAction',
     'parameters' => array("lang" => $lang),
@@ -463,13 +477,11 @@ $collection->attachRoute(new Route('/panel/catalog/:category/:name', array(
     'parameters' => array("lang" => $lang),
     'methods' => 'GET'
 )));
-
 $collection->attachRoute(new Route('/panel/catalog/mainproductbycat', array(
     '_controller' => 'AdminCatalog::mainProductByCat',
     'parameters' => array("lang" => $lang),
     'methods' => 'POST'
 )));
-
 //Admin Press
 $collection->attachRoute(new Route('/panel/press/list', array(
     '_controller' => 'AdminPress::showListPress',

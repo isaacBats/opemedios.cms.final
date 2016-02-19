@@ -166,9 +166,11 @@ class Profile extends Controller{
 	}
 
 	public function detailSessionSaveQuoteAction( $lang = "es" ){
-		if( isset( $_SESSION["user"] ) && isset( $_SESSION["cotizacion"] ) ){
+		if( isset( $_SESSION["user"] ) && isset( $_SESSION["cotizacion"] )  ){
 			$id_user = $_SESSION["user"]["id_registro"];
 			// if($this->addQuote($id_user)){
+			// && empty( $_SESSION["cotizacion"])
+			// 	  empty
 
 			// 	$id_quote = $this->maxQuote();
 			// 	$sql = "INSERT INTO usuarios_cotizacion_producto( usuarios_id, cotizacion_id, product_id, price, field, quantity )
@@ -183,6 +185,9 @@ class Profile extends Controller{
 			// 	$query->bindParam(':quantity', $quantity);
 
 			// }
+			
+			echo "<pre>";
+			print_r($_POST);
 		}
 	}
 

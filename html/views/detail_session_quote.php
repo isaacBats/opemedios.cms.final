@@ -5,6 +5,7 @@
 		<?php require "profile.menu.php"; ?>
 	</div>		
 	<div class=" profile_form ">
+	<form method="POST" action="/profile/my-quote/detail-session/save">
 		<?php 
 			foreach ($products as $product) {
 				$html = '<div class="list-item">
@@ -36,7 +37,7 @@
 						                        Acabado: <strong>'.$product['product']['acabado'].'</strong>
 						                    </td>
 						                    <td>Cantidad:
-						                            <input text="1" value="1" class="cant-quote">
+						                            <input type="number" value="'.$product['quantity'].'" class="cant-quote" name="cantidad">
 						                    </td>
 						                </tr>
 						            </tbody></table>
@@ -47,6 +48,8 @@
 						</div>';
 				echo $html;
 			}
+			echo "<pre>";
+			print_r($_SESSION);
 		?>
 		<div class="texto-listado">
 		    <table style="width: 100%;">
@@ -59,7 +62,7 @@
 		            </td>
 		        </tr><tr>
 		                 <td>
-		                     <a href="/profile/my-quote/detail-session/save" class="boton">Guardar</a>
+		                     <input class="boton" type="submit" value="Guardar">
 		                     &nbsp;
 		                 </td>
 		                 <td>
@@ -71,5 +74,6 @@
 		    </tbody></table>
 		</div>		
 	</div>
+	</form>
 	<br class="clear">
 </div>

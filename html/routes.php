@@ -239,7 +239,7 @@
 	$collection->attachRoute(new Route('/profile/my-quote/detail-session/save', array(
 		'_controller' => 'Profile::detailSessionSaveQuoteAction',
 		'parameters' => array("lang" => $lang),
-		'methods' => 'GET'
+		'methods' => 'POST'
 	)));
 
 	$collection->attachRoute(new Route('/profile/add-quote', array(

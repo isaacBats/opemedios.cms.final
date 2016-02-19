@@ -42,3 +42,13 @@
 #input-imagen_thumbnail, #input-imagen{
     display: none;
 }
+.product_main .thmb{
+    background-color: #259dab;
+}
+.product_main .fm-title a{
+    color: #fff;
+    overflow-x: inherit;
+}
+.product_main .text-muted{
+    color:#fff;
+}

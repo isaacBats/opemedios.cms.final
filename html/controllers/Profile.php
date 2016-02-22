@@ -109,34 +109,39 @@ class Profile extends Controller{
 	 */
 	public function detailQuoteAction( $lang = "es", $id ){
 
-		$this->addbread( array("url"=>"/profile" , "label"=>$this->trans($lang ,"Usuario" , "User" )) );
-		$this->addbread( array("label"=>$this->trans($lang , "Detalle cotización" , "Quote Detail")) );
-		$this->header( $lang );
+		if( isset($_SESSION["user"])){
+			$this->addbread( array("url"=>"/profile" , "label"=>$this->trans($lang ,"Usuario" , "User" )) );
+			$this->addbread( array("label"=>$this->trans($lang , "Detalle cotización" , "Quote Detail")) );
+			$this->header( $lang );
 
-		$sql = "
-				SELECT 	p.nombre, 
-						p.ur, 
-						p.acabado, 
-						p.precio as 'Precion producto', 
-						cu.price as 'Precio cotizado', 
-						cu.field,
-						cu.quantity 
-				FROM product p 
-				INNER JOIN usuarios_cotizacion_producto cu 
-				ON p.id = cu.product_id 
-				WHERE cotizacion_id = :id;
-		";
+			$sql = "
+					SELECT 	p.nombre, 
+							p.ur, 
+							p.acabado, 
+							p.precio as 'Precion producto', 
+							cu.price as 'Precio cotizado', 
+							cu.field,
+							cu.quantity 
+					FROM product p 
+					INNER JOIN usuarios_cotizacion_producto cu 
+					ON p.id = cu.product_id 
+					WHERE cotizacion_id = :id;
+			";
 
-		$query = $this->pdo->prepare($sql);
-		$query->bindParam(':id', $id);
-		$rs = $query->execute();
-		if( $rs ){
-			$products = $query->fetchAll(\PDO::FETCH_ASSOC);
+			$query = $this->pdo->prepare($sql);
+			$query->bindParam(':id', $id);
+			$rs = $query->execute();
+			if( $rs ){
+				$products = $query->fetchAll(\PDO::FETCH_ASSOC);
+			}
+
+			require $this->views."detail_quote.php";
+
+			$this->footer( $lang );
+		}else{
+			header( "Location: http://{$_SERVER["HTTP_HOST"]}/login");
 		}
 
-		require $this->views."detail_quote.php";
-
-		$this->footer( $lang );
 	}
 
 	/**
@@ -145,15 +150,20 @@ class Profile extends Controller{
 	 */
 	public function detailSessionQuoteAction( $lang = "es" ){
 
-		$this->addbread( array("url"=>"/profile" , "label"=>$this->trans($lang ,"Usuario" , "User" )) );
-		$this->addbread( array("label"=>$this->trans($lang , "Detalle cotización" , "Quote Detail")) );
-		$this->header( $lang );
+		if( isset($_SESSION["user"])){
+			$this->addbread( array("url"=>"/profile" , "label"=>$this->trans($lang ,"Usuario" , "User" )) );
+			$this->addbread( array("label"=>$this->trans($lang , "Detalle cotización" , "Quote Detail")) );
+			$this->header( $lang );
 
-		$products = $_SESSION['cotizacion'];
+			$products = $_SESSION['cotizacion'];
 
-		require $this->views."detail_session_quote.php";
+			require $this->views."detail_session_quote.php";
 
-		$this->footer( $lang );
+			$this->footer( $lang );
+		}
+		else{
+			header( "Location: http://{$_SERVER["HTTP_HOST"]}/login");
+		}
 	}
 
 	/**

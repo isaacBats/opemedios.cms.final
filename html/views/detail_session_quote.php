@@ -27,9 +27,9 @@
 						                <tbody><tr>
 						                    <td><strong>'.$product['product']['ur'].'</strong></td>';
 						                    if ( $_SESSION["user"]["precio"] == "precio" ){
-						                    	$html .= '<td>Precio: <strong>'.$product['product']['precio'].'</strong></td>';
+						                    	$html .= '<td>Precio: <strong data-price >'.$product['product']['precio'].'</strong></td>';
 						                    }elseif ( $_SESSION["user"]["precio"] == "_price" ){
-						                    	$html .= '<td>Precio: <strong>'.$product['product']['_price'].'</strong></td>';
+						                    	$html .= '<td>Precio: <strong data-price >'.$product['product']['_price'].'</strong></td>';
 											}
 						      $html .= '</tr>
 						                <tr>
@@ -37,7 +37,7 @@
 						                        Acabado: <strong>'.$product['product']['acabado'].'</strong>
 						                    </td>
 						                    <td>Cantidad:
-						                            <input type="number" value="'.$product['quantity'].'" class="cant-quote" name="'.$product['id'].'">
+						                            <input type="number" value="'.$product['quantity'].'" class="cant-quote" data-quantity name="'.$product['id'].'">
 						                    </td>
 						                </tr>
 						            </tbody></table>
@@ -56,7 +56,7 @@
 		                &nbsp;
 		            </td>
 		            <td>
-		                <strong>Total: <span>$281,450.00</span></strong><br>
+		                <strong>Total: <span id="priceTotal" >$ </span></strong><br>
 		            </td>
 		        </tr><tr>
 		                 <td>

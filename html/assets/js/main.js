@@ -26,6 +26,9 @@ jQuery(document).ready(function ($) {
     //Quotes
     startQuo();
 
+    //Prices
+    priceTotal();
+
     $("#resetPass").click(function () {
         $('#alertHolder').fadeIn();
         $('#alertHolder .bg').click(function () {
@@ -35,8 +38,27 @@ jQuery(document).ready(function ($) {
 });
 
 
-//  START GALLERY
 
+/*
+ * Calcula el precio total de la cotización
+ */
+function priceTotal(){
+    var prices = document.querySelectorAll('strong[data-price]');
+    var cantidad = document.querySelectorAll('input[data-quantity]');
+    var suma = 0;
+    
+    for (var i = 0; i < prices.length; i++) {
+        if(parseInt(prices[i].innerHTML) > 0 && parseInt(cantidad[i].value) > 0 ){
+
+            var precio = parseInt(prices[i].innerHTML) * parseInt(cantidad[i].value);
+
+            suma += precio;
+        }
+    }
+    document.getElementById('priceTotal').innerHTML += suma;
+}
+
+//  START GALLERY
 function startGallery() {
 
     if ($('#gallery').length > 0) {

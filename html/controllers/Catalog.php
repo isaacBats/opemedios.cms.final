@@ -149,8 +149,7 @@ class Catalog extends Controller {
         header("Location: ./catalog/product");
     }
 
-    public function categoriesByType($lang = "es", $type = null)
-    {
+    public function categoriesByType($lang = "es", $type = null) {
         if ($type != null) {
             $this->printCategoriesByType($lang, array(0 => array($this->trans($lang, "tipo", "_type") => $type)));
         } else {
@@ -162,8 +161,7 @@ class Catalog extends Controller {
         }
     }
 
-    private function printCategoriesByType($lang = "es", $catalogo)
-    {
+    private function printCategoriesByType($lang = "es", $catalogo) {
 
         $html = "";
         if ($lang == "es") {
@@ -179,12 +177,13 @@ class Catalog extends Controller {
 
         $html .= '<div id="content-press">';
         $tipo = "";
+        $filtro = '<div class=" input-group-btn" id="productsFilter"><select><option value="#">' . $this->trans($lang, "Filtro de Productos", "Product Filter") . '</option>';
 
         foreach ($catalogo as $product) {
             if ($tipo != $product[$this->trans($lang, "tipo", "_type")]) {
                 $tipo = $product[$this->trans($lang, "tipo", "_type")];
                 $html .= '<div class="tituloSeccion clear">' . ucfirst(strtolower($tipo)) . '</div>';
-
+                $filtro .='<optgroup label="' . $tipo . '">';
 
                 $sqlCategorias = "SELECT
                                         product.ur, categories_products.category as mainCategory
@@ -196,15 +195,18 @@ class Catalog extends Controller {
                                         FROM
                                         product
                                         JOIN categories_products
-                                        ON product.categoria = categories_products.category
-                                        WHERE LOWER(" . $this->trans($lang, "tipo", "_type") . ")=LOWER('" . $tipo . "') and categoria NOT like '%,%') order by mainCategory";
+                                        ON product." . $this->trans($lang, "categoria", "_category") . " = categories_products.category
+                                        WHERE LOWER(" . $this->trans($lang, "tipo", "_type") . ")=LOWER('" . $tipo . "') and  " . $this->trans($lang, "categoria", "_category") . "  NOT like '%,%') order by mainCategory";
 
                 $queryCategorias = $this->pdo->prepare($sqlCategorias);
                 $queryCategorias->execute();
                 $categorias = $queryCategorias->fetchAll(\PDO::FETCH_ASSOC);
                 foreach ($categorias as $categoria) {
+
+                    $filtro.='<option value="' . ( $this->url($lang, "/catalog/" . str_ireplace(' ', '-', strtolower($tipo)) . "/" . str_ireplace(' ', '-', $categoria['mainCategory'])) ) . '">' . ucwords($categoria['mainCategory']) . '</option>';
+
                     $html .= '<article class="item4Col">
-                                <a href="' .( $this->url($lang, "/catalog/" . str_ireplace(' ','-',strtolower($tipo)) . "/" . str_ireplace(' ','-',$categoria['mainCategory'])) ). '">
+                                <a href="' . ( $this->url($lang, "/catalog/" . str_ireplace(' ', '-', strtolower($tipo)) . "/" . str_ireplace(' ', '-', $categoria['mainCategory'])) ) . '">
                                         <div class="imageHolder">
                                             <img
                                             alt="' . $categoria['mainCategory'] . '"
@@ -213,14 +215,17 @@ class Catalog extends Controller {
                                     <br class="clear">
                                     <br class="clear">
                                     <p>
-                                    ' . $categoria['mainCategory'] . '
+                                    ' . ucwords($categoria['mainCategory']) . '
                                     </p>
                                 </a>
                         </article>';
                 }
+                $filtro.='</optgroup>';
             }
         }
+        $filtro.='</select></div>';
         $html .= "</div><!-- .product-list -->";
+        $html = str_ireplace('<div id="content-press">', '<div id="content-press">' . $filtro, $html);
         echo $html;
         $this->footer($lang);
     }
@@ -230,10 +235,13 @@ class Catalog extends Controller {
         $ostyle = $style;
         $otype = $type;
         $ogroup = $group;
+        $use = $ouse = "";
+
 
         $this->addBread(array("label" => $this->trans($lang, "Catalogo", "Catalog"), "url" => "/catalog/products"));
 
         if ($style != "casual" && $style != "metro") {
+            $use = $ouse = $group;
             $ogroup = $type;
             $otype = $style;
             $group = $type;
@@ -242,7 +250,9 @@ class Catalog extends Controller {
             if ($type != "")
                 $this->addBread(array("label" => ucwords(strtolower($type)), "url" => "/catalog/" . $style));
             if ($group != "")
-                $this->addBread(array("label" => ucwords(strtolower(str_replace("-", " ", urldecode($group))))));
+                $this->addBread(array("label" => ucwords(strtolower(str_replace("-", " ", urldecode($group)))), "url" => "/catalog/" . $style . "/" . $group));
+            if ($use != "")
+                $this->addBread(array("label" => ucwords(strtolower(str_replace("-", " ", urldecode($use))))));
         }else {
 
             $this->addBread(array("label" => ucwords(strtolower($style)), "url" => "/catalog/" . $style));
@@ -256,17 +266,16 @@ class Catalog extends Controller {
         $style = $style == "casual" || $style == "metro" ? $this->trans($lang, "estilo", "style") . " LIKE '{$style}' " : " 1=1 ";
         $type = $type != "" ? $this->trans($lang, "tipo", "_type") . " LIKE '{$type}' " : " 1=1 ";
         $group = $group != "" ? "LOWER( " . $this->trans($lang, "categoria", "_category") . " ) LIKE '%" . str_replace("-", " ", urldecode($group)) . "%' " : " 1=1 ";
-        $where = implode(" AND ", array($style, $type, $group));
+        $use = $use != "" ? "LOWER( " . $this->trans($lang, "uso", "_use") . " ) LIKE '%" . str_replace("-", " ", urldecode($use)) . "%' " : " 1=1 ";
 
+        $where = implode(" AND ", array($style, $type, $group, $use));
 
         $groupBy = ( $group == " 1=1 " ) ? " GROUP BY " . $this->trans($lang, "categoria", "_category") . " " : "";
-
-
-
         $grouping = ($groupBy != "") ? $this->trans($lang, "categoria", "_category") : false;
 
 
         $sqlCatalogo = "SELECT * FROM product WHERE {$where} {$groupBy} ";
+
 
         $queryCatalogo = $this->pdo->prepare($sqlCatalogo);
         $rsCatalogo = $queryCatalogo->execute();
@@ -292,9 +301,38 @@ class Catalog extends Controller {
         if ($rsCatalogo !== false) {
             $pr = $queryCatalogo->rowCount();
             if ($pr > 0) {
+                $filtro = "";
+                if ($ouse == "") {
+                    $sqlUsos = "SELECT DISTINCT lower(" . $this->trans($lang, "uso", "_use") . ") as uso                            
+                            FROM product where " . $this->trans($lang, "uso", "_use") . "  not like '%,%'
+                            and LOWER(" . $this->trans($lang, "categoria", "_category") . " )= LOWER('" . str_replace("-", " ", urldecode($ogroup)) . "')
+                            and LOWER(" . $this->trans($lang, "tipo", "_type") . " )= LOWER('" . str_replace("-", " ", urldecode($otype)) . "')
+                            order by " . $this->trans($lang, "uso", "_use") . " ";
+
+                    $queryUsos = $this->pdo->prepare($sqlUsos);
+                    $queryUsos->execute();
+                    $usos = $queryUsos->fetchAll(\PDO::FETCH_ASSOC);
+
+                    if ($queryUsos->rowCount() > 0) {
+
+                        $filtro.= '<div class=" input-group-btn" id="productsFilter"><select><option value="#">' . $this->trans($lang, "Filtro de Productos", "Product Filter") . '</option>';
+
+                        foreach ($usos as $uso) {
+                            $filtro.= '<option value="' . ( $this->url($lang, "/catalog/" . str_ireplace(' ', '-', strtolower($otype)) . "/" . str_ireplace(' ', '-', $ogroup)) ) . "/" . str_ireplace(' ', '-', $uso['uso']) . '">' . strtoupper($uso['uso']) . '</option>';
+                        }
+                        $filtro.= '</select></div>';
+                    }
+                } else {
+                    $filtro.= '<div class=" input-group-btn" id="productsFilter"><select><option value="#">' . $this->trans($lang, "Filtro de Productos", "Product Filter") . '</option>';
+                    $filtro.= '<option value="#">' . strtoupper($ouse) . '</option></select></div>';
+                }
                 $catalogo = $queryCatalogo->fetchAll();
-                $html .= '<div id="content-press">';
+                $html .= '<div id="content-press">' . $filtro;
                 $html .= '<p class="tituloSeccion">' . str_replace("-", " ", urldecode(ucfirst(end($this->bread)["label"]))) . '</p>';
+
+
+
+
 
                 if ($grouping) {
                     foreach ($catalogo as $product) {

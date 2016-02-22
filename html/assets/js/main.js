@@ -325,4 +325,8 @@ function getSearch(value) {
         jQuery("#autocomplete").find("ul").html(temp);
     }, "json");
 }
+jQuery('#productsFilter').change(function () {
+    var cat = $('#productsFilter :selected').attr('value');
+    window.location.href = cat;
+});
     

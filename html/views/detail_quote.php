@@ -25,14 +25,14 @@
 						            <table width="100%">
 						                <tbody><tr>
 						                    <td><strong>'.$product['ur'].'</strong></td>
-						                    <td>Precio: <strong>'.$product['Precio cotizado'].'</strong></td>
+						                    <td>Precio: <strong data-price >'.$product['Precio cotizado'].'</strong></td>
 						                </tr>
 						                <tr>
 						                    <td>
 						                        Acabado: <strong>'.$product['acabado'].'</strong>
 						                    </td>
 						                    <td>Cantidad:
-						                            <input text="'.$product['quantity'].'" value="'.$product['quantity'].'" class="cant-quote">
+						                            <input text="'.$product['quantity'].'" value="'.$product['quantity'].'" class="cant-quote" data-quantity>
 						                    </td>
 						                </tr>
 						            </tbody></table>
@@ -51,7 +51,7 @@
 		                &nbsp;
 		            </td>
 		            <td>
-		                <strong>Total: <span>$281,450.00</span></strong><br>
+		                <strong>Total: <span id="priceTotal" >$ </span></strong><br>
 		            </td>
 		        </tr><tr>
 		                 <td>

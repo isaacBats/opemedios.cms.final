@@ -109,34 +109,39 @@ class Profile extends Controller{
 	 */
 	public function detailQuoteAction( $lang = "es", $id ){
 
-		$this->addbread( array("url"=>"/profile" , "label"=>$this->trans($lang ,"Usuario" , "User" )) );
-		$this->addbread( array("label"=>$this->trans($lang , "Detalle cotización" , "Quote Detail")) );
-		$this->header( $lang );
+		if( isset($_SESSION["user"])){
+			$this->addbread( array("url"=>"/profile" , "label"=>$this->trans($lang ,"Usuario" , "User" )) );
+			$this->addbread( array("label"=>$this->trans($lang , "Detalle cotización" , "Quote Detail")) );
+			$this->header( $lang );
 
-		$sql = "
-				SELECT 	p.nombre, 
-						p.ur, 
-						p.acabado, 
-						p.precio as 'Precion producto', 
-						cu.price as 'Precio cotizado', 
-						cu.field,
-						cu.quantity 
-				FROM product p 
-				INNER JOIN usuarios_cotizacion_producto cu 
-				ON p.id = cu.product_id 
-				WHERE cotizacion_id = :id;
-		";
+			$sql = "
+					SELECT 	p.nombre, 
+							p.ur, 
+							p.acabado, 
+							p.precio as 'Precion producto', 
+							cu.price as 'Precio cotizado', 
+							cu.field,
+							cu.quantity 
+					FROM product p 
+					INNER JOIN usuarios_cotizacion_producto cu 
+					ON p.id = cu.product_id 
+					WHERE cotizacion_id = :id;
+			";
 
-		$query = $this->pdo->prepare($sql);
-		$query->bindParam(':id', $id);
-		$rs = $query->execute();
-		if( $rs ){
-			$products = $query->fetchAll(\PDO::FETCH_ASSOC);
+			$query = $this->pdo->prepare($sql);
+			$query->bindParam(':id', $id);
+			$rs = $query->execute();
+			if( $rs ){
+				$products = $query->fetchAll(\PDO::FETCH_ASSOC);
+			}
+
+			require $this->views."detail_quote.php";
+
+			$this->footer( $lang );
+		}else{
+			header( "Location: http://{$_SERVER["HTTP_HOST"]}/login");
 		}
 
-		require $this->views."detail_quote.php";
-
-		$this->footer( $lang );
 	}
 
 	/**
@@ -145,52 +150,68 @@ class Profile extends Controller{
 	 */
 	public function detailSessionQuoteAction( $lang = "es" ){
 
-		$this->addbread( array("url"=>"/profile" , "label"=>$this->trans($lang ,"Usuario" , "User" )) );
-		$this->addbread( array("label"=>$this->trans($lang , "Detalle cotización" , "Quote Detail")) );
-		$this->header( $lang );
+		if( isset($_SESSION["user"])){
+			$this->addbread( array("url"=>"/profile" , "label"=>$this->trans($lang ,"Usuario" , "User" )) );
+			$this->addbread( array("label"=>$this->trans($lang , "Detalle cotización" , "Quote Detail")) );
+			$this->header( $lang );
 
-		// $ids = implode(",", $_SESSION['cotizacion']);
-		// $sqlQuoteProduct = "SELECT * FROM product WHERE id in (".$ids.")";
-		// $queryQuoteProduct = $this->pdo->prepare($sqlQuoteProduct);
-		// $rsQuoteProduct = $queryQuoteProduct->execute();
-		// if($rsQuoteProduct){
-		// 	$products = $queryQuoteProduct->fetchAll(\PDO::FETCH_ASSOC);
-		// }
-		// 
-		
-		$products = $_SESSION['cotizacion'];
+			$products = $_SESSION['cotizacion'];
 
-		require $this->views."detail_session_quote.php";
+			require $this->views."detail_session_quote.php";
 
-		$this->footer( $lang );
+			$this->footer( $lang );
+		}
+		else{
+			header( "Location: http://{$_SERVER["HTTP_HOST"]}/login");
+		}
 	}
 
+	/**
+	 * Save a session cotizacion
+	 *
+	 * @param  string $lang language
+	 */
 	public function detailSessionSaveQuoteAction( $lang = "es" ){
 		if( isset( $_SESSION["user"] ) && isset( $_SESSION["cotizacion"] )  ){
 			$id_user = $_SESSION["user"]["id_registro"];
-			// if($this->addQuote($id_user)){
-			// && empty( $_SESSION["cotizacion"])
-			// 	  empty
-
-			// 	$id_quote = $this->maxQuote();
-			// 	$sql = "INSERT INTO usuarios_cotizacion_producto( usuarios_id, cotizacion_id, product_id, price, field, quantity )
-			// 					VALUES ( :id_user, :id_quote, :id_product, :price, :field, :quantity )";
-
-			// 	$query = $this->pdo->prepare($sql);
-			// 	$query->bindParam(':id_user', $id_user);
-			// 	$query->bindParam(':id_quote', $id_quote);
-			// 	$query->bindParam(':id_product', $_SESSION['cotizacion'][$c]);
-			// 	$query->bindParam(':price', $price);
-			// 	$query->bindParam(':field', $_SESSION['user']["precio"]);
-			// 	$query->bindParam(':quantity', $quantity);
-
-			// }
-			
-			echo "<pre>";
 			foreach( $_POST as $key => $value){$_SESSION["cotizacion"][$key]["quantity"] = $value;}
-			print_r($_SESSION);
+
+			if($this->addQuote($id_user)){
+			
+				$id_quote = $this->maxQuote();
+				$num = 0;
+				$message = "";
+				foreach ($_SESSION['cotizacion'] as $cotizacion) {
+					$sql = "INSERT INTO usuarios_cotizacion_producto( usuarios_id, cotizacion_id, product_id, price, field, quantity )
+									VALUES ( :id_user, :id_quote, :id_product, :price, :field, :quantity )";
+
+					$query = $this->pdo->prepare($sql);
+					$query->bindParam(':id_user', $id_user);
+					$query->bindParam(':id_quote', $id_quote);
+					$query->bindParam(':id_product', $cotizacion['id']);
+					$query->bindParam(':field', $cotizacion['field']);
+					if($cotizacion['field'] == 'precio'){
+						$query->bindParam(':price', $cotizacion['product']['precio']);					
+					}else{
+						$query->bindParam(':price', $cotizacion['product']['_price']);										
+					}
+					$query->bindParam(':quantity', $cotizacion['quantity']);
+					
+					if( $query->execute() == true ){
+						$num ++;
+						$message = 'exito';
+					}else{
+						$message = 'Error al insertar un producto a la lista de cotización';
+					}
+				}
+				if($message == 'exito'){
+					unset($_SESSION['cotizacion']);
+					header("Location: /profile/my-quote");					
+				}
+			}
 		}
 	}
+	
 
 	/**
 	 * Add a new Quote

@@ -88,10 +88,18 @@ $collection->attachRoute(new Route('/catalog/product-care', array(
     'methods' => 'GET'
 )));
 $collection->attachRoute(new Route('/catalog/products', array(
-    '_controller' => 'Catalog::types',
+    '_controller' => 'Catalog::categoriesByType',
     'parameters' => array("lang" => $lang),
     'methods' => 'GET'
 )));
+
+$collection->attachRoute(new Route('/catalog/products/:type', array(
+    '_controller' => 'Catalog::categoriesByType',
+    'parameters' => array("lang" => $lang),
+    'methods' => 'GET'
+)));
+
+
 $collection->attachRoute(new Route('/catalog/:style', array(
     '_controller' => 'Catalog::showListProducts',
     'parameters' => array("lang" => $lang),

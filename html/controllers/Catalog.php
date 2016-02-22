@@ -149,7 +149,21 @@ class Catalog extends Controller {
         header("Location: ./catalog/product");
     }
 
-    public function types($lang = "es") {
+    public function categoriesByType($lang = "es", $type = null)
+    {
+        if ($type != null) {
+            $this->printCategoriesByType($lang, array(0 => array($this->trans($lang, "tipo", "_type") => $type)));
+        } else {
+            $sqlCatalogo = "SELECT * FROM product GROUP BY " . $this->trans($lang, "categoria", "_category") . " ORDER BY " . $this->trans($lang, "tipo", "_type") . " DESC";
+            $queryCatalogo = $this->pdo->prepare($sqlCatalogo);
+            $queryCatalogo->execute();
+            $catalogo = $queryCatalogo->fetchAll();
+            $this->printCategoriesByType($lang, $catalogo);
+        }
+    }
+
+    private function printCategoriesByType($lang = "es", $catalogo)
+    {
 
         $html = "";
         if ($lang == "es") {
@@ -163,13 +177,9 @@ class Catalog extends Controller {
         }
         $this->header($lang);
 
-        $sqlCatalogo = "SELECT * FROM product GROUP BY " . $this->trans($lang, "categoria", "_category") . " ORDER BY " . $this->trans($lang, "tipo", "_type") . " DESC";
-
-        $queryCatalogo = $this->pdo->prepare($sqlCatalogo);
-        $rsCatalogo = $queryCatalogo->execute();
-        $catalogo = $queryCatalogo->fetchAll();
         $html .= '<div id="content-press">';
         $tipo = "";
+
         foreach ($catalogo as $product) {
             if ($tipo != $product[$this->trans($lang, "tipo", "_type")]) {
                 $tipo = $product[$this->trans($lang, "tipo", "_type")];
@@ -194,10 +204,10 @@ class Catalog extends Controller {
                 $categorias = $queryCategorias->fetchAll(\PDO::FETCH_ASSOC);
                 foreach ($categorias as $categoria) {
                     $html .= '<article class="item4Col">
-                                <a href="' . $this->url($lang, "/catalog/" . strtolower($tipo) . "/" . $categoria['mainCategory']) . '">
+                                <a href="' .( $this->url($lang, "/catalog/" . str_ireplace(' ','-',strtolower($tipo)) . "/" . str_ireplace(' ','-',$categoria['mainCategory'])) ). '">
                                         <div class="imageHolder">
-                                            <img 
-                                            alt="' . $categoria['mainCategory'] . '" 
+                                            <img
+                                            alt="' . $categoria['mainCategory'] . '"
                                             src="http://www.alfonsomarinaebanista.com/images/' . $categoria["ur"] . '/' . $categoria["ur"] . '_alta1.jpg">
                                          </div>
                                     <br class="clear">

@@ -98,6 +98,27 @@ $collection->attachRoute(new Route('/catalog/products', array(
     'methods' => 'GET'
 )));
 
+$collection->attachRoute(new Route('/catalog/new-products/:date', array(
+    '_controller' => 'Catalog::showListProductsByDate',
+    'parameters' => array("lang" => $lang),
+    'methods' => 'GET'
+)));
+$collection->attachRoute(new Route('/catalog/new-products/:date/:category', array(
+    '_controller' => 'Catalog::showListProductsByDate',
+    'parameters' => array("lang" => $lang),
+    'methods' => 'GET'
+)));
+$collection->attachRoute(new Route('/catalog/new-products/:date/:category/:use', array(
+    '_controller' => 'Catalog::showListProductsByDate',
+    'parameters' => array("lang" => $lang),
+    'methods' => 'GET'
+)));
+$collection->attachRoute(new Route('/catalog/new-products', array(
+    '_controller' => 'Catalog::showListProductsByDate',
+    'parameters' => array("lang" => $lang),
+    'methods' => 'GET'
+)));
+
 $collection->attachRoute(new Route('/catalog/products/:type', array(
     '_controller' => 'Catalog::categoriesByType',
     'parameters' => array("lang" => $lang),
@@ -120,6 +141,8 @@ $collection->attachRoute(new Route('/catalog/:style/:type/:use', array(
     'parameters' => array("lang" => $lang),
     'methods' => 'GET'
 )));
+
+
 
 
 //  PRODUCT

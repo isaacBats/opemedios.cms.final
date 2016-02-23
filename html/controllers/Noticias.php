@@ -97,8 +97,8 @@ class Noticias extends Controller
 				}
 			}
 
-			$this->addbread( array("url"=>"/news" , "label"=>"News ") );
-			$this->addbread( array( "label"=>$noticia['titulo']) );
+			$this->addbread( array("url"=>"/news" , "label"=>"News and Events ") );
+			$this->addbread( array("label"=>$noticia['titulo']) );
 
 			$this->header($lang);
 
@@ -124,7 +124,7 @@ class Noticias extends Controller
 		
 
 		if ($lang == "es"){
-			$this->addBread(array("url" => "javascript:void(0);" , "label"=>"Noticias"));
+			$this->addBread(array("url" => "" , "label"=>"Noticias"));
 			$this->addBread(array("label"=>"Noticias y Próximos Eventos"));
 			$sql = "SELECT * FROM noticias";
 			$query = $this->pdo->prepare($sql);
@@ -156,7 +156,8 @@ class Noticias extends Controller
 			}
 		}
 		else if ($lang == "en") {
-			$this->addBread(array("label"=>"News"));
+			$this->addBread( array("url" => "", "label" => "News"));
+			$this->addbread( array("label" => "News and Events ") );
 			$sql = "SELECT * FROM noticias";
 			$query = $this->pdo->prepare($sql);
 			$rs = $query->execute();
@@ -194,6 +195,16 @@ class Noticias extends Controller
 		$this->header($lang , false , false , "who" );
 		echo $html;
 		$this->footer( $lang );
+	}
+
+	public function newsReleasesAction( $lang="es" ){
+
+		$this->addBread(array("url" => "", "label" => "News"));
+		$this->addbread(array("label" => $this->trans($lang, "Nuevos Lanzamientos ", "New Releases ")));
+		
+		$this->header($lang);
+		require $this->views . "new_releases.php";
+		$this->footer($lang);
 	}
 
 }

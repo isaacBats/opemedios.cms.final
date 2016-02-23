@@ -6,9 +6,7 @@
         ?>
     </ul>
 </div>
-<div id="controls" class="controls">
-
-</div>
+<div id="controls" class="controls"></div>
 <div id="gallery" class="content">
     <!--  TODO: @Gallery Arreglar error de altura on next slide (1) -->
     <div style="left: 18%;position: absolute;top:50%;margin-top:-15px;width: 30px;"><a href="#" id="navLeft"><img src="/assets/images/Prev1.png" alt=">>"/></a></div>

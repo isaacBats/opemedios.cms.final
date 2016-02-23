@@ -63,7 +63,7 @@
 					</ul>
 				</li>
 				<li>
-					<a href="<?php echo $this->url($lang , "/news") ?>">
+					<a href="javascript:void(0);">
 						<?php echo $this->trans($lang , "Noticias" , "News") ?>
 					</a>
 					<ul>
@@ -73,7 +73,7 @@
 							</a>
 						</li>
 						<li>
-							<a href="<?php echo $this->url($lang , "/news") ?>">
+							<a href="<?php echo $this->url($lang , "/news/new-releases") ?>">
 								<?php echo $this->trans($lang , "Nuevos Lanzamientos" , "News Releases") ?>
 							</a>
 						</li>

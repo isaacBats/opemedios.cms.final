@@ -11,13 +11,18 @@ $collection->attachRoute(new Route('/news', array(
     'parameters' => array("lang" => $lang),
     'methods' => 'GET'
 )));
+
+$collection->attachRoute(new Route('/news/new-releases', array(
+    '_controller' => 'Noticias::newsReleasesAction',
+    'parameters' => array("lang" => $lang),
+    'methods' => 'GET'
+)));
+
 $collection->attachRoute(new Route('/news/:slug', array(
     '_controller' => 'Noticias::mostrarDetalle',
     'parameters' => array("lang" => $lang),
     'methods' => 'GET'
 )));
-
-
 
 //  Galerias 
 $collection->attachRoute(new Route('/menu', array(
@@ -515,10 +520,8 @@ $collection->attachRoute(new Route('/panel/save/gallery', array(
     'methods' => 'POST'
 )));
 
-//TEMP Relacionados link temporal
 $collection->attachRoute(new Route('/gallery/relatedImgs', array(
     '_controller' => 'Gallery::showRelatedAction',
     'parameters' => array("lang" => $lang),
     'methods' => 'POST'
 )));
-?>

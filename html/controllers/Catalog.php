@@ -230,6 +230,116 @@ class Catalog extends Controller {
         $this->footer($lang);
     }
 
+    public function showListProductsByDate($lang = "es", $date = "", $category = "", $use = "") {
+
+        $this->addBread(array("label" => $this->trans($lang, "Productos Nuevos", "New Products"), "url" => "/catalog/new-products"));       
+        
+        $html .= '<div id="content-press">';
+
+        $sqltipos = "SELECT DISTINCT " . $this->trans($lang, "tipo", "_type") . " FROM product where created <>'-' and " . $this->trans($lang, "tipo", "_type") . " not like '%,%' ";
+
+        if ($date == "") {
+            $sqltipos.= " order by  " . $this->trans($lang, "tipo", "_type");
+
+            $sqldates = "SELECT DISTINCT DATE_FORMAT( DATE(created),'%M %Y') as datec FROM product where created <>'-' order by DATE(created) desc;";
+            $querydates = $this->pdo->prepare($sqldates);
+            $querydates->execute();
+            $dates = $querydates->fetchAll(\PDO::FETCH_ASSOC);
+
+            $filtro = '<div class=" input-group-btn" id="productsFilter"><select><option value="#">' . $this->trans($lang, "Productos Nuevos", "New Products") . '</option>';
+            foreach ($dates as $dates) {
+                $filtro.='<option value="' . ( $this->url($lang, "/catalog/new-products/" . str_ireplace(' ', '-', strtolower($dates['datec'])))) . '">' . ucwords($dates['datec']) . '</option>';
+            }
+            $filtro.="</select></div>";
+            $html .= $filtro;
+        } else {
+            $this->addBread(array("label" => $date, "url" => "#"));
+            
+
+            if ($category != "") {
+
+                if ($use != "") {
+                    $sqltipos.= "and lower(" . $this->trans($lang, "uso", "_use") . ")='" . str_ireplace('-', ' ', $use) . "' and lower(" . $this->trans($lang, "categoria", "_category") . ")='" . str_ireplace('-', ' ', $category) . "'  and lower(DATE_FORMAT( DATE(created),'%M-%Y')) ='" . $date . "' order by " . $this->trans($lang, "tipo", "_type");
+                    $filtro = '<div class=" input-group-btn" id="productsFilter"><select><option value="#">' . ucwords($date) . '</option><option value="#">' . ucwords($use) . '</option></select></div>';
+                } else {
+                    $sqltipos.= "and lower(" . $this->trans($lang, "categoria", "_category") . ")='" . str_ireplace('-', ' ', $category) . "'  and lower(DATE_FORMAT( DATE(created),'%M-%Y')) ='" . $date . "' order by " . $this->trans($lang, "tipo", "_type");
+                    $sqluso = "SELECT DISTINCT " . $this->trans($lang, "uso", "_use") . " as uso FROM product where " . $this->trans($lang, "uso", "_use") . " not like '%,%' and lower(" . $this->trans($lang, "categoria", "_category") . ")='" . str_ireplace('-', ' ', $category) . "' and lower(DATE_FORMAT( DATE(created),'%M-%Y')) ='" . $date . "' order by uso;";
+                    $queryuso = $this->pdo->prepare($sqluso);
+                    $queryuso->execute();
+                    $usos = $queryuso->fetchAll(\PDO::FETCH_ASSOC);
+                    $filtro = '<div class=" input-group-btn" id="productsFilter"><select><option value="#">' . ucwords($date) . '</option>';
+
+                    foreach ($usos as $uso) {
+                        $filtro.='<option value="' . ( $this->url($lang, "/catalog/new-products/" . $date . '/' . str_ireplace(' ', '-', strtolower($category)) . '/' . str_ireplace(' ', '-', strtolower($uso['uso'])))) . '">' . ucwords($uso['uso']) . '</option>';
+                    }
+                    $filtro.="</select></div>";
+                }
+                $html .= $filtro;
+            } else {
+                $sqltipos.= "and lower(DATE_FORMAT( DATE(created),'%M-%Y')) ='" . $date . "' order by " . $this->trans($lang, "tipo", "_type");
+
+                $sqlcat = "SELECT DISTINCT " . $this->trans($lang, "categoria", "_category") . " as cat FROM product where " . $this->trans($lang, "categoria", "_category") . " not like '%,%' and lower(DATE_FORMAT( DATE(created),'%M-%Y')) ='" . $date . "' order by categoria;";
+                $querycat = $this->pdo->prepare($sqlcat);
+                $querycat->execute();
+                $categorias = $querycat->fetchAll(\PDO::FETCH_ASSOC);
+                $filtro = '<div class=" input-group-btn" id="productsFilter"><select><option value="#">' . ucwords($date) . '</option>';
+
+                foreach ($categorias as $categoria) {
+                    $filtro.='<option value="' . ( $this->url($lang, "/catalog/new-products/" . $date . '/' . str_ireplace(' ', '-', strtolower($categoria['cat'])))) . '">' . ucwords($categoria['cat']) . '</option>';
+                }
+                $filtro.="</select></div>";
+                $html .= $filtro;
+            }
+        }
+        $queryTipos = $this->pdo->prepare($sqltipos);
+        $queryTipos->execute();
+        $tipos = $queryTipos->fetchAll(\PDO::FETCH_ASSOC);
+        foreach ($tipos as $tipo) {
+            if ($tipo != $tipo[$this->trans($lang, "tipo", "_type")]) {
+                $tipo = $tipo[$this->trans($lang, "tipo", "_type")];
+                $nombre = $this->trans($lang, "nombre", "_name");
+
+                if ($date == "")
+                    $sqlProductos = "SELECT * FROM product where created <>'-' and lower(" . $this->trans($lang, "tipo", "_type") . ") ='" . strtolower($tipo) . "' order by " . $nombre;
+                else {
+                    if ($category != "") {
+                        if ($use != "")
+                            $sqlProductos = "SELECT * FROM product where lower(DATE_FORMAT( DATE(created),'%M-%Y')) ='" . $date . "' and lower(" . $this->trans($lang, "categoria", "_category") . ") ='" . str_ireplace('-', ' ', $category) . "' and lower(" . $this->trans($lang, "uso", "_use") . ") ='" . str_ireplace('-', ' ', $use) . "' and lower(" . $this->trans($lang, "tipo", "_type") . ") ='" . strtolower($tipo) . "' order by " . $nombre;
+                        else
+                            $sqlProductos = "SELECT * FROM product where lower(DATE_FORMAT( DATE(created),'%M-%Y')) ='" . $date . "' and lower(" . $this->trans($lang, "categoria", "_category") . ") ='" . str_ireplace('-', ' ', $category) . "' and lower(" . $this->trans($lang, "tipo", "_type") . ") ='" . strtolower($tipo) . "' order by " . $nombre;
+                    } else {
+                        $sqlProductos = "SELECT * FROM product where lower(DATE_FORMAT( DATE(created),'%M-%Y')) ='" . $date . "' and lower(" . $this->trans($lang, "tipo", "_type") . ") ='" . strtolower($tipo) . "' order by " . $nombre;
+                    }
+                }
+                $html .= '<div class="tituloSeccion clear">' . ucfirst(strtolower($tipo)) . '</div>';
+                $queryProductos = $this->pdo->prepare($sqlProductos);
+                $queryProductos->execute();
+                $productos = $queryProductos->fetchAll(\PDO::FETCH_ASSOC);
+
+                foreach ($productos as $producto) {
+                    $html .= '<article class="item4Col">
+                               <a href="' . ( $this->url($lang, "/product/" . str_ireplace(' ', '-', $producto["ur"])) ) . '">
+                                        <div class="imageHolder">
+                                            <img
+                                            alt="' . $categoria['mainCategory'] . '"
+                                            src="http://www.alfonsomarinaebanista.com/images/' . $producto["ur"] . '/' . $producto["ur"] . '_alta1.jpg">
+                                         </div>
+                                    <br class="clear">
+                                    <br class="clear">
+                                    <p>
+                                    ' . ucwords($producto[$nombre]) . '
+                                    </p>
+                                </a>
+                        </article>';
+                }
+            }
+        }
+        $this->header($lang);
+        $html .= "</div><!-- .product-list -->";
+        echo $html;
+        $this->footer($lang);
+    }
+
     public function showListProducts($lang = "es", $style = "", $type = "", $group = "") {
 
         $ostyle = $style;

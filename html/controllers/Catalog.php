@@ -194,12 +194,13 @@ class Catalog extends Controller {
                                         categories_products.id
                                         FROM
                                         product
-                                        JOIN categories_products
-                                        ON product." . $this->trans($lang, "categoria", "_category") . " = categories_products.category
+                                        INNER JOIN categories_products
+                                        ON product._category = categories_products.category
                                         WHERE LOWER(" . $this->trans($lang, "tipo", "_type") . ")=LOWER('" . $tipo . "') and  " . $this->trans($lang, "categoria", "_category") . "  NOT like '%,%') order by mainCategory";
 
                 $queryCategorias = $this->pdo->prepare($sqlCategorias);
                 $queryCategorias->execute();
+
                 $categorias = $queryCategorias->fetchAll(\PDO::FETCH_ASSOC);
                 foreach ($categorias as $categoria) {
 
@@ -232,6 +233,7 @@ class Catalog extends Controller {
 
     public function showListProductsByDate($lang = "es", $date = "", $category = "", $use = "") {
 
+        $html = "";
         $this->addBread(array("label" => $this->trans($lang, "Productos Nuevos", "New Products"), "url" => "/catalog/new-products"));       
         
         $html .= '<div id="content-press">';
@@ -315,13 +317,12 @@ class Catalog extends Controller {
                 $queryProductos = $this->pdo->prepare($sqlProductos);
                 $queryProductos->execute();
                 $productos = $queryProductos->fetchAll(\PDO::FETCH_ASSOC);
-
                 foreach ($productos as $producto) {
                     $html .= '<article class="item4Col">
                                <a href="' . ( $this->url($lang, "/product/" . str_ireplace(' ', '-', $producto["ur"])) ) . '">
                                         <div class="imageHolder">
                                             <img
-                                            alt="' . $categoria['mainCategory'] . '"
+                                            alt="' . $producto['nombre'] . '"
                                             src="http://www.alfonsomarinaebanista.com/images/' . $producto["ur"] . '/' . $producto["ur"] . '_alta1.jpg">
                                          </div>
                                     <br class="clear">

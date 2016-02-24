@@ -201,6 +201,17 @@ class Noticias extends Controller
 
 		$this->addBread(array("url" => "", "label" => "News"));
 		$this->addbread(array("label" => $this->trans($lang, "Nuevos Lanzamientos ", "New Releases ")));
+
+		$type = $this->trans($lang, "tapiceria", "upholstery");
+		
+		$sql = "SELECT ur, nombre, created, tipo FROM product 
+				WHERE month(created) = (SELECT month(max(created)) 
+										FROM product 
+										WHERE {$this->trans($lang, "tipo", "_type")} LIKE '$type') 
+				AND {$this->trans($lang, "tipo", "_type")} LIKE '$type';";
+
+		$query = $this->pdo->prepare($sql);
+		$query->execute() == true ? print_r($query->fetchAll()) : print_r(false);
 		
 		$this->header($lang);
 		require $this->views . "new_releases.php";

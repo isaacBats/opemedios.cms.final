@@ -202,16 +202,29 @@ class Noticias extends Controller
 		$this->addBread(array("url" => "", "label" => "News"));
 		$this->addbread(array("label" => $this->trans($lang, "Nuevos Lanzamientos ", "New Releases ")));
 
-		$type = $this->trans($lang, "tapiceria", "upholstery");
-		
-		$sql = "SELECT ur, nombre, created, tipo FROM product 
-				WHERE month(created) = (SELECT month(max(created)) 
-										FROM product 
-										WHERE {$this->trans($lang, "tipo", "_type")} LIKE '$type') 
-				AND {$this->trans($lang, "tipo", "_type")} LIKE '$type';";
+		$queryType = $this->pdo->prepare("SELECT DISTINCT {$this->trans($lang, "tipo", "_type")} FROM product");
+		$type = [];
+		if($queryType->execute())
+			$types = $queryType->fetchAll(\PDO::FETCH_ASSOC);
 
-		$query = $this->pdo->prepare($sql);
-		$query->execute() == true ? print_r($query->fetchAll()) : print_r(false);
+		$nuevos = [];
+		foreach ($types as $type) {
+
+			$type = implode("",$type);
+			$sql = "SELECT id, ur, nombre, _name, caracter, _character, acabado, tipo_acabado, como_se_muestra,". 
+			"current_finish, precio, familia, original, created, _match, _price, tipo, _type, categoria, _category,". 
+			"uso, _use, imagen, creado". 
+					" FROM product". 
+					" WHERE month(created) = (SELECT month(max(created))".
+											" FROM product".
+											" WHERE {$this->trans($lang, "tipo", "_type")} LIKE '$type')".
+					" AND {$this->trans($lang, "tipo", "_type")} LIKE '$type';";
+
+			$query = $this->pdo->prepare($sql);
+			$query->execute() == true ? array_push($nuevos, $query->fetchAll(\PDO::FETCH_ASSOC)) : $nuevos = "Ocurrio un problema al consultar los productos nuevos";
+
+		}
+		print_r($nuevos);
 		
 		$this->header($lang);
 		require $this->views . "new_releases.php";

@@ -197,6 +197,11 @@ class Noticias extends Controller
 		$this->footer( $lang );
 	}
 
+	/**
+	 * Show news releases
+	 * @param  string $lang 
+	 * @return A view
+	 */
 	public function newsReleasesAction( $lang="es" ){
 
 		$this->addBread(array("url" => "", "label" => "News"));
@@ -224,7 +229,6 @@ class Noticias extends Controller
 			$query->execute() == true ? array_push($nuevos, $query->fetchAll(\PDO::FETCH_ASSOC)) : $nuevos = "Ocurrio un problema al consultar los productos nuevos";
 
 		}
-		print_r($nuevos);
 		
 		$this->header($lang);
 		require $this->views . "new_releases.php";

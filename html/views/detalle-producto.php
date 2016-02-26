@@ -6,8 +6,8 @@
     </div><!-- #product-image-->
     <div id="product-info">
         <div class="nav-detalle">
-        <?php  //$this->navProduct($lang,$product['id']) ?>
-        <a href="<?php echo $this->url($lang,'/catalog') ?>" class="ver-todos"><?php echo $this->trans($lang , "Ver todos" , "Show all") ?></a>
+        <?php  echo $this->navProduct($lang,$product["ur"], $product[$this->trans($lang, "categoria","_category")]) ?>
+        <a href="<?php echo "/catalog/".strtolower($product[$this->trans($lang, 'tipo', '_type')]) . "/" . strtolower(str_replace(" ", "-", $product[$this->trans($lang, 'categoria', '_category')])) ?>" class="ver-todos"><?php echo $this->trans($lang , "Ver todos" , "Show all") ?></a>
         <br class="clear">
     </div>
         

@@ -37,7 +37,7 @@
   <div class="headerpanel">
 
     <div class="logopanel">
-      <h2><a href="javascript:void(0);">Alfonso Marina</a></h2>
+      <h2><a href="/">Alfonso Marina</a></h2>
     </div><!-- logopanel -->
 
     <div class="headerbar">

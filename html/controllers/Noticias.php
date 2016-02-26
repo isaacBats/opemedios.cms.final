@@ -213,22 +213,32 @@ class Noticias extends Controller
 			$types = $queryType->fetchAll(\PDO::FETCH_ASSOC);
 
 		$nuevos = [];
-		foreach ($types as $type) {
+		// foreach ($types as $type) {
 
-			$type = implode("",$type);
+			// $type = implode("",$type);
+			
+			// Este query te muestra los ultimos productos lanzados
+			// $sql = "SELECT id, ur, nombre, _name, caracter, _character, acabado, tipo_acabado, como_se_muestra,". 
+			// "current_finish, precio, familia, original, created, _match, _price, tipo, _type, categoria, _category,". 
+			// "uso, _use, imagen, creado". 
+			// 		" FROM product". 
+			// 		" WHERE month(created) = (SELECT month(max(created))".
+			// 								" FROM product".
+			// 								" WHERE {$this->trans($lang, "tipo", "_type")} LIKE '$type')".
+			// 		" AND {$this->trans($lang, "tipo", "_type")} LIKE '$type';";
+			
 			$sql = "SELECT id, ur, nombre, _name, caracter, _character, acabado, tipo_acabado, como_se_muestra,". 
 			"current_finish, precio, familia, original, created, _match, _price, tipo, _type, categoria, _category,". 
 			"uso, _use, imagen, creado". 
 					" FROM product". 
 					" WHERE month(created) = (SELECT month(max(created))".
-											" FROM product".
-											" WHERE {$this->trans($lang, "tipo", "_type")} LIKE '$type')".
-					" AND {$this->trans($lang, "tipo", "_type")} LIKE '$type';";
+											" FROM product);"
+					;
 
 			$query = $this->pdo->prepare($sql);
 			$query->execute() == true ? array_push($nuevos, $query->fetchAll(\PDO::FETCH_ASSOC)) : $nuevos = "Ocurrio un problema al consultar los productos nuevos";
 
-		}
+		// }
 		
 		$this->header($lang);
 		require $this->views . "new_releases.php";

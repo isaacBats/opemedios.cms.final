@@ -1,5 +1,7 @@
 <?php
 
+
+// TODO: Corregir error en las URL de que se rompen
 class Catalog extends Controller {
 
     // Check numbers 
@@ -185,20 +187,23 @@ class Catalog extends Controller {
                 $html .= '<div class="tituloSeccion clear">' . ucfirst(strtolower($tipo)) . '</div>';
                 $filtro .='<optgroup label="' . $tipo . '">';
 
-                $sqlCategorias = "SELECT
-                                        product.ur, categories_products.category as mainCategory
-                                        FROM
-                                        categories_products
-                                        JOIN product
-                                        ON categories_products.product_id = product.id and categories_products.id in (SELECT DISTINCT
-                                        categories_products.id
-                                        FROM
-                                        product
-                                        INNER JOIN categories_products
-                                        ON product._category = categories_products.category
-                                        WHERE LOWER(" . $this->trans($lang, "tipo", "_type") . ")=LOWER('" . $tipo . "') and  " . $this->trans($lang, "categoria", "_category") . "  NOT like '%,%') order by mainCategory";
+                // $sqlCategorias = "SELECT
+                //                         product.ur, categories_products.category as mainCategory
+                //                         FROM
+                //                         categories_products
+                //                         JOIN product
+                //                         ON categories_products.product_id = product.id and categories_products.id in (SELECT DISTINCT
+                //                         categories_products.id
+                //                         FROM
+                //                         product
+                //                         INNER JOIN categories_products
+                //                         ON product._category = categories_products.category
+                //                         WHERE LOWER(" . $this->trans($lang, "tipo", "_type") . ")=LOWER('" . $tipo . "') and  " . $this->trans($lang, "categoria", "_category") . "  NOT like '%,%') order by mainCategory";
+
+                $sqlCategorias = "SELECT DISTINCT ur, ".$this->trans($lang, 'categoria', '_category')." AS mainCategory FROM product WHERE ".$this->trans($lang, 'tipo', '_type')." = '".$tipo."' AND ".$this->trans($lang, 'categoria', '_category')." NOT LIKE '%,%' GROUP BY ".$this->trans($lang, 'categoria', '_category').";";
 
                 $queryCategorias = $this->pdo->prepare($sqlCategorias);
+
                 $queryCategorias->execute();
 
                 $categorias = $queryCategorias->fetchAll(\PDO::FETCH_ASSOC);
@@ -508,8 +513,8 @@ class Catalog extends Controller {
     /*
       | by adanzilla ...
      */
-    private function idProducts() {
-        $sql = "SELECT id FROM products";
+    private function productsByCategory($lang, $category) {
+        $lang == "en" ? $sql = "SELECT ur FROM product WHERE _category LIKE '$category'" : $sql = "SELECT ur FROM product WHERE categoria LIKE '$category'";
         $query = $this->pdo->prepare($sql);
         $rs = $query->execute();
         if ($rs !== false) {
@@ -525,10 +530,10 @@ class Catalog extends Controller {
       | by adanzilla ...
      */
 
-    function navProduct($lang = "es", $slug) {
+    function navProduct($lang = "es", $slug, $category) {
 
-        $slugs = $this->idProducts();
-
+        $slugs = $this->productsByCategory($lang, $category);
+        
         /*         * ********************************************************************************* */
         $key_actual = array_search($slug, $slugs);
         $key_final = key(array_slice($slugs, -1, 1, TRUE));

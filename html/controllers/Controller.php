@@ -156,8 +156,44 @@
 									
 
 		public function header( $lang , $nobeard = false , $product = false , $bread_class = ""){
+			
+			$menuNewProduct = $this->menuNewsProducts();
 			require $this->views."header.php";
 		}
+
+
+		public function menuNewsProducts($lang = "es"){
+
+	        $dataReleases = $this->dataNewReleases();
+	        $html = '<ul>';
+	        if (count($dataReleases) > 0){
+	            foreach ($dataReleases as $data) {
+	                $html .= '<li><a href="/catalog/new-products/'.strtolower(str_replace(" ","-", $data["_date"])).'">'.$data["_date"].'</a></li>';
+	            }
+	            $html .= '</ul>';
+
+	            return $html; 
+	        }
+	    }
+
+	    private  function dataNewReleases(){
+
+	        $query = $this->pdo->prepare("SELECT DISTINCT DATE_FORMAT( DATE(created),'%M %Y') as _date". 
+	                                      " FROM product WHERE created <>'-' ORDER BY DATE(created) DESC;"
+	                                    );
+	        if($query->execute()){
+	            if($query->rowCount() > 0){
+	                return $query->fetchAll(\PDO::FETCH_ASSOC);
+	            }else{
+	                return "No hay resultados en la busqueda";
+	            }
+	        }else{
+	            return "Hay problemas al ejecutar la consulta";
+	        }
+
+	    }
+
+
 		public function footer( $lang ){
 			require  $this->views."footer.php";	
 		}

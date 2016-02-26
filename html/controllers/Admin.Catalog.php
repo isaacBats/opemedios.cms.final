@@ -10,7 +10,7 @@ class AdminCatalog extends Controller {
 
         $this->header_admin($lang);
 
-        $queryCategory = $this->pdo->prepare("SELECT DISTINCT(categoria) FROM product WHERE categoria NOT LIKE '%\,%';");
+        $queryCategory = $this->pdo->prepare("SELECT DISTINCT categoria FROM product WHERE categoria NOT LIKE '%\,%';");
         $queryType = $this->pdo->prepare("SELECT DISTINCT(tipo) FROM product;");
         $queryUse = $this->pdo->prepare("SELECT DISTINCT(uso) FROM product WHERE uso NOT LIKE '%\,%';");
 

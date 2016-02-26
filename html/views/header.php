@@ -64,6 +64,7 @@ $dates = $sqldates->fetchAll(\PDO::FETCH_ASSOC);
 							<a href="<?php echo $this->url($lang , "/catalog/new-products") ?>">
 								<?php echo $this->trans($lang , "Productos Nuevos" , "New Products") ?>
 							</a>
+							<?php echo $this->menuNewsProducts() ?>
 						</li>
 					</ul>
 				</li>

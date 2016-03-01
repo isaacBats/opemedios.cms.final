@@ -443,10 +443,10 @@ $collection->attachRoute(new Route('/panel/news/save-changes', array(
     'methods' => 'POST'
 )));
 
-$collection->attachRoute(new Route('/panel/new/remove/:id', array(
+$collection->attachRoute(new Route('/panel/new/remove', array(
     '_controller' => 'AdminNoticias::removeNew',
     'parameters' => array("lang" => $lang),
-    'methods' => 'GET'
+    'methods' => 'POST'
 )));
 
 $collection->attachRoute(new Route('/panel/gallery/list', array(

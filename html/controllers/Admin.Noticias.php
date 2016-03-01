@@ -127,17 +127,26 @@ class AdminNoticias extends Controller{
 
 	}
 
-	public function removeNew($lang="es", $id){
+	public function removeNew($lang="es"){
 
-		if( !empty($id) ){
+		if( !empty($_POST) ){
+			$resultado = new stdClass();
 			$sql = "DELETE FROM noticias WHERE id_noticia = :id";
 			$query = $this->pdo->prepare($sql);
-			$query->bindParam(':id', $id, \PDO::PARAM_INT);
+			$query->bindParam(':id', $_POST['id_borrar'], \PDO::PARAM_INT);
 			$rs = $query->execute();
-			if( $rs != false ){
-				echo "<span>Noticia eliminada</span>";
-				header("Location: /panel/news/list");
+			// if( $rs != false ){
+			// 	echo "<span>Noticia eliminada</span>";
+			// 	header("Location: /panel/news/list");
+			// }
+			if($rs!=false){
+				$resultado->exito = true;
 			}
+			else{
+				$resultado->exito = false;
+			}
+			header('Content-type: text/json');
+			echo json_encode($resultado); 
 
 		}
 	}
@@ -179,71 +188,8 @@ class AdminNoticias extends Controller{
 			if($rs){
 				header("Location: /panel/news/list");
 			}
-			if( isset( $_FILES["imagen"]["name"] ) && $_FILES["imagen"]["name"] != "" ){
-				echo "<br> with image";
-				$extensiones_permitidas = array("jpg", "jpeg", "gif", "png","JPG","JPEG","PNG");
-				$explode = explode(".", $_FILES['imagen']["name"]);
-				$extension = end($explode);
-				if ((($_FILES['imagen']["type"] == "image/png")
-					|| ($_FILES['imagen']["type"] == "image/jpeg")
-					|| ($_FILES['imagen']["type"] == "image/jpg")
-					|| ($_FILES['imagen']["type"] == "image/PNG"))
-					&& in_array($extension, $extensiones_permitidas))
-				{
-					if ($_FILES['imagen']["error"] > 0)
-					{
-						echo "ERROR: " . $_FILES['imagen']["error"] . "<br>";
-					}
-					else
-					{
-						$_FILES['imagen']["name"]='noticia_'.uniqid().'.'.$extension;
-						$path=__DIR__."/../assets/images/news/". $_FILES['imagen']["name"];
-						$move = move_uploaded_file($_FILES['imagen']["tmp_name"],$path);
-
-						if(!$move){
-							throw new Exception("Error al mover el archivo", 1);
-						}
-					}
-				}
-				$rs = $this->updateNew($_POST['id'], $_POST['titulo'], $new['slug'], $_POST['titulo_en'], $_POST['extracto'], $_POST['extracto_en'], $_POST['contenido'], $_POST['contenido_en'], $new['imagen_thumbnail'], $_FILES['imagen']['name'], $new['fecha']);
-				if($rs){
-					header("Location: /panel/news/list");
-				}
-			}
-
-			if(isset($_FILES["imagen_thumbnail"]["name"]) && $_FILES["imagen_thumbnail"]["name"] != ""){
-				echo "<br> whit thumbnail";
-				$extensiones_permitidas = array("jpg", "jpeg", "gif", "png","JPG","JPEG","PNG");
-				$explode = explode(".", $_FILES['imagen_thumbnail']["name"]);
-				$extension = end($explode);
-				if ((($_FILES['imagen_thumbnail']["type"] == "image/png")
-					|| ($_FILES['imagen_thumbnail']["type"] == "image/jpeg")
-					|| ($_FILES['imagen_thumbnail']["type"] == "image/jpg")
-					|| ($_FILES['imagen_thumbnail']["type"] == "image/PNG"))
-					&& in_array($extension, $extensiones_permitidas))
-				{
-					if ($_FILES['imagen_thumbnail']["error"] > 0)
-					{
-						echo "ERROR: " . $_FILES['imagen_thumbnail']["error"] . "<br>";
-					}
-					else
-					{
-						$_FILES['imagen_thumbnail']["name"]='noticia_'.uniqid().'.'.$extension;
-						$path=__DIR__."/../assets/images/news/". $_FILES['imagen_thumbnail']["name"];
-						$move = move_uploaded_file($_FILES['imagen_thumbnail']["tmp_name"],$path);
-
-						if(!$move){
-							throw new Exception("Error al mover el archivo", 1);
-						}
-					}
-				}
-				$rs = $this->updateNew($_POST['id'], $_POST['titulo'], $new['slug'], $_POST['titulo_en'], $_POST['extracto'], $_POST['extracto_en'], $_POST['contenido'], $_POST['contenido_en'], $_FILES["imagen_thumbnail"]["name"], $new['imagen'], $new['fecha']);
-				if($rs){
-					header("Location: /panel/news/list");
-				}
-			}
-
-			if($_FILES["imagen"]["name"] != "" && $_FILES["imagen_thumbnail"]["name"] != ""){
+			
+			if(isset($_FILES["imagen"]["name"]) && $_FILES["imagen"]["name"] != "" && isset($_FILES["imagen_thumbnail"]["name"]) && $_FILES["imagen_thumbnail"]["name"] != ""){
 				echo "<br> whit images";
 				$extensiones_permitidas = array("jpg", "jpeg", "gif", "png","JPG","JPEG","PNG");
 				$explode = explode(".", $_FILES['imagen']["name"]);
@@ -293,7 +239,67 @@ class AdminNoticias extends Controller{
 						}
 					}
 				}
-				$rs = $this->updateNew($_POST['id'], $_POST['titulo'], $new['slug'], $_POST['titulo_en'], $_POST['extracto'], $_POST['extracto_en'], $_POST['contenido'], $_POST['contenido_en'], $_FILES["imagen_thumbnail"]["name"], $_FILES['imagen']['name'], $new['fecha']);
+				$rs = $this->updateNew($_POST['id'], $_POST['titulo'], $new['slug'], $_POST['titulo_en'], $_POST['extracto'], $_POST['extracto_en'], $_POST['contenido'], $_POST['contenido_en'], $_FILES["imagen_thumbnail"]["name"], $_FILES["imagen"]["name"], $new['fecha']);
+				if($rs){
+					header("Location: /panel/news/list");
+				}
+			}elseif( isset( $_FILES["imagen"]["name"] ) && $_FILES["imagen"]["name"] != "" ){
+				echo "<br> with image";
+				$extensiones_permitidas = array("jpg", "jpeg", "gif", "png","JPG","JPEG","PNG");
+				$explode = explode(".", $_FILES['imagen']["name"]);
+				$extension = end($explode);
+				if ((($_FILES['imagen']["type"] == "image/png")
+					|| ($_FILES['imagen']["type"] == "image/jpeg")
+					|| ($_FILES['imagen']["type"] == "image/jpg")
+					|| ($_FILES['imagen']["type"] == "image/PNG"))
+					&& in_array($extension, $extensiones_permitidas))
+				{
+					if ($_FILES['imagen']["error"] > 0)
+					{
+						echo "ERROR: " . $_FILES['imagen']["error"] . "<br>";
+					}
+					else
+					{
+						$_FILES['imagen']["name"]='noticia_'.uniqid().'.'.$extension;
+						$path=__DIR__."/../assets/images/news/". $_FILES['imagen']["name"];
+						$move = move_uploaded_file($_FILES['imagen']["tmp_name"],$path);
+
+						if(!$move){
+							throw new Exception("Error al mover el archivo", 1);
+						}
+					}
+				}
+				$rs = $this->updateNew($_POST['id'], $_POST['titulo'], $new['slug'], $_POST['titulo_en'], $_POST['extracto'], $_POST['extracto_en'], $_POST['contenido'], $_POST['contenido_en'], $new['imagen_thumbnail'], $_FILES['imagen']['name'], $new['fecha']);
+				if($rs){
+					header("Location: /panel/news/list");
+				}
+			}elseif(isset($_FILES["imagen_thumbnail"]["name"]) && $_FILES["imagen_thumbnail"]["name"] != ""){
+				echo "<br> whit thumbnail";
+				$extensiones_permitidas = array("jpg", "jpeg", "gif", "png","JPG","JPEG","PNG");
+				$explode = explode(".", $_FILES['imagen_thumbnail']["name"]);
+				$extension = end($explode);
+				if ((($_FILES['imagen_thumbnail']["type"] == "image/png")
+					|| ($_FILES['imagen_thumbnail']["type"] == "image/jpeg")
+					|| ($_FILES['imagen_thumbnail']["type"] == "image/jpg")
+					|| ($_FILES['imagen_thumbnail']["type"] == "image/PNG"))
+					&& in_array($extension, $extensiones_permitidas))
+				{
+					if ($_FILES['imagen_thumbnail']["error"] > 0)
+					{
+						echo "ERROR: " . $_FILES['imagen_thumbnail']["error"] . "<br>";
+					}
+					else
+					{
+						$_FILES['imagen_thumbnail']["name"]='noticia_'.uniqid().'.'.$extension;
+						$path=__DIR__."/../assets/images/news/". $_FILES['imagen_thumbnail']["name"];
+						$move = move_uploaded_file($_FILES['imagen_thumbnail']["tmp_name"],$path);
+
+						if(!$move){
+							throw new Exception("Error al mover el archivo", 1);
+						}
+					}
+				}
+				$rs = $this->updateNew($_POST['id'], $_POST['titulo'], $new['slug'], $_POST['titulo_en'], $_POST['extracto'], $_POST['extracto_en'], $_POST['contenido'], $_POST['contenido_en'], $_FILES["imagen_thumbnail"]["name"], $new['imagen'], $new['fecha']);
 				if($rs){
 					header("Location: /panel/news/list");
 				}

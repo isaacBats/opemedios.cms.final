@@ -51,9 +51,9 @@ class Contacto extends Controller {
                 $mail->Port = 465;
                 $mail->Username = "dcepero@denumeris.com";
                 $mail->Password = "";
-                $mail->SetFrom("dcepero@denumeris.com", "dcepero@denumeris.com");
+                $mail->SetFrom("dbabutista@denumeris.com", "dbautista@denumeris.com");
 
-                $mail->AddAddress("dcepero@denumeris.com");
+                $mail->AddAddress("dbautista@denumeris.com");
                 $mail->Subject = "Ha recibido un nuevo contacto";
                 $mail->Body = '<p>
                                             <strong>Nombre:</strong>' . $_POST['nombre'] . '<br />

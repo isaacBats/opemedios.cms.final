@@ -43,7 +43,7 @@ class AdminUsuario extends Controller {
                     $mail->Port = 465;
                     $mail->Username = "dcepero@denumeris.com";
                     $mail->Password = "";
-                    $mail->SetFrom("dcepero@denumeris.com", "dcepero@denumeris.com");
+                    $mail->SetFrom("dbautista@denumeris.com", "dbautista@denumeris.com");
                     $mail->AddAddress($user['email']);
 
                     if ($new_status == 1) {

@@ -97,8 +97,8 @@ class Noticias extends Controller
 				}
 			}
 
-			$this->addbread( array("url"=>"/news" , "label"=>"News and Events ") );
-			$this->addbread( array("label"=>$noticia['titulo']) );
+			$this->addbread( array("url"=>"/news" , "label"=>$this->trans($lang, "Noticias y Próximos Eventos ","News and Events ")) );
+			$this->addbread( array("label"=> $noticia[$this->trans($lang, 'titulo', 'titulo_en')]) );
 
 			$this->header($lang);
 

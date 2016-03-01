@@ -46,7 +46,7 @@ class User extends Controller {
                 $mail->Port = 465;
                 $mail->Username = "dcepero@denumeris.com";
                 $mail->Password = "";
-                $mail->SetFrom("dcepero@denumeris.com", "dcepero@denumeris.com");
+                $mail->SetFrom("dbautista@denumeris.com", "dbautista@denumeris.com");
                 $mail->AddAddress($user['email']);
                 if ($lang == "es") {
                     $resultado->mensaje = "Su nueva contraseña se ha enviado";

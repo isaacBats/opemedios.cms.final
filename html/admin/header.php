@@ -33,6 +33,10 @@
 </head>
 
 <body>
+<div class="alert alert-info fade in nomargin" id="confirmacion" title="">
+  <span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>
+  <p></p>
+</div>
 <header>
   <div class="headerpanel">
 

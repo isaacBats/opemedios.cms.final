@@ -127,6 +127,52 @@ $(document).ready(function () {
         dialogo_confirmacion(data);
     });
 
+      jQuery('.mainpanel').on('click', 'a.btn.removeNew', function (event) {
+        event.preventDefault();
+        var boton = jQuery(this);
+        data = {};
+        data.contenedor = boton.parent().parent();
+        data.id_elemento = boton.data('id');
+        data.accion = 'eliminar_elemento';
+        data.titulo = 'Eliminar noticia';
+        data.descripcion = 'Si borra la noticia no podrá volver a atras';
+        dialogo_confirmacionNew(data);
+    });
+
+    function dialogo_confirmacionNew(data) {
+        var confirmacion = jQuery("#confirmacion");
+        var descripcion = confirmacion.find('p');
+        confirmacion.attr('title', data.titulo);
+        descripcion.html(data.descripcion);
+        var contenedor_eliminar = data.contenedor;
+
+        var datos = {};
+        datos.id_borrar = data.id_elemento;
+
+
+        jQuery("#confirmacion").dialog({
+            resizable: false,
+            width: 250,
+            modal: true,
+            buttons: {
+                "Confirmar": function () {
+                    jQuery(this).dialog("close");
+                    console.log(datos);
+                    jQuery.post('/panel/new/remove', datos, function (json) {
+                        console.log(json);
+                        if (json.exito) {
+                            contenedor_eliminar.fadeOut();
+                        }
+                    });
+                },
+                Cancelar: function () {
+                    jQuery(this).dialog("close");
+                    return false;
+                }
+            }
+        });
+    }
+
     function dialogo_confirmacion(data) {
         var confirmacion = jQuery("#confirmacion");
         var descripcion = confirmacion.find('p');

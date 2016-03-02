@@ -13,7 +13,7 @@ class Catalog extends Controller {
 
     public function productCare($lang = "es") {
         $this->addBread(array("label" => $this->trans($lang, "Cuidado de productos", "Product Care")));
-        $this->header($lang);
+        $this->header($lang, $this->trans($lang, "Cuidado de productos - ", "Product Care - "));
         require $this->views . "product-care.php";
         $this->footer($lang);
     }
@@ -108,7 +108,7 @@ class Catalog extends Controller {
 
 
         $this->addBread(array("label" => $this->trans($lang, "Mis Favoritos", "My Favorites")));
-        $this->header($lang);
+        $this->header($lang, $this->trans($lang, "Mis Favoritos - ", "My Favorites - "));
         $productList = "";
 
         if (isset($_SESSION['favoritos']) && sizeof($_SESSION['favoritos']) > 0) {
@@ -175,7 +175,7 @@ class Catalog extends Controller {
         } else {
             $html .= 'No existe lang';
         }
-        $this->header($lang);
+        $this->header($lang, $this->trans($lang, "Categoría - ", "Category - "));
 
         $html .= '<div id="content-press">';
         $tipo = "";
@@ -340,7 +340,7 @@ class Catalog extends Controller {
                 }
             }
         }
-        $this->header($lang);
+        $this->header($lang, $this->trans($lang, "Productos Nuevos - ", "New Products - "));
         $html .= "</div><!-- .product-list -->";
         echo $html;
         $this->footer($lang);
@@ -443,8 +443,10 @@ class Catalog extends Controller {
                     $filtro.= '<option value="#">' . strtoupper($ouse) . '</option></select></div>';
                 }
                 $catalogo = $queryCatalogo->fetchAll();
+                $tituloSeccion = str_replace("-", " ", urldecode(ucfirst(end($this->bread)["label"])));
+                $tituloSeccion = str_replace(" Y ", " y ", $tituloSeccion);
                 $html .= '<div id="content-press">' . $filtro;
-                $html .= '<p class="tituloSeccion">' . str_replace("-", " ", urldecode(ucfirst(end($this->bread)["label"]))) . '</p>';
+                $html .= '<p class="tituloSeccion">' . $tituloSeccion . '</p>';
 
 
 
@@ -497,7 +499,7 @@ class Catalog extends Controller {
             }
         }
 
-        $this->header($lang);
+        $this->header($lang, $this->trans($lang, "Categoría - ", "Category - "));
         echo $html;
         $this->footer($lang);
     }
@@ -737,7 +739,7 @@ class Catalog extends Controller {
 
 
 
-                $this->header($lang, false, $product);
+                $this->header($lang, $product[$this->trans($lang, "nombre", "_name")]." - ", false, $product);
                 require $this->views . "detalle-producto.php";
             }
         }

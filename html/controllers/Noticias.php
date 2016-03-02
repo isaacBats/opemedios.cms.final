@@ -100,7 +100,7 @@ class Noticias extends Controller
 			$this->addbread( array("url"=>"/news" , "label"=>$this->trans($lang, "Noticias y Próximos Eventos ","News and Events ")) );
 			$this->addbread( array("label"=> $noticia[$this->trans($lang, 'titulo', 'titulo_en')]) );
 
-			$this->header($lang);
+			$this->header($lang, $this->trans($lang, $noticia['titulo']." - ", $noticia['titulo_en']." - "));
 
 			
 		}
@@ -192,7 +192,7 @@ class Noticias extends Controller
 			$html .= 'No existe lang';
 		}
 
-		$this->header($lang , false , false , "who" );
+		$this->header($lang, $this->trans($lang, "Noticias y Próximos Eventos - ", "News and Events - "), false , false , "who" );
 		echo $html;
 		$this->footer( $lang );
 	}
@@ -240,7 +240,7 @@ class Noticias extends Controller
 
 		// }
 		
-		$this->header($lang);
+		$this->header($lang, $this->trans($lang, "Nuevos Lanzamientos - ", "New Releases - "));
 		require $this->views . "new_releases.php";
 		$this->footer($lang);
 	}

@@ -6,7 +6,7 @@ class Profile extends Controller{
 		if( isset($_SESSION["user"])){
 			$this->addbread( array("url"=>"/profile" , "label"=>$this->trans($lang , "Usuario" , "User")) );
 			$this->addbread( array( "label"=>$this->trans($lang ,"Estado de Cuenta" , "Statement") ) );
-			$this->header($lang);
+			$this->header($lang, $this->trans($lang ,"Estado de Cuenta - " , "Statement - "));
 			require $this->views."profile.account.php";
 			$this->footer( $lang );	
 		}
@@ -19,7 +19,7 @@ class Profile extends Controller{
 		if( isset($_SESSION["user"])){
 				$this->addbread( array("url"=>"/profile" , "label"=>$this->trans($lang , "Usuario" , "User")) );
 				$this->addbread( array( "label"=>$this->trans($lang , "Lista de precios" , "Price List")) );
-				$this->header($lang);
+				$this->header($lang, $this->trans($lang , "Lista de precios - " , "Price List - "));
 				require $this->views."profile.price-list.php";
 				$this->footer( $lang );	
 			}
@@ -34,7 +34,7 @@ class Profile extends Controller{
 		if( isset($_SESSION["user"])){
 				$this->addbread( array("url"=>"/profile" , "label"=>$this->trans($lang ,"Usuario" , "User" )) );
 				$this->addbread( array( "label"=>$this->trans($lang , "Descargar Catálogo" , "Download Catalog")) );
-				$this->header($lang);
+				$this->header($lang, $this->trans($lang , "Descargar Catálogo - " , "Download Catalog - "));
 				require $this->views."profile.catalog.php";
 				$this->footer( $lang );	
 			}
@@ -53,7 +53,7 @@ class Profile extends Controller{
 				
 				$this->addbread( array("url"=>"/profile" , "label"=>$this->trans($lang ,"Usuario" , "User" )) );
 				$this->addbread( array("label"=>$this->trans($lang , "Mis cotizaciones" , "My quotes ")) );
-				$this->header($lang);
+				$this->header($lang, $this->trans($lang , "Mis cotizaciones - " , "My quotes - "));
 
 				$quote = "";
 				$cotizaciones = "";
@@ -112,7 +112,7 @@ class Profile extends Controller{
 		if( isset($_SESSION["user"])){
 			$this->addbread( array("url"=>"/profile" , "label"=>$this->trans($lang ,"Usuario" , "User" )) );
 			$this->addbread( array("label"=>$this->trans($lang , "Detalle cotización" , "Quote Detail")) );
-			$this->header( $lang );
+			$this->header( $lang, $this->trans($lang , "Detalle cotización - " , "Quote Detail - ") );
 
 			$sql = "
 					SELECT 	p.nombre, 
@@ -153,7 +153,7 @@ class Profile extends Controller{
 		if( isset($_SESSION["user"])){
 			$this->addbread( array("url"=>"/profile" , "label"=>$this->trans($lang ,"Usuario" , "User" )) );
 			$this->addbread( array("label"=>$this->trans($lang , "Detalle cotización" , "Quote Detail")) );
-			$this->header( $lang );
+			$this->header( $lang, $this->trans($lang , "Detalle cotización - " , "Quote Detail - ") );
 
 			$products = $_SESSION['cotizacion'];
 

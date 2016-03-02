@@ -90,7 +90,7 @@ class Contacto extends Controller {
     function showForm($lang = "es") {
         $this->addbread(array("url" => "/contact", "label" => $this->trans($lang, "Contacto ", "Contact Us ")));
         $countries = $this->getCountries();
-        $this->header($lang, false, false, "contacto");
+        $this->header($lang, $this->trans($lang, "Contacto - ", "Contact Us - "), false, false, "contacto");
         require $this->views . "formulario-contacto.php";
         $this->footer($lang);
     }

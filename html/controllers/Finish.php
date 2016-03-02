@@ -36,7 +36,7 @@
  			$this->addBread( array( "label"=> $this->trans($lang , "Acabados Madera" ,"Wood Finishes") ) );
  		}
 
- 		$this->header( $lang );
+ 		$this->header( $lang, $this->trans($lang , "Acabados - " ,"Finishes - ") );
 
  		$sql = "SELECT * FROM acabados WHERE tipo = :tipo";
  		$query = $this->pdo->prepare($sql);
@@ -85,7 +85,7 @@
 		$this->addBread( array( "label"=> $this->trans( $lang , "Catalogo" , "Catalog") , "url"=>$this->url($lang , "/catalog") ) );
 		$this->addBread( array( "label"=> $this->trans($lang , "Acabados" ,"Finishes") , "url"=>$this->url($lang , "/catalog/finishes") ) );
 		$this->addBread( array( "label"=> $acabado['codigo'].' '.$acabado['nombre'] ) );
- 		$this->header( $lang );
+ 		$this->header( $lang, $this->trans($lang , "Detalle Acabado - " ,"Finish Detail - ") );
 		
 		require $this->views."detalle-finish.php";
 		
@@ -96,7 +96,7 @@
 	public function showFinishes($lang){
 		$this->addBread( array( "label"=> $this->trans( $lang , "Catalogo" , "Catalog") , "url"=>$this->url($lang , "/catalog") ) );
 		$this->addBread( array( "label"=> $this->trans($lang , "Acabados" ,"Finishes") ) );
- 		$this->header( $lang );
+ 		$this->header( $lang, $this->trans($lang , "Acabados - " ,"Finishes - ") );
 
  		$sql = "SELECT * FROM acabados";
  		$query = $this->pdo->prepare($sql);

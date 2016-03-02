@@ -155,9 +155,10 @@
 		}
 									
 
-		public function header( $lang , $nobeard = false , $product = false , $bread_class = ""){
+		public function header( $lang, $title = "", $nobeard = false , $product = false , $bread_class = ""){
 			
 			$menuNewProduct = $this->menuNewsProducts();
+			$titleTab = $this->titleTab($title);
 			require $this->views."header.php";
 		}
 
@@ -191,6 +192,17 @@
 	            return "Hay problemas al ejecutar la consulta";
 	        }
 
+	    }
+
+	    /**
+	     * The name the secction
+	     * @return string  A title
+	     */
+	    private function titleTab($title = ""){
+
+	    	$title .= " Alfonso Marina";
+
+	    	return $title;
 	    }
 
 

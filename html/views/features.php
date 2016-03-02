@@ -1,4 +1,4 @@
-            <h2 class="product-title"><?php echo  $product['nombre'] ?></h2>
+            <h2 class="product-title"><?php echo  $product[$this->trans($lang, 'nombre', '_name')] ?></h2>
             <div class="features">
             <p>
                 <strong><?php echo $product['ur'] ?></strong>

@@ -1,6 +1,6 @@
 <head>
 <meta charset="UTF-8">
-<title>Alfonso Marina</title>
+<title><?php echo $titleTab ?></title>
 
 <?php if ( isset( $product ) ){ ?>
 <!-- Meta tags de Facebook (Open Graph) -->

@@ -10,7 +10,7 @@
  	
  	public function showAll( $lang ){
  		$this->addBread( array( "label"=> $this->trans($lang,"Prensa","Press") ) );
- 		$this->header( $lang );
+ 		$this->header( $lang, $this->trans($lang,"Prensa - ","Press - ") );
 
  		$sql = "SELECT * FROM gallery WHERE contexto IN ('brochure', 'publicity')";
  		$query = $this->pdo->prepare($sql);
@@ -67,7 +67,7 @@
  			$this->addBread( array( "url" => "/press/".$slug, "label"=> ucfirst( $slug ) ) );
  			$this->addBread( array( "label"=> ucfirst( $slug2 ) ) );
 
- 			$this->header( $lang );
+ 			$this->header( $lang, ucfirst($slug2)." - " );
 	 		$sqlGallery = "SELECT * FROM gallery WHERE slug LIKE '".(($slug2!="")?$slug2:$slug)."' ";
 	 		$queryGallery = $this->pdo->prepare($sqlGallery);
 			$rs = $queryGallery->execute();
@@ -88,7 +88,7 @@
  		}else{
 
  			$this->addBread( array( "label"=> ucfirst( $slug ) ) );	
- 			$this->header( $lang );
+ 			$this->header( $lang, ucfirst($slug)." - " );
  			$sqlGallery = "SELECT * FROM gallery WHERE contexto LIKE '".$slug."' ";
 	 		$queryGallery = $this->pdo->prepare($sqlGallery);
 			$rs = $queryGallery->execute();

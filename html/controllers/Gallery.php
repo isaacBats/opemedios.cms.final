@@ -95,7 +95,7 @@ class Gallery extends Controller {
         } else {
             $this->addBread(array("url" => "/gallery", "label" => "Gallery"));
         }
-        $this->header($lang, true);
+        $this->header($lang, $this->trans($lang, "Galeria - ", "Gallery - "), true);
 
 
 

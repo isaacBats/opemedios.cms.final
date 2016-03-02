@@ -125,7 +125,7 @@ class User extends Controller {
         }
 
         $this->addBread(array("label" => "Login"));
-        $this->header($lang, false, false, "who");
+        $this->header($lang, $this->trans($lang, "Iniciar Sesión - ", "Sign in - "), false, false, "who");
         require $this->views . "login.php";
         $this->footer($lang);
     }
@@ -242,7 +242,7 @@ class User extends Controller {
 
     function showForm($lang = "es") {
         $this->addbread(array("url" => "/register", "label" => $this->trans($lang, "Registro", "Register")));
-        $this->header($lang, false, false, "who");
+        $this->header($lang, $this->trans($lang, "Registro - ", "Register - "), false, false, "who");
         $countries = "";
         foreach ($this->getCountries() as $country) {
             $countries .= '<option value="' . $country['nombre'] . '" >' . $country['nombre'] . '</option>';
@@ -278,7 +278,7 @@ class User extends Controller {
         if (isset($_SESSION["user"])) {
 
             $this->addbread(array("url" => "/profile", "label" => $this->trans($lang, "Mi Perfil", "My profile")));
-            $this->header($lang);
+            $this->header($lang, $this->trans($lang, "Mi Perfil - ", "My profile - "));
 
 
             $sqlUser = "SELECT * FROM usuarios WHERE id_registro = :id";

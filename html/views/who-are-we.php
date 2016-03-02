@@ -1,4 +1,3 @@
-
 <div class="registro">
 	<div class="acerca-principal-quienes quienes-somos"><img src="/assets/images/quienes.jpg">
 		<?php if( $lang == "es"){ ?>

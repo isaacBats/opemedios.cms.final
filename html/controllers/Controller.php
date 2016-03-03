@@ -36,7 +36,7 @@
 				"(b"     =>  "(B",
 				"Xvi"    =>  "XVI"
 			];
-			$text = strtolower($text);
+			$text = mb_strtolower($text , 'utf8');
 			$aux = "";
 			foreach ($words as $key => $word) {
 				

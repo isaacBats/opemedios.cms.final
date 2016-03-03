@@ -209,10 +209,10 @@ class Catalog extends Controller {
                 $categorias = $queryCategorias->fetchAll(\PDO::FETCH_ASSOC);
                 foreach ($categorias as $categoria) {
 
-                    $filtro.='<option value="' . ( $this->url($lang, "/catalog/" . str_ireplace(' ', '-', strtolower($tipo)) . "/" . str_ireplace(' ', '-', $categoria['mainCategory'])) ) . '">' . ucwords($categoria['mainCategory']) . '</option>';
+                    $filtro.='<option value="' . ( $this->url($lang, "/catalog/" . str_ireplace(' ', '-', strtolower($tipo)) . "/" . strtolower(str_ireplace(' ', '-', $categoria['mainCategory']))) ) . '">' . $this->personCase(($categoria['mainCategory'])) . '</option>';
 
                     $html .= '<article class="item4Col">
-                                <a href="' . ( $this->url($lang, "/catalog/" . str_ireplace(' ', '-', strtolower($tipo)) . "/" . str_ireplace(' ', '-', $categoria['mainCategory'])) ) . '">
+                                <a href="' . ( $this->url($lang, "/catalog/" . str_ireplace(' ', '-', strtolower($tipo)) . "/" . str_ireplace(' ', '-', strtolower($categoria['mainCategory']))) ) . '">
                                         <div class="imageHolder">
                                             <img
                                             alt="' . $categoria['mainCategory'] . '"
@@ -221,7 +221,7 @@ class Catalog extends Controller {
                                     <br class="clear">
                                     <br class="clear">
                                     <p>
-                                    ' . ucwords($categoria['mainCategory']) . '
+                                    ' . $this->personCase($categoria['mainCategory']) . '
                                     </p>
                                 </a>
                         </article>';
@@ -333,7 +333,7 @@ class Catalog extends Controller {
                                     <br class="clear">
                                     <br class="clear">
                                     <p>
-                                    ' . ucwords($producto[$nombre]) . '
+                                    ' . $this->personCase($producto[$nombre]) . '
                                     </p>
                                 </a>
                         </article>';
@@ -364,18 +364,18 @@ class Catalog extends Controller {
             $type = $style;
 
             if ($type != "")
-                $this->addBread(array("label" => ucwords(strtolower($type)), "url" => "/catalog/" . $style));
+                $this->addBread(array("label" => $this->personCase($type), "url" => "/catalog/" . $style));
             if ($group != "")
-                $this->addBread(array("label" => ucwords(strtolower(str_replace("-", " ", urldecode($group)))), "url" => "/catalog/" . $style . "/" . $group));
+                $this->addBread(array("label" => $this->personCase(str_replace("-", " ", urldecode($group))), "url" => "/catalog/" . $style . "/" . $group));
             if ($use != "")
-                $this->addBread(array("label" => ucwords(strtolower(str_replace("-", " ", urldecode($use))))));
+                $this->addBread(array("label" => $this->personCase(str_replace("-", " ", urldecode($use)))));
         }else {
 
-            $this->addBread(array("label" => ucwords(strtolower($style)), "url" => "/catalog/" . $style));
+            $this->addBread(array("label" => $this->personCase($style), "url" => "/catalog/" . $style));
             if ($type != "")
-                $this->addBread(array("label" => ucwords(strtolower($type)), "url" => "/catalog/" . implode("/", array($style, $type))));
+                $this->addBread(array("label" => $this->personCase($type), "url" => "/catalog/" . implode("/", array($style, $type))));
             if ($group != "")
-                $this->addBread(array("label" => ucwords(strtolower(str_replace("-", " ", urldecode($group))))));
+                $this->addBread(array("label" => $this->personCase(str_replace("-", " ", urldecode($group)))));
         }
 
         $html = "";
@@ -444,7 +444,7 @@ class Catalog extends Controller {
                 }
                 $catalogo = $queryCatalogo->fetchAll();
                 $tituloSeccion = str_replace("-", " ", urldecode(ucfirst(end($this->bread)["label"])));
-                $tituloSeccion = str_replace(" Y ", " y ", $tituloSeccion);
+                $tituloSeccion = $this->personCase($tituloSeccion);
                 $html .= '<div id="content-press">' . $filtro;
                 $html .= '<p class="tituloSeccion">' . $tituloSeccion . '</p>';
 
@@ -467,7 +467,7 @@ class Catalog extends Controller {
 							            <br class="clear">
 							            <br class="clear">
 							            <p>
-							            ' . $product[$grouping] . '
+							            ' . $this->personCase($product[$grouping]) . '
 							            </p>
 							        </a>
 							    </article>
@@ -487,7 +487,7 @@ class Catalog extends Controller {
 							            <br class="clear">
 							            <br class="clear">
 							            <p>
-							            ' . $product["nombre"] . '
+							            ' . $this->personCase($product["nombre"]) . '
 							            </p>
 							        </a>
 							    </article>
@@ -728,8 +728,8 @@ class Catalog extends Controller {
                 $u = $this->trans($lang, $product["nombre"], $product["_name"]);
 
                 $this->addBread(array("label" => ucwords(strtolower($t)), "url" => "/catalog/" . strtolower($t)));
-                $this->addBread(array("label" => ucwords(strtolower($g)), "url" => "/catalog/" . strtolower($t) . "/" . strtolower(str_replace(" ", "-", $g))));
-                $this->addBread(array("label" => ucwords(strtolower($u))));
+                $this->addBread(array("label" => $this->personCase($g), "url" => "/catalog/" . strtolower($t) . "/" . strtolower(str_replace(" ", "-", $g))));
+                $this->addBread(array("label" => $this->personCase($u)));
 
                 $relacionados = $this->findRelated($product);
 

@@ -125,7 +125,6 @@ $collection->attachRoute(new Route('/catalog/products/:type', array(
     'methods' => 'GET'
 )));
 
-
 $collection->attachRoute(new Route('/catalog/:style', array(
     '_controller' => 'Catalog::showListProducts',
     'parameters' => array("lang" => $lang),

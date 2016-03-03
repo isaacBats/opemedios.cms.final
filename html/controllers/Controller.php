@@ -20,6 +20,36 @@
 
 		}
 
+		public function personCase($text){
+
+			$words = [
+				" Y "    =>  " y ",
+				" La "   =>  " la ",
+				" De "   =>  " de ",
+				" Él "   =>  " él ",
+				" Ii "   =>  " II ",
+				" Xiii " =>  " XIII ",
+				" S.n. " =>  " S.N. ",
+				" Ii "   =>  " II ",
+				" Ii"    =>  " II",
+				" S.n."  =>  " S.N.",
+				"(b"     =>  "(B",
+				"Xvi"    =>  "XVI"
+			];
+			$text = strtolower($text);
+			$aux = "";
+			foreach ($words as $key => $word) {
+				
+				if(stripos($text, $key)){
+					return $aux = str_replace($key, $word, ucwords($text));
+					exit;
+				}
+			}
+
+			return ucwords($text);
+		}
+
+
 		function describe($database, $table , $value){
 			$sql = "SELECT column_name , column_type
 			FROM information_schema.columns

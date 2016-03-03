@@ -212,7 +212,7 @@ class Catalog extends Controller {
                     $filtro.='<option value="' . ( $this->url($lang, "/catalog/" . str_ireplace(' ', '-', strtolower($tipo)) . "/" . str_ireplace(' ', '-', $categoria['mainCategory'])) ) . '">' . ucwords($categoria['mainCategory']) . '</option>';
 
                     $html .= '<article class="item4Col">
-                                <a href="' . ( $this->url($lang, "/catalog/" . str_ireplace(' ', '-', strtolower($tipo)) . "/" . str_ireplace(' ', '-', $categoria['mainCategory'])) ) . '">
+                                <a href="' . ( $this->url($lang, "/catalog/" . str_ireplace(' ', '-', strtolower($tipo)) . "/" . str_ireplace(' ', '-', strtolower($categoria['mainCategory']))) ) . '">
                                         <div class="imageHolder">
                                             <img
                                             alt="' . $categoria['mainCategory'] . '"
@@ -221,7 +221,7 @@ class Catalog extends Controller {
                                     <br class="clear">
                                     <br class="clear">
                                     <p>
-                                    ' . ucwords($categoria['mainCategory']) . '
+                                    ' . str_replace(" Y ", " y ", ucwords(strtolower($categoria['mainCategory']))) . '
                                     </p>
                                 </a>
                         </article>';
@@ -374,8 +374,9 @@ class Catalog extends Controller {
             $this->addBread(array("label" => ucwords(strtolower($style)), "url" => "/catalog/" . $style));
             if ($type != "")
                 $this->addBread(array("label" => ucwords(strtolower($type)), "url" => "/catalog/" . implode("/", array($style, $type))));
-            if ($group != "")
+            if ($group != ""){
                 $this->addBread(array("label" => ucwords(strtolower(str_replace("-", " ", urldecode($group))))));
+                print_r($use);}
         }
 
         $html = "";
@@ -467,7 +468,7 @@ class Catalog extends Controller {
 							            <br class="clear">
 							            <br class="clear">
 							            <p>
-							            ' . $product[$grouping] . '
+							            ' . str_replace(" Y ", " y ", ucwords(strtolower($product[$grouping]))) . '
 							            </p>
 							        </a>
 							    </article>
@@ -487,7 +488,7 @@ class Catalog extends Controller {
 							            <br class="clear">
 							            <br class="clear">
 							            <p>
-							            ' . $product["nombre"] . '
+							            ' . str_replace(" Y ", " y ", ucwords(strtolower($product["nombre"]))) . '
 							            </p>
 							        </a>
 							    </article>

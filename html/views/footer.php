@@ -10,7 +10,7 @@
 	        		<p><?php echo $this->trans($lang,"Gracias por suscribirte","Thank your for subscribe"); ?></p>
 	    		</div><!-- #newsletter --> 
 			</form>
-	        <p>&copy;Alfonso Marina Ebanista. <?php echo $this->trans($lang,"Derechos Reservados","All Rights Reserved"); ?> 2016 </p>
+	        <p>&copy;Alfonso Marina Ebanista. <?php echo $this->trans($lang,"Derechos Reservados. ","All Rights Reserved. "); echo $this->trans($lang, " Desarrollo Denumeris Interactive", " Web Design Denumeris Interactive"); ?> 2016 </p>
 	        <div id="social-media">
 		        	<span class="tagline"><?php echo $this->trans($lang,"Síguenos","Follow us"); ?>:</span>
                     <a class="btn-social facebook" href="https://www.facebook.com/pages/Alfonso-Marina-Ebanista/216426771801026?ref=aymt_homepage_panel" target="_blank">Facebook</a>

@@ -30,11 +30,13 @@
 				" Ii "   =>  " II ",
 				" Xiii " =>  " XIII ",
 				" S.n. " =>  " S.N. ",
+				" Iii"	 =>  " III",
 				" Ii "   =>  " II ",
 				" Ii"    =>  " II",
 				" S.n."  =>  " S.N.",
 				"(b"     =>  "(B",
-				"Xvi"    =>  "XVI"
+				"Xvi"    =>  "XVI",
+				" Xiii"  =>  " XIII"
 			];
 			$text = mb_strtolower($text , 'utf8');
 			$aux = "";

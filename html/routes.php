@@ -130,11 +130,13 @@ $collection->attachRoute(new Route('/catalog/:style', array(
     'parameters' => array("lang" => $lang),
     'methods' => 'GET'
 )));
+
 $collection->attachRoute(new Route('/catalog/:style/:type', array(
     '_controller' => 'Catalog::showListProducts',
     'parameters' => array("lang" => $lang),
     'methods' => 'GET'
 )));
+
 $collection->attachRoute(new Route('/catalog/:style/:type/:use', array(
     '_controller' => 'Catalog::showListProducts',
     'parameters' => array("lang" => $lang),

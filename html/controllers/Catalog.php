@@ -795,9 +795,16 @@ class Catalog extends Controller {
 					        <a href="' . $this->url($lang, "/product/" . $product['ur']) . '">
 					        	<div class="imageHolder">
 						            <img 
-						            alt="' . $product["nombre"] . '" 
-						            src="/assets/images/products/' . $product["ur"] . '/' . $product["imagen"] . '">
-						         </div>
+						            alt="' . $product["nombre"] . '"';
+
+                                            if($product["imagen"] == "default2.jpg"){
+                                                $html .= 'src="/assets/images/products/default2.jpg">';
+                                            }else{    
+                                                $html .= 'src="/assets/images/products/' . $product["ur"] . '/' . $product["imagen"] . '">';
+                                            }
+
+
+                                         $html .= '</div>
 					            <br class="clear">
 					            <br class="clear">
 					            <p>

@@ -10,7 +10,7 @@ class AdminCatalog extends Controller {
 
         $this->header_admin($lang);
 
-        $queryCategory = $this->pdo->prepare("SELECT DISTINCT categoria FROM product WHERE categoria NOT LIKE '%\,%';");
+        $queryCategory = $this->pdo->prepare("SELECT * FROM categories_products;");
         $queryType = $this->pdo->prepare("SELECT DISTINCT(tipo) FROM product;");
         $queryUse = $this->pdo->prepare("SELECT DISTINCT(uso) FROM product WHERE uso NOT LIKE '%\,%';");
 
@@ -23,6 +23,13 @@ class AdminCatalog extends Controller {
         $uses = $queryUse->fetchAll(\PDO::FETCH_ASSOC);
 
         require $this->adminviews . "list-categories.php";
+        $this->footer_admin($lang);
+    }
+
+    public function addAction($lang = "es") {
+
+        $this->header_admin($lang);
+        require $this->adminviews . "add-product.php";
         $this->footer_admin($lang);
     }
 

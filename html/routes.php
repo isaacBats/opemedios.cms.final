@@ -509,16 +509,24 @@ $collection->attachRoute(new Route('/panel/catalog/categories/list', array(
     'methods' => 'GET'
 )));
 
+$collection->attachRoute(new Route('/panel/catalog/product/add', array(
+    '_controller' => 'AdminCatalog::addAction',
+    'parameters' => array("lang" => $lang),
+    'methods' => 'GET'
+)));
+
 $collection->attachRoute(new Route('/panel/catalog/:category/:name', array(
     '_controller' => 'AdminCatalog::listRelatedProductAction',
     'parameters' => array("lang" => $lang),
     'methods' => 'GET'
 )));
+
 $collection->attachRoute(new Route('/panel/catalog/mainproductbycat', array(
     '_controller' => 'AdminCatalog::mainProductByCat',
     'parameters' => array("lang" => $lang),
     'methods' => 'POST'
 )));
+
 //Admin Press
 $collection->attachRoute(new Route('/panel/press/list', array(
     '_controller' => 'AdminPress::showListPress',
@@ -549,3 +557,4 @@ $collection->attachRoute(new Route('/gallery/relatedImgs', array(
     'parameters' => array("lang" => $lang),
     'methods' => 'POST'
 )));
+

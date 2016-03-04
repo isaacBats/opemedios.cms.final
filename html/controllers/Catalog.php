@@ -188,7 +188,7 @@ class Catalog extends Controller {
                 $filtro .='<optgroup label="' . $tipo . '">';
 
                 // $sqlCategorias = "SELECT
-                //                         product.ur, categories_products.category as mainCategory
+                //                         product.ur, categories_products.category as mainCategory, imagen
                 //                         FROM
                 //                         categories_products
                 //                         JOIN product
@@ -200,7 +200,7 @@ class Catalog extends Controller {
                 //                         ON product._category = categories_products.category
                 //                         WHERE LOWER(" . $this->trans($lang, "tipo", "_type") . ")=LOWER('" . $tipo . "') and  " . $this->trans($lang, "categoria", "_category") . "  NOT like '%,%') order by mainCategory";
 
-                $sqlCategorias = "SELECT DISTINCT ur, ".$this->trans($lang, 'categoria', '_category')." AS mainCategory FROM product WHERE ".$this->trans($lang, 'tipo', '_type')." = '".$tipo."' AND ".$this->trans($lang, 'categoria', '_category')." NOT LIKE '%,%' GROUP BY ".$this->trans($lang, 'categoria', '_category').";";
+                $sqlCategorias = "SELECT DISTINCT ur, ".$this->trans($lang, 'categoria', '_category')." AS mainCategory, imagen FROM product WHERE ".$this->trans($lang, 'tipo', '_type')." = '".$tipo."' AND ".$this->trans($lang, 'categoria', '_category')." NOT LIKE '%,%' GROUP BY ".$this->trans($lang, 'categoria', '_category').";";
 
                 $queryCategorias = $this->pdo->prepare($sqlCategorias);
 
@@ -215,9 +215,15 @@ class Catalog extends Controller {
                                 <a href="' . ( $this->url($lang, "/catalog/" . str_ireplace(' ', '-', strtolower($tipo)) . "/" . str_ireplace(' ', '-', strtolower($categoria['mainCategory']))) ) . '">
                                         <div class="imageHolder">
                                             <img
-                                            alt="' . $categoria['mainCategory'] . '"
-                                            src="http://www.alfonsomarinaebanista.com/images/' . $categoria["ur"] . '/' . $categoria["ur"] . '_alta1.jpg">
-                                         </div>
+                                            alt="' . $categoria['mainCategory'].'" ';
+
+                                            if($categoria["imagen"] == "default2.jpg"){
+                                                $html .= 'src="/assets/images/products/default2.jpg">';
+                                            }else{
+                                                $html .= 'src="/assets/images/products/' . $categoria["ur"] . '/' . $categoria["imagen"].'">';
+                                            }
+
+                                         $html .= '</div>
                                     <br class="clear">
                                     <br class="clear">
                                     <p>
@@ -327,9 +333,16 @@ class Catalog extends Controller {
                                <a href="' . ( $this->url($lang, "/product/" . str_ireplace(' ', '-', $producto["ur"])) ) . '">
                                         <div class="imageHolder">
                                             <img
-                                            alt="' . $producto['nombre'] . '"
-                                            src="http://www.alfonsomarinaebanista.com/images/' . $producto["ur"] . '/' . $producto["ur"] . '_alta1.jpg">
-                                         </div>
+                                            alt="' . $producto['nombre'] . '"';
+
+                                            if($producto['imagen'] == "default2.jpg"){
+                                                $html .= 'src="/assets/images/products/default2.jpg">';
+                                            }else{
+                                                $html .= 'src="/assets/images/products/' . $producto["ur"] . '/' . $producto["imagen"] . '">';
+                                            }
+
+
+                                         $html .= '</div>
                                     <br class="clear">
                                     <br class="clear">
                                     <p>
@@ -455,15 +468,22 @@ class Catalog extends Controller {
                 if ($grouping) {
                     foreach ($catalogo as $product) {
                         $stype = strtolower($this->trans($lang, $product["tipo"], $product["_type"]));
-                        $product["imagen"] = $product["imagen"] != "-" ? "/assets/images/product/" . $product["imagen"] : "http://placehold.it/200x200/f4f4f4/ccc?text=product";
+                        $product["imagen"] = $product["imagen"] != "-" ? $product["imagen"] : "http://placehold.it/200x200/f4f4f4/ccc?text=product";
                         $html .= '
 								<article class="item4Col">
 							        <a href="' . $this->url($lang, "/catalog/" . $stype . "/" . strtolower(str_replace(" ", "-", $product[$grouping]))) . '">
 							        	<div class="imageHolder">
 								            <img 
-								            alt="' . $product["nombre"] . '" 
-								            src="http://www.alfonsomarinaebanista.com/images/' . $product["ur"] . '/' . $product["ur"] . '_alta1.jpg">
-								         </div>
+								            alt="' . $product["nombre"] . '"';
+
+                                            if($product["imagen"] == "default2.jpg"){
+                                                $html .= 'src="/assets/images/products/default2.jpg">';
+                                            }else{    
+								                $html .= 'src="/assets/images/products/' . $product["ur"] . '/' . $product["imagen"] . '">';
+                                            }
+
+
+								         $html .= '</div>
 							            <br class="clear">
 							            <br class="clear">
 							            <p>
@@ -475,15 +495,22 @@ class Catalog extends Controller {
                     }
                 } else {
                     foreach ($catalogo as $product) {
-                        $product["imagen"] = $product["imagen"] != "-" ? "/assets/images/product/" . $product["imagen"] : "http://placehold.it/200x200/f4f4f4/ccc?text=product";
+                        $product["imagen"] = $product["imagen"] != "-" ? $product["imagen"] : "http://placehold.it/200x200/f4f4f4/ccc?text=product";
                         $html .= '
 								<article class="item4Col">
 							        <a href="' . $this->url($lang, "/product/" . $product['ur']) . '">
 							        	<div class="imageHolder">
 								            <img 
-								            alt="' . $product["nombre"] . '" 
-								            src="http://www.alfonsomarinaebanista.com/images/' . $product["ur"] . '/' . $product["ur"] . '_alta1.jpg">
-								         </div>
+								            alt="' . $product["nombre"] . '"';
+
+                                            if($product["imagen"] == "default2.jpg"){
+                                                $html .= 'src="/assets/images/products/default2.jpg">';
+                                            }else{    
+                                                $html .= 'src="/assets/images/products/' . $product["ur"] . '/' . $product["imagen"] . '">';
+                                            }
+
+
+                                         $html .= '</div>
 							            <br class="clear">
 							            <br class="clear">
 							            <p>
@@ -762,14 +789,14 @@ class Catalog extends Controller {
             $products = $query->fetchAll();
             $html .= '<div id="content-press">';
             foreach ($products as $product) {
-                $product["imagen"] = $product["imagen"] != "-" ? "/images/product/" . $product["imagen"] : "http://placehold.it/200x200/f4f4f4/ccc?text=product";
+                $product["imagen"] = $product["imagen"] != "-" ? $product["imagen"] : "http://placehold.it/200x200/f4f4f4/ccc?text=product";
                 $html .= '
 						<article class="item4Col">
 					        <a href="' . $this->url($lang, "/product/" . $product['ur']) . '">
 					        	<div class="imageHolder">
 						            <img 
 						            alt="' . $product["nombre"] . '" 
-						            src="http://www.alfonsomarinaebanista.com/images/' . $product["ur"] . '/' . $product["ur"] . '_alta2.jpg">
+						            src="/assets/images/products/' . $product["ur"] . '/' . $product["imagen"] . '">
 						         </div>
 					            <br class="clear">
 					            <br class="clear">

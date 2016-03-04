@@ -1,6 +1,6 @@
 <div class="product">
     <div id="product-image">
-        <img src="<?php echo $product["imagen"]== "-"?"http://placehold.it/500x600/f4f4f4/807562?text=product":'http://www.alfonsomarinaebanista.com/images/'.$product["ur"].'/'.$product["ur"].'_alta1.jpg'; ?>">
+        <img src="<?php echo $product["imagen"]== "-"?"http://placehold.it/500x600/f4f4f4/807562?text=product":"/assets/images/products/" . $product["ur"] . "/" . $product["imagen"]?>">
         
         <!-- <img src="<?php echo $product["imagen"]== "-"?"http://placehold.it/500x600/f4f4f4/807562?text=product":'/assets/images/product/'.$product['imagen'].'' ?>"> -->
     </div><!-- #product-image-->

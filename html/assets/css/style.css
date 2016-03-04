@@ -3718,8 +3718,9 @@ h2.tituloSeccion {
 }
 
 .item4Col .imageHolder{
-    height: 200px;
-    max-height: 200px;
+    max-height: 200px;  
+    height: 170px; /*  antes decía 200px */
+    line-height: 165px;
     float: none;
     width: 100%;
     position: relative;
@@ -3744,7 +3745,7 @@ h2.tituloSeccion {
   min-width: auto;
   margin: auto;
   position: relative;
-  vertical-align: middle;
+  vertical-align: bottom; /* antes decia middle */
   max-height: 190px;
 }
 

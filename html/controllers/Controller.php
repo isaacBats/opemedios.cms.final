@@ -148,9 +148,9 @@
 			$grp = $this->trans($lang , "categoria" , "_category");
 			$tp = $this->trans($lang , "tipo" , "_type");
 			if( $estilo != ""){
-				$sql = "SELECT distinct(".$grp.") FROM product WHERE $grp NOT LIKE \"%,%\" AND estilo = :estilo && {$tp} LIKE '{$tipo}'";
+				$sql = "SELECT distinct(".$grp.") FROM product WHERE $grp NOT LIKE \"%,%\" AND estilo = :estilo && {$tp} LIKE '{$tipo}' ORDER BY $grp";
 			}else{
-				$sql = "SELECT distinct(".$grp.") FROM product WHERE $grp NOT LIKE \"%,%\" AND {$tp} LIKE '{$tipo}' ";
+				$sql = "SELECT distinct(".$grp.") FROM product WHERE $grp NOT LIKE \"%,%\" AND {$tp} LIKE '{$tipo}' ORDER BY $grp";
 			}
 			
 			$query = $this->pdo->prepare($sql);

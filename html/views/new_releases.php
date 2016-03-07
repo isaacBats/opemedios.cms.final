@@ -15,7 +15,7 @@
 						    </div>
 		  					<br class="clear">
 		    				<br class="clear">
-		  					<p><?php  echo ucwords( $p[$this->trans($lang, "nombre", "_name")] ) ?></p>
+		  					<p><?php  echo $this->personCase( $p[$this->trans($lang, "nombre", "_name")] ) ?></p>
 		  				</a>
 				    </article>
 

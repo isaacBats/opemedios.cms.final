@@ -79,7 +79,7 @@ class Gallery extends Controller {
     private function getRelated($productsID) {
         $where = "WHERE id IN (";
         $where .= implode(",", $productsID);
-        $where .=");";
+        $where .=") LIMIT 3;";
 
         $query = $this->pdo->prepare("SELECT ur, nombre, imagen FROM product $where");
         $rs = $query->execute();

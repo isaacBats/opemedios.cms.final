@@ -98,7 +98,7 @@
 		$this->addBread( array( "label"=> $this->trans($lang , "Acabados" ,"Finishes") ) );
  		$this->header( $lang, $this->trans($lang , "Acabados - " ,"Finishes - ") );
 
- 		$sql = "SELECT * FROM acabados";
+ 		$sql = "SELECT * FROM acabados ORDER BY codigo";
  		$query = $this->pdo->prepare($sql);
 		$rs = $query->execute();
 		if($rs!==false){

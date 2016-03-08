@@ -109,7 +109,7 @@
             </li>
             <li class="nav-parent"><a href=""><i class="fa fa-th-list"></i> <span>Catálogo</span></a>
               <ul class="children">
-                <li><a href="javascript:void(0);">Listar productos</a></li>
+                <li><a href="/panel/catalog/list">Listar productos</a></li>
                 <li><a href="/panel/catalog/product/add">Agregar producto</a></li>
                 <li><a href="/panel/catalog/export">Exportar productos</a></li>
                 <li><a href="/panel/catalog/import">Importar productos</a></li>

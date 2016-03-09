@@ -327,6 +327,26 @@ class AdminCatalog extends Controller {
         $this->footer_admin();
     }
 
+    public function remove($lang="es"){
+
+        if( !empty($_POST) ){
+            $resultado = new stdClass();
+            $sql = "DELETE FROM product WHERE id = :id";
+            $query = $this->pdo->prepare($sql);
+            $query->bindParam(':id', $_POST['id_borrar'], \PDO::PARAM_INT);
+            $rs = $query->execute();
+            $resultado->mensaje = $rs;
+            if($rs!=false){
+                $resultado->exito = true;
+            }
+            else{
+                $resultado->exito = false;
+            }
+            header('Content-type: text/json');
+            echo json_encode($resultado); 
+        }
+    }
+
 
 
     public function listRelatedProductAction($lang = "es", $category, $name) {

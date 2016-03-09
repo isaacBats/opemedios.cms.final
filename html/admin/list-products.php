@@ -26,7 +26,7 @@
 		         <td class="text-right">
 		          <a class="btn btn-default btn-sm" href="/panel/catalog/product/detail/'.$product['id'].'" >Ver</a>
 		          <a class="btn btn-success btn-sm" href="/panel/catalog/product/edit/'.$product['id'].'" >Editar</a>
-          		  <a class="btn btn-danger btn-sm removeNew" href="javascript:void(0);" data-id="'.$product['id'].'" >Eliminar</a>
+          		  <a class="btn btn-danger btn-sm removeProduct" href="javascript:void(0);" data-id="'.$product['id'].'" >Eliminar</a>
 		        </td>
 	      	</tr>';
 

@@ -179,6 +179,10 @@ class AdminCatalog extends Controller {
         $this->footer_admin( $lang );
     }
 
+    /**
+     * Update a product of Catalog
+     * @return true an return a View list if product is updated
+     */
     public function update(){
 
         if( !empty($_POST) ){
@@ -226,6 +230,11 @@ class AdminCatalog extends Controller {
         }
     }
 
+    /**
+     * Update in data base a product
+     * @param  array  $product Data of product
+     * @return Boolean          If product is updated
+     */
     private function put($product = []){
 
         $sql = "UPDATE product SET  ur                  = :ur,
@@ -302,6 +311,20 @@ class AdminCatalog extends Controller {
 
         return $query->execute();
 
+    }
+
+    public function detailProductAction( $lang = "es", $id){
+
+        $this->header_admin();
+
+        $query = $this->pdo->prepare( "SELECT * FROM product WHERE id = $id;" );
+
+        if($query->execute()){
+            $product = $query->fetch(\PDO::FETCH_ASSOC);
+            require $this->adminviews . "view-product.php";
+        }
+
+        $this->footer_admin();
     }
 
 

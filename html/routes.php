@@ -509,6 +509,12 @@ $collection->attachRoute(new Route('/panel/catalog/categories/list', array(
     'methods' => 'GET'
 )));
 
+$collection->attachRoute(new Route('/panel/catalog/product/detail/:id', array(
+    '_controller' => 'AdminCatalog::detailProductAction',
+    'parameters' => array("lang" => $lang),
+    'methods' => 'GET'
+)));
+
 $collection->attachRoute(new Route('/panel/catalog/product/add', array(
     '_controller' => 'AdminCatalog::addAction',
     'parameters' => array("lang" => $lang),

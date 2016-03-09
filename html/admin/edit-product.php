@@ -3,112 +3,156 @@
     <h4 class="panel-title">Editar Producto</h4>
   </div>
   <div class="panel-body">
-    <form method="post" action="/panel/catalog/product/add" id="addNew" enctype="multipart/form-data">
+    <form method="post" action="/panel/catalog/product/update" id="addNew" enctype="multipart/form-data">
       <div class="form-group">
-        <input type="text" placeholder="ur" class="form-control" name="ur">
+        <input type="hidden" value="<?php echo $row['id'] ?>" class="form-control" name="id">
       </div>
       <div class="form-group">
-        <input type="text" placeholder="Nombre" class="form-control" name="nombre">
+	      <label for="ur" >UR</label>
+	      <input type="text" value = "<?php echo $row['ur'] ?>" class="form-control" name="ur">
       </div>
       <div class="form-group">
-        <input type="text" placeholder="Caracter" class="form-control" name="caracter">
+      	<label for="nombre" >Nombre</label>
+      	<input type="text" value = "<?php echo $row['nombre'] ?>" class="form-control" name="nombre">
       </div>
       <div class="form-group">
-        <input type="text" placeholder="Acabado" class="form-control" name="acabado">
+      	<label for="caracter" >Caracter</label>
+        <input type="text" value = "<?php echo $row['caracter'] ?>" class="form-control" name="caracter">
       </div>
       <div class="form-group">
-        <input type="text" placeholder="Tipo de acabado" class="form-control" name="tipoAcabado">
+      	<label for="acabado" >Acabado</label>
+	    <input type="text" value = "<?php echo $row['acabado'] ?>" class="form-control" name="acabado">
       </div>
       <div class="form-group">
-        <input type="text" placeholder="Como se muestra" class="form-control" name="comoSeMuestra">
+      	<label for="tipoDeAcabado" >Tipo de acabado</label>
+        <input type="text" value = "<?php echo $row['tipo_acabado'] ?>" class="form-control" name="tipoAcabado">
       </div>
       <div class="form-group">
-        <input type="text" placeholder="Precio" class="form-control" name="precio">
+      	<label for="comoSeMuestra" >Como se muestra</label>
+        <input type="text" value = "<?php echo $row['como_se_muestra'] ?>" class="form-control" name="comoSeMuestra">
       </div>
       <div class="form-group">
-        <input type="text" placeholder="Precio Pintado" class="form-control" name="precioPintado">
+     	<label for="precio" >Precio</label>
+        <input type="text" value = "<?php echo $row['precio'] ?>" class="form-control" name="precio">
       </div>
       <div class="form-group">
-        <input type="text" placeholder="Familia" class="form-control" name="familia">
+      	<label for="precio Pintado" >Precio Pintado</label>
+        <input type="text" value = "<?php echo $row['precio_pintado'] ?>" class="form-control" name="precioPintado">
       </div>
       <div class="form-group">
-        <input type="text" placeholder="Original" class="form-control" name="original">
+      	<label for="familia" >Familia</label>
+	    <input type="text" value = "<?php echo $row['familia'] ?>" class="form-control" name="familia">
+      </div>
+      <div class="form-group">
+      	<label for="original" >Original</label>
+        <input type="text" value = "<?php echo $row['original'] ?>" class="form-control" name="original">
         <span class="help-block">Variante de producto. Si no tiene poner un " - "</span>
       </div>
       <div class="form-group">
-        <input type="text" placeholder="Tipo" class="form-control" name="tipo">
+      	<label for="tipo" >Tipo</label>
+        <input type="text" value = "<?php echo $row['tipo'] ?>" class="form-control" name="tipo">
       </div>
       <div class="form-group">
-        <input type="text" placeholder="Categoria" class="form-control" name="categoria">
+      	<label for="categoria" >Categoria</label>
+        <input type="text" value = "<?php echo $row['categoria'] ?>" class="form-control" name="categoria">
       </div>
       <div class="form-group">
-        <input type="text" placeholder="Uso" class="form-control" name="uso">
+      	<label for="uso" >Uso</label>
+        <input type="text" value = "<?php echo $row['uso'] ?>" class="form-control" name="uso">
       </div>
       <div class="form-group">
-        <input type="text" placeholder="Frente" class="form-control" name="frente">
+      	<label for="frente" >Frente</label>
+        <input type="text" value = "<?php echo $row['frente'] ?>" class="form-control" name="frente">
       </div>
       <div class="form-group">
-        <input type="text" placeholder="Fondo" class="form-control" name="fondo">
+      	<label for="fondo" >Fondo</label>
+        <input type="text" value = "<?php echo $row['fondo'] ?>" class="form-control" name="fondo">
       </div>
       <div class="form-group">
-        <input type="text" placeholder="Altura" class="form-control" name="altura">
+      	<label for="altura" >Altura</label>
+        <input type="text" value = "<?php echo $row['altura'] ?>" class="form-control" name="altura">
       </div>
       <div class="form-group">
-        <input type="text" placeholder="Diametro" class="form-control" name="diametro">
+      	<label for="diametro" >Diametro</label>
+        <input type="text" value = "<?php echo $row['diametro'] ?>" class="form-control" name="diametro">
       </div>
       <div class="form-group">
-        <input type="text" placeholder="Frente Pulgadas" class="form-control" name="frentePLG">
+      	<label for="frentePulgadas" >Frente en Pulgadas</label>
+        <input type="text" value = "<?php echo $row['frentre_plg'] ?>" class="form-control" name="frentePLG">
       </div>
       <div class="form-group">
-        <input type="text" placeholder="Fondo Pulgadas" class="form-control" name="fondoPLG">
+      	<label for="fondoPulgadas" >Fondo en Pulgadas</label>
+        <input type="text" value = "<?php echo $row['fondo_plg'] ?>" class="form-control" name="fondoPLG">
       </div>
       <div class="form-group">
-        <input type="text" placeholder="Altura Pulgadas" class="form-control" name="alturaPLG">
+      	<label for="alturaPulgadas" >Altura en Pulgadas</label>
+        <input type="text" value = "<?php echo $row['altura_plg'] ?>" class="form-control" name="alturaPLG">
       </div>
       <div class="form-group">
-        <input type="text" placeholder="Diametro Pulgadas" class="form-control" name="diametroPLG">
+     	<label for="diametroPulgadas" >Diametro en Pulgadas</label>
+        <input type="text" value = "<?php echo $row['diametro_plg'] ?>" class="form-control" name="diametroPLG">
       </div>
       
 
 
       <div class="form-group">
-        <input type="text" placeholder="Name" class="form-control" name="name">
+      	<label for="name" >Name</label>
+        <input type="text" value = "<?php echo $row['_name'] ?>" class="form-control" name="name">
       </div>
       <div class="form-group">
-        <input type="text" placeholder="Character" class="form-control" name="character">
+      	<label for="character" >Character</label>
+        <input type="text" value = "<?php echo $row['_character'] ?>" class="form-control" name="character">
       </div>
       <div class="form-group">
-        <input type="text" placeholder="Current Finish" class="form-control" name="currentFinish">
+      	<label for="currentFinish" >Current Finish</label>
+        <input type="text" value = "<?php echo $row['current_finish'] ?>" class="form-control" name="currentFinish">
       </div>
       <div class="form-group">
-        <input type="text" placeholder="Created" class="form-control" name="created">
+      	<label for="created" >Created</label>
+        <input type="text" value = "<?php echo $row['created'] ?>" class="form-control" name="created">
         <span class="help-block">Ejemplo: 2015-10-01</span>
       </div>
       <div class="form-group">
-        <input type="text" placeholder="Producto Relacionado" class="form-control" name="match">
+      	<label for="productoRelacionado" >Producto Relacionado</label>
+        <input type="text" value = "<?php echo $row['_match'] ?>" class="form-control" name="match">
         <span class="help-block">UR de producto relacionado. Si no tiene poner un " - "</span>
       </div>
       <div class="form-group">
-        <input type="text" placeholder="Price" class="form-control" name="price">
+      	<label for="price" >Price</label>
+        <input type="text" value = "<?php echo $row['_price'] ?>" class="form-control" name="price">
       </div>
       <div class="form-group">
-        <input type="text" placeholder="Price Painted" class="form-control" name="pricePainted">
+      	<label for="pricePainted" >Price Painted</label>
+        <input type="text" value = "<?php echo $row['price_painted'] ?>" class="form-control" name="pricePainted">
       </div>
       <div class="form-group">
-        <input type="text" placeholder="Type" class="form-control" name="type">
+      	<label for="type" >Type</label>
+        <input type="text" value = "<?php echo $row['_type'] ?>" class="form-control" name="type">
       </div>
       <div class="form-group">
-        <input type="text" placeholder="Category" class="form-control" name="category">
+      	<label for="category" >Category</label>
+        <input type="text" value = "<?php echo $row['_category'] ?>" class="form-control" name="category">
       </div>
       <div class="form-group">
-        <input type="text" placeholder="Use" class="form-control" name="use">
+      	<label for="use" >Use</label>
+        <input type="text" value = "<?php echo $row['_use'] ?>" class="form-control" name="use">
       </div>
       <div class="form-group">
-        <input type="file" name="imagen">
+		<?php if($row['imagen'] != "default2.jpg"){ ?>
+        	<img src="/assets/images/products/<?php echo $row['ur']."/".$row['imagen']?>" height="150" width="150">
+        	<input type="hidden" value="<?php echo $row['imagen'] ?>" class="form-control" name="imagen">
+        <?php }else{ ?>
+        	<img src="/assets/images/products/<?php echo $row['imagen']?>" height="150" width="150">
+        	<input type="hidden" value="<?php echo $row['imagen'] ?>" class="form-control" name="imagen">
+        <?php } ?>
+        
+        <input type="file" name="imagen" id="input-imagen" class="inp-thum">
+        <a href="javascript:void(0);" id="btn-changeImage" class="borrar atributo imagen btn btn-default" ><i class="fa fa-pencil-square-o"> Cambiar</i></a>
+        <span class="help-block">Imagen del producto</span>
       </div>
       <br>
       <div class="form-group">
-        <button type="submit" id="btn-submit" class="btn btn-success">Guardar</button>
+        <button type="submit" id="btn-submit" class="btn btn-success">Actualizar</button>
       </div>
     </form>
   </div>

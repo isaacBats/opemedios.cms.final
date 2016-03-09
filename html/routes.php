@@ -533,6 +533,12 @@ $collection->attachRoute(new Route('/panel/catalog/product/edit/:id', array(
     'methods' => 'GET'
 )));
 
+$collection->attachRoute(new Route('/panel/catalog/product/update', array(
+    '_controller' => 'AdminCatalog::update',
+    'parameters' => array("lang" => $lang),
+    'methods' => 'POST'
+)));
+
 $collection->attachRoute(new Route('/panel/catalog/:category/:name', array(
     '_controller' => 'AdminCatalog::listRelatedProductAction',
     'parameters' => array("lang" => $lang),

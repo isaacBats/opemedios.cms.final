@@ -82,12 +82,7 @@ class AdminCatalog extends Controller {
     public function save(){
 
         if(isset($_POST) && !empty($_POST)){
-            print_r($_POST);
-            print_r($_FILES);
-            $directory = $this->newDirectory($_POST['ur']);
-            print_r($directory);
-            if( $directory ){
-                echo "Estamos de este lado";
+            if( $this->newDirectory($_POST['ur']) ){
                 $extensiones_permitidas = array("jpg", "jpeg", "gif", "png","JPG","JPEG","PNG");
                 $explode = explode(".", $_FILES['imagen']["name"]);
                 $extension = end($explode);
@@ -163,6 +158,12 @@ class AdminCatalog extends Controller {
         }
     }
 
+    /**
+     * Show the form for editing a product
+     * @param  string $lang The language
+     * @param  int $id   Identifier the product
+     * @return A View
+     */
     public function editProductAction($lang = "es", $id){
         $this->header_admin( $lang );
 
@@ -176,6 +177,131 @@ class AdminCatalog extends Controller {
         }
 
         $this->footer_admin( $lang );
+    }
+
+    public function update(){
+
+        if( !empty($_POST) ){
+            if( $this->newDirectory($_POST['ur']) ){
+                if( $_FILES['imagen']['name'] != "" ){
+                    $extensiones_permitidas = array("jpg", "jpeg", "gif", "png","JPG","JPEG","PNG");
+                    $explode = explode(".", $_FILES['imagen']["name"]);
+                    $extension = end($explode);
+                    if ((($_FILES['imagen']["type"] == "image/png")
+                        || ($_FILES['imagen']["type"] == "image/jpeg")
+                        || ($_FILES['imagen']["type"] == "image/jpg")
+                        || ($_FILES['imagen']["type"] == "image/PNG"))
+                        && in_array($extension, $extensiones_permitidas))
+                    {
+                        if ($_FILES['imagen']["error"] > 0)
+                        {
+                            echo "ERROR: " . $_FILES['imagen']["error"] . "<br>";
+                        }
+                        else
+                        {
+                            $path=__DIR__."/../assets/images/products/".$_POST['ur']."/". $_FILES['imagen']["name"];
+                            $move = move_uploaded_file($_FILES['imagen']["tmp_name"],$path);
+
+                            if(!$move){
+                                throw new Exception("Error al mover el archivo", 1);
+                            }
+                        }
+                    }
+
+                    $_POST['imagen'] = $_FILES['imagen']['name'];
+                    if( !$this->put($_POST) ){
+                        echo "Error al actualizar el producto";
+                    }else{
+                        header("Location: /panel/catalog/list");
+                    }        
+
+                }else{
+                    if( !$this->put($_POST) ){
+                        echo "Error al actualizar el producto";
+                    }else{
+                        header("Location: /panel/catalog/list");
+                    }
+                }
+            }
+        }
+    }
+
+    private function put($product = []){
+
+        $sql = "UPDATE product SET  ur                  = :ur,
+                                    nombre              = :nombre,
+                                    _name               = :_name,
+                                    caracter            = :caracter,
+                                    _character          = :_character,
+                                    acabado             = :acabado,
+                                    tipo_acabado        = :tipo_acabado,
+                                    como_se_muestra     = :como_se_muestra,
+                                    current_finish      = :current_finish,
+                                    precio              = :precio,
+                                    familia             = :familia,
+                                    original            = :original,
+                                    created             = :created,
+                                    _match              = :_match,
+                                    _price              = :_price,
+                                    precio_pintado      = :precio_pintado,
+                                    price_painted       = :price_painted,
+                                    tipo                = :tipo,
+                                    _type               = :_type,
+                                    categoria           = :categoria,
+                                    _category           = :_category,
+                                    uso                 = :uso,
+                                    _use                = :_use,
+                                    frente              = :frente,
+                                    fondo               = :fondo,
+                                    altura              = :altura,
+                                    diametro            = :diametro,
+                                    frentre_plg         = :frente_plg,
+                                    fondo_plg           = :fondo_plg,
+                                    altura_plg          = :altura_plg,
+                                    diametro_plg        = :diametro_plg,
+                                    imagen              = :imagen
+                            WHERE   id                  = :id
+                            LIMIT 1;
+        ";
+
+        $query = $this->pdo->prepare($sql);
+
+        $query->bindParam(':ur', $product['ur'], \PDO::PARAM_STR);
+        $query->bindParam(':nombre', $product['nombre'], \PDO::PARAM_STR);
+        $query->bindParam(':_name', $product['name'], \PDO::PARAM_STR);
+        $query->bindParam(':caracter', $product['caracter'], \PDO::PARAM_STR);
+        $query->bindParam(':_character', $product['character'], \PDO::PARAM_STR);
+        $query->bindParam(':acabado', $product['acabado'], \PDO::PARAM_STR);
+        $query->bindParam(':tipo_acabado', $product['tipoAcabado'], \PDO::PARAM_STR);
+        $query->bindParam(':como_se_muestra', $product['comoSeMuestra'], \PDO::PARAM_STR);
+        $query->bindParam(':current_finish', $product['currentFinish'], \PDO::PARAM_STR);
+        $query->bindParam(':precio', $product['precio'], \PDO::PARAM_STR);
+        $query->bindParam(':familia', $product['familia'], \PDO::PARAM_STR);
+        $query->bindParam(':original', $product['original'], \PDO::PARAM_STR);
+        $query->bindParam(':created', $product['created'], \PDO::PARAM_STR);
+        $query->bindParam(':_match', $product['match'], \PDO::PARAM_STR);
+        $query->bindParam(':_price', $product['price'], \PDO::PARAM_STR);
+        $query->bindParam(':precio_pintado', $product['precioPintado'], \PDO::PARAM_STR);
+        $query->bindParam(':price_painted', $product['pricePainted'], \PDO::PARAM_STR);
+        $query->bindParam(':tipo', $product['tipo'], \PDO::PARAM_STR);
+        $query->bindParam(':_type', $product['type'], \PDO::PARAM_STR);
+        $query->bindParam(':categoria', $product['categoria'], \PDO::PARAM_STR);
+        $query->bindParam(':_category', $product['category'], \PDO::PARAM_STR);
+        $query->bindParam(':uso', $product['uso'], \PDO::PARAM_STR);
+        $query->bindParam(':_use', $product['use'], \PDO::PARAM_STR);
+        $query->bindParam(':frente', $product['frente'], \PDO::PARAM_STR);
+        $query->bindParam(':fondo', $product['fondo'], \PDO::PARAM_STR);
+        $query->bindParam(':altura', $product['altura'], \PDO::PARAM_STR);
+        $query->bindParam(':diametro', $product['diametro'], \PDO::PARAM_STR);
+        $query->bindParam(':frente_plg', $product['frentePLG'], \PDO::PARAM_STR);
+        $query->bindParam(':fondo_plg', $product['fondoPLG'], \PDO::PARAM_STR);
+        $query->bindParam(':altura_plg', $product['alturaPLG'], \PDO::PARAM_STR);
+        $query->bindParam(':diametro_plg', $product['diametroPLG'], \PDO::PARAM_STR);
+        $query->bindParam(':imagen', $product['imagen'], \PDO::PARAM_STR); 
+        $query->bindParam(':id', $product['id'], \PDO::PARAM_INT); 
+
+        return $query->execute();
+
     }
 
 

@@ -24,7 +24,9 @@
 		         $html .='</td>
 		         <td>'.$product['nombre'].'</td>
 		         <td class="text-right">
-		          <a class="btn btn-default btn-sm" href="/panel/catalog/'.$product['id'].'" >Ver</a>
+		          <a class="btn btn-default btn-sm" href="/panel/catalog/product/'.$product['id'].'" >Ver</a>
+		          <a class="btn btn-success btn-sm" href="/panel/catalog/product/edit/'.$product['id'].'" >Editar</a>
+          		  <a class="btn btn-danger btn-sm removeNew" href="javascript:void(0);" data-id="'.$product['id'].'" >Eliminar</a>
 		        </td>
 	      	</tr>';
 

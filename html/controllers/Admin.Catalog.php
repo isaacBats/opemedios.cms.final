@@ -26,6 +26,10 @@ class AdminCatalog extends Controller {
         $this->footer_admin($lang);
     }
 
+    /**
+     * Show all products in the Panel
+     * @return A view
+     */
     public function showAction(){
         
         $this->header_admin();
@@ -46,9 +50,9 @@ class AdminCatalog extends Controller {
      */
     public function addAction() {
 
-        $this->header_admin($lang);
+        $this->header_admin();
         require $this->adminviews . "add-product.php";
-        $this->footer_admin($lang);
+        $this->footer_admin();
     }
 
     /**
@@ -57,11 +61,11 @@ class AdminCatalog extends Controller {
      * @return boolean       Return TRUE if a directory exist or this created
      */
     private function newDirectory($name){
-        if(!empty($slug)){
-            if(file_exists(__DIR__."/../assets/images/products/".$slug)){
+        if(!empty($name)){
+            if(file_exists(__DIR__."/../assets/images/products/".$name)){
                 return true;
             }else{
-                $pathname = __DIR__."/../assets/images/products/".$slug;
+                $pathname = __DIR__."/../assets/images/products/".$name;
                 if(!mkdir($pathname, 0777)){
                     die('Fallo al crear las carpetas...');
                     return false;
@@ -80,8 +84,10 @@ class AdminCatalog extends Controller {
         if(isset($_POST) && !empty($_POST)){
             print_r($_POST);
             print_r($_FILES);
-            if( $this->newDirectory($_POST['ur']) ){
-
+            $directory = $this->newDirectory($_POST['ur']);
+            print_r($directory);
+            if( $directory ){
+                echo "Estamos de este lado";
                 $extensiones_permitidas = array("jpg", "jpeg", "gif", "png","JPG","JPEG","PNG");
                 $explode = explode(".", $_FILES['imagen']["name"]);
                 $extension = end($explode);
@@ -155,6 +161,21 @@ class AdminCatalog extends Controller {
                 }
             }
         }
+    }
+
+    public function editProductAction($lang = "es", $id){
+        $this->header_admin( $lang );
+
+        $query = $this->pdo->prepare("SELECT * FROM product WHERE id = :id");
+        $query->bindParam(":id", $id, \PDO::PARAM_INT);
+        
+
+        if( $query->execute() ){
+            $row = $query->fetch(\PDO::FETCH_ASSOC);
+            require $this->adminviews . "edit-product.php";
+        }
+
+        $this->footer_admin( $lang );
     }
 
 

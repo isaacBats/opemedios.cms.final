@@ -527,6 +527,12 @@ $collection->attachRoute(new Route('/panel/catalog/product/add', array(
     'methods' => 'POST'
 )));
 
+$collection->attachRoute(new Route('/panel/catalog/product/edit/:id', array(
+    '_controller' => 'AdminCatalog::editProductAction',
+    'parameters' => array("lang" => $lang),
+    'methods' => 'GET'
+)));
+
 $collection->attachRoute(new Route('/panel/catalog/:category/:name', array(
     '_controller' => 'AdminCatalog::listRelatedProductAction',
     'parameters' => array("lang" => $lang),

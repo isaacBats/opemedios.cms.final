@@ -5,15 +5,17 @@
 				<!-- container for the slides -->
 				<div class="images">
 				<?php foreach ($image as $value) { ?>
-					<div><img src="/assets/images/<?php echo $gallery['slug']."/".$value['imagen'] ?>"></div>
-				<?php } ?>
+					<?php if( $value['imagen'] != 'AM_FotosHome_Fondo.png' ){ ?>
+						<div><img src="/assets/images/<?php echo $gallery['slug']."/".$value['imagen'] ?>"></div>
+				<?php }} ?>
 				</div>
 				  
 				<!-- the tabs -->
 				<div class="slidetabs">
 				<?php foreach ($image as $value) { ?>
-					<a href="#"></a>
-				<?php } ?>
+					<?php if( $value['imagen'] != 'AM_FotosHome_Fondo.png' ){ ?>
+						<a href="#"></a>
+				<?php }} ?>
 				</div>
 			</div>
 		</div>

@@ -10,7 +10,28 @@
 		
 		public function  homeView( $lang = "es" ){
 			$this->header($lang, "", true );
+
+			$getGallery = $this->pdo->prepare("SELECT * FROM gallery WHERE contexto = 'home';");
+
+			$gallery = [];
+			$image   = [];
+			$fondo = "";
+			if( $getGallery->execute() ){
+				$gallery = $getGallery->fetch(\PDO::FETCH_ASSOC);
+				$query = $this->pdo->prepare("SELECT imagen FROM gallery_image WHERE gallery_id =  62 ");
+				if( $query->execute() ){
+					$image = $query->fetchAll(\PDO::FETCH_ASSOC);
+					foreach ($image as $im) {
+						if($im['imagen'] === 'AM_FotosHome_Fondo.png')
+							$fondo = $im['imagen'];
+					}
+				}
+
+			}else{
+				echo "No se obtuvo la galeria";
+			}
 			require  $this->views."home.php";	
+
 			$this->footer( $lang );
 
 		}

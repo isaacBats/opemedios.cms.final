@@ -594,3 +594,22 @@ $collection->attachRoute(new Route('/gallery/relatedImgs', array(
     'methods' => 'POST'
 )));
 
+//Admin Plain
+$collection->attachRoute(new Route('/panel/plain/edit/who-are-we', array(
+    '_controller'   => 'AdminPlain::editWhoAreWeAction',
+    'parameters'    => array("lang" => $lang),
+    'methods'       => 'GET'
+)));
+
+$collection->attachRoute(new Route('/panel/plain/add/page', array(
+    '_controller'   => 'AdminPlain::createPageAction',
+    'parameters'    => array("lang" => $lang),
+    'methods'       => 'GET'
+)));
+
+$collection->attachRoute(new Route('/panel/plain/add/page', array(
+    '_controller'   => 'AdminPlain::savePageAction',
+    'parameters'    => array("lang" => $lang),
+    'methods'       => 'POST'
+)));
+

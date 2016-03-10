@@ -4,7 +4,7 @@
     <p>Llena estos campos para agregar un producto al catalogo.</p>
   </div>
   <div class="panel-body">
-    <form method="post" action="/panel/catalog/product/add" id="addNew" enctype="multipart/form-data">
+    <form method="post" action="/panel/catalog/product/add" id="addProduct" enctype="multipart/form-data">
       <div class="form-group">
         <input type="text" placeholder="ur" class="form-control" name="ur">
       </div>

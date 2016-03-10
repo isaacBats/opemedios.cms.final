@@ -3,7 +3,7 @@
     <h4 class="panel-title">Editar Producto</h4>
   </div>
   <div class="panel-body">
-    <form method="post" action="/panel/catalog/product/update" id="addNew" enctype="multipart/form-data">
+    <form method="post" action="/panel/catalog/product/update" id="addProduct" enctype="multipart/form-data">
       <div class="form-group">
         <input type="hidden" value="<?php echo $row['id'] ?>" class="form-control" name="id">
       </div>

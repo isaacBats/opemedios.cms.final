@@ -137,8 +137,8 @@
             </li>
             <li class="nav-parent"><a href=""><i class="fa fa-folder-o"></i> <span>Páginas</span></a>
               <ul class="children">
-                <li><a href="/panel/pag-static/list">Lista páginas estaticas</a></li>
-                <li><a href="/panel/pag-static/add">Agregar Página</a></li>
+                <li><a href="/panel/plain/list">Lista páginas estaticas</a></li>
+                <li><a href="/panel/plain/add/page">Agregar Página</a></li>
               </ul>
             </li>
           </ul>

@@ -15,7 +15,7 @@
          <td class="text-right">
           <a class="btn btn-default btn-sm" href="/panel/plain/page/'.$row['slug'].'">Ver</a>
           <a class="btn btn-success btn-sm" href="/panel/plain/page/edit/'.$row['id'].'" >Editar</a>
-          <!-- <a class="btn btn-danger btn-sm removePage" href="javascript:void(0);" data-id="'.$row['id'].'" >Eliminar</a> -->
+          <!-- <a class="btn btn-danger btn-sm removePage" href="javascript:void(0);" data-id="'.$row['id'].'" >Eliminar</a>  -->
         </td>
       </tr>';
     }

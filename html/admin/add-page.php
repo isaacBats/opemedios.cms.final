@@ -23,6 +23,14 @@
         <span class="help-block">Recuerda que puedes utilizar las herramientas del editor para formar tu contenido.</span>
       </div>
       <div class="form-group">
+        <input type="text" placeholder="Comentario" class="form-control" name="comentario">
+        <span class="help-block">Se utiliza para un pequeño parrafo que acompañe a la imagen</span>
+      </div>
+      <div class="form-group">
+        <input type="text" placeholder="Comentario (en inglés)" class="form-control" name="coment">
+        <span class="help-block">Se utiliza para un pequeño parrafo que acompañe a la imagen en inglés</span>
+      </div>
+      <div class="form-group">
         <input type="file" name="imagen">
         <span class="help-block">Imagen principal de la página</span>
       </div>

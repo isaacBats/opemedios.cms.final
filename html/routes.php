@@ -613,3 +613,8 @@ $collection->attachRoute(new Route('/panel/plain/add/page', array(
     'methods'       => 'POST'
 )));
 
+$collection->attachRoute(new Route('/panel/plain/list', array(
+    '_controller'   => 'AdminPlain::showAction',
+    'parameters'    => array("lang" => $lang),
+    'methods'       => 'GET'
+)));

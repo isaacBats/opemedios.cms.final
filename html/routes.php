@@ -595,8 +595,8 @@ $collection->attachRoute(new Route('/gallery/relatedImgs', array(
 )));
 
 //Admin Plain
-$collection->attachRoute(new Route('/panel/plain/edit/who-are-we', array(
-    '_controller'   => 'AdminPlain::editWhoAreWeAction',
+$collection->attachRoute(new Route('/panel/plain/page/edit/:id', array(
+    '_controller'   => 'AdminPlain::editPageAction',
     'parameters'    => array("lang" => $lang),
     'methods'       => 'GET'
 )));
@@ -613,8 +613,26 @@ $collection->attachRoute(new Route('/panel/plain/add/page', array(
     'methods'       => 'POST'
 )));
 
+$collection->attachRoute(new Route('/panel/plain/page/update', array(
+    '_controller'   => 'AdminPlain::updatePage',
+    'parameters'    => array("lang" => $lang),
+    'methods'       => 'POST'
+)));
+
 $collection->attachRoute(new Route('/panel/plain/list', array(
     '_controller'   => 'AdminPlain::showAction',
     'parameters'    => array("lang" => $lang),
     'methods'       => 'GET'
+)));
+
+$collection->attachRoute(new Route('/panel/plain/page/remove', array(
+    '_controller'   => 'AdminPlain::remove',
+    'parameters'    => array("lang" => $lang),
+    'methods'       => 'POST'
+)));
+
+$collection->attachRoute(new Route('/panel/plain/page/:id', array(
+    '_controller' => 'AdminPlain::viewPageAction',
+    'parameters' => array("lang" => $lang),
+    'methods' => 'GET'
 )));

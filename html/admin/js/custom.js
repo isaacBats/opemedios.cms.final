@@ -151,6 +151,18 @@ $(document).ready(function () {
         dialogo_confirmacion_mueble(data);
     });
 
+    jQuery('.mainpanel').on('click', 'a.btn.removePage', function (event) {
+        event.preventDefault();
+        var boton = jQuery(this);
+        data = {};
+        data.contenedor = boton.parent().parent();
+        data.id_elemento = boton.data('id');
+        data.accion = 'eliminar_elemento';
+        data.titulo = 'Eliminar página';
+        data.descripcion = 'Si borra la página no podrá volver a atras';
+        dialogo_confirmacion_pagina(data);
+    });
+
     function dialogo_confirmacionNew(data) {
         var confirmacion = jQuery("#confirmacion");
         var descripcion = confirmacion.find('p');
@@ -239,6 +251,40 @@ $(document).ready(function () {
                     jQuery(this).dialog("close");
                     console.log(datos);
                     jQuery.post('/panel/catalog/product/remove', datos, function (json) {
+                        console.log(json);
+                        if (json.exito) {
+                            contenedor_eliminar.fadeOut();
+                        }
+                    });
+                },
+                Cancelar: function () {
+                    jQuery(this).dialog("close");
+                    return false;
+                }
+            }
+        });
+    }
+
+    function dialogo_confirmacion_pagina(data) {
+        var confirmacion = jQuery("#confirmacion");
+        var descripcion = confirmacion.find('p');
+        confirmacion.attr('title', data.titulo);
+        descripcion.html(data.descripcion);
+        var contenedor_eliminar = data.contenedor;
+
+        var datos = {};
+        datos.id_borrar = data.id_elemento;
+
+
+        jQuery("#confirmacion").dialog({
+            resizable: false,
+            width: 250,
+            modal: true,
+            buttons: {
+                "Confirmar": function () {
+                    jQuery(this).dialog("close");
+                    console.log(datos);
+                    jQuery.post('/panel/plain/page/remove', datos, function (json) {
                         console.log(json);
                         if (json.exito) {
                             contenedor_eliminar.fadeOut();

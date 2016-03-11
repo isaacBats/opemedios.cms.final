@@ -672,7 +672,8 @@ class Catalog extends Controller {
         $sql = "SELECT `ur`,`nombre`,`_name`,`caracter`,`_character`,`acabado`,`tipo_acabado`,`como_se_muestra`,
 		`current_finish`,`precio`,`familia`,`original`,`created`,`_match`,`_price`,`precio_pintado`,`price_painted`,
 		`tipo`,`_type`,`categoria`,`_category`,`uso`,`_use`,`frente`,`fondo`,`altura`,`diametro`,`frentre_plg`,
-		`fondo_plg`,`altura_plg`,`diametro_plg`
+		`fondo_plg`,`altura_plg`,`diametro_plg`, `imagen`, `precio_ext`, `price_ext`, `extencion`, `extencion_plg`,
+        `creado`
 		FROM product ";
 
 

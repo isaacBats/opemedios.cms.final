@@ -456,6 +456,12 @@ $collection->attachRoute(new Route('/panel/gallery/list', array(
     'methods' => 'GET'
 )));
 
+$collection->attachRoute(new Route('/panel/gallery/remove/:id', array(
+    '_controller' => 'AdminGallery::remove',
+    'parameters' => array("lang" => $lang),
+    'methods' => 'GET'
+)));
+
 $collection->attachRoute(new Route('/panel/gallery/:id', array(
     '_controller' => 'AdminGallery::showImages',
     'parameters' => array("lang" => $lang),

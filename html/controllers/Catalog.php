@@ -14,7 +14,14 @@ class Catalog extends Controller {
     public function productCare($lang = "es") {
         $this->addBread(array("label" => $this->trans($lang, "Cuidado de productos", "Product Care")));
         $this->header($lang, $this->trans($lang, "Cuidado de productos - ", "Product Care - "));
-        require $this->views . "product-care.php";
+        
+        $query = $this->pdo->prepare("SELECT * FROM pages WHERE slug = 'product-care'");
+        if( $query->execute() ){
+            $care = $query->fetch(\PDO::FETCH_ASSOC);
+            require $this->views . "product-care.php";
+            
+        }
+
         $this->footer($lang);
     }
 

@@ -35,7 +35,7 @@
 			$this->footer( $lang );
 
 		}
-		// TODO: Agregar panel de administracion para contenidos estaticos
+		
 		public function  whoWeAreView( $lang = "es" ){
 
 			$this->addBread( array( "label"=> $this->trans($lang,"Acerca de","About") , "url"=> "/acerca-de/quienes-somos" ) );
@@ -43,7 +43,13 @@
 
 			$this->header($lang, $this->trans($lang,"Quiénes Somos - ","About Us - "), false , false , "who" );
 
-			require $this->views."who-are-we.php";
+			$query = $this->pdo->prepare("SELECT * FROM pages WHERE slug = 'about-us'");
+			if( $query->execute() ){
+				$about = $query->fetch(\PDO::FETCH_ASSOC);
+				require $this->views."who-are-we.php";
+			}
+			
+
 
 			$this->footer( $lang );
 		}
@@ -66,7 +72,11 @@
 
 			$this->header($lang, $this->trans($lang,"F&aacute;brica Alfonso Marina - ","Factory Alfonso Marina - "), false , false , "fabric");
 
-			require $this->views."fabric.php";
+			$query = $this->pdo->prepare("SELECT * FROM pages WHERE slug = 'factory-alfonso-marina'");
+			if( $query->execute() ){
+				$fabric = $query->fetch(\PDO::FETCH_ASSOC);
+				require $this->views."fabric.php";
+			}
 
 			$this->footer( $lang );
 		}

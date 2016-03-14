@@ -11,9 +11,24 @@ Class AdminPlain extends Controller{
 		$this->header_admin();
 
 		$query = $this->pdo->prepare("SELECT id, titulo, slug FROM pages");
+
 		
 		if( $query->execute() ){
 			$rows = $query->fetchAll(\PDO::FETCH_ASSOC);
+			
+			$idHome = 0;
+			$idGallery = 0;
+			foreach ($rows as $r) {
+				
+				if($r['slug'] == 'home'){
+					$idHome = $r['id'];
+					$queryGallery = $this->pdo->prepare("SELECT id FROM gallery WHERE slug like '{$r['slug']}'");
+					if( $queryGallery->execute() ){
+						$idGallery = $queryGallery->fetch(\PDO::FETCH_ASSOC);						
+					}
+				}
+			}
+
 			require $this->adminviews . "list-pages.php";
 		}
 		$this->footer_admin();

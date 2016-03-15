@@ -174,7 +174,7 @@ class Catalog extends Controller {
 
         $html = "";
         if ($lang == "es") {
-            $this->addBread(array("url" => "/catalog", "label" => "Catalogo"));
+            $this->addBread(array("url" => "/catalog", "label" => "Catálogo"));
             $this->addBread(array("label" => "Productos"));
         } else if ($lang == "en") {
             $this->addBread(array("url" => "/catalog", "label" => "Catalog"));
@@ -374,7 +374,7 @@ class Catalog extends Controller {
         $use = $ouse = "";
 
 
-        $this->addBread(array("label" => $this->trans($lang, "Catalogo", "Catalog"), "url" => "/catalog/products"));
+        $this->addBread(array("label" => $this->trans($lang, "Catálogo", "Catalog"), "url" => "/catalog/products"));
 
         if ($style != "casual" && $style != "metro") {
             $use = $ouse = $group;
@@ -749,7 +749,7 @@ class Catalog extends Controller {
         if (!empty($slug)) {
 
 
-            $this->addBread(array("label" => $this->trans($lang, "Catalogo", "Catalog"), "url" => "/catalog/products"));
+            $this->addBread(array("label" => $this->trans($lang, "Catálogo", "Catalog"), "url" => "/catalog/products"));
             $this->addBread(array("label" => $this->trans($lang, "Productos", "Products"), "url" => "/catalog/products"));
 
             $sql = "SELECT * FROM product WHERE ur LIKE '$slug'";

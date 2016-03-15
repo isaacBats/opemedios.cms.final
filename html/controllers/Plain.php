@@ -56,9 +56,9 @@
 
 		public function  terminos( $lang = "es" ){
 
-			$this->addBread( array( "label"=> $this->trans($lang,"Terminos y condiciones","Terms & conditions ") , ) );
+			$this->addBread( array( "label"=> $this->trans($lang,"Términos y condiciones","Terms & conditions ") , ) );
 
-			$this->header($lang, $this->trans($lang,"Terminos y condiciones - ","Terms & conditions - "), false , false , "who" );
+			$this->header($lang, $this->trans($lang,"Términos y condiciones - ","Terms & conditions - "), false , false , "who" );
 
 			require $this->views."terminos.php";
 

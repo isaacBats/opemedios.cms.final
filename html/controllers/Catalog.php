@@ -608,6 +608,7 @@ class Catalog extends Controller {
 
     function importUpdate($fields, $Row) {
         $out = "UPDATE `product` SET ";
+
         foreach ($fields as $key => $value) {
             $d = str_replace("'", "\'", $Row[$key]);
             $out .= "`" . $value . "` = '" . $d . ($key == count($fields) - 1 ? "" : "',\n\t");
@@ -652,7 +653,7 @@ class Catalog extends Controller {
             $flag = false;
             $counters = [0, 0];
             $fields = $Data[0];
-            unset($Data[0]);
+            
             foreach ($Data as $Row) {
                 if (!$flag) {
                     $flag = true;
@@ -686,8 +687,7 @@ class Catalog extends Controller {
         $sql = "SELECT `ur`,`nombre`,`_name`,`caracter`,`_character`,`acabado`,`tipo_acabado`,`como_se_muestra`,
 		`current_finish`,`precio`,`familia`,`original`,`created`,`_match`,`_price`,`precio_pintado`,`price_painted`,
 		`tipo`,`_type`,`categoria`,`_category`,`uso`,`_use`,`frente`,`fondo`,`altura`,`diametro`,`frentre_plg`,
-		`fondo_plg`,`altura_plg`,`diametro_plg`, `imagen`, `precio_ext`, `price_ext`, `extencion`, `extencion_plg`,
-        `creado`
+		`fondo_plg`,`altura_plg`,`diametro_plg`, `precio_ext`, `price_ext`, `extencion`, `extencion_plg`
 		FROM product ";
 
 

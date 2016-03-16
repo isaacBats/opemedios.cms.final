@@ -191,9 +191,12 @@ class Catalog extends Controller {
         foreach ($catalogo as $product) {
             if ($tipo != $product[$this->trans($lang, "tipo", "_type")]) {
                 $tipo = $product[$this->trans($lang, "tipo", "_type")];
-                if($tipo == "TAPICERIA")
+                if($tipo == "TAPICERIA"){
                     $titulo = "Tapicería";
-                $html .= '<div class="tituloSeccion clear">' . $this->personCase($titulo) . '</div>';
+                    $html .= '<div class="tituloSeccion clear">' . $this->personCase($titulo) . '</div>';
+                }else{
+                    $html .= '<div class="tituloSeccion clear">' . $this->personCase($tipo) . '</div>';
+                }
                 $filtro .='<optgroup label="' . $tipo . '">';
 
                 // $sqlCategorias = "SELECT

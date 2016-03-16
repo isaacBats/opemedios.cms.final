@@ -23,20 +23,22 @@
 		public function personCase($text){
 
 			$words = [
-				" Y "    =>  " y ",
-				" La "   =>  " la ",
-				" De "   =>  " de ",
-				" Él "   =>  " él ",
-				" Ii "   =>  " II ",
-				" Xiii " =>  " XIII ",
-				" S.n. " =>  " S.N. ",
-				" Iii"	 =>  " III",
-				" Ii "   =>  " II ",
-				" Ii"    =>  " II",
-				" S.n."  =>  " S.N.",
-				"(b"     =>  "(B",
-				"Xvi"    =>  "XVI",
-				" Xiii"  =>  " XIII"
+				" Y "    	=>  " y ",
+				" La "   	=>  " la ",
+				" De "   	=>  " de ",
+				" Él "   	=>  " él ",
+				" Ii "   	=>  " II ",
+				" Xiii " 	=>  " XIII ",
+				" S.n. " 	=>  " S.N. ",
+				" Iii"	 	=>  " III",
+				" Ii "   	=>  " II ",
+				" Ii"    	=>  " II",
+				" S.n."  	=>  " S.N.",
+				"(b"     	=>  "(B",
+				"Xvi"    	=>  "XVI",
+				" Xiii"  	=>  " XIII",
+				"TAPICERIA" =>  "Tapicería",
+				"Á"			=>  "á"
 			];
 			$text = mb_strtolower($text , 'utf8');
 			$aux = "";

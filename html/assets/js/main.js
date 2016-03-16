@@ -246,7 +246,7 @@ function startHomeSlide() {
         fadeOutSpeed: "slow",
         rotate: true
     }).slideshow({
-        interval: 2000,
+        interval: 5000,
         autoplay: true,
         clickable: false
     });

@@ -27,12 +27,12 @@
             <?php if( $lang == "es") {?>
             <p>
                 Si desea más información, favor de contactar a nuestra área de 
-                <a href="mailto:centro@alfonsomarinaebanista.com"><strong>Servicio al Clientes</strong></a>
+                <a href="mailto:centroam@alfonsomarinaebanista.com"><strong>Servicio al Clientes</strong></a>
             </p>
             <?php }else{ ?>
             <p>
                 For more information, please contact 
-                <a href="mailto:centro@alfonsomarinaebanista.com"><strong>customer service</strong></a>
+                <a href="mailto:centroam@alfonsomarinaebanista.com"><strong>customer service</strong></a>
             </p>
             <?php } ?>
         </div><!-- .sec-features -->

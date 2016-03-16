@@ -30,7 +30,7 @@
 			        <br>
 			        <input type="text" value="" placeholder="<?php echo $this->trans($lang, 'Estado / Municipio','State') ?>" name="estado" id="Estado" class="mediano2 requerido">
 			        <input type="text" value="" placeholder="<?php echo $this->trans($lang, 'Código Postal','Zip code') ?>" name="codigopostal" id="CodigoPostal" class="mediano2">
-			        <input type="text" value="" placeholder="<?php echo $this->trans($lang, 'Mobil','Mobile') ?>" name="movil" id="Movil" class="mediano2">
+			        <input type="text" value="" placeholder="<?php echo $this->trans($lang, 'Móvil','Mobile') ?>" name="movil" id="Movil" class="mediano2">
 			        <input type="text" value="" placeholder="<?php echo $this->trans($lang, 'Teléfono','Phone') ?>" name="telefono" id="Telefono" class="mediano2">
 			    </div>
 			    <div class="separador">

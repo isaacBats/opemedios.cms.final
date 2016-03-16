@@ -12,7 +12,7 @@
  		$this->addBread( array( "label"=> $this->trans($lang,"Prensa","Press") ) );
  		$this->header( $lang, $this->trans($lang,"Prensa - ","Press - ") );
 
- 		$sql = "SELECT * FROM gallery WHERE contexto IN ('brochure', 'publicity')";
+ 		$sql = "SELECT * FROM gallery WHERE contexto IN ('brochures', 'publicity')";
  		$query = $this->pdo->prepare($sql);
 		$rs = $query->execute();
 		if($rs!==false){
@@ -64,7 +64,7 @@
 
  		if( $slug2 != "" ){
 
- 			$this->addBread( array( "url" => "/press/".$slug, "label"=> ucfirst( $slug ) ) );
+ 			$this->addBread( array( "url" => "/press/".$slug, "label"=> $this->trans($lang, "Publicidad", ucfirst( $slug )) ) );
  			$this->addBread( array( "label"=> ucfirst( $slug2 ) ) );
 
  			$this->header( $lang, ucfirst($slug2)." - " );
@@ -87,7 +87,7 @@
 			require $this->views."press-detail.php";
  		}else{
 
- 			$this->addBread( array( "label"=> ucfirst( $slug ) ) );	
+ 			$this->addBread( array( "label"=> $this->trans($lang, "Publicidad", ucfirst( $slug )) ) );	
  			$this->header( $lang, ucfirst($slug)." - " );
  			$sqlGallery = "SELECT * FROM gallery WHERE contexto LIKE '".$slug."' ";
 	 		$queryGallery = $this->pdo->prepare($sqlGallery);

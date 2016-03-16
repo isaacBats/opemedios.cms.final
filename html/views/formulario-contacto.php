@@ -84,7 +84,17 @@
 			<div class="field how">
 				<select name="comoseentero">
 					<option value=""><?php echo $this->trans($lang,'¿Cómo se enteró de nosotros?','How did you hear of us?'); ?></option>
-					<option value="un amigo">A través de un amigo</option>
+					<option value="un amigo"><?php echo $this->trans($lang, 'Revista', 'Magazine') ?></option>
+					<option value="un amigo"><?php echo $this->trans($lang, 'Diseñador', 'Designer') ?></option>
+					<option value="un amigo"><?php echo $this->trans($lang, 'Arquitecto', 'Architect') ?></option>
+					<option value="un amigo"><?php echo $this->trans($lang, 'Correo Electronico', 'Email') ?></option>
+					<option value="un amigo"><?php echo $this->trans($lang, 'Sitio Web/Buscador', 'Web Site/Search engine') ?></option>
+					<option value="un amigo"><?php echo $this->trans($lang, 'Blog', 'Blog') ?></option>
+					<option value="un amigo"><?php echo $this->trans($lang, 'Redes Sociales', 'Social Network') ?></option>
+					<option value="un amigo"><?php echo $this->trans($lang, 'Conocido/Amigo', 'Family/Friend') ?></option>
+					<option value="un amigo"><?php echo $this->trans($lang, 'Periódico', 'Newspaper') ?></option>
+					<option value="un amigo"><?php echo $this->trans($lang, 'Representante de Ventas', 'Sales Representative') ?></option>
+					<option value="un amigo"><?php echo $this->trans($lang, 'Cuenta Existente', 'Existiing Account') ?></option>
 				</select>
 				<br class="clear">
 			</div><!-- .field -->

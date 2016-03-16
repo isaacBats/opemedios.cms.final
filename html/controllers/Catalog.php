@@ -191,7 +191,9 @@ class Catalog extends Controller {
         foreach ($catalogo as $product) {
             if ($tipo != $product[$this->trans($lang, "tipo", "_type")]) {
                 $tipo = $product[$this->trans($lang, "tipo", "_type")];
-                $html .= '<div class="tituloSeccion clear">' . ucfirst(strtolower($tipo)) . '</div>';
+                if($tipo == "TAPICERIA")
+                    $titulo = "Tapicería";
+                $html .= '<div class="tituloSeccion clear">' . $this->personCase($titulo) . '</div>';
                 $filtro .='<optgroup label="' . $tipo . '">';
 
                 // $sqlCategorias = "SELECT
@@ -331,7 +333,9 @@ class Catalog extends Controller {
                         $sqlProductos = "SELECT * FROM product where lower(DATE_FORMAT( DATE(created),'%M-%Y')) ='" . $date . "' and lower(" . $this->trans($lang, "tipo", "_type") . ") ='" . strtolower($tipo) . "' order by " . $nombre;
                     }
                 }
-                $html .= '<div class="tituloSeccion clear">' . ucfirst(strtolower($tipo)) . '</div>';
+                if($tipo == "TAPICERIA")
+                    $titulo = "Tapicería";
+                $html .= '<div class="tituloSeccion clear">' . $this->personCase($titulo) . '</div>';
                 $queryProductos = $this->pdo->prepare($sqlProductos);
                 $queryProductos->execute();
                 $productos = $queryProductos->fetchAll(\PDO::FETCH_ASSOC);

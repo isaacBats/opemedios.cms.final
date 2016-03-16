@@ -97,8 +97,8 @@ $dates = $sqldates->fetchAll(\PDO::FETCH_ASSOC);
 							</a>
 						</li>
 						<li>
-							<a href="<?php echo $this->url($lang , "/press/brochure") ?>">
-								<?php echo $this->trans($lang , "Brochure" , "Brochure") ?>
+							<a href="<?php echo $this->url($lang , "/press/brochures") ?>">
+								<?php echo $this->trans($lang , "Brochures" , "Brochures") ?>
 							</a>
 						</li>
 					</ul>

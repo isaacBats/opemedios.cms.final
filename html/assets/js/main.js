@@ -185,7 +185,10 @@ function startGallery() {
                     showNavArrows: true
               });
             });
-            $('#fancybox-content').after('<div class="share-product gallery" style="text-align:center; margin-top:10px; position:absolute; left:0; right: 0;"><a href="javascript:void(0);" style="font-size:18px;"><img src="/assets/images/share-it.png"></a><a href="javascript:void(0);" style="font-size:18px;"><img src="/assets/images/tweet-it.png"></a><a href="javascript:void(0);" style="font-size:18px;"><img src="/assets/images/pin-it.png"></a></div>');
+            $('#fancybox-content').after('<div class="share-product gallery">'+
+                    '<a href="javascript:void(0);" onclick="window.open(\'http://www.facebook.com/sharer/sharer.php?u=http://amarinav2.denumeris.com/<?php echo $this->url($lang); ?>&amp;t=gallery\', \'facebook_share\', \'height=320, width=640, toolbar=no, menubar=no, scrollbars=no, resizable=no, location=no, directories=no, status=no\');" ><img src="/assets/images/share-it.png"></a>'+
+                    '<a href="javascript:void(0);" onclick="window.open(\'https://twitter.com/intent/tweet?text=GalleryAlfonsoMarina&amp;url=<?php echo $this->url($lang); ?>\', \'twitter_share\', \'height=320, width=640, toolbar=no, menubar=no, scrollbars=no, resizable=no, location=no, directories=no, status=no\');"  ><img src="/assets/images/tweet-it.png"></a>'+
+                    '<a href="javascript:void(0);" onclick="window.open(\'http://pinterest.com/pin/create/button/?url=http://amarinav2.denumeris.com/<?php echo $this->url($lang); ?>&amp;media=http://amarinav2.denumeris.com/assets/images/galeria/01_VILLIERS_RS1.jpg&amp;description=Gallery\', \'pint_it_share\', \'height=320, width=640, toolbar=no, menubar=no, scrollbars=no, resizable=no, location=no, directories=no, status=no\');"  ><img src="/assets/images/pin-it.png"></a></div>');
           }catch(e){
             console.log(e);
           }

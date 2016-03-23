@@ -197,8 +197,8 @@ function startGallery() {
 
 function getGalleryRelated() {
     var datos = {};
-//    datos.img = $("#slideshow").find("img").attr("src").split("/").pop();
-    datos.img = "6-metz_etagere_alt1.jpg";
+    datos.img = $("#slideshow").find("img").attr("src").split("/").pop();
+    //datos.img = "6-metz_etagere_alt1.jpg";
     jQuery.post('/gallery/relatedImgs', datos, function (json) {
         jQuery("#galleryRelated").html('');
         $.each(json, function () {

@@ -14,7 +14,7 @@
             <div class="panel-body">
                 <div class="row">
                     <div class="col-lg-6">
-                        <form role="form" action="panel/font/add/font-tv/save" method="post" name="fontTV">
+                        <form role="form" action="/panel/font/add/font-tv" method="post" name="fontTV">
                             <div class="form-group">
                                 <input class="form-control" placeholder="Nombre" name="nombre">
                             </div>

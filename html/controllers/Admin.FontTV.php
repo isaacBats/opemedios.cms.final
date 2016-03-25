@@ -9,4 +9,9 @@ class AdminFontTV extends Controller{
 		require $this->adminviews . "addFontTV.php";
 		$this->footer_admin();
 	}
+
+	public function save(){
+
+		print_r($_POST);
+	}
 }

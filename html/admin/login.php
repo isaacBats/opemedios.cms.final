@@ -7,7 +7,7 @@
   <meta name="author" content="">
   <!--<link rel="shortcut icon" href="../images/favicon.png" type="image/png">-->
 
-  <title>Quirk Responsive Admin Templates</title>
+  <title>Administracion - Operadora de Medios Informativos</title>
 
   <link rel="stylesheet" href="/admin/lib/fontawesome/css/font-awesome.css">
 
@@ -28,7 +28,7 @@
 
   <div class="panel signin">
     <div class="panel-heading">
-      <h1>Alfonso Marina</h1>
+      <h1>Operadora de Medios Informativos</h1>
     </div>
     <div class="panel-body">
       <form action="/panel/login" method="post">

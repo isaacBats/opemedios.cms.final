@@ -1,24 +1,14 @@
 <?php
 
-	/****************************************/
-	//		   __ 							//
-	//		  / / _   _ _ __   __ _ 		//
-	//		 / / | | | | '_ \ / _` |		//
-	//		/ /__| |_| | | | | (_| |		//
-	//		\____/\__,_|_| |_|\__,_|		//
-	// 										//
-	//				Framework				//
-	/****************************************/
-
 	// VENDORS 
 	require_once( __DIR__.'/vendor/autoload.php' );
 	
 	
 	// LANG  MANNAGER
-	$lang = isset($_GET["lang"])?$_GET["lang"]:"es";
-	if( str_replace( "/".$lang ,"",$_SERVER["REQUEST_URI"] ) != $_SERVER["REQUEST_URI"] ){
-		$_SERVER["REQUEST_URI"] = substr( $_SERVER["REQUEST_URI"], 3 );	
-	}
+	// $lang = isset($_GET["lang"])?$_GET["lang"]:"es";
+	// if( str_replace( "/".$lang ,"",$_SERVER["REQUEST_URI"] ) != $_SERVER["REQUEST_URI"] ){
+	// 	$_SERVER["REQUEST_URI"] = substr( $_SERVER["REQUEST_URI"], 3 );	
+	// }
 	
 
 	
@@ -40,7 +30,7 @@
 
 	if( !$route ){
 		$notfound = new Plain();
-		$notfound->no_found( $lang );
+		$notfound->no_found();
 	}
 
 ?>

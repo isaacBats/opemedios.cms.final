@@ -31,14 +31,13 @@ class AdminController extends Controller{
 		$user = $this->pdo->quote( $_POST["username"] );
  		$pass = $_POST["password"];
  			
-		$sql =  "SELECT * FROM admin WHERE user LIKE LOWER(".$user.") ";
+		$sql =  "SELECT * FROM usuario WHERE username LIKE LOWER(".$user.") ";
 		$query = $this->pdo->prepare($sql);
-		$rs = $query->execute();
-		if($rs!==false){
+		if( $query->execute() ){
 			$nr = $query->rowCount();
 			if( $nr > 0 ){
 				$user = $query->fetchAll(PDO::FETCH_ASSOC);
-				if( isset( $user[0]["user"] ) ){
+				if( isset( $user[0]["username"] ) ){
 					if($user[0]["password"] == $pass){
 						$_SESSION[ "admin"] = $user[0];	
 						header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel");
@@ -55,11 +54,11 @@ class AdminController extends Controller{
 			header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
 		}
 
-		require $this->adminviews."login.php";
+		// require $this->adminviews."login.php";
 	}
 
 	public function dashboard(){
-		header( "Location: ./panel/contacts/list");
+		header( "Location: ./panel/dashboard");
 	}
 }
 ?>

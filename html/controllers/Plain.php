@@ -81,11 +81,11 @@
 			$this->footer( $lang );
 		}
 
-		public function no_found( $lang ){
+		public function no_found(){
 			header("HTTP/1.0 404 Not Found");
-			$this->header( $lang, "404 Not Found - " );
+			$this->header( "404 Not Found - " );
 			require_once($this->views.'404.php' );
-			$this->footer( $lang );
+			$this->footer();
 		}
 
 	}

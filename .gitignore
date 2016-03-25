@@ -1,27 +1,20 @@
 # archivo de conexion de base de datos
-
-html/core/conn.php
-.DS_Store
-# phpintel
-
-.phpintel/
-
-/html/config.php
-html/assets/images/press/
-html/assets/images/product/
-html/assets/images/news/
-html/assets/images/galeria/
-/images/
-
-html/vendor/*
-/html/assets/images/press.zip
-
-/html/composer.phar
 html/config.php
 
-/html/assets/images/
-/html/nbproject/*
 
+# phpintel
+.phpintel/
+
+#imagenes
+html/assets/images/*
+
+#librerias
+html/vendor/*
+
+#composer
+html/composer.phar
+
+#otros
 ._.DS_Store
 html/._.DS_Store
-nbproject/
+.DS_Store

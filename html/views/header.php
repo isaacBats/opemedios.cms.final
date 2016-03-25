@@ -13,7 +13,7 @@ $dates = $sqldates->fetchAll(\PDO::FETCH_ASSOC);
 		<a href="<?php echo $this->url( $lang , "/"); ?>"><h1>Alfonso Marina</h1></a>
 		<nav id="main-nav">
 			<ul>
-				<li><a href="<?php echo $this->url( $lang , "/"); ?>"><?php echo $this->trans($lang , "Inicio" , "Home") ?></a></li>
+				<li><a href="/"><?php echo "Inicio" ?></a></li>
 				<li>
 					<a href="javascript:void(0);"><?php echo $this->trans($lang ,  "Acerca de" ,  "About") ?></a>
 					<ul>

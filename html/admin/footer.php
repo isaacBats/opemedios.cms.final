@@ -1,29 +1,25 @@
-</div><!-- contentpanel -->
+</div>
+            <!-- /.container-fluid -->
+      </div>
+        <!-- /#page-wrapper -->
 
-  </div><!-- mainpanel -->
+    </div>
+    <!-- /#wrapper -->
 
-</section>
+    <!-- jQuery -->
+    <script src="/assets/bower_components/jquery/dist/jquery.min.js"></script>
 
-<script src="/admin/lib/jquery/jquery.js"></script>
-<script src="/admin/lib/jquery-ui/jquery-ui.js"></script>
-<script src="/admin/lib/bootstrap/js/bootstrap.js"></script>
-<script src="/admin/lib/jquery-toggles/toggles.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/assets/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 
-<script src="/admin/lib/morrisjs/morris.js"></script>
-<script src="/admin/lib/raphael/raphael.js"></script>
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="/assets/bower_components/metisMenu/dist/metisMenu.min.js"></script>
 
-<script src="/admin/lib/flot/jquery.flot.js"></script>
-<script src="/admin/lib/flot/jquery.flot.resize.js"></script>
-<script src="/admin/lib/flot-spline/jquery.flot.spline.js"></script>
+    <!-- Custom Theme JavaScript -->
+    <script src="/assets/js/sb-admin-2.js"></script>
 
-<script src="/admin/lib/jquery-knob/jquery.knob.js"></script>
-<script src="/admin/lib/summernote/summernote.js"></script>
-<script src="/assets/js/jquery.validate.js"></script>
-<script src="http://jqueryvalidation.org/files/dist/additional-methods.min.js"></script>
-
-<script src="/admin/js/custom.js"></script>
-<script src="/admin/js/quirk.js"></script>
-<script src="/admin/js/dashboard.js"></script>
+    <?= $javaScripts  ?>
 
 </body>
+
 </html>

@@ -20,7 +20,10 @@
 
 		}
 
-		
+		public function insertFont($data, $fuente_id){
+
+		}
+
 		function describe($database, $table , $value){
 			$sql = "SELECT column_name , column_type
 			FROM information_schema.columns
@@ -45,7 +48,7 @@
 
 		function __construct()
 		{
-			session_start();
+			// session_start();
 			global $_config;
 			$this->pdo = new PDO($_config->db["dsn"], $_config->db["nombre_usuario"], $_config->db["password"], $_config->db["opciones"]);
 		}

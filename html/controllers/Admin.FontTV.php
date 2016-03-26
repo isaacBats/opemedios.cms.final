@@ -1,7 +1,18 @@
 <?php 
 
+require (__DIR__.'/../Repositories/TelevisionRepository.php');
+require (__DIR__.'/../Repositories/CoberturaRepository.php');
 
 class AdminFontTV extends Controller{
+
+	public $tvRepository;
+	public $coberturaRepository;
+
+	public function __construct(){
+
+		$this->tvRepository = new TelevisionRepository();
+		$this->coberturaRepository = new CoberturaRepository();
+	}
 
 	public function add(){
 
@@ -12,6 +23,12 @@ class AdminFontTV extends Controller{
 
 	public function save(){
 
-		print_r($_POST);
+		if( !empty($_POST) ){
+
+			$id_television = $this->tvRepository->idFuenteTV();
+			$id_cobertura = $this->coberturaRepository->idCobertura($_POST['cobertura']);
+
+		}
+
 	}
 }

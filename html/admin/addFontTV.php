@@ -18,7 +18,7 @@
                             <div class="form-group">
                                 <input class="form-control" placeholder="Nombre" name="nombre">
                             </div>
-                            <div class="form-group">
+                            <div class="form-group"> 
                                 <input class="form-control" placeholder="Empresa" name="empresa">
                             </div>
                             <div class="form-group">
@@ -32,10 +32,31 @@
                                 <p class="help-block">Example: 7:00 - 8:00 AM.</p>
                             </div>
                             <div class="form-group">
+                                 <select class="form-control" name="senal">
+                                    <option value="">Señal</option>
+                                    <option>Televisión Abierta</option>
+                                    <option>Cablevisión</option>
+                                    <option>Sky</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                 <select class="form-control" name="cobertura">
+                                    <option value="">Cobertura</option>
+                                    <option>Local</option>
+                                    <option>Nacional</option>
+                                    <option>Internacional</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
                                 <label>Comentarios:</label>
                                 <textarea class="form-control" name="comentario"></textarea>
                             </div>
-                            <input name="enviar" type="submit" class="btn btn-default" value="Guardar">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="activo" value="1">Activo
+                                </label>
+                            </div>
+                            <input type="submit" class="btn btn-primary" value="Guardar">
                         </form>
                     </div>
                 </div>

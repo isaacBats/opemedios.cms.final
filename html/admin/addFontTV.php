@@ -34,9 +34,9 @@
                             <div class="form-group">
                                  <select class="form-control" name="senal">
                                     <option value="">Señal</option>
-                                    <option>Televisión Abierta</option>
-                                    <option>Cablevisión</option>
-                                    <option>Sky</option>
+                                    <option value="Televisión Abierta">Televisión Abierta</option>
+                                    <option value="Cablevisión">Cablevisión</option>
+                                    <option value="Sky">Sky</option>
                                 </select>
                             </div>
                             <div class="form-group">

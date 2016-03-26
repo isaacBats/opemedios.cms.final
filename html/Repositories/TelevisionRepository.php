@@ -16,8 +16,26 @@ class TelevisionRepository extends BaseRepository{
 		}
 	}
 
-	public function mensaje(){
+	public function addFontTV( $font ){
 
-		return 'Hola este es un mensaje';
+		$idNewFont = $this->addFont($font);
+		$sql = 'INSERT INTO fuente_tel (id_fuente, conductor, canal, horario, id_senal) 
+								VALUES(:idFuente, :conductor, :canal, :horario, :idSenal)';
+
+		$query = $this->pdo->prepare($sql);
+		$query->bindParam(':idFuente',$idNewFont);
+		$query->bindParam(':conductor',$font['conductor']);
+		$query->bindParam(':canal',$font['canal']);
+		$query->bindParam(':horario',$font['horario']);
+		$query->bindParam(':idSenal',$font['senal']);
+		
+		if($query->execute()){
+			return true;
+			// echo 'se ejecuto correctamente la segunda sentencia';
+		}else{
+		 	return false;
+		 	// echo 'No se ejecuto la segunda sentencia';
+		}
+
 	}
 }

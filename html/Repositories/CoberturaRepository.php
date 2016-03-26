@@ -4,7 +4,7 @@ include_once("BaseRepository.php");
 
 class CoberturaRepository extends BaseRepository{
 
-	public function idCobertura($cobertura){
+	public function findIdByDescription($cobertura){
 		
 		$query = $this->pdo->prepare("SELECT * FROM cobertura WHERE descripcion LIKE '$cobertura' LIMIT 1;");
 		
@@ -16,8 +16,5 @@ class CoberturaRepository extends BaseRepository{
 		}
 	}
 
-	public function mensaje(){
-
-		return 'Hola este es un mensaje';
-	}
+	
 }

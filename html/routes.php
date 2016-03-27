@@ -37,6 +37,12 @@ $collection->attachRoute(new Route('/panel/dashboard', array(
     'methods' => 'GET'
 )));
 
+//Show Fonts list
+$collection->attachRoute(new Route('/panel/fonts/show-list', array(
+    '_controller' => 'AdminFonts::showFonts',
+    'methods' => 'GET'
+)));
+
 //Fots Television 
 $collection->attachRoute(new Route('/panel/font/add/font-tv', array(
     '_controller' => 'AdminFontTV::add',
@@ -48,10 +54,17 @@ $collection->attachRoute(new Route('/panel/font/add/font-tv', array(
     'methods' => 'POST'
 )));
 
-$collection->attachRoute(new Route('/panel/fonts/show-list', array(
-    '_controller' => 'AdminFonts::showFonts',
+//Fots Radio 
+$collection->attachRoute(new Route('/panel/font/add/font-radio', array(
+    '_controller' => 'AdminFontRD::add',
     'methods' => 'GET'
 )));
+
+$collection->attachRoute(new Route('/panel/font/add/font-radio', array(
+    '_controller' => 'AdminFontRD::save',
+    'methods' => 'POST'
+)));
+
 
 
 

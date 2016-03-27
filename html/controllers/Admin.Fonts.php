@@ -34,4 +34,12 @@ class AdminFonts extends Controller{
 		require $this->adminviews . 'showFonts.php';
 		$this->footer_admin();
 	}
+
+	protected function addFont( $campos, $fuente ){
+
+		$this->header_admin('Agregar Fuente de '.$fuente.' - ');
+		require $this->adminviews . 'addFont.php';
+		$this->footer_admin();
+
+	}
 }

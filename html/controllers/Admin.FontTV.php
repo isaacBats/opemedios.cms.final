@@ -9,12 +9,14 @@ class AdminFontTV extends Controller{
 	private $tvRepository;
 	private $coberturaRepository;
 	private $senalRepository;
+	private $fuente;
 
 	public function __construct(){
 
 		$this->tvRepository 		= new TelevisionRepository();
 		$this->coberturaRepository 	= new CoberturaRepository();
 		$this->senalRepository 		= new SenalRepository();
+		$this->fuente 				= 'Television';
 	}
 
 	public function add(){

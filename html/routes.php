@@ -48,5 +48,10 @@ $collection->attachRoute(new Route('/panel/font/add/font-tv', array(
     'methods' => 'POST'
 )));
 
+$collection->attachRoute(new Route('/panel/fonts/show-list', array(
+    '_controller' => 'AdminFonts::showFonts',
+    'methods' => 'GET'
+)));
+
 
 

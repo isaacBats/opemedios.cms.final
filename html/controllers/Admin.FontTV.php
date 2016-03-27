@@ -45,8 +45,8 @@ class AdminFontTV extends Controller{
 				$_POST['senal'] = $id_senal;
 			}
 			if($this->tvRepository->addFontTV($_POST)){
-				// header('Location: /panel/fonts/show-list');
-				echo 'Se ha agregado una fuente de TV correctamente';
+				header('Location: /panel/fonts/show-list');
+				// echo 'Se ha agregado una fuente de TV correctamente';
 			}else{
 				echo 'No se agrego a la tabla fuente_tel';
 			}

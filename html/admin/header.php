@@ -336,7 +336,7 @@
                                     </ul>
                                 </li>
                                 <li>
-                                    <a href="">Administrar Fuentes</a>
+                                    <a href="/panel/fonts/show-list">Administrar Fuentes</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->

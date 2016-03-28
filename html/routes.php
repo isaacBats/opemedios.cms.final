@@ -43,18 +43,18 @@ $collection->attachRoute(new Route('/panel/fonts/show-list', array(
     'methods' => 'GET'
 )));
 
-//Fots Television 
-$collection->attachRoute(new Route('/panel/font/add/font-tv', array(
+//Fonts Television 
+$collection->attachRoute(new Route('/panel/font/add/font-television', array(
     '_controller' => 'AdminFontTV::add',
     'methods' => 'GET'
 )));
 
-$collection->attachRoute(new Route('/panel/font/add/font-tv', array(
+$collection->attachRoute(new Route('/panel/font/add/font-television', array(
     '_controller' => 'AdminFontTV::save',
     'methods' => 'POST'
 )));
 
-//Fots Radio 
+//Fonts Radio 
 $collection->attachRoute(new Route('/panel/font/add/font-radio', array(
     '_controller' => 'AdminFontRD::add',
     'methods' => 'GET'
@@ -65,6 +65,35 @@ $collection->attachRoute(new Route('/panel/font/add/font-radio', array(
     'methods' => 'POST'
 )));
 
+//Fonts Periodico
+$collection->attachRoute(new Route('/panel/font/add/font-periodico', array(
+    '_controller' => 'AdminFontPE::add',
+    'methods' => 'GET'
+)));
 
+$collection->attachRoute(new Route('/panel/font/add/font-periodico', array(
+    '_controller' => 'AdminFontPE::save',
+    'methods' => 'POST'
+)));
 
+//Fonts Revista
+$collection->attachRoute(new Route('/panel/font/add/font-revista', array(
+    '_controller' => 'AdminFontRE::add',
+    'methods' => 'GET'
+)));
 
+$collection->attachRoute(new Route('/panel/font/add/font-revista', array(
+    '_controller' => 'AdminFontRE::save',
+    'methods' => 'POST'
+)));
+
+//Fonts Internet
+$collection->attachRoute(new Route('/panel/font/add/font-internet', array(
+    '_controller' => 'AdminFontIN::add',
+    'methods' => 'GET'
+)));
+
+$collection->attachRoute(new Route('/panel/font/add/font-internet', array(
+    '_controller' => 'AdminFontIN::save',
+    'methods' => 'POST'
+)));

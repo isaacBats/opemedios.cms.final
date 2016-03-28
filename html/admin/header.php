@@ -290,7 +290,7 @@
                                             <a href="#"><i class="fa fa-headphones fa-fw"></i> Radio</a>
                                         </li>
                                         <li>
-                                            <a href="#"><i class="fa fa-newspaper-o fa-fw"></i> Periodico</a>
+                                            <a href="#"><i class="fa fa-newspaper-o fa-fw"></i> Periódico</a>
                                         </li>
                                         <li>
                                             <a href="#"><i class="fa fa-columns fa-fw"></i> Revista</a>
@@ -319,13 +319,13 @@
                                     <a href="javascript:void(0)">Agregar Fuente <span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
                                         <li>
-                                            <a href="/panel/font/add/font-tv"><i class="fa fa-youtube-play fa-fw"></i> Televisión</a>
+                                            <a href="/panel/font/add/font-television"><i class="fa fa-youtube-play fa-fw"></i> Televisión</a>
                                         </li>
                                         <li>
                                             <a href="/panel/font/add/font-radio"><i class="fa fa-headphones fa-fw"></i> Radio</a>
                                         </li>
                                         <li>
-                                            <a href="/panel/font/add/font-periodico"><i class="fa fa-newspaper-o fa-fw"></i> Periodico</a>
+                                            <a href="/panel/font/add/font-periodico"><i class="fa fa-newspaper-o fa-fw"></i> Periódico</a>
                                         </li>
                                         <li>
                                             <a href="/panel/font/add/font-revista"><i class="fa fa-columns fa-fw"></i> Revista</a>

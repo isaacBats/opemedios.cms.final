@@ -1,25 +1,25 @@
 <?php 
 
 include_once('Admin.Fonts.php');
-include_once(__DIR__.'/../Repositories/RadioRepository.php');
+include_once(__DIR__.'/../Repositories/InternetRepository.php');
 include_once(__DIR__.'/../Repositories/CoberturaRepository.php');
 
-class AdminFontRD extends AdminFonts{
+class AdminFontIN extends AdminFonts{
 
-	private $radioRepository;
+	private $internetRepository;
 	private $coberturaRepository;
 	private $fuente;
 
 	public function __construct(){
 
-		$this->radioRepository 		= new RadioRepository();
+		$this->internetRepository 	= new InternetRepository();
 		$this->coberturaRepository 	= new CoberturaRepository();
-		$this->fuente 				= 'Radio';
+		$this->fuente 				= 'Internet';
 	}
 
 	public function add(){
 		$campos = '';
-		require $this->adminviews . 'addFontRD.php';
+		require $this->adminviews . 'addFontIN.php';
 
 		$this->addFont($campos, $this->fuente );
 		
@@ -29,9 +29,9 @@ class AdminFontRD extends AdminFonts{
 
 		if( !empty($_POST) ){
 
-			$id_radio = $this->radioRepository->idFuenteRD();
+			$id_internet = $this->internetRepository->idFuenteIN();
 			$id_cobertura = $this->coberturaRepository->findIdByDescription($_POST['cobertura']);
-			$_POST['tipoFuente'] = $id_radio;
+			$_POST['tipoFuente'] = $id_internet;
 			$_POST['cobertura'] = $id_cobertura;
 			$_POST['logo'] = 'default.jpg';
 			if(isset($_POST['activo'])){
@@ -39,15 +39,16 @@ class AdminFontRD extends AdminFonts{
 			}else{
 				$_POST['activo'] = 0;
 			}
-			if($this->radioRepository->addFontRD($_POST)){
+			
+			if($this->internetRepository->addFontIN($_POST)){
 				header('Location: /panel/fonts/show-list');
 				// echo 'Se ha agregado una fuente de TV correctamente';
 			}else{
-				echo 'No se agrego a la tabla fuente_rad';
+				echo 'No se agrego a la tabla fuente_int';
 			}
 			
 		}else{
-			header('Location: /panel/font/add/font-radio');
+			header('Location: /panel/font/add/font-internet');
 		}
 
 	}

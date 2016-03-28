@@ -1,6 +1,13 @@
 	<div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header">Agregar Fuente de <?= str_replace('Television', 'Televisión', ucwords($fuente)) ?></h1>
+            <h1 class="page-header">Agregar Fuente de <?php if($fuente === 'Television'){
+                                                                echo str_replace('Television', 'Televisión', ucwords($fuente));
+                                                           }elseif($fuente === 'Periodico'){
+                                                                echo str_replace('Periodico', 'Periódico', ucwords($fuente));
+                                                            }else{
+                                                                echo $fuente;
+                                                            } 
+                                                      ?></h1>
         </div>
         <!-- /.col-lg-12 -->
     </div>
@@ -13,7 +20,7 @@
             </div>
             <div class="panel-body">
                 <div class="row">
-                    <div class="col-lg-6">
+                    <div class="col-lg-12">
                         <form role="form" action="/panel/font/add/font-<?= strtolower($fuente)  ?>" method="post" name="font<?= $fuente ?>">
                             <div class="form-group">
                                 <input class="form-control" placeholder="Nombre" name="nombre">

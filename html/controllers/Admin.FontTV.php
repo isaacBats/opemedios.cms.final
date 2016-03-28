@@ -1,10 +1,11 @@
 <?php 
 
-require (__DIR__.'/../Repositories/TelevisionRepository.php');
-require (__DIR__.'/../Repositories/CoberturaRepository.php');
-require (__DIR__.'/../Repositories/SenalRepository.php');
+include_once('Admin.Fonts.php');
+include_once(__DIR__.'/../Repositories/TelevisionRepository.php');
+include_once(__DIR__.'/../Repositories/CoberturaRepository.php');
+include_once(__DIR__.'/../Repositories/SenalRepository.php');
 
-class AdminFontTV extends Controller{
+class AdminFontTV extends AdminFonts{
 
 	private $tvRepository;
 	private $coberturaRepository;
@@ -21,9 +22,9 @@ class AdminFontTV extends Controller{
 
 	public function add(){
 
-		$this->header_admin('Agregar fuente TV - ' );
-		require $this->adminviews . "addFontTV.php";
-		$this->footer_admin();
+		$campos = '';
+		require $this->adminviews . 'addFontTV.php';
+		$this->addFont($campos, $this->fuente );
 	}
 
 	public function save(){
@@ -54,7 +55,7 @@ class AdminFontTV extends Controller{
 			}
 			
 		}else{
-			header('Location: /panel/font/add/font-tv');
+			header('Location: /panel/font/add/font-television');
 		}
 
 	}

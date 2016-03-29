@@ -345,10 +345,10 @@
                             <a href="#"><i class="fa fa-th fa-fw"></i> Sectores<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="flot.html">Agregar Sector</a>
+                                    <a href="/panel/sector/add">Agregar Sector</a>
                                 </li>
                                 <li>
-                                    <a href="morris.html">Administrar Sectores</a>
+                                    <a href="/panel/sector/show-list">Administrar Sectores</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->

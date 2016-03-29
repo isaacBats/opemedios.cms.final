@@ -43,6 +43,7 @@ $collection->attachRoute(new Route('/panel/fonts/show-list', array(
     'methods' => 'GET'
 )));
 
+
 //Fonts Television 
 $collection->attachRoute(new Route('/panel/font/add/font-television', array(
     '_controller' => 'AdminFontTV::add',
@@ -96,4 +97,20 @@ $collection->attachRoute(new Route('/panel/font/add/font-internet', array(
 $collection->attachRoute(new Route('/panel/font/add/font-internet', array(
     '_controller' => 'AdminFontIN::save',
     'methods' => 'POST'
+)));
+
+//Agregar Sector
+$collection->attachRoute(new Route('/panel/sector/add', array(
+    '_controller' => 'AdminSector::add',
+    'methods' => 'GET'
+)));
+
+$collection->attachRoute(new Route('/panel/sector/add', array(
+    '_controller' => 'AdminSector::save',
+    'methods' => 'POST'
+)));
+
+$collection->attachRoute(new Route('/panel/sector/show-list', array(
+    '_controller' => 'AdminSector::showSectors',
+    'methods' => 'GET'
 )));

@@ -114,3 +114,9 @@ $collection->attachRoute(new Route('/panel/sector/show-list', array(
     '_controller' => 'AdminSector::showSectors',
     'methods' => 'GET'
 )));
+
+//News Television 
+$collection->attachRoute(new Route('/panel/new/add/new-television', array(
+    '_controller' => 'AdminNewTV::add',
+    'methods' => 'GET'
+)));

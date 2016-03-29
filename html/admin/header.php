@@ -284,19 +284,19 @@
                                     <a href="javascript:void(0)">Agregar Noticia <span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
                                         <li>
-                                            <a href="#"><i class="fa fa-youtube-play fa-fw"></i> Televisión</a>
+                                            <a href="/panel/new/add/new-television"><i class="fa fa-youtube-play fa-fw"></i> Televisión</a>
                                         </li>
                                         <li>
-                                            <a href="#"><i class="fa fa-headphones fa-fw"></i> Radio</a>
+                                            <a href="/panel/new/add/new-radio"><i class="fa fa-headphones fa-fw"></i> Radio</a>
                                         </li>
                                         <li>
-                                            <a href="#"><i class="fa fa-newspaper-o fa-fw"></i> Periódico</a>
+                                            <a href="/panel/new/add/new-periodico"><i class="fa fa-newspaper-o fa-fw"></i> Periódico</a>
                                         </li>
                                         <li>
-                                            <a href="#"><i class="fa fa-columns fa-fw"></i> Revista</a>
+                                            <a href="/panel/new/add/new-revista"><i class="fa fa-columns fa-fw"></i> Revista</a>
                                         </li>
                                         <li>
-                                            <a href="#"><i class="fa fa-wifi fa-fw"></i> Internet</a>
+                                            <a href="/panel/new/add/new-internet"><i class="fa fa-wifi fa-fw"></i> Internet</a>
                                         </li>
                                     </ul>
                                 </li>

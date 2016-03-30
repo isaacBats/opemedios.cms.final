@@ -35,9 +35,13 @@ class SectorRepository extends BaseRepository{
 
 	}
 
-	public function allSectors(){
+	public function allSectors( $activo = 0 ){
 		
-		$query = $this->pdo->prepare("SELECT * FROM sector ORDER BY id_sector DESC;");
+		if($activo == 1 ){
+			$query = $this->pdo->prepare("SELECT * FROM sector WHERE activo = $activo ORDER BY id_sector DESC;");		
+		}else{
+			$query = $this->pdo->prepare("SELECT * FROM sector ORDER BY id_sector DESC;");			
+		}
 		
 		if($query->execute()){
 			return $query->fetchAll(\PDO::FETCH_ASSOC);

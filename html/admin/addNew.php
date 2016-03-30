@@ -23,10 +23,48 @@
                     <div class="col-lg-12">
                         <form role="form" action="/panel/new/add/new-<?= strtolower($fuente)  ?>" method="post" name="new<?= $fuente ?>">
                             <div class="form-group">
-                                <input class="form-control" placeholder="Nombre" name="nombre">
+                                <select class="form-control" name="fuente" id="selectFuente">
+                                    <option value="">Seleccione una Fuente</option>
+                                    <?= $optionFont ?>
+                                </select>
                             </div>
                             <div class="form-group"> 
-                                <input class="form-control" placeholder="Empresa" name="empresa">
+                                <input class="form-control" placeholder="Encabezado" name="encabezado">
+                            </div>
+                            <div class="form-group">
+                                <label>Síntesis:</label>
+                                <textarea class="form-control" name="sintesis"></textarea>
+                            </div>
+                            <div class="form-group"> 
+                                <input class="form-control" placeholder="Nombre Autor" name="autor">
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                     <select class="form-control" name="cobertura">
+                                        <option value="">Tipo de Autor</option>
+                                        <?= $tipoAutor ?>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                     <select class="form-control" name="cobertura">
+                                        <option value="">Género</option>
+                                        <?= $genero ?>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                     <select class="form-control" name="cobertura">
+                                        <option value="">Sector</option>
+                                        <?= $sector ?>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                     <select class="form-control" name="cobertura">
+                                        <option value="">Sección</option>
+                                        <?= $seccion ?>
+                                    </select>
+                                </div>                               
                             </div>
                             <?= $campos ?>
                             <div class="form-group">
@@ -36,10 +74,6 @@
                                     <option>Nacional</option>
                                     <option>Internacional</option>
                                 </select>
-                            </div>
-                            <div class="form-group">
-                                <label>Comentarios:</label>
-                                <textarea class="form-control" name="comentario"></textarea>
                             </div>
                             <div class="checkbox">
                                 <label>

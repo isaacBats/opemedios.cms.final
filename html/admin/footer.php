@@ -8,6 +8,7 @@
 
     <!-- jQuery -->
     <script src="/assets/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="/admin/js/jquery-ui.js" type="text/javascript"></script>
 
     <!-- Bootstrap Core JavaScript -->
     <script src="/assets/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -19,6 +20,10 @@
     <script src="/assets/js/sb-admin-2.js"></script>
 
     <?= $javaScripts  ?>
+    
+    <!-- Custom JS Admin -->
+    <script src="/admin/js/custom.js" type="text/javascript"></script>
+
 
 </body>
 

@@ -22,7 +22,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <form role="form" action="/panel/new/add/new-<?= strtolower($fuente)  ?>" method="post" name="new<?= $fuente ?>">
-                            <div class="form-group">
+                            <div class="form-group select2">
                                 <select class="form-control" name="fuente" id="selectFuente">
                                     <option value="">Seleccione una Fuente</option>
                                     <?= $optionFont ?>
@@ -38,35 +38,41 @@
                             <div class="form-group"> 
                                 <input class="form-control" placeholder="Nombre Autor" name="autor">
                             </div>
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                     <select class="form-control" name="cobertura">
-                                        <option value="">Tipo de Autor</option>
-                                        <?= $tipoAutor ?>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                     <select class="form-control" name="cobertura">
-                                        <option value="">Género</option>
-                                        <?= $genero ?>
-                                    </select>
+                            <div class="form-group col-lg-6">
+                                 <select class="form-control" name="tipoAutor">
+                                    <option value="">Tipo de Autor</option>
+                                    <?= $tipoAutor ?>
+                                </select>
+                            </div>
+                            <div class="form-group col-lg-6">
+                                 <select class="form-control" name="genero">
+                                    <option value="">Género</option>
+                                    <?= $genero ?>
+                                </select>
+                            </div>
+                            <div class="form-group col-lg-6">
+                                 <select class="form-control" name="sector">
+                                    <option value="">Sector</option>
+                                    <?= $sector ?>
+                                </select>
+                            </div>
+                            <div class="form-group col-lg-6">
+                                 <select class="form-control" name="seccion">
+                                    <option value="">Sección</option>
+                                    <?= $seccion ?>
+                                </select>
+                            </div>
+                            <div class="col-lg-12">
+                                <label>Fecha</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control fechaNota" placeholder="yyyy-mm-dd">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                                 </div>
                             </div>
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                     <select class="form-control" name="cobertura">
-                                        <option value="">Sector</option>
-                                        <?= $sector ?>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                     <select class="form-control" name="cobertura">
-                                        <option value="">Sección</option>
-                                        <?= $seccion ?>
-                                    </select>
-                                </div>                               
+                            <div class="col-lg-12">                               
+                                <?= $campos ?>
                             </div>
-                            <?= $campos ?>
+                            </div>
                             <div class="form-group">
                                  <select class="form-control" name="cobertura">
                                     <option value="">Cobertura</option>

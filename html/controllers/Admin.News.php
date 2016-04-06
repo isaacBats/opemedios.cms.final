@@ -60,10 +60,12 @@ class AdminNews extends Controller{
 		$css = '
 				<!-- Select2 CSS -->
 			    <link href="/assets/css/select2.min.css" rel="stylesheet">
+			    <link href="/admin/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
 		';
 
 		$js = '
 				<!-- Select2 JavaScript -->
+			    <script src="/admin/js/bootstrap-datetimepicker.min.js"></script>
 			    <script src="/assets/js/select2.min.js"></script>
 			    <script src="/assets/js/i18n/es.js"></script>
 			    <script src="/assets/js/admin.js"></script>

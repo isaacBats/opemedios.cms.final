@@ -12,6 +12,9 @@
   <!-- Bootstrap Core CSS -->
     <link href="/assets/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 
+    <!-- Jquery-ui CSS -->
+    <link href="/admin/css/jquery-ui.css" rel="stylesheet">
+
     <!-- MetisMenu CSS -->
     <link href="/assets/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
 

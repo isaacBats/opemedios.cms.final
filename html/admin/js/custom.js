@@ -32,6 +32,19 @@ $(document).ready(function(){
     startDate: '-3d'
     });
 
-    $('.datetime').datetimepicker({
+    /*$('.datetime').datetimepicker({
           pickDate: false
     });
+
+    $(function() {
+    $('#datetimepicker3').datetimepicker({
+      pickDate: false
+    });
+  });*/
+
+$(function () {
+    $('#datetimepicker3').datetimepicker({
+        pickDate: false
+    });
+});
+        

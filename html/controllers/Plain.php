@@ -10,7 +10,17 @@
 		
 		public function  homeView( $lang = "es" ){
 			
-			echo '<h1>Operadora de Medios Informativos</h1>';
+			$this->header('Inicio - ');
+			require $this->views.'home.php';
+			$this->footer();
+
+		}
+
+		public function  about( ){
+			
+			$this->header('Quiénes Somos - ');
+			require $this->views.'about.php';
+			$this->footer();
 
 		}
 		

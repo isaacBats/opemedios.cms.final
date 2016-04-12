@@ -10,6 +10,11 @@ $collection->attachRoute(new Route('/', array(
     'methods' => 'GET'
 )));
 
+$collection->attachRoute(new Route('/quienes-somos', array(
+    '_controller' => 'Plain::about',
+    'methods' => 'GET'
+)));
+
 
 //  ADMIN
 $collection->attachRoute(new Route('/panel/logout', array(

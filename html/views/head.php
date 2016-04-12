@@ -1,55 +1,35 @@
 <head>
-<meta charset="UTF-8">
-<title><?php echo $titleTab ?></title>
+	<meta charset="UTF-8">
+	<!-- <meta name="viewport"    content="width=device-width, initial-scale=1.0"> -->
+	<meta name="description" content="HTML para Operadora de Medios Informativos 2016">
+	<meta name="author"      content="Isaac Daniel Batista">
+	<!-- Corre el sitio en modo full-screen dentro de los móbiles que lo soportan. -->
+	<meta name="apple-mobile-web-app-capable" content="yes">
 
-<?php if ( isset( $product ) ){ ?>
-<!-- Meta tags de Facebook (Open Graph) -->
-<!-- Con esta etiqueta declaramos el título que queremos que contenga al darle share -->
-<meta property="og:title" content="<?php echo $product["nombre"] ?>" />
-<!-- Con esta etiqueta mostramos una imagen al momento de dar share en facebook -->
-<meta property="og:image" content="http://amarinav2.denumeris.com/<?php echo '/assets/images/product/'.$product['imagen']; ?>" />
-<!-- Con esta etiqueta mostramos el nombre de nuestro sitio web al momento de dar share en facebook -->
-<meta property="og:site_name" content="<?php echo $product["nombre"] ?>" />
-<!-- Con esta etiqueta mostramos una descripción acerca de lo que trata nuestra página web al momento de dar share en facebook -->
-<meta property="og:description" content="<?php echo $product["nombre"] ?>" />
-<?php } ?>
-<!-- Corre el sitio en modo full-screen dentro de los móbiles que lo soportan. -->
-<meta name="apple-mobile-web-app-capable" content="yes">
+	<!-- Hace que la barra de status aparezca negra con texto blanco en iphones. -->
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
 
-<!-- Hace que la barra de status aparezca negra con texto blanco en iphones. -->
-<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<!-- Deshabilita la detección automática de números de teléfono, es una cuestión de seguridad. -->
+	<meta name="format-detection" content="telephone=no">
 
-<!-- Deshabilita la detección automática de números de teléfono, es una cuestión de seguridad. -->
-<meta name="format-detection" content="telephone=no">
+	<!-- Pone el sitio en el tamaño que debe ser y evita que el usuario pueda hacer zoom en la página. -->
+	<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	
+	<title><?php echo $titleTab ?></title>
 
-<!-- Pone el sitio en el tamaño que debe ser y evita que el usuario pueda hacer zoom en la página. -->
-<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-     
-<!-- Iconos para el navegador (los íconos que aparecen en los tabs y en los bookmarks) -->
-<link rel="shortcut icon" href="/assets/images/icono.ico">
-<link rel="bookmark" href="/assets/images/icono.ico">
-    
-<!-- Iconos para ipad e iphone (íconos que aparecen en el home al momento de guardar la página) -->
-<!-- Ícono usado para iphone 3gs para atrás -->
-<link rel="apple-touch-icon" href="/assets/images/icons/apple-touch-icon-precomposed.png">
-<!-- Ícono usado en ipads de anterior generación -->
-<link rel="apple-touch-icon" sizes="72x72" href="/assets/images/icons/apple-touch-icon-72x72-precomposed.png">
-<!-- Ícono utilizado en iphone 4 para adelante -->
-<link rel="apple-touch-icon" sizes="114x114" href="/assets/images/icons/apple-touch-icon-114x114-precomposed.png">
-<!-- Ícono utilizado para ipads de nueva generación -->
-<link rel="apple-touch-icon" sizes="144x144" href="/assets/images/icons/apple-touch-icon-144x144-precomposed.png">
-    
-<!-- Hojas de estilo base -->
-<link rel="stylesheet" type="text/css" href="/assets/css/gallerific.css"><!-- Hoja de reset -->
-<link rel="stylesheet" type="text/css" href="/assets/js/bower_components/jquery.fancybox/fancybox/jquery.fancybox-1.3.4.css"><!-- Hoja de reset -->
+	<link rel="shortcut icon" href="/assets/images/favicon.ico">
+	
+	<link rel="stylesheet" media="screen" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
+	<link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/assets/css/font-awesome.min.css">
 
-<link rel="stylesheet" type="text/css" href="/assets/css/style.css"><!-- Hoja personalizada -->
+	<!-- Custom styles for our template -->
+	<link rel="stylesheet" href="/assets/css/bootstrap-theme.css" media="screen" >
+	<link rel="stylesheet" href="/assets/css/main.css">
 
-
-<!-- Código que sirve para que internet explorer rendereé correctamente las etiquetas de html5 -->
-<!--[if IE]>
-<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
-<script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
-<![endif]-->
-
+	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+	<script src="assets/js/html5shiv.js"></script>
+	<script src="assets/js/respond.min.js"></script>
+	<![endif]-->
 </head>

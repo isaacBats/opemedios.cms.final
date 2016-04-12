@@ -96,7 +96,7 @@
 
 
 
-		public function footer( $lang ){
+		public function footer( $js = ''){
 			require  $this->views."footer.php";	
 		}
 

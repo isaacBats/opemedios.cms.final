@@ -8,7 +8,7 @@
 	{
 		
 		
-		public function  homeView( $lang = "es" ){
+		public function  homeView(){
 			
 			$this->header('Inicio - ');
 			require $this->views.'home.php';
@@ -16,12 +16,18 @@
 
 		}
 
-		public function  about( ){
+		public function  about(){
 			
 			$this->header('Quiénes Somos - ');
 			require $this->views.'about.php';
 			$this->footer();
 
+		}
+
+		public function clients(){
+			$this->header('Clientes - ');
+			require $this->views . 'clients.php';
+			$this->footer();
 		}
 		
 		

@@ -22,31 +22,31 @@
 	<div class="jumbotron top-space">
 		<div class="container">
 			
-			<h3 class="text-center thin">Reasons to use this template</h3>
+			<h3 class="text-center thin">Nuestros Servicios</h3>
 			
 			<div class="row">
 				<div class="col-md-3 col-sm-6 highlight">
-					<div class="h-caption"><h4><i class="fa fa-cogs fa-5"></i>Bootstrap-powered</h4></div>
+					<div class="h-caption"><h4><i class="fa fa-microphone fa-5"></i>Radio</h4></div>
 					<div class="h-body text-center">
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque aliquid adipisci aspernatur. Soluta quisquam dignissimos earum quasi voluptate. Amet, dignissimos, tenetur vitae dolor quam iusto assumenda hic reprehenderit?</p>
+						<p>Durante los 365 días del año, las 24 horas, grabamos de manera continua 48 estaciones de radio en las frecuencias de AM y FM. Monitoreamos los programas más importantes de noticias, opinión, salud, espectáculos, cultura, finanzas, de portes. Contamos con personal altamente calificado, mediante el cual estaremos atentos a cualquier información directa o indirecta de su empresa, así como el comportamiento de su competencia.</p>
 					</div>
 				</div>
 				<div class="col-md-3 col-sm-6 highlight">
-					<div class="h-caption"><h4><i class="fa fa-flash fa-5"></i>Fat-free</h4></div>
+					<div class="h-caption"><h4><i class="fa fa-television fa-5"></i>Televisión</h4></div>
 					<div class="h-body text-center">
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores, commodi, sequi quis ad fugit omnis cumque a libero error nesciunt molestiae repellat quos perferendis numquam quibusdam rerum repellendus laboriosam reprehenderit! </p>
+						<p>Grabamos las 24 horas, de lunes a domingo, los 365 días del año, 25 canales de televisión de señales abiertas y del servicio de paga. Monitoreamos los programas más importantes de noticias, opinión, salud, espectáculos, cultura, finanzas, deportes.</p>
 					</div>
 				</div>
 				<div class="col-md-3 col-sm-6 highlight">
-					<div class="h-caption"><h4><i class="fa fa-heart fa-5"></i>Creative Commons</h4></div>
+					<div class="h-caption"><h4><i class="fa fa-newspaper-o fa-5"></i>Periódicos y Revistas</h4></div>
 					<div class="h-body text-center">
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatem, vitae, perferendis, perspiciatis nobis voluptate quod illum soluta minima ipsam ratione quia numquam eveniet eum reprehenderit dolorem dicta nesciunt corporis?</p>
+						<p>Búsqueda de información en los principales diarios y revistas de circulación nacional como Reforma, El Universal, Milenio, La Jornada, Excélsior, Economista, El Financiero; Unomásuno, El Sol de México, La Crónica de Hoy, revistas de diferentes cortes: política, moda, espectáculos, salud, deportes, turismo, entretenimiento, arte, entre otras.</p>
 					</div>
 				</div>
 				<div class="col-md-3 col-sm-6 highlight">
-					<div class="h-caption"><h4><i class="fa fa-smile-o fa-5"></i>Author's support</h4></div>
+					<div class="h-caption"><h4><i class="fa fa-chrome fa-5"></i>Sitios Web y Redes Sociales</h4></div>
 					<div class="h-body text-center">
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias, excepturi, maiores, dolorem quasi reprehenderit illo accusamus nulla minima repudiandae quas ducimus reiciendis odio sequi atque temporibus facere corporis eos expedita? </p>
+						<p>Búsqueda de información de temas encomendados en muchos portales existentes de información general y especializados en temas como política, moda, espectáculos, cultura, salud, deportes, por mencionar algunos. Rankeo integral (tu posicionamiento y el de tus competidores ante búsquedas), análisis estratégico.</p>
 					</div>
 				</div>
 			</div> <!-- /row  -->
@@ -58,42 +58,19 @@
 	<!-- container -->
 	<div class="container">
 
-		<h2 class="text-center top-space">Frequently Asked Questions</h2>
+		<h2 class="text-center top-space">Análisis de Información</h2>
 		<br>
 
 		<div class="row">
 			<div class="col-sm-6">
-				<h3>Which code editor would you recommend?</h3>
-				<p>I'd highly recommend you <a href="http://www.sublimetext.com/">Sublime Text</a> - a free to try text editor which I'm using daily. Awesome tool!</p>
+				<h3>Análisis de Contenido : </h3>
+				<p>Nuestros análisis se realizan en función de lo que tú necesitas; para ello, se hace un estudio con el que, entre otras variables, se determina la cantidad de notas positivas, negativas, neutras; el rating de los programas en los cuales se transmitió, el tipo de público al que se impactó, costos-beneficios, del propio y de la competencia. Se elaboran gráficas para la mejor comprensión del estudio.</p>
 			</div>
 			<div class="col-sm-6">
-				<h3>Nice header. Where do I find more images like that one?</h3>
-				<p>
-					Well, there are thousands of stock art galleries, but personally, 
-					I prefer to use photos from these sites: <a href="http://unsplash.com">Unsplash.com</a> 
-					and <a href="http://www.flickr.com/creativecommons/by-2.0/tags/">Flickr - Creative Commons</a></p>
+				<h3>Análisis de Cobertura Mediática :</h3>
+				<p>Estos estudios están centrados básicamente en los medios de impacto visual como la televisión, periódicos, revistas e internet. El objetivo central es determinar los momentos y espacios en que aparece el objeto del estudio para finalmente evaluar los costos por esas publicidades que no generaron costos directos.</p>
 			</div>
 		</div> <!-- /row -->
-
-		<div class="row">
-			<div class="col-sm-6">
-				<h3>Can I use it to build a site for my client?</h3>
-				<p>
-					Yes, you can. You may use this template for any purpose, just don't forget about the <a href="http://creativecommons.org/licenses/by/3.0/">license</a>, 
-					which says: "You must give appropriate credit", i.e. you must provide the name of the creator and a link to the original template in your work. 
-				</p>
-			</div>
-			<div class="col-sm-6">
-				<h3>Can you customize this template for me?</h3>
-				<p>Yes, I can. Please drop me a line to sergey-at-pozhilov.com and describe your needs in details. Please note, my services are not cheap.</p>
-			</div>
-		</div> <!-- /row -->
-
-		<div class="jumbotron top-space">
-			<h4>Dicta, nostrum nemo soluta sapiente sit dolor quae voluptas quidem doloribus recusandae facere magni ullam suscipit sunt atque rerum eaque iusto facilis esse nam veniam incidunt officia perspiciatis at voluptatibus. Libero, aliquid illum possimus numquam fuga.</h4>
-     		<p class="text-right"><a class="btn btn-primary btn-large">Learn more »</a></p>
-  		</div>
-
 </div>	<!-- /container -->
 	
 	<!-- Social links. @TODO: replace by link/instructions in template -->

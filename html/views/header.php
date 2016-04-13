@@ -15,14 +15,8 @@
 				<ul class="nav navbar-nav pull-right">
 					<li class="active"><a href="/">Inicio</a></li>
 					<li><a href="/quienes-somos">Quiénes somos</a></li>
-					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Servicios <b class="caret"></b></a>
-						<ul class="dropdown-menu">
-							<li><a href="sidebar-left.html">Left Sidebar</a></li>
-							<li class="active"><a href="sidebar-right.html">Right Sidebar</a></li>
-						</ul>
-					</li>
-					<li><a href="contact.html">Contact</a></li>
+					<li><a href="/clientes">Clientes</a></li>
+					<li><a href="/contacto">Contacto</a></li>
 					<li><a class="btn" href="signin.html">SIGN IN / SIGN UP</a></li>
 				</ul>
 			</div><!--/.nav-collapse -->

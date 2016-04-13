@@ -15,6 +15,11 @@ $collection->attachRoute(new Route('/quienes-somos', array(
     'methods' => 'GET'
 )));
 
+$collection->attachRoute(new Route('/clientes', array(
+    '_controller' => 'Plain::clients',
+    'methods' => 'GET'
+)));
+
 
 //  ADMIN
 $collection->attachRoute(new Route('/panel/logout', array(

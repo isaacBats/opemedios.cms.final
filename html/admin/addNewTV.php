@@ -1,14 +1,19 @@
 <?php
 $campos = '
-            <div class="col-sm-6">
-                <div class="form-group">
-                    <label>Hora</label>
-                    <div class="input-group date" id="datetimepicker3">
-                        <input data-format="hh:mm:ss" type="text" class="form-control" />
-                        <span class="input-group-addon">
-                            <span class="glyphicon glyphicon-time"></span>
-                        </span>
-                    </div>
+            <div class="col-lg-6">
+                <label>Hora</label>
+                <div class="input-group date" id="datetimepicker1">
+                    <input data-format="hh:mm:ss" type="text" class="form-control" />
+                    <span class="input-group-addon">
+                        <i class="glyphicon glyphicon-time"></i>
+                    </span>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <label>Duracion</label>
+                <div class="input-group date" id="datetimepicker2">
+                    <input data-format="hh:mm:ss" type="text" class="form-control" />
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
                 </div>
             </div>
             ';

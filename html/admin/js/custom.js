@@ -43,8 +43,14 @@ $(document).ready(function(){
   });*/
 
 $(function () {
-    $('#datetimepicker3').datetimepicker({
+    $('#datetimepicker1').datetimepicker({
         pickDate: false
+    });
+});
+
+$(function () {
+    $('#datetimepicker2').datetimepicker({
+        pickDate: true
     });
 });
         

@@ -13,11 +13,20 @@
 			</div>
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav pull-right">
-					<li class="active"><a href="/">Inicio</a></li>
+					<li><a href="/">Inicio</a></li>
 					<li><a href="/quienes-somos">Quiénes somos</a></li>
 					<li><a href="/clientes">Clientes</a></li>
 					<li><a href="/contacto">Contacto</a></li>
-					<li><a class="btn" href="signin.html">SIGN IN / SIGN UP</a></li>
+					<!-- <li>
+						<div class="form-group">
+							<form class="form-inline" method="POST" action="/login" >
+								<input class="form-control" type="text" placeholder="Usuario" name="user"></input>
+								<input class="form-control" type="password" placeholder="contraseña" name="password"></input>
+								<input class="btn" type="submit" value="Ingreso">		
+							</form>
+						</div>
+					</li> -->
+					<li><a class="btn" href="/sign-in">Mi cuenta</a></li>
 				</ul>
 			</div><!--/.nav-collapse -->
 		</div>

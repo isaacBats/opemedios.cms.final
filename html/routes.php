@@ -20,6 +20,16 @@ $collection->attachRoute(new Route('/clientes', array(
     'methods' => 'GET'
 )));
 
+$collection->attachRoute(new Route('/contacto', array(
+    '_controller' => 'Plain::contact',
+    'methods' => 'GET'
+)));
+
+$collection->attachRoute(new Route('/sign-in', array(
+    '_controller' => 'Plain::signin',
+    'methods' => 'GET'
+)));
+
 
 //  ADMIN
 $collection->attachRoute(new Route('/panel/logout', array(

@@ -18,9 +18,10 @@ class AdminNewTV extends AdminNews{
 		$this->addNew($campos, $this->fuente );
 	}
 
-	// public function save(){
+	public function save(){
 
-	// 	if( !empty($_POST) ){
+		if( !empty($_POST) ){
+			print_r($_POST);
 
 	// 		$id_television = $this->tvRepository->idFuenteTV();
 	// 		$id_cobertura = $this->coberturaRepository->findIdByDescription($_POST['cobertura']);
@@ -47,7 +48,7 @@ class AdminNewTV extends AdminNews{
 			
 	// 	}else{
 	// 		header('Location: /panel/font/add/font-television');
-	// 	}
+		}
 
-	// }
+	}
 }

@@ -43,14 +43,16 @@ $(document).ready(function(){
   });*/
 
 $(function () {
-    $('#datetimepicker1').datetimepicker({
-        pickDate: false
+    $('.date_time').datetimepicker({
+        pickDate: false,
+        inline: true,
+        sideBySide: true
     });
 });
 
-$(function () {
+/*$(function () {
     $('#datetimepicker2').datetimepicker({
         pickDate: true
     });
-});
+});*/
         

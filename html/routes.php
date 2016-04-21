@@ -140,3 +140,8 @@ $collection->attachRoute(new Route('/panel/new/add/new-television', array(
     '_controller' => 'AdminNewTV::add',
     'methods' => 'GET'
 )));
+
+$collection->attachRoute(new Route('/panel/new/television/save', array(
+    '_controller' => 'AdminNewTV::save',
+    'methods' => 'POST'
+)));

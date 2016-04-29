@@ -62,7 +62,7 @@
                                     <?= $seccion ?>
                                 </select>
                             </div>
-                            <div class="form-group col-lg-3 col-sm-3">
+                            <div class="form-group col-lg-3 col-sm-6">
                                 <label>Fecha</label>
                                 <div class="input-group">
                                     <input type="text" class="form-control fechaNota" placeholder="yyyy-mm-dd" name="fecha" >
@@ -72,11 +72,11 @@
                             <div class="form-group col-lg-6">                               
                                 <?= $campos ?>
                             </div>
-                            <div class="col-sm-12">
-                                <div class="col-sm-6 form-group"> 
+                            <div class="form-group col-lg-12">
+                                <div class="form-group col-sm-6"> 
                                     <input class="form-control" placeholder="Costo Beneficio" name="costoBeneficio">
                                 </div>
-                                <div class="col-sm-6 form-group">
+                                <div class="form-group col-sm-6">
                                      <select class="form-control" name="tendencia">
                                         <option value="">Tendencia</option>
                                         <option>Positiva</option>
@@ -89,7 +89,7 @@
                                 <label>Comentarios:</label>
                                 <textarea class="form-control" name="comentarios"></textarea>
                             </div>
-                            <div class="col-lg-6 form-group">
+                            <div class="form-group col-lg-6">
                                 <label>Archivo de <?php if($fuente === 'Television'){
                                                                 echo str_replace('Television', 'Video', ucwords($fuente));
                                                            }elseif($fuente === 'Periodico'){
@@ -98,7 +98,8 @@
                                                                 echo $fuente;
                                                             } 
                                                       ?></label>
-                                <input type="file">
+                                <input type="file" name="file">
+                                <input type="file" name="imagen">
                             </div>
                             <div class="col-lg-12">
                                 <input type="submit" class="btn btn-primary" value="Guardar">

@@ -22,6 +22,7 @@ class AdminNewTV extends AdminNews{
 
 		if( !empty($_POST) ){
 			print_r($_POST);
+			print_r($_FILES);
 
 	// 		$id_television = $this->tvRepository->idFuenteTV();
 	// 		$id_cobertura = $this->coberturaRepository->findIdByDescription($_POST['cobertura']);

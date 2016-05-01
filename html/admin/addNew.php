@@ -21,7 +21,7 @@
             <div class="panel-body">
                 <div class="row">
                     <div class="col-lg-12">
-                        <form role="form" action="/panel/new/<?= strtolower($fuente)  ?>/save" method="post" name="new<?= $fuente ?>">
+                        <form method="post" action="/panel/new/<?= strtolower($fuente)  ?>/save" enctype="multipart/form-data"">
                             <div class="form-group select2">
                                 <select class="form-control" name="fuente" id="selectFuente">
                                     <option value="">Seleccione una Fuente</option>
@@ -98,8 +98,7 @@
                                                                 echo $fuente;
                                                             } 
                                                       ?></label>
-                                <input type="file" name="file">
-                                <input type="file" name="imagen">
+                                <input type="file" name="primario" />
                             </div>
                             <div class="col-lg-12">
                                 <input type="submit" class="btn btn-primary" value="Guardar">

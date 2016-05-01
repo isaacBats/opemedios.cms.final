@@ -13,16 +13,15 @@ class AdminNewTV extends AdminNews{
 
 	public function add(){
 
-		$campos = '';
+		ob_start();
 		require $this->adminviews . 'addNewTV.php';
+		$campos = ob_get_clean();
 		$this->addNew($campos, $this->fuente );
 	}
 
 	public function save(){
 
 		if( !empty($_POST) ){
-			print_r($_POST);
-			print_r($_FILES);
 
 	// 		$id_television = $this->tvRepository->idFuenteTV();
 	// 		$id_cobertura = $this->coberturaRepository->findIdByDescription($_POST['cobertura']);

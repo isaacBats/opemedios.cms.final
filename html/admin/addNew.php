@@ -79,9 +79,9 @@
                                 <div class="form-group col-sm-6">
                                      <select class="form-control" name="tendencia">
                                         <option value="">Tendencia</option>
-                                        <option>Positiva</option>
-                                        <option>Neutral</option>
-                                        <option>Negativa</option>
+                                        <option value="1" >Positiva</option>
+                                        <option value="2" >Neutral</option>
+                                        <option value="3" >Negativa</option>
                                     </select>
                                 </div>
                             </div>

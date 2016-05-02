@@ -38,4 +38,23 @@ class TelevisionRepository extends BaseRepository{
 		}
 
 	}
+
+	public function addNewTV( $new ){
+
+		$idNew = $this->addNews( $new );
+		$sql = 'INSERT INTO noticia_tel (id_noticia, hora, duracion, costo)
+							VALUES(:idNoticia, :hora, :duracion, :costo);';
+
+		$query = $this->pdo->prepare( $sql );
+		$query->bindParam(':idNoticia', $idNew);
+		$query->bindParam(':hora', 		$new['hora']);
+		$query->bindParam(':duracion', 	$new['duracion']);
+		$query->bindParam(':costo', 	$new['costoBeneficio']);
+
+		if($query->execute()){
+			return true;
+		}else{
+		 	return false;
+		}
+	}
 }

@@ -32,27 +32,10 @@ $(document).ready(function(){
     startDate: '-3d'
     });
 
-    /*$('.datetime').datetimepicker({
-          pickDate: false
-    });
-
-    $(function() {
-    $('#datetimepicker3').datetimepicker({
+   
+$(function() {
+    $('.date_time').datetimepicker({
       pickDate: false
     });
-  });*/
+  });
 
-$(function () {
-    $('.date_time').datetimepicker({
-        pickDate: false,
-        inline: true,
-        sideBySide: true
-    });
-});
-
-/*$(function () {
-    $('#datetimepicker2').datetimepicker({
-        pickDate: true
-    });
-});*/
-        

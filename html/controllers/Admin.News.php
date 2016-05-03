@@ -61,6 +61,8 @@ class AdminNews extends Controller{
 				<!-- Select2 CSS -->
 			    <link href="/assets/css/select2.min.css" rel="stylesheet">
 			    <link href="/admin/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+			    <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" rel="stylesheet">
+    			<link rel="stylesheet" type="text/css" media="screen" href="http://tarruda.github.com/bootstrap-datetimepicker/assets/css/bootstrap-datetimepicker.min.css">
 		';
 
 		$js = '

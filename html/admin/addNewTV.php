@@ -1,18 +1,18 @@
-<div class="col-lg-6 col-sm-6">
+<div class="form-group col-lg-3">
     <label>Hora</label>
-    <div class="input-group date date_time input-append" >
-        <input data-format="hh:mm:ss" type="text" name="hora" />
-        <span class="add-on">
-            <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
+    <div class="input-group date_time">
+        <input data-format="hh:mm:ss" type="text" class="form-control height30" name="hora" />
+        <span class="input-group-addon add-on">
+          <span class="glyphicon glyphicon-time" data-time-icon="icon-time" data-date-icon="icon-calendar"></span>
         </span>
     </div>
 </div>
-<div class="col-lg-6 col-sm-6">
+<div class="form-group col-lg-3">
     <label>Duracion</label>
-    <div class="input-group date date_time input-append" >
-        <input data-format="hh:mm:ss" type="text" name="duracion" />
-        <span class="add-on">
-            <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
+    <div class="input-group date_time" >
+        <input data-format="hh:mm:ss" type="text" class="form-control height30 " name="duracion" />
+        <span class="input-group-addon add-on">
+            <span class="glyphicon glyphicon-time" data-time-icon="icon-time" data-date-icon="icon-calendar"></span>
         </span>
     </div>
 </div>

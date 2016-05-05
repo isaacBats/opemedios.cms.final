@@ -21,7 +21,7 @@
             <div class="panel-body">
                 <div class="row">
                     <div class="col-lg-12">
-                        <form method="post" action="/panel/new/<?= strtolower($fuente)  ?>/save" enctype="multipart/form-data"">
+                        <form id="form_new" method="post" action="/panel/new/<?= strtolower($fuente)  ?>/save" enctype="multipart/form-data">
                             <div class="form-group select2">
                                 <select class="form-control" name="fuente" id="selectFuente">
                                     <option value="">Seleccione una Fuente</option>
@@ -38,41 +38,39 @@
                             <div class="form-group"> 
                                 <input class="form-control" placeholder="Nombre Autor" name="autor">
                             </div>
-                            <div class="form-group col-lg-6">
+                            <div class="form-group col-sm-6">
                                  <select class="form-control" name="tipoAutor">
                                     <option value="">Tipo de Autor</option>
                                     <?= $tipoAutor ?>
                                 </select>
                             </div>
-                            <div class="form-group col-lg-6">
+                            <div class="form-group col-sm-6">
                                  <select class="form-control" name="genero">
                                     <option value="">Género</option>
                                     <?= $genero ?>
                                 </select>
                             </div>
-                            <div class="form-group col-lg-6">
+                            <div class="form-group col-sm-6">
                                  <select class="form-control" name="sector">
                                     <option value="">Sector</option>
                                     <?= $sector ?>
                                 </select>
                             </div>
-                            <div class="form-group col-lg-6">
+                            <div class="form-group col-sm-6">
                                  <select class="form-control" name="seccion">
                                     <option value="">Sección</option>
                                     <?= $seccion ?>
                                 </select>
                             </div>
-                            <div class="form-group col-lg-3 col-sm-6">
+                            <div class="form-group col-lg-3">
                                 <label>Fecha</label>
-                                <div class="input-group">
+                                <div id="fecha_new" class="input-group">
                                     <input type="text" class="form-control fechaNota" placeholder="yyyy-mm-dd" name="fecha" >
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                                 </div>
                             </div>
-                            <div class="form-group col-lg-6">                               
-                                <?= $campos ?>
-                            </div>
-                            <div class="form-group col-lg-12">
+                            <?= $campos ?>
+                            <div class="form-group">
                                 <div class="form-group col-sm-6"> 
                                     <input class="form-control" placeholder="Costo Beneficio" name="costoBeneficio">
                                 </div>

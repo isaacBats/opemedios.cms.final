@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Sistema Integral de Administración de Opemedios">
     <meta name="author" content="Isaac Batista">
@@ -10,7 +10,7 @@
   <title><?= $titleTab ?></title>
     
   <!-- Bootstrap Core CSS -->
-    <link href="/assets/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Jquery-ui CSS -->
     <link href="/admin/css/jquery-ui.css" rel="stylesheet">
@@ -25,6 +25,8 @@
     <link href="/assets/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
     <?= $stylesheet ?>
+
+    <link rel="stylesheet" type="text/css" href="/admin/css/admin.css">
     
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->

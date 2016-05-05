@@ -8,11 +8,23 @@ class AdminNewTV extends AdminNews{
 
 	private $tvRepository;	
 	private $fuente;
+	private $urlArchivo;
 
 	public function __construct(){
 
 		$this->tvRepository 		= new TelevisionRepository();		
 		$this->fuente 				= 'Television';
+		$this->urlArchivo			= 'assets/data/noticias/television/';
+	}
+
+	public function getUrlArchivo(){
+
+		return $this->urlArchivo;
+	}
+
+	public function setUrlArchivo( $slug ){
+
+		$this->urlArchivo = $slug;
 	}
 
 	public function add(){
@@ -30,6 +42,16 @@ class AdminNewTV extends AdminNews{
 			$id_television = $this->tvRepository->idFuenteTV();
 			$_POST['tipoFuente'] = $id_television;
 			$_POST['usuario'] = 1;
+			$_POST['slug'] = $this->getUrlArchivo();
+			$_POST['files'] = $_FILES;
+			if ( isset($_FILES['primario']) && !empty($_FILES['primario']) ) {
+				
+				$_POST['principal'] = 1;				
+				
+			}else{
+
+				$_POST['principal'] = 0;				
+			}
 
 			if($this->tvRepository->addNewTV( $_POST )){
 				//header('Location: /panel/fonts/show-list');

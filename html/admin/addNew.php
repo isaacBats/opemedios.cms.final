@@ -23,20 +23,20 @@
                     <div class="col-lg-12">
                         <form id="form_new" method="post" action="/panel/new/<?= strtolower($fuente)  ?>/save" enctype="multipart/form-data">
                             <div class="form-group select2">
-                                <select class="form-control" name="fuente" id="selectFuente">
+                                <select class="form-control" name="fuente" id="selectFuente" required >
                                     <option value="">Seleccione una Fuente</option>
                                     <?= $optionFont ?>
                                 </select>
                             </div>
                             <div class="form-group"> 
-                                <input class="form-control" placeholder="Encabezado" name="encabezado">
+                                <input class="form-control" placeholder="Encabezado" name="encabezado" required>
                             </div>
                             <div class="form-group">
                                 <label>Síntesis:</label>
                                 <textarea class="form-control" name="sintesis"></textarea>
                             </div>
                             <div class="form-group"> 
-                                <input class="form-control" placeholder="Nombre Autor" name="autor">
+                                <input class="form-control" placeholder="Nombre Autor" name="autor" required>
                             </div>
                             <div class="form-group col-sm-6">
                                  <select class="form-control" name="tipoAutor">

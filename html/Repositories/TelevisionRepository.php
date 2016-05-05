@@ -1,6 +1,7 @@
 <?php 
 
 include_once("BaseRepository.php");
+include_once("AdjuntoRepository.php");
 
 class TelevisionRepository extends BaseRepository{
 
@@ -42,19 +43,26 @@ class TelevisionRepository extends BaseRepository{
 	public function addNewTV( $new ){
 
 		$idNew = $this->addNews( $new );
-		$sql = 'INSERT INTO noticia_tel (id_noticia, hora, duracion, costo)
-							VALUES(:idNoticia, :hora, :duracion, :costo);';
 
-		$query = $this->pdo->prepare( $sql );
-		$query->bindParam(':idNoticia', $idNew);
-		$query->bindParam(':hora', 		$new['hora']);
-		$query->bindParam(':duracion', 	$new['duracion']);
-		$query->bindParam(':costo', 	$new['costoBeneficio']);
+		$adjunto = new AdjuntoRepository();
+		if( $adjunto->add( $new, $idNew ) ){
 
-		if($query->execute()){
-			return true;
+			$sql = 'INSERT INTO noticia_tel (id_noticia, hora, duracion, costo)
+								VALUES(:idNoticia, :hora, :duracion, :costo);';
+
+			$query = $this->pdo->prepare( $sql );
+			$query->bindParam(':idNoticia', $idNew);
+			$query->bindParam(':hora', 		$new['hora']);
+			$query->bindParam(':duracion', 	$new['duracion']);
+			$query->bindParam(':costo', 	$new['costoBeneficio']);
+
+			if($query->execute()){
+				return true;
+			}else{
+			 	return false;
+			}
 		}else{
-		 	return false;
+			echo 'No se pude agregar el archivo adjunton :(';
 		}
 	}
 }

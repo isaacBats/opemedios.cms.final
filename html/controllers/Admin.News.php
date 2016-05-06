@@ -11,8 +11,7 @@ include_once(__DIR__.'/../Repositories/SeccionRepository.php');
 
 class AdminNews extends Controller{
 
-	private $noticiasRepository;
-	
+	private $noticiasRepository;		
 
 	public function __construct(){
 		$this->noticiasRepository = new NoticiasRepository();
@@ -113,5 +112,37 @@ class AdminNews extends Controller{
 		require $this->adminviews . 'addNew.php';
 		$this->footer_admin( $js );
 
+	}
+
+	protected static function guardaArchivo( $principal, $ruta ){
+
+		$extencionesPermitidas = ['jpg', 'jpeg', 'gif', 'png', 'JPG', 'JPEG', 'PNG', 'mp4', 'wma', 'wmv'];
+		$explode = explode(".", $principal["name"]);
+		$extension = end($explode);
+		if ((($principal['type'] == 'image/png')
+			|| ($principal['type'] == 'image/jpeg')
+			|| ($principal['type'] == 'image/jpg')
+			|| ($principal['type'] == 'image/PNG')
+			|| ($principal['type'] == 'video/mp4'))
+			&& in_array($extension, $extencionesPermitidas))
+		{
+			if ($principal["error"] > 0)
+			{
+				echo "ERROR: " . $principal["error"] . "<br>";
+			}
+			else
+			{
+				$path=__DIR__ . '/../' . $ruta . $principal["name"];
+				$move = move_uploaded_file($principal["tmp_name"],$path);
+
+				if(!$move){
+					throw new Exception("Error al mover el archivo", 1);
+				}else{
+					return true;
+				}
+			}
+		}else{
+			return false;
+		}
 	}
 }

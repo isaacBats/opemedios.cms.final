@@ -46,7 +46,11 @@ class AdminNewTV extends AdminNews{
 			$_POST['files'] = $_FILES;
 			if ( isset($_FILES['primario']) && !empty($_FILES['primario']) ) {
 				
-				$_POST['principal'] = 1;				
+				$_POST['principal'] = 1;
+				/* guarda archivo */
+				if( $this->guardaArchivo( $_FILES['primario'], $this->getUrlArchivo() ) ){
+					echo 'Archivo guardado en '. $this->getUrlArchivo();
+				}				
 				
 			}else{
 

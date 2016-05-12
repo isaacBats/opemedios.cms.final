@@ -145,3 +145,14 @@ $collection->attachRoute(new Route('/panel/new/television/save', array(
     '_controller' => 'AdminNewTV::save',
     'methods' => 'POST'
 )));
+
+//News Radio 
+$collection->attachRoute(new Route('/panel/new/add/new-radio', array(
+    '_controller' => 'AdminNewRD::add',
+    'methods' => 'GET'
+)));
+
+$collection->attachRoute(new Route('/panel/new/radio/save', array(
+    '_controller' => 'AdminNewRD::save',
+    'methods' => 'POST'
+)));

@@ -44,7 +44,7 @@ class AdminNewRD extends AdminNews{
 			$_POST['usuario'] = 1;
 			$_POST['slug'] = $this->getUrlArchivo();
 			$_POST['files'] = $_FILES;
-			if ( isset($_FILES['primario']) && !empty($_FILES['primario']) ) {
+			if ( $_FILES['primario']['error'] == 0 && !empty($_FILES['primario']) ) {
 				
 				$_POST['principal'] = 1;
 				/* guarda archivo */

@@ -37,4 +37,30 @@ class RadioRepository extends BaseRepository{
 		}
 
 	}
+
+	public function addNewRD( $new ){
+
+		$idNew = $this->addNews( $new );
+
+		$adjunto = new AdjuntoRepository();
+		if( $adjunto->add( $new, $idNew ) ){
+
+			$sql = 'INSERT INTO noticia_rad (id_noticia, hora, duracion, costo)
+								VALUES(:idNoticia, :hora, :duracion, :costo);';
+
+			$query = $this->pdo->prepare( $sql );
+			$query->bindParam(':idNoticia', $idNew);
+			$query->bindParam(':hora', 		$new['hora']);
+			$query->bindParam(':duracion', 	$new['duracion']);
+			$query->bindParam(':costo', 	$new['costoBeneficio']);
+
+			if($query->execute()){
+				return true;
+			}else{
+			 	return false;
+			}
+		}else{
+			echo 'No se pude agregar el archivo adjunton :(';
+		}
+	}
 }

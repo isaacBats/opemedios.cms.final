@@ -1,20 +1,20 @@
 <?php 
 
 include_once('Admin.News.php');
-include_once(__DIR__.'/../Repositories/TelevisionRepository.php');
+include_once(__DIR__.'/../Repositories/PeriodicoRepository.php');
 
 
-class AdminNewTV extends AdminNews{
+class AdminNewPE extends AdminNews{
 
-	private $tvRepository;	
+	private $peRepository;	
 	private $fuente;
 	private $urlArchivo;
 
 	public function __construct(){
 
-		$this->tvRepository 		= new TelevisionRepository();		
-		$this->fuente 				= 'Television';
-		$this->urlArchivo			= 'assets/data/noticias/television/';
+		$this->peRepository 		= new PeriodicoRepository();		
+		$this->fuente 				= 'Periodico';
+		$this->urlArchivo			= 'assets/data/noticias/periodico/';
 	}
 
 	public function getUrlArchivo(){
@@ -30,7 +30,8 @@ class AdminNewTV extends AdminNews{
 	public function add(){
 
 		ob_start();
-		require $this->adminviews . 'addNewTV.php';
+		$tipos = $this->peRepository->getTiposPagina();
+		require $this->adminviews . 'addNewPE.php';
 		$campos = ob_get_clean();
 		$this->addNew($campos, $this->fuente );
 	}
@@ -39,8 +40,8 @@ class AdminNewTV extends AdminNews{
 
 		if( !empty($_POST) ){
 			
-			$id_television = $this->tvRepository->idFuenteTV();
-			$_POST['tipoFuente'] = $id_television;
+			$id_periodico = $this->peRepository->idFuentePE();
+			$_POST['tipoFuente'] = $id_periodico;
 			$_POST['usuario'] = 1;
 			$_POST['slug'] = $this->getUrlArchivo();
 			$_POST['files'] = $_FILES;
@@ -57,15 +58,15 @@ class AdminNewTV extends AdminNews{
 				$_POST['principal'] = 0;				
 			}
 
-			if($this->tvRepository->addNewTV( $_POST )){
+			if($this->peRepository->addNewPE( $_POST )){
 				//header('Location: /panel/fonts/show-list');
-				 echo 'Se ha agregado una noticia de TV correctamente';
+				 echo 'Se ha agregado una noticia de '.$this->fuente.' correctamente';
 			}else{
-				echo 'No se agrego a la tabla noticia_tel';
+				echo 'No se agrego a la tabla noticia_ped';
 			}
 			
 		}else{
-			header('Location: /panel/new/add/new-television');
+			header('Location: /panel/new/add/new-periodico');
 		}
 
 	}

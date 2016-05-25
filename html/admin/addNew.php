@@ -38,25 +38,25 @@
                             <div class="form-group"> 
                                 <input class="form-control" placeholder="Nombre Autor" name="autor" required>
                             </div>
-                            <div class="form-group col-sm-6">
+                            <div class="form-group col-lg-6">
                                  <select class="form-control" name="tipoAutor">
                                     <option value="">Tipo de Autor</option>
                                     <?= $tipoAutor ?>
                                 </select>
                             </div>
-                            <div class="form-group col-sm-6">
+                            <div class="form-group col-lg-6">
                                  <select class="form-control" name="genero">
                                     <option value="">Género</option>
                                     <?= $genero ?>
                                 </select>
                             </div>
-                            <div class="form-group col-sm-6">
+                            <div class="form-group col-lg-6">
                                  <select class="form-control" name="sector">
                                     <option value="">Sector</option>
                                     <?= $sector ?>
                                 </select>
                             </div>
-                            <div class="form-group col-sm-6">
+                            <div class="form-group col-lg-6">
                                  <select class="form-control" name="seccion">
                                     <option value="">Sección</option>
                                     <?= $seccion ?>
@@ -71,10 +71,10 @@
                             </div>
                             <?= $campos ?>
                             <div class="form-group">
-                                <div class="form-group col-sm-6"> 
+                                <div class="form-group col-lg-6"> 
                                     <input class="form-control" placeholder="Costo Beneficio" name="costoBeneficio">
                                 </div>
-                                <div class="form-group col-sm-6">
+                                <div class="form-group col-lg-6">
                                      <select class="form-control" name="tendencia">
                                         <option value="">Tendencia</option>
                                         <option value="1" >Positiva</option>

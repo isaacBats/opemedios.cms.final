@@ -29,8 +29,12 @@ class AdminNewPE extends AdminNews{
 
 	public function add(){
 
-		ob_start();
+		$tipoPaginacion = '';
 		$tipos = $this->peRepository->getTiposPagina();
+		foreach ($tipos as $t) {
+			$tipoPaginacion .= '<option value="'.$t['id_tipo_pagina'].'">'.$t['descripcion'].'</option>';
+		}
+		ob_start();
 		require $this->adminviews . 'addNewPE.php';
 		$campos = ob_get_clean();
 		$this->addNew($campos, $this->fuente );
@@ -38,6 +42,7 @@ class AdminNewPE extends AdminNews{
 
 	public function save(){
 
+		print_r($_POST); exit();
 		if( !empty($_POST) ){
 			
 			$id_periodico = $this->peRepository->idFuentePE();

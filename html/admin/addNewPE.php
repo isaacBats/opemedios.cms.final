@@ -3,7 +3,7 @@
     <input class="form-control" placeholder="Pagina" name="pagina" required>
 </div>
 <div class="form-group col-lg-3"> 
-    <label>Tamaño</label>
+    <label>Tamaño (%)</label>
     <input class="form-control" placeholder="Tamaño (%)" name="tamano" value="1" required>
     <p class="help-block">Valor de 1 a 600.</p>
 </div>

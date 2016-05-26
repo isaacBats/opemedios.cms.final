@@ -42,7 +42,6 @@ class AdminNewPE extends AdminNews{
 
 	public function save(){
 
-		print_r($_POST); exit();
 		if( !empty($_POST) ){
 			
 			$id_periodico = $this->peRepository->idFuentePE();
@@ -63,6 +62,7 @@ class AdminNewPE extends AdminNews{
 				$_POST['principal'] = 0;				
 			}
 
+			print_r($_POST); exit();
 			if($this->peRepository->addNewPE( $_POST )){
 				//header('Location: /panel/fonts/show-list');
 				 echo 'Se ha agregado una noticia de '.$this->fuente.' correctamente';

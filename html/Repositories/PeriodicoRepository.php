@@ -43,4 +43,33 @@ class PeriodicoRepository extends BaseRepository{
 
 		return $tipos;
 	}
+
+	public function addNewPE( $new ){
+
+		$idNew = $this->addNews( $new );
+
+		$adjunto = new AdjuntoRepository();
+		if( $adjunto->add( $new, $idNew ) ){
+
+			$sql = 'INSERT INTO noticia_per (id_noticia, pagina, id_tipo_pagina, id_tamano_nota, porcentaje_pagina, costo)
+								VALUES(:idNoticia, :pagina, :id_tipo_pagina, :id_tamano_nota, :porcentaje, :costo);';
+
+			$tamano = 0;
+			$query = $this->pdo->prepare( $sql );
+			$query->bindParam(':idNoticia', $idNew);
+			$query->bindParam(':pagina', 		$new['pagina']);
+			$query->bindParam(':id_tipo_pagina', 	$new['tipoPagina']);
+			$query->bindParam(':id_tamano_nota', 	$tamano);
+			$query->bindParam(':porcentaje', 	$new['tamano']);
+			$query->bindParam(':costo', 	$new['costoBeneficio']);
+
+			if($query->execute()){
+				return true;
+			}else{
+			 	return false;
+			}
+		}else{
+			echo 'No se pude agregar el archivo adjunton :(';
+		}
+	}
 }

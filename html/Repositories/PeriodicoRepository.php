@@ -56,14 +56,14 @@ class PeriodicoRepository extends BaseRepository{
 
 			$tamano = 0;
 			$query = $this->pdo->prepare( $sql );
-			$query->bindParam(':idNoticia', $idNew);
-			$query->bindParam(':pagina', 		$new['pagina']);
-			$query->bindParam(':id_tipo_pagina', 	$new['tipoPagina']);
+			$query->bindParam(':idNoticia', 		$idNew);
+			$query->bindParam(':pagina', 			$new['pagina']);
+			$query->bindParam(':id_tipo_pagina',	$new['tipoPagina']);
 			$query->bindParam(':id_tamano_nota', 	$tamano);
-			$query->bindParam(':porcentaje', 	$new['tamano']);
-			$query->bindParam(':costo', 	$new['costoBeneficio']);
+			$query->bindParam(':porcentaje', 		$new['tamano']);
+			$query->bindParam(':costo', 			$new['costoBeneficio']);
 
-			if($query->execute()){
+			if($query->execute() && $this->addUbicacion( $new['ubicacion'], $idNew ) ){
 				return true;
 			}else{
 			 	return false;
@@ -72,4 +72,6 @@ class PeriodicoRepository extends BaseRepository{
 			echo 'No se pude agregar el archivo adjunton :(';
 		}
 	}
+
+
 }

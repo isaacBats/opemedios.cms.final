@@ -59,4 +59,29 @@ class BaseRepository {
 		}
 
 	}
+
+	protected function addUbicacion ( $new, $id ){
+		
+		$sql = 'INSERT INTO ubicacion (id_noticia, uno, dos, tres, cuatro, cinco, seis, siete, ocho, nueve, diez, once, doce)
+				VALUES (:idNoticia, :uno, :dos, :tres, :cuatro, :cinco, :seis, :siete, :ocho, :nueve, :diez, :once, :doce);';
+		
+		$query = $this->pdo->prepare( $sql );
+		$query->bindParam(':idNoticia', $id);
+		$query->bindParam(':uno', $new[0]);
+		$query->bindParam(':dos', $new[1]);
+		$query->bindParam(':tres', $new[2]);
+		$query->bindParam(':cuatro', $new[3]);
+		$query->bindParam(':cinco', $new[4]);
+		$query->bindParam(':seis', $new[5]);
+		$query->bindParam(':siete', $new[6]);
+		$query->bindParam(':ocho', $new[7]);
+		$query->bindParam(':nueve', $new[8]);
+		$query->bindParam(':diez', $new[9]);
+		$query->bindParam(':once', $new[10]);
+		$query->bindParam(':doce', $new[11]);
+
+		$rs = ( $query->execute() ) ? TRUE : FALSE;
+
+		return $rs;
+	}
 }

@@ -61,8 +61,20 @@ class AdminNewPE extends AdminNews{
 
 				$_POST['principal'] = 0;				
 			}
+			$ubicacion = [];
+			for ($i=1; $i <= 12 ; $i++) { 
+				if ( isset( $_POST['ubicacion'. $i] ) ){
+					$ub = 1;
+					array_push($ubicacion, $ub);
+				}else{
 
-			print_r($_POST); exit();
+					$ub = 0;
+					array_push($ubicacion, $ub);
+				}
+			}
+
+			$_POST['ubicacion'] = $ubicacion;
+
 			if($this->peRepository->addNewPE( $_POST )){
 				//header('Location: /panel/fonts/show-list');
 				 echo 'Se ha agregado una noticia de '.$this->fuente.' correctamente';

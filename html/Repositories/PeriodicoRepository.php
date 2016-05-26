@@ -36,14 +36,6 @@ class PeriodicoRepository extends BaseRepository{
 
 	}
 
-	public function getTiposPagina(){
-
-		$query = $this->pdo->prepare('SELECT * FROM tipo_pagina');
-		( $query->execute() ) ? $tipos = $query->fetchAll() : $tipos = 'Error en la consulta de la tabla de Tipos de Pagina';
-
-		return $tipos;
-	}
-
 	public function addNewPE( $new ){
 
 		$idNew = $this->addNews( $new );

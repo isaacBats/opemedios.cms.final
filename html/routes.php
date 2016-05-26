@@ -167,3 +167,14 @@ $collection->attachRoute(new Route('/panel/new/periodico/save', array(
     '_controller' => 'AdminNewPE::save',
     'methods' => 'POST'
 )));
+
+//News Revista 
+$collection->attachRoute(new Route('/panel/new/add/new-revista', array(
+    '_controller' => 'AdminNewRE::add',
+    'methods' => 'GET'
+)));
+
+$collection->attachRoute(new Route('/panel/new/revista/save', array(
+    '_controller' => 'AdminNewRE::save',
+    'methods' => 'POST'
+)));

@@ -178,3 +178,14 @@ $collection->attachRoute(new Route('/panel/new/revista/save', array(
     '_controller' => 'AdminNewRE::save',
     'methods' => 'POST'
 )));
+
+//News Internet 
+$collection->attachRoute(new Route('/panel/new/add/new-internet', array(
+    '_controller' => 'AdminNewIN::add',
+    'methods' => 'GET'
+)));
+
+$collection->attachRoute(new Route('/panel/new/internet/save', array(
+    '_controller' => 'AdminNewIN::save',
+    'methods' => 'POST'
+)));

@@ -35,4 +35,30 @@ class InternetRepository extends BaseRepository{
 		}
 
 	}
+
+	public function addNewIN( $new ){
+
+		$idNew = $this->addNews( $new );
+
+		$adjunto = new AdjuntoRepository();
+		if( $adjunto->add( $new, $idNew ) ){
+
+			$sql = 'INSERT INTO noticia_int (id_noticia, url, hora_publicacion, costo)
+								VALUES(:idNoticia, :url, :horaPub, :costo);';
+
+			$query = $this->pdo->prepare( $sql );
+			$query->bindParam(':idNoticia', $idNew);
+			$query->bindParam(':url', 	$new['url']);
+			$query->bindParam(':horaPub', 		$new['hora']);
+			$query->bindParam(':costo', 	$new['costoBeneficio']);
+
+			if($query->execute()){
+				return true;
+			}else{
+			 	return false;
+			}
+		}else{
+			echo 'No se pude agregar el archivo adjunton :(';
+		}
+	}
 }

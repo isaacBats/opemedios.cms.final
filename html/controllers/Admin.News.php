@@ -17,29 +17,32 @@ class AdminNews extends Controller{
 		$this->noticiasRepository = new NoticiasRepository();
 	}
 
-	// public function showNews(){
+	public function showNews(){
 
-	// 	$this->header_admin('Noticias de Hoy - ' );
-	// 	$noticias = $this->noticiasRepository->showAllNews();
-	// 	$html = '';
-	// 	foreach ($noticias as $noticia) {
-	// 		$html .= '
-	// 				<tr>
- //                        <td></td>
- //                        <td>'.$noticia['nombre'].'</td>
- //                        <td>'.$noticia['empresa'].'</td>
- //                        <td>'.$noticia['logo'].'</td>
- //                        <td>
- //          					<a class="btn btn-default btn-sm" href="javascript:void(0);">Ver</a>
- //          					<a class="btn btn-danger btn-sm" href="javascript:void(0);">Eliminar</a>
- //          				</td>
- //                    </tr>
-	// 		';
-	// 	}
+		$this->header_admin('Noticias de Hoy - ' );
+		$noticias = $this->noticiasRepository->showAllNews();
+		$html = '';
+		foreach ($noticias as $noticia) {
+			$html .= '
+					<tr>
+                        <td></td>
+                        <td>
+                        	<span>' . $noticia['id_noticia'] . '</span>
+                        	<p>' . $noticia['encabezado'] . '</p>
+                        </td>
+                        <td>'.$noticia['fuente'].'</td>
+                        <td>'.$noticia['logo'].'</td>
+                        <td>
+          					<a class="btn btn-default btn-sm" href="javascript:void(0);">Ver</a>
+          					<a class="btn btn-danger btn-sm" href="javascript:void(0);">Eliminar</a>
+          				</td>
+                    </tr>
+			';
+		}
 
-	// 	require $this->adminviews . 'showNews.php';
-	// 	$this->footer_admin();
-	// }
+		require $this->adminviews . 'showNews.php';
+		$this->footer_admin();
+	}
 
 	protected function addNew( $campos, $fuente ){
 
@@ -143,7 +146,7 @@ class AdminNews extends Controller{
 
 		 */
 
-		$extencionesPermitidas = ['jpg', 'jpeg', 'gif', 'png', 'JPG', 'JPEG', 'PNG', 'mp4', 'wma', 'wmv', 'mp3', 'avi'];
+		$extencionesPermitidas = ['pdf', 'jpg', 'jpeg', 'gif', 'png', 'JPG', 'JPEG', 'PNG', 'mp4', 'wma', 'wmv', 'mp3', 'avi'];
 		$explode = explode(".", $principal["name"]);
 		$extension = end($explode);
 		if ((($principal['type'] == 'image/png')
@@ -154,6 +157,7 @@ class AdminNews extends Controller{
 			|| ($principal['type'] == 'audio/mpeg')
 			|| ($principal['type'] == 'audio/mp3')
 			|| ($principal['type'] == 'video/avi')
+			|| ($principal['type'] == 'application/pdf')
 			|| ($principal['type'] == 'video/mp4'))
 			&& in_array($extension, $extencionesPermitidas))
 		{

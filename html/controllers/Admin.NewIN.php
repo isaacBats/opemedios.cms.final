@@ -56,7 +56,7 @@ class AdminNewIN extends AdminNews{
 
 				$_POST['principal'] = 0;				
 			}
-			print_r($_POST); exit();
+			
 			if($this->inRepository->addNewIN( $_POST )){
 				//header('Location: /panel/fonts/show-list');
 				 echo 'Se ha agregado una noticia de '.$this->fuente.' correctamente';

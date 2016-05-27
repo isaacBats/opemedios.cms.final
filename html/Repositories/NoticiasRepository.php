@@ -15,4 +15,20 @@ class NoticiasRepository extends BaseRepository{
 		}
 	}
 
+	public function showNewsToDay(){
+
+		$sql = ' 	SELECT n.id_noticia AS id, n.encabezado, f.nombre AS nameFont, a.id_empresa, e.nombre AS send
+					FROM noticia n
+					INNER JOIN fuente f ON n.id_fuente = f.id_fuente
+					INNER JOIN asigna a ON n.id_noticia = a.id_noticia
+					INNER JOIN empresa e ON a.id_empresa = e.id_empresa
+					ORDER BY n.id_noticia DESC LIMIT 30;					
+				';
+		$query = $this->pdo->prepare( $sql );
+
+		$rs = ( $query->execute() ) ? $query->fetchAll() : 'No hay noticias aun';
+
+		return $rs;
+	}
+
 }

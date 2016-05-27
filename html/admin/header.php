@@ -306,7 +306,7 @@
                                     </ul>
                                 </li>
                                 <li>
-                                    <a href="morris.html">Noticias de hoy</a>
+                                    <a href="/panel/news">Noticias de hoy</a>
                                 </li>
                                 <li>
                                     <a href="morris.html">Búsqueda avanzada</a>

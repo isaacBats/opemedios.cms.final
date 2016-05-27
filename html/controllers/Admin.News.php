@@ -20,24 +20,23 @@ class AdminNews extends Controller{
 	public function showNews(){
 
 		$this->header_admin('Noticias de Hoy - ' );
-		$noticias = $this->noticiasRepository->showAllNews();
-		$html = '';
-		foreach ($noticias as $noticia) {
-			$html .= '
-					<tr>
-                        <td></td>
-                        <td>
-                        	<span>' . $noticia['id_noticia'] . '</span>
-                        	<p>' . $noticia['encabezado'] . '</p>
-                        </td>
-                        <td>'.$noticia['fuente'].'</td>
-                        <td>'.$noticia['logo'].'</td>
-                        <td>
-          					<a class="btn btn-default btn-sm" href="javascript:void(0);">Ver</a>
-          					<a class="btn btn-danger btn-sm" href="javascript:void(0);">Eliminar</a>
-          				</td>
-                    </tr>
-			';
+		$noticias = $this->noticiasRepository->showNewsToDay();
+		if ( is_array($noticias) ){
+
+			$html = '';
+			foreach ($noticias as $noticia) {
+				$html .= '
+						<tr>
+	                        <td></td>
+	                        <td>
+	                        	<span>' . $noticia['id'] . '</span>
+	                        	<p>' . $noticia['encabezado'] . '</p>
+	                        </td>
+	                        <td>'.$noticia['nameFont'].'</td>
+	                        <td>'.$noticia['send'].'</td>
+	                    </tr>
+				';
+			}
 		}
 
 		require $this->adminviews . 'showNews.php';

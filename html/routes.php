@@ -189,3 +189,9 @@ $collection->attachRoute(new Route('/panel/new/internet/save', array(
     '_controller' => 'AdminNewIN::save',
     'methods' => 'POST'
 )));
+
+//Show News list
+$collection->attachRoute(new Route('/panel/news', array(
+    '_controller' => 'AdminNews::showNews',
+    'methods' => 'GET'
+)));

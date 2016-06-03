@@ -25,6 +25,10 @@ class AdminNews extends Controller{
 
 			$html = '';
 			foreach ($noticias as $noticia) {
+
+				$asigna = $this->noticiasRepository->asignaByIdNoticia( $noticia['id'] );
+				$enviado = ( is_array( $asigna ) ) ? $asigna['empresa'] : 'No enviado';
+
 				$html .= '
 						<tr>
 	                        <td></td>
@@ -33,7 +37,7 @@ class AdminNews extends Controller{
 	                        	<p>' . $noticia['encabezado'] . '</p>
 	                        </td>
 	                        <td>'.$noticia['nameFont'].'</td>
-	                        <td>'.$noticia['send'].'</td>
+	                        <td>' .$enviado. '</td>
 	                    </tr>
 				';
 			}

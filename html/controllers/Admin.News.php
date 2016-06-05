@@ -8,6 +8,7 @@ include_once(__DIR__.'/../Repositories/GeneroRepository.php');
 include_once(__DIR__.'/../Repositories/SectorRepository.php');
 include_once(__DIR__.'/../Repositories/SeccionRepository.php');
 
+include 'Image.php';
 
 class AdminNews extends Controller{
 
@@ -182,5 +183,15 @@ class AdminNews extends Controller{
 		}else{
 			return false;
 		}
+	}
+
+	public function createImage(){
+
+		$imagen = new Image('Mi imagen');
+
+		header('Content-Type: image/jpeg');
+		$nueva = $imagen->createImage();		
+		imagejpeg($nueva);
+		imagedestroy($nueva);
 	}
 }

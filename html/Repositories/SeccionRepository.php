@@ -4,16 +4,13 @@ include_once("BaseRepository.php");
 
 class SeccionRepository extends BaseRepository{
 
-	// public function findById($id){
+	public function getSeccionById($id){
 		
-	// 	$query = $this->pdo->prepare("SELECT * FROM sector WHERE id_sector = '$id' LIMIT 1;");
+		$query = $this->pdo->prepare("SELECT * FROM seccion WHERE id_seccion = '$id' LIMIT 1;");
 		
-	// 	if($query->execute()){
-	// 		return  $query->fetch();
-	// 	}else{
-	// 		echo 'No se pudo ejecutar la consulta para buscar el Sector';
-	// 	}
-	// }
+		$rs = ($query->execute()) ? $query->fetch() : 'No se pudo ejecutar la consulta para buscar la sección';
+		return $rs;
+	}
 
 	// public function addSector( $font ){
 

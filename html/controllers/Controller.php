@@ -1,6 +1,9 @@
 <?php 
 
-	
+use Knp\Snappy\Pdf;
+
+use Knp\Snappy\Image;
+
 	class Controller
 	{
 		public $pdo = null;
@@ -91,6 +94,32 @@
 	    	$title .= " Operadora de Medios Informativos 2016";
 
 	    	return $title;
+	    }
+
+	    public function generarPdf($res, $data, $template) {
+	        $snappy = new Pdf('/usr/bin/wkhtmltopdf');
+	        $pd = $res->mustache->loadTemplate($template);
+	        $text = $pd->render($data);
+	        header('Content-Type: application/pdf');
+	        header('Content-Disposition: attachment; filename="' . $data['filename'] . '.pdf"');
+	        echo $snappy->getOutputFromHtml($text, array(
+	//            'orientation' => 'landscape',
+	            'zoom' => 0.5,
+	//            'page-height' => 10000,
+	            'encoding' => 'utf-8'
+	        ));
+	    }
+
+	    public function generarImage( $data, $template ) {
+	        $snappy = new Image('/usr/bin/wkhtmltoimage');
+	        header('Content-Type: image/jpeg');
+	        header('Content-Disposition: attachment; filename="' . $filename . '.jpg"');
+	        echo $snappy->getOutputFromHtml($template, array(
+	//            'orientation' => 'landscape',
+	            'zoom' => 0.5,
+	//            'page-height' => 10000,
+	            'encoding' => 'utf-8'
+	        ));
 	    }
 
 

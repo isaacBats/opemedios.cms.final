@@ -8,5 +8,5 @@
 <p>Autor: <strong><?= $newSelected['autor'] ?></strong></p>
 <p>Fecha: <strong><?= getFechaLarga($newSelected['fecha']) ?></strong></p>
 <?= $html ?>
-<p>Fuente: <?= $fuente  ?></p>
+<p>Fuente: <?= $newSelected['fuente']  ?></p>
 

@@ -59,7 +59,7 @@ class AdminNews extends Controller{
 		$newSelected = $this->noticiasRepository->getNewById( $id ); 
 		$relatedNew = null ;
 		$html = '';
-		switch ($newSelected['id_tipo_fuente']) {
+		switch ($newSelected['tipofuente_id']) {
 			case '1':
 				$font = 'tel';
 				$relatedNew = $this->noticiasRepository->getNewById( $id, $font );
@@ -111,13 +111,7 @@ class AdminNews extends Controller{
 				}
 				break;
 		}
-
-		$relatedFont = $fr->getFontById( $newSelected['id_fuente'] );
-		if( is_array($relatedFont) ){
-			$fuente = $relatedFont['nombre'];			
-		}
-
-
+		
 		$this->header_admin('Noticias de Hoy: ' . $newSelected['encabezado'] . ' - ' );
 		require $this->adminviews . 'viewNew.php';
 		$this->footer_admin();

@@ -196,6 +196,13 @@ $collection->attachRoute(new Route('/panel/news', array(
     'methods' => 'GET'
 )));
 
+$collection->attachRoute(new Route('/panel/new/view/:id', array(
+    '_controller' => 'AdminNews::viewNew',
+    'methods' => 'GET'
+)));
+
+
+
 $collection->attachRoute(new Route('/create-image/:id', array(
     '_controller' => 'AdminNews::createImage',
     'methods' => 'GET'

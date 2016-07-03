@@ -4,6 +4,8 @@ use Knp\Snappy\Pdf;
 
 use Knp\Snappy\Image;
 
+require 'helpers.php';
+
 	class Controller
 	{
 		public $pdo = null;
@@ -47,7 +49,6 @@ use Knp\Snappy\Image;
 
 		function __construct()
 		{
-			session_start();
 			global $_config;
 			$this->pdo = new PDO($_config->db["dsn"], $_config->db["nombre_usuario"], $_config->db["password"], $_config->db["opciones"]);
 		}

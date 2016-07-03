@@ -19,8 +19,6 @@ class AdminNews extends Controller{
 	}
 
 	public function showNews(){
-
-		$this->header_admin('Noticias de Hoy - ' );
 		$noticias = $this->noticiasRepository->showNewsToDay();
 		if ( is_array($noticias) ){
 
@@ -39,14 +37,92 @@ class AdminNews extends Controller{
 	                        </td>
 	                        <td>'.$noticia['nameFont'].'</td>
 	                        <td>' .$enviado. '</td>
+	                        <td>
+								<a href="/panel/new/view/' . $noticia['id'] . '"><i class="fa fa-eye"></i></a>	
+								<a href=""><i class="fa fa-pencil"></i></a>	
+								<a href=""><i class="fa fa-envelope-o"></i></a>	
+								<a href=""><i class="fa fa-trash-o"></i></a>	
+	                        </td>
 	                    </tr>
 				';
 			}
 		}
 
+		$this->header_admin('Noticias de Hoy - ' );
 		require $this->adminviews . 'showNews.php';
 		$this->footer_admin();
 	}
+
+	public function viewNew ( $id ){
+
+		$fr = new FuentesRepository();
+		$newSelected = $this->noticiasRepository->getNewById( $id ); 
+		$relatedNew = null ;
+		$html = '';
+		switch ($newSelected['id_tipo_fuente']) {
+			case '1':
+				$font = 'tel';
+				$relatedNew = $this->noticiasRepository->getNewById( $id, $font );
+				if( is_array( $relatedNew ) ){
+					$html = '
+								<p>Hora: <strong>' . $relatedNew['hora'] . '</strong></p>
+								<p>Duración: <strong>' . $relatedNew['duracion'] . '</strong></p>
+					';					
+				}
+				break;
+			case '2':
+				$font = 'rad';
+				$relatedNew = $this->noticiasRepository->getNewById( $id, $font );
+				if( is_array( $relatedNew ) ){
+					$html = '
+								<p>Hora: <strong>' . $relatedNew['hora'] . '</strong></p>
+								<p>Duración: <strong>' . $relatedNew['duracion'] . '</strong></p>
+					';					
+				}
+				break;
+			case '3':
+				$font = 'per';
+				$relatedNew = $this->noticiasRepository->getNewById( $id, $font );
+				if( is_array( $relatedNew ) ){
+					$html = '
+								<p>Página: <strong>' . $relatedNew['pagina'] . '</strong></p>
+								<p>Tamaño(%): <strong>' . $relatedNew['porcentaje_pagina'] . '</strong></p>
+					';					
+				}
+				break;
+			case '4':
+				$font = 'rev';
+				$relatedNew = $this->noticiasRepository->getNewById( $id, $font );
+				if( is_array( $relatedNew ) ){
+					$html = '
+								<p>Página: <strong>' . $relatedNew['pagina'] . '</strong></p>
+								<p>Tamaño(%): <strong>' . $relatedNew['porcentaje_pagina'] . '</strong></p>
+					';					
+				}
+				break;
+			case '5':
+				$font = 'int';
+				$relatedNew = $this->noticiasRepository->getNewById( $id, $font );
+				if( is_array( $relatedNew ) ){
+					$html = '
+								<p>Hora de captura: <strong>' . $relatedNew['hora_publicacion'] . '</strong></p>
+								<p>URL: <a href="' . $relatedNew['url'] . '" target="_blank" >' . $relatedNew['url'] . '</a></p>							
+					';					
+				}
+				break;
+		}
+
+		$relatedFont = $fr->getFontById( $newSelected['id_fuente'] );
+		if( is_array($relatedFont) ){
+			$fuente = $relatedFont['nombre'];			
+		}
+
+
+		$this->header_admin('Noticias de Hoy: ' . $newSelected['encabezado'] . ' - ' );
+		require $this->adminviews . 'viewNew.php';
+		$this->footer_admin();
+	}
+
 
 	protected function addNew( $campos, $fuente ){
 

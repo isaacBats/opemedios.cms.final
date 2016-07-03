@@ -19,5 +19,19 @@ class FuentesRepository extends BaseRepository{
 		}
 	}
 
+	public function getFontById( $id, $font = '' ) {
+
+		if( $font != '' || $font != null ){
+			$query = $this->pdo->prepare( 'SELECT * FROM fuente_' . $font . ' WHERE id_fuente = :id' );			
+		}else{
+			$query = $this->pdo->prepare( 'SELECT * FROM fuente WHERE id_fuente = :id' );			
+		}
+		$query->bindparam( ':id', $id, \PDO::PARAM_INT);
+
+		$rs = ( $query->execute() ) ? $query->fetch() : 'No se ejecuto la consulta para buscar la fuente';
+
+		return $rs;	
+	}
+
 
 }

@@ -65,4 +65,5 @@ class TelevisionRepository extends BaseRepository{
 			echo 'No se pude agregar el archivo adjunton :(';
 		}
 	}
+
 }

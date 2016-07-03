@@ -20,6 +20,7 @@
                                 <th>Noticia</th>
                                 <th>Fuente</th>
                                 <th>Enviado a</th>
+                                <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody>

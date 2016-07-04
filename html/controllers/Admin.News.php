@@ -39,7 +39,7 @@ class AdminNews extends Controller{
 	                        <td>' .$enviado. '</td>
 	                        <td>
 								<a href="/panel/new/view/' . $noticia['id'] . '"><i class="fa fa-eye"></i></a>	
-								<a href=""><i class="fa fa-pencil"></i></a>	
+								<a href="/panel/new/edit/' . $noticia['id'] . '"><i class="fa fa-pencil"></i></a>	
 								<a href=""><i class="fa fa-envelope-o"></i></a>	
 								<a href=""><i class="fa fa-trash-o"></i></a>	
 	                        </td>
@@ -117,6 +117,14 @@ class AdminNews extends Controller{
 		$this->footer_admin();
 	}
 
+	public function editNewView( $id ){
+
+		$newSelected = $this->noticiasRepository->getNewById( $id ); 
+		
+		$this->header_admin('Editar noticias: ' . $newSelected['encabezado'] . ' - ' );
+		require $this->adminviews . 'editNew.php';
+		$this->footer_admin();	
+	}
 
 	protected function addNew( $campos, $fuente ){
 

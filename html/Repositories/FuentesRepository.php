@@ -7,7 +7,7 @@ class FuentesRepository extends BaseRepository{
 	public function showAllFonts( $id = -1 ){
 		
 		if( $id != -1){
-			$query = $this->pdo->prepare("SELECT * FROM fuente where id_tipo_fuente = $id ORDER BY id_fuente DESC LIMIT 130;");			
+			$query = $this->pdo->prepare("SELECT * FROM fuente where id_tipo_fuente = $id ORDER BY id_fuente DESC;");			
 		}else{
 			$query = $this->pdo->prepare("SELECT * FROM fuente ORDER BY id_fuente DESC LIMIT 130;");			
 		}

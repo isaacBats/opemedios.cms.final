@@ -119,7 +119,68 @@ class AdminNews extends Controller{
 
 	public function editNewView( $id ){
 
-		$newSelected = $this->noticiasRepository->getNewById( $id ); 
+		$fr   = new FuentesRepository();
+		$gr   = new GeneroRepository();
+		$secr = new SectorRepository();
+		$sccr = new SeccionRepository();
+		$tfr  = new TipoFuenteRepository();
+		$tar  = new TipoAutorRepository();
+
+		$optionFont = '';
+		$genero		= '';
+		$sector		= '';
+		$seccion	= '';
+		$tipoAutor	= '';
+
+		$newSelected = $this->noticiasRepository->getNewById( $id );
+
+		$fuentes   = $fr->showAllFonts( $newSelected['tipofuente_id'] );
+		$autores   = $tar->allAuthors();
+		$generos   = $gr->allGeneros();
+		$sectores  = $secr->allSectors( 1 );
+		$secciones = $sccr->allSecciones( 1 );
+
+		foreach ($fuentes as $f) {
+			if ( $f['id_fuente'] == $newSelected['fuente_id'] ){
+				$optionFont .= '<option value="'.$f['id_fuente'].'" selected >'.$f['nombre'].'</option>';				
+			}else{
+				$optionFont .= '<option value="'.$f['id_fuente'].'">'.$f['nombre'].'</option>';
+			}
+		}
+
+		foreach ($autores as $a) {
+			if( $a['id_tipo_autor'] == $newSelected['tipoautor_id'] ){
+				$tipoAutor .= '<option value="'.$a['id_tipo_autor'].'" selected >'.$a['descripcion'].'</option>';				
+			}else{
+				$tipoAutor .= '<option value="'.$a['id_tipo_autor'].'">'.$a['descripcion'].'</option>';				
+			}
+		}
+
+		foreach ($generos as $g) {
+			if( $g['id_genero'] == $newSelected['genero_id'] ){
+				$genero .= '<option value="'.$g['id_genero'].'" selected >'.$g['descripcion'].'</option>';				
+			}else{
+				$genero .= '<option value="'.$g['id_genero'].'">'.$g['descripcion'].'</option>';				
+			}
+		}
+
+		foreach ($sectores as $s) {
+			if( $s['id_sector'] == $newSelected['sector_id'] ){
+				$sector .= '<option value="'.$s['id_sector'].'" selected >'.$s['nombre'].'</option>';				
+			}else{
+				$sector .= '<option value="'.$s['id_sector'].'">'.$s['nombre'].'</option>';				
+			}
+		}
+
+		foreach ($secciones as $secc) {
+			if( $secc['id_seccion'] == $newSelected['seccion_id'] ){
+				$seccion .= '<option value="'.$secc['id_seccion'].'">'.$secc['nombre'].'</option>';				
+			}else{
+				$seccion .= '<option value="'.$secc['id_seccion'].'">'.$secc['nombre'].'</option>';				
+			}
+		}
+
+		// echo $newSelected['seccion_id']; exit();
 		
 		$this->header_admin('Editar noticias: ' . $newSelected['encabezado'] . ' - ' );
 		require $this->adminviews . 'editNew.php';

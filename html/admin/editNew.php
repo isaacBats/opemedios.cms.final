@@ -24,33 +24,39 @@
                                 <textarea class="form-control" name="sintesis"><?= $newSelected['sintesis'] ?></textarea>
                             </div>
                             <div class="form-group select2">
+                                <label>Fuente:</label>
                                 <select class="form-control" name="fuente" id="selectFuente" required >
                                     <option value="">Seleccione una Fuente</option>
                                     <?= $optionFont ?>
                                 </select>
                             </div>
                             <div class="form-group"> 
-                                <input class="form-control" placeholder="Nombre Autor" name="autor" required>
+                                <label>Nombre Autor:</label>
+                                <input class="form-control" value="<?= $newSelected['autor'] ?>" name="autor" required>
                             </div>
                             <div class="form-group col-lg-6">
+                            	<label>Tipo de Autor:</label>
                                  <select class="form-control" name="tipoAutor">
                                     <option value="">Tipo de Autor</option>
                                     <?= $tipoAutor ?>
                                 </select>
                             </div>
                             <div class="form-group col-lg-6">
+                            	<label>Género:</label>
                                  <select class="form-control" name="genero">
                                     <option value="">Género</option>
                                     <?= $genero ?>
                                 </select>
                             </div>
                             <div class="form-group col-lg-6">
+                            	<label>Sector:</label>
                                  <select class="form-control" name="sector">
                                     <option value="">Sector</option>
                                     <?= $sector ?>
                                 </select>
                             </div>
                             <div class="form-group col-lg-6">
+                            	<label>Sección</label>
                                  <select class="form-control" name="seccion">
                                     <option value="">Sección</option>
                                     <?= $seccion ?>

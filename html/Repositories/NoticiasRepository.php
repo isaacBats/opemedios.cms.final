@@ -98,5 +98,14 @@ class NoticiasRepository extends BaseRepository{
 		return $rs;	
 	}
 
+	public function getTendencias(){
+		
+		$query = $this->pdo->prepare("SELECT * FROM tendencia;");			
+		
+		$tendencias = ( $query->execute() ) ? $query->fetchAll(\PDO::FETCH_ASSOC) : 'No se pudo ejecutar la consulta para buscar todos los Sectores';
+		
+		return $tendencias;
+	}
+
 
 }

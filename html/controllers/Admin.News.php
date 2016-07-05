@@ -131,6 +131,7 @@ class AdminNews extends Controller{
 		$sector		= '';
 		$seccion	= '';
 		$tipoAutor	= '';
+		$tendencia  = '';
 
 		$newSelected = $this->noticiasRepository->getNewById( $id );
 
@@ -139,6 +140,15 @@ class AdminNews extends Controller{
 		$generos   = $gr->allGeneros();
 		$sectores  = $secr->allSectors( 1 );
 		$secciones = $sccr->allSecciones( 1 );
+		$tendencias = $this->noticiasRepository->getTendencias();
+
+		foreach ($tendencias as $t) {
+			if ( $t['id_tendencia'] == $newSelected['tendencia_id'] ){
+				$tendencia .= '<option value="'.$t['id_tendencia'].'" selected >'.$t['descripcion'].'</option>';				
+			}else{
+				$tendencia .= '<option value="'.$t['id_tendencia'].'">'.$t['descripcion'].'</option>';
+			}
+		}
 
 		foreach ($fuentes as $f) {
 			if ( $f['id_fuente'] == $newSelected['fuente_id'] ){

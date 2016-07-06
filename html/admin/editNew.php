@@ -73,7 +73,7 @@
                             <div class="form-group">
                                 <div class="form-group col-lg-6">
                                     <label>Costo:</label>
-                                    <input class="form-control" value="<?= 'Sin costo por el momento' ?>" name="costoBeneficio">
+                                    <input class="form-control" value="<?= $costo ?>" name="costoBeneficio">
                                 </div>
                                 <div class="form-group col-lg-6">
                                     <label>Tendencia:</label>

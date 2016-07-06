@@ -91,7 +91,7 @@ class NoticiasRepository extends BaseRepository{
 			// $query = $this->pdo->prepare( 'SELECT * FROM noticia WHERE id_noticia = :id' );			
 			$query = $this->pdo->prepare( $sql );			
 		}
-		$query->bindparam( ':id', $id, \PDO::PARAM_INT);
+		$query->bindParam( ':id', $id, \PDO::PARAM_INT);
 
 		$rs = ( $query->execute() ) ? $query->fetch() : 'No se ejecuto la consulta para buscar la noticia';
 

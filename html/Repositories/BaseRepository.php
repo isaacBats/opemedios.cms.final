@@ -92,4 +92,13 @@ class BaseRepository {
 
 		return $tipos;
 	}
+
+	public function getUbicacionByNoticiaId( $id ){
+
+		$query = $this->pdo->prepare('SELECT * FROM ubicacion WHERE id_noticia = :id');
+		$query->bindParam(':id', $id, \PDO::PARAM_STR);
+		$ubicacion = ( $query->execute() ) ? $query->fetch() : 'Error en la consulta de la tabla de Ubicación';
+
+		return $ubicacion;
+	}
 }

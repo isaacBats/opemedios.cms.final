@@ -119,6 +119,20 @@ class AdminNews extends Controller{
 
 	public function editNewView( $id ){
 
+		$css = '
+				<!-- Select2 CSS -->
+			    <link href="/assets/css/select2.min.css" rel="stylesheet">
+			    <link href="/admin/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+		';
+
+		$js = '
+				<!-- Select2 JavaScript -->
+			    <script type="text/javascript" src="/assets/bower_components/moment/min/moment.min.js"></script>
+			    <script src="/admin/js/bootstrap-datetimepicker.min.js"></script>
+			    <script src="/assets/js/select2.min.js"></script>
+			    <script src="/assets/js/i18n/es.js"></script>
+		';
+
 		$fr   = new FuentesRepository();
 		$gr   = new GeneroRepository();
 		$secr = new SectorRepository();
@@ -132,6 +146,7 @@ class AdminNews extends Controller{
 		$seccion	= '';
 		$tipoAutor	= '';
 		$tendencia  = '';
+		$costo 		= '';
 
 		$newSelected = $this->noticiasRepository->getNewById( $id );
 
@@ -184,17 +199,164 @@ class AdminNews extends Controller{
 
 		foreach ($secciones as $secc) {
 			if( $secc['id_seccion'] == $newSelected['seccion_id'] ){
-				$seccion .= '<option value="'.$secc['id_seccion'].'">'.$secc['nombre'].'</option>';				
+				$seccion .= '<option value="'.$secc['id_seccion'].'" selected >'.$secc['nombre'].'</option>';				
 			}else{
 				$seccion .= '<option value="'.$secc['id_seccion'].'">'.$secc['nombre'].'</option>';				
 			}
 		}
 
+		$relatedNew = null ;
+		$campos = '';
+		switch ($newSelected['tipofuente_id']) {
+			case '1':
+				$font = 'tel';
+				$css .= '
+						<link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" rel="stylesheet">
+					    <link rel="stylesheet" type="text/css" media="screen" href="http://tarruda.github.com/bootstrap-datetimepicker/assets/css/bootstrap-datetimepicker.min.css">    			
+				';
+				$relatedNew = $this->noticiasRepository->getNewById( $id, $font );
+				if( is_array( $relatedNew ) ){
+					ob_start();
+					require $this->adminviews . 'editNewTV.php';
+					$campos = ob_get_clean();
+					$costo = $relatedNew['costo'];					
+				}
+				break;
+			case '2':
+				$font = 'rad';
+				$css .= '
+						<link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" rel="stylesheet">
+					    <link rel="stylesheet" type="text/css" media="screen" href="http://tarruda.github.com/bootstrap-datetimepicker/assets/css/bootstrap-datetimepicker.min.css">    			
+				';
+				$relatedNew = $this->noticiasRepository->getNewById( $id, $font );
+				if( is_array( $relatedNew ) ){
+					ob_start();
+					require $this->adminviews . 'editNewRD.php';
+					$campos = ob_get_clean();
+					$costo = $relatedNew['costo'];					
+				}
+				break;
+			case '3':
+				$font = 'per';
+				$relatedNew = $this->noticiasRepository->getNewById( $id, $font );
+				if( is_array( $relatedNew ) ){
+					ob_start();
+					require $this->adminviews . 'editNewPE.php';
+					$campos = ob_get_clean();
+					$costo = $relatedNew['costo'];					
+				}
+				break;
+			case '4':
+				$ub1 = '';
+				$ub2 = '';
+				$ub3 = '';
+				$ub4 = '';
+
+				$font = 'rev';
+				$relatedNew = $this->noticiasRepository->getNewById( $id, $font );
+				if( is_array( $relatedNew ) ){
+					$tipoPaginacion = '';
+					$tipos = $this->noticiasRepository->getTiposPagina();
+					foreach ($tipos as $t) {
+						if( $t['id_tipo_pagina'] == $relatedNew['id_tipo_pagina'] ){
+							$tipoPaginacion .= '<option value="'.$t['id_tipo_pagina'].'" selected>'.$t['descripcion'].'</option>';							
+						}else{
+							$tipoPaginacion .= '<option value="'.$t['id_tipo_pagina'].'">'.$t['descripcion'].'</option>';							
+						}
+					}
+
+					$ubicaciones = $this->noticiasRepository->getUbicacionByNoticiaId( $id );
+					for ($i=1; $i <= 3; $i++) { 
+						if( $ubicaciones[$i] == '1' ){
+							$ub1 .= '
+									<label class="checkbox-inline">
+							            <input name="ubicacion' . $i . '" type="checkbox" checked >
+							        </label>
+							';
+						}else{
+							$ub1 .= '
+									<label class="checkbox-inline">
+							            <input name="ubicacion' . $i . '" type="checkbox" >
+							        </label>
+							';
+						}
+					}
+
+					for ($i=4; $i <= 6; $i++) { 
+						if( $ubicaciones[$i] == '1' ){
+							$ub2 .= '
+									<label class="checkbox-inline">
+							            <input name="ubicacion' . $i . '" type="checkbox" checked >
+							        </label>
+							';
+						}else{
+							$ub2 .= '
+									<label class="checkbox-inline">
+							            <input name="ubicacion' . $i . '" type="checkbox" >
+							        </label>
+							';
+						}
+					}
+
+					for ($i=7; $i <= 9; $i++) { 
+						if( $ubicaciones[$i] == '1' ){
+							$ub3 .= '
+									<label class="checkbox-inline">
+							            <input name="ubicacion' . $i . '" type="checkbox" checked >
+							        </label>
+							';
+						}else{
+							$ub3 .= '
+									<label class="checkbox-inline">
+							            <input name="ubicacion' . $i . '" type="checkbox" >
+							        </label>
+							';
+						}
+					}
+
+					for ($i=10; $i <= 12; $i++) { 
+						if( $ubicaciones[$i] == '1' ){
+							$ub4 .= '
+									<label class="checkbox-inline">
+							            <input name="ubicacion' . $i . '" type="checkbox" checked >
+							        </label>
+							';
+						}else{
+							$ub4 .= '
+									<label class="checkbox-inline">
+							            <input name="ubicacion' . $i . '" type="checkbox" >
+							        </label>
+							';
+						}
+					}
+
+					ob_start();
+					require $this->adminviews . 'editNewRE.php';
+					$campos = ob_get_clean();
+					$costo = $relatedNew['costo'];					
+				}
+				break;
+			case '5':
+				$font = 'int';
+				$css .= '
+						<link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" rel="stylesheet">
+					    <link rel="stylesheet" type="text/css" media="screen" href="http://tarruda.github.com/bootstrap-datetimepicker/assets/css/bootstrap-datetimepicker.min.css">    			
+				';
+				$relatedNew = $this->noticiasRepository->getNewById( $id, $font );
+				if( is_array( $relatedNew ) ){
+					ob_start();
+					require $this->adminviews . 'editNewIN.php';
+					$campos = ob_get_clean();
+					$costo = $relatedNew['costo'];					
+				}
+				break;
+		}
+
 		// echo $newSelected['seccion_id']; exit();
 		
-		$this->header_admin('Editar noticias: ' . $newSelected['encabezado'] . ' - ' );
+		$this->header_admin('Editar noticias: ' . $newSelected['encabezado'] . ' - ', $css );
 		require $this->adminviews . 'editNew.php';
-		$this->footer_admin();	
+		$this->footer_admin( $js );	
 	}
 
 	protected function addNew( $campos, $fuente ){

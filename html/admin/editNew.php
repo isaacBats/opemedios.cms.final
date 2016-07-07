@@ -14,7 +14,9 @@
             <div class="panel-body">
                 <div class="row">
                     <div class="col-lg-12">
-                        <form id="form_new" method="post" action="" enctype="multipart/form-data">
+                        <form id="form_new" method="post" action="/panel/new/update-new" enctype="multipart/form-data">
+                            <input type="hidden" name="noticia_id" value="<?= $newSelected['id'] ?>" />
+                            <input type="hidden" name="tipofuente_id" value="<?= $newSelected['tipofuente_id'] ?>" />
                             <div class="form-group"> 
                             	<label>Título:</label>
                                 <input class="form-control" value="<?= $newSelected['encabezado'] ?>" name="encabezado" required>
@@ -25,7 +27,7 @@
                             </div>
                             <div class="form-group select2">
                                 <label>Fuente:</label>
-                                <select class="form-control" name="fuente" id="selectFuente" required >
+                                <select class="form-control" name="fuente_id" id="selectFuente" required >
                                     <option value="">Seleccione una Fuente</option>
                                     <?= $optionFont ?>
                                 </select>
@@ -87,10 +89,10 @@
                                 <label>Comentarios:</label>
                                 <textarea class="form-control" name="comentarios"><?= $newSelected['comentario'] ?></textarea>
                             </div>
-                            <div class="form-group col-lg-6">
+                            <!-- <div class="form-group col-lg-6">
                                 <label>Archivo de <?= $newSelected['tipofuente'] ?></label>
                                 <input type="file" name="primario" />
-                            </div>
+                            </div> -->
                             <div class="col-lg-12">
                                 <input type="submit" class="btn btn-primary" value="Guardar">
                             </div>

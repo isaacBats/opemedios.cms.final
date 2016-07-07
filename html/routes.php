@@ -206,6 +206,11 @@ $collection->attachRoute(new Route('/panel/new/edit/:id', array(
     'methods' => 'GET'
 )));
 
+$collection->attachRoute(new Route('/panel/new/update-new', array(
+    '_controller' => 'AdminNews::updateNew',
+    'methods' => 'POST'
+)));
+
 
 
 $collection->attachRoute(new Route('/create-image/:id', array(

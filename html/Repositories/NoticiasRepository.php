@@ -107,5 +107,37 @@ class NoticiasRepository extends BaseRepository{
 		return $tendencias;
 	}
 
+	public function updateNew( $new ){
+
+		$sql = 'UPDATE noticia SET encabezado 				= :encabezado,
+								   sintesis	  				= :sintesis,
+								   autor	  				= :autor,
+								   fecha	  				= :fecha,
+								   comentario 				= :comentario,
+								   id_fuente      			= :fuente_id,
+								   id_seccion     			= :seccion_id,
+								   id_sector      			= :sector_id,
+								   id_tipo_autor  			= :tipoautor_id,
+								   id_genero      			= :genero_id,
+								   id_tendencia_monitorista = :tendencia_id
+				WHERE id_noticia = :noticia_id;				
+			   ';
+		
+		$query = $this->pdo->prepare( $sql );
+	 	$query->bindParam(':encabezado', $new['encabezado']);
+	 	$query->bindParam(':sintesis', $new['sintesis']);
+	 	$query->bindParam(':autor', $new['autor']);
+	 	$query->bindParam(':fecha', $new['fecha']);
+	 	$query->bindParam(':comentario', $new['comentarios']);
+	 	$query->bindParam(':fuente_id', $new['fuente_id']);
+	 	$query->bindParam(':seccion_id', $new['seccion']);
+	 	$query->bindParam(':sector_id', $new['sector']);
+	 	$query->bindParam(':tipoautor_id', $new['tipoAutor']);
+	 	$query->bindParam(':genero_id', $new['genero']);
+	 	$query->bindParam(':tendencia_id', $new['tendencia']);
+	 	$query->bindParam(':noticia_id', $new['noticia_id']);
+
+	 	return $query->execute();
+	}
 
 }

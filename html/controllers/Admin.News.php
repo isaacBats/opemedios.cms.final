@@ -237,9 +237,90 @@ class AdminNews extends Controller{
 				}
 				break;
 			case '3':
+				$ub1 = '';
+				$ub2 = '';
+				$ub3 = '';
+				$ub4 = '';
+
 				$font = 'per';
 				$relatedNew = $this->noticiasRepository->getNewById( $id, $font );
 				if( is_array( $relatedNew ) ){
+
+					$tipoPaginacion = '';
+					$tipos = $this->noticiasRepository->getTiposPagina();
+					foreach ($tipos as $t) {
+						if( $t['id_tipo_pagina'] == $relatedNew['id_tipo_pagina'] ){
+							$tipoPaginacion .= '<option value="'.$t['id_tipo_pagina'].'" selected>'.$t['descripcion'].'</option>';							
+						}else{
+							$tipoPaginacion .= '<option value="'.$t['id_tipo_pagina'].'">'.$t['descripcion'].'</option>';							
+						}
+					}
+
+					$ubicaciones = $this->noticiasRepository->getUbicacionByNoticiaId( $id );
+					for ($i=1; $i <= 3; $i++) { 
+						if( $ubicaciones[$i] == '1' ){
+							$ub1 .= '
+									<label class="checkbox-inline">
+							            <input name="ubicacion' . $i . '" type="checkbox" checked >
+							        </label>
+							';
+						}else{
+							$ub1 .= '
+									<label class="checkbox-inline">
+							            <input name="ubicacion' . $i . '" type="checkbox" >
+							        </label>
+							';
+						}
+					}
+
+					for ($i=4; $i <= 6; $i++) { 
+						if( $ubicaciones[$i] == '1' ){
+							$ub2 .= '
+									<label class="checkbox-inline">
+							            <input name="ubicacion' . $i . '" type="checkbox" checked >
+							        </label>
+							';
+						}else{
+							$ub2 .= '
+									<label class="checkbox-inline">
+							            <input name="ubicacion' . $i . '" type="checkbox" >
+							        </label>
+							';
+						}
+					}
+
+					for ($i=7; $i <= 9; $i++) { 
+						if( $ubicaciones[$i] == '1' ){
+							$ub3 .= '
+									<label class="checkbox-inline">
+							            <input name="ubicacion' . $i . '" type="checkbox" checked >
+							        </label>
+							';
+						}else{
+							$ub3 .= '
+									<label class="checkbox-inline">
+							            <input name="ubicacion' . $i . '" type="checkbox" >
+							        </label>
+							';
+						}
+					}
+
+					for ($i=10; $i <= 12; $i++) { 
+						if( $ubicaciones[$i] == '1' ){
+							$ub4 .= '
+									<label class="checkbox-inline">
+							            <input name="ubicacion' . $i . '" type="checkbox" checked >
+							        </label>
+							';
+						}else{
+							$ub4 .= '
+									<label class="checkbox-inline">
+							            <input name="ubicacion' . $i . '" type="checkbox" >
+							        </label>
+							';
+						}
+					}
+
 					ob_start();
 					require $this->adminviews . 'editNewPE.php';
 					$campos = ob_get_clean();
@@ -357,6 +438,11 @@ class AdminNews extends Controller{
 		$this->header_admin('Editar noticias: ' . $newSelected['encabezado'] . ' - ', $css );
 		require $this->adminviews . 'editNew.php';
 		$this->footer_admin( $js );	
+	}
+
+	public function updateNew(){
+
+		$upedateNew = $_POST;
 	}
 
 	protected function addNew( $campos, $fuente ){

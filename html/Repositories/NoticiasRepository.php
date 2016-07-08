@@ -140,4 +140,60 @@ class NoticiasRepository extends BaseRepository{
 	 	return $query->execute();
 	}
 
+	public function updateNewRadTel( $new, $typeFont ){
+
+		$sql = 'UPDATE noticia_' . $typeFont . ' SET hora     = :hora,
+													 duracion = :duracion,
+													 costo    = :costo
+				WHERE id_noticia = :noticia_id;
+	
+		';
+
+		$query = $this->pdo->prepare( $sql );
+		$query->bindParam(':hora', $new['hora']);
+		$query->bindParam(':duracion', $new['duracion']);
+		$query->bindParam(':costo', $new['costoBeneficio']);
+		$query->bindParam(':noticia_id', $new['noticia_id']);
+
+		return $query->execute();
+	}
+
+	public function updateNewPerRev( $new, $typeFont ){
+
+		$sql = 'UPDATE noticia_' . $typeFont . ' SET paginia           = :pagina,
+													 id_tipo_pagina    = :tipopag_id,
+													 porcentaje_pagina = :tamano
+													 costo             = :costo
+				WHERE id_noticia = :noticia_id;
+	
+		';
+
+		$query = $this->pdo->prepare( $sql );
+		$query->bindParam(':pagina', $new['pagina']);
+		$query->bindParam(':tipopag_id', $new['tipoPagina']);
+		$query->bindParam(':tamano', $new['tamano']);
+		$query->bindParam(':costo', $new['costoBeneficio']);
+		$query->bindParam(':noticia_id', $new['noticia_id']);
+
+		return $query->execute();
+	}
+
+	public function updateNewInt( $new, $typeFont ){
+
+		$sql = 'UPDATE noticia_' . $typeFont . ' SET url     		  = :url,
+													 hora_publicacion = :hora,
+													 costo    		  = :costo
+				WHERE id_noticia = :noticia_id;
+	
+		';
+
+		$query = $this->pdo->prepare( $sql );
+		$query->bindParam(':hora', $new['hora']);
+		$query->bindParam(':url', $new['url']);
+		$query->bindParam(':costo', $new['costoBeneficio']);
+		$query->bindParam(':noticia_id', $new['noticia_id']);
+
+		return $query->execute();
+	}	
+
 }

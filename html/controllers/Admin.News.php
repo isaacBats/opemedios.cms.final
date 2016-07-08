@@ -442,7 +442,63 @@ class AdminNews extends Controller{
 
 	public function updateNew(){
 
-		$upedateNew = $_POST;
+		$updateNew = $_POST;
+		// print_r($updateNew); exit();
+		// Actualizando noticia general
+		$mupdatenew = $this->noticiasRepository->updateNew( $updateNew );
+		$updatenewson = false;
+		if($mupdatenew){
+			// Actualizando parte especifica de la noticia dependiendo el tipo de noticia 
+			switch ($updateNew['tipofuente_id']) {
+				case '1':
+					$font = 'tel';
+					$updatenewson = $this->noticiasRepository->updateNewRadTel( $updateNew, $font );
+					break;
+
+				case '2':
+					$font = 'rad';
+					$updatenewson = $this->noticiasRepository->updateNewRadTel( $updateNew, $font );
+					break;
+
+				case '3':
+					$font = 'per';
+					$ubicacion = [];
+					for ($i=1; $i <= 12 ; $i++) { 
+						if ( isset( $updateNew['ubicacion'. $i] ) ){
+							$ub = 1;
+							array_push($ubicacion, $ub);
+						}else{
+
+							$ub = 0;
+							array_push($ubicacion, $ub);
+						}
+					}
+
+					$updateNew['ubicacion'] = $ubicacion;
+					$this->noticiasRepository->updateUbicacion( $updateNew['ubicacion'], $updateNew['noticia_id']);
+					$updatenewson = $this->noticiasRepository->updateNewPerRev( $updateNew, $font );
+					break;
+
+				case '4':
+					$font = 'rev';
+					$updatenewson = $this->noticiasRepository->updateNewPerRev( $updateNew, $font );
+					break;
+
+				case '5':
+					$font = 'int';
+					$updatenewson = $this->noticiasRepository->updateNewInt( $updateNew, $font );
+					break;
+			}
+			
+		}
+
+		if( $updatenewson ){
+
+			header('Location: /panel/news');
+		}else{
+			echo 'Ocurrio un error';
+		}
+
 	}
 
 	protected function addNew( $campos, $fuente ){

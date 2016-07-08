@@ -85,6 +85,41 @@ class BaseRepository {
 		return $rs;
 	}
 
+	protected function updateUbicacion ( $new, $id ){
+		
+		$sql = 'UPDATE ubicacion SET uno 		= :uno, 
+									 dos 		= :dos, 
+			  						 tres 		= :tres, 
+									 cuatro 	= :cuatro, 
+									 cinco 		= :cinco, 
+									 seis 		= :seis, 
+									 siete 		= :siete, 
+									 ocho 		= :ocho, 
+									 nueve 		= :nueve, 
+									 diez 		= :diez, 
+									 once 		= :once, 
+									 doce 		= :doce
+				WHERE id_noticia = :noticia_id;
+				';
+		
+		$query = $this->pdo->prepare( $sql );
+		$query->bindParam(':idNoticia', $id);
+		$query->bindParam(':uno', $new[0]);
+		$query->bindParam(':dos', $new[1]);
+		$query->bindParam(':tres', $new[2]);
+		$query->bindParam(':cuatro', $new[3]);
+		$query->bindParam(':cinco', $new[4]);
+		$query->bindParam(':seis', $new[5]);
+		$query->bindParam(':siete', $new[6]);
+		$query->bindParam(':ocho', $new[7]);
+		$query->bindParam(':nueve', $new[8]);
+		$query->bindParam(':diez', $new[9]);
+		$query->bindParam(':once', $new[10]);
+		$query->bindParam(':doce', $new[11]);
+
+		return $query->execute();
+	}
+
 	public function getTiposPagina(){
 
 		$query = $this->pdo->prepare('SELECT * FROM tipo_pagina');

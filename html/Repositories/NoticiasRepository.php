@@ -160,14 +160,15 @@ class NoticiasRepository extends BaseRepository{
 
 	public function updateNewPerRev( $new, $typeFont ){
 
-		$sql = 'UPDATE noticia_' . $typeFont . ' SET paginia           = :pagina,
+
+		$sql = 'UPDATE noticia_' . $typeFont . ' SET pagina            = :pagina,
 													 id_tipo_pagina    = :tipopag_id,
-													 porcentaje_pagina = :tamano
+													 porcentaje_pagina = :tamano,
 													 costo             = :costo
 				WHERE id_noticia = :noticia_id;
 	
 		';
-
+		
 		$query = $this->pdo->prepare( $sql );
 		$query->bindParam(':pagina', $new['pagina']);
 		$query->bindParam(':tipopag_id', $new['tipoPagina']);

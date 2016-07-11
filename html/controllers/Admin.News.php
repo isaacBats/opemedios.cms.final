@@ -40,7 +40,7 @@ class AdminNews extends Controller{
 	                        <td>
 								<a href="/panel/new/view/' . $noticia['id'] . '"><i class="fa fa-eye"></i></a>	
 								<a href="/panel/new/edit/' . $noticia['id'] . '"><i class="fa fa-pencil"></i></a>	
-								<a href=""><i class="fa fa-envelope-o"></i></a>	
+								<a href="/panel/new/send/' . $noticia['id'] . '"><i class="fa fa-envelope-o"></i></a>	
 								<a href=""><i class="fa fa-trash-o"></i></a>	
 	                        </td>
 	                    </tr>
@@ -481,6 +481,20 @@ class AdminNews extends Controller{
 
 				case '4':
 					$font = 'rev';
+					$ubicacion = [];
+					for ($i=1; $i <= 12 ; $i++) { 
+						if ( isset( $updateNew['ubicacion'. $i] ) ){
+							$ub = 1;
+							array_push($ubicacion, $ub);
+						}else{
+
+							$ub = 0;
+							array_push($ubicacion, $ub);
+						}
+					}
+
+					$updateNew['ubicacion'] = $ubicacion;
+					$this->noticiasRepository->updateUbicacion( $updateNew['ubicacion'], $updateNew['noticia_id']);
 					$updatenewson = $this->noticiasRepository->updateNewPerRev( $updateNew, $font );
 					break;
 
@@ -661,5 +675,15 @@ class AdminNews extends Controller{
 		$nueva = $imagen->createImage();		
 		imagejpeg($nueva);
 		imagedestroy($nueva);
+	}
+
+	public function sendMailView( $id ){
+
+		$new = $this->noticiasRepository->getNewById( $id );
+		// echo '<pre>'; print_r($new); exit();
+		$this->header_admin( 'Enviar Noticia - ' );
+		require $this->adminviews . 'sendView.php';
+		$this->footer_admin();
+
 	}
 }

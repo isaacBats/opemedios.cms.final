@@ -85,8 +85,8 @@ class BaseRepository {
 		return $rs;
 	}
 
-	protected function updateUbicacion ( $new, $id ){
-		
+	public function updateUbicacion ( $new, $id ){
+
 		$sql = 'UPDATE ubicacion SET uno 		= :uno, 
 									 dos 		= :dos, 
 			  						 tres 		= :tres, 
@@ -103,7 +103,7 @@ class BaseRepository {
 				';
 		
 		$query = $this->pdo->prepare( $sql );
-		$query->bindParam(':idNoticia', $id);
+		$query->bindParam(':noticia_id', $id);
 		$query->bindParam(':uno', $new[0]);
 		$query->bindParam(':dos', $new[1]);
 		$query->bindParam(':tres', $new[2]);

@@ -684,6 +684,44 @@ class AdminNews extends Controller{
 		$this->header_admin( 'Enviar Noticia - ' );
 		require $this->adminviews . 'sendView.php';
 		$this->footer_admin();
+	}
+
+	public function filtrarAccion() {
+		$html = '';
+		$resultado = new stdClass();
+
+		// if( $familias ){
+		// 	foreach ($familias as $familia) {
+		// 		$estado = ( $familia['estado'] == 1 ) ? 'Activa' : 'Inactiva' ;
+		// 		$adeudo = ( $familia['adeudo'] == 1 ) ? 'Adeudo' : 'No adeudo' ;
+		// 		$html .= '<tr>
+	 //              <td class="text-center">
+	 //                <label class="ckbox">
+	 //                  <input type="checkbox"><span></span>
+	 //                </label>
+	 //              </td>
+	 //              <td>'.$familia['id'].'</td>
+	 //              <td class="text-center">'.$familia['apellido_paterno'].' '.$familia['apellido_materno'].'</td>
+	 //              <td class="text-center">'.$estado.'</td>
+	 //              <td class="text-center">'.$adeudo.'</td>
+	 //              <td>
+	 //               <ul class="table-options">
+	 //                 <li><a href="/comunidad/administrador/familia/'.$familia['id'].'"><i class="fa fa-pencil"></i></a></li>
+	 //                 <!-- <li><a href=""><i class="fa fa-trash"></i></a></li> -->
+	 //               </ul>
+	 //             </td>
+	 //           </tr>';
+		// 	}
+		// 	$resultado->html = $html;
+		// 	$resultado->exito = true;
+		// }
+		// else{
+		// 	$resultado->html = '<tr><td>no hay resultados con ese criterio</td></tr>';
+		// 	$resultado->exito = true;
+		// }
+
+		// header('Content-type: text/json');
+		// echo json_encode($resultado); 
 
 	}
 }

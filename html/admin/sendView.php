@@ -11,15 +11,24 @@
 </div>
 <div class="row">
 	<div class="col-lg-12">
-		<form role="form">
-			<div class="form-group">
-				<label>Buscar Cliente: </label>
-				<input type="text" class="form-control" name="buscar" placeholder="Ingresa nombre de cliente">
-			</div>
-			<div class="form-group">
-				<input type="submit" class="btn btn-primary" name="buscar" placeholder="Ingresa nombre de cliente">
-			</div>
+		<div class="form-group">
+			<label>Buscar Cliente: </label>
+			<input type="text" data-noticiaid="<?= $new['id'] ?>" class="form-control filtro-clientes" placeholder="Ingresa nombre de cliente">
+		</div>
+	</div>
+	<div class="col-lg-8 table-clientes">
+		<div class="table-responsive">
+	        <table class="table table-bordered table-inverse nomargin resultados clientes">
+		          <thead>
+			            <tr>
+			              <th class="text-center">Cliente</th>
+			              <th class="text-center">Acciones</th>
+			            </tr>
+		          </thead>
+	          <tbody>
 
-		</form>
+	          </tbody>
+	        </table>
+      </div>
 	</div>
 </div>

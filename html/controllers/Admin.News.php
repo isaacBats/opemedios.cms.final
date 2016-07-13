@@ -12,6 +12,8 @@ include_once(__DIR__.'/../Repositories/CuentaRepository.php');
 
 include 'Image.php';
 
+require_once('Mail.php');
+
 class AdminNews extends Controller{
 
 	private $noticiasRepository;		
@@ -730,7 +732,7 @@ class AdminNews extends Controller{
 				$html .= '	<tr>
 				            	<td class="text-center">
 					                <label class="ckbox">
-					                  <input type="checkbox" checked ><span></span>
+					                  <input type="checkbox" name="' . $acount['id_cuenta'] . '" value="' . $acount['email'] . '" checked ><span></span>
 					                </label>
 					            </td>
 				            	<td>' . $acount['nombre'] . ' ' . $acount['apellidos'] . '</td>
@@ -747,4 +749,52 @@ class AdminNews extends Controller{
 		$this->footer_admin();
 
 	}
+
+	public function sendAction(){
+
+		$resultado = $_POST;
+
+		$usuarios = array_keys($resultado);
+		$keynoticia = array_shift($usuarios);
+		$noticiaid = array_shift($resultado);
+
+		$new = $this->noticiasRepository->getNewById( $noticiaid ); 	
+
+		switch ($new['tipofuente_id']) {
+			case '1':
+				$font = 'tel';
+				$relatedNew = $this->noticiasRepository->getNewById( $noticiaid, $font );
+				break;
+			case '2':
+				$font = 'rad';
+				$relatedNew = $this->noticiasRepository->getNewById( $noticiaid, $font );
+				break;
+			case '3':
+				$font = 'per';
+				$relatedNew = $this->noticiasRepository->getNewById( $noticiaid, $font );
+				break;
+			case '4':
+				$font = 'rev';
+				$relatedNew = $this->noticiasRepository->getNewById( $noticiaid, $font );
+				break;
+			case '5':
+				$font = 'int';
+				$relatedNew = $this->noticiasRepository->getNewById( $noticiaid, $font );
+				break;
+		}
+
+		ob_start();
+		require $this->adminviews . 'viewsEmails/oneNewEmail.php';
+		$body = ob_get_clean();
+
+		$mail = new Mail();
+		$mail->setSubject('Noticia de prueba');
+		$mail->setBody( $body );
+
+		if( $mail->sendMail() ){
+			echo 'Se mando el correo correctamente';
+			exit();			
+		}
+	}
+
 }

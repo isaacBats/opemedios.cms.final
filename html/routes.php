@@ -221,6 +221,11 @@ $collection->attachRoute(new Route('/panel/new/send/:noticia/:idcontacto', array
     'methods' => 'GET'
 )));
 
+$collection->attachRoute(new Route('/panel/new/send', array(
+    '_controller' => 'AdminNews::sendAction',
+    'methods' => 'POST'
+)));
+
 $collection->attachRoute(new Route('/panel/new/update-new', array(
     '_controller' => 'AdminNews::updateNew',
     'methods' => 'POST'

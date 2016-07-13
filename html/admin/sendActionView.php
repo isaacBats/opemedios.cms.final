@@ -19,20 +19,23 @@
 </div>
 <div class="row">
 	<div class="col-lg-8 table-contactos">
-		<div class="table-responsive">
-	        <table class="table table-bordered table-inverse nomargin">
-		          <thead>
-			            <tr>
-			              <th class="text-center">Enviar</th>
-			              <th class="text-center">Cuenta</th>
-			              <th class="text-center">Email</th>
-			            </tr>
-		          </thead>
-	          <tbody>
-					<?= $html ?>
-	          </tbody>
-	        </table>
-      </div>
-    <input type="submit" value="Enviar noticia" class="btn btn-primary btn-lg col-lg-3 col-md-offset-8">
+		<form method="post" action="/panel/new/send" id="form-send-action" >
+			<input type="hidden" name="noticiaid" value="<?= $new['id'] ?>">			
+			<div class="table-responsive">
+		        <table class="table table-bordered table-inverse nomargin">
+			        <thead>
+				    	<tr>
+				        	<th class="text-center">Enviar</th>
+				            <th class="text-center">Cuenta</th>
+				            <th class="text-center">Email</th>
+				        </tr>
+			        </thead>
+		          	<tbody>
+						<?= $html ?>
+		          	</tbody>
+		        </table>
+	      	</div>
+	    	<input type="submit" value="Enviar noticia" class="btn btn-primary btn-lg col-lg-3 col-md-offset-8">
+		</form>
 	</div>
 </div>

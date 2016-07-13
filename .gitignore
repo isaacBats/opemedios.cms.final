@@ -1,6 +1,8 @@
 # archivo de conexion de base de datos
 html/config.php
 
+#parameters
+html/config.ini
 
 # phpintel
 .phpintel/

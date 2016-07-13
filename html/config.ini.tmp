@@ -2,10 +2,10 @@
 ;mailReceptor: Un correo que recibe
 ;passwordEmail: la clave para poder mandar correos desde la cuelta asignada
 [Confg correo]
-	emailReceptor	= klonate@gmail.com
-	email 			= AKIAI6VE2IV27YC5DC3A
-	passwordEmail	= AhlgJyzCrpYH34oswl7TDYJnDLu4sZ/qQzc/IN9TSRRo
-	hostEmail		= email-smtp.us-west-2.amazonaws.com
+	emailReceptor	= correo@gmail.com
+	email 			= correodesdedonde@semanda.com
+	passwordEmail	= password
+	hostEmail		= smtp.amazonaws.com
 	port			= 465
 	SMTPSecure		= ssl
 	emailSender		= noticias@opemedios.com.mx

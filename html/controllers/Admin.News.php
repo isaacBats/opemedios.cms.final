@@ -732,7 +732,7 @@ class AdminNews extends Controller{
 				$html .= '	<tr>
 				            	<td class="text-center">
 					                <label class="ckbox">
-					                  <input type="checkbox" name="' . $acount['id_cuenta'] . '" value="' . $acount['email'] . '" checked ><span></span>
+					                  <input type="checkbox" name="' . $acount['email'] . '" value="' . $acount['nombre'] . ' ' . $acount['apellidos'] . '" checked ><span></span>
 					                </label>
 					            </td>
 				            	<td>' . $acount['nombre'] . ' ' . $acount['apellidos'] . '</td>
@@ -752,11 +752,13 @@ class AdminNews extends Controller{
 
 	public function sendAction(){
 
-		$resultado = $_POST;
+		$usuarios = $_POST;
+		$resultado = $usuarios;
 
-		$usuarios = array_keys($resultado);
-		$keynoticia = array_shift($usuarios);
+		// $usuarios = array_keys($resultado);
+		// $keynoticia = array_shift($usuarios);
 		$noticiaid = array_shift($resultado);
+		// print_r($usuarios); exit();
 
 		$new = $this->noticiasRepository->getNewById( $noticiaid ); 	
 
@@ -787,13 +789,16 @@ class AdminNews extends Controller{
 		require $this->adminviews . 'viewsEmails/oneNewEmail.php';
 		$body = ob_get_clean();
 
-		$mail = new Mail();
-		$mail->setSubject('Noticia de prueba');
+		$mail = new Mail($usuarios);
+		$mail->setSubject('Noticia Operadora de medios - ' . strtoupper($new['tipofuente']));
 		$mail->setBody( $body );
+		// exit();
 
 		if( $mail->sendMail() ){
 			echo 'Se mando el correo correctamente';
 			exit();			
+		}else{
+			echo 'No se puede mandar el correo';
 		}
 	}
 

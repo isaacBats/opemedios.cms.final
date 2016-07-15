@@ -9,6 +9,7 @@ include_once(__DIR__.'/../Repositories/SectorRepository.php');
 include_once(__DIR__.'/../Repositories/SeccionRepository.php');
 include_once(__DIR__.'/../Repositories/EmpresaRepository.php');
 include_once(__DIR__.'/../Repositories/CuentaRepository.php');
+include_once(__DIR__.'/../Repositories/TemaRepository.php');
 
 include 'Image.php';
 
@@ -752,18 +753,29 @@ class AdminNews extends Controller{
 
 	public function sendAction(){
 
+		$temRep = new TemaRepository();
+
 		$usuarios = $_POST;
 		$resultado = $usuarios;
+
 
 
 		// $usuarios = array_keys($resultado);
 		// $keynoticia = array_shift($usuarios);
 		$noticiaid = array_shift($resultado);
 		$empresaid = array_shift($resultado);
-		print_r($empresaid); exit();
 		// print_r($usuarios); exit();
 
 		$new = $this->noticiasRepository->getNewById( $noticiaid ); 	
+
+
+		$tema  = $temRep->getThemaByEmpresaID( $empresaid );
+
+		$temaid = null;
+		if( is_array($tema) )
+			$temaid = $tema['id_tema'];
+
+		$tendenciaid = $new['tendencia_id'];
 
 		switch ($new['tipofuente_id']) {
 			case '1':
@@ -799,17 +811,21 @@ class AdminNews extends Controller{
 		$noenviados = [];
 
 		foreach ($usuarios as $key => $email) {
-			if( $key != 'noticiaid' || $key != 'empresaid' ){
-				$key = str_replace('_', ' ', $key);
-				$exito = $mail->sendMail( $email, $key );
-				if( !$exito ){
-					$noenviado = [$key => $email ];
-					array_push($noenviados, $noenviado);
+			if( $key != 'noticiaid' ){
+				if ($key != 'empresaid' ){
+					$key = str_replace('_', ' ', $key);
+					$exito = $mail->sendMail( $email, $key );
+					if( !$exito ){
+						$noenviado = [$key => $email ];
+						array_push($noenviados, $noenviado);
+					}					
 				}
 			}
 		}
-		if( count($noenviados) == 0 ){
-			echo 'Se mando el correo correctamente';			
+		if( count($noenviados) == 0 && $this->noticiasRepository->insertAsigna( compact('noticiaid', 'empresaid', 'temaid', 'tendenciaid') ) ){
+			
+			echo 'Se mando el correo correctamente';
+
 		}else{
 			echo 'No se puede mandar el correo a: <br>';
 			echo '<pre>';

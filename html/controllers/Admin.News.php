@@ -732,7 +732,7 @@ class AdminNews extends Controller{
 				$html .= '	<tr>
 				            	<td class="text-center">
 					                <label class="ckbox">
-					                  <input type="checkbox" name="' . $acount['email'] . '" value="' . $acount['nombre'] . ' ' . $acount['apellidos'] . '" checked ><span></span>
+					                  <input type="checkbox" name="' . $acount['nombre'] . ' ' . $acount['apellidos'] . '" value="' . $acount['email'] . '" checked ><span></span>
 					                </label>
 					            </td>
 				            	<td>' . $acount['nombre'] . ' ' . $acount['apellidos'] . '</td>
@@ -743,7 +743,7 @@ class AdminNews extends Controller{
 
 		$emr = new EmpresaRepository();
 		$company = $emr->getEmpresaById( $empresaid );
-		
+
 		$this->header_admin( 'Enviar Noticia - ' );
 		require $this->adminviews . 'sendActionView.php';
 		$this->footer_admin();
@@ -755,9 +755,12 @@ class AdminNews extends Controller{
 		$usuarios = $_POST;
 		$resultado = $usuarios;
 
+
 		// $usuarios = array_keys($resultado);
 		// $keynoticia = array_shift($usuarios);
 		$noticiaid = array_shift($resultado);
+		$empresaid = array_shift($resultado);
+		print_r($empresaid); exit();
 		// print_r($usuarios); exit();
 
 		$new = $this->noticiasRepository->getNewById( $noticiaid ); 	
@@ -789,16 +792,28 @@ class AdminNews extends Controller{
 		require $this->adminviews . 'viewsEmails/oneNewEmail.php';
 		$body = ob_get_clean();
 
-		$mail = new Mail($usuarios);
+		$mail = new Mail();
 		$mail->setSubject('Noticia Operadora de medios - ' . strtoupper($new['tipofuente']));
 		$mail->setBody( $body );
 		// exit();
+		$noenviados = [];
 
-		if( $mail->sendMail() ){
-			echo 'Se mando el correo correctamente';
-			exit();			
+		foreach ($usuarios as $key => $email) {
+			if( $key != 'noticiaid' || $key != 'empresaid' ){
+				$key = str_replace('_', ' ', $key);
+				$exito = $mail->sendMail( $email, $key );
+				if( !$exito ){
+					$noenviado = [$key => $email ];
+					array_push($noenviados, $noenviado);
+				}
+			}
+		}
+		if( count($noenviados) == 0 ){
+			echo 'Se mando el correo correctamente';			
 		}else{
-			echo 'No se puede mandar el correo';
+			echo 'No se puede mandar el correo a: <br>';
+			echo '<pre>';
+			print_r($noenviados);
 		}
 	}
 

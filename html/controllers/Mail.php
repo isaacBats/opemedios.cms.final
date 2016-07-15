@@ -6,7 +6,7 @@ Class Mail{
 
 	private $mail;
 	
-	public function __construct( $contacts ){
+	public function __construct(){
 
 		$properties = parse_ini_file(__DIR__ . '/../config.ini');
 			
@@ -20,17 +20,7 @@ Class Mail{
 		$this->mail->Port = $properties['port'];
 		$this->mail->Username = $properties['email'];
 		$this->mail->Password = $properties['passwordEmail'];
-		if( count( $contacts ) != 0 ){
-			foreach ($contacts as $key => $contact) {
-				if( $key != 'noticiaid' ){
-					$this->mail->AddAddress( $key, $contact );
-					echo $contact . ' - ' . $key;
-				}
-			}
-			exit();			
-		}else{
-			$this->mail->AddAddress( $properties['emailReceptor'], 'Usuario Opemedios' );			
-		}
+		//$this->mail->AddAddress( $properties['emailReceptor'], 'Usuario Opemedios' );
 		$this->mail->SetFrom($properties['emailSender'], 'Noticias OPEMEDIOS');
 		$this->mail->Subject = 'Mensaje de prueba';
 		$this->mail->Body =
@@ -49,9 +39,15 @@ Class Mail{
 		$this->mail->Body = $body;
 	}
 
-	public function sendMail(){
+	public function sendMail( $email, $name ){
 
-		return $this->mail->Send();
+	 	$this->mail->AddAddress( $email, $name );		
+
+		$exito = ( $this->mail->Send() ) ? true : false;
+
+		$this->mail->ClearAddresses();
+
+		return $exito;
 	}
 
 }

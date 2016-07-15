@@ -195,6 +195,19 @@ class NoticiasRepository extends BaseRepository{
 		$query->bindParam(':noticia_id', $new['noticia_id']);
 
 		return $query->execute();
+	}
+
+	public function insertAsigna( $data ){
+
+		$sql = 'INSERT INTO asigna (id_noticia, id_empresa, id_tema, id_tendencia) VALUES (:noticiaid, :empresaid, :temaid, :tendenciaid)';
+
+		$query = $this->pdo->prepare( $sql );
+		$query->bindParam(':noticiaid', $data['noticiaid']);
+		$query->bindParam(':empresaid', $data['empresaid']);
+		$query->bindParam(':temaid', $data['temaid']);
+		$query->bindParam(':tendenciaid', $data['tendenciaid']);
+
+		return $query->execute();
 	}	
 
 }

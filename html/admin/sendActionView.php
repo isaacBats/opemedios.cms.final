@@ -20,7 +20,8 @@
 <div class="row">
 	<div class="col-lg-8 table-contactos">
 		<form method="post" action="/panel/new/send" id="form-send-action" >
-			<input type="hidden" name="noticiaid" value="<?= $new['id'] ?>">			
+			<input type="hidden" name="noticiaid" value="<?= $new['id'] ?>">
+			<input type="hidden" name="empresaid" value="<?= $empresaid ?>">			
 			<div class="table-responsive">
 		        <table class="table table-bordered table-inverse nomargin">
 			        <thead>

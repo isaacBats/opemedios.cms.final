@@ -833,4 +833,28 @@ class AdminNews extends Controller{
 		}
 	}
 
+	public function advancedSearch(){
+
+		$this->header_admin( 'Busqueda Avanzada - ' );
+		require $this->adminviews . 'advancedSearchView.php';
+		$this->footer_admin();
+	}
+
+	public function sendBlock(){
+
+		$typeFont = '';
+
+		$tipoFuenteRepository = new TipoFuenteRepository();
+
+		$tiposFuente = $tipoFuenteRepository->all(); 
+
+		foreach ($tiposFuente as $tf) {
+			$typeFont .= '<option value="'.$tf['id_tipo_fuente'].'">'.$tf['descripcion'].'</option>';							
+		}
+		
+		$this->header_admin( 'Enviar Bloque Noticia - ' );
+		require $this->adminviews . 'sendBlockView.php';
+		$this->footer_admin();
+	}
+
 }

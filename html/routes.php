@@ -231,6 +231,15 @@ $collection->attachRoute(new Route('/panel/new/update-new', array(
     'methods' => 'POST'
 )));
 
+$collection->attachRoute(new Route('/panel/news/advanced-search', array(
+    '_controller' => 'AdminNews::advancedSearch',
+    'methods' => 'GET'
+)));
+
+$collection->attachRoute(new Route('/panel/news/send-news-block', array(
+    '_controller' => 'AdminNews::sendBlock',
+    'methods' => 'GET'
+)));
 
 
 $collection->attachRoute(new Route('/create-image/:id', array(

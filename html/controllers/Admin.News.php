@@ -843,6 +843,12 @@ class AdminNews extends Controller{
 	public function sendBlock(){
 
 		$typeFont = '';
+		$js = '';
+
+		$js = '
+				<!-- Paginador con js --> 
+				<script src="/assets/js/panel.paginador.js"></script>
+		';
 
 		$tipoFuenteRepository = new TipoFuenteRepository();
 
@@ -854,7 +860,7 @@ class AdminNews extends Controller{
 		
 		$this->header_admin( 'Enviar Bloque Noticia - ' );
 		require $this->adminviews . 'sendBlockView.php';
-		$this->footer_admin();
+		$this->footer_admin( $js );
 	}
 
 }

@@ -20,5 +20,14 @@ class TipoFuenteRepository extends BaseRepository{
 		}
 	}
 
+	public function all(){
+		
+		$query = $this->pdo->prepare('SELECT * FROM tipo_fuente');
+
+		$resultado = ( $query->execute() ) ? $query->fetchAll() : 'No se pudo ejecutar la consulta para el tipo de fuentes';
+
+		return $resultado;
+	}
+
 	
 }

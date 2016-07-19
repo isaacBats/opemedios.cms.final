@@ -21,8 +21,10 @@
     <!-- Custom CSS -->
     <link href="/assets/css/sb-admin-2.css" rel="stylesheet">
 
-    <!-- Custom Fonts -->
+    <!-- Custom Fonts
     <link href="/assets/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    -->
+    <link rel="stylesheet" href="/assets/css/font-awesome.min.css">
 
     <?= $stylesheet ?>
 
@@ -289,10 +291,10 @@
                                     <a href="javascript:void(0)">Agregar Noticia <span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
                                         <li>
-                                            <a href="/panel/new/add/new-television"><i class="fa fa-youtube-play fa-fw"></i> Televisión</a>
+                                            <a href="/panel/new/add/new-television"><i class="fa fa-television fa-fw"></i> Televisión</a>
                                         </li>
                                         <li>
-                                            <a href="/panel/new/add/new-radio"><i class="fa fa-headphones fa-fw"></i> Radio</a>
+                                            <a href="/panel/new/add/new-radio"><i class="fa fa-microphone fa-fw"></i> Radio</a>
                                         </li>
                                         <li>
                                             <a href="/panel/new/add/new-periodico"><i class="fa fa-newspaper-o fa-fw"></i> Periódico</a>
@@ -301,7 +303,7 @@
                                             <a href="/panel/new/add/new-revista"><i class="fa fa-columns fa-fw"></i> Revista</a>
                                         </li>
                                         <li>
-                                            <a href="/panel/new/add/new-internet"><i class="fa fa-wifi fa-fw"></i> Internet</a>
+                                            <a href="/panel/new/add/new-internet"><i class="fa fa-chrome fa-fw"></i> Internet</a>
                                         </li>
                                     </ul>
                                 </li>
@@ -309,10 +311,10 @@
                                     <a href="/panel/news">Noticias de hoy</a>
                                 </li>
                                 <li>
-                                    <a href="morris.html">Búsqueda avanzada</a>
+                                    <a href="/panel/news/advanced-search">Búsqueda avanzada</a>
                                 </li>
                                 <li>
-                                    <a href="morris.html">Enviar bloque de noticias</a>
+                                    <a href="/panel/news/send-news-block">Enviar bloque de noticias</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
@@ -324,10 +326,10 @@
                                     <a href="javascript:void(0)">Agregar Fuente <span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
                                         <li>
-                                            <a href="/panel/font/add/font-television"><i class="fa fa-youtube-play fa-fw"></i> Televisión</a>
+                                            <a href="/panel/font/add/font-television"><i class="fa fa-television fa-fw"></i> Televisión</a>
                                         </li>
                                         <li>
-                                            <a href="/panel/font/add/font-radio"><i class="fa fa-headphones fa-fw"></i> Radio</a>
+                                            <a href="/panel/font/add/font-radio"><i class="fa fa-microphone fa-fw"></i> Radio</a>
                                         </li>
                                         <li>
                                             <a href="/panel/font/add/font-periodico"><i class="fa fa-newspaper-o fa-fw"></i> Periódico</a>
@@ -336,7 +338,7 @@
                                             <a href="/panel/font/add/font-revista"><i class="fa fa-columns fa-fw"></i> Revista</a>
                                         </li>
                                         <li>
-                                            <a href="/panel/font/add/font-internet"><i class="fa fa-wifi fa-fw"></i> Internet</a>
+                                            <a href="/panel/font/add/font-internet"><i class="fa fa-chrome fa-fw"></i> Internet</a>
                                         </li>
                                     </ul>
                                 </li>

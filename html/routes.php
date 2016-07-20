@@ -241,6 +241,11 @@ $collection->attachRoute(new Route('/panel/news/send-news-block', array(
     'methods' => 'GET'
 )));
 
+$collection->attachRoute(new Route('/panel/news/send-blocksss', array(
+    '_controller' => 'AdminNews::sendBlockAction',
+    'methods' => 'GET'
+)));
+
 
 $collection->attachRoute(new Route('/create-image/:id', array(
     '_controller' => 'AdminNews::createImage',

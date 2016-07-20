@@ -1,0 +1,165 @@
+/*bootpag*/
+#bootpag_text {
+    margin-top: 26px
+}
+
+#bootpag_pag {
+    text-align: right
+}
+
+#bootpag_text_count {
+    margin: 20px 0px;
+}
+
+#bootpag_text_count label {
+    font-weight: normal;
+}
+
+.nav-sidebar li {
+    margin-top: 5px;
+    list-style-type: none;
+}
+
+.myalert {
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+.myalert .rest {
+    font-weight: bold;
+    margin: 5px;
+}
+.reporte_errorabono h4{
+    color: #428BCA;
+    width: 100%;
+    border-bottom: 2px solid;
+    margin-bottom: 15px;
+    padding-bottom: 5px;
+}
+.reporte_errorabono .row{
+    margin-bottom: 15px;
+    padding: 0 30px;
+}
+div.overflow{
+    height: 250px;
+    overflow: auto;
+    border: 1px solid #428BCA;
+    padding: 15px;
+}
+.cupon{
+    color: #C82C3B;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.ayudamostrar .help-block{
+    display: none!important;
+}
+
+#codigo_postal-error{
+    margin-left: 272px;
+}
+#imagen-error,#imagennew-error{
+    margin-top: 17px;
+    margin-left: 272px;
+}
+.cd-panel-header{
+    margin-top: 50px!important;
+    padding-left: 26px;
+    height: 70px!important;
+}
+.btnhsearch{
+    cursor: pointer;
+}
+#ayudaCont .home{
+    margin-top: 30px;
+}
+.cd-panel-header .input-group{
+    width: 300px;
+    float: left;
+    margin-top: 25px;
+}
+.cd-panel-header .glyphicon-remove {
+    float: right;
+    margin: 10px 25px;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.help.context-help{
+    text-indent: 155222px;
+    display: block;
+    background:  rgba(0, 0, 0, 0) url("../img/ayuda.jpg") no-repeat scroll;
+    background-size: 30px 30px;
+    width: 34px;
+    height: 30px;
+    margin-right: 15px;
+    margin-top: 6px;
+    float: right;
+    overflow: hidden;
+}
+
+input[type="text"]{
+    text-transform: uppercase;
+}
+input[name="slug"]{
+    text-transform: lowercase;
+}
+
+#frNuevaAyuda #titulo{
+    text-transform: none;
+}
+#correo{
+    text-transform: none;
+}
+.text-red{
+    color: #ff4424;
+}
+table.reporte a{
+    color: #ff4424;
+    text-decoration: underline;
+    text-decoration-color: #ff4424!important;
+}
+#repTotales .active{
+    color: #ff4424;
+    cursor: default;
+}
+.repInfo{
+    margin-top: 20px;
+    border: 1px solid #000;
+    margin-right: 30px;
+    padding: 40px 15px ;
+    margin-bottom: 30px;        
+}
+/*-----------------------Ajuste botones panel admin--------------------*/
+@media screen and (max-width:1300px) {
+    .btn-primary {
+        width: 93px;
+        margin-right: 8px;
+    }
+}
+@media screen and (max-width:1146px) {
+    .btn-primary {
+        margin-right: 0px;
+    }
+}
+@media screen and (max-width:1132px) {
+    .btn-danger {
+        margin-right: -2px;
+    }
+}
+@media screen and (max-width:1006px) {
+    .btn-danger {
+        margin-right: -11px;
+    }
+    .btn-primary {
+        margin-right: -6px;
+    }
+}
+@media screen and (max-width:991px) {
+    .btn-primary {
+        margin-right: -2px;
+    }
+}

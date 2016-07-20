@@ -7,28 +7,40 @@
 <div class="row">
 	<div class="panel panel-default">
 		<div class="panel-body">
-			<form>
+			<form id="bootpag_text_count">
+				<div class="form-group" id="bootpag_nummc">
+					<label for="exampleInputName2">Mostrar &nbsp;</label>
+					<input type="hidden" value="1" name="page" id="current_page">
+					<select name="numpp" id="bootpag_text_count_select" class="form-control">
+						<option value="5">5</option>
+						<option value="10">10</option>
+						<option value="25">25</option>
+						<option value="50">50</option>
+						<option value="100">100</option>
+					</select>
+					<label for="exampleInputName2">&nbsp; Registros</label>
+				</div>
 				<div class="form-group col-lg-3">
 					<label>Por Titulo</label>
-					<input type="text" name="titulo" class="form-control">
+					<input id="bootpag_text_titulo" type="text" name="titulo" class="form-control">
 				</div>
 				<div class="form-group col-lg-3">
 	                <label>Entre</label>
 	                <div class="input-group">
-	                    <input type="text" class="form-control fechaNota" placeholder="yyyy-mm-dd" name="fechaInicio" >
+	                    <input id="bootpag_text_finicio" type="text" class="form-control fechaNota" placeholder="yyyy-mm-dd" name="fechaInicio" >
 	                    <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
 	                </div>
 	            </div>
 	            <div class="form-group col-lg-3">
 	                <label>Y</label>
 	                <div class="input-group">
-	                    <input type="text" class="form-control fechaNota" placeholder="yyyy-mm-dd" name="fechaFin" >
+	                    <input id="bootpag_text_ffin" type="text" class="form-control fechaNota" placeholder="yyyy-mm-dd" name="fechaFin" >
 	                    <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
 	                </div>
 	            </div>
 	            <div class="form-group col-lg-3">
 	                <label>Tipo de Fuente</label>
-	                <select class="form-control" name="tipoFuente" id="" required >
+	                <select class="form-control" name="tipoFuente" id="bootpag_text_fuente_selected" required >
 	                    <option value="">Seleccione un tipo de fuente</option>
 	                    <?= $typeFont ?>
 	                </select>
@@ -55,6 +67,7 @@
 						<?php //$html ?>
 		          	</tbody>
 		        </table>
+		        <div class="col-md-6"><p id="bootpag_pag" data-count="5"></p></div>	
 	      	</div>
 	    	<input type="submit" value="Enviar noticias" class="btn btn-primary btn-lg col-lg-3 col-md-offset-8">
 		</form>

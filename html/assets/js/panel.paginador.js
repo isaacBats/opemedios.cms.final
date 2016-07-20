@@ -1,29 +1,34 @@
 $(document).ready(function () {
     var url = $.url();
-    $("#btnbuscar").click(function () {
-        $("#bootpag_text_count").submit();
+     $("#btnbuscar").click(function () {
+         $("#bootpag_text_count").submit();
 
-    });
-    $("#bootpag_text_count_select").change(function () {
-        $("#bootpag_text_count").submit();
-    });
+     });
+     $("#bootpag_text_count_select").change(function () {
+         $("#bootpag_text_count").submit();
+     });
 
-    if (url.param('sa') != null) {
-        $('#bootpag_text_param').val(url.param('sa'));
-    }
-    if (url.param('numpp') != null) {
-        $('#bootpag_text_count_select').val(url.param('numpp'));
-    }
+     $("#bootpag_text_fuente_selected").change(function () {
+         $("#bootpag_text_count").submit();
+     });
 
-    /*Usuarios*/
-    if (url.param('tipousuario') != null) {
-        $('#tiposusuarios').val(url.param('tipousuario'));
+    if (url.param('titulo') != null) {
+        $('#bootpag_text_titulo').val(url.param('titulo'));
     }
-    $("#tiposusuarios").change(function () {
+    $("#bootpag_text_titulo").change(function () {
         $("#bootpag_text_count").submit();
     });
 
 
+    if (url.param('finicio') != null) {
+        $('#bootpag_text_finicio').val(url.param('finicio'));
+    }
+
+    if (url.param('ffin') != null) {
+        $('#bootpag_text_ffin').val(url.param('ffin'));
+    }
+
+    
     /*Producto*/
     if (url.param('tipoproducto') != null) {
         $('#tiposproductos').val(url.param('tipoproducto'));

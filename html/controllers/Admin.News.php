@@ -844,10 +844,23 @@ class AdminNews extends Controller{
 
 		$typeFont = '';
 		$js = '';
+		$css = '';
+
+
 
 		$js = '
+				<!-- Libreria jquery-bootpag --> 
+				<script src="/admin/js/vendors/bootstrap/jquery.bootpag.min.js"></script>
+				<!-- Libreria purl --> 
+				<script src="/admin/js/vendors/purl/purl.min.js"></script>
 				<!-- Paginador con js --> 
 				<script src="/assets/js/panel.paginador.js"></script>
+		';
+
+		$css = '
+
+				<!-- panel_paginator CSS -->
+			    <link href="/assets/css/panel.main.css" rel="stylesheet">
 		';
 
 		$tipoFuenteRepository = new TipoFuenteRepository();
@@ -858,9 +871,14 @@ class AdminNews extends Controller{
 			$typeFont .= '<option value="'.$tf['id_tipo_fuente'].'">'.$tf['descripcion'].'</option>';							
 		}
 		
-		$this->header_admin( 'Enviar Bloque Noticia - ' );
+		$this->header_admin( 'Enviar Bloque Noticia - ', $css );
 		require $this->adminviews . 'sendBlockView.php';
 		$this->footer_admin( $js );
+	}
+
+	public function sendBlockAction(){
+
+		print_r($_GET);
 	}
 
 }

@@ -214,7 +214,9 @@ class NoticiasRepository extends BaseRepository{
 
 		$query = $this->pdo->prepare('SELECT COUNT(*) AS count FROM noticia');
 
-		$value = ( $query->execute() ) ? intval( $query->fetch( \PDO::FETCH_ASSOC ) ) : 0;
+		$value = ( $query->execute() ) ? $query->fetch( \PDO::FETCH_ASSOC ) : 0;
+
+		$value = intval($value['count']);
 
 		return $value;
 	}	

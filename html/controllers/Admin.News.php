@@ -848,11 +848,11 @@ class AdminNews extends Controller{
 
 		$limit = isset( $_GET['numpp'] ) ? $_GET['numpp'] : 10;
 		$page = isset( $_GET['page'] ) ? ( $_GET['page'] * $limit ) - $limit : 0;
-		$titulo = isset( $_GET['titulo'] ) $_GET['titulo'] : null;
-		$finicio = isset( $_GET['finicio'] ) $_GET['finicio'] : null;
-		$ffin = isset( $_GET['ffin'] ) $_GET['ffin'] : null;
+		$titulo = isset( $_GET['titulo'] ) ? $_GET['titulo'] : null;
+		$finicio = isset( $_GET['finicio'] ) ? $_GET['finicio'] : null;
+		$ffin = isset( $_GET['ffin'] ) ? $_GET['ffin'] : null;
 
-		
+		$count = $this->noticiasRepository->getCountAllNews();		
 
 
 

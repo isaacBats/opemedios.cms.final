@@ -6,20 +6,8 @@
 
 <div class="row">
 	<div class="panel panel-default">
-		<div class="panel-body">
-			<form id="bootpag_text_count">
-				<div class="form-group" id="bootpag_nummc">
-					<label for="exampleInputName2">Mostrar &nbsp;</label>
-					<input type="hidden" value="1" name="page" id="current_page">
-					<select name="numpp" id="bootpag_text_count_select" class="form-control">
-						<option value="5">5</option>
-						<option value="10">10</option>
-						<option value="25">25</option>
-						<option value="50">50</option>
-						<option value="100">100</option>
-					</select>
-					<label for="exampleInputName2">&nbsp; Registros</label>
-				</div>
+		<form class="" id="bootpag_text_count">
+			<div class="panel-body">
 				<div class="form-group col-lg-3">
 					<label>Por Titulo</label>
 					<input id="bootpag_text_titulo" type="text" name="titulo" class="form-control">
@@ -45,8 +33,22 @@
 	                    <?= $typeFont ?>
 	                </select>
 	            </div>
-	        </form>
-		</div>	
+			</div>
+			<div class="form-inline">
+				<div class="col-sm-12" id="bootpag_nummc">
+					<label for="exampleInputName2">Mostrar &nbsp;</label>
+					<input type="hidden" value="1" name="page" id="current_page">
+					<select name="numpp" id="bootpag_text_count_select" class="form-control input-sm">
+						<option value="5">5</option>
+						<option value="10">10</option>
+						<option value="25">25</option>
+						<option value="50">50</option>
+						<option value="100">100</option>
+					</select>
+					<label for="exampleInputName2">&nbsp; Registros</label>
+				</div>					
+			</div>	
+	    </form>
 	</div>
 </div>
 <div class="row">

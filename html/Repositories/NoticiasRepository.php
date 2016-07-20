@@ -208,6 +208,15 @@ class NoticiasRepository extends BaseRepository{
 		$query->bindParam(':tendenciaid', $data['tendenciaid']);
 
 		return $query->execute();
+	}
+
+	public function getCountAllNews(){
+
+		$query = $this->pdo->prepare('SELECT COUNT(*) AS count FROM noticia');
+
+		$value = ( $query->execute() ) ? intval( $query->fetch( \PDO::FETCH_ASSOC ) ) : 0;
+
+		return $value;
 	}	
 
 }

@@ -846,6 +846,14 @@ class AdminNews extends Controller{
 		$js = '';
 		$css = '';
 
+		$limit = isset( $_GET['numpp'] ) ? $_GET['numpp'] : 10;
+		$page = isset( $_GET['page'] ) ? ( $_GET['page'] * $limit ) - $limit : 0;
+		$titulo = isset( $_GET['titulo'] ) $_GET['titulo'] : null;
+		$finicio = isset( $_GET['finicio'] ) $_GET['finicio'] : null;
+		$ffin = isset( $_GET['ffin'] ) $_GET['ffin'] : null;
+
+		
+
 
 
 		$js = '
@@ -861,6 +869,8 @@ class AdminNews extends Controller{
 
 				<!-- panel_paginator CSS -->
 			    <link href="/assets/css/panel.main.css" rel="stylesheet">
+			    <!-- data tables bootstrap CSS -->
+			    <link href="/admin/css/dataTables.bootstrap.css" rel="stylesheet">
 		';
 
 		$tipoFuenteRepository = new TipoFuenteRepository();

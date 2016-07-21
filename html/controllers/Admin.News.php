@@ -858,7 +858,7 @@ class AdminNews extends Controller{
 		$countWithFilter = null;
 		$resultados = null;
 
-		if( $finicio === $ffin || empty($ffin) ){
+		if( $finicio === $ffin || ( $finicio != null && empty($ffin) ) ){
 			
 			$countWithFilter = $this->noticiasRepository->getCountNews( compact('limit', 'page', 'titulo', 'tipoFuente',  'finicio') );
 			$resultados = $this->noticiasRepository->getNewsWithFilters( compact('limit', 'page', 'titulo', 'tipoFuente',  'finicio') );
@@ -870,6 +870,7 @@ class AdminNews extends Controller{
 		}
 
 		$count = $countWithFilter;
+
 		$ini = $page + 1;
 		$end = ( $page + $limit >= $count ) ? $count : $page + $limit;
 
@@ -903,7 +904,7 @@ class AdminNews extends Controller{
 		$css = '
 
 				<!-- panel_paginator CSS -->
-			    <link href="/assets/css/panel.main.css" rel="stylesheet">
+			    <link href="/admin/css/panel.main.css" rel="stylesheet">
 			    <!-- data tables bootstrap CSS -->
 			    <link href="/admin/css/dataTables.bootstrap.css" rel="stylesheet">
 		';
@@ -923,7 +924,7 @@ class AdminNews extends Controller{
 
 	public function sendBlockAction(){
 
-		print_r($_GET);
+		echo '<pre>';print_r($_POST);
 	}
 
 }

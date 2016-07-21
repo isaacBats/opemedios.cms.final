@@ -30,6 +30,7 @@
 	                <label>Tipo de Fuente</label>
 	                <select class="form-control" name="tipoFuente" id="bootpag_text_fuente_selected" required >
 	                    <option value="">Seleccione un tipo de fuente</option>
+	                    <option value="0">***Todas***</option>
 	                    <?= $typeFont ?>
 	                </select>
 	            </div>
@@ -52,8 +53,8 @@
 	</div>
 </div>
 <div class="row">
-	<div class="col-lg-8 table-busqueda">
-		<form method="post" action="/panel/new/send-block" id="form-send-block-action" >
+	<div class="col-lg-12 table-busqueda">
+		<form method="post" action="/panel/news/send-block" id="form-send-block-action" >
 			<div class="table-responsive">
 		        <table class="table table-bordered table-inverse nomargin">
 			        <thead>

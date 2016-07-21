@@ -245,8 +245,13 @@ class NoticiasRepository extends BaseRepository{
 					$w .= " AND fecha > '" . $finicio . "' AND fecha < '" . $ffin . "' ";
 				}
 
-				if( $tipoFuente != null ){
+				if( $tipoFuente != null && $tipoFuente != 0 ){
+
 					$w .= " AND id_tipo_fuente = $tipoFuente";
+
+				}elseif( $tipoFuente == 0 ){
+
+					$w .= " AND id_tipo_fuente in ('1', '2', '3', '4', '5')";
 				}
 			}			
 			$query = $this->pdo->prepare ( $sql . $w );
@@ -328,15 +333,20 @@ class NoticiasRepository extends BaseRepository{
 					$w .= " AND n.fecha > '" . $finicio . "' AND n.fecha < '" . $ffin . "' ";
 				}
 
-				if( $tipoFuente != null ){
+				if( $tipoFuente != null && $tipoFuente != 0 ){
+
 					$w .= " AND n.id_tipo_fuente = $tipoFuente";
+
+				}elseif( $tipoFuente == 0 ){
+
+					$w .= " AND n.id_tipo_fuente in ('1', '2', '3', '4', '5')";
 				}
 			}
 
 			$l = ' LIMIT ' . $limit . ' OFFSET ' . $page;
 			$o = ' ORDER BY n.fecha';
 
-			//echo $sql . $w . $l . $o; exit();
+			// echo $sql . $w . $o . $l; exit();
 			$query = $this->pdo->prepare ( $sql . $w . $o . $l );
 
 		}
@@ -349,7 +359,7 @@ class NoticiasRepository extends BaseRepository{
 
 		$value = ( $query->execute() ) ? $query->fetchAll( \PDO::FETCH_ASSOC ) : 'No ahi resultados para tu filtro';
 
-		echo $sql . $w . $o . $l; echo '<pre>'; print_r($value); exit(); 
+		// echo $sql . $w . $o . $l; echo '<pre>'; print_r($value); exit(); 
 
 		return $value;
 	}	

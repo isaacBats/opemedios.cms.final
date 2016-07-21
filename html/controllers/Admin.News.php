@@ -924,7 +924,25 @@ class AdminNews extends Controller{
 
 	public function sendBlockAction(){
 
-		echo '<pre>';print_r($_POST);
+		//echo '<pre>';print_r($_POST);
+
+		$data = $_POST;
+		$noticiasid = array_keys($data);
+
+		$noticias = [];
+
+		foreach ($noticiasid as $new) {
+			
+			$noticias[ $new ] = $this->noticiasRepository->getNewById( $new );
+
+		}
+
+		ob_start();
+		require $this->adminviews . 'viewsEmails/blockNewsEmail.php';
+		$body = ob_get_clean();
+
+		echo $body;
+
 	}
 
 }

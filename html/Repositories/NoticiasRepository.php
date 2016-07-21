@@ -210,13 +210,146 @@ class NoticiasRepository extends BaseRepository{
 		return $query->execute();
 	}
 
-	public function getCountAllNews(){
+	public function getCountNews( $data = [] ){
 
-		$query = $this->pdo->prepare('SELECT COUNT(*) AS count FROM noticia');
+		$sql = '';
+
+		if( count( $data ) > 0 ){
+			
+			extract( $data );
+			
+			$sql = 'SELECT COUNT(*) AS count FROM noticia';
+
+			$w = ' WHERE ';
+			if( $titulo != null ){
+				$w .= "encabezado LIKE '%" . $titulo . "%' ";
+
+				if( $finicio != null && !isset( $ffin ) ){
+					$w .= " AND fecha = '" . $finicio . "' ";
+				}
+
+				if( $finicio != null && ( isset( $ffin ) && $ffin != null ) ){
+					$w .= " AND fecha > '" . $finicio . "' AND fecha < '" . $ffin . "' ";
+				}
+
+				if( $tipoFuente != null ){
+					$w .= " AND id_tipo_fuente = $tipoFuente";
+				}
+			}elseif( $titulo == ''){
+
+				if( $finicio != null && !isset( $ffin ) ){
+					$w .= " fecha = '" . $finicio . "' ";
+				}
+
+				if( $finicio != null && ( isset( $ffin ) && $ffin != null ) ){
+					$w .= " AND fecha > '" . $finicio . "' AND fecha < '" . $ffin . "' ";
+				}
+
+				if( $tipoFuente != null ){
+					$w .= " AND id_tipo_fuente = $tipoFuente";
+				}
+			}			
+			$query = $this->pdo->prepare ( $sql . $w );
+
+		}else{
+			
+			$sql = 'SELECT COUNT(*) AS count FROM noticia';
+
+			$query = $this->pdo->prepare( $sql );			
+		}
 
 		$value = ( $query->execute() ) ? $query->fetch( \PDO::FETCH_ASSOC ) : 0;
 
 		$value = intval($value['count']);
+
+		return $value;
+	}
+
+	public function getNewsWithFilters( $data = [] ){
+
+		$sql = "SELECT n.id_noticia 	AS 'id', 
+					       n.encabezado 	AS 'encabezado', 
+					       n.sintesis   	AS 'sintesis', 
+					       n.autor 	    	AS 'autor', 
+					       n.fecha 	    	AS 'fecha', 
+					       n.comentario 	AS 'comentario', 
+					       n.id_tipo_fuente	AS 'tipofuente_id',
+					       tf.descripcion	AS 'tipofuente',
+					       n.id_fuente		AS 'fuente_id',
+					       f.nombre			AS 'fuente',
+					       n.id_seccion		AS 'seccion_id',
+					       scc.nombre		AS 'seccion',
+					       n.id_sector		AS 'sector_id',
+					       sec.nombre		AS 'sector',
+					       n.id_tipo_autor	AS 'tipoautor_id',
+					       ta.descripcion	AS 'tipoautor',
+					       n.id_genero		AS 'genero_id',
+					       g.descripcion	AS 'genero',
+					       n.id_tendencia_monitorista AS 'tendencia_id',
+					       t.descripcion	AS 'tendencia',
+					       n.id_usuario		AS 'usuario_id',
+					       u.nombre			AS 'usuario'
+					FROM   noticia n
+					INNER JOIN tipo_fuente tf ON n.id_tipo_fuente = tf.id_tipo_fuente
+					INNER JOIN fuente f 	  ON n.id_fuente = f.id_fuente
+					INNER JOIN seccion scc    ON n.id_seccion = scc.id_seccion
+					INNER JOIN sector sec     ON n.id_sector = sec.id_sector 
+					INNER JOIN tipo_autor ta  ON n.id_tipo_autor = ta.id_tipo_autor
+					INNER JOIN genero g 	  ON n.id_genero = g.id_genero
+					INNER JOIN tendencia t 	  ON n.id_tendencia_monitorista = t.id_tendencia
+					INNER JOIN usuario u 	  ON n.id_usuario = u.id_usuario ";
+
+		if( count( $data ) > 0 ){
+			
+			extract( $data );
+			
+			$w = ' WHERE ';
+			if( $titulo != null ){
+				$w .= "n.encabezado LIKE '%" . $titulo . "%' ";
+
+				if( $finicio != null && !isset( $ffin ) ){
+					$w .= " AND n.fecha = '" . $finicio . "' ";
+				}
+
+				if( $finicio != null && ( isset( $ffin ) && $ffin != null ) ){
+					$w .= " AND n.fecha > '" . $finicio . "' AND n.fecha < '" . $ffin . "' ";
+				}
+
+				if( $tipoFuente != null ){
+					$w .= " AND n.id_tipo_fuente = $tipoFuente";
+				}
+			}elseif( $titulo == ''){
+
+				if( $finicio != null && !isset( $ffin ) ){
+					$w .= " n.fecha = '" . $finicio . "' ";
+				}
+
+				if( $finicio != null && ( isset( $ffin ) && $ffin != null ) ){
+					$w .= " AND n.fecha > '" . $finicio . "' AND n.fecha < '" . $ffin . "' ";
+				}
+
+				if( $tipoFuente != null ){
+					$w .= " AND n.id_tipo_fuente = $tipoFuente";
+				}
+			}
+
+			$l = ' LIMIT ' . $limit . ' OFFSET ' . $page;
+			$o = ' ORDER BY n.fecha';
+
+			//echo $sql . $w . $l . $o; exit();
+			$query = $this->pdo->prepare ( $sql . $w . $o . $l );
+
+		}
+		// else{
+			
+		// 	$sql = 'SELECT COUNT(*) AS count FROM noticia';
+
+		// 	$query = $this->pdo->prepare( $sql );			
+		// }
+
+		$value = ( $query->execute() ) ? $query->fetchAll( \PDO::FETCH_ASSOC ) : 'No ahi resultados para tu filtro';
+
+		echo $sql . $w . $o . $l; echo '<pre>'; print_r($value); exit(); 
 
 		return $value;
 	}	

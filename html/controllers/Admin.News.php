@@ -851,10 +851,45 @@ class AdminNews extends Controller{
 		$titulo = isset( $_GET['titulo'] ) ? $_GET['titulo'] : null;
 		$finicio = isset( $_GET['finicio'] ) ? $_GET['finicio'] : null;
 		$ffin = isset( $_GET['ffin'] ) ? $_GET['ffin'] : null;
+		$tipoFuente = isset( $_GET['tipoFuente'] ) ? $_GET['tipoFuente'] : null;
 
-		$count = $this->noticiasRepository->getCountAllNews();		
+		$countWithoutFilter = $this->noticiasRepository->getCountNews();
 
+		$countWithFilter = null;
+		$resultados = null;
 
+		if( $finicio === $ffin || empty($ffin) ){
+			
+			$countWithFilter = $this->noticiasRepository->getCountNews( compact('limit', 'page', 'titulo', 'tipoFuente',  'finicio') );
+			$resultados = $this->noticiasRepository->getNewsWithFilters( compact('limit', 'page', 'titulo', 'tipoFuente',  'finicio') );
+		
+		}else{
+
+			$countWithFilter = $this->noticiasRepository->getCountNews( compact('limit', 'page', 'titulo', 'tipoFuente',  'finicio', 'ffin') );
+			$resultados = $this->noticiasRepository->getNewsWithFilters( compact('limit', 'page', 'titulo', 'tipoFuente',  'finicio', 'ffin') );
+		}
+
+		$count = $countWithFilter;
+		$ini = $page + 1;
+		$end = ( $page + $limit >= $count ) ? $count : $page + $limit;
+
+		$html = '';
+
+		if( is_array($resultados) ){
+			foreach ( $resultados as $noticia ) {
+				$html .= '	<tr>
+				            	<td class="text-center">
+					                <label class="ckbox">
+					                  <input type="checkbox" name="' . $noticia['id'] . '" value="' . $noticia['encabezado'] . '"><span></span>
+					                </label>
+					            </td>
+				            	<td>' . $noticia['tipofuente'] . '</td>
+				            	<td>' . $noticia['encabezado'] . '</td>
+				              	<td>' . $noticia['fuente'] . '</td>
+				              	<td>Enviado a</td>
+				           	</tr>';
+			}
+		}
 
 		$js = '
 				<!-- Libreria jquery-bootpag --> 

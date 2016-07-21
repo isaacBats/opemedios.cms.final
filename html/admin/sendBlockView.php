@@ -15,14 +15,14 @@
 				<div class="form-group col-lg-3">
 	                <label>Entre</label>
 	                <div class="input-group">
-	                    <input id="bootpag_text_finicio" type="text" class="form-control fechaNota" placeholder="yyyy-mm-dd" name="fechaInicio" >
+	                    <input id="bootpag_text_finicio" type="text" class="form-control fechaNota" placeholder="yyyy-mm-dd" name="finicio" >
 	                    <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
 	                </div>
 	            </div>
 	            <div class="form-group col-lg-3">
 	                <label>Y</label>
 	                <div class="input-group">
-	                    <input id="bootpag_text_ffin" type="text" class="form-control fechaNota" placeholder="yyyy-mm-dd" name="fechaFin" >
+	                    <input id="bootpag_text_ffin" type="text" class="form-control fechaNota" placeholder="yyyy-mm-dd" name="ffin" >
 	                    <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
 	                </div>
 	            </div>
@@ -59,17 +59,22 @@
 			        <thead>
 				    	<tr>
 				        	<th class="text-center"></th>
+				        	<th class="text-center">TipoFuente</th>
 				        	<th class="text-center">Noticia</th>
-				            <th class="text-center">Sintesis</th>
 				            <th class="text-center">Fuente</th>
 				            <th class="text-center">Enviado a</th>
 				        </tr>
 			        </thead>
 		          	<tbody>
-						<?php //$html ?>
+						<?= $html ?>
 		          	</tbody>
 		        </table>
-		        <div class="col-md-6"><p id="bootpag_pag" data-count="5"></p></div>	
+		        <div class="col-md-6">
+		        	<p id="bootpag_text">
+		        		Mostrando registros del <b><?= $ini ?></b> al <b><?= $end ?></b> de un total de <b><?= $count ?></b> registros.
+		        	</p>
+		        </div>
+		        <div class="col-md-6"><p id="bootpag_pag" data-count="<?= $count ?>"></p></div>	
 	      	</div>
 	    	<input type="submit" value="Enviar noticias" class="btn btn-primary btn-lg col-lg-3 col-md-offset-8">
 		</form>

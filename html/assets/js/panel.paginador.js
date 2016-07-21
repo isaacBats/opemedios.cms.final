@@ -1,24 +1,26 @@
 $(document).ready(function () {
+    
     var url = $.url();
-     $("#btnbuscar").click(function () {
-         $("#bootpag_text_count").submit();
+    
+    $("#btnbuscar").click(function () {
+        $("#bootpag_text_count").submit();
+    });
+    
+    $("#bootpag_text_count_select").change(function () {
+        $("#bootpag_text_count").submit();
+    });
 
-     });
-     $("#bootpag_text_count_select").change(function () {
-         $("#bootpag_text_count").submit();
-     });
-
-     $("#bootpag_text_fuente_selected").change(function () {
-         $("#bootpag_text_count").submit();
-     });
-
-    if (url.param('titulo') != null) {
-        $('#bootpag_text_titulo').val(url.param('titulo'));
-    }
+    $("#bootpag_text_fuente_selected").change(function () {
+        $("#bootpag_text_count").submit();
+    });
+    
     $("#bootpag_text_titulo").change(function () {
         $("#bootpag_text_count").submit();
     });
 
+    if (url.param('titulo') != null) {
+        $('#bootpag_text_titulo').val(url.param('titulo'));
+    }
 
     if (url.param('finicio') != null) {
         $('#bootpag_text_finicio').val(url.param('finicio'));
@@ -28,45 +30,49 @@ $(document).ready(function () {
         $('#bootpag_text_ffin').val(url.param('ffin'));
     }
 
+    if (url.param('tipoFuente') != null) {
+        $('#bootpag_text_fuente_selected').val(url.param('tipoFuente'));
+    }
+
+    if (url.param('numpp') != null) {
+        $('#bootpag_text_count_select').val(url.param('numpp'));
+    }
     
     /*Producto*/
-    if (url.param('tipoproducto') != null) {
-        $('#tiposproductos').val(url.param('tipoproducto'));
-    }
-    $("#tiposproductos").change(function () {
-        $("#bootpag_text_count").submit();
-    });
+    //$("#tiposproductos").change(function () {
+    //    $("#bootpag_text_count").submit();
+    //});
 
 
     /*Notificaciones*/
-    if (url.param('tiponotificacion') != null) {
-        $('#tiposnotificaciones').val(url.param('tiponotificacion'));
-    }
-    $("#tiposnotificaciones").change(function () {
-        $("#bootpag_text_count").submit();
-    });
+    // if (url.param('tiponotificacion') != null) {
+    //     $('#tiposnotificaciones').val(url.param('tiponotificacion'));
+    // }
+    // $("#tiposnotificaciones").change(function () {
+    //     $("#bootpag_text_count").submit();
+    // });
 
     /*Puntos de venta*/
-    if (url.param('estado') != null) {
-        $('#estados').val(url.param('estado'));
-    }
-    $("#estados").change(function () {
-        $("#bootpag_text_count").submit();
-    });
-    if (url.param('statuspunto') != null) {
-        $('#statuspunto').val(url.param('statuspunto'));
-    }
-    $("#statuspunto").change(function () {
-        $("#bootpag_text_count").submit();
-    });
+    // if (url.param('estado') != null) {
+    //     $('#estados').val(url.param('estado'));
+    // }
+    // $("#estados").change(function () {
+    //     $("#bootpag_text_count").submit();
+    // });
+    // if (url.param('statuspunto') != null) {
+    //     $('#statuspunto').val(url.param('statuspunto'));
+    // }
+    // $("#statuspunto").change(function () {
+    //     $("#bootpag_text_count").submit();
+    // });
     
-    if (url.param('date_ini') != null) {
-        $('#date_ini').val(url.param('date_ini'));
-    }
+    // if (url.param('date_ini') != null) {
+    //     $('#date_ini').val(url.param('date_ini'));
+    // }
    
-    if (url.param('date_fin') != null) {
-        $('#date_fin').val(url.param('date_fin'));
-    }
+    // if (url.param('date_fin') != null) {
+    //     $('#date_fin').val(url.param('date_fin'));
+    // }
 
 
     setNavigation();

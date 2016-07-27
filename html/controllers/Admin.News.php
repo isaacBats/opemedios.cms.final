@@ -696,7 +696,7 @@ class AdminNews extends Controller{
 		$resultado = new stdClass();
 
 		$criterio = $_POST['criterio'];
-		$noticia = $_POST['noticiaid'];
+		$noticia = ( isset( $_POST['noticiaid'] ) ) ? $_POST['noticiaid'] : 'block';
 
 		$emr = new EmpresaRepository();
 		$empresas = $emr->filterEmpresas( $criterio );
@@ -720,30 +720,62 @@ class AdminNews extends Controller{
 	}
 
 	public function searchContacts( $noticiaid, $empresaid ){
+		
+		$title = '';
+		$sintesis = '';
 
-		$new = $this->noticiasRepository->getNewById( $noticiaid );
+		if( $noticiaid != 'block' ){
+			$new = $this->noticiasRepository->getNewById( $noticiaid );			
+			$title = $new['encabezado'];
+			$sintesis = '<p>' . $new['sintesis'] . '</p>';
 
-		$cuentarep = new CuentaRepository();
-		$acounts = $cuentarep->getAcountsByCompany( $empresaid );
-
-		$html = '';
-
-		if( is_array($acounts) ){
-			foreach ( $acounts as $acount ) {
-				$html .= '	<tr>
-				            	<td class="text-center">
-					                <label class="ckbox">
-					                  <input type="checkbox" name="' . $acount['nombre'] . ' ' . $acount['apellidos'] . '" value="' . $acount['email'] . '" checked ><span></span>
-					                </label>
-					            </td>
-				            	<td>' . $acount['nombre'] . ' ' . $acount['apellidos'] . '</td>
-				              	<td>' . $acount['email'] . '</td>
+		}elseif( $noticiaid === 'block' && ( isset( $_SESSION['noticias'] ) && count( $_SESSION['noticias'] ) > 0 ) ){
+			
+			$noticias = $_SESSION['noticias'];
+			
+			$title = 'Enviar bloque de noticias.';
+			$sintesis = '<div class="table-responsive">
+		        <table class="table table-bordered table-inverse nomargin">
+			        <thead>
+			            <tr>
+			              	<th class="text-center">Noticia</th>
+			              	<th class="text-center">Tipo de Fuente</th>
+			            </tr>
+			        </thead>
+		          	<tbody>';
+			foreach ($noticias as $key => $noticia) {
+				$sintesis .='<tr>
+				            	<td>' . $noticia['encabezado'] . '</td>
+				              	<td>' . $noticia['tipofuente'] . '</td>
 				           	</tr>';
 			}
+		    $sintesis .= '</tbody>
+		        </table>
+	      </div>';
 		}
 
-		$emr = new EmpresaRepository();
-		$company = $emr->getEmpresaById( $empresaid );
+		$cuentarep = new CuentaRepository();
+			$acounts = $cuentarep->getAcountsByCompany( $empresaid );
+
+			$html = '';
+
+			if( is_array($acounts) ){
+				foreach ( $acounts as $acount ) {
+					$html .= '	<tr>
+					            	<td class="text-center">
+						                <label class="ckbox">
+						                  <input type="checkbox" name="' . $acount['nombre'] . ' ' . $acount['apellidos'] . '" value="' . $acount['email'] . '" checked ><span></span>
+						                </label>
+						            </td>
+					            	<td>' . $acount['nombre'] . ' ' . $acount['apellidos'] . '</td>
+					              	<td>' . $acount['email'] . '</td>
+					           	</tr>';
+				}
+			}
+
+			$emr = new EmpresaRepository();
+			$company = $emr->getEmpresaById( $empresaid );
+
 
 		$this->header_admin( 'Enviar Noticia - ' );
 		require $this->adminviews . 'sendActionView.php';
@@ -757,15 +789,10 @@ class AdminNews extends Controller{
 
 		$usuarios = $_POST;
 		$resultado = $usuarios;
-
-
-
-		// $usuarios = array_keys($resultado);
-		// $keynoticia = array_shift($usuarios);
+		
 		$noticiaid = array_shift($resultado);
 		$empresaid = array_shift($resultado);
-		// print_r($usuarios); exit();
-
+		
 		$new = $this->noticiasRepository->getNewById( $noticiaid ); 	
 
 
@@ -830,6 +857,53 @@ class AdminNews extends Controller{
 			echo 'No se puede mandar el correo a: <br>';
 			echo '<pre>';
 			print_r($noenviados);
+		}
+	}
+
+	public function sendBlockNewsAction(){
+
+		if( isset( $_SESSION['noticias'] ) && count( $_SESSION['noticias'] ) > 0 )
+		{
+			$noticias = $_SESSION['noticias'];
+
+			$usuarios = $_POST;
+			$resultado = $usuarios;
+			
+			$empresaid = array_shift($resultado);
+
+			ob_start();
+			require $this->adminviews . 'viewsEmails/blockNewsEmail.php';
+			$body = ob_get_clean();
+
+			/*echo '<pre>'; print_r( $noticias ); print_r($_POST); exit();
+			echo $body;*/
+
+			$mail = new Mail();
+			$mail->setSubject('Bloque de Noticias Operadora de medios');
+			$mail->setBody( $body );
+			// exit();
+			$noenviados = [];
+
+			foreach ($usuarios as $key => $email) {
+				if( $key != 'empresaid' ){
+					$key = str_replace('_', ' ', $key);
+					$exito = $mail->sendMail( $email, $key );
+					if( !$exito ){
+						$noenviado = [$key => $email ];
+						array_push($noenviados, $noenviado);
+					}					
+				}
+			}
+			if( count($noenviados) == 0 ){
+				
+				unset($_SESSION['noticias']);
+				echo 'Se mando el correo correctamente';
+
+			}else{
+				echo 'No se puede mandar el correo a: <br>';
+				echo '<pre>';
+				print_r($noenviados);
+			}
 		}
 	}
 
@@ -937,11 +1011,19 @@ class AdminNews extends Controller{
 
 		}
 
-		ob_start();
-		require $this->adminviews . 'viewsEmails/blockNewsEmail.php';
-		$body = ob_get_clean();
+		$_SESSION['noticias'] = $noticias;
 
-		echo $body;
+		$this->header_admin( 'Enviar Bloque de Noticias - ' );
+		require $this->adminviews . 'sendBlockAcountView.php';
+		$this->footer_admin();		
+
+		// ob_start();
+		// require $this->adminviews . 'viewsEmails/blockNewsEmail.php';
+		// $body = ob_get_clean();
+
+		// echo $body;
+		
+		// echo '<pre>';print_r($noticias); die('Fin');
 
 	}
 

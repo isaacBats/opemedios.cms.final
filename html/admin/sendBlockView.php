@@ -77,7 +77,7 @@
 		        </div>
 		        <div class="col-md-6"><p id="bootpag_pag" data-count="<?= $count ?>"></p></div>	
 	      	</div>
-	    	<input type="submit" value="Enviar noticias" class="btn btn-primary btn-lg col-lg-3 col-md-offset-8">
+	    	<input type="submit" value="Siguiente" class="btn btn-primary btn-lg col-lg-3 col-md-offset-8">
 		</form>
 	</div>
 </div>

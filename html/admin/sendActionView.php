@@ -1,12 +1,12 @@
 <div class="row">
     <div class="col-lg-12">
-        <h1 class="page-header"><?= $new['encabezado'] ?></h1>
+        <h1 class="page-header"><?= $title ?></h1>
     </div>
     <!-- /.col-lg-12 -->
 </div>
 <div class="row">
 	<div class="panel-body">
-	    <p><?= $new['sintesis'] ?></p>
+	    <?= $sintesis ?>
 	</div>
 </div>
 <div class="panel panel-default">
@@ -19,8 +19,13 @@
 </div>
 <div class="row">
 	<div class="col-lg-8 table-contactos">
+			<?php if( $noticiaid != 'block' ){ ?>
 		<form method="post" action="/panel/new/send" id="form-send-action" >
-			<input type="hidden" name="noticiaid" value="<?= $new['id'] ?>">
+				<input type="hidden" name="noticiaid" value="<?= $new['id'] ?>">
+			<?php }else{ ?>
+		<form method="post" action="/panel/news/send-news-block" id="form-send-action" >
+			<?php }?>
+
 			<input type="hidden" name="empresaid" value="<?= $empresaid ?>">			
 			<div class="table-responsive">
 		        <table class="table table-bordered table-inverse nomargin">

@@ -828,8 +828,10 @@ class AdminNews extends Controller{
 		}
 
 		ob_start();
-		require $this->adminviews . 'viewsEmails/oneNewEmail.php';
+		require $this->adminviews . 'viewsEmails/oneNewEmail2.php';
 		$body = ob_get_clean();
+
+		echo $body; exit();
 
 		$mail = new Mail();
 		$mail->setSubject('Noticia Operadora de medios - ' . strtoupper($new['tipofuente']));

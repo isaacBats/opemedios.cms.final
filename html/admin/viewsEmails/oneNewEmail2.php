@@ -157,29 +157,37 @@
 
         <!-- Email Header : BEGIN -->
         <table cellspacing="0" cellpadding="0" border="0" align="center" width="600" style="margin: auto;" class="email-container">
-			<tr>
-				<td style="padding: 20px 0; text-align: center">
-					<img src="http://www.opemedios.com.mx/images/logo.png" width="230" height="100" alt="opemedios logo" border="0">
-				</td>
-			</tr>
+            <tr>
+                <td style="padding: 20px 0; text-align: center">
+                    <img src="http://www.opemedios.com.mx/images/logo.png" width="230" height="100" alt="opemedios logo" border="0">
+                </td>
+            </tr>
         </table>
         <!-- Email Header : END -->
+
+        <table cellspacing="0" cellpadding="0" border="0" align="center" width="600" style="margin: auto;" class="email-container">
+            <tr>
+                <td bgcolor="#ffffff" style="padding: 20px 0; text-align: center">
+                    <h1 style="margin: 10px; padding-top: 30px; text-align: center;"><?= $new{'encabezado'} ?></h1>                                
+                </td>
+            </tr>
+        </table>
         
         <!-- Email Body : BEGIN -->
         <table cellspacing="0" cellpadding="0" border="0" align="center" width="600" style="margin: auto;" class="email-container">
             
             <!-- Hero Image, Flush : BEGIN -->
             <tr>
-				<td bgcolor="#ffffff">
-					<img src="http://placehold.it/600x300" width="600" height="" alt="alt_text" border="0" align="center" style="width: 100%; max-width: 600px;">
-				</td>
+                <td bgcolor="#ffffff">
+                    <img src="<?= $pathImage ?>" width="600" height="" alt="<?= $new['encabezado'] ?>" border="0" align="center" style="width: 100%; max-width: 600px;">
+                    <embed src="<?= $pathImage ?>" width="370" height="285" align="middle" border="3"></embed>
+                </td>
             </tr>
             <!-- Hero Image, Flush : END -->
 
             <!-- 1 Column Text : BEGIN -->
             <tr>
                 <td bgcolor="#ffffff" style="padding: 40px; text-align: justify; font-family: sans-serif; font-size: 15px; mso-height-rule: exactly; line-height: 20px; color: #555555;">
-                    <h1 style="margin: 10px; padding-top: 30px; text-align: justify;"><?= $new{'encabezado'} ?></h1>
                     <?= $new['sintesis'] ?>
                     <br><br>
                     <!-- Button : Begin -->

@@ -10,6 +10,7 @@ include_once(__DIR__.'/../Repositories/SeccionRepository.php');
 include_once(__DIR__.'/../Repositories/EmpresaRepository.php');
 include_once(__DIR__.'/../Repositories/CuentaRepository.php');
 include_once(__DIR__.'/../Repositories/TemaRepository.php');
+include_once(__DIR__.'/../Repositories/AdjuntoRepository.php');
 
 include 'Image.php';
 
@@ -786,6 +787,7 @@ class AdminNews extends Controller{
 	public function sendAction(){
 
 		$temRep = new TemaRepository();
+		$adjuntoRepo = new AdjuntoRepository();
 
 		$usuarios = $_POST;
 		$resultado = $usuarios;
@@ -794,7 +796,7 @@ class AdminNews extends Controller{
 		$empresaid = array_shift($resultado);
 		
 		$new = $this->noticiasRepository->getNewById( $noticiaid ); 	
-
+		$adjunto = $adjuntoRepo->getAdjunto( $noticiaid );
 
 		$tema  = $temRep->getThemaByEmpresaID( $empresaid );
 
@@ -804,26 +806,35 @@ class AdminNews extends Controller{
 
 		$tendenciaid = $new['tendencia_id'];
 
+		$file = '';
+
 		switch ($new['tipofuente_id']) {
 			case '1':
 				$font = 'tel';
 				$relatedNew = $this->noticiasRepository->getNewById( $noticiaid, $font );
+				$file = '/assets/data/noticias/television/' . $adjunto['nombre_archivo'];
 				break;
 			case '2':
 				$font = 'rad';
 				$relatedNew = $this->noticiasRepository->getNewById( $noticiaid, $font );
+				$file = '/assets/data/noticias/radio/' . $adjunto['nombre_archivo'];
 				break;
 			case '3':
 				$font = 'per';
 				$relatedNew = $this->noticiasRepository->getNewById( $noticiaid, $font );
+				$file = '<img src="/assets/data/noticias/periodico/' . $adjunto['nombre_archivo'] . '" width="600" alt="' . $new['encabezado'] . '" border="0" align="center" style="width: 100%; max-width: 600px;">';
 				break;
 			case '4':
 				$font = 'rev';
 				$relatedNew = $this->noticiasRepository->getNewById( $noticiaid, $font );
+				$file = '<img src="/assets/data/noticias/revista/' . $adjunto['nombre_archivo'] . '" width="600" alt="' . $new['encabezado'] . '" border="0" align="center" style="width: 100%; max-width: 600px;">';
 				break;
 			case '5':
 				$font = 'int';
 				$relatedNew = $this->noticiasRepository->getNewById( $noticiaid, $font );
+				$file = '<embed src="/assets/data/noticias/internet/' . $adjunto['nombre_archivo'] . '" width="370" height="285" align="middle" border="3"></embed>';
+
+				'/assets/data/noticias/internet/' . $adjunto['nombre_archivo'];
 				break;
 		}
 

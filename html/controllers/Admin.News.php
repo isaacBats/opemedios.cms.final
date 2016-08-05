@@ -812,12 +812,12 @@ class AdminNews extends Controller{
 			case '1':
 				$font = 'tel';
 				$relatedNew = $this->noticiasRepository->getNewById( $noticiaid, $font );
-				$file = '/assets/data/noticias/television/' . $adjunto['nombre_archivo'];
+				$file = '<embed src="/assets/data/noticias/television/' . $adjunto['nombre_archivo'] . '" width="600" height="300" align="center" border="3"></embed>';
 				break;
 			case '2':
 				$font = 'rad';
 				$relatedNew = $this->noticiasRepository->getNewById( $noticiaid, $font );
-				$file = '/assets/data/noticias/radio/' . $adjunto['nombre_archivo'];
+				$file = '<embed src="/assets/data/noticias/radio/' . $adjunto['nombre_archivo'] . '" width="600" height="300" align="center" border="3"></embed>';
 				break;
 			case '3':
 				$font = 'per';
@@ -832,17 +832,14 @@ class AdminNews extends Controller{
 			case '5':
 				$font = 'int';
 				$relatedNew = $this->noticiasRepository->getNewById( $noticiaid, $font );
-				$file = '<embed src="/assets/data/noticias/internet/' . $adjunto['nombre_archivo'] . '" width="370" height="285" align="middle" border="3"></embed>';
-
-				'/assets/data/noticias/internet/' . $adjunto['nombre_archivo'];
+				//$file = '<embed src="/assets/data/noticias/internet/' . $adjunto['nombre_archivo'] . '" width="600" height="300" align="center" border="3"></embed>';
+				$file = '<embed src="http://sistema.opemedios.com.mx/data/noticias/internet/' . $adjunto['nombre_archivo'] . '" width="600" height="300" align="center" border="3"></embed>';
 				break;
 		}
 
 		ob_start();
 		require $this->adminviews . 'viewsEmails/oneNewEmail2.php';
 		$body = ob_get_clean();
-
-		echo $body; exit();
 
 		$mail = new Mail();
 		$mail->setSubject('Noticia Operadora de medios - ' . strtoupper($new['tipofuente']));
@@ -881,15 +878,18 @@ class AdminNews extends Controller{
 
 			$usuarios = $_POST;
 			$resultado = $usuarios;
+
+			$noticiaPrincipal =  current($noticias);
 			
 			$empresaid = array_shift($resultado);
 
 			ob_start();
-			require $this->adminviews . 'viewsEmails/blockNewsEmail.php';
+			require $this->adminviews . 'viewsEmails/blockNewsEmail2.php';
 			$body = ob_get_clean();
 
-			/*echo '<pre>'; print_r( $noticias ); print_r($_POST); exit();
-			echo $body;*/
+			/*echo '<pre>'; print_r( $noticias ); print_r($_POST); exit();*/
+			//echo $body; exit(); 
+			//echo '<pre>'; print_r($noticiaPrincipal); exit();
 
 			$mail = new Mail();
 			$mail->setSubject('Bloque de Noticias Operadora de medios');

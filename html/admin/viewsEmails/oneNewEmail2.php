@@ -179,8 +179,7 @@
             <!-- Hero Image, Flush : BEGIN -->
             <tr>
                 <td bgcolor="#ffffff">
-                    <img src="<?= $pathImage ?>" width="600" height="" alt="<?= $new['encabezado'] ?>" border="0" align="center" style="width: 100%; max-width: 600px;">
-                    <embed src="<?= $pathImage ?>" width="370" height="285" align="middle" border="3"></embed>
+                    <?= $file ?>
                 </td>
             </tr>
             <!-- Hero Image, Flush : END -->

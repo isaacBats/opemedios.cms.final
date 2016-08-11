@@ -29,10 +29,14 @@ class AdminNewRD extends AdminNews{
 
 	public function add(){
 
-		ob_start();
-		require $this->adminviews . 'addNewRD.php';
-		$campos = ob_get_clean();
-		$this->addNew($campos, $this->fuente );
+		if( isset( $_SESSION['admin'] ) ){	
+			ob_start();
+			require $this->adminviews . 'addNewRD.php';
+			$campos = ob_get_clean();
+			$this->addNew($campos, $this->fuente );
+		}else{
+            header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
+        }
 	}
 
 	public function save(){

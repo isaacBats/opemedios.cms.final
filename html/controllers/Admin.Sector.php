@@ -15,9 +15,13 @@ class AdminSector extends Controller{
 
 	public function add(){
 		
-		$this->header_admin('Agregar Sector - ' );
-		require $this->adminviews . 'addSector.php';
-		$this->footer_admin();
+		if( isset( $_SESSION['admin'] ) ){
+			$this->header_admin('Agregar Sector - ' );
+			require $this->adminviews . 'addSector.php';
+			$this->footer_admin();
+		}else{
+            header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
+        }
 		
 	}
 
@@ -45,23 +49,27 @@ class AdminSector extends Controller{
 
 	public function showSectors(){
 
-		$this->header_admin('Administrar Sectores - ' );
-		$sectores = $this->sectorRepository->allSectors();
-		$html = '';
-		foreach ($sectores as $sector) {
-			$html .= '
-					<tr>
-                        <td>'.$sector['nombre'].'</td>
-                        <td>'.$sector['descripcion'].'</td>
-                        <td>
-          					<a class="btn btn-default btn-sm" href="javascript:void(0);">Ver</a>
-          					<a class="btn btn-danger btn-sm" href="javascript:void(0);">Eliminar</a>
-          				</td>
-                    </tr>
-			';
-		}
+		if( isset( $_SESSION['admin'] ) ){
+			$this->header_admin('Administrar Sectores - ' );
+			$sectores = $this->sectorRepository->allSectors();
+			$html = '';
+			foreach ($sectores as $sector) {
+				$html .= '
+						<tr>
+	                        <td>'.$sector['nombre'].'</td>
+	                        <td>'.$sector['descripcion'].'</td>
+	                        <td>
+	          					<a class="btn btn-default btn-sm" href="javascript:void(0);">Ver</a>
+	          					<a class="btn btn-danger btn-sm" href="javascript:void(0);">Eliminar</a>
+	          				</td>
+	                    </tr>
+				';
+			}
 
-		require $this->adminviews . 'showSectores.php';
-		$this->footer_admin();
+			require $this->adminviews . 'showSectores.php';
+			$this->footer_admin();
+		}else{
+            header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
+        }
 	}
 }

@@ -54,11 +54,15 @@ class AdminController extends Controller{
 			header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
 		}
 
-		// require $this->adminviews."login.php";
+		require $this->adminviews."login.php";
 	}
 
 	public function dashboard(){
-		header( "Location: ./panel/dashboard");
+		if( isset( $_SESSION['admin'] ) ){
+			header( "Location: ./panel/dashboard");			
+		}else{
+            header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
+        }
 	}
 }
 ?>

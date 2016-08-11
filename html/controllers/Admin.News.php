@@ -25,572 +25,593 @@ class AdminNews extends Controller{
 	}
 
 	public function showNews(){
-		$noticias = $this->noticiasRepository->showNewsToDay();
-		if ( is_array($noticias) ){
+		if( isset( $_SESSION['admin'] ) ){
+			$noticias = $this->noticiasRepository->showNewsToDay();
+			if ( is_array($noticias) ){
 
-			$html = '';
-			foreach ($noticias as $noticia) {
+				$html = '';
+				foreach ($noticias as $noticia) {
 
-				$asigna = $this->noticiasRepository->asignaByIdNoticia( $noticia['id'] );
-				$enviado = ( is_array( $asigna ) ) ? $asigna['empresa'] : 'No enviado';
+					$asigna = $this->noticiasRepository->asignaByIdNoticia( $noticia['id'] );
+					$enviado = ( is_array( $asigna ) ) ? $asigna['empresa'] : 'No enviado';
 
-				$html .= '
-						<tr>
-	                        <td></td>
-	                        <td>
-	                        	<span>' . $noticia['id'] . '</span>
-	                        	<p>' . $noticia['encabezado'] . '</p>
-	                        </td>
-	                        <td>'.$noticia['nameFont'].'</td>
-	                        <td>' .$enviado. '</td>
-	                        <td>
-								<a href="/panel/new/view/' . $noticia['id'] . '"><i class="fa fa-eye"></i></a>	
-								<a href="/panel/new/edit/' . $noticia['id'] . '"><i class="fa fa-pencil"></i></a>	
-								<a href="/panel/new/send/' . $noticia['id'] . '"><i class="fa fa-envelope-o"></i></a>	
-								<a href=""><i class="fa fa-trash-o"></i></a>	
-	                        </td>
-	                    </tr>
-				';
+					$html .= '
+							<tr>
+		                        <td></td>
+		                        <td>
+		                        	<span>' . $noticia['id'] . '</span>
+		                        	<p>' . $noticia['encabezado'] . '</p>
+		                        </td>
+		                        <td>'.$noticia['nameFont'].'</td>
+		                        <td>' .$enviado. '</td>
+		                        <td>
+									<a href="/panel/new/view/' . $noticia['id'] . '"><i class="fa fa-eye"></i></a>	
+									<a href="/panel/new/edit/' . $noticia['id'] . '"><i class="fa fa-pencil"></i></a>	
+									<a href="/panel/new/send/' . $noticia['id'] . '"><i class="fa fa-envelope-o"></i></a>	
+									<a href=""><i class="fa fa-trash-o"></i></a>	
+		                        </td>
+		                    </tr>
+					';
+				}
 			}
-		}
 
-		$this->header_admin('Noticias de Hoy - ' );
-		require $this->adminviews . 'showNews.php';
-		$this->footer_admin();
+			$this->header_admin('Noticias de Hoy - ' );
+			require $this->adminviews . 'showNews.php';
+			$this->footer_admin();
+		}else{
+            header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
+        }
 	}
 
 	public function viewNew ( $id ){
 
-		$fr = new FuentesRepository();
-		$newSelected = $this->noticiasRepository->getNewById( $id ); 
-		$relatedNew = null ;
-		$html = '';
-		switch ($newSelected['tipofuente_id']) {
-			case '1':
-				$font = 'tel';
-				$relatedNew = $this->noticiasRepository->getNewById( $id, $font );
-				if( is_array( $relatedNew ) ){
-					$html = '
-								<p>Hora: <strong>' . $relatedNew['hora'] . '</strong></p>
-								<p>Duración: <strong>' . $relatedNew['duracion'] . '</strong></p>
-					';					
-				}
-				break;
-			case '2':
-				$font = 'rad';
-				$relatedNew = $this->noticiasRepository->getNewById( $id, $font );
-				if( is_array( $relatedNew ) ){
-					$html = '
-								<p>Hora: <strong>' . $relatedNew['hora'] . '</strong></p>
-								<p>Duración: <strong>' . $relatedNew['duracion'] . '</strong></p>
-					';					
-				}
-				break;
-			case '3':
-				$font = 'per';
-				$relatedNew = $this->noticiasRepository->getNewById( $id, $font );
-				if( is_array( $relatedNew ) ){
-					$html = '
-								<p>Página: <strong>' . $relatedNew['pagina'] . '</strong></p>
-								<p>Tamaño(%): <strong>' . $relatedNew['porcentaje_pagina'] . '</strong></p>
-					';					
-				}
-				break;
-			case '4':
-				$font = 'rev';
-				$relatedNew = $this->noticiasRepository->getNewById( $id, $font );
-				if( is_array( $relatedNew ) ){
-					$html = '
-								<p>Página: <strong>' . $relatedNew['pagina'] . '</strong></p>
-								<p>Tamaño(%): <strong>' . $relatedNew['porcentaje_pagina'] . '</strong></p>
-					';					
-				}
-				break;
-			case '5':
-				$font = 'int';
-				$relatedNew = $this->noticiasRepository->getNewById( $id, $font );
-				if( is_array( $relatedNew ) ){
-					$html = '
-								<p>Hora de captura: <strong>' . $relatedNew['hora_publicacion'] . '</strong></p>
-								<p>URL: <a href="' . $relatedNew['url'] . '" target="_blank" >' . $relatedNew['url'] . '</a></p>							
-					';					
-				}
-				break;
-		}
-		
-		$this->header_admin('Noticias de Hoy: ' . $newSelected['encabezado'] . ' - ' );
-		require $this->adminviews . 'viewNew.php';
-		$this->footer_admin();
+		if( isset( $_SESSION['admin'] ) ){
+			$fr = new FuentesRepository();
+			$newSelected = $this->noticiasRepository->getNewById( $id ); 
+			$relatedNew = null ;
+			$html = '';
+			switch ($newSelected['tipofuente_id']) {
+				case '1':
+					$font = 'tel';
+					$relatedNew = $this->noticiasRepository->getNewById( $id, $font );
+					if( is_array( $relatedNew ) ){
+						$html = '
+									<p>Hora: <strong>' . $relatedNew['hora'] . '</strong></p>
+									<p>Duración: <strong>' . $relatedNew['duracion'] . '</strong></p>
+						';					
+					}
+					break;
+				case '2':
+					$font = 'rad';
+					$relatedNew = $this->noticiasRepository->getNewById( $id, $font );
+					if( is_array( $relatedNew ) ){
+						$html = '
+									<p>Hora: <strong>' . $relatedNew['hora'] . '</strong></p>
+									<p>Duración: <strong>' . $relatedNew['duracion'] . '</strong></p>
+						';					
+					}
+					break;
+				case '3':
+					$font = 'per';
+					$relatedNew = $this->noticiasRepository->getNewById( $id, $font );
+					if( is_array( $relatedNew ) ){
+						$html = '
+									<p>Página: <strong>' . $relatedNew['pagina'] . '</strong></p>
+									<p>Tamaño(%): <strong>' . $relatedNew['porcentaje_pagina'] . '</strong></p>
+						';					
+					}
+					break;
+				case '4':
+					$font = 'rev';
+					$relatedNew = $this->noticiasRepository->getNewById( $id, $font );
+					if( is_array( $relatedNew ) ){
+						$html = '
+									<p>Página: <strong>' . $relatedNew['pagina'] . '</strong></p>
+									<p>Tamaño(%): <strong>' . $relatedNew['porcentaje_pagina'] . '</strong></p>
+						';					
+					}
+					break;
+				case '5':
+					$font = 'int';
+					$relatedNew = $this->noticiasRepository->getNewById( $id, $font );
+					if( is_array( $relatedNew ) ){
+						$html = '
+									<p>Hora de captura: <strong>' . $relatedNew['hora_publicacion'] . '</strong></p>
+									<p>URL: <a href="' . $relatedNew['url'] . '" target="_blank" >' . $relatedNew['url'] . '</a></p>							
+						';					
+					}
+					break;
+			}
+			
+			$this->header_admin('Noticias de Hoy: ' . $newSelected['encabezado'] . ' - ' );
+			require $this->adminviews . 'viewNew.php';
+			$this->footer_admin();
+		}else{
+            header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
+        }
 	}
 
 	public function editNewView( $id ){
 
-		$css = '
-				<!-- Select2 CSS -->
-			    <link href="/assets/css/select2.min.css" rel="stylesheet">
-			    <link href="/admin/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
-		';
+		if( isset( $_SESSION['admin'] ) ){
 
-		$js = '
-				<!-- Select2 JavaScript -->
-			    <script type="text/javascript" src="/assets/bower_components/moment/min/moment.min.js"></script>
-			    <script src="/admin/js/bootstrap-datetimepicker.min.js"></script>
-			    <script src="/assets/js/select2.min.js"></script>
-			    <script src="/assets/js/i18n/es.js"></script>
-		';
+			$css = '
+					<!-- Select2 CSS -->
+				    <link href="/assets/css/select2.min.css" rel="stylesheet">
+				    <link href="/admin/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+			';
 
-		$fr   = new FuentesRepository();
-		$gr   = new GeneroRepository();
-		$secr = new SectorRepository();
-		$sccr = new SeccionRepository();
-		$tfr  = new TipoFuenteRepository();
-		$tar  = new TipoAutorRepository();
+			$js = '
+					<!-- Select2 JavaScript -->
+				    <script type="text/javascript" src="/assets/bower_components/moment/min/moment.min.js"></script>
+				    <script src="/admin/js/bootstrap-datetimepicker.min.js"></script>
+				    <script src="/assets/js/select2.min.js"></script>
+				    <script src="/assets/js/i18n/es.js"></script>
+			';
 
-		$optionFont = '';
-		$genero		= '';
-		$sector		= '';
-		$seccion	= '';
-		$tipoAutor	= '';
-		$tendencia  = '';
-		$costo 		= '';
+			$fr   = new FuentesRepository();
+			$gr   = new GeneroRepository();
+			$secr = new SectorRepository();
+			$sccr = new SeccionRepository();
+			$tfr  = new TipoFuenteRepository();
+			$tar  = new TipoAutorRepository();
 
-		$newSelected = $this->noticiasRepository->getNewById( $id );
+			$optionFont = '';
+			$genero		= '';
+			$sector		= '';
+			$seccion	= '';
+			$tipoAutor	= '';
+			$tendencia  = '';
+			$costo 		= '';
 
-		$fuentes   = $fr->showAllFonts( $newSelected['tipofuente_id'] );
-		$autores   = $tar->allAuthors();
-		$generos   = $gr->allGeneros();
-		$sectores  = $secr->allSectors( 1 );
-		$secciones = $sccr->allSecciones( 1 );
-		$tendencias = $this->noticiasRepository->getTendencias();
+			$newSelected = $this->noticiasRepository->getNewById( $id );
 
-		foreach ($tendencias as $t) {
-			if ( $t['id_tendencia'] == $newSelected['tendencia_id'] ){
-				$tendencia .= '<option value="'.$t['id_tendencia'].'" selected >'.$t['descripcion'].'</option>';				
-			}else{
-				$tendencia .= '<option value="'.$t['id_tendencia'].'">'.$t['descripcion'].'</option>';
-			}
-		}
+			$fuentes   = $fr->showAllFonts( $newSelected['tipofuente_id'] );
+			$autores   = $tar->allAuthors();
+			$generos   = $gr->allGeneros();
+			$sectores  = $secr->allSectors( 1 );
+			$secciones = $sccr->allSecciones( 1 );
+			$tendencias = $this->noticiasRepository->getTendencias();
 
-		foreach ($fuentes as $f) {
-			if ( $f['id_fuente'] == $newSelected['fuente_id'] ){
-				$optionFont .= '<option value="'.$f['id_fuente'].'" selected >'.$f['nombre'].'</option>';				
-			}else{
-				$optionFont .= '<option value="'.$f['id_fuente'].'">'.$f['nombre'].'</option>';
-			}
-		}
-
-		foreach ($autores as $a) {
-			if( $a['id_tipo_autor'] == $newSelected['tipoautor_id'] ){
-				$tipoAutor .= '<option value="'.$a['id_tipo_autor'].'" selected >'.$a['descripcion'].'</option>';				
-			}else{
-				$tipoAutor .= '<option value="'.$a['id_tipo_autor'].'">'.$a['descripcion'].'</option>';				
-			}
-		}
-
-		foreach ($generos as $g) {
-			if( $g['id_genero'] == $newSelected['genero_id'] ){
-				$genero .= '<option value="'.$g['id_genero'].'" selected >'.$g['descripcion'].'</option>';				
-			}else{
-				$genero .= '<option value="'.$g['id_genero'].'">'.$g['descripcion'].'</option>';				
-			}
-		}
-
-		foreach ($sectores as $s) {
-			if( $s['id_sector'] == $newSelected['sector_id'] ){
-				$sector .= '<option value="'.$s['id_sector'].'" selected >'.$s['nombre'].'</option>';				
-			}else{
-				$sector .= '<option value="'.$s['id_sector'].'">'.$s['nombre'].'</option>';				
-			}
-		}
-
-		foreach ($secciones as $secc) {
-			if( $secc['id_seccion'] == $newSelected['seccion_id'] ){
-				$seccion .= '<option value="'.$secc['id_seccion'].'" selected >'.$secc['nombre'].'</option>';				
-			}else{
-				$seccion .= '<option value="'.$secc['id_seccion'].'">'.$secc['nombre'].'</option>';				
-			}
-		}
-
-		$relatedNew = null ;
-		$campos = '';
-		switch ($newSelected['tipofuente_id']) {
-			case '1':
-				$font = 'tel';
-				$css .= '
-						<link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" rel="stylesheet">
-					    <link rel="stylesheet" type="text/css" media="screen" href="http://tarruda.github.com/bootstrap-datetimepicker/assets/css/bootstrap-datetimepicker.min.css">    			
-				';
-				$relatedNew = $this->noticiasRepository->getNewById( $id, $font );
-				if( is_array( $relatedNew ) ){
-					ob_start();
-					require $this->adminviews . 'editNewTV.php';
-					$campos = ob_get_clean();
-					$costo = $relatedNew['costo'];					
+			foreach ($tendencias as $t) {
+				if ( $t['id_tendencia'] == $newSelected['tendencia_id'] ){
+					$tendencia .= '<option value="'.$t['id_tendencia'].'" selected >'.$t['descripcion'].'</option>';				
+				}else{
+					$tendencia .= '<option value="'.$t['id_tendencia'].'">'.$t['descripcion'].'</option>';
 				}
-				break;
-			case '2':
-				$font = 'rad';
-				$css .= '
-						<link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" rel="stylesheet">
-					    <link rel="stylesheet" type="text/css" media="screen" href="http://tarruda.github.com/bootstrap-datetimepicker/assets/css/bootstrap-datetimepicker.min.css">    			
-				';
-				$relatedNew = $this->noticiasRepository->getNewById( $id, $font );
-				if( is_array( $relatedNew ) ){
-					ob_start();
-					require $this->adminviews . 'editNewRD.php';
-					$campos = ob_get_clean();
-					$costo = $relatedNew['costo'];					
+			}
+
+			foreach ($fuentes as $f) {
+				if ( $f['id_fuente'] == $newSelected['fuente_id'] ){
+					$optionFont .= '<option value="'.$f['id_fuente'].'" selected >'.$f['nombre'].'</option>';				
+				}else{
+					$optionFont .= '<option value="'.$f['id_fuente'].'">'.$f['nombre'].'</option>';
 				}
-				break;
-			case '3':
-				$ub1 = '';
-				$ub2 = '';
-				$ub3 = '';
-				$ub4 = '';
+			}
 
-				$font = 'per';
-				$relatedNew = $this->noticiasRepository->getNewById( $id, $font );
-				if( is_array( $relatedNew ) ){
-
-					$tipoPaginacion = '';
-					$tipos = $this->noticiasRepository->getTiposPagina();
-					foreach ($tipos as $t) {
-						if( $t['id_tipo_pagina'] == $relatedNew['id_tipo_pagina'] ){
-							$tipoPaginacion .= '<option value="'.$t['id_tipo_pagina'].'" selected>'.$t['descripcion'].'</option>';							
-						}else{
-							$tipoPaginacion .= '<option value="'.$t['id_tipo_pagina'].'">'.$t['descripcion'].'</option>';							
-						}
-					}
-
-					$ubicaciones = $this->noticiasRepository->getUbicacionByNoticiaId( $id );
-					for ($i=1; $i <= 3; $i++) { 
-						if( $ubicaciones[$i] == '1' ){
-							$ub1 .= '
-									<label class="checkbox-inline">
-							            <input name="ubicacion' . $i . '" type="checkbox" checked >
-							        </label>
-							';
-						}else{
-							$ub1 .= '
-									<label class="checkbox-inline">
-							            <input name="ubicacion' . $i . '" type="checkbox" >
-							        </label>
-							';
-						}
-					}
-
-					for ($i=4; $i <= 6; $i++) { 
-						if( $ubicaciones[$i] == '1' ){
-							$ub2 .= '
-									<label class="checkbox-inline">
-							            <input name="ubicacion' . $i . '" type="checkbox" checked >
-							        </label>
-							';
-						}else{
-							$ub2 .= '
-									<label class="checkbox-inline">
-							            <input name="ubicacion' . $i . '" type="checkbox" >
-							        </label>
-							';
-						}
-					}
-
-					for ($i=7; $i <= 9; $i++) { 
-						if( $ubicaciones[$i] == '1' ){
-							$ub3 .= '
-									<label class="checkbox-inline">
-							            <input name="ubicacion' . $i . '" type="checkbox" checked >
-							        </label>
-							';
-						}else{
-							$ub3 .= '
-									<label class="checkbox-inline">
-							            <input name="ubicacion' . $i . '" type="checkbox" >
-							        </label>
-							';
-						}
-					}
-
-					for ($i=10; $i <= 12; $i++) { 
-						if( $ubicaciones[$i] == '1' ){
-							$ub4 .= '
-									<label class="checkbox-inline">
-							            <input name="ubicacion' . $i . '" type="checkbox" checked >
-							        </label>
-							';
-						}else{
-							$ub4 .= '
-									<label class="checkbox-inline">
-							            <input name="ubicacion' . $i . '" type="checkbox" >
-							        </label>
-							';
-						}
-					}
-
-					ob_start();
-					require $this->adminviews . 'editNewPE.php';
-					$campos = ob_get_clean();
-					$costo = $relatedNew['costo'];					
+			foreach ($autores as $a) {
+				if( $a['id_tipo_autor'] == $newSelected['tipoautor_id'] ){
+					$tipoAutor .= '<option value="'.$a['id_tipo_autor'].'" selected >'.$a['descripcion'].'</option>';				
+				}else{
+					$tipoAutor .= '<option value="'.$a['id_tipo_autor'].'">'.$a['descripcion'].'</option>';				
 				}
-				break;
-			case '4':
-				$ub1 = '';
-				$ub2 = '';
-				$ub3 = '';
-				$ub4 = '';
+			}
 
-				$font = 'rev';
-				$relatedNew = $this->noticiasRepository->getNewById( $id, $font );
-				if( is_array( $relatedNew ) ){
-					$tipoPaginacion = '';
-					$tipos = $this->noticiasRepository->getTiposPagina();
-					foreach ($tipos as $t) {
-						if( $t['id_tipo_pagina'] == $relatedNew['id_tipo_pagina'] ){
-							$tipoPaginacion .= '<option value="'.$t['id_tipo_pagina'].'" selected>'.$t['descripcion'].'</option>';							
-						}else{
-							$tipoPaginacion .= '<option value="'.$t['id_tipo_pagina'].'">'.$t['descripcion'].'</option>';							
-						}
-					}
-
-					$ubicaciones = $this->noticiasRepository->getUbicacionByNoticiaId( $id );
-					for ($i=1; $i <= 3; $i++) { 
-						if( $ubicaciones[$i] == '1' ){
-							$ub1 .= '
-									<label class="checkbox-inline">
-							            <input name="ubicacion' . $i . '" type="checkbox" checked >
-							        </label>
-							';
-						}else{
-							$ub1 .= '
-									<label class="checkbox-inline">
-							            <input name="ubicacion' . $i . '" type="checkbox" >
-							        </label>
-							';
-						}
-					}
-
-					for ($i=4; $i <= 6; $i++) { 
-						if( $ubicaciones[$i] == '1' ){
-							$ub2 .= '
-									<label class="checkbox-inline">
-							            <input name="ubicacion' . $i . '" type="checkbox" checked >
-							        </label>
-							';
-						}else{
-							$ub2 .= '
-									<label class="checkbox-inline">
-							            <input name="ubicacion' . $i . '" type="checkbox" >
-							        </label>
-							';
-						}
-					}
-
-					for ($i=7; $i <= 9; $i++) { 
-						if( $ubicaciones[$i] == '1' ){
-							$ub3 .= '
-									<label class="checkbox-inline">
-							            <input name="ubicacion' . $i . '" type="checkbox" checked >
-							        </label>
-							';
-						}else{
-							$ub3 .= '
-									<label class="checkbox-inline">
-							            <input name="ubicacion' . $i . '" type="checkbox" >
-							        </label>
-							';
-						}
-					}
-
-					for ($i=10; $i <= 12; $i++) { 
-						if( $ubicaciones[$i] == '1' ){
-							$ub4 .= '
-									<label class="checkbox-inline">
-							            <input name="ubicacion' . $i . '" type="checkbox" checked >
-							        </label>
-							';
-						}else{
-							$ub4 .= '
-									<label class="checkbox-inline">
-							            <input name="ubicacion' . $i . '" type="checkbox" >
-							        </label>
-							';
-						}
-					}
-
-					ob_start();
-					require $this->adminviews . 'editNewRE.php';
-					$campos = ob_get_clean();
-					$costo = $relatedNew['costo'];					
+			foreach ($generos as $g) {
+				if( $g['id_genero'] == $newSelected['genero_id'] ){
+					$genero .= '<option value="'.$g['id_genero'].'" selected >'.$g['descripcion'].'</option>';				
+				}else{
+					$genero .= '<option value="'.$g['id_genero'].'">'.$g['descripcion'].'</option>';				
 				}
-				break;
-			case '5':
-				$font = 'int';
-				$css .= '
-						<link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" rel="stylesheet">
-					    <link rel="stylesheet" type="text/css" media="screen" href="http://tarruda.github.com/bootstrap-datetimepicker/assets/css/bootstrap-datetimepicker.min.css">    			
-				';
-				$relatedNew = $this->noticiasRepository->getNewById( $id, $font );
-				if( is_array( $relatedNew ) ){
-					ob_start();
-					require $this->adminviews . 'editNewIN.php';
-					$campos = ob_get_clean();
-					$costo = $relatedNew['costo'];					
-				}
-				break;
-		}
+			}
 
-		// echo $newSelected['seccion_id']; exit();
-		
-		$this->header_admin('Editar noticias: ' . $newSelected['encabezado'] . ' - ', $css );
-		require $this->adminviews . 'editNew.php';
-		$this->footer_admin( $js );	
+			foreach ($sectores as $s) {
+				if( $s['id_sector'] == $newSelected['sector_id'] ){
+					$sector .= '<option value="'.$s['id_sector'].'" selected >'.$s['nombre'].'</option>';				
+				}else{
+					$sector .= '<option value="'.$s['id_sector'].'">'.$s['nombre'].'</option>';				
+				}
+			}
+
+			foreach ($secciones as $secc) {
+				if( $secc['id_seccion'] == $newSelected['seccion_id'] ){
+					$seccion .= '<option value="'.$secc['id_seccion'].'" selected >'.$secc['nombre'].'</option>';				
+				}else{
+					$seccion .= '<option value="'.$secc['id_seccion'].'">'.$secc['nombre'].'</option>';				
+				}
+			}
+
+			$relatedNew = null ;
+			$campos = '';
+			switch ($newSelected['tipofuente_id']) {
+				case '1':
+					$font = 'tel';
+					$css .= '
+							<link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" rel="stylesheet">
+						    <link rel="stylesheet" type="text/css" media="screen" href="http://tarruda.github.com/bootstrap-datetimepicker/assets/css/bootstrap-datetimepicker.min.css">    			
+					';
+					$relatedNew = $this->noticiasRepository->getNewById( $id, $font );
+					if( is_array( $relatedNew ) ){
+						ob_start();
+						require $this->adminviews . 'editNewTV.php';
+						$campos = ob_get_clean();
+						$costo = $relatedNew['costo'];					
+					}
+					break;
+				case '2':
+					$font = 'rad';
+					$css .= '
+							<link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" rel="stylesheet">
+						    <link rel="stylesheet" type="text/css" media="screen" href="http://tarruda.github.com/bootstrap-datetimepicker/assets/css/bootstrap-datetimepicker.min.css">    			
+					';
+					$relatedNew = $this->noticiasRepository->getNewById( $id, $font );
+					if( is_array( $relatedNew ) ){
+						ob_start();
+						require $this->adminviews . 'editNewRD.php';
+						$campos = ob_get_clean();
+						$costo = $relatedNew['costo'];					
+					}
+					break;
+				case '3':
+					$ub1 = '';
+					$ub2 = '';
+					$ub3 = '';
+					$ub4 = '';
+
+					$font = 'per';
+					$relatedNew = $this->noticiasRepository->getNewById( $id, $font );
+					if( is_array( $relatedNew ) ){
+
+						$tipoPaginacion = '';
+						$tipos = $this->noticiasRepository->getTiposPagina();
+						foreach ($tipos as $t) {
+							if( $t['id_tipo_pagina'] == $relatedNew['id_tipo_pagina'] ){
+								$tipoPaginacion .= '<option value="'.$t['id_tipo_pagina'].'" selected>'.$t['descripcion'].'</option>';							
+							}else{
+								$tipoPaginacion .= '<option value="'.$t['id_tipo_pagina'].'">'.$t['descripcion'].'</option>';							
+							}
+						}
+
+						$ubicaciones = $this->noticiasRepository->getUbicacionByNoticiaId( $id );
+						for ($i=1; $i <= 3; $i++) { 
+							if( $ubicaciones[$i] == '1' ){
+								$ub1 .= '
+										<label class="checkbox-inline">
+								            <input name="ubicacion' . $i . '" type="checkbox" checked >
+								        </label>
+								';
+							}else{
+								$ub1 .= '
+										<label class="checkbox-inline">
+								            <input name="ubicacion' . $i . '" type="checkbox" >
+								        </label>
+								';
+							}
+						}
+
+						for ($i=4; $i <= 6; $i++) { 
+							if( $ubicaciones[$i] == '1' ){
+								$ub2 .= '
+										<label class="checkbox-inline">
+								            <input name="ubicacion' . $i . '" type="checkbox" checked >
+								        </label>
+								';
+							}else{
+								$ub2 .= '
+										<label class="checkbox-inline">
+								            <input name="ubicacion' . $i . '" type="checkbox" >
+								        </label>
+								';
+							}
+						}
+
+						for ($i=7; $i <= 9; $i++) { 
+							if( $ubicaciones[$i] == '1' ){
+								$ub3 .= '
+										<label class="checkbox-inline">
+								            <input name="ubicacion' . $i . '" type="checkbox" checked >
+								        </label>
+								';
+							}else{
+								$ub3 .= '
+										<label class="checkbox-inline">
+								            <input name="ubicacion' . $i . '" type="checkbox" >
+								        </label>
+								';
+							}
+						}
+
+						for ($i=10; $i <= 12; $i++) { 
+							if( $ubicaciones[$i] == '1' ){
+								$ub4 .= '
+										<label class="checkbox-inline">
+								            <input name="ubicacion' . $i . '" type="checkbox" checked >
+								        </label>
+								';
+							}else{
+								$ub4 .= '
+										<label class="checkbox-inline">
+								            <input name="ubicacion' . $i . '" type="checkbox" >
+								        </label>
+								';
+							}
+						}
+
+						ob_start();
+						require $this->adminviews . 'editNewPE.php';
+						$campos = ob_get_clean();
+						$costo = $relatedNew['costo'];					
+					}
+					break;
+				case '4':
+					$ub1 = '';
+					$ub2 = '';
+					$ub3 = '';
+					$ub4 = '';
+
+					$font = 'rev';
+					$relatedNew = $this->noticiasRepository->getNewById( $id, $font );
+					if( is_array( $relatedNew ) ){
+						$tipoPaginacion = '';
+						$tipos = $this->noticiasRepository->getTiposPagina();
+						foreach ($tipos as $t) {
+							if( $t['id_tipo_pagina'] == $relatedNew['id_tipo_pagina'] ){
+								$tipoPaginacion .= '<option value="'.$t['id_tipo_pagina'].'" selected>'.$t['descripcion'].'</option>';							
+							}else{
+								$tipoPaginacion .= '<option value="'.$t['id_tipo_pagina'].'">'.$t['descripcion'].'</option>';							
+							}
+						}
+
+						$ubicaciones = $this->noticiasRepository->getUbicacionByNoticiaId( $id );
+						for ($i=1; $i <= 3; $i++) { 
+							if( $ubicaciones[$i] == '1' ){
+								$ub1 .= '
+										<label class="checkbox-inline">
+								            <input name="ubicacion' . $i . '" type="checkbox" checked >
+								        </label>
+								';
+							}else{
+								$ub1 .= '
+										<label class="checkbox-inline">
+								            <input name="ubicacion' . $i . '" type="checkbox" >
+								        </label>
+								';
+							}
+						}
+
+						for ($i=4; $i <= 6; $i++) { 
+							if( $ubicaciones[$i] == '1' ){
+								$ub2 .= '
+										<label class="checkbox-inline">
+								            <input name="ubicacion' . $i . '" type="checkbox" checked >
+								        </label>
+								';
+							}else{
+								$ub2 .= '
+										<label class="checkbox-inline">
+								            <input name="ubicacion' . $i . '" type="checkbox" >
+								        </label>
+								';
+							}
+						}
+
+						for ($i=7; $i <= 9; $i++) { 
+							if( $ubicaciones[$i] == '1' ){
+								$ub3 .= '
+										<label class="checkbox-inline">
+								            <input name="ubicacion' . $i . '" type="checkbox" checked >
+								        </label>
+								';
+							}else{
+								$ub3 .= '
+										<label class="checkbox-inline">
+								            <input name="ubicacion' . $i . '" type="checkbox" >
+								        </label>
+								';
+							}
+						}
+
+						for ($i=10; $i <= 12; $i++) { 
+							if( $ubicaciones[$i] == '1' ){
+								$ub4 .= '
+										<label class="checkbox-inline">
+								            <input name="ubicacion' . $i . '" type="checkbox" checked >
+								        </label>
+								';
+							}else{
+								$ub4 .= '
+										<label class="checkbox-inline">
+								            <input name="ubicacion' . $i . '" type="checkbox" >
+								        </label>
+								';
+							}
+						}
+
+						ob_start();
+						require $this->adminviews . 'editNewRE.php';
+						$campos = ob_get_clean();
+						$costo = $relatedNew['costo'];					
+					}
+					break;
+				case '5':
+					$font = 'int';
+					$css .= '
+							<link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" rel="stylesheet">
+						    <link rel="stylesheet" type="text/css" media="screen" href="http://tarruda.github.com/bootstrap-datetimepicker/assets/css/bootstrap-datetimepicker.min.css">    			
+					';
+					$relatedNew = $this->noticiasRepository->getNewById( $id, $font );
+					if( is_array( $relatedNew ) ){
+						ob_start();
+						require $this->adminviews . 'editNewIN.php';
+						$campos = ob_get_clean();
+						$costo = $relatedNew['costo'];					
+					}
+					break;
+			}
+
+			// echo $newSelected['seccion_id']; exit();
+			
+			$this->header_admin('Editar noticias: ' . $newSelected['encabezado'] . ' - ', $css );
+			require $this->adminviews . 'editNew.php';
+			$this->footer_admin( $js );	
+		}else{
+            header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
+        }
 	}
 
 	public function updateNew(){
 
-		$updateNew = $_POST;
-		// print_r($updateNew); exit();
-		// Actualizando noticia general
-		$mupdatenew = $this->noticiasRepository->updateNew( $updateNew );
-		$updatenewson = false;
-		if($mupdatenew){
-			// Actualizando parte especifica de la noticia dependiendo el tipo de noticia 
-			switch ($updateNew['tipofuente_id']) {
-				case '1':
-					$font = 'tel';
-					$updatenewson = $this->noticiasRepository->updateNewRadTel( $updateNew, $font );
-					break;
+		if( isset( $_SESSION['admin'] ) ){
+			$updateNew = $_POST;
+			// print_r($updateNew); exit();
+			// Actualizando noticia general
+			$mupdatenew = $this->noticiasRepository->updateNew( $updateNew );
+			$updatenewson = false;
+			if($mupdatenew){
+				// Actualizando parte especifica de la noticia dependiendo el tipo de noticia 
+				switch ($updateNew['tipofuente_id']) {
+					case '1':
+						$font = 'tel';
+						$updatenewson = $this->noticiasRepository->updateNewRadTel( $updateNew, $font );
+						break;
 
-				case '2':
-					$font = 'rad';
-					$updatenewson = $this->noticiasRepository->updateNewRadTel( $updateNew, $font );
-					break;
+					case '2':
+						$font = 'rad';
+						$updatenewson = $this->noticiasRepository->updateNewRadTel( $updateNew, $font );
+						break;
 
-				case '3':
-					$font = 'per';
-					$ubicacion = [];
-					for ($i=1; $i <= 12 ; $i++) { 
-						if ( isset( $updateNew['ubicacion'. $i] ) ){
-							$ub = 1;
-							array_push($ubicacion, $ub);
-						}else{
+					case '3':
+						$font = 'per';
+						$ubicacion = [];
+						for ($i=1; $i <= 12 ; $i++) { 
+							if ( isset( $updateNew['ubicacion'. $i] ) ){
+								$ub = 1;
+								array_push($ubicacion, $ub);
+							}else{
 
-							$ub = 0;
-							array_push($ubicacion, $ub);
+								$ub = 0;
+								array_push($ubicacion, $ub);
+							}
 						}
-					}
 
-					$updateNew['ubicacion'] = $ubicacion;
-					$this->noticiasRepository->updateUbicacion( $updateNew['ubicacion'], $updateNew['noticia_id']);
-					$updatenewson = $this->noticiasRepository->updateNewPerRev( $updateNew, $font );
-					break;
+						$updateNew['ubicacion'] = $ubicacion;
+						$this->noticiasRepository->updateUbicacion( $updateNew['ubicacion'], $updateNew['noticia_id']);
+						$updatenewson = $this->noticiasRepository->updateNewPerRev( $updateNew, $font );
+						break;
 
-				case '4':
-					$font = 'rev';
-					$ubicacion = [];
-					for ($i=1; $i <= 12 ; $i++) { 
-						if ( isset( $updateNew['ubicacion'. $i] ) ){
-							$ub = 1;
-							array_push($ubicacion, $ub);
-						}else{
+					case '4':
+						$font = 'rev';
+						$ubicacion = [];
+						for ($i=1; $i <= 12 ; $i++) { 
+							if ( isset( $updateNew['ubicacion'. $i] ) ){
+								$ub = 1;
+								array_push($ubicacion, $ub);
+							}else{
 
-							$ub = 0;
-							array_push($ubicacion, $ub);
+								$ub = 0;
+								array_push($ubicacion, $ub);
+							}
 						}
-					}
 
-					$updateNew['ubicacion'] = $ubicacion;
-					$this->noticiasRepository->updateUbicacion( $updateNew['ubicacion'], $updateNew['noticia_id']);
-					$updatenewson = $this->noticiasRepository->updateNewPerRev( $updateNew, $font );
-					break;
+						$updateNew['ubicacion'] = $ubicacion;
+						$this->noticiasRepository->updateUbicacion( $updateNew['ubicacion'], $updateNew['noticia_id']);
+						$updatenewson = $this->noticiasRepository->updateNewPerRev( $updateNew, $font );
+						break;
 
-				case '5':
-					$font = 'int';
-					$updatenewson = $this->noticiasRepository->updateNewInt( $updateNew, $font );
-					break;
+					case '5':
+						$font = 'int';
+						$updatenewson = $this->noticiasRepository->updateNewInt( $updateNew, $font );
+						break;
+				}
+				
 			}
-			
-		}
 
-		if( $updatenewson ){
+			if( $updatenewson ){
 
-			header('Location: /panel/news');
+				header('Location: /panel/news');
+			}else{
+				echo 'Ocurrio un error';
+			}
 		}else{
-			echo 'Ocurrio un error';
-		}
+            header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
+        }
 
 	}
 
 	protected function addNew( $campos, $fuente ){
 
-		$fuentesRepository    = new FuentesRepository();
-		$generoRepository     = new GeneroRepository();
-		$sectorRepository     = new SectorRepository();
-		$seccionRepository    = new SeccionRepository();
-		$tipoFuenteRepository = new TipoFuenteRepository();
-		$tipoAutorRepository  = new TipoAutorRepository();
+		if( isset( $_SESSION['admin'] ) ){
+			$fuentesRepository    = new FuentesRepository();
+			$generoRepository     = new GeneroRepository();
+			$sectorRepository     = new SectorRepository();
+			$seccionRepository    = new SeccionRepository();
+			$tipoFuenteRepository = new TipoFuenteRepository();
+			$tipoAutorRepository  = new TipoAutorRepository();
 
-		$genero		= '';
-		$optionFont = '';
-		$sector		= '';
-		$seccion	= '';
-		$tipoAutor	= '';
+			$genero		= '';
+			$optionFont = '';
+			$sector		= '';
+			$seccion	= '';
+			$tipoAutor	= '';
 
-		$css = '
-				<!-- Select2 CSS -->
-			    <link href="/assets/css/select2.min.css" rel="stylesheet">
-			    <link href="/admin/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
-			    <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" rel="stylesheet">
-			    <link rel="stylesheet" type="text/css" media="screen" href="http://tarruda.github.com/bootstrap-datetimepicker/assets/css/bootstrap-datetimepicker.min.css">    			
-		';
+			$css = '
+					<!-- Select2 CSS -->
+				    <link href="/assets/css/select2.min.css" rel="stylesheet">
+				    <link href="/admin/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+				    <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" rel="stylesheet">
+				    <link rel="stylesheet" type="text/css" media="screen" href="http://tarruda.github.com/bootstrap-datetimepicker/assets/css/bootstrap-datetimepicker.min.css">    			
+			';
 
-		$js = '
-				<!-- Select2 JavaScript -->
-			    <script type="text/javascript" src="/assets/bower_components/moment/min/moment.min.js"></script>
-			    <script src="/admin/js/bootstrap-datetimepicker.min.js"></script>
-			    <script src="/assets/js/select2.min.js"></script>
-			    <script src="/assets/js/i18n/es.js"></script>
-		';
-		
-		if($fuente === 'Television'){
-            $nomFuente = 'tele';
-       	}elseif($fuente === 'Periodico'){
-            $nomFuente = 'peri';
-        }else{
-			$nomFuente = strtolower($fuente);        	
+			$js = '
+					<!-- Select2 JavaScript -->
+				    <script type="text/javascript" src="/assets/bower_components/moment/min/moment.min.js"></script>
+				    <script src="/admin/js/bootstrap-datetimepicker.min.js"></script>
+				    <script src="/assets/js/select2.min.js"></script>
+				    <script src="/assets/js/i18n/es.js"></script>
+			';
+			
+			if($fuente === 'Television'){
+	            $nomFuente = 'tele';
+	       	}elseif($fuente === 'Periodico'){
+	            $nomFuente = 'peri';
+	        }else{
+				$nomFuente = strtolower($fuente);        	
+	        }
+
+			$idFuente = $tipoFuenteRepository->findIdByName( $nomFuente );
+			
+			$fuentes   = $fuentesRepository->showAllFonts( $idFuente );
+			$autores   = $tipoAutorRepository->allAuthors();
+			$generos   = $generoRepository->allGeneros();
+			$sectores  = $sectorRepository->allSectors( 1 );
+			$secciones = $seccionRepository->allSecciones( 1 );
+
+			foreach ($fuentes as $f) {
+				$optionFont .= '<option value="'.$f['id_fuente'].'">'.$f['nombre'].'</option>';
+			}
+
+			foreach ($autores as $a) {
+				$tipoAutor .= '<option value="'.$a['id_tipo_autor'].'">'.$a['descripcion'].'</option>';
+			}
+
+			foreach ($generos as $g) {
+				$genero .= '<option value="'.$g['id_genero'].'">'.$g['descripcion'].'</option>';
+			}
+
+			foreach ($sectores as $s) {
+				$sector .= '<option value="'.$s['id_sector'].'">'.$s['nombre'].'</option>';
+			}
+
+			foreach ($secciones as $secc) {
+				$seccion .= '<option value="'.$secc['id_seccion'].'">'.$secc['nombre'].'</option>';
+			}
+
+			$this->header_admin( 'Agregar Noticia de '.$fuente.' - ', $css );
+			require $this->adminviews . 'addNew.php';
+			$this->footer_admin( $js );
+		}else{
+            header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
         }
-
-		$idFuente = $tipoFuenteRepository->findIdByName( $nomFuente );
-		
-		$fuentes   = $fuentesRepository->showAllFonts( $idFuente );
-		$autores   = $tipoAutorRepository->allAuthors();
-		$generos   = $generoRepository->allGeneros();
-		$sectores  = $sectorRepository->allSectors( 1 );
-		$secciones = $seccionRepository->allSecciones( 1 );
-
-		foreach ($fuentes as $f) {
-			$optionFont .= '<option value="'.$f['id_fuente'].'">'.$f['nombre'].'</option>';
-		}
-
-		foreach ($autores as $a) {
-			$tipoAutor .= '<option value="'.$a['id_tipo_autor'].'">'.$a['descripcion'].'</option>';
-		}
-
-		foreach ($generos as $g) {
-			$genero .= '<option value="'.$g['id_genero'].'">'.$g['descripcion'].'</option>';
-		}
-
-		foreach ($sectores as $s) {
-			$sector .= '<option value="'.$s['id_sector'].'">'.$s['nombre'].'</option>';
-		}
-
-		foreach ($secciones as $secc) {
-			$seccion .= '<option value="'.$secc['id_seccion'].'">'.$secc['nombre'].'</option>';
-		}
-
-		$this->header_admin( 'Agregar Noticia de '.$fuente.' - ', $css );
-		require $this->adminviews . 'addNew.php';
-		$this->footer_admin( $js );
 
 	}
 
@@ -685,11 +706,15 @@ class AdminNews extends Controller{
 
 	public function sendMailView( $id ){
 
-		$new = $this->noticiasRepository->getNewById( $id );
-		
-		$this->header_admin( 'Enviar Noticia - ' );
-		require $this->adminviews . 'sendView.php';
-		$this->footer_admin();
+		if( isset( $_SESSION['admin'] ) ){
+			$new = $this->noticiasRepository->getNewById( $id );
+			
+			$this->header_admin( 'Enviar Noticia - ' );
+			require $this->adminviews . 'sendView.php';
+			$this->footer_admin();
+		}else{
+            header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
+        }
 	}
 
 	public function filterClient() {
@@ -722,65 +747,69 @@ class AdminNews extends Controller{
 
 	public function searchContacts( $noticiaid, $empresaid ){
 		
-		$title = '';
-		$sintesis = '';
+		if( isset( $_SESSION['admin'] ) ){
+			$title = '';
+			$sintesis = '';
 
-		if( $noticiaid != 'block' ){
-			$new = $this->noticiasRepository->getNewById( $noticiaid );			
-			$title = $new['encabezado'];
-			$sintesis = '<p>' . $new['sintesis'] . '</p>';
+			if( $noticiaid != 'block' ){
+				$new = $this->noticiasRepository->getNewById( $noticiaid );			
+				$title = $new['encabezado'];
+				$sintesis = '<p>' . $new['sintesis'] . '</p>';
 
-		}elseif( $noticiaid === 'block' && ( isset( $_SESSION['noticias'] ) && count( $_SESSION['noticias'] ) > 0 ) ){
-			
-			$noticias = $_SESSION['noticias'];
-			
-			$title = 'Enviar bloque de noticias.';
-			$sintesis = '<div class="table-responsive">
-		        <table class="table table-bordered table-inverse nomargin">
-			        <thead>
-			            <tr>
-			              	<th class="text-center">Noticia</th>
-			              	<th class="text-center">Tipo de Fuente</th>
-			            </tr>
-			        </thead>
-		          	<tbody>';
-			foreach ($noticias as $key => $noticia) {
-				$sintesis .='<tr>
-				            	<td>' . $noticia['encabezado'] . '</td>
-				              	<td>' . $noticia['tipofuente'] . '</td>
-				           	</tr>';
-			}
-		    $sintesis .= '</tbody>
-		        </table>
-	      </div>';
-		}
-
-		$cuentarep = new CuentaRepository();
-			$acounts = $cuentarep->getAcountsByCompany( $empresaid );
-
-			$html = '';
-
-			if( is_array($acounts) ){
-				foreach ( $acounts as $acount ) {
-					$html .= '	<tr>
-					            	<td class="text-center">
-						                <label class="ckbox">
-						                  <input type="checkbox" name="' . $acount['nombre'] . ' ' . $acount['apellidos'] . '" value="' . $acount['email'] . '" checked ><span></span>
-						                </label>
-						            </td>
-					            	<td>' . $acount['nombre'] . ' ' . $acount['apellidos'] . '</td>
-					              	<td>' . $acount['email'] . '</td>
+			}elseif( $noticiaid === 'block' && ( isset( $_SESSION['noticias'] ) && count( $_SESSION['noticias'] ) > 0 ) ){
+				
+				$noticias = $_SESSION['noticias'];
+				
+				$title = 'Enviar bloque de noticias.';
+				$sintesis = '<div class="table-responsive">
+			        <table class="table table-bordered table-inverse nomargin">
+				        <thead>
+				            <tr>
+				              	<th class="text-center">Noticia</th>
+				              	<th class="text-center">Tipo de Fuente</th>
+				            </tr>
+				        </thead>
+			          	<tbody>';
+				foreach ($noticias as $key => $noticia) {
+					$sintesis .='<tr>
+					            	<td>' . $noticia['encabezado'] . '</td>
+					              	<td>' . $noticia['tipofuente'] . '</td>
 					           	</tr>';
 				}
+			    $sintesis .= '</tbody>
+			        </table>
+		      </div>';
 			}
 
-			$emr = new EmpresaRepository();
-			$company = $emr->getEmpresaById( $empresaid );
+			$cuentarep = new CuentaRepository();
+				$acounts = $cuentarep->getAcountsByCompany( $empresaid );
+
+				$html = '';
+
+				if( is_array($acounts) ){
+					foreach ( $acounts as $acount ) {
+						$html .= '	<tr>
+						            	<td class="text-center">
+							                <label class="ckbox">
+							                  <input type="checkbox" name="' . $acount['nombre'] . ' ' . $acount['apellidos'] . '" value="' . $acount['email'] . '" checked ><span></span>
+							                </label>
+							            </td>
+						            	<td>' . $acount['nombre'] . ' ' . $acount['apellidos'] . '</td>
+						              	<td>' . $acount['email'] . '</td>
+						           	</tr>';
+					}
+				}
+
+				$emr = new EmpresaRepository();
+				$company = $emr->getEmpresaById( $empresaid );
 
 
-		$this->header_admin( 'Enviar Noticia - ' );
-		require $this->adminviews . 'sendActionView.php';
-		$this->footer_admin();
+			$this->header_admin( 'Enviar Noticia - ' );
+			require $this->adminviews . 'sendActionView.php';
+			$this->footer_admin();
+		}else{
+            header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
+        }
 
 	}
 
@@ -922,113 +951,125 @@ class AdminNews extends Controller{
 
 	public function advancedSearch(){
 
-		$this->header_admin( 'Busqueda Avanzada - ' );
-		require $this->adminviews . 'advancedSearchView.php';
-		$this->footer_admin();
+		if( isset( $_SESSION['admin'] ) ){
+			$this->header_admin( 'Busqueda Avanzada - ' );
+			require $this->adminviews . 'advancedSearchView.php';
+			$this->footer_admin();
+		}else{
+            header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
+        }
 	}
 
 	public function sendBlock(){
 
-		$typeFont = '';
-		$js = '';
-		$css = '';
+		if( isset( $_SESSION['admin'] ) ){
+			$typeFont = '';
+			$js = '';
+			$css = '';
 
-		$limit = isset( $_GET['numpp'] ) ? $_GET['numpp'] : 10;
-		$page = isset( $_GET['page'] ) ? ( $_GET['page'] * $limit ) - $limit : 0;
-		$titulo = isset( $_GET['titulo'] ) ? $_GET['titulo'] : null;
-		$finicio = isset( $_GET['finicio'] ) ? $_GET['finicio'] : null;
-		$ffin = isset( $_GET['ffin'] ) ? $_GET['ffin'] : null;
-		$tipoFuente = isset( $_GET['tipoFuente'] ) ? $_GET['tipoFuente'] : null;
+			$limit = isset( $_GET['numpp'] ) ? $_GET['numpp'] : 10;
+			$page = isset( $_GET['page'] ) ? ( $_GET['page'] * $limit ) - $limit : 0;
+			$titulo = isset( $_GET['titulo'] ) ? $_GET['titulo'] : null;
+			$finicio = isset( $_GET['finicio'] ) ? $_GET['finicio'] : null;
+			$ffin = isset( $_GET['ffin'] ) ? $_GET['ffin'] : null;
+			$tipoFuente = isset( $_GET['tipoFuente'] ) ? $_GET['tipoFuente'] : null;
 
-		$countWithoutFilter = $this->noticiasRepository->getCountNews();
+			$countWithoutFilter = $this->noticiasRepository->getCountNews();
 
-		$countWithFilter = null;
-		$resultados = null;
+			$countWithFilter = null;
+			$resultados = null;
 
-		if( $finicio === $ffin || ( $finicio != null && empty($ffin) ) ){
+			if( $finicio === $ffin || ( $finicio != null && empty($ffin) ) ){
+				
+				$countWithFilter = $this->noticiasRepository->getCountNews( compact('limit', 'page', 'titulo', 'tipoFuente',  'finicio') );
+				$resultados = $this->noticiasRepository->getNewsWithFilters( compact('limit', 'page', 'titulo', 'tipoFuente',  'finicio') );
 			
-			$countWithFilter = $this->noticiasRepository->getCountNews( compact('limit', 'page', 'titulo', 'tipoFuente',  'finicio') );
-			$resultados = $this->noticiasRepository->getNewsWithFilters( compact('limit', 'page', 'titulo', 'tipoFuente',  'finicio') );
-		
-		}else{
+			}else{
 
-			$countWithFilter = $this->noticiasRepository->getCountNews( compact('limit', 'page', 'titulo', 'tipoFuente',  'finicio', 'ffin') );
-			$resultados = $this->noticiasRepository->getNewsWithFilters( compact('limit', 'page', 'titulo', 'tipoFuente',  'finicio', 'ffin') );
-		}
-
-		$count = $countWithFilter;
-
-		$ini = $page + 1;
-		$end = ( $page + $limit >= $count ) ? $count : $page + $limit;
-
-		$html = '';
-
-		if( is_array($resultados) ){
-			foreach ( $resultados as $noticia ) {
-				$html .= '	<tr>
-				            	<td class="text-center">
-					                <label class="ckbox">
-					                  <input type="checkbox" name="' . $noticia['id'] . '" value="' . $noticia['encabezado'] . '"><span></span>
-					                </label>
-					            </td>
-				            	<td>' . $noticia['tipofuente'] . '</td>
-				            	<td>' . $noticia['encabezado'] . '</td>
-				              	<td>' . $noticia['fuente'] . '</td>
-				              	<td>Enviado a</td>
-				           	</tr>';
+				$countWithFilter = $this->noticiasRepository->getCountNews( compact('limit', 'page', 'titulo', 'tipoFuente',  'finicio', 'ffin') );
+				$resultados = $this->noticiasRepository->getNewsWithFilters( compact('limit', 'page', 'titulo', 'tipoFuente',  'finicio', 'ffin') );
 			}
-		}
 
-		$js = '
-				<!-- Libreria jquery-bootpag --> 
-				<script src="/admin/js/vendors/bootstrap/jquery.bootpag.min.js"></script>
-				<!-- Libreria purl --> 
-				<script src="/admin/js/vendors/purl/purl.min.js"></script>
-				<!-- Paginador con js --> 
-				<script src="/assets/js/panel.paginador.js"></script>
-		';
+			$count = $countWithFilter;
 
-		$css = '
+			$ini = $page + 1;
+			$end = ( $page + $limit >= $count ) ? $count : $page + $limit;
 
-				<!-- panel_paginator CSS -->
-			    <link href="/admin/css/panel.main.css" rel="stylesheet">
-			    <!-- data tables bootstrap CSS -->
-			    <link href="/admin/css/dataTables.bootstrap.css" rel="stylesheet">
-		';
+			$html = '';
 
-		$tipoFuenteRepository = new TipoFuenteRepository();
+			if( is_array($resultados) ){
+				foreach ( $resultados as $noticia ) {
+					$html .= '	<tr>
+					            	<td class="text-center">
+						                <label class="ckbox">
+						                  <input type="checkbox" name="' . $noticia['id'] . '" value="' . $noticia['encabezado'] . '"><span></span>
+						                </label>
+						            </td>
+					            	<td>' . $noticia['tipofuente'] . '</td>
+					            	<td>' . $noticia['encabezado'] . '</td>
+					              	<td>' . $noticia['fuente'] . '</td>
+					              	<td>Enviado a</td>
+					           	</tr>';
+				}
+			}
 
-		$tiposFuente = $tipoFuenteRepository->all(); 
+			$js = '
+					<!-- Libreria jquery-bootpag --> 
+					<script src="/admin/js/vendors/bootstrap/jquery.bootpag.min.js"></script>
+					<!-- Libreria purl --> 
+					<script src="/admin/js/vendors/purl/purl.min.js"></script>
+					<!-- Paginador con js --> 
+					<script src="/assets/js/panel.paginador.js"></script>
+			';
 
-		foreach ($tiposFuente as $tf) {
-			$typeFont .= '<option value="'.$tf['id_tipo_fuente'].'">'.$tf['descripcion'].'</option>';							
-		}
-		
-		$this->header_admin( 'Enviar Bloque Noticia - ', $css );
-		require $this->adminviews . 'sendBlockView.php';
-		$this->footer_admin( $js );
+			$css = '
+
+					<!-- panel_paginator CSS -->
+				    <link href="/admin/css/panel.main.css" rel="stylesheet">
+				    <!-- data tables bootstrap CSS -->
+				    <link href="/admin/css/dataTables.bootstrap.css" rel="stylesheet">
+			';
+
+			$tipoFuenteRepository = new TipoFuenteRepository();
+
+			$tiposFuente = $tipoFuenteRepository->all(); 
+
+			foreach ($tiposFuente as $tf) {
+				$typeFont .= '<option value="'.$tf['id_tipo_fuente'].'">'.$tf['descripcion'].'</option>';							
+			}
+			
+			$this->header_admin( 'Enviar Bloque Noticia - ', $css );
+			require $this->adminviews . 'sendBlockView.php';
+			$this->footer_admin( $js );
+		}else{
+            header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
+        }
 	}
 
 	public function sendBlockAction(){
 
 		//echo '<pre>';print_r($_POST);
 
-		$data = $_POST;
-		$noticiasid = array_keys($data);
+		if( isset( $_SESSION['admin'] ) ){
+			$data = $_POST;
+			$noticiasid = array_keys($data);
 
-		$noticias = [];
+			$noticias = [];
 
-		foreach ($noticiasid as $new) {
-			
-			$noticias[ $new ] = $this->noticiasRepository->getNewById( $new );
+			foreach ($noticiasid as $new) {
+				
+				$noticias[ $new ] = $this->noticiasRepository->getNewById( $new );
 
-		}
+			}
 
-		$_SESSION['noticias'] = $noticias;
+			$_SESSION['noticias'] = $noticias;
 
-		$this->header_admin( 'Enviar Bloque de Noticias - ' );
-		require $this->adminviews . 'sendBlockAcountView.php';
-		$this->footer_admin();		
+			$this->header_admin( 'Enviar Bloque de Noticias - ' );
+			require $this->adminviews . 'sendBlockAcountView.php';
+			$this->footer_admin();
+		}else{
+            header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
+        }
 
 		// ob_start();
 		// require $this->adminviews . 'viewsEmails/blockNewsEmail.php';

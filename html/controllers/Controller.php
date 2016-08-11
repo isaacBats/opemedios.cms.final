@@ -140,6 +140,33 @@ require 'helpers.php';
 			$javaScripts = $js;
 			require  $this->adminviews."footer.php";	
 		}
+
+		public function viewMedia( $fuente, $noticia){
+
+			switch ( $fuente ) {
+				case ( $fuente == 1 || $fuente == 'television'):
+					$archivo = $this->getMediaFile( $fuente, $noticia );
+					break;
+				case ( $fuente == 2 || $fuente == 'radio'):
+					echo 'Tienes un archivo de tipo Radio';
+					break;
+				case ( $fuente == 3 || $fuente == 'periodico'):
+					echo 'Tienes un archivo de tipo Periodico';
+					break;
+				case ( $fuente == 4 || $fuente == 'revista'):
+					echo 'Tienes un archivo de tipo revista';
+					break;
+				case ( $fuente == 5 || $fuente == 'internet'):
+					echo 'Tienes un archivo de tipo Internet';
+					break;
+				
+				default:
+					echo 'No existe esa fuente';
+					break;
+			}
+		}
+		
+		
 	}
 
 	//  AUTOLOAD CONTROLLERS

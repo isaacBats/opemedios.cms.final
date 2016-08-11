@@ -41,8 +41,6 @@
 			require $this->views . 'ingresar.php';
 			$this->footer();
 		}
-		
-		
 
 		public function no_found(){
 			header("HTTP/1.0 404 Not Found");

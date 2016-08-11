@@ -30,6 +30,13 @@ $collection->attachRoute(new Route('/sign-in', array(
     'methods' => 'GET'
 )));
 
+$collection->attachRoute(new Route('/media/:fuente/:noticia', array(
+    '_controller' => 'Plain::viewMedia',
+    'methods' => 'GET'
+)));
+
+
+
 
 //  ADMIN
 $collection->attachRoute(new Route('/panel/logout', array(

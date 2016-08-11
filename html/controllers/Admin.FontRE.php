@@ -18,10 +18,14 @@ class AdminFontRE extends AdminFonts{
 	}
 
 	public function add(){
-		$campos = '';
-		require $this->adminviews . 'addFontRE.php';
-
-		$this->addFont($campos, $this->fuente );
+		
+		if( isset( $_SESSION['admin'] ) ){
+			$campos = '';
+			require $this->adminviews . 'addFontRE.php';
+			$this->addFont($campos, $this->fuente );
+		}else{
+            header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
+        }
 		
 	}
 

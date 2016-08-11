@@ -29,15 +29,19 @@ class AdminNewPE extends AdminNews{
 
 	public function add(){
 
-		$tipoPaginacion = '';
-		$tipos = $this->peRepository->getTiposPagina();
-		foreach ($tipos as $t) {
-			$tipoPaginacion .= '<option value="'.$t['id_tipo_pagina'].'">'.$t['descripcion'].'</option>';
-		}
-		ob_start();
-		require $this->adminviews . 'addNewPE.php';
-		$campos = ob_get_clean();
-		$this->addNew($campos, $this->fuente );
+		if( isset( $_SESSION['admin'] ) ){
+			$tipoPaginacion = '';
+			$tipos = $this->peRepository->getTiposPagina();
+			foreach ($tipos as $t) {
+				$tipoPaginacion .= '<option value="'.$t['id_tipo_pagina'].'">'.$t['descripcion'].'</option>';
+			}
+			ob_start();
+			require $this->adminviews . 'addNewPE.php';
+			$campos = ob_get_clean();
+			$this->addNew($campos, $this->fuente );
+		}else{
+            header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
+        }
 	}
 
 	public function save(){

@@ -1,5 +1,9 @@
 <?php 
 
+echo 'Este helper fue echo por Isaac Daniel Batista
+      <br> Twitter: @codeisaac
+      <br> Para <strong>Opemedios</strong> © 2016';
+
 /**
  * Return a format Date "02 de Julio, 2016" in Spanish language
  * @param  String $fecha 

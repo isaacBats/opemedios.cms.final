@@ -1,16 +1,5 @@
 <?php 
 
-include_once(__DIR__.'/../Repositories/NoticiasRepository.php');
-include_once(__DIR__.'/../Repositories/FuentesRepository.php');
-include_once(__DIR__.'/../Repositories/TipoFuenteRepository.php');
-include_once(__DIR__.'/../Repositories/TipoAutorRepository.php');
-include_once(__DIR__.'/../Repositories/GeneroRepository.php');
-include_once(__DIR__.'/../Repositories/SectorRepository.php');
-include_once(__DIR__.'/../Repositories/SeccionRepository.php');
-include_once(__DIR__.'/../Repositories/EmpresaRepository.php');
-include_once(__DIR__.'/../Repositories/CuentaRepository.php');
-include_once(__DIR__.'/../Repositories/TemaRepository.php');
-include_once(__DIR__.'/../Repositories/AdjuntoRepository.php');
 
 include 'Image.php';
 

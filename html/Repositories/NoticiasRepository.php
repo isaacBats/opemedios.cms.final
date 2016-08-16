@@ -29,8 +29,8 @@ class NoticiasRepository extends BaseRepository{
 					FROM noticia n
 					INNER JOIN fuente f ON n.id_fuente = f.id_fuente
 					/*WHERE fecha = CURDATE()*/
-					WHERE n.id_noticia > 673600
-					ORDER BY n.id_noticia DESC;					
+					WHERE n.id_noticia > 500000
+					ORDER BY n.id_noticia DESC LIMIT 50;					
 				';
 		$query = $this->pdo->prepare( $sql );
 

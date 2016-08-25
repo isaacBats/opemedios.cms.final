@@ -144,23 +144,27 @@ class Controller
 	public function viewMedia( $fuente, $noticia){
 
 		$adjuntoRepository = new AdjuntoRepository();		
+		$noticiaRepository = new NoticiasRepository();
+
 		$archivo = $adjuntoRepository->getAdjunto( $noticia );
+		$noticia =  $noticiaRepository->getNewById( $noticia );
 
-		$buffer = explode( '.', $archivo['nombre'] );
+		// $buffer = explode( '.', $archivo['nombre'] );
 
-		$title = current( $buffer );
+		// $title = current( $buffer );
+		$title = $noticia['encabezado'];
 
-		$code = '';
+		$media = '';
 
 		// vdd($archivo);
 
 		switch ( $fuente ) {
 			case ( $fuente == 1 || $fuente == 'television'):
-				$code = '<embed width="600" height="350" type="' . $archivo['tipo'] . '" src="/assets/data/noticias/' . $fuente . '/' . $archivo['nombre_archivo'] . '" title="' . $title . '" />';
+				$media = '<embed width="600" height="350" type="' . $archivo['tipo'] . '" src="/assets/data/noticias/' . $fuente . '/' . $archivo['nombre_archivo'] . '" title="' . $title . '" />';
 				break;
 			case ( $fuente == 2 || $fuente == 'radio'):
-				//$code = '<embed type="' . $archivo['tipo'] . '" src="/assets/data/noticias/' . $fuente . '/' . $archivo['nombre_archivo'] . '" title="' . $title . '" />';
-				$code = '
+				//$media = '<embed type="' . $archivo['tipo'] . '" src="/assets/data/noticias/' . $fuente . '/' . $archivo['nombre_archivo'] . '" title="' . $title . '" />';
+				$media = '
 							<audio controls preload>
 								<source src="/assets/data/noticias/' . $fuente . '/' . $archivo['nombre_archivo'] . '" type="' . $archivo['tipo'] . '" />
 								Tu navegador no soporta la caracteristica de escuchar Audio
@@ -168,13 +172,13 @@ class Controller
 				';
 				break;
 			case ( $fuente == 3 || $fuente == 'periodico'):
-				$code = '<embed width="850" height="600" src="/assets/data/noticias/' . $fuente . '/' . $archivo['nombre_archivo'] . '" title="' . $title . '" />';
+				$media = '<embed width="850" height="600" src="/assets/data/noticias/' . $fuente . '/' . $archivo['nombre_archivo'] . '" title="' . $title . '" />';
 				break;
 			case ( $fuente == 4 || $fuente == 'revista'):
-				$code = '<embed width="850" height="600" src="/assets/data/noticias/' . $fuente . '/' . $archivo['nombre_archivo'] . '" title="' . $title . '" />';
+				$media = '<embed width="850" height="600" src="/assets/data/noticias/' . $fuente . '/' . $archivo['nombre_archivo'] . '" title="' . $title . '" />';
 				break;
 			case ( $fuente == 5 || $fuente == 'internet'):
-				$code = '<embed width="850" height="600" src="/assets/data/noticias/' . $fuente . '/' . $archivo['nombre_archivo'] . '" title="' . $title . '" />';
+				$media = '<embed width="850" height="600" src="/assets/data/noticias/' . $fuente . '/' . $archivo['nombre_archivo'] . '" title="' . $title . '" />';
 				break;
 			
 			default:

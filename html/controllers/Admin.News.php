@@ -902,11 +902,11 @@ class AdminNews extends Controller{
 			$empresaid = array_shift($resultado);
 
 			ob_start();
-			require $this->adminviews . 'viewsEmails/blockNewsEmail2.php';
+			require $this->adminviews . 'viewsEmails/blockNewsEmail3.php';
 			$body = ob_get_clean();
 
 			/*echo '<pre>'; print_r( $noticias ); print_r($_POST); exit();*/
-			//echo $body; exit(); 
+			echo $body; exit(); 
 			//echo '<pre>'; print_r($noticiaPrincipal); exit();
 
 			$mail = new Mail();

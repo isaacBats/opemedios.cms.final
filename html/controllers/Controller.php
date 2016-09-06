@@ -4,7 +4,10 @@ use Knp\Snappy\Pdf;
 
 use Knp\Snappy\Image;
 
+require_once __DIR__ . '/../Utilities/Opemedios.php';
+
 require 'helpers.php';
+
 
 class Controller
 {

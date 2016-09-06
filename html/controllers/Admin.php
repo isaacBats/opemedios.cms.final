@@ -5,8 +5,6 @@ class AdminController extends Controller{
 
 	function __construct()
 	{
-		session_start();
-		
 		if( !isset($_SESSION["admin"] ) && $_SERVER["REQUEST_URI"] != "/panel/login"){
 			header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
 		}

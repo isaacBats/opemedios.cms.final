@@ -1,8 +1,6 @@
 <?php 
 
 include_once('Admin.News.php');
-include_once(__DIR__.'/../Repositories/InternetRepository.php');
-
 
 class AdminNewIN extends AdminNews{
 
@@ -62,8 +60,7 @@ class AdminNewIN extends AdminNews{
 			}
 			
 			if($this->inRepository->addNewIN( $_POST )){
-				//header('Location: /panel/fonts/show-list');
-				 echo 'Se ha agregado una noticia de '.$this->fuente.' correctamente';
+				header('Location: /panel/fonts/show-list');
 			}else{
 				echo 'No se agrego a la tabla noticia_int';
 			}

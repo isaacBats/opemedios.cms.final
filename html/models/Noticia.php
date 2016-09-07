@@ -2,31 +2,47 @@
 
 namespace Opemedios\models;
 
+use Opememdios\models\Autor;
+use Opememdios\models\Fuente;
+use Opememdios\models\Usuario;
+use Opememdios\models\Archivo;
+use Opememdios\models\Empresa;
+
 class Noticia{
 
 	private $id;
 	private $titulo;
 	private $sintesis;
-	private $autor;
+	private Autor $autor;
 	private $fechaNoticia;
 	private $comentario;
 	private $tipoFuente;
-	private $seccionFuente;
-	private $tipoAutor;
+    private Fuente $fuente;
 	private $genero;
 	private $tendencia;
-	private $usuario;
-	private $archivo;
-	private $createdAt;
+	private Usuario $usuario;
+	private Archivo $archivo;
+    private Empresa $empresa;
+    private $createdAt;
 
+    
+    public function getAutor()
+    {
+        return $this->author;
+    }
 
+    public function setAutor( Autor $autor )
+    {
+        if( !is_empty( $autor->name ) )
+        $this->autor = $autor;
+    }
 
     /**
      * Gets the value of id.
      *
-     * @return int
+     * @return mixed
      */
-    potected function getId()
+    public function getId()
     {
         return $this->id;
     }
@@ -34,11 +50,11 @@ class Noticia{
     /**
      * Sets the value of id.
      *
-     * @param int $id the id
+     * @param mixed $id the id
      *
      * @return self
      */
-    private function setId($id)
+    public function setId( $id )
     {
         $this->id = $id;
 
@@ -48,9 +64,9 @@ class Noticia{
     /**
      * Gets the value of titulo.
      *
-     * @return string
+     * @return mixed
      */
-    potected function getTitulo()
+    public function getTitulo()
     {
         return $this->titulo;
     }
@@ -58,22 +74,23 @@ class Noticia{
     /**
      * Sets the value of titulo.
      *
-     * @param string $titulo the titulo
+     * @param mixed $titulo the titulo
      *
      * @return self
      */
-    private function setTitulo($titulo)
+    public function setTitulo( $titulo )
     {
         $this->titulo = $titulo;
 
         return $this;
     }
+
     /**
      * Gets the value of sintesis.
      *
-     * @return string
+     * @return mixed
      */
-    potected function getSintesis()
+    public function getSintesis()
     {
         return $this->sintesis;
     }
@@ -81,37 +98,13 @@ class Noticia{
     /**
      * Sets the value of sintesis.
      *
-     * @param string $sintesis the sintesis
+     * @param mixed $sintesis the sintesis
      *
      * @return self
      */
-    private function setSintesis($sintesis)
+    public function setSintesis( $sintesis )
     {
         $this->sintesis = $sintesis;
-
-        return $this;
-    }
-
-    /**
-     * Gets the value of autor.
-     *
-     * @return mixed
-     */
-    potected function getAutor()
-    {
-        return $this->autor;
-    }
-
-    /**
-     * Sets the value of autor.
-     *
-     * @param mint$autor the autor
-     *
-     * @return self
-     */
-    private function setAutor($autor)
-    {
-        $this->autor = $autor;
 
         return $this;
     }
@@ -121,7 +114,7 @@ class Noticia{
      *
      * @return mixed
      */
-    potected function getFechaNoticia()
+    public function getFechaNoticia()
     {
         return $this->fechaNoticia;
     }
@@ -129,11 +122,11 @@ class Noticia{
     /**
      * Sets the value of fechaNoticia.
      *
-     * @param mint$fechaNoticia the fecha noticia
+     * @param mixed $fechaNoticia the fecha noticia
      *
      * @return self
      */
-    private function setFechaNoticia($fechaNoticia)
+    public function setFechaNoticia( $fechaNoticia )
     {
         $this->fechaNoticia = $fechaNoticia;
 
@@ -145,7 +138,7 @@ class Noticia{
      *
      * @return mixed
      */
-    potected function getComentario()
+    public function getComentario()
     {
         return $this->comentario;
     }
@@ -153,11 +146,11 @@ class Noticia{
     /**
      * Sets the value of comentario.
      *
-     * @param mint$comentario the comentario
+     * @param mixed $comentario the comentario
      *
      * @return self
      */
-    private function setComentario($comentario)
+    public function setComentario( $comentario )
     {
         $this->comentario = $comentario;
 
@@ -169,7 +162,7 @@ class Noticia{
      *
      * @return mixed
      */
-    potected function getTipoFuente()
+    public function getTipoFuente()
     {
         return $this->tipoFuente;
     }
@@ -177,61 +170,13 @@ class Noticia{
     /**
      * Sets the value of tipoFuente.
      *
-     * @param mint$tipoFuente the tipo fuente
+     * @param mixed $tipoFuente the tipo fuente
      *
      * @return self
      */
-    private function setTipoFuente($tipoFuente)
+    public function setTipoFuente( $tipoFuente )
     {
         $this->tipoFuente = $tipoFuente;
-
-        return $this;
-    }
-
-    /**
-     * Gets the value of seccionFuente.
-     *
-     * @return mixed
-     */
-    potected function getSeccionFuente()
-    {
-        return $this->seccionFuente;
-    }
-
-    /**
-     * Sets the value of seccionFuente.
-     *
-     * @param mint$seccionFuente the seccion fuente
-     *
-     * @return self
-     */
-    private function setSeccionFuente($seccionFuente)
-    {
-        $this->seccionFuente = $seccionFuente;
-
-        return $this;
-    }
-
-    /**
-     * Gets the value of tipoAutor.
-     *
-     * @return mixed
-     */
-    potected function getTipoAutor()
-    {
-        return $this->tipoAutor;
-    }
-
-    /**
-     * Sets the value of tipoAutor.
-     *
-     * @param mint$tipoAutor the tipo autor
-     *
-     * @return self
-     */
-    private function setTipoAutor($tipoAutor)
-    {
-        $this->tipoAutor = $tipoAutor;
 
         return $this;
     }
@@ -241,7 +186,7 @@ class Noticia{
      *
      * @return mixed
      */
-    potected function getGenero()
+    public function getGenero()
     {
         return $this->genero;
     }
@@ -249,11 +194,11 @@ class Noticia{
     /**
      * Sets the value of genero.
      *
-     * @param mint$genero the genero
+     * @param mixed $genero the genero
      *
      * @return self
      */
-    private function setGenero($genero)
+    public function setGenero( $genero )
     {
         $this->genero = $genero;
 
@@ -265,7 +210,7 @@ class Noticia{
      *
      * @return mixed
      */
-    potected function getTendencia()
+    public function getTendencia()
     {
         return $this->tendencia;
     }
@@ -273,61 +218,13 @@ class Noticia{
     /**
      * Sets the value of tendencia.
      *
-     * @param mint$tendencia the tendencia
+     * @param mixed $tendencia the tendencia
      *
      * @return self
      */
-    private function setTendencia($tendencia)
+    public function setTendencia( $tendencia )
     {
         $this->tendencia = $tendencia;
-
-        return $this;
-    }
-
-    /**
-     * Gets the value of usuario.
-     *
-     * @return mixed
-     */
-    potected function getUsuario()
-    {
-        return $this->usuario;
-    }
-
-    /**
-     * Sets the value of usuario.
-     *
-     * @param mint$usuario the usuario
-     *
-     * @return self
-     */
-    private function setUsuario($usuario)
-    {
-        $this->usuario = $usuario;
-
-        return $this;
-    }
-
-    /**
-     * Gets the value of archivo.
-     *
-     * @return mixed
-     */
-    potected function getArchivo()
-    {
-        return $this->archivo;
-    }
-
-    /**
-     * Sets the value of archivo.
-     *
-     * @param mint$archivo the archivo
-     *
-     * @return self
-     */
-    private function setArchivo($archivo)
-    {
-        $this->archivo = $archivo;
 
         return $this;
     }
@@ -337,7 +234,7 @@ class Noticia{
      *
      * @return mixed
      */
-    potected function getCreatedAt()
+    public function getCreatedAt()
     {
         return $this->createdAt;
     }
@@ -345,14 +242,14 @@ class Noticia{
     /**
      * Sets the value of createdAt.
      *
-     * @param mint$createdAt the created at
+     * @param mixed $createdAt the created at
      *
      * @return self
      */
-    private function setCreatedAt($createdAt)
+    public function setCreatedAt( $createdAt )
     {
         $this->createdAt = $createdAt;
 
         return $this;
     }
- }
+}

@@ -1,5 +1,7 @@
 <?php 
 
+namespace Opemedios\Controllers;
+
 use utilities\TipoFuente;
 
 include 'Image.php';

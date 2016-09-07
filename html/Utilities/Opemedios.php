@@ -73,3 +73,10 @@ class Gender extends PHPEnum
 	const OTRO				 = 10;
 	const PROMOCIONES		 = 11;
 }
+
+class Coverage extends PHPEnum
+{
+	const LOCAL			= 1;
+	const NACIONAL		= 2;
+	const INTERNACIONAL	= 3;
+}

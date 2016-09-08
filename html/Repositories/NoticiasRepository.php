@@ -15,24 +15,19 @@ class NoticiasRepository extends BaseRepository{
 		}
 	}
 
-	public function showNewsToDay(){
-
-		/*$sql = ' 	SELECT n.id_noticia AS id, n.encabezado, f.nombre AS nameFont, a.id_empresa, e.nombre AS send
-					FROM noticia n
-					INNER JOIN fuente f ON n.id_fuente = f.id_fuente
-					INNER JOIN asigna a ON n.id_noticia = a.id_noticia
-					INNER JOIN empresa e ON a.id_empresa = e.id_empresa
-					ORDER BY n.id_noticia DESC LIMIT 30;					
-				';*/
+	public function showNewsToDay( $data = [] ){
+		
+		extract( $data );
 
 		$sql = ' 	SELECT n.id_noticia AS id, n.encabezado, f.nombre AS nameFont
 					FROM noticia n
 					INNER JOIN fuente f ON n.id_fuente = f.id_fuente
-					/*WHERE fecha = CURDATE()*/
-					WHERE n.id_noticia > 500000
-					ORDER BY n.id_noticia DESC LIMIT 50;					
+					WHERE fecha = CURDATE()	
 				';
-		$query = $this->pdo->prepare( $sql );
+		$l = ' LIMIT ' . $limit . ' OFFSET ' . $page;
+		$o = ' ORDER BY n.id_noticia DESC';
+					// WHERE n.id_noticia > 500000
+		$query = $this->pdo->prepare( $sql . $o . $l);
 
 		$rs = ( $query->execute() ) ? $query->fetchAll() : 'No hay noticias aun';
 
@@ -210,7 +205,7 @@ class NoticiasRepository extends BaseRepository{
 		return $query->execute();
 	}
 
-	public function getCountNews( $data = [] ){
+	public function getCountNews( $data = [], $hoy = '' ){
 
 		$sql = '';
 
@@ -261,6 +256,10 @@ class NoticiasRepository extends BaseRepository{
 			$sql = 'SELECT COUNT(*) AS count FROM noticia';
 
 			$query = $this->pdo->prepare( $sql );			
+		}
+
+		if( !empty( $hoy ) ){
+			$query = $this->pdo->prepare( 'SELECT COUNT(*) AS count  FROM noticia WHERE fecha = CURDATE()' );
 		}
 
 		$value = ( $query->execute() ) ? $query->fetch( \PDO::FETCH_ASSOC ) : 0;

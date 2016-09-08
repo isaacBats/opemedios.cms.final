@@ -62,8 +62,7 @@ class AdminNewTV extends AdminNews{
 			}
 
 			if($this->tvRepository->addNewTV( $_POST )){
-				//header('Location: /panel/fonts/show-list');
-				 echo 'Se ha agregado una noticia de TV correctamente';
+				header('Location: /panel/news');
 			}else{
 				echo 'No se agrego a la tabla noticia_tel';
 			}

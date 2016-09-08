@@ -80,8 +80,7 @@ class AdminNewRE extends AdminNews{
 			$_POST['ubicacion'] = $ubicacion;
 
 			if($this->reRepository->addNewRE( $_POST )){
-				//header('Location: /panel/fonts/show-list');
-				 echo 'Se ha agregado una noticia de '.$this->fuente.' correctamente';
+				header('Location: /panel/news');
 			}else{
 				echo 'No se agrego a la tabla noticia_rev';
 			}

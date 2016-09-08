@@ -1,9 +1,5 @@
 <?php 
 
-namespace Opemedios\Controllers;
-
-use utilities\TipoFuente;
-
 include 'Image.php';
 
 require_once('Mail.php');
@@ -18,7 +14,21 @@ class AdminNews extends Controller{
 
 	public function showNews(){
 		if( isset( $_SESSION['admin'] ) ){
-			$noticias = $this->noticiasRepository->showNewsToDay();
+			
+			$js = '';
+			$css = '';
+
+			$limit = isset( $_GET['numpp'] ) ? $_GET['numpp'] : 10;
+			$page = isset( $_GET['page'] ) ? ( $_GET['page'] * $limit ) - $limit : 0;
+			
+			$countWithFilter = $this->noticiasRepository->getCountNews($data = [], $hoy = 'hoy');
+
+			$count = $countWithFilter;
+
+			$ini = $page + 1;
+			$end = ( $page + $limit >= $count ) ? $count : $page + $limit;
+
+			$noticias = $this->noticiasRepository->showNewsToDay( compact( 'limit', 'page' ) );
 			if ( is_array($noticias) ){
 
 				$html = '';
@@ -47,9 +57,26 @@ class AdminNews extends Controller{
 				}
 			}
 
-			$this->header_admin('Noticias de Hoy - ' );
+			$js = '
+					<!-- Libreria jquery-bootpag --> 
+					<script src="/admin/js/vendors/bootstrap/jquery.bootpag.min.js"></script>
+					<!-- Libreria purl --> 
+					<script src="/admin/js/vendors/purl/purl.min.js"></script>
+					<!-- Paginador con js --> 
+					<script src="/assets/js/panel.paginador.js"></script>
+			';
+
+			$css = '
+
+					<!-- panel_paginator CSS -->
+				    <link href="/admin/css/panel.main.css" rel="stylesheet">
+				    <!-- data tables bootstrap CSS -->
+				    <link href="/admin/css/dataTables.bootstrap.css" rel="stylesheet">
+			';
+
+			$this->header_admin('Noticias de Hoy - ', $css );
 			require $this->adminviews . 'showNews.php';
-			$this->footer_admin();
+			$this->footer_admin( $js );
 		}else{
             header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
         }

@@ -62,8 +62,7 @@ class AdminNewRD extends AdminNews{
 			}
 
 			if($this->rdRepository->addNewRD( $_POST )){
-				//header('Location: /panel/fonts/show-list');
-				 echo 'Se ha agregado una noticia de Radio correctamente';
+				header('Location: /panel/news');
 			}else{
 				echo 'No se agrego a la tabla noticia_rad';
 			}

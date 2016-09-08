@@ -60,7 +60,7 @@ class AdminNewIN extends AdminNews{
 			}
 			
 			if($this->inRepository->addNewIN( $_POST )){
-				header('Location: /panel/fonts/show-list');
+				header('Location: /panel/news');
 			}else{
 				echo 'No se agrego a la tabla noticia_int';
 			}

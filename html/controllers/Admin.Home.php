@@ -5,7 +5,8 @@ class AdminHome extends Controller{
 
 	public function dashboard(){
 
-		$css = '
+		if( isset( $_SESSION['admin'] ) ){
+			$css = '
 				<!-- Timeline CSS -->
 			    <link href="/assets/css/timeline.css" rel="stylesheet">
 
@@ -22,6 +23,9 @@ class AdminHome extends Controller{
 
 		$this->header_admin('Dasboard - ', $css);
         require $this->adminviews . "home.php";
-        $this->footer_admin( $js );
+        $this->footer_admin( $js );			
+		}else{
+            header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
+        }
 	}
 }

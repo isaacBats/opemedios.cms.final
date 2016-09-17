@@ -57,6 +57,7 @@ $(document).ready(function(){
         }
     });
 
+    /* Trae las secciones de acuerdo a la fuente seleccionada */
     $( '#selectFuente' ).change( function (){
         $( '#selectFuente option:selected' ).each( function () {
             var $elegido = $(this).val();

@@ -50,12 +50,12 @@
                                     <?= $genero ?>
                                 </select>
                             </div>
-                            <div class="form-group col-lg-6">
+                            <!-- <div class="form-group col-lg-6">
                                  <select class="form-control" name="sector">
                                     <option value="">Sector</option>
-                                    <?= $sector ?>
+                                    <?php //echo $sector ?>
                                 </select>
-                            </div>
+                            </div> -->
                             <div class="form-group col-lg-6">
                                  <select class="form-control" name="seccion" id="add-new-secction" disabled="disabled" >
                                     <option value="">Sección</option>

@@ -562,15 +562,15 @@ class AdminNews extends Controller{
 		if( isset( $_SESSION['admin'] ) ){
 			$fuentesRepository    = new FuentesRepository();
 			$generoRepository     = new GeneroRepository();
-			$sectorRepository     = new SectorRepository();
-			$seccionRepository    = new SeccionRepository();
+			// $sectorRepository     = new SectorRepository();
+			// $seccionRepository    = new SeccionRepository();
 			$tipoFuenteRepository = new TipoFuenteRepository();
 			$tipoAutorRepository  = new TipoAutorRepository();
 
 			$genero		= '';
 			$optionFont = '';
-			$sector		= '';
-			$seccion	= '';
+			//$sector		= '';
+			// $seccion	= '';
 			$tipoAutor	= '';
 
 			$css = '
@@ -601,7 +601,7 @@ class AdminNews extends Controller{
 			$fuentes   = $fuentesRepository->showAllFonts( $idFuente );
 			$autores   = $tipoAutorRepository->allAuthors();
 			$generos   = $generoRepository->allGeneros();
-			$sectores  = $sectorRepository->allSectors( 1 );
+			//$sectores  = $sectorRepository->allSectors( 1 );
 			
 			foreach ($fuentes as $f) {
 				$optionFont .= '<option value="'.$f['id_fuente'].'">'.$f['nombre'].'</option>';
@@ -615,9 +615,9 @@ class AdminNews extends Controller{
 				$genero .= '<option value="'.$g['id_genero'].'">'.$g['descripcion'].'</option>';
 			}
 
-			foreach ($sectores as $s) {
-				$sector .= '<option value="'.$s['id_sector'].'">'.$s['nombre'].'</option>';
-			}
+			// foreach ($sectores as $s) {
+			// 	$sector .= '<option value="'.$s['id_sector'].'">'.$s['nombre'].'</option>';
+			// }
 
 			$this->header_admin( 'Agregar Noticia de '.$fuente.' - ', $css );
 			require $this->adminviews . 'addNew.php';

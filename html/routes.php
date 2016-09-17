@@ -258,6 +258,12 @@ $collection->attachRoute(new Route('/panel/news/send-block', array(
     'methods' => 'POST'
 )));
 
+//Sections of Fonts
+
+$collection->attachRoute(new Route('/panel/get/seccion/:id', array(
+    '_controller' => 'AdminFonts::getSectionsByFontId',
+    'methods' => 'GET'
+)));
 
 $collection->attachRoute(new Route('/create-image/:id', array(
     '_controller' => 'AdminNews::createImage',

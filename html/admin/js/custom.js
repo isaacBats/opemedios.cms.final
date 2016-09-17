@@ -1,12 +1,6 @@
 $(document).ready(function(){
     
-    try{
-        $("#selectFuente").select2({
-          placeholder: "Seleccione una Fuente",
-          allowClear: true
-        }); 
-
-        /* Cambia el lenguaje del datepicker a espaÃ±ol */
+    /* Cambia el lenguaje del datepicker a español */
         $.datepicker.regional['es'] = {
             closeText: 'Cerrar',
             prevText: '',
@@ -24,7 +18,13 @@ $(document).ready(function(){
             showMonthAfterYear: false,
             yearSuffix: ''
         };
-        $.datepicker.setDefaults($.datepicker.regional['es']);   
+        $.datepicker.setDefaults($.datepicker.regional['es']);
+
+    try{
+        $("#selectFuente").select2({
+          placeholder: "Seleccione una Fuente",
+          allowClear: true
+        });    
 
         $(function() {
             $('.date_time').datetimepicker({
@@ -57,4 +57,28 @@ $(document).ready(function(){
         }
     });
 
+    $( '#selectFuente' ).change( function (){
+        $( '#selectFuente option:selected' ).each( function () {
+            var $elegido = $(this).val();
+            $.get( '/panel/get/seccion/' + $elegido, function (data) {
+                var $ssecction = $('#add-new-secction');
+                $ssecction.removeAttr('disabled');
+                $('option', $ssecction).remove();
+                if( typeof(data) == 'string' ){
+                    $ssecction.append('<option value="">Sección</option>');
+                    $ssecction.append('<option value="">' + data + '</option>');
+                }else{
+                    $ssecction.append('<option value="">Sección</option>');                    
+                    $.each( data, function (i, item){
+                        $ssecction.append( $('<option>', {
+                            value: item.id_seccion,
+                            text : item.nombre                            
+                        } ) );
+                    } );
+                }                
+            } );
+        });
+    });
+
 }); /* DOCUMMENT READY */
+

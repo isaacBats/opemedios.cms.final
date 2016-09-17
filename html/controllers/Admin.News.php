@@ -586,7 +586,6 @@ class AdminNews extends Controller{
 				    <script type="text/javascript" src="/assets/bower_components/moment/min/moment.min.js"></script>
 				    <script src="/admin/js/bootstrap-datetimepicker.min.js"></script>
 				    <script src="/assets/js/select2.min.js"></script>
-				    <script src="/assets/js/i18n/es.js"></script>
 			';
 			
 			if($fuente === 'Television'){
@@ -603,8 +602,7 @@ class AdminNews extends Controller{
 			$autores   = $tipoAutorRepository->allAuthors();
 			$generos   = $generoRepository->allGeneros();
 			$sectores  = $sectorRepository->allSectors( 1 );
-			$secciones = $seccionRepository->allSecciones( 1 );
-
+			
 			foreach ($fuentes as $f) {
 				$optionFont .= '<option value="'.$f['id_fuente'].'">'.$f['nombre'].'</option>';
 			}
@@ -619,10 +617,6 @@ class AdminNews extends Controller{
 
 			foreach ($sectores as $s) {
 				$sector .= '<option value="'.$s['id_sector'].'">'.$s['nombre'].'</option>';
-			}
-
-			foreach ($secciones as $secc) {
-				$seccion .= '<option value="'.$secc['id_seccion'].'">'.$secc['nombre'].'</option>';
 			}
 
 			$this->header_admin( 'Agregar Noticia de '.$fuente.' - ', $css );

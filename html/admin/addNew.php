@@ -57,9 +57,8 @@
                                 </select>
                             </div>
                             <div class="form-group col-lg-6">
-                                 <select class="form-control" name="seccion">
+                                 <select class="form-control" name="seccion" id="add-new-secction" disabled="disabled" >
                                     <option value="">Sección</option>
-                                    <?= $seccion ?>
                                 </select>
                             </div>
                             <div class="form-group col-lg-3">

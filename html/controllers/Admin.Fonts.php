@@ -1,14 +1,13 @@
 <?php 
 
-require (__DIR__.'/../Repositories/FuentesRepository.php');
-
-
 class AdminFonts extends Controller{
 
 	private $fuentesRepository;
+	private $sectionRepository;
 
 	public function __construct(){
 		$this->fuentesRepository = new FuentesRepository();
+		$this->sectionRepository 	= new SeccionRepository();
 	}
 
 	public function showFonts(){
@@ -45,5 +44,23 @@ class AdminFonts extends Controller{
 		require $this->adminviews . 'addFont.php';
 		$this->footer_admin();
 
+	}
+
+	/**
+	 *Return sections by font id
+	 * @param int $id
+	 * @return JSON
+	 */
+	public function getSectionsByFontId ( $id ){
+		
+		$sections = null;
+		if( isset( $_SESSION['admin'] ) ){
+			$sections = $this->sectionRepository->getByFontId( $id );
+			header('Content-type: text/json');
+	        echo json_encode($sections);		
+		}else{
+            header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
+        }
+		
 	}
 }

@@ -678,7 +678,7 @@ class AdminNews extends Controller{
 			}
 			else
 			{
-				$path=__DIR__ . '/../' . $ruta . $principal["name"];
+				$path=__DIR__ . '/../' . $ruta . $principal["createdName"];
 				$move = move_uploaded_file($principal["tmp_name"],$path);
 
 				if(!$move){

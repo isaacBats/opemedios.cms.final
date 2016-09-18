@@ -25,11 +25,11 @@ abstract class PHPEnum
 
 class FontType extends PHPEnum
 {
-	const FONT_TELEVISION 	= 1;
-	const FONT_RADIO 		= 2;
-	const FONT_PERIODICO 	= 3;
-	const FONT_REVISTA 		= 4;
-	const FONT_INTERNET 	= 5;
+	const FONT_TELEVISION 	= ['key' => 1, 'fuente' => 'Television'];
+	const FONT_RADIO 		= ['key' => 2, 'fuente' => 'Radio'];
+	const FONT_PERIODICO 	= ['key' => 3, 'fuente' => 'Periodico'];
+	const FONT_REVISTA 		= ['key' => 4, 'fuente' => 'Revista'];
+	const FONT_INTERNET 	= ['key' => 5, 'fuente' => 'Internet'];
 
 }
 

@@ -40,8 +40,9 @@ class PeriodicoRepository extends BaseRepository{
 
 		$idNew = $this->addNews( $new );
 
-		$adjunto = new AdjuntoRepository();
-		if( $adjunto->add( $new, $idNew ) ){
+		$adjuntoRepo = new AdjuntoRepository();
+		$adjunto = $adjuntoRepo->add( $new, $idNew );
+		if( $adjunto->exito ){
 
 			$sql = 'INSERT INTO noticia_per (id_noticia, pagina, id_tipo_pagina, id_tamano_nota, porcentaje_pagina, costo)
 								VALUES(:idNoticia, :pagina, :id_tipo_pagina, :id_tamano_nota, :porcentaje, :costo);';
@@ -55,11 +56,20 @@ class PeriodicoRepository extends BaseRepository{
 			$query->bindParam(':porcentaje', 		$new['tamano']);
 			$query->bindParam(':costo', 			$new['costoBeneficio']);
 
+			$result = new stdClass();
+
 			if($query->execute() && $this->addUbicacion( $new['ubicacion'], $idNew ) ){
-				return true;
+				$result->exito = true;
+				$result->fileName = $adjunto->name;
 			}else{
-			 	return false;
+			 	$error = $query->errorInfo();
+				$result->exito = false;
+				$result->fileName = 'No se inserto la noticia';
+				$result->errorCode = $error[1];
+				$result->error = $error[2];
 			}
+
+			return $result;
 		}else{
 			echo 'No se pude agregar el archivo adjunton :(';
 		}

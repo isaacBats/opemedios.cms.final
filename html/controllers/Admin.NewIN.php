@@ -70,7 +70,7 @@ class AdminNewIN extends AdminNews{
 			
 			$notice = $this->inRepository->addNewIN( $_POST );
 
-			if($notice->exito){
+			if( $notice->exito ){
 
 				/* guarda archivo */
 				$_FILES['primario']['createdName'] = $notice->fileName;

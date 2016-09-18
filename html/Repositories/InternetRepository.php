@@ -40,8 +40,9 @@ class InternetRepository extends BaseRepository{
 
 		$idNew = $this->addNews( $new );
 
-		$adjunto = new AdjuntoRepository();
-		if( $adjunto->add( $new, $idNew ) ){
+		$adjuntoRepo = new AdjuntoRepository();
+		$adjunto = $adjuntoRepo->add( $new, $idNew );
+		if( $adjunto->exito ){
 
 			$sql = 'INSERT INTO noticia_int (id_noticia, url, hora_publicacion, costo)
 								VALUES(:idNoticia, :url, :horaPub, :costo);';
@@ -52,13 +53,22 @@ class InternetRepository extends BaseRepository{
 			$query->bindParam(':horaPub', 		$new['hora']);
 			$query->bindParam(':costo', 	$new['costoBeneficio']);
 
+			$result = new stdClass();
+
 			if($query->execute()){
-				return true;
+				$result->exito = true;
+				$result->fileName = $adjunto->name;
 			}else{
-			 	return false;
+			 	$error = $query->errorInfo();
+				$result->exito = false;
+				$result->fileName = 'No se inserto la noticia';
+				$result->errorCode = $error[1];
+				$result->error = $error[2];
 			}
+
+			return $result;
 		}else{
-			echo 'No se pude agregar el archivo adjunton :(';
+			echo $adjunto->name;
 		}
 	}
 }

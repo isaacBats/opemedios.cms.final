@@ -8,11 +8,11 @@ class AdjuntoRepository extends BaseRepository{
 
 		if ( $adjunto['principal'] == 1 ) {
 		
-			$nombreArchivo = 'ID'.$idNoticia.'_'.$adjunto['files']['primario']['name'];
+			$nombreArchivo = 'ID'.$idNoticia.'_'.str_replace( ' ', '-', $adjunto['files']['primario']['name'] );
 		
 		}else{
 			
-			$nombreArchivo = 'ID'.$idNoticia.'_2_'.$adjunto['files']['primario']['name'];
+			$nombreArchivo = 'ID'.$idNoticia.'_2_'.str_replace( ' ', '-', $adjunto['files']['primario']['name'] );
 		}
 
 		$sql = 'INSERT INTO adjunto (nombre, tipo, carpeta, principal, id_noticia, nombre_archivo) 
@@ -26,11 +26,20 @@ class AdjuntoRepository extends BaseRepository{
 		$query->bindParam(':idNoticia',$idNoticia);
 		$query->bindParam(':nombreArchivo',$nombreArchivo);
 		
+		$result = new stdClass();
+
 		if($query->execute()){
-			return true;
+			$result->exito = true;
+			$result->name = $nombreArchivo;
 		}else{
-		 	return false;
+			$error = $query->errorInfo();
+			$result->exito = false;
+			$result->name = 'No se pude agregar el archivo adjunton :( en la base de datos';
+			$result->errorCode = $error[1];
+			$result->error = $error[2];
 		}
+
+		return $result;
 
 	}
 

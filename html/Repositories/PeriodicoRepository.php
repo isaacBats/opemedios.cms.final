@@ -71,7 +71,7 @@ class PeriodicoRepository extends BaseRepository{
 
 			return $result;
 		}else{
-			echo 'No se pude agregar el archivo adjunton :(';
+			echo $adjunto->name;
 		}
 	}
 

@@ -667,8 +667,9 @@ class AdminNews extends Controller{
 			|| ($principal['type'] == 'audio/x-ms-wma')
 			|| ($principal['type'] == 'audio/mpeg')
 			|| ($principal['type'] == 'audio/mp3')
-			|| ($principal['type'] == 'video/avi')
 			|| ($principal['type'] == 'application/pdf')
+			|| ($principal['type'] == 'video/x-ms-wmv')
+			|| ($principal['type'] == 'video/avi')
 			|| ($principal['type'] == 'video/mp4'))
 			&& in_array($extension, $extencionesPermitidas))
 		{

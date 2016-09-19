@@ -1,7 +1,9 @@
 <?php 
 
 include_once('Admin.News.php');
-include_once(__DIR__.'/../Repositories/TelevisionRepository.php');
+
+use utilities\MediaDirectory;
+use utilities\FontType;
 
 
 class AdminNewTV extends AdminNews{
@@ -13,8 +15,8 @@ class AdminNewTV extends AdminNews{
 	public function __construct(){
 
 		$this->tvRepository 		= new TelevisionRepository();		
-		$this->fuente 				= 'Television';
-		$this->urlArchivo			= 'assets/data/noticias/television/';
+		$this->fuente 				= FontType::FONT_TELEVISION['fuente'];
+		$this->urlArchivo			= MediaDirectory::MEDIA_TELEVISION;
 	}
 
 	public function getUrlArchivo(){
@@ -43,6 +45,14 @@ class AdminNewTV extends AdminNews{
 
 		if( !empty($_POST) ){
 			
+			// si no existe un folder con el mes y el año se crea
+			$createdAt = new DateTime();
+			$folder = $createdAt->format('m-Y');
+			$this->setUrlArchivo( $this->getUrlArchivo() . $folder . '/');
+			if( !is_dir( $this->getUrlArchivo() ) ){
+				mkdir( $this->getUrlArchivo(), 0755, true);
+			}
+
 			$id_television = $this->tvRepository->idFuenteTV();
 			$_POST['tipoFuente'] = $id_television;
 			$_POST['usuario'] = 1;
@@ -50,18 +60,23 @@ class AdminNewTV extends AdminNews{
 			$_POST['files'] = $_FILES;
 			if ( $_FILES['primario']['error'] == 0 && !empty($_FILES['primario']) ) {
 				
-				$_POST['principal'] = 1;
-				/* guarda archivo */
-				if( $this->guardaArchivo( $_FILES['primario'], $this->getUrlArchivo() ) ){
-					echo 'Archivo guardado en '. $this->getUrlArchivo();
-				}				
+				$_POST['principal'] = 1;				
 				
 			}else{
 
 				$_POST['principal'] = 0;				
 			}
 
-			if($this->tvRepository->addNewTV( $_POST )){
+			$notice = $this->tvRepository->addNewTV( $_POST );
+
+			if( $notice->exito ){
+
+				/* guarda archivo */
+				$_FILES['primario']['createdName'] = $notice->fileName;
+				if( $this->guardaArchivo( $_FILES['primario'], $this->getUrlArchivo() ) ){
+					echo 'Archivo guardado en '. $this->getUrlArchivo();
+				}
+				
 				header('Location: /panel/news');
 			}else{
 				echo 'No se agrego a la tabla noticia_tel';

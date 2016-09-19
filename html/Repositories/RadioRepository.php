@@ -42,8 +42,9 @@ class RadioRepository extends BaseRepository{
 
 		$idNew = $this->addNews( $new );
 
-		$adjunto = new AdjuntoRepository();
-		if( $adjunto->add( $new, $idNew ) ){
+		$adjuntoRepo = new AdjuntoRepository();
+		$adjunto = $adjuntoRepo->add( $new, $idNew );
+		if( $adjunto->exito ){
 
 			$sql = 'INSERT INTO noticia_rad (id_noticia, hora, duracion, costo)
 								VALUES(:idNoticia, :hora, :duracion, :costo);';
@@ -54,13 +55,21 @@ class RadioRepository extends BaseRepository{
 			$query->bindParam(':duracion', 	$new['duracion']);
 			$query->bindParam(':costo', 	$new['costoBeneficio']);
 
+			$result = new stdClass();
+
 			if($query->execute()){
-				return true;
+				$result->exito = true;
+				$result->fileName = $adjunto->name;
 			}else{
-			 	return false;
+			 	$error = $query->errorInfo();
+				$result->exito = false;
+				$result->fileName = 'No se inserto la noticia';
+				$result->errorCode = $error[1];
+				$result->error = $error[2];
 			}
+			return $result;
 		}else{
-			echo 'No se pude agregar el archivo adjunton :(';
+			echo $adjunto->name;
 		}
 	}
 }

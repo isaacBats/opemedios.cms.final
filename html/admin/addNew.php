@@ -86,6 +86,13 @@
                                 <label>Comentarios:</label>
                                 <textarea class="form-control" name="comentarios"></textarea>
                             </div>
+                            <div class="form-group col-lg-12">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" />Incluir a bloque de noticias
+                                    </label>
+                                </div>
+                            </div>
                             <div class="form-group col-lg-6">
                                 <label>Archivo de <?php if($fuente === 'Television'){
                                                                 echo str_replace('Television', 'Video', ucwords($fuente));

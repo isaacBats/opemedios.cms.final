@@ -233,11 +233,6 @@ $collection->attachRoute(new Route('/panel/new/send', array(
     'methods' => 'POST'
 )));
 
-$collection->attachRoute(new Route('/panel/news/send-news-block', array(
-    '_controller' => 'AdminNews::sendBlockNewsAction',
-    'methods' => 'POST'
-)));
-
 $collection->attachRoute(new Route('/panel/new/update-new', array(
     '_controller' => 'AdminNews::updateNew',
     'methods' => 'POST'
@@ -249,8 +244,13 @@ $collection->attachRoute(new Route('/panel/news/advanced-search', array(
 )));
 
 $collection->attachRoute(new Route('/panel/news/send-news-block', array(
-    '_controller' => 'AdminNews::sendBlock',
+    '_controller' => 'AdminNews::blockNewsView',
     'methods' => 'GET'
+)));
+
+$collection->attachRoute(new Route('/panel/news/send-news-block', array(
+    '_controller' => 'AdminNews::sendBlockNewsAction',
+    'methods' => 'POST'
 )));
 
 $collection->attachRoute(new Route('/panel/news/send-block', array(

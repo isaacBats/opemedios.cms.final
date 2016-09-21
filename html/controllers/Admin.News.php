@@ -1095,4 +1095,16 @@ class AdminNews extends Controller{
 
 	}
 
+	public function blockNewsView ()
+	{
+		if( isset( $_SESSION['admin'] ) ){
+			
+			$this->header_admin( 'Enviar Bloque de Noticias - ' );
+			require $this->adminviews . 'blockNewsView.php';
+			$this->footer_admin();
+		}else{
+            header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
+        }		
+	}
+
 }

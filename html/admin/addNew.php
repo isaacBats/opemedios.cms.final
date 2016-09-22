@@ -22,7 +22,7 @@
                 <div class="row">
                     <div class="col-sm-12 col-md-12 col-lg-12">
                         <form id="form_new" method="post" action="/panel/new/<?= strtolower($fuente)  ?>/save" enctype="multipart/form-data">
-                            <div class="col-sm-12 col-md-12 col-lg-12 form-group select2">
+                            <div class="col-sm-12 col-md-12 col-lg-12 form-group">
                                 <select class="form-control" name="fuente" id="selectFuente" required >
                                     <option value="">Seleccione una Fuente</option>
                                     <?= $optionFont ?>
@@ -86,14 +86,30 @@
                                 <label>Comentarios:</label>
                                 <textarea class="form-control" name="comentarios"></textarea>
                             </div>
-                            <div class="form-group col-sm-12 col-md-12 col-lg-12">
+                            <div class="form-group col-sm-12 col-md-4 col-lg-4">
                                 <div class="checkbox">
                                     <label>
                                         <input type="checkbox" />Incluir a bloque de noticias
                                     </label>
                                 </div>
                             </div>
-                            <div class="form-group col-sm-12 col-md-6 col-lg-6">
+                            <div class="col-sm-12 col-md-8 col-lg-8">
+                                <div class="panel panel-default">
+                                    <div class="panel-body">
+                                        <div class="form-group col-sm-12 col-md-12 col-lg-12">
+                                            <select name="bloque" class="form-control">
+                                                <option value="">Seleccione un bloque</option>
+                                            </select>
+                                            <select name="tema" class="form-control">
+                                                <option value="">Seleccione un tema</option>
+                                            </select>
+                                            <a class="btn btn-primary"><i class="fa fa-plus-circle"></i> Agregar Bloque</a>
+                                            <a class="btn btn-success"><i class="glyphicon glyphicon-repeat"></i> Agregar Noticia a otro bloque</a>
+                                        </div>
+                                    </div>
+                                </div>                                
+                            </div>
+                            <div class="form-group col-sm-12 col-md-12 col-lg-12">
                                 <label>Archivo de <?php if($fuente === 'Television'){
                                                                 echo str_replace('Television', 'Video', ucwords($fuente));
                                                            }elseif($fuente === 'Periodico'){

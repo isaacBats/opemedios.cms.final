@@ -1,20 +1,20 @@
-<div class="form-group col-lg-3">
+<div class="form-group col-sm-12 col-md-6 col-lg-3">
     <label>Pagina</label> 
     <input class="form-control" placeholder="Pagina" name="pagina" required>
 </div>
-<div class="form-group col-lg-3"> 
+<div class="form-group col-sm-12 col-md-6 col-lg-3"> 
     <label>Tamaño (%)</label>
     <input class="form-control" placeholder="Tamaño (%)" name="tamano" value="1" required>
     <p class="help-block">Valor de 1 a 600.</p>
 </div>
-<div class="form-group col-lg-3">
+<div class="form-group col-sm-12 col-md-6 col-lg-3">
     <label>Paginación</label>
      <select class="form-control" name="tipoPagina">
         <option value="">Tipo de Paginación</option>
         <?= $tipoPaginacion ?>
     </select>
 </div>
-<div class="well well-sm col-lg-6">
+<div class="well well-sm col-sm-12 col-md-6 col-lg-6">
 <label>Ubicación</label>
     <div class="form-group">
         <label class="checkbox-inline">

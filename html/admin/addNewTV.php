@@ -1,4 +1,4 @@
-<div class="form-group col-lg-3">
+<div class="form-group col-sm-12 col-md-3 col-lg-3">
     <label>Hora</label>
     <div class="input-group date_time">
         <input data-format="hh:mm:ss" type="text" class="form-control height30" name="hora" />
@@ -7,7 +7,7 @@
         </span>
     </div>
 </div>
-<div class="form-group col-lg-3">
+<div class="form-group col-sm-12 col-md-3 col-lg-3">
     <label>Duracion</label>
     <div class="input-group date_time" >
         <input data-format="hh:mm:ss" type="text" class="form-control height30 " name="duracion" />

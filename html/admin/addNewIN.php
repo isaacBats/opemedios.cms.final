@@ -1,4 +1,4 @@
-<div class="form-group col-lg-3">
+<div class="form-group col-sm-12 col-md-6 col-lg-3">
     <label>Hora de captura</label>
     <div class="input-group date_time">
         <input data-format="hh:mm:ss" type="text" class="form-control height30" name="hora" />
@@ -7,6 +7,6 @@
         </span>
     </div>
 </div>
-<div class="form-group"> 
+<div class="form-group col-sm-12 col-md-12 col-lg-12"> 
     <input class="form-control" placeholder="URL" name="url" required>
 </div>

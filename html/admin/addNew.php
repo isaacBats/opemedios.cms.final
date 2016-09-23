@@ -89,18 +89,20 @@
                             <div class="form-group col-sm-12 col-md-4 col-lg-4">
                                 <div class="checkbox">
                                     <label>
-                                        <input type="checkbox" />Incluir a bloque de noticias
+                                        <input type="checkbox" id="checkBlock"/>Incluir a bloque de noticias
                                     </label>
                                 </div>
                             </div>
-                            <div class="col-sm-12 col-md-8 col-lg-8">
+                            <div class="invisible col-sm-12 col-md-8 col-lg-8" id="panelBloque">
                                 <div class="panel panel-default">
                                     <div class="panel-body">
-                                        <div class="form-group col-sm-12 col-md-12 col-lg-12">
+                                        <div class="form-group">
+                                            <label for="bloque">Bloque:</label>
                                             <select name="bloque" class="form-control">
                                                 <option value="">Seleccione un bloque</option>
                                             </select>
-                                            <select name="tema" class="form-control">
+                                            <label for="tema">Tema:</label>
+                                            <select name="tema" class="form-control" disabled="disabled">
                                                 <option value="">Seleccione un tema</option>
                                             </select>
                                             <a class="btn btn-primary"><i class="fa fa-plus-circle"></i> Agregar Bloque</a>

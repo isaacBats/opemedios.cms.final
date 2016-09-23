@@ -81,5 +81,20 @@ $(document).ready(function(){
         });
     });
 
+    /* Para el bloque de noticias */
+
+    $('#checkBlock').change(addNewBlock);
+    
+    function addNewBlock(){
+        var $checkBlock = $('#checkBlock');
+        var $panelBlock = $('#panelBloque');
+        if( $checkBlock.prop('checked')){
+            $panelBlock.removeClass('invisible');
+        }else{
+            $panelBlock.addClass('invisible');
+        }
+    }
+
+
 }); /* DOCUMMENT READY */
 

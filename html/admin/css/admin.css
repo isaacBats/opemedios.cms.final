@@ -2,6 +2,9 @@
     display: none;
 }
 
+.invisible{
+	display: none;
+}
 /*.padding60{
 	padding-bottom: 60px;
 }*/

@@ -83,6 +83,7 @@ $(document).ready(function(){
 
     /* Para el bloque de noticias */
 
+    
     $('#checkBlock').change(addNewBlock);
     
     function addNewBlock(){

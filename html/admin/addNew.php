@@ -98,11 +98,19 @@
                                     <div class="panel-body">
                                         <div class="form-group">
                                             <label for="bloque">Bloque:</label>
-                                            <select name="bloque" class="form-control">
+                                            <select name="bloque1" class="form-control">
                                                 <option value="">Seleccione un bloque</option>
+                                                <?php if( is_array($sbloques) ){
+                                                        foreach ($sbloques as $b) { ?>
+                                                            <option value="<?= $b['id'] ?>"><?= $b['name'] ?></option>
+                                                <?php   }
+                                                       }else{
+                                                        echo $sbloques;
+                                                       }
+                                                ?>
                                             </select>
                                             <label for="tema">Tema:</label>
-                                            <select name="tema" class="form-control" disabled="disabled">
+                                            <select name="tema1" class="form-control" disabled="disabled">
                                                 <option value="">Seleccione un tema</option>
                                             </select>
                                             <a class="btn btn-primary"><i class="fa fa-plus-circle"></i> Agregar Bloque</a>

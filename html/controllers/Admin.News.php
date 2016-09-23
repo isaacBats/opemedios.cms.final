@@ -566,12 +566,15 @@ class AdminNews extends Controller{
 			// $seccionRepository    = new SeccionRepository();
 			$tipoFuenteRepository = new TipoFuenteRepository();
 			$tipoAutorRepository  = new TipoAutorRepository();
-
+			$bloqueRepository = new BloqueRepository();
 			$genero		= '';
 			$optionFont = '';
 			//$sector		= '';
 			// $seccion	= '';
 			$tipoAutor	= '';
+
+			$bloques = $bloqueRepository->all();
+			$sbloques = ( $bloques->exito && !is_array($bloques->error) ) ? $bloques->rows : '<option value="">No hay bloques</option>';
 
 			$css = '
 					<!-- Select2 CSS -->

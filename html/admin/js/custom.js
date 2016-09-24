@@ -82,8 +82,8 @@ $(document).ready(function(){
     });
 
     /* Para el bloque de noticias */
-
     
+    //muestra el area para agregar una noticia al un bloque
     $('#checkBlock').change(addNewBlock);
     
     function addNewBlock(){
@@ -95,6 +95,36 @@ $(document).ready(function(){
             $panelBlock.addClass('invisible');
         }
     }
+
+    // Selecciona un tema
+    $( '.select-bloque' ).change( function (){
+        $( '.select-bloque option:selected' ).each( function () {
+            var $elegido = $(this).val();
+            var empresa = $(this).data('empresa');
+            $.get( '/panel/get/temas/' + empresa, function (data) {
+                var $stema = $('.select-tema');
+                $stema.removeAttr('disabled');
+                $('option', $stema).remove();
+                if( typeof(data) == 'string' ){
+                    $stema.append('<option value="">Seleccione un tema</option>');
+                    $stema.append('<option value="">' + data + '</option>');
+                }else{
+                    $stema.append('<option value="">Seleccione un tema</option>');                    
+                    $.each( data, function (i, item){
+                        $stema.append( $('<option>', {
+                            value: item.id_tema,
+                            text : item.nombre                            
+                        } ) );
+                    } );
+                }                
+            } );
+        });
+    });
+
+    //activa el boton de guardar
+    $( '.select-tema' ).change( function() {
+        $('#btn-guardar-tema').removeClass('disabled');
+    }); 
 
 
 }); /* DOCUMMENT READY */

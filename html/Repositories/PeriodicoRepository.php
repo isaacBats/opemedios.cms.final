@@ -61,6 +61,7 @@ class PeriodicoRepository extends BaseRepository{
 			if($query->execute() && $this->addUbicacion( $new['ubicacion'], $idNew ) ){
 				$result->exito = true;
 				$result->fileName = $adjunto->name;
+				$result->idNew = $idNew;
 			}else{
 			 	$error = $query->errorInfo();
 				$result->exito = false;

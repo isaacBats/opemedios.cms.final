@@ -6,12 +6,18 @@ class TemaRepository extends BaseRepository{
 
 	public function getThemaByEmpresaID( $id ){
 		
+		$issues = null;
+
 		$query = $this->pdo->prepare('SELECT * FROM tema WHERE id_empresa = ' . $id);
 		
 		if($query->execute()){
-			return $query->fetch(\PDO::FETCH_ASSOC);
+			$issues = ( $query->rowCount() > 0 ) ? $query->fetchAll(\PDO::FETCH_ASSOC) : 'No hay temas disponibles';
 		}else{
-			echo 'No se pudo ejecutar la consulta en la tabla Tema';
+			$error = $query->errorInfo();
+			$issues = 'Error al consultar las secciones para la fuente con id ' . $fontId . PHP_EOL;
+			$issues .= 'Code Error: ' . $error[1] . ' Error: ' . $error[2];
 		}
+
+		return $issues;
 	}
 }

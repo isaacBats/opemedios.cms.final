@@ -259,9 +259,14 @@ $collection->attachRoute(new Route('/panel/news/send-block', array(
 )));
 
 //Sections of Fonts
-
 $collection->attachRoute(new Route('/panel/get/seccion/:id', array(
     '_controller' => 'AdminFonts::getSectionsByFontId',
+    'methods' => 'GET'
+)));
+
+//Selection of Tema
+$collection->attachRoute(new Route('/panel/get/temas/:id', array(
+    '_controller' => 'AdminEmpresa::getIssuesByCompanyId',
     'methods' => 'GET'
 )));
 

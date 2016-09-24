@@ -22,5 +22,14 @@ class BloqueRepository extends BaseRepository{
 		return $blocks;
 	}
 
+	public function insertNewToBlock( $block )
+	{
+		$query = $this->pdo->prepare( 'INSERT INTO bloques_noticias ( bloque_id, noticia_id, tema_id ) VALUES( ' . $block['bloque'] . ', '. $block['noticia'] .', ' . $block['tema'] . ');' );
+
+		$rs = ( $query->execute() ) ? TRUE : FALSE;
+
+		return $rs;
+	}
+
 	
 }

@@ -62,6 +62,7 @@ class TelevisionRepository extends BaseRepository{
 			if($query->execute()){
 				$result->exito = true;
 				$result->fileName = $adjunto->name;
+				$result->idNew = $idNew;
 			}else{
 			 	$error = $query->errorInfo();
 				$result->exito = false;

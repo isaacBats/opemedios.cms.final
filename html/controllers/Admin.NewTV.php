@@ -11,10 +11,12 @@ class AdminNewTV extends AdminNews{
 	private $tvRepository;	
 	private $fuente;
 	private $urlArchivo;
+	private $bloqueRepo;
 
 	public function __construct(){
 
 		$this->tvRepository 		= new TelevisionRepository();		
+		$this->bloqueRepo 			= new BloqueRepository();
 		$this->fuente 				= FontType::FONT_TELEVISION['fuente'];
 		$this->urlArchivo			= MediaDirectory::MEDIA_TELEVISION;
 	}
@@ -75,6 +77,16 @@ class AdminNewTV extends AdminNews{
 				$_FILES['primario']['createdName'] = $notice->fileName;
 				if( $this->guardaArchivo( $_FILES['primario'], $this->getUrlArchivo() ) ){
 					echo 'Archivo guardado en '. $this->getUrlArchivo();
+				}
+
+				// Para agregar a un bloque
+				if( $_POST['bloque'] != '' && $_POST['tema'] != '' ){
+					
+					$bloque['bloque'] = $_POST['bloque'];
+					$bloque['noticia'] = $notice->idNew;
+					$bloque['tema'] = $_POST['tema'];
+
+					$this->bloqueRepo->insertNewToBlock( $bloque );
 				}
 				
 				header('Location: /panel/news');

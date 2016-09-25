@@ -1102,12 +1102,37 @@ class AdminNews extends Controller{
 	{
 		if( isset( $_SESSION['admin'] ) ){
 			
-			$this->header_admin( 'Enviar Bloque de Noticias - ' );
+			$blockRep = new BloqueRepository();
+			$blocks = $blockRep->all();
+			
+			$this->header_admin( 'Bloques de Noticias - ' );
 			require $this->adminviews . 'blockNewsView.php';
 			$this->footer_admin();
 		}else{
             header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
         }		
+	}
+
+	public function detailBlockView( $id )
+	{
+		if( isset( $_SESSION['admin'] ) ){
+
+			$blockRep = new BloqueRepository();
+			$block = $blockRep->getBlockById( $id );
+			$news = $blockRep->getNewsOfBlock( $id );
+			if( $block->exito ){
+				$bloque = $block->rows['name'];
+				$bloqueId = $block->rows['id'];				
+				$empresa = $block->rows['empresa'];
+				$empresaId = $block->rows['empresa_id'];
+			}
+			
+			$this->header_admin( 'Bloque de Noticias - ' );
+			require $this->adminviews . 'detailBlockView.php';
+			$this->footer_admin();
+		}else{
+            header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
+        }	
 	}
 
 }

@@ -243,8 +243,13 @@ $collection->attachRoute(new Route('/panel/news/advanced-search', array(
     'methods' => 'GET'
 )));
 
-$collection->attachRoute(new Route('/panel/news/send-news-block', array(
+$collection->attachRoute(new Route('/panel/news/blocks', array(
     '_controller' => 'AdminNews::blockNewsView',
+    'methods' => 'GET'
+)));
+
+$collection->attachRoute(new Route('/panel/news/blocks/:id', array(
+    '_controller' => 'AdminNews::detailBlockView',
     'methods' => 'GET'
 )));
 

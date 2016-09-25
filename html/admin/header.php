@@ -131,7 +131,7 @@
                                     <a href="/panel/news/advanced-search">Búsqueda avanzada</a>
                                 </li>
                                 <li>
-                                    <a href="/panel/news/send-news-block">Enviar bloque de noticias</a>
+                                    <a href="/panel/news/blocks">Bloques de noticias</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->

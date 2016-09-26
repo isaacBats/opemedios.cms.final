@@ -1118,13 +1118,18 @@ class AdminNews extends Controller{
 		if( isset( $_SESSION['admin'] ) ){
 
 			$blockRep = new BloqueRepository();
+			$themeRep = new TemaRepository();
+			
 			$block = $blockRep->getBlockById( $id );
+			$thems = $themeRep->getThemaByEmpresaID( $block->rows['empresa_id'] );
 			$news = $blockRep->getNewsOfBlock( $id );
-			if( $block->exito ){
-				$bloque = $block->rows['name'];
-				$bloqueId = $block->rows['id'];				
-				$empresa = $block->rows['empresa'];
-				$empresaId = $block->rows['empresa_id'];
+			$themesId = array_column( $thems, 'id_tema');
+			
+			$noticiasBloque = array();
+			foreach ($news->rows as $new) {
+				if( in_array( $new['temaId'], $themesId ) ){
+					$noticiasBloque[$new['tema']][] = $new;
+				}
 			}
 			
 			$this->header_admin( 'Bloque de Noticias - ' );

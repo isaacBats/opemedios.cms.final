@@ -71,5 +71,20 @@ class BloqueRepository extends BaseRepository{
 		return $rs;
 	}
 
+	public function insertBlock( $block )
+	{
+		$query = $this->pdo->prepare( "INSERT INTO bloques ( name, empresa_id, enviado ) VALUES( '". $block['blockName'] . "', '" . $block['empresaId'] . "', '0');" );
+		
+		$rs = new stdClass();
+		if( $query->execute() ){
+			$rs->exito = true;
+		}else{
+			$rs->exito = false;
+			$rs->error = $query->errorInfo();
+		}
+
+		return $rs;
+	}
+
 	
 }

@@ -25,4 +25,22 @@ class EmpresaRepository extends BaseRepository{
 
 		return $company;
 	}
+
+	public function all(){
+		
+		$empresas = new stdClass();
+
+		$query = $this->pdo->prepare('SELECT * FROM empresa;');
+		
+		if($query->execute()){
+			$empresas->exito = true;
+			$empresas->rows = ( $query->rowCount() > 0 ) ? $query->fetchAll( \PDO::FETCH_ASSOC) : 'No hay empresas';
+			$empresas->error = 0;
+		}else{
+			$empresas->exito = false;
+			$empresas->error = $query->errorInfo();
+		}
+
+		return $empresas;
+	}
 }

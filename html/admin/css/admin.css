@@ -5,6 +5,10 @@
 .invisible{
 	display: none;
 }
+
+.mb-20{
+	margin-bottom: 20px;
+}
 /*.padding60{
 	padding-bottom: 60px;
 }*/

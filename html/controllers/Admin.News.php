@@ -1103,11 +1103,27 @@ class AdminNews extends Controller{
 		if( isset( $_SESSION['admin'] ) ){
 			
 			$blockRep = new BloqueRepository();
+			$empreasaRep = new EmpresaRepository();
 			$blocks = $blockRep->all();
+			$companies = $empreasaRep->all();
+
+			$css = '
+					<!-- Select2 CSS -->
+				    <link href="/assets/css/select2.min.css" rel="stylesheet">
+				   ';
+
+			$js = '
+					<!-- Select2 JavaScript -->
+				    <script src="/assets/js/select2.min.js"></script>
+				    <script src="/admin/js/bootstrap-datetimepicker.min.js"></script>
+				    
+					<!-- validate JavaScript -->
+					<script src="/admin/js/jquery.validate.js"></script>
+				    ';
 			
-			$this->header_admin( 'Bloques de Noticias - ' );
+			$this->header_admin( 'Bloques de Noticias - ', $css );
 			require $this->adminviews . 'blockNewsView.php';
-			$this->footer_admin();
+			$this->footer_admin( $js );
 		}else{
             header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
         }		
@@ -1138,6 +1154,32 @@ class AdminNews extends Controller{
 		}else{
             header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
         }	
+	}
+
+	public function createBlock()
+	{
+		if( isset( $_SESSION['admin'] ) ){
+			if( !empty( $_POST ) ){
+				$blockRep = new BloqueRepository();				
+				
+				$result = new stdClass();
+				$block = $blockRep->insertBlock( $_POST );
+				if( $block->exito ){
+					$result->exito = true;
+					$result->tipo = 'alert-info';
+					$result->mensaje = 'Se ha insertado satisfactoriamente el bloque';
+				}else{
+					$result->exito = false;
+					$result->tipo = 'alert-danger';
+					$result->mensaje = $block->error[2];
+				}
+				header('Content-type: text/json');
+				echo json_encode($result);				
+			}
+
+		}else{
+            header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
+        }
 	}
 
 }

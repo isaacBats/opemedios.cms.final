@@ -22,7 +22,10 @@ $(document).ready(function(){
 
     try{
         $("#selectFuente").select2({
-          placeholder: "Seleccione una Fuente",
+          allowClear: true
+        });
+
+        $(".select2").select2({
           allowClear: true
         });    
 
@@ -124,7 +127,27 @@ $(document).ready(function(){
     //activa el boton de guardar
     $( '.select-tema' ).change( function() {
         $('#btn-guardar-tema').removeClass('disabled');
-    }); 
+    });
+
+    /* Para crear un bloque */ 
+
+    //Submit crear bloque
+    $('#form-block').validate({
+
+        submitHandler: function( form ){
+            var $formulario = $(form);
+            var datos = formulario.serialize();
+            console.log('estoy en el submit'); 
+            $.post(formulario.attr('action'), datos, function (json) {
+                if (json.exito) {
+                    var $alert = $('.alert');
+                    $alert.addClass(json.tipo).html(json.mensaje).delay(3000).fadeOut('slow');
+                    formulario.fadeOut('slow');
+                }
+            });
+        }
+    });
+    
 
 
 }); /* DOCUMMENT READY */

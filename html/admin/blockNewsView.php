@@ -4,6 +4,27 @@
     </div>    <!-- /.col-lg-12 -->
 </div>
 <div class="row">
+    <div class="col-sm-12 col-md-12 col-lg-12 mb-20">
+        <form method="post" action="/panel/block/create" class="form-inline" id="form-block">
+            <div class="form-group">
+                <!-- <label for="nombre del bloque">Nombre del bloque: </label> -->
+                <input class="form-control" name="blockName" placeholder="Nombre del bloque" required>                
+            </div>
+            <div class="form-group">
+                <!-- <label for="empresa">Empresa: </label> -->
+                <select class="form-control select2"  name="empresaId" required>
+                    <option value="">Selecciona una Empresa</option>
+                    <?php if( is_array( $companies->rows ) ) {
+                            foreach ($companies->rows as $key => $empresa) { ?>
+                                <option value="<?= $empresa['id_empresa'] ?>"><?= $empresa['nombre'] ?></option>
+                    <?php } }?>
+                </select>                
+            </div>
+            <input type="submit" class="btn btn-success" value="Crear bloque">
+        </form>
+    </div>
+</div>
+<div class="row">
 	<div class="col-lg-12">
         <div class="panel panel-default">
             <div class="panel-heading">

@@ -20,7 +20,7 @@
 	                    <option value="">Selecciona una Empresa</option>
 	                    <?php if( is_array( $companies->rows ) ) {
 	                            foreach ($companies->rows as $key => $empresa) { 
-	                            	if( $empresa['id_empresa'] == $id ){ ?>
+	                            	if( $empresa['id_empresa'] == $block->rows['empresa_id'] ){ ?>
 	                                	<option value="<?= $empresa['id_empresa'] ?>" selected><?= $empresa['nombre'] ?></option>
 	                          <?php }else{ ?>
 	                                	<option value="<?= $empresa['id_empresa'] ?>"><?= $empresa['nombre'] ?></option>

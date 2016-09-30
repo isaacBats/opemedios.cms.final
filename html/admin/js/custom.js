@@ -133,16 +133,16 @@ $(document).ready(function(){
 
     //Submit crear bloque
     $('#form-block').validate({
-
-        submitHandler: function( form ){
+        submitHandler: function (form){
             var $formulario = $(form);
-            var datos = formulario.serialize();
-            console.log('estoy en el submit'); 
-            $.post(formulario.attr('action'), datos, function (json) {
+            var datos = $formulario.serialize();
+            $.post($formulario.attr('action'), datos, function (json) {
                 if (json.exito) {
                     var $alert = $('.alert');
-                    $alert.addClass(json.tipo).html(json.mensaje).delay(3000).fadeOut('slow');
-                    formulario.fadeOut('slow');
+                    $alert.addClass(json.tipo).html(json.mensaje).delay(3000).fadeOut('slow', function() {
+                        window.location.reload();
+                    });
+                    $formulario.fadeOut('slow');
                 }
             });
         }

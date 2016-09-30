@@ -147,6 +147,22 @@ $(document).ready(function(){
             });
         }
     });
+
+    /** Para editar un bloque */
+    //Activar formulario de edicion
+    $('#block-edit').on('click', activarFormularioEditar);
+    
+    function activarFormularioEditar(){
+        var $botonCancelar = $('#block-cancel');
+        var $botonEditar = $('#block-edit');
+        var $fields = $('#form-block-edit fieldset');
+        var $formulario = $('#form-block-edit');
+
+        $botonCancelar.removeClass('invisible');
+        $botonEditar.addClass('invisible');
+        $formulario.removeClass('invisible');
+        $fields.removeAttr('disabled');
+    }
     
 
 

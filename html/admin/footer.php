@@ -31,6 +31,9 @@
 
     <!-- Custom Theme JavaScript -->
     <script src="/assets/js/sb-admin-2.js"></script>
+    <!-- validate JavaScript -->
+    <script src="/admin/js/jquery.validate.js"></script>
+                    
 
     <?= $javaScripts  ?>
     

@@ -1117,9 +1117,7 @@ class AdminNews extends Controller{
 				    <script src="/assets/js/select2.min.js"></script>
 				    <script src="/admin/js/bootstrap-datetimepicker.min.js"></script>
 				    
-					<!-- validate JavaScript -->
-					<script src="/admin/js/jquery.validate.js"></script>
-				    ';
+					';
 			
 			$this->header_admin( 'Bloques de Noticias - ', $css );
 			require $this->adminviews . 'blockNewsView.php';
@@ -1135,17 +1133,25 @@ class AdminNews extends Controller{
 
 			$blockRep = new BloqueRepository();
 			$themeRep = new TemaRepository();
+			$empreasaRep = new EmpresaRepository();
 			
 			$block = $blockRep->getBlockById( $id );
 			$thems = $themeRep->getThemaByEmpresaID( $block->rows['empresa_id'] );
 			$news = $blockRep->getNewsOfBlock( $id );
 			$themesId = array_column( $thems, 'id_tema');
 			
-			$noticiasBloque = array();
-			foreach ($news->rows as $new) {
-				if( in_array( $new['temaId'], $themesId ) ){
-					$noticiasBloque[$new['tema']][] = $new;
-				}
+			$companies = $empreasaRep->all();
+
+			$noticiasBloque = null;
+			// vdd($news);
+			if( is_array($news->rows) ){
+				foreach ($news->rows as $new) {
+					if( in_array( $new['temaId'], $themesId ) ){
+						$noticiasBloque[$new['tema']][] = $new;
+					}
+				}				
+			}else{
+				$noticiasBloque = $news->rows;
 			}
 			
 			$this->header_admin( 'Bloque de Noticias - ' );

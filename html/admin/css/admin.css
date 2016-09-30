@@ -6,8 +6,16 @@
 	display: none;
 }
 
+.mb-10{
+	margin-bottom: 10px;
+}
+
 .mb-20{
 	margin-bottom: 20px;
+}
+
+.mt-20{
+	margin-top: 20px;
 }
 /*.padding60{
 	padding-bottom: 60px;

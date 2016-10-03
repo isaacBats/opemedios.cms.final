@@ -23,7 +23,7 @@
                     <div class="col-sm-12 col-md-12 col-lg-12">
                         <form id="form_new" method="post" action="/panel/new/<?= strtolower($fuente)  ?>/save" enctype="multipart/form-data">
                             <div class="col-sm-12 col-md-12 col-lg-12 form-group">
-                                <select class="form-control" name="fuente" id="selectFuente" required >
+                                <select class="select2 form-control" name="fuente" required >
                                     <option value="">Seleccione una Fuente</option>
                                     <?= $optionFont ?>
                                 </select>

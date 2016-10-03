@@ -16,7 +16,7 @@
 	            </div>
 	            <div class="form-group">
 	                <label for="empresa">Empresa: </label>
-	                <select class="form-control select2"  name="empresaId" required>
+	                <select class="select2"  name="empresaId" required>
 	                    <option value="">Selecciona una Empresa</option>
 	                    <?php if( is_array( $companies->rows ) ) {
 	                            foreach ($companies->rows as $key => $empresa) { 

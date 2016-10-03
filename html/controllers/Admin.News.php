@@ -1131,6 +1131,18 @@ class AdminNews extends Controller{
 	{
 		if( isset( $_SESSION['admin'] ) ){
 
+			$css = '
+					<!-- Select2 CSS -->
+				    <link href="/assets/css/select2.min.css" rel="stylesheet">
+				   ';
+
+			$js = '
+					<!-- Select2 JavaScript -->
+				    <script src="/assets/js/select2.min.js"></script>
+				    <script src="/admin/js/bootstrap-datetimepicker.min.js"></script>
+				    
+					';
+
 			$blockRep = new BloqueRepository();
 			$themeRep = new TemaRepository();
 			$empreasaRep = new EmpresaRepository();
@@ -1154,9 +1166,9 @@ class AdminNews extends Controller{
 				$noticiasBloque = $news->rows;
 			}
 			
-			$this->header_admin( 'Bloque de Noticias - ' );
+			$this->header_admin( 'Bloque de Noticias - ', $css );
 			require $this->adminviews . 'detailBlockView.php';
-			$this->footer_admin();
+			$this->footer_admin( $js );
 		}else{
             header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
         }	
@@ -1186,6 +1198,45 @@ class AdminNews extends Controller{
 		}else{
             header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
         }
+	}
+
+	public function editBlock()
+	{
+		if( isset( $_SESSION['admin'] ) ){
+			if( !empty( $_POST ) ){
+				$blockRep = new BloqueRepository();				
+				$result = new stdClass();
+				
+				$_POST['blockId'] = base64_decode( $_POST['blockId'] );
+				$passBlock = $blockRep->getBlockById( $_POST['blockId'] ); 
+
+				if( $passBlock->rows['name'] == $_POST['blockName'] && $passBlock->rows['empresa_id'] == $_POST['empresaId'] ){
+					$result->exito = true;
+					$result->tipo = 'alert-info';
+					$result->mensaje = 'Se ha editado satisfactoriamente el bloque';
+
+					header('Content-type: text/json');
+					echo json_encode($result);
+					exit;
+				}
+				
+				$block = $blockRep->editBlock( $_POST );
+				if( $block->exito ){
+					$result->exito = true;
+					$result->tipo = 'alert-info';
+					$result->mensaje = 'Se ha editado satisfactoriamente el bloque';
+				}else{
+					$result->exito = false;
+					$result->tipo = 'alert-danger';
+					$result->mensaje = $block->error[2];
+				}
+				header('Content-type: text/json');
+				echo json_encode($result);				
+			}
+
+		}else{
+            header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
+        }	
 	}
 
 }

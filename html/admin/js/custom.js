@@ -163,6 +163,38 @@ $(document).ready(function(){
         $formulario.removeClass('invisible');
         $fields.removeAttr('disabled');
     }
+
+    //Descativar formulario de edicion
+    $('#block-cancel').on('click', desactivarFormularioEditar);
+    
+    function desactivarFormularioEditar(){
+        var $botonCancelar = $('#block-cancel');
+        var $botonEditar = $('#block-edit');
+        var $fields = $('#form-block-edit fieldset');
+        var $formulario = $('#form-block-edit');
+
+        $botonEditar.removeClass('invisible');
+        $botonCancelar.addClass('invisible');
+        $formulario.addClass('invisible');
+        $fields.attr('disabled', 'disabled');
+    }
+
+    //Submit editar bloque
+    $('#form-block-edit').validate({
+        submitHandler: function (form){
+            var $formulario = $(form);
+            var datos = $formulario.serialize();
+            $.post($formulario.attr('action'), datos, function (json) {
+                if (json.exito) {
+                    var $alert = $('.alert');
+                    $alert.addClass(json.tipo).html(json.mensaje).delay(3000).fadeOut('slow', function() {
+                        window.location.reload();
+                    });
+                    $formulario.fadeOut('slow');
+                }
+            });
+        }
+    });
     
 
 

@@ -966,18 +966,18 @@ class AdminNews extends Controller{
 		}
 	}
 
+	// public function advancedSearch(){
+
+	// 	if( isset( $_SESSION['admin'] ) ){
+	// 		$this->header_admin( 'Busqueda Avanzada - ' );
+	// 		require $this->adminviews . 'advancedSearchView.php';
+	// 		$this->footer_admin();
+	// 	}else{
+ //            header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
+ //        }
+	// }
+
 	public function advancedSearch(){
-
-		if( isset( $_SESSION['admin'] ) ){
-			$this->header_admin( 'Busqueda Avanzada - ' );
-			require $this->adminviews . 'advancedSearchView.php';
-			$this->footer_admin();
-		}else{
-            header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
-        }
-	}
-
-	public function sendBlock(){
 
 		if( isset( $_SESSION['admin'] ) ){
 			$typeFont = '';
@@ -1055,7 +1055,7 @@ class AdminNews extends Controller{
 				$typeFont .= '<option value="'.$tf['id_tipo_fuente'].'">'.$tf['descripcion'].'</option>';							
 			}
 			
-			$this->header_admin( 'Enviar Bloque Noticia - ', $css );
+			$this->header_admin( 'Busqueda Avanzada - ', $css );
 			require $this->adminviews . 'sendBlockView.php';
 			$this->footer_admin( $js );
 		}else{
@@ -1155,7 +1155,7 @@ class AdminNews extends Controller{
 			$companies = $empreasaRep->all();
 
 			$noticiasBloque = null;
-			// vdd($news);
+			
 			if( is_array($news->rows) ){
 				foreach ($news->rows as $new) {
 					if( in_array( $new['temaId'], $themesId ) ){

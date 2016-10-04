@@ -195,6 +195,8 @@ $(document).ready(function(){
             });
         }
     });
+
+    //Agregar una noticia a un bloque
     
 
 

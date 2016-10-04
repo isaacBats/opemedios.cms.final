@@ -219,38 +219,37 @@ class NoticiasRepository extends BaseRepository{
 			if( $titulo != null ){
 				$w .= "encabezado LIKE '%" . $titulo . "%' ";
 
-				if( $finicio != null && !isset( $ffin ) ){
+				if( @$finicio != null && !isset( $ffin ) ){
 					$w .= " AND fecha = '" . $finicio . "' ";
 				}
 
-				if( $finicio != null && ( isset( $ffin ) && $ffin != null ) ){
+				if( @$finicio != null && ( isset( $ffin ) && $ffin != null ) ){
 					$w .= " AND fecha > '" . $finicio . "' AND fecha < '" . $ffin . "' ";
 				}
 
-				if( $tipoFuente != null ){
+				if( $tipoFuente > 0 ){
 					$w .= " AND id_tipo_fuente = $tipoFuente";
+				}else{
+					$w .= " AND id_tipo_fuente in ('1', '2', '3', '4', '5')";					
 				}
+
 			}elseif( $titulo == ''){
 
-				if( $finicio != null && !isset( $ffin ) ){
+				if( @$finicio != null && !isset( $ffin ) ){
 					$w .= " fecha = '" . $finicio . "' ";
 				}
 
-				if( $finicio != null && ( isset( $ffin ) && $ffin != null ) ){
+				if( @$finicio != null && ( isset( $ffin ) && $ffin != null ) ){
 					$w .= " AND fecha > '" . $finicio . "' AND fecha < '" . $ffin . "' ";
 				}
 
-				if( $tipoFuente != null && $tipoFuente != 0 ){
-
+				if( $tipoFuente > 0 ){
 					$w .= " AND id_tipo_fuente = $tipoFuente";
-
-				}elseif( $tipoFuente == 0 ){
-
-					$w .= " AND id_tipo_fuente in ('1', '2', '3', '4', '5')";
+				}else{
+					$w .= " AND id_tipo_fuente in ('1', '2', '3', '4', '5')";					
 				}
 			}			
 			$query = $this->pdo->prepare ( $sql . $w );
-
 		}else{
 			
 			$sql = 'SELECT COUNT(*) AS count FROM noticia';
@@ -311,32 +310,34 @@ class NoticiasRepository extends BaseRepository{
 			if( $titulo != null ){
 				$w .= "n.encabezado LIKE '%" . $titulo . "%' ";
 
-				if( $finicio != null && !isset( $ffin ) ){
+				if( @$finicio != null && !isset( $ffin ) ){
 					$w .= " AND n.fecha = '" . $finicio . "' ";
 				}
 
-				if( $finicio != null && ( isset( $ffin ) && $ffin != null ) ){
+				if( @$finicio != null && ( isset( $ffin ) && $ffin != null ) ){
 					$w .= " AND n.fecha > '" . $finicio . "' AND n.fecha < '" . $ffin . "' ";
 				}
 
-				if( $tipoFuente != null ){
+				if( $tipoFuente > 0 ){
 					$w .= " AND n.id_tipo_fuente = $tipoFuente";
+				}else{
+					$w .= " AND n.id_tipo_fuente in ('1', '2', '3', '4', '5')";					
 				}
 			}elseif( $titulo == ''){
 
-				if( $finicio != null && !isset( $ffin ) ){
+				if( @$finicio != null && !isset( $ffin ) ){
 					$w .= " n.fecha = '" . $finicio . "' ";
 				}
 
-				if( $finicio != null && ( isset( $ffin ) && $ffin != null ) ){
+				if( @$finicio != null && ( isset( $ffin ) && $ffin != null ) ){
 					$w .= " AND n.fecha > '" . $finicio . "' AND n.fecha < '" . $ffin . "' ";
 				}
 
-				if( $tipoFuente != null && $tipoFuente != 0 ){
+				if( $tipoFuente > 0 ){
 
 					$w .= " AND n.id_tipo_fuente = $tipoFuente";
 
-				}elseif( $tipoFuente == 0 ){
+				}else{
 
 					$w .= " AND n.id_tipo_fuente in ('1', '2', '3', '4', '5')";
 				}
@@ -347,7 +348,6 @@ class NoticiasRepository extends BaseRepository{
 
 			// echo $sql . $w . $o . $l; exit();
 			$query = $this->pdo->prepare ( $sql . $w . $o . $l );
-
 		}
 		// else{
 			

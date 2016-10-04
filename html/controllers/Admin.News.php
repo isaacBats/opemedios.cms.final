@@ -1131,22 +1131,47 @@ class AdminNews extends Controller{
 	{
 		if( isset( $_SESSION['admin'] ) ){
 
+			$limit = isset( $_GET['numpp'] ) ? $_GET['numpp'] : 10;
+			$page = isset( $_GET['page'] ) ? ( $_GET['page'] * $limit ) - $limit : 0;
+			$titulo = isset( $_GET['titulo'] ) ? $_GET['titulo'] : null;
+			$tipoFuente = isset( $_GET['tipoFuente'] ) ? $_GET['tipoFuente'] : null;
+
+			$countWithFilter = $this->noticiasRepository->getCountNews( compact('limit', 'page', 'titulo', 'tipoFuente' ) );
+			$resultados = $this->noticiasRepository->getNewsWithFilters( compact('limit', 'page', 'titulo', 'tipoFuente') );
+
+			$count = $countWithFilter;
+
+			$ini = $page + 1;
+			$end = ( $page + $limit >= $count ) ? $count : $page + $limit;
+
 			$css = '
 					<!-- Select2 CSS -->
 				    <link href="/assets/css/select2.min.css" rel="stylesheet">
+				    <!-- panel_paginator CSS -->
+				    <link href="/admin/css/panel.main.css" rel="stylesheet">
+				    <!-- data tables bootstrap CSS -->
+				    <link href="/admin/css/dataTables.bootstrap.css" rel="stylesheet">
 				   ';
 
 			$js = '
 					<!-- Select2 JavaScript -->
 				    <script src="/assets/js/select2.min.js"></script>
 				    <script src="/admin/js/bootstrap-datetimepicker.min.js"></script>
-				    
+				    <!-- Libreria jquery-bootpag --> 
+					<script src="/admin/js/vendors/bootstrap/jquery.bootpag.min.js"></script>
+					<!-- Libreria purl --> 
+					<script src="/admin/js/vendors/purl/purl.min.js"></script>
+					<!-- Paginador con js --> 
+					<script src="/assets/js/panel.paginador.js"></script>
 					';
 
+			
 			$blockRep = new BloqueRepository();
 			$themeRep = new TemaRepository();
 			$empreasaRep = new EmpresaRepository();
+			$tfuenteRep = new TipoFuenteRepository();
 			
+			$tiposFuente = $tfuenteRep->all();			
 			$block = $blockRep->getBlockById( $id );
 			$thems = $themeRep->getThemaByEmpresaID( $block->rows['empresa_id'] );
 			$news = $blockRep->getNewsOfBlock( $id );
@@ -1209,6 +1234,7 @@ class AdminNews extends Controller{
 				
 				$_POST['blockId'] = base64_decode( $_POST['blockId'] );
 				$passBlock = $blockRep->getBlockById( $_POST['blockId'] ); 
+
 
 				if( $passBlock->rows['name'] == $_POST['blockName'] && $passBlock->rows['empresa_id'] == $_POST['empresaId'] ){
 					$result->exito = true;

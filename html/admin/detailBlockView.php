@@ -2,7 +2,7 @@
     <div class="col-lg-12 page-header">
         <h1 class="col-sm-6 col-md-8 col-lg-8"><?= $block->rows['name'] ?></h1>
         <button class="btn btn-primary pull-right mb-10 mt-20 ml-20" id="block-add-new"><i class="fa fa-plus"></i> Agregar noticia</button>
-        <button class="btn btn-primary pull-right mb-10 mt-20 ml-20" id="block-save"><i class="fa fa-save"></i> Guardar</button>
+        <a href="/panel/news/blocks/<?= $id ?>" class="btn btn-primary pull-right mb-10 mt-20 ml-20" id="block-save"><i class="fa fa-save"></i> Guardar</a>
         <button class="btn btn-outline btn-default pull-right mb-10 mt-20" id="block-edit">Editar bloque</button>
         <button class="btn btn-outline btn-default pull-right mb-10 mt-20 invisible" id="block-cancel">Cancelar</button>
     </div>    <!-- /.col-lg-12 -->

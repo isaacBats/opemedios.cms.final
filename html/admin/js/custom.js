@@ -198,22 +198,24 @@ $(document).ready(function(){
 
     //Agregar una noticia a un bloque
     $('.block-save').click(function( event ) {
+        var boton = $(this);
         event.preventDefault();
         var data = {};
         data.noticia = $(this).data('noticia');
         data.bloque = $(this).data('bloque');
         // data.tema = $('.addThemeBlock').val();
-        data.tema = $(this).parent().parent().find('addThemeBlock').val();
-        // $.post('/panel/block/add-new', data, function(json){
-        //     if (json.exito) {
-        //         var $alert = $('.alert');
-        //         $alert.addClass(json.tipo).html(json.mensaje).delay(3000).fadeOut('slow', function(){
-        //             $(this).parent().fadeOut('slow');                    
-        //         });
-        //     }
-        // });
-        // console.log(data);
+        data.tema = $(this).parent().parent().find('td .addThemeBlock').val();
+        $.post('/panel/block/add-new', data, function(json){
+            if (json.exito) {
+                var $alert = $('.alert');
+                $alert.addClass(json.tipo).html(json.mensaje).delay(3000).fadeOut('slow', function(){
+                    boton.parent().parent().fadeOut('slow');                    
+                });
+            }
+        });
     });
+
+    $('#block-save'),click(function(){ window.location.reload() });
 
 
 }); /* DOCUMMENT READY */

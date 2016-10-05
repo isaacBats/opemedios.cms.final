@@ -98,9 +98,9 @@
 				              		</select>
 				              	</td>
 				            	<td>
-				            		<a href="javascript:void(0);" data-bloque="<?= $id ?>" data-noticia="<?= $res['id']?>" class="btn btn-success block-save" >
+				            		<button data-bloque="<?= $id ?>" data-noticia="<?= $res['id']?>" class="btn btn-success block-save" >
 				            			<i class="fa fa-check-circle"></i> Agregar
-				            		</a>
+				            		</button>
 				            	</td>
 				             </tr>
 					<?php	} } ?>

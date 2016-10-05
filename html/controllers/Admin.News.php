@@ -1265,4 +1265,30 @@ class AdminNews extends Controller{
         }	
 	}
 
+	public function addNewBlock()
+	{
+		if( isset( $_SESSION['admin'] ) ){
+			if( !empty( $_POST ) ){
+				$blockRep = new BloqueRepository();				
+				$result = new stdClass();
+				
+				if( $blockRep->insertNewToBlock( $_POST ) ){
+					$result->exito = true;
+					$result->tipo = 'alert-info';
+					$result->mensaje = 'Agregando noticia al bloque';
+				}else{
+					$result->exito = false;
+					$result->tipo = 'alert-danger';
+					$result->mensaje = 'No se agrego la noticia';
+				}
+				
+				header('Content-type: text/json');
+				echo json_encode($result);				
+			}
+
+		}else{
+            header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
+        }
+	}
+
 }

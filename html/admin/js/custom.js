@@ -197,7 +197,23 @@ $(document).ready(function(){
     });
 
     //Agregar una noticia a un bloque
-    
+    $('.block-save').click(function( event ) {
+        event.preventDefault();
+        var data = {};
+        data.noticia = $(this).data('noticia');
+        data.bloque = $(this).data('bloque');
+        // data.tema = $('.addThemeBlock').val();
+        data.tema = $(this).parent().parent().find('addThemeBlock').val();
+        // $.post('/panel/block/add-new', data, function(json){
+        //     if (json.exito) {
+        //         var $alert = $('.alert');
+        //         $alert.addClass(json.tipo).html(json.mensaje).delay(3000).fadeOut('slow', function(){
+        //             $(this).parent().fadeOut('slow');                    
+        //         });
+        //     }
+        // });
+        // console.log(data);
+    });
 
 
 }); /* DOCUMMENT READY */

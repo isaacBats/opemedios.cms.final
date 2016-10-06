@@ -1,8 +1,8 @@
 <div class="row">
     <div class="col-lg-12 page-header">
         <h1 class="col-sm-6 col-md-8 col-lg-8"><?= $block->rows['name'] ?></h1>
-        <button class="btn btn-primary pull-right mb-10 mt-20 ml-20" id="block-add-new"><i class="fa fa-plus"></i> Agregar noticia</button>
-        <a href="/panel/news/blocks/<?= $id ?>" class="btn btn-primary pull-right mb-10 mt-20 ml-20" id="block-save"><i class="fa fa-save"></i> Guardar</a>
+        <button class="btn btn-primary pull-right mb-10 mt-20 ml-20 <?php if(isset($_GET['titulo'])) echo 'invisible'; ?>" id="block-add-new"><i class="fa fa-plus"></i> Agregar noticia</button>
+        <a href="/panel/news/blocks/<?= $id ?>" class="btn btn-primary pull-right mb-10 mt-20 ml-20 <?php if(!isset($_GET['titulo'])) echo ' invisible'; ?>" id="block-save"><i class="fa fa-save"></i> Guardar</a>
         <button class="btn btn-outline btn-default pull-right mb-10 mt-20" id="block-edit">Editar bloque</button>
         <button class="btn btn-outline btn-default pull-right mb-10 mt-20 invisible" id="block-cancel">Cancelar</button>
     </div>    <!-- /.col-lg-12 -->
@@ -34,10 +34,10 @@
         </form>
     </div>
 </div>
-<div class="row">
+<div class="row <?php if(!isset($_GET['titulo'])) echo 'invisible'; ?>" id="block-form-add-new">
     <div class="col-sm-12 col-md-12 col-lg-12 mb-20">
         <form method="get" id="bootpag_text_count">
-        	<fieldset id="activ-form-edit">
+        	<fieldset <?php if(!isset($_GET['titulo'])) echo 'disabled="disabled"'; ?>>
 	            <div class="form-group col-sm-12 col-md-6 col-lg-6">
 					<label>Por Titulo</label>
 					<input id="bootpag_text_titulo" type="text" name="titulo" class="form-control">
@@ -55,7 +55,7 @@
 	            </div>
 	        </fieldset>
 	        <div class="form-inline">
-				<div class="col-sm-12" id="bootpag_nummc">
+				<div class="col-sm-4 col-md-4" id="bootpag_nummc">
 					<label for="exampleInputName2">Mostrar &nbsp;</label>
 					<input type="hidden" value="1" name="page" id="current_page">
 					<select name="numpp" id="bootpag_text_count_select" class="form-control input-sm">

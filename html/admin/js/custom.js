@@ -152,6 +152,15 @@ $(document).ready(function(){
     //Activar formulario de edicion
     $('#block-edit').on('click', activarFormularioEditar);
     
+    //Descativar formulario de edicion
+    $('#block-cancel').on('click', desactivarFormularioEditar);
+
+    //Activar formulario para agregar una noticia al bloque
+    $('#block-add-new').on('click', activarAgregarNoticia);
+
+    //Desactivar formulario para agregar una noticia al bloque
+    $('#block-save').on('click', desactivarAgregarNoticia);
+    
     function activarFormularioEditar(){
         var $botonCancelar = $('#block-cancel');
         var $botonEditar = $('#block-edit');
@@ -163,9 +172,6 @@ $(document).ready(function(){
         $formulario.removeClass('invisible');
         $fields.removeAttr('disabled');
     }
-
-    //Descativar formulario de edicion
-    $('#block-cancel').on('click', desactivarFormularioEditar);
     
     function desactivarFormularioEditar(){
         var $botonCancelar = $('#block-cancel');
@@ -175,6 +181,30 @@ $(document).ready(function(){
 
         $botonEditar.removeClass('invisible');
         $botonCancelar.addClass('invisible');
+        $formulario.addClass('invisible');
+        $fields.attr('disabled', 'disabled');
+    }
+
+    function activarAgregarNoticia(){
+        var $botonGuardar = $('#block-save');
+        var $botonAgregar = $('#block-add-new');
+        var $fields = $('#block-form-add-new fieldset');
+        var $formulario = $('#block-form-add-new');
+
+        $botonGuardar.removeClass('invisible');
+        $botonAgregar.addClass('invisible');
+        $formulario.removeClass('invisible');
+        $fields.removeAttr('disabled');
+    }
+
+    function desactivarAgregarNoticia(){
+        var $botonGuardar = $('#block-save');
+        var $botonAgregar = $('#block-add-new');
+        var $fields = $('#block-form-add-new fieldset');
+        var $formulario = $('#block-form-add-new');
+
+        $botonGuardar.addClass('invisible');
+        $botonAgregar.removeClass('invisible');
         $formulario.addClass('invisible');
         $fields.attr('disabled', 'disabled');
     }
@@ -199,6 +229,7 @@ $(document).ready(function(){
     //Agregar una noticia a un bloque
     $('.block-save').click(function( event ) {
         var boton = $(this);
+        var $alert = $('.alert');
         event.preventDefault();
         var data = {};
         data.noticia = $(this).data('noticia');
@@ -207,7 +238,8 @@ $(document).ready(function(){
         data.tema = $(this).parent().parent().find('td .addThemeBlock').val();
         $.post('/panel/block/add-new', data, function(json){
             if (json.exito) {
-                var $alert = $('.alert');
+                $alert.removeClass(json.tipo);
+                $alert.removeAttr('style');
                 $alert.addClass(json.tipo).html(json.mensaje).delay(3000).fadeOut('slow', function(){
                     boton.parent().parent().fadeOut('slow');                    
                 });
@@ -215,7 +247,7 @@ $(document).ready(function(){
         });
     });
 
-    $('#block-save'),click(function(){ window.location.reload() });
+    $('#block-save').click(function(){ window.location.reload() });
 
 
 }); /* DOCUMMENT READY */

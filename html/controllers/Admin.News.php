@@ -1271,16 +1271,22 @@ class AdminNews extends Controller{
 			if( !empty( $_POST ) ){
 				$blockRep = new BloqueRepository();				
 				$result = new stdClass();
-				// validar si la noticia ya se encuentra en el bloque
-				if( $blockRep->insertNewToBlock( $_POST ) ){
+				$check = $blockRep->checkNewInBlock( $_POST['noticia'], $_POST['bloque'] ); 
+				if($check->exito && $check->exist){
 					$result->exito = true;
-					$result->tipo = 'alert-info';
-					$result->mensaje = 'Agregando noticia al bloque';
-				}else{
-					$result->exito = false;
-					$result->tipo = 'alert-danger';
-					$result->mensaje = 'No se agrego la noticia';
-				}
+					$result->tipo = 'alert-success';
+					$result->mensaje = 'La noticia ya existe en el bloque';
+				}elseif( $check->exito && !$check->exist){
+					if( $blockRep->insertNewToBlock( $_POST ) ){
+						$result->exito = true;
+						$result->tipo = 'alert-info';
+						$result->mensaje = 'Agregando noticia al bloque';
+					}else{
+						$result->exito = false;
+						$result->tipo = 'alert-danger';
+						$result->mensaje = 'No se agrego la noticia';
+					}	
+				}				
 
 				header('Content-type: text/json');
 				echo json_encode($result);				

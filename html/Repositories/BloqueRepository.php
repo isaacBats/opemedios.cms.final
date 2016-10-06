@@ -101,5 +101,31 @@ class BloqueRepository extends BaseRepository{
 		return $rs;
 	}
 
+	/**
+	 * Check if a new exist in a block
+	 * @param  int $new   Id of the new
+	 * @param  int $block Id of block
+	 * @return Object $check     $check->exito = true and $check->exist = true If exist in the block
+	 */
+	public function checkNewInBlock( $new, $block )
+	{
+		$check = new stdClass();
+
+		$query = $this->pdo->prepare('SELECT * FROM bloques_noticias WHERE bloque_id = :block AND noticia_id = :new;');
+		$query->bindParam(':block', $block, \PDO::PARAM_INT);
+		$query->bindParam(':new', $new, \PDO::PARAM_INT);
+
+		if($query->execute()){
+			$check->exito = true;
+			$check->exist = ( $query->rowCount() > 0 ) ? true : false;
+			$check->error = 0;
+		}else{
+			$check->exito = false;
+			$check->error = $query->errorInfo();
+		}
+
+		return $check;
+	} 
+
 	
 }

@@ -126,14 +126,17 @@
             		foreach ($noticiasBloque as $tema => $noticias){ ?>
             			<h4 class="page-header"><?= $tema ?></h4>
             			<?php foreach ($noticias as $noticia) { ?>
-            				<article class="panel-body">
+            				<article class="panel-body muestra">
             					<!-- <button type="button" class="close" >&times;</button> -->
             					<dl>
                                 	<dt>Encabezado</dt>
                                 	<dd><?= $noticia['encabezado'] ?></dd>
                                 	<dt>Sintesis</dt>
                                 	<dd><?= $noticia['sintesis'] ?></dd>
+                                	<dt>Fuente</dt>
+                                	<dd><?= $noticia['fuente'] ?></dd>
                             	</dl>
+                            	<a href="javascript:void(0);" data-bn="<?= base64_encode( $noticia['bnid'] ) ?>" class="block-remove-new">X</a>
             				</article>
             <?php } } }else{ ?>
             	<div class="alert alert-success"><?= $noticiasBloque ?></div>

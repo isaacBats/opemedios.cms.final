@@ -247,6 +247,14 @@ $(document).ready(function(){
         });
     });
 
+    //elimina una noticia del bloque de noticias
+    $('.block-remove-new').click(function( event ){
+        event.preventDefault();
+        var $aBorrar = $(this).data('bn');
+        console.log($aBorrar);
+    });
+
+    //Actializa la pagina 
     $('#block-save').click(function(){ window.location.reload() });
 
 

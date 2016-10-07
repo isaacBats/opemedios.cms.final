@@ -250,8 +250,27 @@ $(document).ready(function(){
     //elimina una noticia del bloque de noticias
     $('.block-remove-new').click(function( event ){
         event.preventDefault();
-        var $aBorrar = $(this).data('bn');
-        console.log($aBorrar);
+        var boton = $(this);
+        var data = {};
+        var $alert = $('.alert');
+        var $modal = $('#myModal');
+        var $eliminar = $modal.find('.modal-footer .btn-primary');
+        $modal.find('#myModalLabel').html('Eliminar Noticia del Bloque');
+        $modal.find('.modal-body').html('Esta seguro que decea eliminar esta noticia.');
+        $eliminar.html('Eliminar');
+        data.bnid = $(this).data('bn');
+        $eliminar.click(function(){
+            $.post('/panel/block-new/delete', data, function(json){
+                if (json.exito) {
+                    $alert.removeClass(json.tipo);
+                    $alert.removeAttr('style');
+                    $alert.addClass(json.tipo).html(json.mensaje).delay(3000).fadeOut('slow', function(){
+                        boton.parent().fadeOut('slow');
+                        window.location.reload();
+                    });
+                }
+            });            
+        });
     });
 
     //Actializa la pagina 

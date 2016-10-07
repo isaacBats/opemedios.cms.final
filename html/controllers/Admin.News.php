@@ -1297,4 +1297,31 @@ class AdminNews extends Controller{
         }
 	}
 
+	public function deleteNewBlock()
+	{
+		if( isset( $_SESSION['admin'] ) ){
+			if( !empty( $_POST ) ){
+				$blockRep = new BloqueRepository();				
+				$result = new stdClass();
+				$newid = base64_decode($_POST['bnid']);
+
+				if( $blockRep->deleteNewBlock( $newid ) ){
+					$result->exito = true;
+					$result->tipo = 'alert-info';
+					$result->mensaje = '<strong>Exito.</strong> Se ha eleminado la noticia';
+				}else{
+					$result->exito = false;
+					$result->tipo = 'alert-danger';
+					$result->mensaje = '<strong>No se ha podido eliminar el elemento!!!</strong>';
+				}
+
+				header('Content-type: text/json');
+				echo json_encode($result);				
+			}
+
+		}else{
+            header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
+        }
+	}
+
 }

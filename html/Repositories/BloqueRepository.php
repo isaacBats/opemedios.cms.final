@@ -125,6 +125,15 @@ class BloqueRepository extends BaseRepository{
 		}
 
 		return $check;
+	}
+
+	public function deleteNewBlock( $block_new_id )
+	{
+		$query = $this->pdo->prepare( 'DELETE FROM  bloques_noticias WHERE id = ' . $block_new_id );
+
+		$rs = ( $query->execute() ) ? TRUE : FALSE;
+
+		return $rs;
 	} 
 
 	

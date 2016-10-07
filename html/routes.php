@@ -263,6 +263,11 @@ $collection->attachRoute(new Route('/panel/block/add-new', array(
     'methods' => 'POST'
 )));
 
+$collection->attachRoute(new Route('/panel/block-new/delete', array(
+    '_controller' => 'AdminNews::deleteNewBlock',
+    'methods' => 'POST'
+)));
+
 $collection->attachRoute(new Route('/panel/news/blocks/:id', array(
     '_controller' => 'AdminNews::detailBlockView',
     'methods' => 'GET'

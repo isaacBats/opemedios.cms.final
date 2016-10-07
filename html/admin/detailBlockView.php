@@ -136,7 +136,7 @@
                                 	<dt>Fuente</dt>
                                 	<dd><?= $noticia['fuente'] ?></dd>
                             	</dl>
-                            	<a href="javascript:void(0);" data-bn="<?= base64_encode( $noticia['bnid'] ) ?>" class="block-remove-new">X</a>
+                            	<a href="javascript:void(0);" data-bn="<?= base64_encode( $noticia['bnid'] ) ?>" data-toggle="modal" data-target="#myModal" class="block-remove-new">X</a>
             				</article>
             <?php } } }else{ ?>
             	<div class="alert alert-success"><?= $noticiasBloque ?></div>

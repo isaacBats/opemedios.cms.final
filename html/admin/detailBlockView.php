@@ -90,7 +90,7 @@
 				            	<td><?= $res['encabezado'] ?></td>
 				              	<td><?= $res['fuente'] ?></td>
 				              	<td>
-				              		<select name="addThemeBlock" class="addThemeBlock form-control" >
+				              		<select name="addThemeBlock" class="addThemeBlock form-control" data-rule-required="true" data-msg-required="Seleccione un tema" >
 										<option value="">Seleccione un tema</option>
 										<?php foreach($thems as $them) { ?>
 											<option value="<?= $them['id_tema'] ?>"><?= $them['nombre']?></option>
@@ -116,10 +116,37 @@
 	</div>
 </div>
 <div class="row">
+	<div class="panel-body">
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Username</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td>@mdo</td>
+                        <td><input type="checkbox"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div><!-- /.table-responsive -->
+    </div><!-- /.panel-body -->
+</div>
+<div class="row">
 	<div class="col-lg-12">
         <div class="panel panel-default">
-            <div class="panel-heading">
+            <div class="panel-heading block-send">
                 <h3><?= $block->rows['empresa'] ?></h3>
+                <a href="" class="btn btn-success mt-10 pull-right">Enviar bloque</a>
             </div><!-- /.panel-heading -->
             <div class="panel-body">
             <?php if( is_array( $noticiasBloque ) ) {

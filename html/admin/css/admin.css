@@ -1,4 +1,8 @@
 
+.block-send h3, a {
+	display: inline-block;
+}
+
 .invisible{
 	display: none;
 }
@@ -13,6 +17,10 @@
 
 .ml-20{
 	margin-left: 20px;
+}
+
+.mt-10{
+	margin-top: 10px;
 }
 
 .mt-20{
@@ -38,6 +46,8 @@
 .resultados.clientes{
     display: none;
 }
+
+
 
 /*.padding60{
 	padding-bottom: 60px;

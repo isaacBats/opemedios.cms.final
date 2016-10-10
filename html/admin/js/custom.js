@@ -243,6 +243,9 @@ $(document).ready(function(){
                 $alert.addClass(json.tipo).html(json.mensaje).delay(3000).fadeOut('slow', function(){
                     boton.parent().parent().fadeOut('slow');                    
                 });
+            }else{
+                $alert.removeAttr('style');
+                $alert.addClass(json.tipo).html(json.mensaje).delay(3000).fadeOut('slow');
             }
         });
     });

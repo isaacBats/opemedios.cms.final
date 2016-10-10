@@ -262,6 +262,7 @@ $(document).ready(function(){
         $eliminar.click(function(){
             $.post('/panel/block-new/delete', data, function(json){
                 if (json.exito) {
+                    $modal.modal('toggle');
                     $alert.removeClass(json.tipo);
                     $alert.removeAttr('style');
                     $alert.addClass(json.tipo).html(json.mensaje).delay(3000).fadeOut('slow', function(){

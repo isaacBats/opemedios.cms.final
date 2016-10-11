@@ -1170,13 +1170,24 @@ class AdminNews extends Controller{
 			$themeRep = new TemaRepository();
 			$empreasaRep = new EmpresaRepository();
 			$tfuenteRep = new TipoFuenteRepository();
+
 			
 			$tiposFuente = $tfuenteRep->all();			
 			$block = $blockRep->getBlockById( $id );
 			$thems = $themeRep->getThemaByEmpresaID( $block->rows['empresa_id'] );
 			$news = $blockRep->getNewsOfBlock( $id );
 			$themesId = array_column( $thems, 'id_tema');
+			$contacts = $empreasaRep->getContactsbyEmpresaId( $block->rows['empresa_id'] ); 
 			
+			$emails = array_map(function( $contact ){
+				return [
+					'nombre' => $contact['nombre_cuenta'],
+					'email'	 => $contact['correo']
+				];
+			}, $contacts->rows);
+
+			$emails = array_values(array_unique($emails, SORT_REGULAR));
+			// vdd($emails);
 			$companies = $empreasaRep->all();
 
 			$noticiasBloque = null;

@@ -80,3 +80,9 @@ class Coverage extends PHPEnum
 	const NACIONAL		= 2;
 	const INTERNACIONAL	= 3;
 }
+
+class UserState extends PHPEnum
+{
+	const ACTIVE 	= 1;
+	const INACTIVE	= 0;
+}

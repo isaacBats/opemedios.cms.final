@@ -122,20 +122,20 @@
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Username</th>
-                        <th></th>
+                        <th>Nombre</th>
+                        <th>Correo</th>
+                        <th>Enviar</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        <td><input type="checkbox"></td>
-                    </tr>
+                	<?php foreach($emails as $key => $mail){ ?>
+	                    <tr>
+	                        <td><?= $key + 1 ?></td>
+	                        <td><?= $mail['nombre']?></td>
+	                        <td><?= $mail['email'] ?></td>
+	                        <td><input type="checkbox" value="<?= $mail['email'] ?>"></td>
+	                    </tr>
+                    <?php } ?>
                 </tbody>
             </table>
         </div><!-- /.table-responsive -->
@@ -146,7 +146,7 @@
         <div class="panel panel-default">
             <div class="panel-heading block-send">
                 <h3><?= $block->rows['empresa'] ?></h3>
-                <a href="" class="btn btn-success mt-10 pull-right">Enviar bloque</a>
+                <a href="javascript:void(0);" class="btn btn-success mt-10 pull-right">Selecciona contactos para enviar bloque</a>
             </div><!-- /.panel-heading -->
             <div class="panel-body">
             <?php if( is_array( $noticiasBloque ) ) {

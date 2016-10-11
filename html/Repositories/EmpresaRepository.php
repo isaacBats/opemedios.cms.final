@@ -2,6 +2,8 @@
 
 include_once("BaseRepository.php");
 
+use utilities\UserState;
+
 class EmpresaRepository extends BaseRepository{
 
 	public function filterEmpresas ( $criterio ){
@@ -42,5 +44,24 @@ class EmpresaRepository extends BaseRepository{
 		}
 
 		return $empresas;
+	}
+
+	public function getContactsbyEmpresaId( $empresa_id )
+	{
+		$sql = "SELECT e.id_empresa AS empresaid, e.nombre AS empresa, t.id_tema AS temaid, t.nombre AS tema, c.id_cuenta AS cuentaid, CONCAT(c.nombre, ' ', c.apellidos) AS nombre_cuenta, c.email AS correo FROM empresa_tema_cuenta etc INNER JOIN empresa e ON etc.id_empresa = e.id_empresa INNER JOIN tema t ON etc.id_tema = t.id_tema INNER JOIN cuenta c ON etc.id_cuenta = c.id_cuenta WHERE c.activo = " . UserState::ACTIVE . " AND e.id_empresa = " . $empresa_id;
+
+		$contacts = new stdClass();
+		$query = $this->pdo->prepare( $sql );
+		
+		if($query->execute()){
+			$contacts->exito = true;
+			$contacts->rows = ( $query->rowCount() > 0 ) ? $query->fetchAll( \PDO::FETCH_ASSOC) : 'No hay contactos';
+			$contacts->error = 0;
+		}else{
+			$contacts->exito = false;
+			$contacts->error = $query->errorInfo();
+		}
+
+		return $contacts;
 	}
 }

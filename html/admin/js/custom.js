@@ -140,13 +140,13 @@ $(document).ready(function(){
                 if (json.exito) {
                     var $alert = $('.alert');
                     $alert.addClass(json.tipo).html(json.mensaje).delay(3000).fadeOut('slow', function() {
-                        window.location.reload();
+                        window.location = '/panel/news/blocks';
                     });
-                    $formulario.fadeOut('slow');
                 }
             });
         }
     });
+
 
     /** Para editar un bloque */
     //Activar formulario de edicion
@@ -160,6 +160,24 @@ $(document).ready(function(){
 
     //Desactivar formulario para agregar una noticia al bloque
     $('#block-save').on('click', desactivarAgregarNoticia);
+
+    //Activar formulario para seleccionar contactos
+    $('#block-contactos-btn').on('click', activarSeleccionarContactos);
+
+    //Cancelar envio
+    $('#block-contactos-cancela').click(function(){
+        window.location.reload();
+    });
+
+    //Cancelar envio
+    $('.checkbox-todos').change(function(){
+        var $checkboxs = $(".checkbox-active input[type=checkbox]");
+        if ($(this).is(':checked')) {
+            $checkboxs.prop('checked', true);
+        }else{
+            $checkboxs.prop('checked', false);
+        }
+    });
     
     function activarFormularioEditar(){
         var $botonCancelar = $('#block-cancel');
@@ -209,6 +227,15 @@ $(document).ready(function(){
         $fields.attr('disabled', 'disabled');
     }
 
+    //activar formulario para seleccionar contactos
+    function activarSeleccionarContactos(){
+        // console.log('ouch');
+        var $fields = $('#active-form-contacs');
+        var $panelContactos = $('.row.panel-green');
+
+        $panelContactos.removeClass('invisible');
+        $fields.removeAttr('disabled');
+    }
     //Submit editar bloque
     $('#form-block-edit').validate({
         submitHandler: function (form){
@@ -223,6 +250,28 @@ $(document).ready(function(){
                     $formulario.fadeOut('slow');
                 }
             });
+        }
+    });
+
+    //Submit enviar bloque
+    $('#form-send-block').validate({
+        submitHandler: function (form){
+            var $formulario = $(form);
+            var datos = $formulario.serialize();
+            var $checkboxs = $(".checkbox-active input[type=checkbox]:checked");
+            if( $checkboxs.length === 0){
+                alert('Debe seleccionar al menos un contacto');
+            }else{
+                $.post($formulario.attr('action'), datos, function (json) {
+                    if (json.exito) {
+                        var $alert = $('.alert');
+                        $alert.addClass(json.tipo).html(json.mensaje).delay(3000).fadeOut('slow', function() {
+                            window.location.reload();
+                        });
+                        $formulario.fadeOut('slow');
+                    }
+                });                
+            }
         }
     });
 

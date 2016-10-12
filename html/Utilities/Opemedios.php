@@ -86,3 +86,9 @@ class UserState extends PHPEnum
 	const ACTIVE 	= 1;
 	const INACTIVE	= 0;
 }
+
+class StatusBlock extends PHPEnum
+{
+	const SEND 	= 1;
+	const NOT_SEND	= 0;
+}

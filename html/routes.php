@@ -273,15 +273,20 @@ $collection->attachRoute(new Route('/panel/news/blocks/:id', array(
     'methods' => 'GET'
 )));
 
-$collection->attachRoute(new Route('/panel/news/send-news-block', array(
-    '_controller' => 'AdminNews::sendBlockNewsAction',
+$collection->attachRoute(new Route('/panel/news/block/send', array(
+    '_controller' => 'AdminNews::sendBlock',
     'methods' => 'POST'
 )));
 
-$collection->attachRoute(new Route('/panel/news/send-block', array(
-    '_controller' => 'AdminNews::sendBlockAction',
-    'methods' => 'POST'
-)));
+// $collection->attachRoute(new Route('/panel/news/send-news-block', array(
+//     '_controller' => 'AdminNews::sendBlockNewsAction',
+//     'methods' => 'POST'
+// )));
+
+// $collection->attachRoute(new Route('/panel/news/send-block', array(
+//     '_controller' => 'AdminNews::sendBlockAction',
+//     'methods' => 'POST'
+// )));
 
 //Sections of Fonts
 $collection->attachRoute(new Route('/panel/get/seccion/:id', array(

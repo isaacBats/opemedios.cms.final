@@ -23,3 +23,6 @@ html/._.DS_Store
 
 #ignorando todos los archivos
 html/assets/data/noticias/
+
+#ignorando archivo comprimido de empresas 
+html/assets/data/empresas.tar.gz

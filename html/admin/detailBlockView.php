@@ -115,30 +115,54 @@
       	</div>
 	</div>
 </div>
-<div class="row">
+<div class="row panel panel-green invisible">
+	<div class="panel-heading">
+		<span>Contactos relacionados</span>
+		<a href="javascript:void(0);" class="btn btn-default" id="block-contactos-cancela" style="margin: -7px; float: right;">Cancelar</a>
+	</div>
 	<div class="panel-body">
-        <div class="table-responsive">
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Nombre</th>
-                        <th>Correo</th>
-                        <th>Enviar</th>
-                    </tr>
-                </thead>
-                <tbody>
-                	<?php foreach($emails as $key => $mail){ ?>
-	                    <tr>
-	                        <td><?= $key + 1 ?></td>
-	                        <td><?= $mail['nombre']?></td>
-	                        <td><?= $mail['email'] ?></td>
-	                        <td><input type="checkbox" value="<?= $mail['email'] ?>"></td>
-	                    </tr>
-                    <?php } ?>
-                </tbody>
-            </table>
-        </div><!-- /.table-responsive -->
+		<div class="checkbox">
+            <label>
+                <input type="checkbox" class="checkbox-todos">Seleccionar todos
+            </label>
+        </div>
+		<form method="post" action="/panel/news/block/send" id="form-send-block">
+			<fieldset id="active-form-contacs" disabled>
+				<input type="hidden" name="block" value="<?= base64_encode($id); ?>">
+		        <div class="table-responsive">
+		            <table class="table table-striped table-bordered table-hover checkbox-active">
+		                <thead>
+		                    <tr>
+		                        <th>#</th>
+		                        <th>Nombre</th>
+		                        <th>Correo</th>
+		                        <th>Enviar</th>
+		                    </tr>
+		                </thead>
+		                <tbody>
+		                	<?php if( is_array($emails) ){
+		                			foreach($emails as $key => $mail){ ?>
+			                    <tr>
+			                        <td><?= $key + 1 ?></td>
+			                        <td><?= $mail['nombre']?></td>
+			                        <td><?= $mail['email'] ?></td>
+			                        <td><input type="checkbox" name="<?= $mail['nombre'] ?>" value="<?= $mail['email'] ?>" ></td>
+			                    </tr>
+		                    <?php 	} }else{ ?>
+		                    	<tr>
+			                    	<?= $emails ?>
+			                    </tr>
+		                    <?php } ?>
+		                </tbody>
+		            </table>
+		        </div><!-- /.table-responsive -->
+		        <div class="panel-footer">
+					<div class="col-sm-offset-5 col-md-offset-10 col-lg-offset-11">
+						<input type="submit" class="btn btn-outline btn-primary btn-lg" value="Enviar">
+					</div>
+		        </div>
+		    </fieldset>
+	    </form>
     </div><!-- /.panel-body -->
 </div>
 <div class="row">
@@ -146,7 +170,7 @@
         <div class="panel panel-default">
             <div class="panel-heading block-send">
                 <h3><?= $block->rows['empresa'] ?></h3>
-                <a href="javascript:void(0);" class="btn btn-success mt-10 pull-right">Selecciona contactos para enviar bloque</a>
+                <a href="javascript:void(0);" class="btn btn-success mt-10 pull-right" id="block-contactos-btn">Selecciona contactos para enviar bloque</a>
             </div><!-- /.panel-heading -->
             <div class="panel-body">
             <?php if( is_array( $noticiasBloque ) ) {

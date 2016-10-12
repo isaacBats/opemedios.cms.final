@@ -1,6 +1,7 @@
 <?php 
 
 include_once("BaseRepository.php");
+use utilities\StatusBlock;
 
 class BloqueRepository extends BaseRepository{
 
@@ -89,6 +90,21 @@ class BloqueRepository extends BaseRepository{
 	public function editBlock( $block )
 	{
 		$query = $this->pdo->prepare( "UPDATE bloques SET name = '" . $block['blockName'] . "', empresa_id = " . $block['empresaId'] . " WHERE id = " . $block['blockId'] . " LIMIT 1;" );
+		
+		$rs = new stdClass();
+		if( $query->execute() ){
+			$rs->exito = true;
+		}else{
+			$rs->exito = false;
+			$rs->error = $query->errorInfo();
+		}
+
+		return $rs;
+	}
+
+	public function updateBlockSend( $block )
+	{
+		$query = $this->pdo->prepare( "UPDATE bloques SET enviado = '" . StatusBlock::SEND . "' WHERE id = " . $block . " LIMIT 1;" );
 		
 		$rs = new stdClass();
 		if( $query->execute() ){

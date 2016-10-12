@@ -1103,9 +1103,9 @@ class AdminNews extends Controller{
 		if( isset( $_SESSION['admin'] ) ){
 			
 			$blockRep = new BloqueRepository();
-			$empreasaRep = new EmpresaRepository();
+			$empresaRep = new EmpresaRepository();
 			$blocks = $blockRep->all();
-			$companies = $empreasaRep->all();
+			$companies = $empresaRep->all();
 
 			$css = '
 					<!-- Select2 CSS -->
@@ -1168,7 +1168,7 @@ class AdminNews extends Controller{
 			
 			$blockRep = new BloqueRepository();
 			$themeRep = new TemaRepository();
-			$empreasaRep = new EmpresaRepository();
+			$empresaRep = new EmpresaRepository();
 			$tfuenteRep = new TipoFuenteRepository();
 
 			
@@ -1177,18 +1177,24 @@ class AdminNews extends Controller{
 			$thems = $themeRep->getThemaByEmpresaID( $block->rows['empresa_id'] );
 			$news = $blockRep->getNewsOfBlock( $id );
 			$themesId = array_column( $thems, 'id_tema');
-			$contacts = $empreasaRep->getContactsbyEmpresaId( $block->rows['empresa_id'] ); 
+			$contacts = $empresaRep->getContactsbyEmpresaId( $block->rows['empresa_id'] ); 
 			
-			$emails = array_map(function( $contact ){
-				return [
-					'nombre' => $contact['nombre_cuenta'],
-					'email'	 => $contact['correo']
-				];
-			}, $contacts->rows);
+			if( $contacts->exito && is_array($contacts->rows) ){
+				$emails = array_map(function( $contact ){
+					return [
+						'nombre' => $contact['nombre_cuenta'],
+						'email'	 => $contact['correo']
+					];
+				}, $contacts->rows);
 
-			$emails = array_values(array_unique($emails, SORT_REGULAR));
+				$emails = array_values(array_unique($emails, SORT_REGULAR));				
+			}elseif(!$contacts->exito && is_array($contacts->error)){
+				$emails = '<div class="alert alert-warning">' . $contacts->error[2] . '</div>';
+			}else{
+				$emails = '<div class="alert alert-warning">No hay contactos para este tema y esta empresa.</div>';				
+			}
 			// vdd($emails);
-			$companies = $empreasaRep->all();
+			$companies = $empresaRep->all();
 
 			$noticiasBloque = null;
 			
@@ -1333,6 +1339,88 @@ class AdminNews extends Controller{
 		}else{
             header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
         }
+	}
+
+	public function sendBlock()
+	{
+		if( isset( $_SESSION['admin'] ) ){
+			if( !empty( $_POST ) ){
+				$blockRepo = new BloqueRepository();
+				$themeRep = new TemaRepository();
+				$empresaRep = new EmpresaRepository();
+
+				$blockId = base64_decode( $_POST['block'] );
+				$block = $blockRepo->getBlockById( $blockId );
+				$thems = $themeRep->getThemaByEmpresaID( $block->rows['empresa_id'] );
+				$themesId = array_column( $thems, 'id_tema');
+				$empresa = $empresaRep->getEmpresaById( $block->rows['empresa_id'] );
+				// vdd($empresa);
+
+				$contacts = [];
+				foreach ($_POST as $key => $contact) {
+					if($key != 'block')
+						array_push($contacts, ['name' => str_replace('_', ' ', $key), 'mail' => $contact]);
+				}
+
+				$news = $blockRepo->getNewsOfBlock( $blockId );
+
+				$noticias = null;
+			
+				if( is_array($news->rows) ){
+					foreach ($news->rows as $new) {
+						if( in_array( $new['temaId'], $themesId ) ){
+							$noticias[$new['tema']][] = $new;
+						}
+					}				
+				}else{
+					$noticias = $news->rows;
+				}
+				
+
+				ob_start();
+				require $this->adminviews . 'viewsEmails/blockNews.php';
+				$body = ob_get_clean();
+
+				// vdd($body);
+				// echo $body; exit(); 
+				
+				$mail = new Mail();
+				$mail->setSubject('Bloque de Noticias Operadora de medios');
+				$mail->setBody( $body );
+				
+				$noenviados = [];
+
+				foreach ($contacts as $key => $contact) {
+					$exito = $mail->sendMail( $contact['mail'], $contact['name'] );
+					if( !$exito ){
+						$noenviado = [$contact['name'] => $contact['mail'] ];
+						array_push($noenviados, $noenviado);
+					}					
+				}
+
+				$result = new stdClass();
+
+				if( count($noenviados) == 0 ){
+
+					$update = $blockRepo->updateBlockSend( $blockId );
+					$result->exito = true;
+					$result->tipo = 'alert-info';
+					$result->mensaje = 'Se mando el correo correctamente';
+
+				}else{
+					$result->exito = false;
+					$result->tipo = 'alert-warning';
+					$result->mensaje = 'No se puede mandar el correo a: <br>';
+					$result->no_enviados = $noenviados;
+				}
+
+				header('Content-type: text/json');
+				echo json_encode($result);
+			}
+
+		}else{
+            header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
+        }	
 	}
 
 }

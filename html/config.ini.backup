@@ -1,0 +1,18 @@
+;mail: correo que se va a configurar para el envio de correos
+;mailReceptor: Un correo que recibe
+;passwordEmail: la clave para poder mandar correos desde la cuelta asignada
+[Confg correo]
+	emailReceptor	= klonate@gmail.com
+	email 			= AKIAI6VE2IV27YC5DC3A
+	passwordEmail	= AhlgJyzCrpYH34oswl7TDYJnDLu4sZ/qQzc/IN9TSRRo
+	hostEmail		= email-smtp.us-west-2.amazonaws.com
+	port			= 465
+	SMTPSecure		= ssl
+	emailSender		= noticias@opemedios.com.mx
+
+;Parametros de la base de datos	
+[Config Database]
+	database 		= nameDataBase
+	userDB 			= userDataBase
+	passwordDB		= passwordDataBase
+	host 			= localhost

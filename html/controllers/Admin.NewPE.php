@@ -51,6 +51,7 @@ class AdminNewPE extends AdminNews{
 
 		if( !empty($_POST) ){
 
+			vdd($_FILES);
 			// si no existe un folder con el mes y el año se crea
 			$createdAt = new DateTime();
 			$folder = $createdAt->format('m-Y');

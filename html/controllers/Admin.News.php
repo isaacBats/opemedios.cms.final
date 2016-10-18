@@ -1402,7 +1402,7 @@ class AdminNews extends Controller{
 
 				if( count($noenviados) == 0 ){
 
-					$update = $blockRepo->updateBlockSend( $blockId );
+					// $update = $blockRepo->updateBlockSend( $blockId );
 					$result->exito = true;
 					$result->tipo = 'alert-info';
 					$result->mensaje = 'Se mando el correo correctamente';

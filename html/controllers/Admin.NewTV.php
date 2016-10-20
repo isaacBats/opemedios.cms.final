@@ -46,8 +46,6 @@ class AdminNewTV extends AdminNews{
 	public function save(){
 
 		if( !empty($_POST) ){
-			
-			vdd($_FILES);
 
 			// si no existe un folder con el mes y el año se crea
 			$createdAt = new DateTime();
@@ -60,25 +58,31 @@ class AdminNewTV extends AdminNews{
 			$id_television = $this->tvRepository->idFuenteTV();
 			$_POST['tipoFuente'] = $id_television;
 			$_POST['usuario'] = 1;
-			$_POST['slug'] = $this->getUrlArchivo();
-			$_POST['files'] = $_FILES;
-			if ( $_FILES['primario']['error'] == 0 && !empty($_FILES['primario']) ) {
-				
-				$_POST['principal'] = 1;				
-				
-			}else{
-
-				$_POST['principal'] = 0;				
+			$_POST['slug'] = $slug = $this->getUrlArchivo();
+			$_POST['principal'] = 0;				
+			
+			$fil = array();
+			if( $_FILES['primario']['name'][0] != '' ){
+				$fil = array_map(function ($name, $type, $tmp_name, $error, $size) use ($slug){
+					return ['name' => $name, 'type' => $type, 'tmp_name' => $tmp_name, 'error' => $error, 'size' => $size, 'slug' => $_POST['slug'], 'principal' => '0'];
+				}, $_FILES['primario']['name'], $_FILES['primario']['type'], $_FILES['primario']['tmp_name'], $_FILES['primario']['error'], $_FILES['primario']['size']);
 			}
-
+			$_POST['archivos'] = $fil;
+			
 			$notice = $this->tvRepository->addNewTV( $_POST );
 
 			if( $notice->exito ){
 
 				/* guarda archivo */
-				$_FILES['primario']['createdName'] = $notice->fileName;
-				if( $this->guardaArchivo( $_FILES['primario'], $this->getUrlArchivo() ) ){
-					echo 'Archivo guardado en '. $this->getUrlArchivo();
+				foreach ($notice->fileName as $file) {
+					foreach ($fil as &$origin) {
+						if( $origin['name'] == $file->originName && $origin['size'] == $file->size ){
+							$origin['createdName'] = $file->name;
+							if( $this->guardaArchivo( $origin, $this->getUrlArchivo() ) ){
+								echo 'Archivo guardado en '. $this->getUrlArchivo();
+							}							
+						}
+					}
 				}
 
 				// Para agregar a un bloque

@@ -129,37 +129,12 @@
                                                                 echo $fuente;
                                                             } 
                                                       ?></label>
-                                <input type="file" name="primario[]" id="js-upload-files" multiple />
+                                <input type="file" name="primario[]" multiple />
                             </div>
                             <div class="col-sm-12 col-md-12 col-lg-12">
                                 <input type="submit" class="btn btn-primary" value="Guardar">
                             </div>
                         </form>
-
-
-                    </div>
-                    <div class="col-sm-12 col-md-12 col-lg-12">
-                        <!-- Drop Zone -->
-                        <h4>Arrastre sus archivos aquí</h4>
-                        <div class="upload-drop-zone" id="drop-zone">
-                            Just drag and drop files here
-                        </div>
-
-                        <!-- Progress Bar -->
-                        <div class="progress">
-                            <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
-                                <span class="sr-only">60% Complete</span>
-                            </div>
-                        </div>
-
-                        <!-- Upload Finished -->
-                        <div class="js-upload-finished">
-                            <h3>Processed files</h3>
-                            <div class="list-group">
-                                <a href="#" class="list-group-item list-group-item-success"><span class="badge alert-success pull-right">Success</span>image-01.jpg</a>
-                                <a href="#" class="list-group-item list-group-item-success"><span class="badge alert-success pull-right">Success</span>image-02.jpg</a>
-                            </div>
-                        </div>
                     </div>
                 </div>
                 <!-- /.row (nested) -->

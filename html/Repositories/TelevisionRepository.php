@@ -45,8 +45,21 @@ class TelevisionRepository extends BaseRepository{
 		$idNew = $this->addNews( $new );
 
 		$adjuntoRepo = new AdjuntoRepository();
-		$adjunto = $adjuntoRepo->add( $new, $idNew );
-		if( $adjunto->exito ){
+		
+		$adjunto = array();
+		foreach ($new['archivos'] as $file) {
+			$adjunto[] = $adjuntoRepo->add( $file, $idNew );
+		}
+		$error = 0;
+		$fallidos = array();
+		foreach ($adjunto as $adj) {
+			if(!$adj->exito){
+				$error++;
+				array_push($fallidos, $adj);
+			}
+		}
+		
+		if( $error === 0 && sizeof( $fallidos ) == 0 ){
 
 			$sql = 'INSERT INTO noticia_tel (id_noticia, hora, duracion, costo)
 								VALUES(:idNoticia, :hora, :duracion, :costo);';
@@ -61,7 +74,7 @@ class TelevisionRepository extends BaseRepository{
 
 			if($query->execute()){
 				$result->exito = true;
-				$result->fileName = $adjunto->name;
+				$result->fileName = $adjunto;
 				$result->idNew = $idNew;
 			}else{
 			 	$error = $query->errorInfo();

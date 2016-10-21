@@ -73,7 +73,7 @@ class AdminNewTV extends AdminNews{
 
 			if( $notice->exito ){
 
-				/* guarda archivo */
+				/* guarda archivos */
 				foreach ($notice->fileName as $file) {
 					foreach ($fil as &$origin) {
 						if( $origin['name'] == $file->originName && $origin['size'] == $file->size ){

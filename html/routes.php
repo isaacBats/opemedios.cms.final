@@ -300,6 +300,14 @@ $collection->attachRoute(new Route('/panel/get/temas/:id', array(
     'methods' => 'GET'
 )));
 
+//Tarifario
+    //Import tariff
+$collection->attachRoute(new Route('/panel/tariff', array(
+    '_controller' => 'AdminTarifario::tarifariosAdmin',
+    'methods' => 'GET'
+)));
+
+
 $collection->attachRoute(new Route('/create-image/:id', array(
     '_controller' => 'AdminNews::createImage',
     'methods' => 'GET'

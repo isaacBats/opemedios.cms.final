@@ -92,3 +92,8 @@ class StatusBlock extends PHPEnum
 	const SEND 	= 1;
 	const NOT_SEND	= 0;
 }
+
+class PathFiles extends PHPEnum
+{
+	const PATH_TARIFFS = 'assets/data/tarifarios/';
+}

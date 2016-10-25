@@ -17,6 +17,12 @@ class Controller
 	public $adminviews = "admin/";
 
 	
+	function __construct()
+	{
+		global $_config;
+		$this->pdo = new PDO($_config->db["dsn"], $_config->db["nombre_usuario"], $_config->db["password"], $_config->db["opciones"]);
+	}
+
 	public function url( $url = ""){
 		if( $url == ""){
 			return "/".$_SERVER["REQUEST_URI"];
@@ -45,15 +51,7 @@ class Controller
 			}
 			
 		}
-
 		return $end;
-
-	}
-
-	function __construct()
-	{
-		global $_config;
-		$this->pdo = new PDO($_config->db["dsn"], $_config->db["nombre_usuario"], $_config->db["password"], $_config->db["opciones"]);
 	}
 
 

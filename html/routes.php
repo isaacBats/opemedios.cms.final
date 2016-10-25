@@ -301,10 +301,16 @@ $collection->attachRoute(new Route('/panel/get/temas/:id', array(
 )));
 
 //Tarifario
-    //Import tariff
+    //admin tariff
 $collection->attachRoute(new Route('/panel/tariff', array(
     '_controller' => 'AdminTarifario::tarifariosAdmin',
     'methods' => 'GET'
+)));
+
+    //Import tariff
+$collection->attachRoute(new Route('/panel/tariff/add', array(
+    '_controller' => 'AdminTarifario::addTariff',
+    'methods' => 'POST'
 )));
 
 

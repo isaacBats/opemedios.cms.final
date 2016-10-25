@@ -5,7 +5,7 @@
 </div>
 <div class="row"> <!-- Importar tarifario -->
 	<div class="panel panel-default">
-		<form>
+		<form method="post" action="/panel/tariff/add" enctype="multipart/form-data">
 			<fieldset>
 				<div class="form-group col-md-4">
 					<label for="nombre">Nombre: </label>
@@ -43,7 +43,7 @@
                         <ul class="dropdown-menu pull-right" role="menu">
                             <li>
                             	<a href="javascript:void(0);">
-                            		Importar Tarifario
+                            		Nuevo Tarifario
                             	</a>
                             </li>
                             <li>

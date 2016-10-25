@@ -631,7 +631,7 @@ class AdminNews extends Controller{
 
 	}
 
-	protected static function guardaArchivo( $principal, $ruta ){
+	public static function guardaArchivo( $principal, $ruta ){
 
 		/*
 		
@@ -660,7 +660,7 @@ class AdminNews extends Controller{
 
 		 */
 
-		$extencionesPermitidas = ['pdf', 'jpg', 'jpeg', 'gif', 'png', 'JPG', 'JPEG', 'PNG', 'mp4', 'wma', 'wmv', 'mp3', 'avi'];
+		$extencionesPermitidas = ['pdf', 'jpg', 'jpeg', 'gif', 'png', 'JPG', 'JPEG', 'PNG', 'mp4', 'wma', 'wmv', 'mp3', 'avi', 'xlsx', 'csv'];
 		$explode = explode(".", $principal["name"]);
 		$extension = end($explode);
 		if ((($principal['type'] == 'image/png')
@@ -673,6 +673,8 @@ class AdminNews extends Controller{
 			|| ($principal['type'] == 'application/pdf')
 			|| ($principal['type'] == 'video/x-ms-wmv')
 			|| ($principal['type'] == 'video/avi')
+			|| ($principal['type'] == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+			|| ($principal['type'] == 'text/csv')
 			|| ($principal['type'] == 'video/mp4'))
 			&& in_array($extension, $extencionesPermitidas))
 		{

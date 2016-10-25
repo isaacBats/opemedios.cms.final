@@ -26,3 +26,6 @@ html/assets/data/noticias/
 
 #ignorando archivo comprimido de empresas 
 html/assets/data/empresas.tar.gz
+
+#ignorando los tarifarios
+html/assets/data/tarifarios/

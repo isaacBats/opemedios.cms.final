@@ -193,7 +193,7 @@
                             <a href="#"><i class="fa fa-newspaper-o fa-fw"></i> Prensa<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="flot.html">Primeras planas</a>
+                                    <a href="/panel/prensa/primeras-planas">Primeras planas</a>
                                 </li>
                                 <li>
                                     <a href="morris.html">Portadas financieras</a>

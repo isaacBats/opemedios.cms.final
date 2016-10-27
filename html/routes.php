@@ -318,3 +318,10 @@ $collection->attachRoute(new Route('/create-image/:id', array(
     '_controller' => 'AdminNews::createImage',
     'methods' => 'GET'
 )));
+
+
+//Prensa
+$collection->attachRoute(new Route('/panel/prensa/primeras-planas', array(
+    '_controller' => 'AdminColumns::primerasPlanas',
+    'methods' => 'GET'
+)));

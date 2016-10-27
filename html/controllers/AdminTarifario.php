@@ -21,6 +21,18 @@ class AdminTarifario extends Controller
         }
 	}
 
+	private function readFile( $file )
+	{
+		if( is_array( $file ) ){
+
+		}else{
+			$f = fopen( $file, 'r' );
+			$f = utf8_encode(file_get_contents($f));
+			$data = str_getcsv( $f , '\n' );
+
+		}
+	} 
+
 	public function addTariff()
 	{
 		if( isset( $_SESSION['admin'] ) && !empty($_POST) ){

@@ -19,6 +19,30 @@ class FuentesRepository extends BaseRepository{
 		}
 	}
 
+	public function getFontsByTipeFont( $tipoFuente = array(), $limit = 10, $offset = 0 ){
+		
+		if( sizeof( $tipoFuente ) > 0 ){
+			$tipos = implode(',', $tipoFuente );
+			$query = $this->pdo->prepare("SELECT * FROM fuente where id_tipo_fuente in ( $tipos ) ORDER BY id_fuente DESC;");			
+		}else{
+			$query = $this->pdo->prepare("SELECT * FROM fuente ORDER BY id_fuente DESC LIMIT $limit OFFSET $offset;");			
+		}
+		
+		$result = new stdClass();
+
+		if($query->execute()){
+			$result->exito = true;
+			$result->rows = ( $query->rowCount() > 0 ) ? $query->fetchAll(\PDO::FETCH_ASSOC) : 'No se encontraron resultados';
+			$result->class="alert-warning";
+		}else{
+			$result->exito = false;
+			$result->error = $query->errorInfo();
+			$result->class="alert-danger";
+		}
+
+		return $result;
+	}
+
 	public function getFontById( $id, $font = '' ) {
 
 		if( $font != '' || $font != null ){

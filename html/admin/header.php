@@ -196,7 +196,7 @@
                                     <a href="/panel/prensa/primeras-planas">Primeras planas</a>
                                 </li>
                                 <li>
-                                    <a href="morris.html">Portadas financieras</a>
+                                    <a href="/panel/prensa/portadas-financieras">Portadas financieras</a>
                                 </li>
                                 <li>
                                     <a href="morris.html">Columnas Políticas</a>
@@ -205,7 +205,7 @@
                                     <a href="morris.html">Columnas Financieras</a>
                                 </li>
                                 <li>
-                                    <a href="morris.html">Cartones</a>
+                                    <a href="/panel/prensa/cartones">Cartones</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->

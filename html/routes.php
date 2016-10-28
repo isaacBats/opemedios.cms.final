@@ -325,3 +325,13 @@ $collection->attachRoute(new Route('/panel/prensa/primeras-planas', array(
     '_controller' => 'AdminColumns::primerasPlanas',
     'methods' => 'GET'
 )));
+
+$collection->attachRoute(new Route('/panel/prensa/portadas-financieras', array(
+    '_controller' => 'AdminColumns::portadasFinancieras',
+    'methods' => 'GET'
+)));
+
+$collection->attachRoute(new Route('/panel/prensa/cartones', array(
+    '_controller' => 'AdminColumns::cartones',
+    'methods' => 'GET'
+)));

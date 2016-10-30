@@ -36,7 +36,7 @@ class AdminColumns extends Controller
 		if( isset( $_SESSION['admin'] ) ){
 
 			$titulo = 'Primeras Planas';
-			$action = '';
+			$action = '/panel/prensa/guardar-portada';
 
 			$this->header_admin( $titulo . ' - ', $this->css );
 				require $this->adminviews . 'portadasView.php';
@@ -52,7 +52,7 @@ class AdminColumns extends Controller
 		if( isset( $_SESSION['admin'] ) ){
 
 			$titulo = 'Portadas Financieras';
-			$action = '';
+			$action = '/panel/prensa/guardar-portada';
 
 			$this->header_admin( $titulo . ' - ', $this->css );
 				require $this->adminviews . 'portadasView.php';
@@ -68,7 +68,7 @@ class AdminColumns extends Controller
 		if( isset( $_SESSION['admin'] ) ){
 
 			$titulo = 'Cartones';
-			$action = '';
+			$action = '/panel/prensa/guardar-portada';
 
 			$this->header_admin( $titulo . ' - ', $this->css );
 				require $this->adminviews . 'portadasView.php';
@@ -88,7 +88,7 @@ class AdminColumns extends Controller
 
 
 			$titulo = 'Columnas Politicas';
-			$action = '';
+			$action = '/panel/prensa/guardar-columna';
 
 			$this->header_admin( $titulo . ' - ', $this->css );
 				require $this->adminviews . 'columnasView.php';
@@ -107,7 +107,7 @@ class AdminColumns extends Controller
 			$this->js .= '<script src="/admin/lib/summernote/summernote.js"></script>';
 
 			$titulo = 'Columnas Financieras';
-			$action = '';
+			$action = '/panel/prensa/guardar-columna';
 
 			$this->header_admin( $titulo . ' - ', $this->css );
 				require $this->adminviews . 'columnasView.php';
@@ -116,5 +116,16 @@ class AdminColumns extends Controller
             header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
         }
 
+	}
+
+	public function guardarPortada()
+	{
+		if( isset( $_SESSION['admin'] ) ){
+
+			$fecha = new \DateTime();
+
+		}else{
+            header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
+        }		
 	}
 }

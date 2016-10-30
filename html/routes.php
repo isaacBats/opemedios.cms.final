@@ -345,3 +345,13 @@ $collection->attachRoute(new Route('/panel/prensa/columnas-financieras', array(
     '_controller' => 'AdminColumns::columnasFinancieras',
     'methods' => 'GET'
 )));
+
+$collection->attachRoute(new Route('/panel/prensa/guardar-portada', array(
+    '_controller' => 'AdminColumns::guardarPortada',
+    'methods' => 'POST'
+)));
+
+$collection->attachRoute(new Route('/panel/prensa/guardar-columna', array(
+    '_controller' => 'AdminColumns::guardarColumna',
+    'methods' => 'POST'
+)));

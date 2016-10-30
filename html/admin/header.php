@@ -177,7 +177,7 @@
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
-                        <li>
+                        <!-- <li>
                             <a href="#"><i class="fa fa-th fa-fw"></i> Sectores<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
@@ -187,8 +187,7 @@
                                     <a href="/panel/sector/show-list">Administrar Sectores</a>
                                 </li>
                             </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
+                        </li> -->
                         <li>
                             <a href="#"><i class="fa fa-newspaper-o fa-fw"></i> Prensa<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
@@ -199,10 +198,10 @@
                                     <a href="/panel/prensa/portadas-financieras">Portadas financieras</a>
                                 </li>
                                 <li>
-                                    <a href="morris.html">Columnas Políticas</a>
+                                    <a href="/panel/prensa/columnas-politicas">Columnas Políticas</a>
                                 </li>
                                 <li>
-                                    <a href="morris.html">Columnas Financieras</a>
+                                    <a href="/panel/prensa/columnas-financieras">Columnas Financieras</a>
                                 </li>
                                 <li>
                                     <a href="/panel/prensa/cartones">Cartones</a>
@@ -210,15 +209,14 @@
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
-                        <li>
+                        <!-- <li>
                             <a href="#"><i class="fa fa-check-square-o fa-fw"></i> Asignación<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
                                     <a href="flot.html">Noticias por Clientes</a>
                                 </li>
                             </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
+                        </li> -->
                         <li>
                             <a href="#"><i class="fa fa-file-excel-o fa-fw"></i> Reportes<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
@@ -229,16 +227,25 @@
                                     <a href="flot.html">Reporte de Notas por día</a>
                                 </li>
                             </ul>
-                            <!-- /.nav-second-level -->
                         </li>
-                        <li>
+                        <!-- <li>
                             <a href="#"><i class="fa fa-pie-chart fa-fw"></i> Gráficas<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
                                     <a href="flot.html">Noticias por Clientes</a>
                                 </li>
                             </ul>
-                            <!-- /.nav-second-level -->
+                        </li> -->
+                        <li>
+                            <a href="#"><i class="glyphicon glyphicon-user"></i> Clientes<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="flot.html">Agregar Cliente</a>
+                                </li>
+                                <li>
+                                    <a href="flot.html">Administrar Cliente</a>
+                                </li>
+                            </ul>
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-users fa-fw"></i> Usuarios<span class="fa arrow"></span></a>
@@ -250,7 +257,6 @@
                                     <a href="flot.html">Administrar Usuarios</a>
                                 </li>
                             </ul>
-                            <!-- /.nav-second-level -->
                         </li>                        
                     </ul>
                 </div>

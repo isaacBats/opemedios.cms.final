@@ -78,4 +78,43 @@ class AdminColumns extends Controller
         }
 
 	}
+
+	public function columnasPoliticas()
+	{
+		if( isset( $_SESSION['admin'] ) ){
+
+			$this->css .= '<link rel="stylesheet" href="/admin/lib/summernote/summernote.css">';
+			$this->js .= '<script src="/admin/lib/summernote/summernote.js"></script>';
+
+
+			$titulo = 'Columnas Politicas';
+			$action = '';
+
+			$this->header_admin( $titulo . ' - ', $this->css );
+				require $this->adminviews . 'columnasView.php';
+			$this->footer_admin( $this->js );
+		}else{
+            header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
+        }
+
+	}
+
+	public function columnasFinancieras()
+	{
+		if( isset( $_SESSION['admin'] ) ){
+
+			$this->css .= '<link rel="stylesheet" href="/admin/lib/summernote/summernote.css">';
+			$this->js .= '<script src="/admin/lib/summernote/summernote.js"></script>';
+
+			$titulo = 'Columnas Financieras';
+			$action = '';
+
+			$this->header_admin( $titulo . ' - ', $this->css );
+				require $this->adminviews . 'columnasView.php';
+			$this->footer_admin( $this->js );
+		}else{
+            header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
+        }
+
+	}
 }

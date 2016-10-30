@@ -97,3 +97,16 @@ class PathFiles extends PHPEnum
 {
 	const PATH_TARIFFS = 'assets/data/tarifarios/';
 }
+
+class TipoPortadas extends PHPEnum
+{
+	const PRIMERAS_PLANAS 		= 1;
+	const PORTADAS_FINANCIERAS 	= 2;
+	const CARTONES 				= 3;
+}
+
+class TipoColumnas extends PHPEnum
+{
+	const COLUMNAS_POLITICAS 	= 1;
+	const COLUMNAS_FINANCIERAS 	= 2;
+}

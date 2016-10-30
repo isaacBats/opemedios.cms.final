@@ -8,3 +8,6 @@
   `created_at` DATE NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `id_UNIQUE` (`id` ASC));
+
+  ALTER TABLE `opemedios`.`portadas` 
+CHANGE COLUMN `tipo_portada` `tipo_portada` ENUM('PRIMERAS_PLANAS', 'PORTADA_FINANCIERA', 'CARTON') NOT NULL ;

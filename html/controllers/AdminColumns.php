@@ -1,5 +1,7 @@
 <?php 
 
+use utilities\Image;
+
 /**
 * Controlador para las columnas financieras, primeras planas, columnas politicas y demas 
 * @author Isaac Daniel < @codeisaac >
@@ -123,9 +125,17 @@ class AdminColumns extends Controller
 		if( isset( $_SESSION['admin'] ) ){
 
 			$fecha = new \DateTime();
-
+			echo '<pre>'; print_r(['post' => $_POST, 'files' => $_FILES, 'fecha' => $fecha]); exit;
 		}else{
             header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
         }		
+	}
+
+	private function saveImages( $file )
+	{
+		$im = new Image();
+
+		$explode = explode('.', $file['name']);
+		$file['createdName'] = $explode[0].'_'.uniqid().'.'.end($explode);
 	}
 }

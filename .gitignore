@@ -29,3 +29,14 @@ html/assets/data/empresas.tar.gz
 
 #ignorando los tarifarios
 html/assets/data/tarifarios/
+
+#ignorando las portadas cartones
+html/assets/data/portadas/cartones/
+#ignorando las portadas portadas_financieras
+html/assets/data/portadas/portadas_financieras/
+#ignorando las portadas primeras_planas
+html/assets/data/portadas/primeras_planas/
+#ignorando las columnas columnas_politicas
+html/assets/data/columnas/columnas_politicas/
+#ignorando las columnas columnas_financieras
+html/assets/data/columnas/columnas_financieras/

@@ -15,6 +15,7 @@
 					$ext = strtolower ( end( $form ) );
 				?>
 				<form method="post" action="<?= $action ?>" class="form-inline" id="form-<?= $ext ?>" enctype="multipart/form-data">
+					<input type="hidden" name="tipo_portada" value="<?= $tipo_portada ?>">
 					<div class="form-group fuente">
 						<select name="fuente" class="form-control select2" required="true">
 							<option value="">Selecciona la Fuente</option>
@@ -26,7 +27,7 @@
 						</select>					
 					</div>
 					<div class="form-group file">
-						<input type="file" name="<?= $ext ?>" required="true">
+						<input type="file" name="file" required="true">
 					</div>
 					<input type="submit" class="btn btn-success" id="btn-submit" value="Cargar"> 
 				</form>			

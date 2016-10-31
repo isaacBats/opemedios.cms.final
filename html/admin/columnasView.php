@@ -41,7 +41,7 @@
 						</select>					
 					</div>
 					<div class="form-group file">
-						<input type="file" name="<?= $ext ?>" required="true">
+						<input type="file" name="file" required="true">
 					</div>
 					<input type="submit" class="btn btn-success pull-right" id="btn-submit" value="Cargar"> 
 				</form>			

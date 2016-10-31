@@ -5,6 +5,8 @@ use Knp\Snappy\Pdf;
 use Knp\Snappy\Image;
 
 require_once __DIR__ . '/../Utilities/Opemedios.php';
+require_once __DIR__ . '/../Utilities/Image.php';
+require_once __DIR__ . '/../Utilities/Util.php';
 
 require 'helpers.php';
 

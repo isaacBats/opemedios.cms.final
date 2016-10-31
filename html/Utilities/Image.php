@@ -4,9 +4,6 @@ namespace utilities;
 
 class Image
 {
-	
-
-
 	public function imageCreateFromFile( $filename )
 	{
 		static $image_creators ;
@@ -92,7 +89,8 @@ class Image
 
 		header("Content-type: image/png");
 		if($path != '' && $name != ''){
-			$imageThumb = imagePNG($thumb, $path.$name.'_thumb.png');						
+			imagePNG($thumb, __DIR__ . '/../' . $path.$name.'_thumb.png');						
+			$imageThumb = true;
 		}else{
 			$imageThumb = imagePNG($thumb);
 		}
@@ -112,7 +110,7 @@ class Image
                 }
                 else
                 {
-                    $path=__DIR__ . '/../' . $pathFile . $file["createdName"];
+                    $path = __DIR__ . '/../' . $pathFile . $file["createdName"];
 					$move = move_uploaded_file($file["tmp_name"],$path);
 
                     if(!$move){

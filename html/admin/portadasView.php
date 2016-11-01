@@ -14,7 +14,7 @@
 					$form = explode(' ', $titulo); 
 					$ext = strtolower ( end( $form ) );
 				?>
-				<form method="post" action="<?= $action ?>" class="form-inline" id="form-<?= $ext ?>" enctype="multipart/form-data">
+				<form method="post" action="<?= $action ?>" class="form-inline" id="form-portada" enctype="multipart/form-data">
 					<input type="hidden" name="tipo_portada" value="<?= $tipo_portada ?>">
 					<div class="form-group fuente">
 						<select name="fuente" class="form-control select2" required="true">
@@ -27,10 +27,15 @@
 						</select>					
 					</div>
 					<div class="form-group file">
-						<input type="file" name="file" required="true">
+						<input type="file" name="file" required="true" id="file">
 					</div>
 					<input type="submit" class="btn btn-success" id="btn-submit" value="Cargar"> 
-				</form>			
+				</form>
+				<div class="progress">
+        			<div class="bar"></div >
+        			<div class="percent">0%</div >
+    			</div>    
+    			<div id="status"></div>
 			</div>
 		</div>
 	</div>

@@ -18,19 +18,19 @@ class PortadasRepository extends BaseRepository{
 		$query->bindParam(':thumb',$portada['thumb']);
 		$query->bindParam(':tipo',Util::tipoPortada($portada['tipo_portada']));
 		$query->bindParam(':orden',$this->getOrden( $createdAt->format('Y-m-d') ));
-		$query->bindParam(':created',$createdAt);
+		$query->bindParam(':created',$createdAt->format('Y-m-d H:i:s'));
 		
 		$result = new stdClass();
 
 		if($query->execute()){
 			$result->exito = true;
-			$result->mesaage = 'Se agregado un nuevo elemento';
-			$result->class = 'alert-info';
+			$result->mensaje = 'Se agregado un nuevo elemento';
+			$result->tipo = 'alert-info';
 		}else{
 			$result->exito = false;
-			$result->message = 'No se pude agregar el elemento';
+			$result->mensaje = 'No se pude agregar el elemento';
 			$result->error = $query->errorInfo();
-			$result->class = 'alert-danger';
+			$result->tipo = 'alert-danger';
 		}
 
 		return $result;

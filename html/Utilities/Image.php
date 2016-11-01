@@ -87,10 +87,9 @@ class Image
 		// copiar la original con nuevas dimensiones
 		imagecopyresized($thumb, $source, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
 
-		header("Content-type: image/png");
+		// header("Content-type: image/png");
 		if($path != '' && $name != ''){
-			imagePNG($thumb, __DIR__ . '/../' . $path.$name.'_thumb.png');						
-			$imageThumb = true;
+			$imageThumb = imagePNG($thumb, __DIR__ . '/../' . $path.$name.'_thumb.png');			
 		}else{
 			$imageThumb = imagePNG($thumb);
 		}

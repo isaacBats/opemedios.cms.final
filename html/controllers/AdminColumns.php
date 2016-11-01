@@ -31,6 +31,7 @@ class AdminColumns extends Controller
 		$this->js = '
 				<!-- Select2 JavaScript -->
 			    <script src="/assets/js/select2.min.js"></script>
+			    <script src="/admin/lib/jquery-form/jquery.form.min.js"></script>
 			  ';
 		$this->getFuentes = $this->fuentesRepo->getFontsByTipeFont([3,]);
 			
@@ -132,10 +133,9 @@ class AdminColumns extends Controller
 	{
 		if( isset( $_SESSION['admin'] ) ){
 
+			vdd($_POST);
 			$path = $this->getPath( 'portadas', $_POST['tipo_portada'] );
-			//$nameImages = $this->saveImages($_FILES['file'], $path);
-			$nameImages['originName'] = $path.'financiero_5816f705d2024.jpg';
-			$nameImages['thumbName'] = $path.'financiero_5816f705d2024_thumb.png';
+			$nameImages = $this->saveImages($_FILES['file'], $path);
 			$saveRow = $this->portadasRepo->create([
 				'fuente' => $_POST['fuente'], 
 				'imagen' => $nameImages['originName'], 

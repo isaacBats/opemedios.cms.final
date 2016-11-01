@@ -9,5 +9,9 @@
   PRIMARY KEY (`id`),
   UNIQUE INDEX `id_UNIQUE` (`id` ASC));
 
-  ALTER TABLE `opemedios`.`portadas` 
+ALTER TABLE `opemedios`.`portadas` 
 CHANGE COLUMN `tipo_portada` `tipo_portada` ENUM('PRIMERAS_PLANAS', 'PORTADA_FINANCIERA', 'CARTON') NOT NULL ;
+
+
+ALTER TABLE `opemedios`.`portadas` 
+CHANGE COLUMN `created_at` `created_at` DATETIME NOT NULL ;

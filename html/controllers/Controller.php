@@ -63,14 +63,14 @@ class Controller
 
 			if( isset( $alert->error ) ){
 				$al = '
-						<div class="alert '.$alert->tipo.' alert-dismissable">
+						<div class="alert '.$alert->tipo.' alert-dismissable alert-controller">
 	                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
 	                        '.$alert->mensaje.'<br />'.$alert->error[2].'
 	                    </div>
 					 ';
 			}else{
 				$al = '
-						<div class="alert '.$alert->tipo.' alert-dismissable">
+						<div class="alert '.$alert->tipo.' alert-dismissable alert-controller">
 	                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
 	                        '.$alert->mensaje.'
 	                    </div>

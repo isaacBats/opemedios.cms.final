@@ -334,10 +334,17 @@ $(document).ready(function(){
     
     /************************************************************/
 
+    function flashAlerts(){
+        $('.alert-controller').delay(3000).fadeOut('slow');
+    }
+
+    flashAlerts();
+    
     // Summernote
     $('#summernote').summernote({
         height: 200
     });
+
 
 
     

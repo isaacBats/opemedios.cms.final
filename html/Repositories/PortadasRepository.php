@@ -17,7 +17,7 @@ class PortadasRepository extends BaseRepository{
 		$query->bindParam(':imagen',$portada['imagen']);
 		$query->bindParam(':thumb',$portada['thumb']);
 		$query->bindParam(':tipo',Util::tipoPortada($portada['tipo_portada']));
-		$query->bindParam(':orden',$this->getOrden( $createdAt->format('Y-m-d') ));
+		$query->bindParam(':orden',$this->getOrden( $createdAt->format('Y-m-d'), Util::tipoPortada($portada['tipo_portada']) ));
 		$query->bindParam(':created',$createdAt->format('Y-m-d H:i:s'));
 		
 		$result = new stdClass();
@@ -36,9 +36,9 @@ class PortadasRepository extends BaseRepository{
 		return $result;
 	}
 
-	private function getOrden ( $day )
+	private function getOrden ( $day, $type )
 	{
-		$ultimo = $this->pdo->query("SELECT MAX(orden) as 'orden' FROM portadas WHERE DATE_FORMAT(created_at, '%Y-%m-%d') = '{$day}'")->fetch( \PDO::FETCH_ASSOC );
+		$ultimo = $this->pdo->query("SELECT MAX(orden) as 'orden' FROM portadas WHERE DATE_FORMAT(created_at, '%Y-%m-%d') = '{$day}' AND tipo_portada = '{$type}'")->fetch( \PDO::FETCH_ASSOC );
 
 		$orden = 0;
 		if( $ultimo['orden'] != NULL ){

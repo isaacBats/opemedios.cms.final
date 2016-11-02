@@ -56,6 +56,33 @@ class Controller
 		return $end;
 	}
 
+	protected function flashAlerts( $type )
+	{
+		if( isset( $_SESSION['alerts'][ $type ] ) ){
+			$alert = $_SESSION['alerts'][ $type ];
+
+			if( isset( $alert->error ) ){
+				$al = '
+						<div class="alert '.$alert->tipo.' alert-dismissable">
+	                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+	                        '.$alert->mensaje.'<br />'.$alert->error[2].'
+	                    </div>
+					 ';
+			}else{
+				$al = '
+						<div class="alert '.$alert->tipo.' alert-dismissable">
+	                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+	                        '.$alert->mensaje.'
+	                    </div>
+					 ';
+			}
+		}else{
+			$al = '';
+		}
+
+		unset( $_SESSION['alerts'][$type] ); 
+		return $al;
+	}
 
 	public function bread( $lang ){
 		$out = "<a href=\"/\">Inicio</a>";

@@ -3,6 +3,7 @@
 use utilities\Image;
 use utilities\TipoPortadas;
 use utilities\TipoColumnas;
+use utilities\Util;
 
 /**
 * Controlador para las columnas financieras, primeras planas, columnas politicas y demas 
@@ -47,6 +48,7 @@ class AdminColumns extends Controller
 			$action = '/panel/prensa/guardar-portada';
 			$tipo_portada = TipoPortadas::PRIMERAS_PLANAS;
 
+			$planas = $this->portadasRepo->getCovers( date( 'Y-m-d' ), Util::tipoPortada( $tipo_portada ) );
 			$this->header_admin( $titulo . ' - ', $this->css );
 				require $this->adminviews . 'portadasView.php';
 			$this->footer_admin( $this->js );
@@ -63,6 +65,8 @@ class AdminColumns extends Controller
 			$titulo = 'Portadas Financieras';
 			$action = '/panel/prensa/guardar-portada';
 			$tipo_portada = TipoPortadas::PORTADAS_FINANCIERAS;
+
+
 
 			$this->header_admin( $titulo . ' - ', $this->css );
 				require $this->adminviews . 'portadasView.php';

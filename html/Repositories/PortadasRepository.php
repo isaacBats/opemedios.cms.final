@@ -50,4 +50,21 @@ class PortadasRepository extends BaseRepository{
 		return $orden;
 	}
 
+	public function getCovers( $day, $type )
+	{
+		$portadas = $this->pdo->query("SELECT * FROM portadas WHERE DATE_FORMAT(created_at, '%Y-%m-%d') = '{$day}' AND tipo_portada = '{$type}' ORDER BY orden DESC");
+
+		$result = new stdClass();
+
+		if( $portadas ){
+			$result->exito = TRUE;
+			$result->rows = ( sizeof( $portadas ) > 0 ) ? $portadas->fetchAll( \PDO::FETCH_ASSOC ) : 'No hay elementos aun';			
+		}else{
+			$result->exito = FALSE;
+			$result->error = $this->pdo->errorInfo();
+		}
+
+		return $result;
+	}
+
 }

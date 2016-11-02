@@ -132,8 +132,6 @@ class AdminColumns extends Controller
 	public function guardarPortada()
 	{
 		if( isset( $_SESSION['admin'] ) ){
-
-			vdd($_POST);
 			$path = $this->getPath( 'portadas', $_POST['tipo_portada'] );
 			$nameImages = $this->saveImages($_FILES['file'], $path);
 			$saveRow = $this->portadasRepo->create([
@@ -143,8 +141,10 @@ class AdminColumns extends Controller
 				'tipo_portada' => $_POST['tipo_portada']
 				]);
 
-			header('Content-type: text/json');
-			echo json_encode($saveRow); 
+			// header('Content-type: text/json');
+			// echo json_encode($saveRow); 
+			$_SESSION['alerts']['portada'] = $saveRow;
+			header( 'Location: ' . $_SERVER['HTTP_REFERER'] );
 		}else{
             header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
         }		

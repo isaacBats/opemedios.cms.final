@@ -10,7 +10,7 @@
 			Agregar <?= $titulo ?>
 		</div>
 		<div class="panel-body">
-			<div class="col-sm-9 inline">
+			<div class="col-sm-9 inline line-bottom">
 				<?php 
 					$form = explode(' ', $titulo); 
 					$ext = strtolower ( end( $form ) );
@@ -32,6 +32,24 @@
 					</div>
 					<input type="submit" class="btn btn-success" value="Cargar"> 
 				</form>
+			</div>
+			<div class="col-sm-12">
+				<?php if( sizeof( $covers ) > 0 ): ?> 
+					<article class="items-covers col-sm-12">
+					<?php foreach ($covers as $cover): ?>
+							<figure class="items-img col-xs-6 col-sm-6 col-md-4 col-lg-3">
+								<img src="/<?= $cover['thumb'] ?>" alt="<?= $titulo . ' - ' . $cover['nombre_fuente'] ?>" width="180" heigth="240">
+								<figcaption class="items-descripcion">
+									<strong><?= $cover['nombre_fuente'] ?></strong>
+									<p><?= $cover['created_at'] ?></p>
+								</figcaption>
+							</figure>
+					<?php endforeach; ?>
+					</article>
+				<?php else: 
+						echo '<strong>No cuentas con '.$titulo.' para este día</strong>'; 
+					  endif; 
+				?>
 			</div>
 		</div>
 	</div>

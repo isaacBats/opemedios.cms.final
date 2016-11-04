@@ -18,6 +18,25 @@
 	display: none;
 }
 
+.items-covers{
+  display: block;
+  padding: 1em;
+  padding-top: 3em;
+}
+  .items-img{
+    transition: all .2s ease-in-out;
+  }
+  .items-img:hover{
+    transform: scale(1.1);
+  }
+    .items-img img{
+      height: 240px;
+    }
+
+.line-bottom{
+  border-bottom: 1px solid #eee;
+}
+
 .mb-10{
 	margin-bottom: 10px;
 }

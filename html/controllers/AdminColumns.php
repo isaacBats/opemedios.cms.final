@@ -43,12 +43,24 @@ class AdminColumns extends Controller
 	public function primerasPlanas()
 	{
 		if( isset( $_SESSION['admin'] ) ){
-
 			$titulo = 'Primeras Planas';
 			$action = '/panel/prensa/guardar-portada';
 			$tipo_portada = TipoPortadas::PRIMERAS_PLANAS;
 
 			$planas = $this->portadasRepo->getCovers( date( 'Y-m-d' ), Util::tipoPortada( $tipo_portada ) );
+			
+			if( $planas->exito && is_array( $planas->rows ) ){
+				foreach ($planas->rows as &$cover) {
+					$font = $this->fuentesRepo->getFontById( $cover['fuente_id'] );
+					if( is_array ( $font ) ){
+						$cover['nombre_fuente'] = $font['nombre']; 
+					}
+					$createdAt = new DateTime( $cover['created_at'] );
+					$cover['created_at'] = $createdAt->format('Y-m-d');
+				}
+				$covers = $planas->rows;
+			}
+
 			$this->header_admin( $titulo . ' - ', $this->css );
 				require $this->adminviews . 'portadasView.php';
 			$this->footer_admin( $this->js );
@@ -66,7 +78,19 @@ class AdminColumns extends Controller
 			$action = '/panel/prensa/guardar-portada';
 			$tipo_portada = TipoPortadas::PORTADAS_FINANCIERAS;
 
-
+			$planas = $this->portadasRepo->getCovers( date( 'Y-m-d' ), Util::tipoPortada( $tipo_portada ) );
+			
+			if( $planas->exito && is_array( $planas->rows ) ){
+				foreach ($planas->rows as &$cover) {
+					$font = $this->fuentesRepo->getFontById( $cover['fuente_id'] );
+					if( is_array ( $font ) ){
+						$cover['nombre_fuente'] = $font['nombre']; 
+					}
+					$createdAt = new DateTime( $cover['created_at'] );
+					$cover['created_at'] = $createdAt->format('Y-m-d');
+				}
+				$covers = $planas->rows;
+			}
 
 			$this->header_admin( $titulo . ' - ', $this->css );
 				require $this->adminviews . 'portadasView.php';
@@ -84,6 +108,20 @@ class AdminColumns extends Controller
 			$titulo = 'Cartones';
 			$action = '/panel/prensa/guardar-portada';
 			$tipo_portada = TipoPortadas::CARTONES;
+
+			$planas = $this->portadasRepo->getCovers( date( 'Y-m-d' ), Util::tipoPortada( $tipo_portada ) );
+			
+			if( $planas->exito && is_array( $planas->rows ) ){
+				foreach ($planas->rows as &$cover) {
+					$font = $this->fuentesRepo->getFontById( $cover['fuente_id'] );
+					if( is_array ( $font ) ){
+						$cover['nombre_fuente'] = $font['nombre']; 
+					}
+					$createdAt = new DateTime( $cover['created_at'] );
+					$cover['created_at'] = $createdAt->format('Y-m-d');
+				}
+				$covers = $planas->rows;
+			}
 
 			$this->header_admin( $titulo . ' - ', $this->css );
 				require $this->adminviews . 'portadasView.php';

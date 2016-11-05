@@ -89,7 +89,7 @@ class Image
 
 		// header("Content-type: image/png");
 		if($path != '' && $name != ''){
-			$imageThumb = imagePNG($thumb, __DIR__ . '/../' . $path.$name.'_thumb.png');			
+			$imageThumb = imagePNG($thumb, __DIR__ . '/../' . $path.$name.'_thumb.png', 0);			
 		}else{
 			$imageThumb = imagePNG($thumb);
 		}

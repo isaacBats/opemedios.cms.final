@@ -84,3 +84,18 @@ img.pull-left { margin-right: 10px; }
 #img_client{
 	
 }
+
+.user{
+	background-color: #2E2E2E;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+	.user:active{
+		background: none;
+	    color: white;
+	}
+
+	.user:hover{
+		background: none;
+	    color: white;
+	}

@@ -40,3 +40,5 @@ html/assets/data/portadas/primeras_planas/
 html/assets/data/columnas/columnas_politicas/
 #ignorando las columnas columnas_financieras
 html/assets/data/columnas/columnas_financieras/
+#ignorando los logos de las fuentes
+html/assets/data/fuentes/

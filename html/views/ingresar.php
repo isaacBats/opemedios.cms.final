@@ -22,10 +22,10 @@
 							<h3 class="thin text-center">Entra a tu cuenta</h3>
 							<hr>
 							
-							<form method="POST" action="/login">
+							<form method="POST" action="/sign-in">
 								<div class="top-margin">
 									<label>Usuario <span class="text-danger">*</span></label>
-									<input type="text" class="form-control" required="true" name="user">
+									<input type="text" class="form-control" required="true" name="username">
 								</div>
 								<div class="top-margin">
 									<label>Contraseña <span class="text-danger">*</span></label>
@@ -36,7 +36,7 @@
 
 								<div class="row">
 									<div class="col-lg-4 text-right">
-										<button class="btn btn-action" type="submit">Sign in</button>
+										<input type="submit" value="Entrar" class="btn btn-action">
 									</div>
 								</div>
 							</form>

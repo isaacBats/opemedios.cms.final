@@ -1,9 +1,8 @@
 <?php
 
 /**
- * 
+ * Clase para el perfil del usuario  
  */
-require_once(__DIR__ . '/../admin/lib/php-mailer/PHPMailerAutoload.php');
 
 class User extends Controller {
 
@@ -83,38 +82,48 @@ class User extends Controller {
         }
     }
 
-    public function loginAction($lang) {
+    public function loginAction() {
         $user = $this->pdo->quote($_POST["username"]);
         $pass = $_POST["password"];
 
-        $sql = "SELECT * FROM usuarios WHERE nombreusuario LIKE LOWER(" . $user . ") ";
+
+        $sql = "SELECT c.id_cuenta, CONCAT(c.nombre, ' ', c.apellidos) as usuario, c.cargo, c.telefono1, c.email, c.username, c.password, e.id_empresa, e.nombre as empresa, e.direccion, e.telefono as tel_empresa, e.contacto as contacto_empresa, e.email as email_empresa, e.giro, e.logo as logo_empresa FROM cuenta c INNER JOIN empresa e ON c.id_empresa = e.id_empresa WHERE c.username LIKE LOWER(" . $user . ") ";
         $query = $this->pdo->prepare($sql);
         $rs = $query->execute();
         if ($rs !== false) {
             $nr = $query->rowCount();
             if ($nr > 0) {
-                $user = $query->fetchAll(PDO::FETCH_ASSOC);
-                if (isset($user[0]["nombreusuario"])) {
-                    if ($user[0]["pass"] == $pass) {
-                        $_SESSION["user"] = $user[0];
-                        header('Location: ./profile');
+                $user = $query->fetch(PDO::FETCH_ASSOC);                
+                if (isset($user["username"])) {
+                    if ($user["password"] == $pass) {
+
+                        $queryTemas = $this->pdo->prepare('SELECT * FROM tema WHERE id_empresa = ' . $user['id_empresa']);
+                        if( $queryTemas->execute() ){
+
+                            $temas = ( $queryTemas->rowCount() > 0 ) ? $queryTemas->fetchAll(\PDO::FETCH_ASSOC) : 'Sin temas disponibles';
+                        }
+                        $_SESSION["user"] = $user;
+                        if( is_array( $temas ) ){
+                            $_SESSION['user']['temas'] = $temas;
+                        }
+                        header('Location: ./noticias');
                     } else {
-                        header('Location: ./login');
+                        header('Location: ./sign-in');
                     }
                 } else {
-                    header('Location: ./login');
+                    header('Location: ./sign-in');
                 }
             } else {
-                header('Location: ./login');
+                header('Location: ./sign-in');
             }
         } else {
-            header('Location: ./login');
+            header('Location: ./sign-in');
         }
     }
 
-    public function logout($lang) {
+    public function logout() {
         session_destroy();
-        header('Location: ./login');
+        header('Location: ./sign-in');
     }
 
     public function login($lang) {

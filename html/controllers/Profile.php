@@ -19,11 +19,10 @@ class Profile extends Controller{
 			
 			// $temasIds = implode(',', array_column( $this->temas, 'id_tema'));
 			$totales = $this->perfilRepository->getCountAllNewsOfClient( $_SESSION['user']['id_empresa'], $this->temas );
-			print_r($totales->rows );
-
-			// $this->header('Noticias - ' . $_SESSION['user']['empresa'] . ' - ');
+			
+			$this->header('Noticias - ' . $_SESSION['user']['empresa'] . ' - ');
 			require $this->views.'noticias.php';
-			// $this->footer();
+			$this->footer();
 		}else{
             header( "Location: http://{$_SERVER["HTTP_HOST"]}/sign-in");
         }

@@ -99,3 +99,57 @@ img.pull-left { margin-right: 10px; }
 		background: none;
 	    color: white;
 	}
+.perfil{
+	background-color: #FFEDE1;
+	border-bottom: 5px solid #0DACFF;
+	border-left: 1px solid #0DACFF;
+	border-right: 1px solid #0DACFF;
+	border-radius: 5px;
+	margin: 100px 0 5% 0;
+}
+
+	.empresa{
+		display: block;
+		padding: 1%;
+	}
+		.empresa figure, .empresa h3{
+			color: #2B4F86;
+			display: inline-block;
+		}
+		.empresa h3{
+			font-size: 19px;
+		}
+		.empresa .logo{
+			width: 150px;
+		}
+		.empresa .logo img{
+			max-width: 100%;
+		}
+	
+	.totales{
+		margin: 5px;
+		color: #7AAFB2;
+		
+	}
+
+		.totales ul{
+			display: block; 
+			list-style: none;
+			margin: 0;
+			padding: 0;
+		}
+		.totales li{
+			display: inline-block;
+		}
+		.totales li a{
+		    display: block;
+		    font-size: 16px;
+			padding: 12%;
+			text-decoration: none;
+		}
+		
+		.totales li a:hover{
+			border-bottom: 5px solid #B29B8C;
+
+
+		}

@@ -1,4 +1,4 @@
-<div class="container row">
+<div class="row">
 	<div class="perfil">
 		<div class="empresa">
 			<figure class="logo">
@@ -41,7 +41,7 @@
 								54
 							</strong>
 						</a>
-					</li>
+					</li> 
 					<li>
 						<a href="">Radio: 
 							<strong>
@@ -81,71 +81,134 @@
 			</div>
 		</div>				
 	</div>
-	<div class="row noticias">
+	<div class="noticias">
 		<article class="noticia">
-			<div class="media">
-				<figure>
-					<img src="">
-				</figure>
-			</div>
+			<figure class="media">
+				<img src="/assets/data/fuentes/ID6511_EDITORIALES.gif">
+			</figure>
+			<h2 class="titulo_noticia">
+				<a href="#">TRUNGELLITI VENCE A ESCOBAR EN EL MONTERREY OPEN</a>
+			</h2>
 			<div class="datos">
-				<h2><a href="#">TRUNGELLITI VENCE A ESCOBAR EN EL MONTERREY OPEN</a></h2>
+				<p>Radio</p>
 				<p>02 de Noviembre, 2016 -- 15:27:00</p>
 				<p>Autor: JORGE RUBIO (Conductor)</p>
-				<p>Canal: 130</p>
-				<p>Tema: DEMO</p>
-				<p>Costo Beneficio: $ 6499.45</p>
-				<p>El argentino Marco Trungelliti venció al ecuatoriano Gonzalo Escobar por 6-3 y 7-6; repaso a los resultados de la jornada del Monterrey Open. (11-OCT-2016) (con costo beneficio de Aprende TV)</p>
-				<p>Fuente: INGENIO TV</p>
-				<p>Género: Noticia</p>
-				<p>Sección: DEPORTES</p>
-				<p>Sector: DEPORTES</p>
-				<p>Duración: 00:00:43</p>
-				<p>Tendencia: Positiva</p>
 			</div>
 		</article>
 		<article class="noticia">
 			<div class="media">
 				<figure>
-					<img src="">
+					<img src="/assets/data/fuentes/ID6511_EDITORIALES.gif">
 				</figure>
 			</div>
+			<h2 class="titulo_noticia">
+				<a href="#">TRUNGELLITI VENCE A ESCOBAR EN EL MONTERREY OPEN</a>
+			</h2>
 			<div class="datos">
-				<h2><a href="#">TRUNGELLITI VENCE A ESCOBAR EN EL MONTERREY OPEN</a></h2>
+				<p>Television</p>
 				<p>02 de Noviembre, 2016 -- 15:27:00</p>
 				<p>Autor: JORGE RUBIO (Conductor)</p>
-				<p>Canal: 130</p>
-				<p>Tema: DEMO</p>
-				<p>Costo Beneficio: $ 6499.45</p>
-				<p>El argentino Marco Trungelliti venció al ecuatoriano Gonzalo Escobar por 6-3 y 7-6; repaso a los resultados de la jornada del Monterrey Open. (11-OCT-2016) (con costo beneficio de Aprende TV)</p>
-				<p>Fuente: INGENIO TV</p>
-				<p>Género: Noticia</p>
-				<p>Sección: DEPORTES</p>
-				<p>Sector: DEPORTES</p>
-				<p>Duración: 00:00:43</p>
-				<p>Tendencia: Positiva</p>
 			</div>
 		</article>
 		<article class="noticia">
 			<div class="media">
 				<figure>
-					<img src="">
+					<img src="/assets/data/fuentes/ID6511_EDITORIALES.gif">
 				</figure>
 			</div>
+			<h2 class="titulo_noticia">
+				<a href="#">TRUNGELLITI VENCE A ESCOBAR EN EL MONTERREY OPEN</a>
+			</h2>
 			<div class="datos">
-				<h2><a href="#">TRUNGELLITI VENCE A ESCOBAR EN EL MONTERREY OPEN</a></h2>
+				<p>Internet</p>
 				<p>02 de Noviembre, 2016 -- 15:27:00</p>
 				<p>Autor: JORGE RUBIO (Conductor)</p>
-				<p>Canal: 130</p>
-				<p>Tema: DEMO</p>
-				<p>Costo Beneficio: $ 6499.45</p>
-				<p>El argentino Marco Trungelliti venció al ecuatoriano Gonzalo Escobar por 6-3 y 7-6; repaso a los resultados de la jornada del Monterrey Open. (11-OCT-2016) (con costo beneficio de Aprende TV)</p>
-				<p>Fuente: INGENIO TV</p>
-				<p>Género: Noticia</p>
-				<p>Sección: DEPORTES</p>
-				<p>Sector: DEPORTES</p>
-				<p>Duración: 00:00:43</p>
-				<p>Tendencia: Positiva</p>
+			</div>
+		</article>
+		<article class="noticia">
+			<figure class="media">
+				<img src="/assets/data/fuentes/ID6511_EDITORIALES.gif">
+			</figure>
+			<h2 class="titulo_noticia">
+				<a href="#">TRUNGELLITI VENCE A ESCOBAR EN EL MONTERREY OPEN</a>
+			</h2>
+			<div class="datos">
+				<p>Radio</p>
+				<p>02 de Noviembre, 2016 -- 15:27:00</p>
+				<p>Autor: JORGE RUBIO (Conductor)</p>
+			</div>
+		</article>
+		<article class="noticia">
+			<div class="media">
+				<figure>
+					<img src="/assets/data/fuentes/ID6511_EDITORIALES.gif">
+				</figure>
+			</div>
+			<h2 class="titulo_noticia">
+				<a href="#">TRUNGELLITI VENCE A ESCOBAR EN EL MONTERREY OPEN</a>
+			</h2>
+			<div class="datos">
+				<p>Television</p>
+				<p>02 de Noviembre, 2016 -- 15:27:00</p>
+				<p>Autor: JORGE RUBIO (Conductor)</p>
+			</div>
+		</article>
+		<article class="noticia">
+			<div class="media">
+				<figure>
+					<img src="/assets/data/fuentes/ID6511_EDITORIALES.gif">
+				</figure>
+			</div>
+			<h2 class="titulo_noticia">
+				<a href="#">TRUNGELLITI VENCE A ESCOBAR EN EL MONTERREY OPEN</a>
+			</h2>
+			<div class="datos">
+				<p>Internet</p>
+				<p>02 de Noviembre, 2016 -- 15:27:00</p>
+				<p>Autor: JORGE RUBIO (Conductor)</p>
+			</div>
+		</article>
+		<article class="noticia">
+			<figure class="media">
+				<img src="/assets/data/fuentes/ID6511_EDITORIALES.gif">
+			</figure>
+			<h2 class="titulo_noticia">
+				<a href="#">TRUNGELLITI VENCE A ESCOBAR EN EL MONTERREY OPEN</a>
+			</h2>
+			<div class="datos">
+				<p>Radio</p>
+				<p>02 de Noviembre, 2016 -- 15:27:00</p>
+				<p>Autor: JORGE RUBIO (Conductor)</p>
+			</div>
+		</article>
+		<article class="noticia">
+			<div class="media">
+				<figure>
+					<img src="/assets/data/fuentes/ID6511_EDITORIALES.gif">
+				</figure>
+			</div>
+			<h2 class="titulo_noticia">
+				<a href="#">TRUNGELLITI VENCE A ESCOBAR EN EL MONTERREY OPEN</a>
+			</h2>
+			<div class="datos">
+				<p>Television</p>
+				<p>02 de Noviembre, 2016 -- 15:27:00</p>
+				<p>Autor: JORGE RUBIO (Conductor)</p>
+			</div>
+		</article>
+		<article class="noticia">
+			<div class="media">
+				<figure>
+					<img src="/assets/data/fuentes/ID6511_EDITORIALES.gif">
+				</figure>
+			</div>
+			<h2 class="titulo_noticia">
+				<a href="#">TRUNGELLITI VENCE A ESCOBAR EN EL MONTERREY OPEN</a>
+			</h2>
+			<div class="datos">
+				<p>Internet</p>
+				<p>02 de Noviembre, 2016 -- 15:27:00</p>
+				<p>Autor: JORGE RUBIO (Conductor)</p>
 			</div>
 		</article>
 	</div>	

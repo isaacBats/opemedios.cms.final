@@ -105,7 +105,7 @@ img.pull-left { margin-right: 10px; }
 	border-left: 1px solid #0DACFF;
 	border-right: 1px solid #0DACFF;
 	border-radius: 5px;
-	margin: 100px 0 5% 0;
+	margin: 100px 0 0 0;
 }
 
 	.empresa{
@@ -144,12 +144,107 @@ img.pull-left { margin-right: 10px; }
 		.totales li a{
 		    display: block;
 		    font-size: 16px;
-			padding: 12%;
+			padding: 12% 13% 12% 12%;
 			text-decoration: none;
-		}
-		
+			transition: all .3s ease-out;
+		}		
 		.totales li a:hover{
 			border-bottom: 5px solid #B29B8C;
-
-
 		}
+	.fuentes ul{
+		display: block;
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+	.fuentes ul li{
+		/*border-left: 3px solid #B29B8C;*/
+		display: inline-block;
+		margin: 0 .3em;
+		vertical-align: top;
+	}
+	.fuentes li a{
+		display: block;
+		padding: .8em;
+		text-decoration: none;
+		transition: all .3s ease;
+	}
+	.fuentes li a:hover{
+		border-bottom: 5px solid #B29B8C;
+	}
+	.fuentes #label{
+		font-size: 18px;
+		padding: .2em 0 .2em .5em;
+	}
+
+	.noticias{
+		background-color: #E2FDFF;
+	}
+		.noticia{
+			background-color: #EFF;
+			border-bottom: .1em solid #A5A0CC;
+			/*border-top: .1em solid #A5A0CC;*/
+			border-radius: 5px;
+			margin: 1em 0;
+			padding: 1em;
+		}
+			.media, .titulo_noticia{
+				display: inline-block;
+				vertical-align: top;
+				margin: 0;
+				padding: 0;
+			}
+			.media img{
+				width: 100%;
+			}
+			.media{
+				float: left;
+				margin: 10% auto;
+				width: 180px;
+
+			}
+			.titulo_noticia{
+				margin: 0 .5em;
+				width: 60%;
+			}
+			.datos{
+				color: #CCBEB4;
+				font-size: 10px;
+				font-weight: bold;
+				margin: 20px 0 0 20px;  
+
+			}
+			.datos p{
+				display: block;
+				margin:0;
+			}
+
+@media screen and (min-width: 680px){
+
+	.noticias{
+		width: 100%;
+	}
+		.noticia{
+			display: inline-block;
+			margin: 1em 2%;
+			width: 45%;
+		}
+			.media, .titulo_noticia{
+				width: 100%;
+				text-align: center;
+			}
+
+			.titulo_noticia{
+				text-align: justify;
+			}
+	.perfil{
+		margin-top: 188px;
+	}
+
+}
+
+@media screen and ( min-width: 1200px ){
+	.noticia{
+		width: 27%;
+	}
+}

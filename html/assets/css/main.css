@@ -99,6 +99,9 @@ img.pull-left { margin-right: 10px; }
 		background: none;
 	    color: white;
 	}
+.navbar-nav .btn{
+	border: none;	
+}
 .perfil{
 	background-color: #FFEDE1;
 	border-bottom: 5px solid #0DACFF;
@@ -174,6 +177,7 @@ img.pull-left { margin-right: 10px; }
 	}
 	.fuentes #label{
 		font-size: 18px;
+		margin-left: 15px;
 		padding: .2em 0 .2em .5em;
 	}
 
@@ -238,7 +242,7 @@ img.pull-left { margin-right: 10px; }
 				text-align: justify;
 			}
 	.perfil{
-		margin-top: 188px;
+		margin-top: 128px;
 	}
 
 }
@@ -246,5 +250,8 @@ img.pull-left { margin-right: 10px; }
 @media screen and ( min-width: 1200px ){
 	.noticia{
 		width: 27%;
+	}
+	.perfil{
+		margin-top: 100px;
 	}
 }

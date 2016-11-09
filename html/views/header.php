@@ -30,12 +30,28 @@
 						<li><a class="btn" href="/sign-in">Mi cuenta</a></li>
 					<?php else: ?>
 						<li><a href="/noticias">Noticias</a></li>
-						<li><a href="/primeras-planas">Primeras Planas</a></li>
-						<li><a href="/columnas-financieras">Columnas Financieras</a></li>
-						<li><a href="/columnas-politicas">Columnas Politicas</a></li>
-						<li><a href="/portadas-financieras">Portadas Financieras</a></li>
-						<li><a href="/cartones">Cartones</a></li>
-						<li><a href="/reporte">Reporte</a></li>
+						<li class="dropdown">
+							<a class="btn dropdown-toggle user" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" href="javascript:void(0);">
+					        	Portadas
+					        	<span class="caret"></span>
+					      	</a>
+							<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+								<li><a href="/primeras-planas">Primeras Planas</a></li>
+								<li><a href="/portadas-financieras">Portadas Financieras</a></li>
+								<li><a href="/cartones">Cartones</a></li>								
+							</ul>
+						</li>
+						<li class="dropdown">
+							<a class="btn dropdown-toggle user" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" href="javascript:void(0);">
+					        	Columnas
+					        	<span class="caret"></span>
+					      	</a>
+							<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+								<li><a href="/columnas-financieras">Columnas Financieras</a></li>
+								<li><a href="/columnas-politicas">Columnas Politicas</a></li>
+							</ul>
+						</li>
+						<li><a href="/reporte">Reporte</a></li>								
 						<li>
 							<div class="dropdown">
 							 	<button class="btn dropdown-toggle user" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">

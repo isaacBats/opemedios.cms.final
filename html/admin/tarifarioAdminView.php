@@ -12,13 +12,13 @@
 					<input  name="nombre" class="form-control" placeholder="Tarifario - El universal" />
 					<span class="help-block">El nombre debe de tener relacion con la fuente ejemplo: Tarifario - El Universal.</span>
 				</div>
-				<div class="form-group col-md-4">
+				<!-- <div class="form-group col-md-4">
 					<label for="columnas">Columnas: </label>
 					<input  name="columnas" class="form-control" placeholder="seccion, par, impar, ..." />
 					<span class="help-block">Las columnas deben ir en minusculas separadas por una ","</span>
-				</div>
+				</div> -->
 				<div class="form-group col-md-4">
-					<label for="columnas">Archivo: </label>
+					<label for="file">Archivo: </label>
 					<input  type="file" name="file" />
 					<span class="help-block">El archivo solo debe de contener las columnas que ingreso. El nombre del archivo debe de ser la fuente</span>
 				</div>

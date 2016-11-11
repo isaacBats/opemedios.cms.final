@@ -1,3 +1,4 @@
+<?= $this->flashAlerts('tarifario'); ?>
 <div class="row">
 	<div class="col-sm-12">
 		<h1 class="page-header">Administrador de tarifarios</h1>

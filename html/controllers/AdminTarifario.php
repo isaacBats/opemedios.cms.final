@@ -25,14 +25,14 @@ class AdminTarifario extends Controller
 		if( isset( $_SESSION['admin'] ) && !empty($_POST) ){
 			
 			$name = $_POST['nombre'];
-			// $columns = [ explode( ',', $_POST['columnas'] ) ];
 			
 			$file = $_FILES['file'];
+			// Obtenemos los datos del archivo CSV
 			$csv = array_map( 'str_getcsv', file($file['tmp_name']) );
+			
 			$columns = $csv[0];
 			$secciones = array_column( $csv, 0);
-			// $cabecera = array_shift( $secciones );
-			// echo '<pre>'; print_r(['secciones' => $csv, ]); exit;
+			
 			$explode = explode(".", $file["name"]);
 			$extension = strtolower( end($explode) );
 			$file['createdName'] = str_replace( ' ', '_', $explode[0] ) . '_' . time() . '_'.$_SESSION['admin']['id_usuario'].'.' . $extension;
@@ -45,7 +45,7 @@ class AdminTarifario extends Controller
 			if( !is_dir( $pathFile ) ){
 				mkdir( $pathFile, 0755, true);
 			}			
-			//save file excel
+			//save file CSV
 			$saveFile = $adminNews->guardaArchivo( $file, $pathFile );
 
 			$tarifarioRepo = new TarifarioRepository();
@@ -54,7 +54,6 @@ class AdminTarifario extends Controller
 			$tarifarioSaved = $tarifarioRepo->addTariff( $name, serialize( $columns ), $pathFile . $file['createdName']);
 			
 			$result = new stdClass();
-			// echo '<pre>'; print_r($csv); echo '</pre>'; exit;
 			if( $tarifarioSaved->exito ){
 				$tariff = $tarifarioSaved->row;
 				$tariffSecciones = array();
@@ -65,20 +64,17 @@ class AdminTarifario extends Controller
 				}
 
 				$valuesSections = array();
-				foreach ($csv as $row) {
-					foreach ($tariffSecciones as $values) {
-						$valor = $tarifarioRepo->addValues( $values->lastID, serialize( $row ) );
-						array_push( $valuesSections, $valor);
-					}
+				$i = 0;
+				foreach ($tariffSecciones as $values) {
+					$valor = $tarifarioRepo->addValues( $values->lastID, serialize( $csv[$i] ) );
+					array_push( $valuesSections, $valor);
+					$i++;
 				}
 				$result->mensaje = 'Se ha agregado el tarifario correctamente';
 				$result->tipo = 'alert-info';
 				$result->tarifario = $tarifarioSaved;
 				$result->secciones = $tariffSecciones;
 				$result->values = $valuesSections;
-				// echo '<pre>'; var_dump($csv); echo '</pre>'; exit;
-				// $rs->mensaje = 'Se ha agregado el tarifario correctamente';
-				
 			}else{
 				$result->mensaje = 'No se agrego el tarifario';
 				$result->tipo = 'alert-danger';

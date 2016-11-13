@@ -86,10 +86,13 @@ img.pull-left { margin-right: 10px; }
 }
 
 .clientes{
-	margin: 0 auto;
 }
 .clientes #img_client img{
 	padding: 1em;
+	transition: all .2s ease-in-out;
+}
+.clientes #img_client img:hover{
+	transform: scale(1.1);
 }
 
 .user{

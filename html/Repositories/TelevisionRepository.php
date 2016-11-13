@@ -20,14 +20,17 @@ class TelevisionRepository extends BaseRepository{
 	public function addFontTV( $font ){
 
 		$idNewFont = $this->addFont($font);
-		$sql = 'INSERT INTO fuente_tel (id_fuente, conductor, canal, horario, id_senal) 
-								VALUES(:idFuente, :conductor, :canal, :horario, :idSenal)';
+		$sql = 'INSERT INTO fuente_tel (id_fuente, conductor, canal, desde, hasta, id_senal) 
+								VALUES(:idFuente, :conductor, :canal, :desde, :hasta, :idSenal)';
 
+		$desde = new \DateTime( $font['desde'] );
+		$hasta = new \DateTime( $font['hasta'] );
 		$query = $this->pdo->prepare($sql);
 		$query->bindParam(':idFuente',$idNewFont);
 		$query->bindParam(':conductor',$font['conductor']);
 		$query->bindParam(':canal',$font['canal']);
-		$query->bindParam(':horario',$font['horario']);
+		$query->bindParam(':desde', $desde->format('Y-m-d H:m:s'));
+		$query->bindParam(':hasta', $hasta->format('Y-m-d H:m:s'));
 		$query->bindParam(':idSenal',$font['senal']);
 		
 		if($query->execute()){

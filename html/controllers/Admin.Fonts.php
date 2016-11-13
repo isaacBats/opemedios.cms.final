@@ -40,9 +40,20 @@ class AdminFonts extends Controller{
 
 	protected function addFont( $campos, $fuente ){
 
-		$this->header_admin('Agregar Fuente de '.$fuente.' - ');
+		$css = '
+				<link href="/admin/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+			   ';
+
+		$js = '
+				<!-- Select2 JavaScript -->
+			    <script type="text/javascript" src="/assets/bower_components/moment/min/moment.min.js"></script>
+			    <script src="/admin/js/datetimepicker.js"></script>
+			  ';
+		
+
+		$this->header_admin('Agregar Fuente de '.$fuente.' - ', $css);
 		require $this->adminviews . 'addFont.php';
-		$this->footer_admin();
+		$this->footer_admin( $js );
 
 	}
 

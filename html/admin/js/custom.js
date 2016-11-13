@@ -35,13 +35,24 @@ $(document).ready(function(){
             });
         });
 
-    }catch(e){
+        // Summernote
+    $('#summernote').summernote({
+        height: 200
+    });
 
+    }catch(e){
+        console.log(e);
     }
 
     $('.fechaNota').datepicker({
     dateFormat: 'yy-mm-dd',
     startDate: '-3d'
+    });
+
+    $(function () {
+        $('.relojd').datetimepicker({
+            format: 'LTS'
+        });
     });
 
     /* Filtro clientes envia correo */
@@ -340,10 +351,7 @@ $(document).ready(function(){
 
     flashAlerts();
     
-    // Summernote
-    $('#summernote').summernote({
-        height: 200
-    });
+    
 
 
 

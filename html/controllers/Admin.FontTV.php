@@ -1,9 +1,7 @@
 <?php 
 
 include_once('Admin.Fonts.php');
-include_once(__DIR__.'/../Repositories/TelevisionRepository.php');
-include_once(__DIR__.'/../Repositories/CoberturaRepository.php');
-include_once(__DIR__.'/../Repositories/SenalRepository.php');
+use utilities\MediaDirectory;
 
 class AdminFontTV extends AdminFonts{
 
@@ -11,6 +9,7 @@ class AdminFontTV extends AdminFonts{
 	private $coberturaRepository;
 	private $senalRepository;
 	private $fuente;
+	private $urlLogo;
 
 	public function __construct(){
 
@@ -18,13 +17,15 @@ class AdminFontTV extends AdminFonts{
 		$this->coberturaRepository 	= new CoberturaRepository();
 		$this->senalRepository 		= new SenalRepository();
 		$this->fuente 				= 'Television';
+		$this->urlLogo				= MediaDirectory::LOGO_FUENTES;
 	}
 
 	public function add(){
 
 		if( isset( $_SESSION['admin'] ) ){
-			$campos = '';
-			require $this->adminviews . 'addFontTV.php';
+			ob_start();
+				require $this->adminviews . 'addFontTV.php';
+			$campos = ob_get_clean();
 			$this->addFont($campos, $this->fuente );
 		}else{
             header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
@@ -35,11 +36,16 @@ class AdminFontTV extends AdminFonts{
 
 		if( !empty($_POST) ){
 
+			$logo = $_FILES['logo'];
 			$id_television = $this->tvRepository->idFuenteTV();
 			$id_cobertura = $this->coberturaRepository->findIdByDescription($_POST['cobertura']);
 			$_POST['tipoFuente'] = $id_television;
 			$_POST['cobertura'] = $id_cobertura;
-			$_POST['logo'] = 'default.jpg';
+
+			$adminColumn = new AdminColumns();
+			$guardarLogo = $adminColumn->saveImages( $logo, $this->urlLogo );
+
+			$_POST['logo'] = $guardarLogo['originName'];
 			if(isset($_POST['activo'])){
 				$_POST['activo'] = 1;
 			}else{
@@ -52,10 +58,19 @@ class AdminFontTV extends AdminFonts{
 				$_POST['senal'] = $id_senal;
 			}
 			if($this->tvRepository->addFontTV($_POST)){
+				
+				$alert = new stdClass();
+				$alert->tipo = 'alert-info';
+				$alert->mensaje = 'Se agrego la fuente <strong>' . $_POST['nombre'] . '</strong> Correctamente!!!';
+				$_SESSION['alerts']['fuentes'] = $alert;
 				header('Location: /panel/fonts/show-list');
 				// echo 'Se ha agregado una fuente de TV correctamente';
 			}else{
-				echo 'No se agrego a la tabla fuente_tel';
+				$alert = new stdClass();
+				$alert->tipo = 'alert-danger';
+				$alert->mensaje = 'No se agrego la fuente <strong>' . $_POST['nombre'] . '</strong> :(';
+				$_SESSION['alerts']['fuentes'] = $alert;
+				header( 'Location: ' . $_SERVER['HTTP_REFERER'] );
 			}
 			
 		}else{

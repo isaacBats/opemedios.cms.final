@@ -236,7 +236,7 @@ class AdminColumns extends Controller
 
 	}
 
-	private function saveImages( $file, $path )
+	public function saveImages( $file, $path )
 	{
 		$im = new Image();
 

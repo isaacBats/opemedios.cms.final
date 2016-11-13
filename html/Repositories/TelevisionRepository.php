@@ -25,12 +25,13 @@ class TelevisionRepository extends BaseRepository{
 
 		$desde = new \DateTime( $font['desde'] );
 		$hasta = new \DateTime( $font['hasta'] );
+
 		$query = $this->pdo->prepare($sql);
 		$query->bindParam(':idFuente',$idNewFont);
 		$query->bindParam(':conductor',$font['conductor']);
 		$query->bindParam(':canal',$font['canal']);
-		$query->bindParam(':desde', $desde->format('Y-m-d H:m:s'));
-		$query->bindParam(':hasta', $hasta->format('Y-m-d H:m:s'));
+		$query->bindParam(':desde', $desde->format('H:i:s'));
+		$query->bindParam(':hasta', $hasta->format('H:i:s'));
 		$query->bindParam(':idSenal',$font['senal']);
 		
 		if($query->execute()){

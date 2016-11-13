@@ -85,6 +85,13 @@ img.pull-left { margin-right: 10px; }
 	
 }
 
+.clientes{
+	margin: 0 auto;
+}
+.clientes #img_client img{
+	padding: 1em;
+}
+
 .user{
 	background-color: #2E2E2E;
     color: rgba(255, 255, 255, 0.6);

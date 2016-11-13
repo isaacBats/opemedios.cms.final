@@ -1,5 +1,5 @@
 <header id="head" class="secondary"></header>
-<div class="container row">
+<div class="container row clientes">
 	<h1 class="page-title">Clientes</h1>
 	<figure id="img_client">
 		<img src="/assets/images/clientes/liverpool.png" width="auto" height="auto" alt="liverpool">		

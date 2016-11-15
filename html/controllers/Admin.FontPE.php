@@ -52,7 +52,7 @@ class AdminFontPE extends AdminFonts{
 			}
 			
 			if($this->periodicoRepository->addFontPE($_POST)){
-				// echo 'Se ha agregado una fuente de TV correctamente';
+				// echo 'Se ha agregado una fuente de PE correctamente';
 				$alert = new stdClass();
 				$alert->tipo = 'alert-info';
 				$alert->mensaje = 'Se agrego la fuente <strong>' . $_POST['nombre'] . '</strong> Correctamente!!!';

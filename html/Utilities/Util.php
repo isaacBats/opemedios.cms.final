@@ -15,4 +15,15 @@ class Util
 				return 'CARTON';
 		}
 	}
+
+	public static function tipoFuente( $tipoFuenteId ){
+		$tipoFuente = [
+						['id' => 1, 'fuente' => 'Televisión', 'icon' => 'fa-television'], 
+						['id' => 2, 'fuente' => 'Radio', 	  'icon' => 'fa-microphone'], 
+						['id' => 3, 'fuente' => 'Periódico',  'icon' => 'fa-newspaper-o'], 
+						['id' => 4, 'fuente' => 'Revista',    'icon' => 'fa-columns'], 
+						['id' => 5, 'fuente' => 'Internet',   'icon' => 'fa-chrome'],
+					  ];
+		return $tipoFuente[ $tipoFuenteId ];
+	}
 }

@@ -19,7 +19,7 @@ class NoticiasRepository extends BaseRepository{
 		
 		extract( $data );
 
-		$sql = ' 	SELECT n.id_noticia AS id, n.encabezado, f.nombre AS nameFont
+		$sql = ' 	SELECT n.id_noticia AS id, n.encabezado, f.nombre AS nameFont, n.id_tipo_fuente
 					FROM noticia n
 					INNER JOIN fuente f ON n.id_fuente = f.id_fuente
 					WHERE fecha = CURDATE()	

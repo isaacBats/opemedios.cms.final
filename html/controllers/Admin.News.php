@@ -3,6 +3,7 @@
 include 'Image.php';
 
 require_once('Mail.php');
+use utilities\Util;
 
 class AdminNews extends Controller{
 
@@ -39,7 +40,9 @@ class AdminNews extends Controller{
 
 					$html .= '
 							<tr>
-		                        <td></td>
+		                        <td style="text-align: center;">
+	                        		<i class="fa ' . Util::tipoFuente($noticia['id_tipo_fuente'] - 1)['icon'] . ' fa-3" style="font-size:40px; "></i>
+	                        	</td>
 		                        <td>
 		                        	<span>' . $noticia['id'] . '</span>
 		                        	<p>' . $noticia['encabezado'] . '</p>
@@ -47,10 +50,10 @@ class AdminNews extends Controller{
 		                        <td>'.$noticia['nameFont'].'</td>
 		                        <td>' .$enviado. '</td>
 		                        <td>
-									<a href="/panel/new/view/' . $noticia['id'] . '"><i class="fa fa-eye"></i></a>	
-									<a href="/panel/new/edit/' . $noticia['id'] . '"><i class="fa fa-pencil"></i></a>	
-									<a href="/panel/new/send/' . $noticia['id'] . '"><i class="fa fa-envelope-o"></i></a>	
-									<a href=""><i class="fa fa-trash-o"></i></a>	
+									<a class = "p5" href="/panel/new/view/' . $noticia['id'] . '"><i class="fa fa-eye"></i></a>	
+									<a class = "p5" href="/panel/new/edit/' . $noticia['id'] . '"><i class="fa fa-pencil"></i></a>	
+									<a class = "p5" href="/panel/new/send/' . $noticia['id'] . '"><i class="fa fa-envelope-o"></i></a>	
+									<a class = "p5" href=""><i class="fa fa-trash-o"></i></a>	
 		                        </td>
 		                    </tr>
 					';

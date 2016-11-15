@@ -36,10 +36,15 @@ $(document).ready(function(){
         });
 
         // Summernote
-    $('#summernote').summernote({
-        height: 200
-    });
+        $('#summernote').summernote({
+            height: 200
+        });
 
+        $(function () {
+            $('.relojd').datetimepicker({
+                format: 'LTS'
+            });
+        });
     }catch(e){
         console.log(e);
     }
@@ -49,11 +54,6 @@ $(document).ready(function(){
     startDate: '-3d'
     });
 
-    $(function () {
-        $('.relojd').datetimepicker({
-            format: 'LTS'
-        });
-    });
 
     /* Filtro clientes envia correo */
     jQuery('input.filtro-clientes').on('keyup', function(event) {

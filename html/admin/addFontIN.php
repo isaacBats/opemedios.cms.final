@@ -1,8 +1,4 @@
-<?php 
-
-$campos = '
-            <div class="form-group">
-                <input class="form-control" placeholder="URL Portal" name="urlPortal">
-            </div>                            
-          ';    
-                            
+<div class="form-group col-sm-9">
+	<label>Url del portal</label>
+    <input class="form-control" placeholder="http://www.opemedios.com.mx" name="urlPortal">
+</div>

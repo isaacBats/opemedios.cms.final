@@ -1,4 +1,5 @@
 <?php 
+use utilities\Util;
 
 class AdminFonts extends Controller{
 
@@ -13,13 +14,16 @@ class AdminFonts extends Controller{
 	public function showFonts(){
 
 		if( isset( $_SESSION['admin'] ) ){
+
 			$this->header_admin('Fuentes - ' );
 			$fuentes = $this->fuentesRepository->showAllFonts();
 			$html = '';
 			foreach ($fuentes as $fuente) {
 				$html .= '
 						<tr>
-	                        <td></td>
+	                        <td>
+	                        	<i class="fa ' . Util::tipoFuente($fuente['id_tipo_fuente'] - 1)['icon'] . ' fa-3" style="font-size:40px;"></i>
+	                        </td>
 	                        <td>'.$fuente['nombre'].'</td>
 	                        <td>'.$fuente['empresa'].'</td>
 	                        <td>'.$fuente['logo'].'</td>

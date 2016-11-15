@@ -27,9 +27,9 @@ class AdminFonts extends Controller{
 	                        <td>'.$fuente['nombre'].'</td>
 	                        <td>'.$fuente['empresa'].'</td>
 	                        <td><img src="/'.$fuente['logo'].'" alt="'.$fuente['nombre'].'" width="150" /></td>
-	                        <td width="150">
-	          					<a class="btn btn-default" href="javascript:void(0);">Ver</a>
-	          					<a class="btn btn-danger" href="javascript:void(0);">Eliminar</a>
+	                        <td width="170">
+	          					<a class="btn btn-default" href="/panel/fonts/detail/'.$fuente['id_tipo_fuente'].'-'.$fuente['id_fuente'].'">Ver</a>
+	          					<a class="btn btn-danger" href="javascript:void(0);">Dar de baja</a>
 	          				</td>
 	                    </tr>
 				';
@@ -42,22 +42,45 @@ class AdminFonts extends Controller{
         }
 	}
 
+	public function fontDetail( $id )
+	{
+		if( isset( $_SESSION['admin'] ) ){
+
+			$explode = explode('-', $id);
+			// $font = $this->fuentesRepository->getFontById( $id );
+			$font = $this->fuentesRepository->getFontById( $explode[1], Util::tipoFuente($explode[0] - 1 )['pref']);
+			// echo '<pre>';print_r($font);
+			
+			$this->header_admin('Detalle - ' . $font['nombre'] . ' - ' );
+				require $this->adminviews . 'detailFontView.php';
+			$this->footer_admin();
+					
+		}else{
+            header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
+        }
+	}
+
 	protected function addFont( $campos, $fuente ){
 
-		$css = '
-				<link href="/admin/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
-			   ';
+		if( isset( $_SESSION['admin'] ) ){
 
-		$js = '
-				<!-- Select2 JavaScript -->
-			    <script type="text/javascript" src="/assets/bower_components/moment/min/moment.min.js"></script>
-			    <script src="/admin/js/datetimepicker.js"></script>
-			  ';
-		
+			$css = '
+					<link href="/admin/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+				   ';
 
-		$this->header_admin('Agregar Fuente de '.$fuente.' - ', $css);
-		require $this->adminviews . 'addFont.php';
-		$this->footer_admin( $js );
+			$js = '
+					<!-- Select2 JavaScript -->
+				    <script type="text/javascript" src="/assets/bower_components/moment/min/moment.min.js"></script>
+				    <script src="/admin/js/datetimepicker.js"></script>
+				  ';
+			
+
+			$this->header_admin('Agregar Fuente de '.$fuente.' - ', $css);
+			require $this->adminviews . 'addFont.php';
+			$this->footer_admin( $js );
+		}else{
+            header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
+        }
 
 	}
 

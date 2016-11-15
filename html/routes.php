@@ -85,6 +85,11 @@ $collection->attachRoute(new Route('/panel/fonts/show-list', array(
     'methods' => 'GET'
 )));
 
+$collection->attachRoute(new Route('/panel/fonts/detail/:id', array(
+    '_controller' => 'AdminFonts::fontDetail',
+    'methods' => 'GET'
+)));
+
 
 //Fonts Television 
 $collection->attachRoute(new Route('/panel/font/add/font-television', array(

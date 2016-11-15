@@ -21,15 +21,15 @@ class AdminFonts extends Controller{
 			foreach ($fuentes as $fuente) {
 				$html .= '
 						<tr>
-	                        <td>
+	                        <td style="text-align: center;">
 	                        	<i class="fa ' . Util::tipoFuente($fuente['id_tipo_fuente'] - 1)['icon'] . ' fa-3" style="font-size:40px;"></i>
 	                        </td>
 	                        <td>'.$fuente['nombre'].'</td>
 	                        <td>'.$fuente['empresa'].'</td>
-	                        <td>'.$fuente['logo'].'</td>
-	                        <td>
-	          					<a class="btn btn-default btn-sm" href="javascript:void(0);">Ver</a>
-	          					<a class="btn btn-danger btn-sm" href="javascript:void(0);">Eliminar</a>
+	                        <td><img src="/'.$fuente['logo'].'" alt="'.$fuente['nombre'].'" width="150" /></td>
+	                        <td width="150">
+	          					<a class="btn btn-default" href="javascript:void(0);">Ver</a>
+	          					<a class="btn btn-danger" href="javascript:void(0);">Eliminar</a>
 	          				</td>
 	                    </tr>
 				';

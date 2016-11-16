@@ -16,5 +16,22 @@ class CoberturaRepository extends BaseRepository{
 		}
 	}
 
+	public function getCoberturaById( $id )
+	{
+		$cobertura = $this->pdo->query( "SELECT * FROM cobertura WHERE id_cobertura = $id" );
+
+		$result = new stdClass();
+
+		if( $cobertura ){
+			$result->exito = TRUE;
+			$result->rows = ( sizeof( $cobertura ) > 0 ) ? $cobertura->fetch( \PDO::FETCH_ASSOC )['descripcion'] : 'No se encontro la cobertura';	
+		}else{
+			$result->exito = FALSE;
+			$result->error = $this->pdo->errorInfo();
+		}
+
+		return $result;
+	}
+
 	
 }

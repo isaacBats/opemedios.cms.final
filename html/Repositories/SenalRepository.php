@@ -16,4 +16,21 @@ class SenalRepository extends BaseRepository{
 		}
 	}
 
+	public function getSenalById( $id )
+	{
+		$senal = $this->pdo->query( "SELECT * FROM senal WHERE id_senal = $id" );
+
+		$result = new stdClass();
+
+		if( $senal ){
+			$result->exito = TRUE;
+			$result->rows = ( sizeof( $senal ) > 0 ) ? $senal->fetch( \PDO::FETCH_ASSOC )['descripcion'] : 'No se encontro la señal';	
+		}else{
+			$result->exito = FALSE;
+			$result->error = $this->pdo->errorInfo();
+		}
+
+		return $result;
+	}
+
 }

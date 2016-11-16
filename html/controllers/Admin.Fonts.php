@@ -5,10 +5,14 @@ class AdminFonts extends Controller{
 
 	private $fuentesRepository;
 	private $sectionRepository;
+	private $coberturaRepository;
+	private $senalRepository;
 
 	public function __construct(){
 		$this->fuentesRepository = new FuentesRepository();
 		$this->sectionRepository 	= new SeccionRepository();
+		$this->coberturaRepository 	= new CoberturaRepository();
+		$this->senalRepository 	= new SenalRepository();
 	}
 
 	public function showFonts(){
@@ -49,6 +53,19 @@ class AdminFonts extends Controller{
 			$explode = explode('-', $id);
 			// $font = $this->fuentesRepository->getFontById( $id );
 			$font = $this->fuentesRepository->getFontById( $explode[1], Util::tipoFuente($explode[0] - 1 )['pref']);
+			$font['tipo fuente'] = Util::tipoFuente( $explode[0] -1 )['fuente'];
+			$cobertura = $this->coberturaRepository->getCoberturaById( $font['id_cobertura'] );
+			$font['cobertura'] = ($cobertura->exito) ? $cobertura->rows : 'Covertura no especificada';
+			if( $explode[0] == 1 && isset( $font['id_senal'] ) ){
+				$senal = $this->senalRepository->getSenalById( $font['id_senal'] );				
+				$font['señal'] = ($senal->exito) ? $senal->rows : 'Señal no especificada';
+				$desde = new DateTime( $font['desde'] );
+				$hasta = new DateTime( $font['hasta'] );
+				$font['desde'] = $desde->format('H:i');
+				$font['hasta'] = $hasta->format('H:i');
+			}
+			$font['activo'] = ( $font['activo'] ) ? 'Si' : 'No';
+
 			// echo '<pre>';print_r($font);
 			
 			$this->header_admin('Detalle - ' . $font['nombre'] . ' - ' );

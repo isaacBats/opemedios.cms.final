@@ -6,10 +6,9 @@
 		<img src="/<?= $font['logo']  ?>" alt="<?= $font['nombre'] ?>" width="320">
 	</div>
 	<div class="col-md-8">
-		<strong>Empresa: </strong><span><?= $font['empresa'] ?></span>
-		<br><strong>Activo: </strong><span><?= ($font['activo'])? 'SI':'NO'; ?></span>
-		<strong></strong>
-		<strong></strong>
-		<strong></strong>
+		<?php foreach ($font as $key => $value): 
+				if( $key != 'id_fuente' && $key != 'id_cobertura' && $key != 'logo' && $key != 'id_tipo_fuente' && $key != 'id_senal' ): ?>
+					<p><strong><?= ucwords( $key ) ?>: </strong><?= $value ?></p>
+		<?php endif; endforeach; ?>
 	</div>
 </div>

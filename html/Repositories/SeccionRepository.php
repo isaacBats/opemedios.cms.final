@@ -12,26 +12,6 @@ class SeccionRepository extends BaseRepository{
 		return $rs;
 	}
 
-	// public function addSector( $font ){
-
-	// 	$sql = 'INSERT INTO sector (nombre, descripcion, activo) 
-	// 							VALUES(:nombre, :descripcion, :activo)';
-
-	// 	$query = $this->pdo->prepare($sql);
-	// 	$query->bindParam(':nombre',$font['nombre']);
-	// 	$query->bindParam(':descripcion',$font['descripcion']);
-	// 	$query->bindParam(':activo',$font['activo']);
-		
-	// 	if($query->execute()){
-	// 		return true;
-	// 		// echo 'se ejecuto correctamente la segunda sentencia';
-	// 	}else{
-	// 	 	return false;
-	// 	 	// echo 'No se ejecuto la segunda sentencia';
-	// 	}
-
-	// }
-
 	public function allSecciones( $activo = 0 ){
 		
 		if($activo == 1 ){
@@ -64,6 +44,36 @@ class SeccionRepository extends BaseRepository{
 		}
 
 		return $sections;
+	}
 
+	public function getSectionsByFont( $id )
+	{
+		$sections = $this->pdo->prepare( "SELECT * FROM seccion WHERE id_fuente = :id" );
+
+		$result = new stdClass();
+
+		if( $sections->execute([ ':id' => $id ]) ){
+			$result->exito = TRUE;
+			$result->rows = ( $sections->rowCount() > 0 ) ? $sections->fetchAll( \PDO::FETCH_ASSOC ) : 'No se encontraron secciones';	
+		}else{
+			$result->exito = FALSE;
+			$result->error = $sections->errorInfo();
+		}
+
+		return $result;
+	}
+
+	public function changeActive( $sectionId )
+	{
+		$result = new stdClass();
+
+		if( $this->pdo->exec( "UPDATE seccion SET activo = NOT activo WHERE id_seccion = $sectionId;" ) === 1 ){
+			$result->exito = TRUE;
+		}else{
+			$result->exito = FALSE;
+			$result->error = $this->pdo->errorInfo()[2];
+		}
+		
+		return $result;
 	}
 }

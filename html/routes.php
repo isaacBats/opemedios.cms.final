@@ -309,8 +309,14 @@ $collection->attachRoute(new Route('/panel/news/block/send', array(
 // )));
 
 //Sections of Fonts
+    // Sections
 $collection->attachRoute(new Route('/panel/get/seccion/:id', array(
     '_controller' => 'AdminFonts::getSectionsByFontId',
+    'methods' => 'GET'
+)));
+
+$collection->attachRoute(new Route('/panel/font/section/change-state', array(
+    '_controller' => 'AdminFonts::changeState',
     'methods' => 'GET'
 )));
 

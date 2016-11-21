@@ -51,7 +51,6 @@ class AdminFonts extends Controller{
 		if( isset( $_SESSION['admin'] ) ){
 
 			$explode = explode('-', $id);
-			// $font = $this->fuentesRepository->getFontById( $id );
 			$font = $this->fuentesRepository->getFontById( $explode[1], Util::tipoFuente($explode[0] - 1 )['pref']);
 			$font['tipo fuente'] = Util::tipoFuente( $explode[0] -1 )['fuente'];
 			$cobertura = $this->coberturaRepository->getCoberturaById( $font['id_cobertura'] );
@@ -66,9 +65,17 @@ class AdminFonts extends Controller{
 			}
 			$font['activo'] = ( $font['activo'] ) ? 'Si' : 'No';
 
+			$getSections = $this->sectionRepository->getSectionsByFont( $explode[1] );	
+			$sections = ( $getSections->exito ) ? $getSections->rows : $getSections->error[2];
+			if(is_array( $sections ) ){
+				$sections = array_map( function( $s ){
+					$s['activo'] = ( $s['activo'] ) ? ['class' => 'fa-check-circle green', 'activo' => TRUE] : ['class' => 'fa-times-circle red', 'activo' => FALSE];
+					return $s;
+				}, $sections);
+			}
 			// echo '<pre>';print_r($font);
 			
-			$this->header_admin('Detalle - ' . $font['nombre'] . ' - ' );
+			$this->header_admin('Detalle - ' . $font['nombre'] . ' - ');
 				require $this->adminviews . 'detailFontView.php';
 			$this->footer_admin();
 					
@@ -117,5 +124,28 @@ class AdminFonts extends Controller{
             header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
         }
 		
+	}
+
+	public function changeState()
+	{
+		if( isset( $_SESSION['admin'] ) ){
+			$sectionId = $_GET['section'];
+			$action = $_GET['action'];
+			$res = new stdClass();
+			$state = $this->sectionRepository->changeActive( $sectionId );
+			if( $state->exito ){
+				$res->exito = TRUE;
+				$res->class = 'alert-info';
+				$res->text = 'Se ha ' . $action . ' la seccion con exito!!!';
+			}else{
+				$res->exito = FALSE;
+				$res->class = 'alert-warning';
+				$res->text = $state->error;
+			}
+			header('Content-type: text/json');
+	        echo json_encode($res);		
+		}else{
+            header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
+        }
 	}
 }

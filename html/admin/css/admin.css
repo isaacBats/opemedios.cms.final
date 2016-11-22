@@ -3,6 +3,14 @@
 	display: inline-block;
 }
 
+.form-agregar-seccion{
+  border-top: 1px solid #D8FACE;
+  border-bottom: 1px solid #D8FACE;
+  border-radius: .3em;
+  margin: 1.2em 0;
+  padding: 1em .5em 1em 0;
+}
+
 .green, .red{
   font-size: 1.5em;
 }

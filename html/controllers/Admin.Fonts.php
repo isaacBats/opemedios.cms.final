@@ -51,7 +51,8 @@ class AdminFonts extends Controller{
 		if( isset( $_SESSION['admin'] ) ){
 
 			$explode = explode('-', $id);
-			$font = $this->fuentesRepository->getFontById( $explode[1], Util::tipoFuente($explode[0] - 1 )['pref']);
+			$fontId = $explode[1];
+			$font = $this->fuentesRepository->getFontById( $fontId, Util::tipoFuente($explode[0] - 1 )['pref']);
 			$font['tipo fuente'] = Util::tipoFuente( $explode[0] -1 )['fuente'];
 			$cobertura = $this->coberturaRepository->getCoberturaById( $font['id_cobertura'] );
 			$font['cobertura'] = ($cobertura->exito) ? $cobertura->rows : 'Covertura no especificada';
@@ -65,7 +66,7 @@ class AdminFonts extends Controller{
 			}
 			$font['activo'] = ( $font['activo'] ) ? 'Si' : 'No';
 
-			$getSections = $this->sectionRepository->getSectionsByFont( $explode[1] );	
+			$getSections = $this->sectionRepository->getSectionsByFont( $fontId );	
 			$sections = ( $getSections->exito ) ? $getSections->rows : $getSections->error[2];
 			if(is_array( $sections ) ){
 				$sections = array_map( function( $s ){
@@ -147,5 +148,34 @@ class AdminFonts extends Controller{
 		}else{
             header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
         }
+	}
+
+	public function addSection()
+	{
+		if( isset( $_SESSION['admin'] ) ){
+			
+			$section = new stdClass();
+			$section->nombre = $_POST['nombre'];
+			$section->descripcion = ( !empty( $_POST['decripcion'] ) ) ? $_POST['decripcion'] : 'Sin descripción';
+			$section->fuenteId = $_POST['fuenteId'];
+
+			// vdd($section);
+			$res = new stdClass();
+			$state = $this->sectionRepository->addSection( $section );
+			if( $state->exito ){
+				$res->exito = TRUE;
+				$res->class = 'alert-info';
+				$res->text = 'Se ha agregado la seccion con exito!!!';
+			}else{
+				$res->exito = FALSE;
+				$res->class = 'alert-warning';
+				$res->text = $state->error;
+			}
+
+			header('Content-type: text/json');
+	        echo json_encode($res);		
+		}else{
+            header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
+        }	
 	}
 }

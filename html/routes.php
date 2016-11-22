@@ -320,6 +320,11 @@ $collection->attachRoute(new Route('/panel/font/section/change-state', array(
     'methods' => 'GET'
 )));
 
+$collection->attachRoute(new Route('/panel/font/section/add', array(
+    '_controller' => 'AdminFonts::addSection',
+    'methods' => 'POST'
+)));
+
 //Selection of Tema
 $collection->attachRoute(new Route('/panel/get/temas/:id', array(
     '_controller' => 'AdminEmpresa::getIssuesByCompanyId',

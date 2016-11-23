@@ -16,7 +16,7 @@
 <div class="row">
 	<div class="col-sm-12 form-agregar-seccion" style="display: none">
 		<div class="col-sm-3 plus-secction"></div>
-		<form action="/panel/font/section/add" method="post" class="form-horizontal col-sm-6" >
+		<form action="/panel/font/section/add" method="post" class="form-horizontal col-sm-6" id="form-agrega-seccion">
 			<input type="hidden" value="<?= $fontId ?>" name="fuenteId">
 			<div class="form-group">
 				<label class="col-sm-3 control-label">Nombre</label>

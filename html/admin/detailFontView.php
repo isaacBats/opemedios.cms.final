@@ -14,7 +14,7 @@
 </div>
 <!-- Formulario para agregar una seccion -->
 <div class="row">
-	<div class="col-sm-12 form-agregar-seccion">
+	<div class="col-sm-12 form-agregar-seccion" style="display: none">
 		<div class="col-sm-3 plus-secction"></div>
 		<form action="/panel/font/section/add" method="post" class="form-horizontal col-sm-6" >
 			<input type="hidden" value="<?= $fontId ?>" name="fuenteId">
@@ -38,7 +38,7 @@
 				</div>
 			</div>
 			<button class="btn btn-primary pull-right">Crear</button>
-			<button class="btn btn-warning pull-right" type="button" style="margin: 0 10px 0 0;">Cancelar</button>
+			<button class="btn btn-warning pull-right cancelar" type="button" style="margin: 0 10px 0 0;">Cancelar</button>
 		</form>
 		<div class="col-sm-3 plus-secction"></div>
 	</div>

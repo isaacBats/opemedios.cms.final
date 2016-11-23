@@ -365,6 +365,16 @@ $(document).ready(function(){
     //Actializa la pagina 
     $('#block-save').click(function(){ window.location.reload() });
 
+    // Esconder aparecer formulario de seccion para las fuentes
+    $('#agregarSeccionAction').on('click', function(){
+        $('.form-agregar-seccion').slideToggle();
+    });
+
+    $('.cancelar').on('click', function(){
+        $('.form-agregar-seccion').slideToggle();
+    });
+
+
     /********************** drag an drop  **************************/
 
     

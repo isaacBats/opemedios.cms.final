@@ -16,6 +16,18 @@ class Util
 		}
 	}
 
+	public static function tipoUsuario( $tipo )
+	{
+		switch ( $tipo ) {
+			case 1:
+				return 'Administrador';
+			case 2:
+				return 'Encargado de Area';
+			case 3:
+				return 'Monitorista';
+		}
+	}
+
 	public static function tipoFuente( $tipoFuenteId ){
 		$tipoFuente = [
 						['id' => 1, 'fuente' => 'Televisión', 'icon' => 'fa-television', 'pref' => 'tel', ], 

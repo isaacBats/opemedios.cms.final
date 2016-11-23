@@ -25,7 +25,7 @@
     <div class="col-lg-12">
         <div class="panel panel-default">
             <div class="panel-heading">
-                Bienvenido : Usuario
+                Bienvenido : <?= $_SESSION['admin']['nombre'] . ' ' . $_SESSION['admin']['apellidos'] ?>
             </div>
             <div class="panel-body">
                 <div class="table-responsive">
@@ -44,11 +44,13 @@
                         </tbody>
                     </table>
                     <div class="col-md-6">
-                    <p id="bootpag_text">
-                        Mostrando registros del <b><?= $ini ?></b> al <b><?= $end ?></b> de un total de <b><?= $count ?></b> registros.
-                    </p>
-                </div>
-                <div class="col-md-6"><p id="bootpag_pag" data-count="<?= $count ?>"></p></div>
+                        <p id="bootpag_text">
+                            Mostrando registros del <b><?= $ini ?></b> al <b><?= $end ?></b> de un total de <b><?= $count ?></b> registros.
+                        </p>
+                    </div>
+                    <div class="col-md-6">
+                        <p id="bootpag_pag" data-count="<?= $count ?>"></p>
+                    </div>
                 </div>
                 <!-- /.table-responsive -->
             </div>

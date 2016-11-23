@@ -7,6 +7,24 @@
     </div>
     <!-- /.row -->
     <div class="row">
+        <form class="" id="bootpag_text_count">
+            <div class="form-inline">
+                <div class="col-sm-12" id="bootpag_nummc">
+                    <label for="exampleInputName2">Mostrar &nbsp;</label>
+                    <input type="hidden" value="1" name="page" id="current_page">
+                    <select name="numpp" id="bootpag_text_count_select" class="form-control input-sm">
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                        <option value="25">25</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                    </select>
+                    <label for="exampleInputName2">&nbsp; Registros</label>
+                </div>                  
+            </div>  
+        </form>
+    </div>
+    <div class="row">
     <div class="col-lg-12">
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -28,6 +46,14 @@
                             <?= $html  ?>
                         </tbody>
                     </table>
+                    <div class="col-md-6">
+                        <p id="bootpag_text">
+                            Mostrando registros del <b><?= $ini ?></b> al <b><?= $end ?></b> de un total de <b><?= $count ?></b> registros.
+                        </p>
+                    </div>
+                    <div class="col-md-6">
+                        <p id="bootpag_pag" data-count="<?= $count ?>"></p>
+                    </div>
                 </div>
                 <!-- /.table-responsive -->
             </div>

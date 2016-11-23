@@ -19,8 +19,32 @@ class AdminFonts extends Controller{
 
 		if( isset( $_SESSION['admin'] ) ){
 
-			$this->header_admin('Fuentes - ' );
-			$fuentes = $this->fuentesRepository->showAllFonts();
+			$js = '
+					<!-- Libreria jquery-bootpag --> 
+					<script src="/admin/js/vendors/bootstrap/jquery.bootpag.min.js"></script>
+					<!-- Libreria purl --> 
+					<script src="/admin/js/vendors/purl/purl.min.js"></script>
+					<!-- Paginador con js --> 
+					<script src="/assets/js/panel.paginador.js"></script>
+			';
+
+			$css = '
+
+					<!-- panel_paginator CSS -->
+				    <link href="/admin/css/panel.main.css" rel="stylesheet">
+				    <!-- data tables bootstrap CSS -->
+				    <link href="/admin/css/dataTables.bootstrap.css" rel="stylesheet">
+			';
+
+			$limit = isset( $_GET['numpp'] ) ? $_GET['numpp'] : 10;
+			$page = isset( $_GET['page'] ) ? ( $_GET['page'] * $limit ) - $limit : 0;
+
+			$fuentes = $this->fuentesRepository->showAllFonts( $limit, $page);
+
+			$count = $this->fuentesRepository->getCountAllFonts();
+			$ini = $page + 1;
+			$end = ( $page + $limit >= $count ) ? $count : $page + $limit;
+			
 			$html = '';
 			foreach ($fuentes as $fuente) {
 				$html .= '
@@ -39,8 +63,11 @@ class AdminFonts extends Controller{
 				';
 			}
 
+
+
+			$this->header_admin('Fuentes - ', $css);
 			require $this->adminviews . 'showFonts.php';
-			$this->footer_admin();
+			$this->footer_admin( $js );
 		}else{
             header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
         }
@@ -178,4 +205,7 @@ class AdminFonts extends Controller{
             header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
         }	
 	}
+
+	//TODO: @Adminfonts Falta Editar una fuente
+	//TODO: Para la seccion de fuentes tambien falta crear un paginador en la seccion de ver todas fuentes y talvez un filtro
 }

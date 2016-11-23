@@ -46,6 +46,23 @@ class EmpresaRepository extends BaseRepository{
 		return $empresas;
 	}
 
+	public function showAllCompanies( $limit, $offset )
+	{
+		$empresas = new stdClass();
+
+		$stmt = $this->pdo->prepare(" SELECT * FROM empresa ORDER BY id_empresa DESC LIMIT $limit OFFSET $offset;");
+		if($stmt->execute()){
+			$empresas->exito = true;
+			$empresas->rows = ( $stmt->rowCount() > 0 ) ? $stmt->fetchAll( \PDO::FETCH_ASSOC) : 0;
+			$empresas->count = $this->pdo->query(' SELECT COUNT(*) AS count FROM empresa; ')->fetch()['count'];
+		}else{
+			$empresas->exito = false;
+			$empresas->error = $stmt->errorInfo()[2];
+		}
+
+		return $empresas;	
+	}
+
 	public function getContactsbyEmpresaId( $empresa_id )
 	{
 		$sql = "SELECT e.id_empresa AS empresaid, e.nombre AS empresa, t.id_tema AS temaid, t.nombre AS tema, c.id_cuenta AS cuentaid, CONCAT(c.nombre, ' ', c.apellidos) AS nombre_cuenta, c.email AS correo FROM empresa_tema_cuenta etc INNER JOIN empresa e ON etc.id_empresa = e.id_empresa INNER JOIN tema t ON etc.id_tema = t.id_tema INNER JOIN cuenta c ON etc.id_cuenta = c.id_cuenta WHERE c.activo = " . UserState::ACTIVE . " AND e.id_empresa = " . $empresa_id;

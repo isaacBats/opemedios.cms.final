@@ -331,6 +331,19 @@ $collection->attachRoute(new Route('/panel/get/temas/:id', array(
     'methods' => 'GET'
 )));
 
+//Empresas
+$collection->attachRoute(new Route('/panel/companies', array(
+    '_controller' => 'AdminEmpresa::showCompanies',
+    'methods' => 'GET'
+)));
+
+//Usuarios
+$collection->attachRoute(new Route('/panel/users', array(
+    '_controller' => 'AdminUsuario::showUsers',
+    'methods' => 'GET'
+)));
+
+
 //Tarifario
     //admin tariff
 $collection->attachRoute(new Route('/panel/tariff', array(

@@ -207,5 +207,5 @@ class AdminFonts extends Controller{
 	}
 
 	//TODO: @Adminfonts Falta Editar una fuente
-	//TODO: Para la seccion de fuentes tambien falta crear un paginador en la seccion de ver todas fuentes y talvez un filtro
+	//TODO: @AdminFonts Falta borrar una fuente
 }

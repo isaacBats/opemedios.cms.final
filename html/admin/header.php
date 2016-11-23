@@ -243,7 +243,7 @@
                                     <a href="flot.html">Agregar Cliente</a>
                                 </li>
                                 <li>
-                                    <a href="flot.html">Administrar Cliente</a>
+                                    <a href="/panel/companies">Administrar Cliente</a>
                                 </li>
                             </ul>
                         </li>
@@ -254,7 +254,7 @@
                                     <a href="flot.html">Agregar Usuario</a>
                                 </li>
                                 <li>
-                                    <a href="flot.html">Administrar Usuarios</a>
+                                    <a href="/panel/users">Administrar Usuarios</a>
                                 </li>
                             </ul>
                         </li>                        

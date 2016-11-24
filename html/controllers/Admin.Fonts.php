@@ -183,6 +183,7 @@ class AdminFonts extends Controller{
 			
 			$section = new stdClass();
 			$section->nombre = $_POST['nombre'];
+			$section->autor = $_POST['autor'];
 			$section->descripcion = ( !empty( $_POST['decripcion'] ) ) ? $_POST['decripcion'] : 'Sin descripción';
 			$section->fuenteId = $_POST['fuenteId'];
 

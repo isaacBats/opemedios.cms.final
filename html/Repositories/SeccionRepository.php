@@ -82,8 +82,9 @@ class SeccionRepository extends BaseRepository{
 		$result = new stdClass();
 		$activo = 1;
 
-		$stmt = $this->pdo->prepare( ' INSERT INTO seccion ( nombre, descripcion, activo, id_fuente ) VALUES ( :nombre, :descripcion, :activo, :fuente); ' );
+		$stmt = $this->pdo->prepare( ' INSERT INTO seccion ( nombre, autor, descripcion, activo, id_fuente ) VALUES ( :nombre, :autor, :descripcion, :activo, :fuente); ' );
 		$stmt->bindParam(':nombre', 	 $seccion->nombre, 		\PDO::PARAM_STR);
+		$stmt->bindParam(':autor', 		 $seccion->autor, 		\PDO::PARAM_STR);
 		$stmt->bindParam(':descripcion', $seccion->descripcion, \PDO::PARAM_STR);
 		$stmt->bindParam(':activo', 	 $activo,				\PDO::PARAM_INT);
 		$stmt->bindParam(':fuente',  	 $seccion->fuenteId, 	\PDO::PARAM_INT);

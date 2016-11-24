@@ -32,6 +32,19 @@
 				</div>
 			</div>
 			<div class="form-group">
+				<label class="col-sm-3 control-label">Autor</label>
+				<div class="col-sm-8">
+					<input 
+						class="form-control" 
+						name="autor"  
+						autocomplete="off" 
+						placeholder="Ejem.: Eduardo Vega" 
+						required="required" 
+						data-rule-required="true" 
+						data-msg="Introduce el nombre del autor de la sección" />	
+				</div>
+			</div>
+			<div class="form-group">
 				<label class="col-sm-3 control-label">Descripción</label>
 				<div class="col-sm-8">
 					<textarea class="form-control" name="decripcion" rows="6" required></textarea>					
@@ -74,6 +87,7 @@
 	                        <tr>
 	                            <th>#</th>
 	                            <th>Nombre</th>
+	                            <th>Autor</th>
 	                            <th>Descripción</th>
 	                            <th>Activa</th>
 	                            <th>Acción</th>
@@ -84,6 +98,7 @@
 	                        <tr>
 	                            <td><?= $key + 1 ?></td>
 	                            <td><?= $section['nombre'] ?></td>
+	                            <td><?= $section['autor'] ?></td>
 	                            <td><?= $section['descripcion'] ?></td>
 	                            <td class="fa <?= $section['activo']['class'] ?>">
 	                            </td>

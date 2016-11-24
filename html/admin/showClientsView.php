@@ -51,7 +51,7 @@
                                     <td><?= $c['contacto'] ?></td>
                                     <td><?= $c['giro'] ?></td>
                                     <td>
-                                        <a href="javascript:void(0);"><i class="p5 fa fa-eye" style="font-size: 1.3em;"></i></a> 
+                                        <a href="/panel/client/<?= $c['id_empresa'] ?>"><i class="p5 fa fa-eye" style="font-size: 1.3em;"></i></a> 
                                         <!-- <a href="javascript:void(0);"><i class="p5 fa fa-pencil"></i></a>  
                                         <a href="javascript:void(0);"><i class="p5 fa fa-envelope-o"></i></a>  
                                         <a href="javascript:void(0);"><i class="p5 fa fa-trash-o"></i></a> -->

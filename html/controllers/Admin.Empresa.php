@@ -53,6 +53,24 @@ class AdminEmpresa extends Controller
         }
 	}
 
+	public function clientDetail( $id )
+	{
+		if( isset( $_SESSION['admin'] ) ){
+
+			$client = $this->empresaRepo->get( $id );
+			$client = ( $client->exito ) ? $client->rows : $client->error;
+
+			$thems = $this->temaRep->getThemaByEmpresaID( $id );	
+			
+			$this->header_admin('Detalle - ' . $client['nombre'] . ' - ');
+				require $this->adminviews . 'detailClientView.php';
+			$this->footer_admin();
+					
+		}else{
+            header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
+        }
+	}
+
 	public function getIssuesByCompanyId( $id )
 	{
 		$issues = null;

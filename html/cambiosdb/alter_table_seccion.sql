@@ -1,0 +1,2 @@
+ALTER TABLE seccion 
+ADD COLUMN `autor` VARCHAR(140) DEFAULT NULL AFTER `descripcion`;

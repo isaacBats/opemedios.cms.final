@@ -63,6 +63,22 @@ class EmpresaRepository extends BaseRepository{
 		return $empresas;	
 	}
 
+	public function get( $id )
+	{
+		$empresa = new stdClass();
+
+		$stmt = $this->pdo->prepare(" SELECT * FROM empresa WHERE id_empresa = $id;");
+		if($stmt->execute()){
+			$empresa->exito = true;
+			$empresa->rows = ( $stmt->rowCount() > 0 ) ? $stmt->fetch( \PDO::FETCH_ASSOC) : 0;
+		}else{
+			$empresa->exito = false;
+			$empresa->error = $stmt->errorInfo()[2];
+		}
+
+		return $empresa;	
+	}
+
 	public function getContactsbyEmpresaId( $empresa_id )
 	{
 		$sql = "SELECT e.id_empresa AS empresaid, e.nombre AS empresa, t.id_tema AS temaid, t.nombre AS tema, c.id_cuenta AS cuentaid, CONCAT(c.nombre, ' ', c.apellidos) AS nombre_cuenta, c.email AS correo FROM empresa_tema_cuenta etc INNER JOIN empresa e ON etc.id_empresa = e.id_empresa INNER JOIN tema t ON etc.id_tema = t.id_tema INNER JOIN cuenta c ON etc.id_cuenta = c.id_cuenta WHERE c.activo = " . UserState::ACTIVE . " AND e.id_empresa = " . $empresa_id;

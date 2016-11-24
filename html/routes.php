@@ -337,6 +337,11 @@ $collection->attachRoute(new Route('/panel/companies', array(
     'methods' => 'GET'
 )));
 
+$collection->attachRoute(new Route('/panel/client/:id', array(
+    '_controller' => 'AdminEmpresa::clientDetail',
+    'methods' => 'GET'
+)));
+
 //Usuarios
 $collection->attachRoute(new Route('/panel/users', array(
     '_controller' => 'AdminUsuario::showUsers',

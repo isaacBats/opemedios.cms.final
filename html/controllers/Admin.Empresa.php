@@ -82,4 +82,7 @@ class AdminEmpresa extends Controller
             header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
         }
 	}
+	// TODO: @AdminEmpresa Falta crear el formulario para agregar un cliente.
+	// TODO: @AdminEmpresa Falta el metodo para agregar una seccion.
+	// TODO: @AdminEmpresa Falta el metodo para agregar una cuenta relacionada a un tema.
 }

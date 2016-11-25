@@ -47,12 +47,12 @@
                         <?php if( is_array( $users ) ): ?>
                             <?php foreach ($users as $key => $u): ?>
                                 <tr>
-                                    <td><?= $key + 1 ?></td>
+                                    <td><?= ($key  + 1 * $page) + 1 ?></td>
                                     <td><?= $u['nombre'] ?></td>
                                     <td><?= Util::tipoUsuario( $u['id_tipo_usuario'] ) ?></td>
                                     <td><?= $u['cargo'] ?></td>
                                     <td>
-                                        <a href="javascript:void(0);"><i class="p5 fa fa-eye" style="font-size: 1.3em;"></i></a> 
+                                        <a href="/panel/user/<?= $u['id_usuario'] ?>"><i class="p5 fa fa-eye" style="font-size: 1.3em;"></i></a> 
                                         <!-- <a href="javascript:void(0);"><i class="p5 fa fa-pencil"></i></a>  
                                         <a href="javascript:void(0);"><i class="p5 fa fa-envelope-o"></i></a>  
                                         <a href="javascript:void(0);"><i class="p5 fa fa-trash-o"></i></a> -->

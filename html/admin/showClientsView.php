@@ -46,7 +46,7 @@
                         <?php if( is_array( $clients ) ): ?>
                             <?php foreach ($clients as $key => $c): ?>
                                 <tr>
-                                    <td><?= $key + 1 ?></td>
+                                    <td><?= ($key  + 1 * $page) + 1 ?></td>
                                     <td><?= $c['nombre'] ?></td>
                                     <td><?= $c['contacto'] ?></td>
                                     <td><?= $c['giro'] ?></td>

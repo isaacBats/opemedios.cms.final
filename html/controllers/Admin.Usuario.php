@@ -50,4 +50,22 @@ class AdminUsuario extends Controller {
             header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
         }
     }
+
+    public function userDetail( $id )
+    {
+        if( isset( $_SESSION['admin'] ) ){
+            
+            $user = $this->usuariosRepo->get( $id );
+
+            $this->header_admin('Detalle de ' . $user['nombre'] . ' ' . $user['apellidos'] . ' - ');
+            require $this->adminviews . 'userDetailView.php';
+            $this->footer_admin( );
+
+        }else{
+            header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
+        }   
+    }
+
+    // TODO: @AdminUsuario Falta editar un usuario.
+    // TODO: @AdminUsuario Falta crear un nuevo usuario.
 }

@@ -4,6 +4,14 @@ include_once("BaseRepository.php");
 
 class UsuarioRepository extends BaseRepository{
 
+	private $result;
+
+	function __construct()
+	{
+		$this->result = new stdClass();
+		parent::__construct();
+	}
+
 	public function showAllUsers( $limit, $offset )
 	{
 		$users = new stdClass();
@@ -19,5 +27,10 @@ class UsuarioRepository extends BaseRepository{
 		}
 
 		return $users;	
+	}
+
+	public function get( $id )
+	{
+		return $this->pdo->query( "SELECT * FROM usuario WHERE id_usuario = $id" )->fetch(\PDO::FETCH_ASSOC);
 	}
 }

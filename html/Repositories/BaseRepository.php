@@ -5,10 +5,10 @@ class BaseRepository {
 	protected $pdo = null;
 
 	function __construct()
-		{
-			global $_config;
-			$this->pdo = new PDO($_config->db["dsn"], $_config->db["nombre_usuario"], $_config->db["password"], $_config->db["opciones"]);
-		}
+	{
+		global $_config;
+		$this->pdo = new PDO($_config->db["dsn"], $_config->db["nombre_usuario"], $_config->db["password"], $_config->db["opciones"]);
+	}
 
 	public function addFont( $font ){
 		$sql = "INSERT INTO fuente (nombre, empresa, comentario, logo, activo, id_tipo_fuente, id_cobertura) 

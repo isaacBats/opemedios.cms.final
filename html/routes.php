@@ -348,6 +348,11 @@ $collection->attachRoute(new Route('/panel/users', array(
     'methods' => 'GET'
 )));
 
+$collection->attachRoute(new Route('/panel/user/:id', array(
+    '_controller' => 'AdminUsuario::userDetail',
+    'methods' => 'GET'
+)));
+
 
 //Tarifario
     //admin tariff

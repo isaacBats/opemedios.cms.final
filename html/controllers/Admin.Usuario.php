@@ -56,6 +56,8 @@ class AdminUsuario extends Controller {
         if( isset( $_SESSION['admin'] ) ){
             
             $user = $this->usuariosRepo->get( $id );
+            $tipoUsuarios = $this->usuariosRepo->getUsersTypes();
+            // echo '<pre>'; print_r($tipoUsuarios); exit;
 
             $this->header_admin('Detalle de ' . $user['nombre'] . ' ' . $user['apellidos'] . ' - ');
             require $this->adminviews . 'userDetailView.php';

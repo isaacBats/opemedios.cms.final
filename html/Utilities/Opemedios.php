@@ -111,3 +111,10 @@ class TipoColumnas extends PHPEnum
 	const COLUMNAS_POLITICAS 	= 1;
 	const COLUMNAS_FINANCIERAS 	= 2;
 }
+
+class TipoUsuario extends PHPEnum
+{
+	const ADMINISTRADOR 	= 1;
+	const ENCARGADO_AREA 	= 2;
+	const MONITORISTA	 	= 3;
+}

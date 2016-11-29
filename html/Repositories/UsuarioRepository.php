@@ -33,4 +33,9 @@ class UsuarioRepository extends BaseRepository{
 	{
 		return $this->pdo->query( "SELECT * FROM usuario WHERE id_usuario = $id" )->fetch(\PDO::FETCH_ASSOC);
 	}
+
+	public function getUsersTypes()
+	{
+		return $this->pdo->query( "SELECT * FROM tipo_usuario" )->fetchAll( \PDO::FETCH_ASSOC );
+	}
 }

@@ -390,6 +390,11 @@ $(document).ready(function(){
         }
     });
 
+    // Muestra el formulario para editar un usuario
+    $('#btn-edit-user').on('click', function(){
+        $('#user-edit').slideToggle();
+    });
+
     /********************** drag an drop  **************************/
 
     

@@ -1,25 +1,29 @@
+<?= $this->flashAlerts('usuario'); ?>
 <div class="row" id="user-detail">
 	<div class="col-sm-12">
-		<h1 class="page-header"><?= $user['nombre'] . ' ' . $user['apellidos'] ?></h1>
+		<h1 class="page-header">
+			<?= $user['nombre'] . ' ' . $user['apellidos'] ?>
+			<button type="button" class="btn btn-success btn-lg pull-right" id="btn-edit-user">Editar</button>			
+		</h1>
 	</div>
 	<!-- <div class="col-md-6">
 		<img src="/<?php //echo $client['logo']  ?>" alt="<?php //echo $client['nombre'] ?>" width="320">
 	</div> -->
 	<div class="col-md-6">
 		<?php foreach ($user as $key => $value): 
-				if( $key != 'id_usuario' && $key != 'nombre' && $key != 'id_tipo_usuario' && $key != 'activo' && $key != 'apellidos' ): ?>
+				if( $key != 'id_usuario' && $key != 'nombre' && $key != 'id_tipo_usuario' && $key != 'activo' && $key != 'apellidos' && $key != 'password' ): ?>
 					<p><strong><?= ucwords( $key ) ?>: </strong><?= $value ?></p>
 		<?php endif; endforeach; ?>
 		<p><strong><?= ($user['activo'] == TRUE ) ? 'Usuario Activo' : 'Usuario Inactivo' ?></strong></p>
 	</div>
 </div>
-<div class="row" id="user-edit">
+<div class="row" id="user-edit" style="display: none;">
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			Editar a <?= $user['nombre'] . ' ' . $user['apellidos'] ?>
 		</div>
 		<div class="panel-body">
-			<form action="/panel/user/edit/<?= $user['id_usuario']?>" id="form-edit-user" class="form-horizontal">
+			<form action="/panel/user/edit/<?= $user['id_usuario']?>" id="form-edit-user" class="form-horizontal" method="post" >
 				<div class="col-sm-6">
 					<p>Datos personales: </p>
 					<hr>
@@ -99,7 +103,7 @@
 					<div class="form-group">
 						<label class="col-sm-2 control-label">Username*</label>
 						<div class="col-sm-8">
-							<input type="email" placeholder="juan1234" class="form-control col-sm-8" name="username" required="required" value="<?= $user['username'] ?>" />
+							<input placeholder="juan1234" class="form-control col-sm-8" name="username" required="required" value="<?= $user['username'] ?>" />
 						</div>
 					</div>
 					<div class="form-group">

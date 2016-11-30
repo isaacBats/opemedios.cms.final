@@ -38,4 +38,51 @@ class UsuarioRepository extends BaseRepository{
 	{
 		return $this->pdo->query( "SELECT * FROM tipo_usuario" )->fetchAll( \PDO::FETCH_ASSOC );
 	}
+
+	public function edit( array $user )
+	{
+		$qry = "UPDATE usuario SET nombre     = :nombre,
+								   apellidos  = :apellidos,
+								   direccion  = :direccion, 
+								   telefono1  = :tel_casa,
+								   telefono2  = :tel_cel,
+								   email      = :email,
+								   cargo      = :cargo, 
+								   comentario = :comentario,
+								   username   = :username,
+								   password   = :password,
+								   activo     = :activo,
+								   id_tipo_usuario = :tipoUsuario
+				WHERE id_usuario = :iduser;";
+
+		$data = [
+					':nombre' 	  => $user['nombre'],
+					':apellidos'  => $user['apellidos'],
+					':direccion'  => $user['direccion'],
+					':tel_casa'   => $user['tel_casa'],
+					':tel_cel' 	  => $user['celular'],
+					':email' 	  => $user['correo'],
+					':cargo' 	  => $user['cargo'],
+					':comentario' => $user['comentarios'],
+					':username'   => $user['username'],
+					':password'   => $user['password'],
+					':activo'     => $user['activo'],
+					':tipoUsuario' 	  => $user['tipo_usuario'],
+					':iduser'     => $user['id'],
+				];
+		$stmt = $this->pdo->prepare( $qry );
+
+		if( $stmt->execute( $data )){
+			$this->result->exito = true;
+			$this->result->tipo = 'alert-info';
+			$this->result->mensaje = 'Datos actializados <strong>Correctamente!!!</strong>';
+		}else{
+			$this->result->exito = false;
+			$this->result->tipo = 'alert-danger';
+            $this->result->mensaje = 'No se pudo actualizar tu perfil';
+            $this->result->error = $stmt->errorInfo()[2];;
+		}
+		
+		return $this->result;
+	}
 }

@@ -68,6 +68,24 @@ class AdminUsuario extends Controller {
         }   
     }
 
+    public function editUser( $id )
+    {
+        if( isset( $_SESSION['admin'] ) ){
+            
+            $user = $this->usuariosRepo->get( $id );
+            $_POST['password'] = ( $_POST['password'] != '' ) ? md5( $_POST['password'] ) : $user['password'];
+            $_POST['activo'] = isset( $_POST['activo'] ) ? 1 : 0;
+            $_POST['id'] = $id;
+            // vdd($_POST);
+            $update = $this->usuariosRepo->edit( $_POST );
+
+            $_SESSION['alerts']['usuario'] = $update;
+            header( 'Location: ' . $_SERVER['HTTP_REFERER'] );
+        }else{
+            header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
+        }   
+    }
+
     // TODO: @AdminUsuario Falta editar un usuario.
     // TODO: @AdminUsuario Falta crear un nuevo usuario.
 }

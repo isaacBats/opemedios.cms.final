@@ -36,7 +36,7 @@ class AdminController extends Controller{
 			if( $nr > 0 ){
 				$user = $query->fetchAll(PDO::FETCH_ASSOC);
 				if( isset( $user[0]["username"] ) ){
-					if($user[0]["password"] == $pass){
+					if($user[0]["password"] == md5( $pass ) ){
 						$_SESSION[ "admin"] = $user[0];	
 						header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel");
 					}else{

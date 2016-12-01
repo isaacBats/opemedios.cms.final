@@ -348,6 +348,16 @@ $collection->attachRoute(new Route('/panel/users', array(
     'methods' => 'GET'
 )));
 
+$collection->attachRoute(new Route('/panel/user/add', array(
+    '_controller' => 'AdminUsuario::createUser',
+    'methods' => 'GET'
+)));
+
+$collection->attachRoute(new Route('/panel/user/add', array(
+    '_controller' => 'AdminUsuario::createUserAction',
+    'methods' => 'POST'
+)));
+
 $collection->attachRoute(new Route('/panel/user/:id', array(
     '_controller' => 'AdminUsuario::userDetail',
     'methods' => 'GET'

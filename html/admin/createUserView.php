@@ -1,28 +1,28 @@
 <div class="row" id="user-create">
-	<form action="/panel/user/add" id="form-add-user" class="form-horizontal">
+	<form action="/panel/user/add" id="form-add-user" class="form-horizontal" autocomplete="off" method="POST">
 		<div class="col-sm-6">
 			<p>Datos personales: </p>
 			<hr>
 			<div class="form-group">
-				<label class="col-sm-2 control-label">Nombre *</label>
+				<label class="col-sm-2 control-label">Nombre*</label>
 				<div class="col-sm-8">
 					<input type="text" placeholder="Juan" class="form-control" name="nombre" required="required">
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="col-sm-2 control-label">Apellidos *</label>
+				<label class="col-sm-2 control-label">Apellidos*</label>
 				<div class="col-sm-8">
 					<input type="text" placeholder="Perez" class="form-control col-sm-8" name="apellidos" required="required">
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="col-sm-2 control-label">Correo *</label>
+				<label class="col-sm-2 control-label">Correo*</label>
 				<div class="col-sm-8">
 					<input type="email" placeholder="juan@opemedios.com.mx" class="form-control col-sm-8" name="correo" required="required">
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="col-sm-2 control-label">Tel. Casa *</label>
+				<label class="col-sm-2 control-label">Tel. Casa*</label>
 				<div class="col-sm-8">
 					<input type="tel" placeholder="5545768789" maxlength="12" minlength="8" class="form-control col-sm-8" name="tel_casa" required="required">
 				</div>
@@ -44,10 +44,15 @@
 			<p>Datos laborales: </p>
 			<hr>
 			<div class="form-group">
-				<label class="col-sm-2 control-label">Tipo *</label>
+				<label class="col-sm-2 control-label">Tipo*</label>
 				<div class="col-sm-8">
 					<select name="tipo_usuario" class="form-control" required="required">
 						<option>Tipo usuario</option>
+						<?php foreach( $tipoUsuarios as $userType ): ?>
+							<option value="<?= $userType['id_tipo_usuario'] ?>" >
+								<?= $userType['descripcion'] ?>
+							</option>									
+						<?php endforeach; ?>
 					</select>
 				</div>
 			</div>
@@ -66,23 +71,23 @@
 			<p>Datos de sistema: </p>
 			<hr>
 			<div class="form-group">
-				<label class="col-sm-2 control-label">Username *</label>
+				<label class="col-sm-2 control-label">Username*</label>
 				<div class="col-sm-8">
-					<input type="email" placeholder="juan1234" class="form-control col-sm-8" name="username" required="required">
+					<input placeholder="juan1234" class="form-control col-sm-8" name="username" required="required">
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="col-sm-2 control-label">Password *</label>
+				<label class="col-sm-2 control-label">Password*</label>
 				<div class="col-sm-8">
-					<input type="password" class="form-control col-sm-8" name="password" >
+					<input type="password" class="form-control col-sm-8" name="password" required="required" >
 				</div>
 			</div>
-			<div class="checkbox">
+			<!-- <div class="checkbox">
 				<label>
 					<input type="checkbox" name="activo" > Activo 
 				</label>
-			</div>
-			<input type="submit" value="Crear" />
+			</div> -->
+			<input type="submit" value="Crear" class="btn btn-primary btn-lg pull-right" />
 		</div>
 	</form>		
 </div>

@@ -85,4 +85,41 @@ class UsuarioRepository extends BaseRepository{
 		
 		return $this->result;
 	}
+
+	public function create( array $user )
+	{
+		$qry = "INSERT INTO usuario ( nombre, apellidos, direccion, telefono1, telefono2, email, cargo, comentario, username, password, activo, id_tipo_usuario ) VALUES( :nombre, :apellidos, :direccion, :tel_casa, :tel_cel, :email, :cargo, :comentario, :username, :password, :activo, :tipoUsuario );";
+		
+		$data = [
+					':nombre' 	  => $user['nombre'],
+					':apellidos'  => $user['apellidos'],
+					':direccion'  => $user['direccion'],
+					':tel_casa'   => $user['tel_casa'],
+					':tel_cel' 	  => $user['celular'],
+					':email' 	  => $user['correo'],
+					':cargo' 	  => $user['cargo'],
+					':comentario' => $user['comentarios'],
+					':username'   => $user['username'],
+					':password'   => $user['password'],
+					':activo'     => $user['activo'],
+					':tipoUsuario'=> $user['tipo_usuario'],
+				];
+
+		$stmt = $this->pdo->prepare( $qry );
+
+		if( $stmt->execute( $data )){
+			$this->result->exito = true;
+			$this->result->tipo = 'alert-info';
+			$this->result->mensaje = '<strong>Exito: </strong> Se ha creado el usuario ' . $user['nombre'] . ' ' . $user['apellidos'] . ' exitosamente !!!';
+			$this->result->lastID = $this->pdo->lastInsertId();
+			$this->result->row = $this->pdo->query('SELECT * FROM usuario WHERE id_usuario = ' . $this->result->lastID)->fetch(\PDO::FETCH_ASSOC);
+		}else{
+			$this->result->exito = false;
+			$this->result->tipo = 'alert-danger';
+            $this->result->mensaje = 'No se pudo crear el usuario';
+            $this->result->error = $stmt->errorInfo()[2];;
+		}
+		
+		return $this->result;
+	}
 }

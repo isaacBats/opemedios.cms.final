@@ -251,7 +251,7 @@
                             <a href="#"><i class="fa fa-users fa-fw"></i> Usuarios<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="flot.html">Agregar Usuario</a>
+                                    <a href="/panel/user/add">Agregar Usuario</a>
                                 </li>
                                 <li>
                                     <a href="/panel/users">Administrar Usuarios</a>

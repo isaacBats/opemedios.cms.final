@@ -1,8 +1,8 @@
 <?php use utilities\Util; ?>
-<?= $this->flashAlerts('clientes'); ?>
+<?= $this->flashAlerts('usuarios'); ?>
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header">Administrar Clientes</h1>
+            <h1 class="page-header">Administrar Usuarios</h1>
         </div>
         <!-- /.col-lg-12 -->
     </div>

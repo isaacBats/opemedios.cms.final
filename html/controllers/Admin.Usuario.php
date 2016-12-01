@@ -9,7 +9,8 @@ class AdminUsuario extends Controller {
         $this->usuariosRepo = new UsuarioRepository();
     }
 
-    public function showUsers() {
+    public function showUsers() 
+    {
         
         if( isset( $_SESSION['admin'] ) ){
             $js = '
@@ -57,8 +58,7 @@ class AdminUsuario extends Controller {
             
             $user = $this->usuariosRepo->get( $id );
             $tipoUsuarios = $this->usuariosRepo->getUsersTypes();
-            // echo '<pre>'; print_r($tipoUsuarios); exit;
-
+            
             $this->header_admin('Detalle de ' . $user['nombre'] . ' ' . $user['apellidos'] . ' - ');
             require $this->adminviews . 'userDetailView.php';
             $this->footer_admin( );
@@ -76,7 +76,7 @@ class AdminUsuario extends Controller {
             $_POST['password'] = ( $_POST['password'] != '' ) ? md5( $_POST['password'] ) : $user['password'];
             $_POST['activo'] = isset( $_POST['activo'] ) ? 1 : 0;
             $_POST['id'] = $id;
-            // vdd($_POST);
+            
             $update = $this->usuariosRepo->edit( $_POST );
 
             $_SESSION['alerts']['usuario'] = $update;
@@ -86,6 +86,50 @@ class AdminUsuario extends Controller {
         }   
     }
 
-    // TODO: @AdminUsuario Falta editar un usuario.
+    public function createUser()
+    {
+        if( isset( $_SESSION['admin'] ) ){
+            
+            $tipoUsuarios = $this->usuariosRepo->getUsersTypes();
+            
+            $this->header_admin('Crear usuario - ');
+            require $this->adminviews . 'createUserView.php';
+            $this->footer_admin( );
+
+        }else{
+            header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
+        }
+    }
+
+    public function createUserAction()
+    {
+        if( isset( $_SESSION['admin'] ) ){
+            
+            $rules = [
+                        'nombre'    => 'required',
+                        'apellidos' => 'required',
+                        'tel_casa'  => 'required',
+                        'username'  => 'required',
+                        'password'  => 'required',
+                        'tipo_usuario' => 'required',
+                     ];
+            $_POST['activo'] = TRUE;
+            $_POST['password'] = md5( $_POST['password'] );
+            
+            $user = $this->usuariosRepo->create( $_POST );
+
+            $_SESSION['alerts']['usuarios'] = $user;
+            header( 'Location: /panel/users' );
+
+        }else{
+            header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
+        }
+    }
+
+    private function validateForm( $data, $rules )
+    {
+        // Pendiente por crear
+    }
+
     // TODO: @AdminUsuario Falta crear un nuevo usuario.
 }

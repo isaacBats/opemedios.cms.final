@@ -604,7 +604,7 @@ class AdminNews extends Controller{
 
 			$idFuente = $tipoFuenteRepository->findIdByName( $nomFuente );
 			
-			$fuentes   = $fuentesRepository->showAllFonts( $idFuente );
+			$fuentes   = $fuentesRepository->showAllFonts( 0, 0, $idFuente );
 			$autores   = $tipoAutorRepository->allAuthors();
 			$generos   = $generoRepository->allGeneros();
 			//$sectores  = $sectorRepository->allSectors( 1 );
@@ -851,9 +851,9 @@ class AdminNews extends Controller{
 
 		$tema  = $temRep->getThemaByEmpresaID( $empresaid );
 
-		$temaid = null;
-		if( is_array($tema) )
-			$temaid = $tema['id_tema'];
+		// $temaid = null;
+		// if( is_array($tema) )
+		// 	$temaid = $tema['id_tema'];
 
 		$tendenciaid = $new['tendencia_id'];
 

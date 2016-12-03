@@ -146,8 +146,8 @@
     </style>
 
 </head>
-<body bgcolor="#222222" width="100%" style="margin: 0;">
-    <center style="width: 100%; background: #222222;">
+<body bgcolor="#e6eef4" width="100%" style="margin: 0;">
+    <center style="width: 100%; background: #e6eef4;">
 
         <!-- Visually Hidden Preheader Text : BEGIN -->
         <div style="display:none;font-size:1px;line-height:1px;max-height:0px;max-width:0px;opacity:0;overflow:hidden;mso-hide:all;font-family: sans-serif;">
@@ -192,8 +192,8 @@
                     <!-- Button : Begin -->
                     <table cellspacing="0" cellpadding="0" border="0" align="center" style="margin: auto">
                         <tr>
-                            <td style="border-radius: 3px; background: #222222; text-align: center;" class="button-td">
-                                <a href="http://alfa.opemedios.dev/panel/new/view/<?= $new['id'] ?>" target="_blank" style="background: #222222; border: 15px solid #222222; font-family: sans-serif; font-size: 13px; line-height: 1.1; text-align: center; text-decoration: none; display: block; border-radius: 3px; font-weight: bold;" class="button-a">
+                            <td style="border-radius: 3px; background: #1c0e0e; text-align: center;" class="button-td">
+                                <a href="http://alfa.opemedios.dev/panel/new/view/<?= $new['id'] ?>" target="_blank" style="background: #1c0e0e; border: 15px solid #1c0e0e; font-family: sans-serif; font-size: 13px; line-height: 1.1; text-align: center; text-decoration: none; display: block; border-radius: 3px; font-weight: bold;" class="button-a">
                                     &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#ffffff">Ver noticia completa</span>&nbsp;&nbsp;&nbsp;&nbsp;
                                 </a>
                             </td>

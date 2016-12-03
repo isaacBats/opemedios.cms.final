@@ -122,4 +122,11 @@ class UsuarioRepository extends BaseRepository{
 		
 		return $this->result;
 	}
+
+	public function getContactsByCompanyTheme( $company, $theme )
+	{
+		$qry = " SELECT c.* FROM empresa_tema_cuenta etc INNER JOIN cuenta c ON etc.id_cuenta = c.id_cuenta WHERE etc.id_empresa = $company AND id_tema = $theme; ";
+
+		return $this->pdo->query( $qry )->fetchAll(PDO::FETCH_ASSOC);
+	}
 }

@@ -4,11 +4,13 @@ class AdminEmpresa extends Controller
 {
 	private $temaRep;
 	private $empresaRepo;
+	private $userRepo;
 
 	function __construct()
 	{
 		$this->temaRep = new TemaRepository();
 		$this->empresaRepo = new EmpresaRepository();
+		$this->userRepo = new UsuarioRepository();
 	}
 
 	public function showCompanies()
@@ -59,8 +61,12 @@ class AdminEmpresa extends Controller
 
 			$client = $this->empresaRepo->get( $id );
 			$client = ( $client->exito ) ? $client->rows : $client->error;
-
-			$thems = $this->temaRep->getThemaByEmpresaID( $id );	
+			$thems = $this->temaRep->getThemaByEmpresaID( $id );
+			$thems = array_map( function( $theme ) use ( $id ){
+				$company = $id;
+				$theme['contacts'] = $this->userRepo->getContactsByCompanyTheme( $company, $theme['id_tema'] );
+				return $theme;
+			}, $thems);
 			
 			$this->header_admin('Detalle - ' . $client['nombre'] . ' - ');
 				require $this->adminviews . 'detailClientView.php';

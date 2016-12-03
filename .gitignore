@@ -42,3 +42,6 @@ html/assets/data/columnas/columnas_politicas/
 html/assets/data/columnas/columnas_financieras/
 #ignorando los logos de las fuentes
 html/assets/data/fuentes/
+
+#archivos de sublime
+*.sublime-*

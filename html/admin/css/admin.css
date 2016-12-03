@@ -3,6 +3,18 @@
 	display: inline-block;
 }
 
+.d-info{
+  color: #5bc0de;
+}
+
+.d-success{
+  color: #5cb85c;
+}
+
+.d-warning{
+  color: #f0ad4e;
+}
+
 .form-agregar-seccion{
   border-top: 1px solid #D8FACE;
   border-bottom: 1px solid #D8FACE;
@@ -61,6 +73,17 @@
 	margin-bottom: 20px;
 }
 
+.menu-actions-icon ul{
+  display: block;
+  list-style: none;
+}
+
+.menu-actions-icon ul li{
+  display: inline-block;
+  padding: .8em;
+  vertical-align: top;
+}
+
 .ml-20{
 	margin-left: 20px;
 }
@@ -93,7 +116,7 @@
     padding: 0 5px 0 0;
 }
 
-.red{
+.red, .d-danger{
     color: red; 
 }
 .resultados.clientes{

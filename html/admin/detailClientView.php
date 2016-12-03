@@ -84,9 +84,44 @@
 	                            <td><?= $key + 1 ?></td>
 	                            <td><?= $theme['nombre'] ?></td>
 	                            <td><?= $theme['descripcion'] ?></td>
-	                            <td>
-	                            	<a href="javascript:void(0)">Ver contactos</a>	                            	
+	                            <td class="menu-actions-icon">
+	                            	<ul>
+	                            		<li>
+	                            			<a class="d-success" href="javascript:void(0)"><i class="p5 fa fa-eye" style="font-size: 1.3em;"></i></a>
+	                            		</li>
+	                            		<li>
+	                            			<a class="d-warning" href="javascript:void(0)"><i class="p5 fa fa-trash-o" style="font-size: 1.3em;"></i></a>
+	                            		</li>
+	                            		<li>
+	                            			<a class="d-info btn-view-contacts" id="<?= $key + 1 ?>" data-id="<?= $key + 1 ?>" href="javascript:void(0)"><i class="p5 fa fa-group" style="font-size: 1.3em;"></i></a>
+	                            		</li>
+	                            	</ul>	                            	
 	                            </td>
+	                        </tr>
+	                        <tr style="display: none"  id="table<?= $key + 1 ?>">
+	                            <!-- Tabla para los contactos -->
+	                           	<td></td>
+	                           	<td colspan="2">
+		                            <table class="table table-striped table-bordered table-hover">
+		                            	<thead>
+		                            		<th>#</th>
+		                            		<th>Nombre</th>
+		                            		<th>Cargo</th>
+		                            		<th>Correo</th>
+		                            	</thead>
+		                            	<tbody>
+		                            		<?php foreach ($theme['contacts'] as $num => $user): ?>
+			                            		<tr>
+			                            			<td><?= $num + 1 ?></td>
+			                            			<td><?= $user['nombre'] . ' ' . $user['apellidos'] ?></td>
+			                            			<td><?= $user['cargo'] ?></td>
+			                            			<td><?= $user['email'] ?></td>
+			                            		</tr>
+		                            		<?php endforeach ?>
+		                            	</tbody>
+		                            </table>
+		                        </td>
+		                        <!-- /Fin de la tabla de los contactos -->
 	                        </tr>
 	                    <?php endforeach; ?>
 	                    </tbody>

@@ -395,6 +395,26 @@ $(document).ready(function(){
         $('#user-edit').slideToggle();
     });
 
+    // muestra y oculta los contacos de un tema 
+    $('.btn-view-contacts').on('click', function()
+   {
+        var $btn = $(this);
+        var $idTable = $btn.data('id');
+        var $cajita = $('#table' + $idTable);
+
+        if( $btn.class == 'd-info'){
+            $btn.removeClass('d-info');
+            $btn.addClass('d-danger');
+        }else{
+            $btn.addClass('d-info');
+        }
+        
+        $cajita.slideToggle();
+
+
+   });
+    
+
     /********************** drag an drop  **************************/
 
     

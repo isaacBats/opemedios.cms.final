@@ -5,12 +5,14 @@ class AdminEmpresa extends Controller
 	private $temaRep;
 	private $empresaRepo;
 	private $userRepo;
+	private $cuentaRepo;
 
 	function __construct()
 	{
-		$this->temaRep = new TemaRepository();
+		$this->temaRep     = new TemaRepository();
 		$this->empresaRepo = new EmpresaRepository();
-		$this->userRepo = new UsuarioRepository();
+		$this->userRepo    = new UsuarioRepository();
+		$this->cuentaRepo  = new CuentaRepository();
 	}
 
 	public function showCompanies()
@@ -67,7 +69,11 @@ class AdminEmpresa extends Controller
 				$theme['contacts'] = $this->userRepo->getContactsByCompanyTheme( $company, $theme['id_tema'] );
 				return $theme;
 			}, $thems);
-			
+
+			$counts = $this->cuentaRepo->getAcountsByCompany( $id );
+
+			// TODO: @AdminEmpresa Crear una tabla de cuentas relacionadas con la empresa y de acciones tendra crear una cuenta.
+
 			$this->header_admin('Detalle - ' . $client['nombre'] . ' - ');
 				require $this->adminviews . 'detailClientView.php';
 			$this->footer_admin();
@@ -95,7 +101,7 @@ class AdminEmpresa extends Controller
 
 			header('Content-type: text/json');
 	        echo json_encode($res);
-	        
+
 		}else{
             header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
         }

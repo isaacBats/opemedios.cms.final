@@ -44,6 +44,43 @@
 	</div>
 </div>
 <!-- /Formulario para agregar un tema -->
+<!-- Formulario para relaciona una cuenta a la empresa y tema-->
+<div class="row">
+	<div class="col-sm-12 form-r_cuenta-tema">
+		<div class="col-sm-3 plus-tema"></div>
+		<form action="/panel/client/theme-acount" method="post" class="form-horizontal col-sm-6" id="form-agrega-tema-cuenta">
+			<input type="hidden" value="<?= $id ?>" name="empresaId">
+			<div class="form-group">
+				<label class="col-sm-3 control-label">Tema</label>
+				<div class="col-sm-8">
+					<select name='tema' required="required" class="form-control">
+						<option value="">Selecciona un tema</option>
+						<?php foreach ($thems as $them): ?>
+						<option value="<?= $them['id_tema'] ?>"><?= $them['nombre'] ?></option>
+						<?php endforeach; ?>
+					</select>		
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">Cuenta</label>
+				<div class="col-sm-8">
+					<select name="cuenta" required="required" class="form-control">
+						<option>Selecciona una cuenta</option>
+						<?php if( is_array( $counts ) && sizeof( $counts ) > 0 ): 
+								foreach ($counts as $count): ?>
+									<option value="<?= $count['id_cuenta'] ?>"><?= $count['nombre'] . ' ' . $count['apellidos'] ?></option>
+						<?php 	endforeach; 
+							  endif; ?>
+					</select>
+				</div>
+			</div>
+			<button class="btn btn-primary pull-right">Relacionar</button>
+			<button class="btn btn-warning pull-right" id="cancelar-tema-cuenta" type="button" style="margin: 0 10px 0 0;">Cancelar</button>
+		</form>
+		<div class="col-sm-3 plus-secction"></div>		
+	</div>
+</div>
+<!-- /Formulario para relaciona una cuenta a la empresa y tema-->
 <!-- Temas -->
 <div class="row">
 	<div class="col-sm-12">
@@ -60,6 +97,11 @@
 	                        <li>
 	                        	<a href="javascript:void(0);" id="agregarTemaAction">
 	                        		Agregar nuevo tema
+	                        	</a>
+	                        </li>
+	                        <li>
+	                        	<a href="javascript:void(0);" id="agrega-cuenta-TemaAction">
+	                        		Relacionar cuenta
 	                        	</a>
 	                        </li>
 	                    </ul>

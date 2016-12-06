@@ -15,7 +15,7 @@
   color: #f0ad4e;
 }
 
-.form-agregar-seccion{
+.form-agregar-seccion, .form-agregar-tema, .form-r_cuenta-tema{
   border-top: 1px solid #D8FACE;
   border-bottom: 1px solid #D8FACE;
   border-radius: .3em;

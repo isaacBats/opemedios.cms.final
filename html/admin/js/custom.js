@@ -390,6 +390,31 @@ $(document).ready(function(){
         }
     });
 
+    // Esconder aparecer formulario de agregar tema a cliente
+    $('#agregarTemaAction').on('click', function(){
+        $('.form-agregar-tema').slideToggle();
+    });
+
+    $('.cancelar').on('click', function(){
+        $('.form-agregar-tema').slideToggle();
+    });
+
+    // Enviar Formulario de agregar tema para un cliente
+    $('#form-agrega-tema').validate({
+        submitHandler: function(form){
+            var $formulario = $(form);
+            var datos = $formulario.serialize();
+            $.post( $formulario.attr('action'), datos, function(json){
+                if (json.exito) {
+                    var $alert = $('.alert');
+                    $alert.addClass(json.class).html(json.text).delay(3000).fadeOut('slow', function() {
+                        window.location.reload();
+                    });
+                }
+            });
+        }
+    });
+
     // Muestra el formulario para editar un usuario
     $('#btn-edit-user').on('click', function(){
         $('#user-edit').slideToggle();
@@ -402,10 +427,11 @@ $(document).ready(function(){
         var $idTable = $btn.data('id');
         var $cajita = $('#table' + $idTable);
 
-        if( $btn.class == 'd-info'){
+        if( $btn.hasClass('d-info') ){
             $btn.removeClass('d-info');
             $btn.addClass('d-danger');
         }else{
+            $btn.removeClass('d-danger');
             $btn.addClass('d-info');
         }
         

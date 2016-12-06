@@ -77,6 +77,30 @@ class AdminEmpresa extends Controller
         }
 	}
 
+	public function addThemeAction()
+	{
+		if( isset( $_SESSION['admin'] ) ){
+			
+			$res = new stdClass();
+			$newTheme = $this->empresaRepo->addTheme( $_POST );
+			if( $newTheme->exito ){
+				$res->exito = TRUE;
+				$res->class = 'alert-info';
+				$res->text = 'Se ha agregado el tema con exito!!!';
+			}else{
+				$res->exito = FALSE;
+				$res->class = 'alert-warning';
+				$res->text = $newTheme->error;
+			}
+
+			header('Content-type: text/json');
+	        echo json_encode($res);
+	        
+		}else{
+            header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
+        }
+	}
+
 	public function getIssuesByCompanyId( $id )
 	{
 		$issues = null;

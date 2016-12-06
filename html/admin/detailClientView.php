@@ -12,7 +12,7 @@
 		<?php endif; endforeach; ?>
 	</div>
 </div>
-<!-- Formulario para agregar una seccion -->
+<!-- Formulario para agregar un tema -->
 <div class="row">
 	<div class="col-sm-12 form-agregar-tema" style="display: none">
 		<div class="col-sm-3 plus-tema"></div>
@@ -25,16 +25,16 @@
 						class="form-control" 
 						name="nombre"  
 						autocomplete="off" 
-						placeholder="Ejem.: Entretenimiento" 
+						placeholder="Ejem.: Recursos Ambientales" 
 						required="required" 
 						data-rule-required="true" 
-						data-msg="Introduce el nombre de la sección" />	
+						data-msg="Introduce el nombre del tema" />	
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-sm-3 control-label">Descripción</label>
 				<div class="col-sm-8">
-					<textarea class="form-control" name="decripcion" rows="6" required></textarea>					
+					<textarea class="form-control" name="descripcion" rows="6" required="required" data-rule-required="true" data-msg="Agrega una texto que describa el tema"></textarea>					
 				</div>
 			</div>
 			<button class="btn btn-primary pull-right">Crear</button>
@@ -43,8 +43,8 @@
 		<div class="col-sm-3 plus-secction"></div>
 	</div>
 </div>
-<!-- /Formulario para agregar una seccion -->
-<!-- Secciones -->
+<!-- /Formulario para agregar un tema -->
+<!-- Temas -->
 <div class="row">
 	<div class="col-sm-12">
 	    <div class="panel panel-default">
@@ -80,50 +80,52 @@
 	                    </thead>
 	                    <tbody>
 	                    	<?php foreach( $thems as $key => $theme ): ?>
-	                        <tr>
-	                            <td><?= $key + 1 ?></td>
-	                            <td><?= $theme['nombre'] ?></td>
-	                            <td><?= $theme['descripcion'] ?></td>
-	                            <td class="menu-actions-icon">
-	                            	<ul>
-	                            		<li>
-	                            			<a class="d-success" href="javascript:void(0)"><i class="p5 fa fa-eye" style="font-size: 1.3em;"></i></a>
-	                            		</li>
-	                            		<li>
-	                            			<a class="d-warning" href="javascript:void(0)"><i class="p5 fa fa-trash-o" style="font-size: 1.3em;"></i></a>
-	                            		</li>
-	                            		<li>
-	                            			<a class="d-info btn-view-contacts" id="<?= $key + 1 ?>" data-id="<?= $key + 1 ?>" href="javascript:void(0)"><i class="p5 fa fa-group" style="font-size: 1.3em;"></i></a>
-	                            		</li>
-	                            	</ul>	                            	
-	                            </td>
-	                        </tr>
-	                        <tr style="display: none"  id="table<?= $key + 1 ?>">
-	                            <!-- Tabla para los contactos -->
-	                           	<td></td>
-	                           	<td colspan="2">
-		                            <table class="table table-striped table-bordered table-hover">
-		                            	<thead>
-		                            		<th>#</th>
-		                            		<th>Nombre</th>
-		                            		<th>Cargo</th>
-		                            		<th>Correo</th>
-		                            	</thead>
-		                            	<tbody>
-		                            		<?php foreach ($theme['contacts'] as $num => $user): ?>
-			                            		<tr>
-			                            			<td><?= $num + 1 ?></td>
-			                            			<td><?= $user['nombre'] . ' ' . $user['apellidos'] ?></td>
-			                            			<td><?= $user['cargo'] ?></td>
-			                            			<td><?= $user['email'] ?></td>
-			                            		</tr>
-		                            		<?php endforeach ?>
-		                            	</tbody>
-		                            </table>
-		                        </td>
-		                        <!-- /Fin de la tabla de los contactos -->
-	                        </tr>
-	                    <?php endforeach; ?>
+		                        <tr>
+		                            <td><?= $key + 1 ?></td>
+		                            <td><?= $theme['nombre'] ?></td>
+		                            <td><?= $theme['descripcion'] ?></td>
+		                            <td class="menu-actions-icon">
+		                            	<ul>
+		                            		<li>
+		                            			<a class="d-success" href="javascript:void(0)"><i class="p5 fa fa-eye" style="font-size: 1.3em;"></i></a>
+		                            		</li>
+		                            		<li>
+		                            			<a class="d-warning" href="javascript:void(0)"><i class="p5 fa fa-trash-o" style="font-size: 1.3em;"></i></a>
+		                            		</li>
+		                            		<li>
+		                            			<a class="btn-view-contacts d-info" id="<?= $key + 1 ?>" data-id="<?= $key + 1 ?>" href="javascript:void(0)"><i class="p5 fa fa-group" style="font-size: 1.3em;"></i></a>
+		                            		</li>
+		                            	</ul>	                            	
+		                            </td>
+		                        </tr>
+		                        <?php if( isset( $theme['contacts'] ) ): ?>
+		                        <tr style="display: none"  id="table<?= $key + 1 ?>">
+		                            <!-- Tabla para los contactos -->
+		                           	<td></td>
+		                           	<td colspan="2">
+			                            <table class="table table-striped table-bordered table-hover">
+			                            	<thead>
+			                            		<th>#</th>
+			                            		<th>Nombre</th>
+			                            		<th>Cargo</th>
+			                            		<th>Correo</th>
+			                            	</thead>
+			                            	<tbody>
+			                            		<?php foreach ($theme['contacts'] as $num => $user): ?>
+				                            		<tr>
+				                            			<td><?= $num + 1 ?></td>
+				                            			<td><?= $user['nombre'] . ' ' . $user['apellidos'] ?></td>
+				                            			<td><?= $user['cargo'] ?></td>
+				                            			<td><?= $user['email'] ?></td>
+				                            		</tr>
+			                            		<?php endforeach ?>
+			                            	</tbody>
+			                            </table>
+			                        </td>
+			                        <!-- /Fin de la tabla de los contactos -->
+		                        </tr>
+		                    <?php endif; ?>
+	                    	<?php endforeach; ?>
 	                    </tbody>
 	                </table>
 	            </div>
@@ -136,4 +138,4 @@
 	    </div>
 	</div>
 </div>
-<!-- /Secciones -->
+<!-- /Temas -->

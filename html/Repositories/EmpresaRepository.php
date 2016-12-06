@@ -97,4 +97,24 @@ class EmpresaRepository extends BaseRepository{
 
 		return $contacts;
 	}
+
+	public function addTheme( array $theme )
+	{
+		$result = new stdClass();
+		$theme['descripcion'] = ( !empty( $theme['descripcion'] ) ) ? $theme['descripcion'] : 'Sin descripción';
+		
+		$stmt = $this->pdo->prepare( ' INSERT INTO tema ( nombre, descripcion, id_empresa ) VALUES ( :nombre, :descripcion, :empresa); ' );
+		$stmt->bindParam(':nombre', 	 $theme['nombre'], 		\PDO::PARAM_STR);
+		$stmt->bindParam(':descripcion', $theme['descripcion'], \PDO::PARAM_STR);
+		$stmt->bindParam(':empresa',  	 $theme['empresaId'], 	\PDO::PARAM_INT);
+
+		if( $stmt->execute() ){
+			$result->exito = TRUE;
+		}else{
+			$result->exito = FALSE;
+			$result->error = $this->pdo->errorInfo()[2];
+		}
+		
+		return $result;
+	}
 }

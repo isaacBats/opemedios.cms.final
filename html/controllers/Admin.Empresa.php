@@ -15,6 +15,10 @@ class AdminEmpresa extends Controller
 		$this->cuentaRepo  = new CuentaRepository();
 	}
 
+	/**
+	 * Muestra la lista de los clientes 
+	 * @return View 
+	 */
 	public function showCompanies()
 	{
 		if( isset( $_SESSION['admin'] ) ){
@@ -57,6 +61,11 @@ class AdminEmpresa extends Controller
         }
 	}
 
+	/**
+	 * Detalle del cliente
+	 * @param  Integer $id Id del cliente
+	 * @return View
+	 */
 	public function clientDetail( $id )
 	{
 		if( isset( $_SESSION['admin'] ) ){
@@ -83,6 +92,31 @@ class AdminEmpresa extends Controller
         }
 	}
 
+	/**
+	 * Agrega una cuenta a un cliente
+	 */
+	public function addAccountAction()
+	{
+		if( isset( $_SESSION['admin'] ) ){
+			
+			$res = new stdClass();
+
+			$_POST['activo'] = TRUE;
+            $_POST['password'] = md5( $_POST['password'] );
+
+			$newAccount = $this->cuentaRepo->create( $_POST );
+            
+			header('Content-type: text/json');
+	        echo json_encode($newAccount);
+
+		}else{
+            header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
+        }
+	}
+
+	/**
+	 * Agrega un tema a monitorear para un cliente
+	 */
 	public function addThemeAction()
 	{
 		if( isset( $_SESSION['admin'] ) ){
@@ -107,6 +141,11 @@ class AdminEmpresa extends Controller
         }
 	}
 
+	/**
+	 * Lista los temas de un cliente 
+	 * @param  Integer $id El Id del cliente 
+	 * @return JSON     
+	 */
 	public function getIssuesByCompanyId( $id )
 	{
 		$issues = null;

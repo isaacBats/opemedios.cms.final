@@ -215,7 +215,7 @@
 	                            <th>Cargo</th>
 	                            <th>Correo</th>
 	                            <th>Activo</th>
-	                            <th>Acción</th>
+	                            <!-- <th>Acción</th> -->
 	                        </tr>
 	                    </thead>
 	                    <tbody>
@@ -226,7 +226,7 @@
                         			<td><?= $userData['cargo'] ?></td>
                         			<td><?= $userData['email'] ?></td>
                         			<td class="fa <?= ( $userData['activo'] ) ? 'fa-check-circle green' : 'fa-times-circle red' ?>" ></td>
-                        			<td class="menu-actions-icon">
+                        			<!-- <td class="menu-actions-icon">
 		                            	<ul>
 		                            		<li>
 		                            			<a class="d-success" href="javascript:void(0)"><i class="p5 fa fa-eye" style="font-size: 1.3em;"></i></a>
@@ -241,7 +241,7 @@
 		                            			<a href="javascript:void(0)">Desactivar</a>
 		                            		</li>
 		                            	</ul>	                            	
-		                            </td>
+		                            </td> -->
                         		</tr>
 			                <?php endforeach; ?>
 	                    </tbody>

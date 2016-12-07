@@ -181,7 +181,89 @@
 	</div>
 </div>
 <!-- /Temas -->
-
+<!-- Formulario para crear una cuenta  -->
+<div class="row">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			Crear nueva cuenta para <?= $client['nombre'] ?>
+		</div>
+		<div class="panel-body">
+			<form action="/panel/client/cuenta/add" method="post" class="form-horizontal col-sm-12" id="form-agrega-cuenta">
+				<div class="col-sm-6">
+					<p>Datos personales: </p>
+					<hr>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">Nombre *</label>
+						<div class="col-sm-8">
+							<input type="text" placeholder="Juan" class="form-control" name="nombre" required="required" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">Apellidos*</label>
+						<div class="col-sm-8">
+							<input type="text" placeholder="Perez" class="form-control col-sm-8" name="apellidos" required="required" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">Correo *</label>
+						<div class="col-sm-8">
+							<input type="email" placeholder="juan@opemedios.com.mx" class="form-control col-sm-8" name="correo" required="required" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">Tel. Casa *</label>
+						<div class="col-sm-8">
+							<input type="tel" placeholder="5545768789" maxlength="12" minlength="8" class="form-control col-sm-8" name="tel_casa" required="required" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">Celular</label>
+						<div class="col-sm-8">
+							<input type="tel" placeholder="0445567890485" maxlength="15" minlength="10" class="form-control col-sm-8" name="celular" />
+						</div>
+					</div>			
+				</div>
+				<div class="col-sm-6">
+					<p>Datos laborales: </p>
+					<hr>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">Cargo</label>
+						<div class="col-sm-8">
+							<input type="text" placeholder="Encargado de Internet" class="form-control col-sm-8" name="cargo" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">Comentarios</label>
+						<div class="col-sm-8">
+							<textarea class="form-control" name="comentarios" rows="6" ></textarea>
+						</div>
+					</div>
+					<p>Datos de sistema: </p>
+					<hr>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">Username*</label>
+						<div class="col-sm-8">
+							<input placeholder="juan1234" class="form-control col-sm-8" name="username" required="required" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">Password </label>
+						<div class="col-sm-8">
+							<input type="password" class="form-control col-sm-8" name="password" required="required" />
+						</div>
+					</div>
+					<div class="checkbox">
+						<label>
+							<input type="checkbox" name="activo" /> Activo 								
+						</label>
+					</div>
+				</div>
+				<input type="submit" value="Guardar" class="btn btn-success pull-right" />
+			</form>			
+		</div>
+	</div>
+</div>
+<!-- /Formulario para crear una cuenta  -->
 <!-- Cuentas -->
 <div class="row">
 	<div class="col-sm-12">
@@ -219,6 +301,7 @@
 	                        </tr>
 	                    </thead>
 	                    <tbody>
+	                    	<?php // TODO: @DetailclientView Desarrollar las acciones para una cuenta (Editar, ver, eliminar, desactivar). ?>
 	                    	<?php foreach ($theme['contacts'] as $number => $userData): ?>
                         		<tr>
                         			<td><?= $number + 1 ?></td>

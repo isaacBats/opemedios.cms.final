@@ -181,3 +181,77 @@
 	</div>
 </div>
 <!-- /Temas -->
+
+<!-- Cuentas -->
+<div class="row">
+	<div class="col-sm-12">
+	    <div class="panel panel-default">
+	        <div class="panel-heading">
+	            Cuentas 
+	            <div class="pull-right">
+	                <div class="btn-group">
+	                    <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+	                        Acciones
+	                        <span class="caret"></span>
+	                    </button>
+	                    <ul class="dropdown-menu pull-right" role="menu">
+	                        <li>
+	                        	<a href="javascript:void(0);" id="agregarCuentaAction">
+	                        		Agregar nueva cuenta
+	                        	</a>
+	                        </li>
+	                    </ul>
+	                </div>
+	            </div>
+	        </div>
+	        <div class="panel-body">
+	            <?php if( isset( $theme['contacts'] ) ): ?>
+	            <div class="table-responsive">
+	                <table class="table table-striped">
+	                    <thead>
+	                        <tr>
+	                            <th>#</th>
+	                            <th>Nombre</th>
+	                            <th>Cargo</th>
+	                            <th>Correo</th>
+	                            <th>Activo</th>
+	                            <th>Acción</th>
+	                        </tr>
+	                    </thead>
+	                    <tbody>
+	                    	<?php foreach ($theme['contacts'] as $number => $userData): ?>
+                        		<tr>
+                        			<td><?= $number + 1 ?></td>
+                        			<td><?= $userData['nombre'] . ' ' . $userData['apellidos'] ?></td>
+                        			<td><?= $userData['cargo'] ?></td>
+                        			<td><?= $userData['email'] ?></td>
+                        			<td class="fa <?= ( $userData['activo'] ) ? 'fa-check-circle green' : 'fa-times-circle red' ?>" ></td>
+                        			<td class="menu-actions-icon">
+		                            	<ul>
+		                            		<li>
+		                            			<a class="d-success" href="javascript:void(0)"><i class="p5 fa fa-eye" style="font-size: 1.3em;"></i></a>
+		                            		</li>
+		                            		<li>
+		                            			<a class="d-info" href="javascript:void(0)"><i class="p5 fa fa-pencil" style="font-size: 1.3em;"></i></a>
+		                            		</li>
+		                            		<li>
+		                            			<a class="d-warning" href="javascript:void(0)"><i class="p5 fa fa-trash-o" style="font-size: 1.3em;"></i></a>
+		                            		</li>
+		                            		<li>
+		                            			<a href="javascript:void(0)">Desactivar</a>
+		                            		</li>
+		                            	</ul>	                            	
+		                            </td>
+                        		</tr>
+			                <?php endforeach; ?>
+	                    </tbody>
+	                </table>
+	            </div>
+	        	<?php endif; ?>
+	            <!-- /.table-responsive -->
+	        </div>
+	        <!-- /.panel-body -->
+	    </div>
+	</div>
+</div>
+<!-- /Cuentas -->

@@ -66,7 +66,7 @@ class AdminEmpresa extends Controller
 			$thems = $this->temaRep->getThemaByEmpresaID( $id );
 			$thems = array_map( function( $theme ) use ( $id ){
 				$company = $id;
-				$theme['contacts'] = $this->userRepo->getContactsByCompanyTheme( $company, $theme['id_tema'] );
+				$theme['contacts'] = $this->userRepo->getContactsByCompanyTheme( $company, $theme['id_tema'] );				
 				return $theme;
 			}, $thems);
 

@@ -415,6 +415,48 @@ $(document).ready(function(){
         }
     });
 
+    // Esconder aparecer formulario de agregar una cuenta
+    $('#agregarCuentaAction').on('click', function(){
+        
+        $('.form-agregar-cuenta').slideToggle('slow');
+        var posicion = $(".form-agregar-cuenta").offset().top;
+        $("html, body").animate({
+            scrollTop: posicion
+        }, 2000); 
+
+    });
+
+    $('#cancela-nueva-cuenta').on('click', function(){
+        $('.form-agregar-cuenta').hide('slow');
+    });
+
+    // Enviar Formulario para agregar una cuenta a un cliente
+    $('#form-agrega-cuenta').validate({
+        messages:{
+            nombre: 'Ingresa tu(s) nombre(s)',
+            apellidos: 'Ingresa tus apellidos',
+            correo:{
+                required: 'Debes ingresar un correo',
+                email: 'El correo debe de ser de formato nombre@dominio.com'
+            },
+            tel_casa: 'Ingresa un numero de teléfono',
+            username: 'Escribe tu nombre de usuario',
+            password: 'Necesitas una contraseña'
+        },
+        submitHandler: function(form){
+            var $formulario = $(form);
+            var datos = $formulario.serialize();
+            $.post( $formulario.attr('action'), datos, function(json){
+                if (json.exito) {
+                    var $alert = $('.alert');
+                    $alert.addClass(json.tipo).html(json.mensaje).delay(3000).fadeOut('slow', function() {
+                        window.location.reload();
+                    });
+                }
+            });
+        }
+    });
+
     // Muestra el formulario para editar un usuario
     $('#btn-edit-user').on('click', function(){
         $('#user-edit').slideToggle();

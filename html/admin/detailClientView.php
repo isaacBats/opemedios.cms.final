@@ -257,7 +257,7 @@
 <!-- /Cuentas -->
 <!-- Formulario para crear una cuenta  -->
 <div class="row">
-	<div class="panel panel-default">
+	<div class="panel panel-default form-agregar-cuenta" style="display: none">
 		<div class="panel-heading">
 			Crear nueva cuenta para <?= $client['nombre'] ?>
 		</div>
@@ -334,6 +334,7 @@
 					</div> -->
 				</div>
 				<input type="submit" value="Guardar" class="btn btn-success pull-right" />
+				<input type="button" value="Cancelar" class="btn btn-success pull-right" id="cancela-nueva-cuenta" />
 			</form>			
 		</div>
 	</div>

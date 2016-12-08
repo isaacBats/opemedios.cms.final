@@ -117,4 +117,43 @@ class EmpresaRepository extends BaseRepository{
 		
 		return $result;
 	}
+
+	public function addRelatedCompanyThemeAccount( $company, $theme, $account )
+	{
+		$result = new stdClass();
+		
+		$stmt = $this->pdo->prepare( ' INSERT INTO empresa_tema_cuenta ( id_empresa, id_tema, id_cuenta ) VALUES ( :empresa, :tema, :cuenta); ' );
+		$stmt->bindParam(':empresa',$company, \PDO::PARAM_INT);
+		$stmt->bindParam(':tema',   $theme,   \PDO::PARAM_INT);
+		$stmt->bindParam(':cuenta', $account, \PDO::PARAM_INT);
+
+		if( $stmt->execute() ){
+			$result->exito = TRUE;
+			$result->row = $this->pdo->query('SELECT * FROM empresa_tema_cuenta WHERE id = ' . $this->pdo->lastInsertId() )->fetch(\PDO::FETCH_ASSOC);
+		}else{
+			$result->exito = FALSE;
+			$result->error = $this->pdo->errorInfo()[2];
+		}
+		
+		return $result;
+	}
+
+	public function getVerifiedRelation( $company, $theme, $account )
+	{
+		$row = $this->pdo->prepare("SELECT * FROM empresa_tema_cuenta WHERE id_empresa = :empresa AND id_tema = :tema AND id_cuenta = :cuenta; ");
+
+		$result = new stdClass();
+
+		if( $row->execute( [ ':empresa' => $company, ':tema' => $theme, ':cuenta' => $account ] ) )
+		{
+			$result->exito = TRUE;
+			$result->exist = ( $row->rowCount() > 0 ) ? TRUE : FALSE;
+		}else
+		{
+			$result->exito = FALSE;
+			$result->error = $row->errorInfo()[2];			
+		}
+
+		return $result;
+	}
 }

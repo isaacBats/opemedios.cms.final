@@ -142,6 +142,55 @@ class AdminEmpresa extends Controller
 	}
 
 	/**
+	 * Relaciona un tema con una cuenta existente
+	 */
+	public function relatedAccountThemeAction()
+	{
+		if( isset( $_SESSION['admin'] ) )
+		{
+			$company = $_POST['empresaId'];
+			$account = $_POST['cuenta'];
+			$theme 	 = $_POST['tema'];
+			$res = new stdClass();
+
+			if( !$this->validateRelatedAccountTheme( $company, $theme, $account ) )
+			{
+				$related = $this->empresaRepo->addRelatedCompanyThemeAccount( $company, $theme, $account );
+				if( $related->exito ){
+					$res->exito = TRUE;
+					$res->class = 'alert-info';
+					$res->text = '<strong>Exito:</strong> Se ha relacionado la cuenta con exito!!!';
+				}
+			}
+			else
+			{
+				$res->exito = FALSE;
+				$res->class = 'alert-warning';
+				$res->text = 'Este tema ya esta relacionado.';
+			}
+
+			header('Content-type: text/json');
+	        echo json_encode($res);
+		}
+		else
+		{
+			header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");	
+		}
+	}
+
+	private function validateRelatedAccountTheme( $company, $theme, $account )
+	{
+		$valid = $this->empresaRepo->getVerifiedRelation( $company, $theme, $account );
+		
+		if( $valid->exito )
+		{
+			return $valid->exist;
+		}
+
+		return FALSE;
+	}
+
+	/**
 	 * Lista los temas de un cliente 
 	 * @param  Integer $id El Id del cliente 
 	 * @return JSON     
@@ -157,7 +206,5 @@ class AdminEmpresa extends Controller
             header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
         }
 	}
-	// TODO: @AdminEmpresa Falta crear el formulario para agregar un cliente.
-	// TODO: @AdminEmpresa Falta el metodo para agregar una seccion.
 	// TODO: @AdminEmpresa Falta el metodo para agregar una cuenta relacionada a un tema.
 }

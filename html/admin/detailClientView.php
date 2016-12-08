@@ -327,14 +327,9 @@
 							<input type="password" class="form-control col-sm-8" name="password" required="required" />
 						</div>
 					</div>
-					<!-- <div class="checkbox">
-						<label>
-							<input type="checkbox" name="activo" /> Activo 								
-						</label>
-					</div> -->
 				</div>
 				<input type="submit" value="Guardar" class="btn btn-success pull-right" />
-				<input type="button" value="Cancelar" class="btn btn-success pull-right" id="cancela-nueva-cuenta" />
+				<input type="button" value="Cancelar" class="btn btn-danger pull-right" id="cancela-nueva-cuenta" style="margin-right: 2.5em;" />
 			</form>			
 		</div>
 	</div>

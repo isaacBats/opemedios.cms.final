@@ -352,6 +352,11 @@ $collection->attachRoute(new Route('/panel/client/cuenta/add', array(
     'methods' => 'POST'
 )));
 
+$collection->attachRoute(new Route('/panel/client/theme-acount', array(
+    '_controller' => 'AdminEmpresa::relatedAccountThemeAction',
+    'methods' => 'POST'
+)));
+
 //Usuarios
 $collection->attachRoute(new Route('/panel/users', array(
     '_controller' => 'AdminUsuario::showUsers',

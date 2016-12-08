@@ -81,8 +81,6 @@ class AdminEmpresa extends Controller
 
 			$counts = $this->cuentaRepo->getAcountsByCompany( $id );
 
-			// TODO: @AdminEmpresa Crear una tabla de cuentas relacionadas con la empresa y de acciones tendra crear una cuenta.
-
 			$this->header_admin('Detalle - ' . $client['nombre'] . ' - ');
 				require $this->adminviews . 'detailClientView.php';
 			$this->footer_admin();
@@ -206,5 +204,5 @@ class AdminEmpresa extends Controller
             header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
         }
 	}
-	// TODO: @AdminEmpresa Falta el metodo para agregar una cuenta relacionada a un tema.
+	// TODO: @AdminEmpresa Solo falta agregar acciones para el formulario de relacion.
 }

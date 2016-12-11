@@ -415,6 +415,31 @@ $(document).ready(function(){
         }
     });
 
+    // Esconder aparecer formulario de Relacionar cuenta
+    $('#agrega-cuenta-TemaAction').on('click', function(){
+        $('.form-r_cuenta-tema').slideToggle();
+    });
+
+    $('#cancelar-tema-cuenta').on('click', function(){
+        $('.form-r_cuenta-tema').slideToggle();
+    });
+
+    // Enviar Formulario de relacionar cuenta
+    $('#form-agrega-tema-cuenta').validate({
+        submitHandler: function(form){
+            var $formulario = $(form);
+            var datos = $formulario.serialize();
+            $.post( $formulario.attr('action'), datos, function(json){
+                if (json.exito) {
+                    var $alert = $('.alert');
+                    $alert.addClass(json.class).html(json.text).delay(3000).fadeOut('slow', function() {
+                        window.location.reload();
+                    });
+                }
+            });
+        }
+    });
+
     // Esconder aparecer formulario de agregar una cuenta
     $('#agregarCuentaAction').on('click', function(){
         

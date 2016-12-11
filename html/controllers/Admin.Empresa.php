@@ -205,4 +205,6 @@ class AdminEmpresa extends Controller
         }
 	}
 	// TODO: @AdminEmpresa Solo falta agregar acciones para el formulario de relacion.
+	// TODO: @AdminEmpresa Formulario para editar a un cliente.
+	// TODO: @AdminEmpresa Formulario para crear un cliente.
 }

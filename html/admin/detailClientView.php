@@ -1,6 +1,9 @@
-<div class="row">
+<div class="row" id="datos-cliente">
 	<div class="col-sm-12">
 		<h1 class="page-header"><?= $client['nombre'] ?></h1>
+		<div class="col-sm-offset-11">
+			<button class="btn btn-success btn-lg" style="margin-top: -120px;">Editar</button>
+		</div>
 	</div>
 	<div class="col-md-6">
 		<img src="/<?= $client['logo']  ?>" alt="<?= $client['nombre'] ?>" width="320">
@@ -12,6 +15,46 @@
 		<?php endif; endforeach; ?>
 	</div>
 </div>
+<!-- Editar cliente -->
+<div class="row" id="edita-datos-cliente" style="display: none;">
+	<div class="panel panel-default">
+		<div class="panel-heading"> Editar <?= $client['nombre'] ?></div>
+		<div class="panel-body">
+			<form action="/panel/client/edit/<?= $client['id_empresa'] ?>" method="post" id="form-edita-cliente">
+				<div class="form-group col-sm-6">
+					<label>Nombre</label>
+					<input class="form-control" name=":nombre" required="required" value="<?= $client['nombre'] ?>" />	
+				</div>
+				<div class="form-group col-sm-6">
+					<label>Direccion</label>
+					<input class="form-control" name=":direccion" value="<?= $client['direccion'] ?>" />	
+				</div>
+				<div class="form-group col-sm-3">
+					<label>Telefono</label>
+					<input class="form-control" name=":telefono" required="required" value="<?= $client['telefono'] ?>" />	
+				</div>
+				<div class="form-group col-sm-3">
+					<label>Contacto</label>
+					<input class="form-control" name=":contacto" required="required" value="<?= $client['contacto'] ?>" />	
+				</div>
+				<div class="form-group col-sm-3">
+					<label>Correo</label>
+					<input class="form-control" name=":email" required="required" value="<?= $client['email'] ?>" />	
+				</div>
+				<div class="form-group col-sm-3">
+					<label>Giro</label>
+					<input class="form-control" name=":giro" value="<?= $client['giro'] ?>" />	
+				</div>
+				<input type="hidden" name=":id_empresa" value="<?= $client['id_empresa'] ?>">
+				<div class="col-sm-offset-10">
+					<button class="btn btn-warning" type="button" id="calcela-editar-datos">Cancelar</button>					
+					<button class="btn btn-primary">Guardar</button>					
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<!-- /Editar cliente -->
 <!-- Formulario para agregar un tema -->
 <div class="row">
 	<div class="col-sm-12 form-agregar-tema" style="display: none">

@@ -440,6 +440,33 @@ $(document).ready(function(){
         }
     });
 
+    // Esconder aparecer formulario de editar cliente
+    $('#datos-cliente button').on('click', function(){
+        $('#datos-cliente').hide('slow');
+        $('#edita-datos-cliente').slideToggle();
+    });
+
+    $('#calcela-editar-datos').on('click', function(){
+        $('#datos-cliente').show('slow');
+        $('#edita-datos-cliente').hide('slow');
+    });
+
+    // Enviar Formulario editar cliente
+    $('#form-edita-cliente').validate({
+        submitHandler: function(form){
+            var $formulario = $(form);
+            var datos = $formulario.serialize();
+            $.post( $formulario.attr('action'), datos, function(json){
+                if (json.exito) {
+                    var $alert = $('.alert');
+                    $alert.addClass(json.class).html(json.text).delay(2000).fadeOut('slow', function() {
+                        window.location.reload();
+                    });
+                }
+            });
+        }
+    });
+
     // Esconder aparecer formulario de agregar una cuenta
     $('#agregarCuentaAction').on('click', function(){
         

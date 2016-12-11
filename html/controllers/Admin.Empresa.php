@@ -91,6 +91,40 @@ class AdminEmpresa extends Controller
 	}
 
 	/**
+	 * Edita una empresa
+	 * @param  int $id
+	 * @return json
+	 */
+	public function editCompany( $id )
+	{
+		if( isset( $_SESSION['admin'] ) )
+		{
+			$json = new stdClass();
+			
+			if( $update = $this->empresaRepo->editCompany( $_POST )->exito )
+			{
+				$json->exito = TRUE;
+				$json->class = 'alert-info';
+				$json->text = '<strong>Exito:</strong> Se ha editado la cuenta con exito!!!';
+			}
+			else
+			{
+				$json->exito = FALSE;
+				$json->class = 'alert-warning';
+				$json->text = '<strong>Error:</strong> No se pudo editar la cuenta';	
+				$json->error = $update->error;	
+			}
+
+			header('Content-type: text/json');
+	        echo json_encode($json);					
+		}
+		else
+		{
+            header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
+        }	
+	}
+
+	/**
 	 * Agrega una cuenta a un cliente
 	 */
 	public function addAccountAction()
@@ -204,7 +238,7 @@ class AdminEmpresa extends Controller
             header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
         }
 	}
-	// TODO: @AdminEmpresa Solo falta agregar acciones para el formulario de relacion.
-	// TODO: @AdminEmpresa Formulario para editar a un cliente.
+	
+
 	// TODO: @AdminEmpresa Formulario para crear un cliente.
 }

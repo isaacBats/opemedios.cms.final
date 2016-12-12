@@ -184,4 +184,26 @@ class EmpresaRepository extends BaseRepository{
 
 		return $rs;
 	}
+
+	public function updateLogo( $empresa, $logo )
+	{
+		$qry = 'UPDATE empresa SET logo = :logo WHERE id_empresa = :id_empresa';
+		
+		$smtp = $this->pdo->prepare( $qry );
+
+		$rs = new stdClass();
+
+		if( $smtp->execute( [ ':logo' => $logo, ':id_empresa' => $empresa ] ) )
+		{
+			$rs->exito = TRUE;
+			$rs->row = $this->pdo->query('SELECT * FROM empresa WHERE id_empresa = ' . $this->pdo->lastInsertId() )->fetch(\PDO::FETCH_ASSOC);
+		}
+		else
+		{
+			$rs->exito = FALSE;
+			$rs->error = $smtp->errorInfo()[2]; 
+		}
+
+		return $rs;
+	}
 }

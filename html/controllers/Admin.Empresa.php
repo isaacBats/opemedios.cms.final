@@ -1,5 +1,8 @@
 <?php 
 
+use utilities\MediaDirectory;
+use utilities\Image as Imagen;
+
 class AdminEmpresa extends Controller
 {
 	private $temaRep;
@@ -122,6 +125,57 @@ class AdminEmpresa extends Controller
 		{
             header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
         }	
+	}
+
+	/**
+	 * Cambia el logo de la empresa
+	 * @return json
+	 */
+	public function changeLogoAction()
+	{
+		if( isset( $_SESSION['admin'] ) )
+		{
+			$imagen = new Imagen();
+			$pathLogo = MediaDirectory::LOGO_EMPRESA;
+			$explode = explode( '.', $_FILES['empresa-logo']['name'] );
+			$explode[0] .= '_' .uniqid();
+			$_FILES['empresa-logo']['createdName'] = implode( '.', $explode);
+			$json = new stdClass();
+
+			if( $imagen->saveFile( $_FILES['empresa-logo'], $pathLogo, $_FILES['empresa-logo']['type'] ) )
+			{
+				$empresa = $_POST['empresaId'];
+				$logo = $pathLogo . $_FILES['empresa-logo']['createdName'];
+
+				if( $updateLogo = $this->empresaRepo->updateLogo( $empresa, $logo )->exito )
+				{
+					$json->exito = TRUE;
+					$json->tipo = 'alert-info';
+					$json->mensaje = '<strong>Exito:</strong> Logo actualizado!!!';
+				}
+				else
+				{
+					$json->exito = FALSE;
+					$json->tipo = 'alert-warning';
+					$json->mensaje = '<strong>Error:</strong> No se inserto el logo en la base de datos';	
+					$json->error[2] = $updateLogo->error;	
+				}
+
+			}
+			else
+			{
+				$json->exito = FALSE;
+				$json->tipo = 'alert-warning';
+				$json->mensaje = '<strong>Error:</strong> No se guardo el logo';		
+			}
+
+			$_SESSION['alerts']['empresa'] = $json;
+			header( 'Location: ' . $_SERVER['HTTP_REFERER'] );
+		}
+		else
+		{
+            header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
+        }
 	}
 
 	/**

@@ -467,6 +467,33 @@ $(document).ready(function(){
         }
     });
 
+    // Esconder aparecer formulario de cambiar Logo
+    $('#cambiar-imagen-cliente').on('click', function(){
+        $('#logo-cliente').hide('slow');
+        $('#cambiar-logo-action').slideToggle();
+    });
+
+    $('#cancelar-guarda-logo').on('click', function(){
+        $('#logo-cliente').show('slow');
+        $('#cambiar-logo-action').hide('slow');
+    });
+
+    // // Enviar Formulario cambiar logo
+    // $('#form-cambia-imagen').validate({
+    //     submitHandler: function(form){
+    //         var $formulario = $(form);
+    //         var datos = $formulario.serialize();
+    //         $.post( $formulario.attr('action'), datos, function(json){
+    //             if (json.exito) {
+    //                 var $alert = $('.alert');
+    //                 $alert.addClass(json.class).html(json.text).delay(2000).fadeOut('slow', function() {
+    //                     window.location.reload();
+    //                 });
+    //             }
+    //         });
+    //     }
+    // });
+
     // Esconder aparecer formulario de agregar una cuenta
     $('#agregarCuentaAction').on('click', function(){
         

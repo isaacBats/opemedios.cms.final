@@ -362,6 +362,11 @@ $collection->attachRoute(new Route('/panel/client/edit/:id', array(
     'methods' => 'POST'
 )));
 
+$collection->attachRoute(new Route('/panel/client/logo/edit', array(
+    '_controller' => 'AdminEmpresa::changeLogoAction',
+    'methods' => 'POST'
+)));
+
 //Usuarios
 $collection->attachRoute(new Route('/panel/users', array(
     '_controller' => 'AdminUsuario::showUsers',

@@ -1,3 +1,4 @@
+<?= $this->flashAlerts('empresa'); ?>
 <div class="row" id="datos-cliente">
 	<div class="col-sm-12">
 		<h1 class="page-header"><?= $client['nombre'] ?></h1>
@@ -5,8 +6,31 @@
 			<button class="btn btn-success btn-lg" style="margin-top: -120px;">Editar</button>
 		</div>
 	</div>
-	<div class="col-md-6">
+	<div class="col-md-6" id="logo-cliente">
 		<img src="/<?= $client['logo']  ?>" alt="<?= $client['nombre'] ?>" width="320">
+		<a href="javascript:void(0);" class="col-sm-12" id="cambiar-imagen-cliente">Cambiar Imagen</a>
+	</div>
+	<div class="col-md-6" id="cambiar-logo-action" style="display: none">
+		<form action="/panel/client/logo/edit" method="post" id="form-cambia-imagen" enctype="multipart/form-data">
+			<input type="hidden" value="<?= $id ?>" name="empresaId">
+			<div class="col-sm-6">
+	            <div class="input-group">
+	                <label class="input-group-btn">
+	                    <span class="btn btn-primary">
+	                        Buscar <input name="empresa-logo" type="file" style="display: none;" required="required"/>
+	                    </span>
+	                </label>
+	                <input type="text" class="form-control" readonly>
+	            </div>
+	            <span class="help-block">
+	                Selecciona la imagen que desees que quede en representación del cliente
+	            </span>
+	        </div>
+	        <div class="col-sm-6">
+	        	<input type="submit" value="Cambiar" class="btn btn-primary">
+	        	<input type="button" value="Cancelar" class="btn btn-warning" id="cancelar-guarda-logo">
+	        </div>
+		</form>
 	</div>
 	<div class="col-md-6">
 		<?php foreach ($client as $key => $value): 

@@ -64,6 +64,76 @@ class AdminEmpresa extends Controller
         }
 	}
 
+	/**'#FFF';
+'#FFF';
+	 * Formularion para agregar a un cliente
+	 */
+	public function addClientView()
+	{
+		if( isset( $_SESSION['admin'] ) )
+		{			
+			$this->header_admin('Agrega un cliente - ');
+			require $this->adminviews . 'addClientView.php';
+			$this->footer_admin();						
+		}
+		else
+		{
+            header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
+        }
+	}
+
+	/**
+	 * Guarda un cliente
+	 */
+	public function addClientAction()
+	{
+		if( isset( $_SESSION['admin'] ) )
+		{			
+			$imagen = new Imagen();
+			$pathLogo = MediaDirectory::LOGO_EMPRESA;
+			$json = new stdClass();
+			
+			$_POST[':color_fondo'] = '#FFF'; 
+			$_POST[':color_letra'] = '#FFF';
+			$_POST[':fecha_registro'] = date('Y-m-d H:i:s');
+			$explode = explode( '.', $_FILES[':logo']['name'] );
+			$explode[0] .= '_' .uniqid();
+			$_FILES[':logo']['createdName'] = implode( '.', $explode);
+			$_POST[':nombre_logo'] = $pathLogo . $_FILES[':logo']['createdName'];
+
+			if( $imagen->saveFile( $_FILES[':logo'], $pathLogo, $_FILES[':logo']['type'] ) )
+			{
+				if( $save = $this->empresaRepo->create( $_POST )->exito )
+				{
+					$json->exito = TRUE;
+					$json->tipo = 'alert-info';
+					$json->mensaje = '<strong>Exito:</strong> Se ha agregado un nuevo cliente!!!';
+				}
+				else
+				{
+					$json->exito = FALSE;
+					$json->tipo = 'alert-warning';
+					$json->mensaje = '<strong>Error:</strong> No se pudo agregar al cliente ' . $_POST['nombre'];	
+					$json->error[2] = $save->error;	
+				}
+
+			}
+			else
+			{
+				$json->exito = FALSE;
+				$json->tipo = 'alert-warning';
+				$json->mensaje = '<strong>Error:</strong> No se guardo el logo';		
+			}
+
+			$_SESSION['alerts']['clientes'] = $json;
+			header( 'Location: /panel/companies');
+		}
+		else
+		{
+            header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
+        }
+	}
+
 	/**
 	 * Detalle del cliente
 	 * @param  Integer $id Id del cliente
@@ -76,11 +146,13 @@ class AdminEmpresa extends Controller
 			$client = $this->empresaRepo->get( $id );
 			$client = ( $client->exito ) ? $client->rows : $client->error;
 			$thems = $this->temaRep->getThemaByEmpresaID( $id );
-			$thems = array_map( function( $theme ) use ( $id ){
-				$company = $id;
-				$theme['contacts'] = $this->userRepo->getContactsByCompanyTheme( $company, $theme['id_tema'] );				
-				return $theme;
-			}, $thems);
+			if( is_array( $thems ) ){
+				$thems = array_map( function( $theme ) use ( $id ){
+					$company = $id;
+					$theme['contacts'] = $this->userRepo->getContactsByCompanyTheme( $company, $theme['id_tema'] );				
+					return $theme;
+				}, $thems);				
+			}
 
 			$counts = $this->cuentaRepo->getAcountsByCompany( $id );
 

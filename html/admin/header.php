@@ -240,7 +240,7 @@
                             <a href="#"><i class="glyphicon glyphicon-user"></i> Clientes<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="flot.html">Agregar Cliente</a>
+                                    <a href="/panel/company/add">Agregar Cliente</a>
                                 </li>
                                 <li>
                                     <a href="/panel/companies">Administrar Cliente</a>

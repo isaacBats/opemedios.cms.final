@@ -328,6 +328,8 @@
 	                    </tbody>
 	                </table>
 	            </div>
+	        	<?php else: ?>
+	        	<p class="lead">No hay cuentas relacionadas con este cliente</p>
 	        	<?php endif; ?>
 	            <!-- /.table-responsive -->
 	        </div>

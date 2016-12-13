@@ -337,6 +337,16 @@ $collection->attachRoute(new Route('/panel/companies', array(
     'methods' => 'GET'
 )));
 
+$collection->attachRoute(new Route('/panel/company/add', array(
+    '_controller' => 'AdminEmpresa::addClientView',
+    'methods' => 'GET'
+)));
+
+$collection->attachRoute(new Route('/panel/company/add', array(
+    '_controller' => 'AdminEmpresa::addClientAction',
+    'methods' => 'POST'
+)));
+
 $collection->attachRoute(new Route('/panel/client/:id', array(
     '_controller' => 'AdminEmpresa::clientDetail',
     'methods' => 'GET'

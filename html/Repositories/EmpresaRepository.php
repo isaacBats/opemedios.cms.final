@@ -157,6 +157,28 @@ class EmpresaRepository extends BaseRepository{
 		return $result;
 	}
 
+	public function create( $company )
+	{
+		$qry = ' INSERT INTO empresa ( nombre, direccion, telefono, contacto, email, giro, logo, color_fondo, color_letra, fecha_registro ) VALUES (:nombre, :direccion, :telefono, :contacto, :email, :giro, :nombre_logo, :color_fondo, :color_letra, :fecha_registro)';
+
+		$smtp = $this->pdo->prepare( $qry );
+
+		$rs = new stdClass();
+
+		if( $smtp->execute( $company ) )
+		{
+			$rs->exito = TRUE;
+			$rs->row = $this->pdo->query('SELECT * FROM empresa WHERE id_empresa = ' . $this->pdo->lastInsertId() )->fetch(\PDO::FETCH_ASSOC);
+		}
+		else
+		{
+			$rs->exito = FALSE;
+			$rs->error = $smtp->errorInfo()[2]; 
+		}
+
+		return $rs;
+	}
+
 	public function editCompany( $company )
 	{
 		$qry = 'UPDATE empresa SET nombre    = :nombre,

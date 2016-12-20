@@ -72,7 +72,8 @@ class NoticiasRepository extends BaseRepository{
 					       n.id_tendencia_monitorista AS 'tendencia_id',
 					       t.descripcion	AS 'tendencia',
 					       n.id_usuario		AS 'usuario_id',
-					       u.nombre			AS 'usuario'
+					       u.nombre			AS 'usuario',
+					       u.apellidos		AS 'apellidos'
 					FROM   noticia n
 					INNER JOIN tipo_fuente tf ON n.id_tipo_fuente = tf.id_tipo_fuente
 					INNER JOIN fuente f 	  ON n.id_fuente = f.id_fuente

@@ -8,9 +8,11 @@ use utilities\Util;
 class AdminNews extends Controller{
 
 	private $noticiasRepository;		
+	private $adjuntoRepo;		
 
 	public function __construct(){
 		$this->noticiasRepository = new NoticiasRepository();
+		$this->adjuntoRepo = new AdjuntoRepository();
 	}
 
 	public function showNews(){
@@ -91,6 +93,9 @@ class AdminNews extends Controller{
 			$fr = new FuentesRepository();
 			$newSelected = $this->noticiasRepository->getNewById( $id ); 
 			$relatedNew = null ;
+
+			$adjunto = $this->adjuntoRepo->getAdjunto( $id );
+
 			$html = '';
 			switch ($newSelected['tipofuente_id']) {
 				case '1':
@@ -102,6 +107,12 @@ class AdminNews extends Controller{
 									<p>Duración: <strong>' . $relatedNew['duracion'] . '</strong></p>
 						';					
 					}
+
+					$htmlAdjunto = '
+										<video class="radio" src="/'. $adjunto['carpeta'] . $adjunto['nombre_archivo'] .'" controls >
+											<p>Tu navegador no implementa el elemento video</p>
+										</video>
+								   ';
 					break;
 				case '2':
 					$font = 'rad';
@@ -112,6 +123,13 @@ class AdminNews extends Controller{
 									<p>Duración: <strong>' . $relatedNew['duracion'] . '</strong></p>
 						';					
 					}
+
+					$htmlAdjunto = '
+										<audio class="radio" src="/'. $adjunto['carpeta'] . $adjunto['nombre_archivo'] .'" controls >
+											<p>Tu navegador no implementa el elemento audio</p>
+										</audio>
+								   ';
+
 					break;
 				case '3':
 					$font = 'per';

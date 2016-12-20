@@ -3,16 +3,25 @@
 		<h1 class="page-header"><?= $newSelected['encabezado'] ?></h1>
 	</div>	
 </div>
-<h4>Noticia de <?= $newSelected['tipofuente'] ?></h4>
-<p>Síntesis: </p>
-<p><?= $newSelected['sintesis'] ?></p>
-<p>Autor: <strong><?= $newSelected['autor'] . ' ( ' . $newSelected['tipoautor'] . ' )' ?></strong></p>
-<p>Fecha: <strong><?= getFechaLarga($newSelected['fecha']) ?></strong></p>
-<?= $html ?>
-<p>Fuente: <strong><?= $newSelected['fuente'] ?></strong></p>
-<p>Sección: <strong><?= $newSelected['seccion'] ?></strong></p>
-<p>Sector: <strong><?= $newSelected['sector'] ?></strong></p>
-<p>Género: <strong><?= $newSelected['genero'] ?></strong></p>
-<p>Tendencia: <strong><?= $newSelected['tendencia'] ?></strong></p>
-<p>Comentarios: <strong><?= $newSelected['comentario'] ?></strong></p>
-<p>Usuario que subio la nota : </p><strong><?= $newSelected['usuario'] ?></strong>
+<div class="row">
+	<div class="col-md-4">
+		<h4>Noticia de <?= $newSelected['tipofuente'] ?></h4>
+		<p>Síntesis: </p>
+		<p>
+			<?= $newSelected['sintesis'] ?>
+		</p>	
+		<p>Autor: <strong><?= $newSelected['autor'] . ' ( ' . $newSelected['tipoautor'] . ' )' ?></strong></p>
+		<p>Fecha: <strong><?= getFechaLarga($newSelected['fecha']) ?></strong></p>
+		<?= $html ?>
+		<p>Fuente: <strong><?= $newSelected['fuente'] ?></strong></p>
+		<p>Sección: <strong><?= $newSelected['seccion'] ?></strong></p>
+		<p>Sector: <strong><?= $newSelected['sector'] ?></strong></p>
+		<p>Género: <strong><?= $newSelected['genero'] ?></strong></p>
+		<p>Tendencia: <strong><?= $newSelected['tendencia'] ?></strong></p>
+		<p>Comentarios:</p><p><?= $newSelected['comentario'] ?></p>
+		<p>Usuario que subio la nota : </p><strong><?= $newSelected['usuario'] . ' ' . $newSelected['apellidos'] ?></strong>
+	</div>
+	<div class="col-md-8">
+		<?= $htmlAdjunto ?>
+	</div>	
+</div>

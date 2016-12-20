@@ -95,7 +95,7 @@ class User extends Controller {
             if ($nr > 0) {
                 $user = $query->fetch(PDO::FETCH_ASSOC);                
                 if (isset($user["username"])) {
-                    if ($user["password"] == $pass) {
+                    if ($user["password"] == md5( $pass ) ) {
 
                         $queryTemas = $this->pdo->prepare('SELECT * FROM tema WHERE id_empresa = ' . $user['id_empresa']);
                         if( $queryTemas->execute() ){

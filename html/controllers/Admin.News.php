@@ -96,6 +96,13 @@ class AdminNews extends Controller{
 
 			$adjunto = $this->adjuntoRepo->getAdjunto( $id );
 
+			$htmlAdjunto = '
+								<figure class="figure">
+								  <img src="/'. $adjunto['carpeta'] . $adjunto['nombre_archivo'] .'" class="figure-img img-fluid rounded" alt="'.$adjunto['nombre'].'" style="max-width: 100%;">
+								  <figcaption class="figure-caption text-xs-right">'.$newSelected['encabezado'].'.</figcaption>
+								</figure>
+						   ';
+
 			$html = '';
 			switch ($newSelected['tipofuente_id']) {
 				case '1':
@@ -109,7 +116,7 @@ class AdminNews extends Controller{
 					}
 
 					$htmlAdjunto = '
-										<video class="radio" src="/'. $adjunto['carpeta'] . $adjunto['nombre_archivo'] .'" controls >
+										<video class="adjunto-media" src="/'. $adjunto['carpeta'] . $adjunto['nombre_archivo'] .'" controls style="max-width: 100%;" >
 											<p>Tu navegador no implementa el elemento video</p>
 										</video>
 								   ';
@@ -125,7 +132,7 @@ class AdminNews extends Controller{
 					}
 
 					$htmlAdjunto = '
-										<audio class="radio" src="/'. $adjunto['carpeta'] . $adjunto['nombre_archivo'] .'" controls >
+										<audio class="adjunto-media" src="/'. $adjunto['carpeta'] . $adjunto['nombre_archivo'] .'" controls style="max-width: 100%;" >
 											<p>Tu navegador no implementa el elemento audio</p>
 										</audio>
 								   ';

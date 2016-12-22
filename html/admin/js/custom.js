@@ -8,8 +8,8 @@ $(document).ready(function(){
             currentText: 'Hoy',
             monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
             monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
-            dayNames: ['Domingo', 'Lunes', 'Martes', 'MiÃ©rcoles', 'Jueves', 'Viernes', 'SÃ¡bado'],
-            dayNamesShort: ['Dom', 'Lun', 'Mar', 'MiÃ©', 'Juv', 'Vie', 'SÃ¡b'],
+            dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+            dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mié', 'Juv', 'Vie', 'Sáb'],
             dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sá'],
             weekHeader: 'Sm',
             dateFormat: 'yy/mm/dd',
@@ -35,16 +35,29 @@ $(document).ready(function(){
             });
         });
 
+        moment.updateLocale('en', {
+            longDateFormat : {
+                LTS: "HH:mm:ss"
+            }
+        });
+
+        $(function () {
+            var $input = $('.relojd');
+            $input.datetimepicker({
+                format: 'LTS'
+            });
+
+            var hour = new Date();
+
+            $input.find('input').val(hour.toLocaleTimeString());  
+
+        });
+
         // Summernote
         $('#summernote').summernote({
             height: 200
         });
 
-        $(function () {
-            $('.relojd').datetimepicker({
-                format: 'LTS'
-            });
-        });
     }catch(e){
         console.log(e);
     }

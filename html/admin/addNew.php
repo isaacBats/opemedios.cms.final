@@ -61,13 +61,13 @@
                                     <option value="">Sección</option>
                                 </select>
                             </div>
-                            <div class="form-group col-sm-12 col-md-6 col-lg-3">
+                            <!-- <div class="form-group col-sm-12 col-md-6 col-lg-3">
                                 <label>Fecha</label>
                                 <div id="fecha_new" class="input-group">
                                     <input type="text" class="form-control fechaNota" placeholder="yyyy-mm-dd" name="fecha" >
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                                 </div>
-                            </div>
+                            </div> -->
                             <?= $campos ?>
                             <div class="form-group">
                                 <div class="form-group col-sm-12 col-md-6 col-lg-6"> 

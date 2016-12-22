@@ -608,14 +608,12 @@ class AdminNews extends Controller{
 					<!-- Select2 CSS -->
 				    <link href="/assets/css/select2.min.css" rel="stylesheet">
 				    <link href="/admin/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
-				    <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" rel="stylesheet">
-				    <link rel="stylesheet" type="text/css" media="screen" href="http://tarruda.github.com/bootstrap-datetimepicker/assets/css/bootstrap-datetimepicker.min.css">    			
-			';
+				   ';
 
 			$js = '
 					<!-- Select2 JavaScript -->
 				    <script type="text/javascript" src="/assets/bower_components/moment/min/moment.min.js"></script>
-				    <script src="/admin/js/bootstrap-datetimepicker.min.js"></script>
+				    <script src="/admin/js/datetimepicker.js"></script>
 				    <script src="/assets/js/select2.min.js"></script>
 			';
 			
@@ -1452,5 +1450,4 @@ class AdminNews extends Controller{
             header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
         }	
 	}
-
 }

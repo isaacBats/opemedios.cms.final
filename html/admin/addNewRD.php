@@ -1,7 +1,7 @@
 <div class="form-group col-sm-12 col-md-3 col-lg-3">
     <label>Hora</label>
     <div class='input-group date relojd' >
-        <input class="form-control" name="hora" required >
+        <input class="form-control required-hour" name="hora" required >
         <span class="input-group-addon">
             <span class="glyphicon glyphicon-time"></span>
         </span>

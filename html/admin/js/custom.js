@@ -46,12 +46,14 @@ $(document).ready(function(){
             $input.datetimepicker({
                 format: 'LTS'
             });
+        });
+
+        getTimeHour();
+        function getTimeHour(){
 
             var hour = new Date();
-
-            $input.find('input').val(hour.toLocaleTimeString());  
-
-        });
+            $('.required-hour').val(hour.toLocaleTimeString());
+        } 
 
         // Summernote
         $('#summernote').summernote({

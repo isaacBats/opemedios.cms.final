@@ -1,6 +1,7 @@
 <?php 
 
 include_once("BaseRepository.php");
+use utilities\Util;
 
 class RevistaRepository extends BaseRepository{
 
@@ -57,8 +58,8 @@ class RevistaRepository extends BaseRepository{
 		
 		if( $error === 0 && sizeof( $fallidos ) == 0 ){
 
-			$sql = 'INSERT INTO noticia_rev (id_noticia, pagina, id_tipo_pagina, id_tamano_nota, porcentaje_pagina, costo)
-								VALUES(:idNoticia, :pagina, :id_tipo_pagina, :id_tamano_nota, :porcentaje, :costo);';
+			$sql = 'INSERT INTO noticia_rev (id_noticia, pagina, id_tipo_pagina, id_tamano_nota, porcentaje_pagina, costo, ubicacion)
+								VALUES(:idNoticia, :pagina, :id_tipo_pagina, :id_tamano_nota, :porcentaje, :costo, :ubicacion);';
 
 			$tamano = 0;
 			$query = $this->pdo->prepare( $sql );
@@ -68,10 +69,11 @@ class RevistaRepository extends BaseRepository{
 			$query->bindParam(':id_tamano_nota', 	$tamano);
 			$query->bindParam(':porcentaje', 		$new['tamano']);
 			$query->bindParam(':costo', 			$new['costoBeneficio']);
+			$query->bindParam(':ubicacion', 		Util::ubicationNew( $new['ubicacion'] ) );
 
 			$result = new stdClass();
 
-			if($query->execute() && $this->addUbicacion( $new['ubicacion'], $idNew ) ){
+			if( $query->execute() ){
 				$result->exito = true;
 				$result->fileName = $adjunto;
 				$result->idNew = $idNew;

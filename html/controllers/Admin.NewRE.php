@@ -73,20 +73,6 @@ class AdminNewRE extends AdminNews{
 			}
 			$_POST['archivos'] = $fil;
 			
-			$ubicacion = [];
-			for ($i=1; $i <= 12 ; $i++) { 
-				if ( isset( $_POST['ubicacion'. $i] ) ){
-					$ub = 1;
-					array_push($ubicacion, $ub);
-				}else{
-
-					$ub = 0;
-					array_push($ubicacion, $ub);
-				}
-			}
-
-			$_POST['ubicacion'] = $ubicacion;
-
 			$notice = $this->reRepository->addNewRE( $_POST );
 
 			if( $notice->exito ){

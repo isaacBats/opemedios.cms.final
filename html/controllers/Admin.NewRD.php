@@ -56,7 +56,7 @@ class AdminNewRD extends AdminNews{
 			
 			$id_radio = $this->rdRepository->idFuenteRD();
 			$_POST['tipoFuente'] = $id_radio;
-			$_POST['usuario'] = 1;
+			$_POST['usuario'] = $_SESSION['admin']['id_usuario'];
 			$_POST['slug'] = $slug = $this->getUrlArchivo();
 			$_POST['principal'] = 0;				
 			

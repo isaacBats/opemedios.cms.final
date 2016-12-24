@@ -61,7 +61,7 @@ class AdminNewPE extends AdminNews{
 			
 			$id_periodico = $this->peRepository->idFuentePE();
 			$_POST['tipoFuente'] = $id_periodico;
-			$_POST['usuario'] = 1;
+			$_POST['usuario'] = $_SESSION['admin']['id_usuario'];
 			$_POST['slug'] = $slug = $this->getUrlArchivo();
 			$_POST['principal'] = 0;				
 			
@@ -73,19 +73,19 @@ class AdminNewPE extends AdminNews{
 			}
 			$_POST['archivos'] = $fil;
 
-			$ubicacion = [];
-			for ($i=1; $i <= 12 ; $i++) { 
-				if ( isset( $_POST['ubicacion'. $i] ) ){
-					$ub = 1;
-					array_push($ubicacion, $ub);
-				}else{
+			// $ubicacion = [];
+			// for ($i=1; $i <= 12 ; $i++) { 
+			// 	if ( isset( $_POST['ubicacion'. $i] ) ){
+			// 		$ub = 1;
+			// 		array_push($ubicacion, $ub);
+			// 	}else{
 
-					$ub = 0;
-					array_push($ubicacion, $ub);
-				}
-			}
+			// 		$ub = 0;
+			// 		array_push($ubicacion, $ub);
+			// 	}
+			// }
 
-			$_POST['ubicacion'] = $ubicacion;
+			// $_POST['ubicacion'] = $ubicacion;
 
 			$notice = $this->peRepository->addNewPE( $_POST );
 

@@ -56,7 +56,7 @@ class AdminNewIN extends AdminNews{
 
 			$id_internet = $this->inRepository->idFuenteIN();
 			$_POST['tipoFuente'] = $id_internet;
-			$_POST['usuario'] = 1;
+			$_POST['usuario'] = $_SESSION['admin']['id_usuario'];
 			$_POST['slug'] = $slug = $this->getUrlArchivo();
 			$_POST['principal'] = 0;				
 			

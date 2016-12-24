@@ -61,7 +61,7 @@ class AdminNewRE extends AdminNews{
 
 			$id_revista = $this->reRepository->idFuenteRE();
 			$_POST['tipoFuente'] = $id_revista;
-			$_POST['usuario'] = 1;
+			$_POST['usuario'] = $_SESSION['admin']['id_usuario'];
 			$_POST['slug'] = $slug = $this->getUrlArchivo();
 			$_POST['principal'] = 0;				
 			

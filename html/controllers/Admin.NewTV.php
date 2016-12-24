@@ -57,7 +57,7 @@ class AdminNewTV extends AdminNews{
 
 			$id_television = $this->tvRepository->idFuenteTV();
 			$_POST['tipoFuente'] = $id_television;
-			$_POST['usuario'] = 1;
+			$_POST['usuario'] = $_SESSION['admin']['id_usuario'];
 			$_POST['slug'] = $slug = $this->getUrlArchivo();
 			$_POST['principal'] = 0;				
 			

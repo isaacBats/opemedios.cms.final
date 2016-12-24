@@ -38,4 +38,19 @@ class Util
 					  ];
 		return $tipoFuente[ $tipoFuenteId ];
 	}
+
+	public static function ubicationNew( $ubicationId ){
+		switch ( $ubicationId ) {
+			case 1:
+				return 'SUPERIOR_IZQUIERDO';
+			case 2:
+				return 'SUPERIOR_DERECHO';
+			case 3:
+				return 'CENTRO';
+			case 4:
+				return 'INFERIOR_IZQUIERDO';
+			case 5:
+				return 'INFERIOR_DERECHO';
+		}
+	}
 }

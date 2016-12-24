@@ -14,50 +14,14 @@
         <?= $tipoPaginacion ?>
     </select>
 </div>
-<div class="well well-sm col-sm-12 col-md-6 col-lg-6">
-<label>Ubicación</label>
-    <div class="form-group">
-        <label class="checkbox-inline">
-            <input name="ubicacion1" type="checkbox">
-        </label>
-        <label class="checkbox-inline">
-            <input name="ubicacion2" type="checkbox">
-        </label>
-        <label class="checkbox-inline">
-            <input name="ubicacion3" type="checkbox">
-        </label>
-    </div>
-    <div class="form-group">
-        <label class="checkbox-inline">
-            <input name="ubicacion4" type="checkbox">
-        </label>
-        <label class="checkbox-inline">
-            <input name="ubicacion5" type="checkbox">
-        </label>
-        <label class="checkbox-inline">
-            <input name="ubicacion6" type="checkbox">
-        </label>
-    </div>
-    <div class="form-group">
-        <label class="checkbox-inline">
-            <input name="ubicacion7" type="checkbox">
-        </label>
-        <label class="checkbox-inline">
-            <input name="ubicacion8" type="checkbox">
-        </label>
-        <label class="checkbox-inline">
-            <input name="ubicacion9" type="checkbox">
-        </label>
-    </div>
-    <div class="form-group">
-        <label class="checkbox-inline">
-            <input name="ubicacion10" type="checkbox">
-        </label>
-        <label class="checkbox-inline">
-            <input name="ubicacion11" type="checkbox">
-        </label>
-        <label class="checkbox-inline">
-            <input name="ubicacion12" type="checkbox">
-        </label>
-    </div>
+<div class="form-group col-sm-3">
+    <label>Ubicación:</label>
+    <select class="form-control" name="ubicacion">
+        <option value="">Ubicación de la nota</option>
+        <option value="1">Superior Izquierda</option>
+        <option value="2">Superior Derecha</option>
+        <option value="3">Centro</option>
+        <option value="4">Inferior Izquierda</option>
+        <option value="5">Inferior Derecha</option>
+    </select>
 </div>

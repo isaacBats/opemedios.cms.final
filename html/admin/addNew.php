@@ -22,29 +22,40 @@
                 <div class="row">
                     <div class="col-sm-12 col-md-12 col-lg-12">
                         <form id="form_new" method="post" action="/panel/new/<?= strtolower($fuente)  ?>/save" enctype="multipart/form-data">
-                            <div class="col-sm-12 col-md-12 col-lg-12 form-group">
+                            <div class="form-group col-sm-12 col-md-12 col-lg-12 "> 
+                                <label>Encabezado:</label>
+                                <input class="form-control" placeholder="Encabezado" name="encabezado" required>
+                            </div>
+                            <div class="form-group col-sm-12 col-md-12 col-lg-12">
+                                <label>Síntesis:</label>
+                                <textarea class="form-control" name="sintesis" rows="10"></textarea>
+                            </div>
+                            <div class="col-sm-6 form-group">
+                                <label>Fuente:</label>
                                 <select id="selectFuente" class="select2 form-control" name="fuente" required >
                                     <option value="">Seleccione una Fuente</option>
                                     <?= $optionFont ?>
                                 </select>
                             </div>
-                            <div class="form-group col-sm-12 col-md-12 col-lg-12 "> 
-                                <input class="form-control" placeholder="Encabezado" name="encabezado" required>
+                            <div class="form-group col-sm-6">
+                                <label>Sección:</label>
+                                 <select class="form-control" name="seccion" id="add-new-secction" disabled="disabled" >
+                                    <option value="">Sección</option>
+                                </select>
                             </div>
-                            <div class="form-group col-sm-12 col-md-12 col-lg-12">
-                                <label>Síntesis:</label>
-                                <textarea class="form-control" name="sintesis"></textarea>
-                            </div>
-                            <div class="form-group col-sm-12 col-md-6 col-lg-3"> 
+                            <div class="form-group col-sm-6"> 
+                                <label>Autor:</label>
                                 <input class="form-control" placeholder="Nombre Autor" name="autor" required>
                             </div>
                             <div class="form-group col-sm-12 col-md-6 col-lg-3">
+                                <label>Tipo de autor:</label>
                                  <select class="form-control" name="tipoAutor">
                                     <option value="">Tipo de Autor</option>
                                     <?= $tipoAutor ?>
                                 </select>
                             </div>
                             <div class="form-group col-sm-12 col-md-6 col-lg-3">
+                                <label>Genero:</label>
                                  <select class="form-control" name="genero">
                                     <option value="">Género</option>
                                     <?= $genero ?>
@@ -56,11 +67,6 @@
                                     <?php //echo $sector ?>
                                 </select>
                             </div> -->
-                            <div class="form-group col-sm-12 col-md-6 col-lg-3">
-                                 <select class="form-control" name="seccion" id="add-new-secction" disabled="disabled" >
-                                    <option value="">Sección</option>
-                                </select>
-                            </div>
                             <!-- <div class="form-group col-sm-12 col-md-6 col-lg-3">
                                 <label>Fecha</label>
                                 <div id="fecha_new" class="input-group">
@@ -70,10 +76,12 @@
                             </div> -->
                             <?= $campos ?>
                             <div class="form-group">
-                                <div class="form-group col-sm-12 col-md-6 col-lg-6"> 
+                                <div class="form-group col-sm-3"> 
+                                    <label>Costo Beneficio:</label>
                                     <input class="form-control" placeholder="Costo Beneficio" name="costoBeneficio">
                                 </div>
-                                <div class="form-group col-sm-12 col-md-6 col-lg-6">
+                                <div class="form-group col-sm-3">
+                                    <label>Tendencia:</label>
                                      <select class="form-control" name="tendencia">
                                         <option value="">Tendencia</option>
                                         <option value="1" >Positiva</option>
@@ -84,7 +92,7 @@
                             </div>
                             <div class="col-sm-12 col-md-12 col-lg-12 form-group">
                                 <label>Comentarios:</label>
-                                <textarea class="form-control" name="comentarios"></textarea>
+                                <textarea class="form-control" name="comentarios" rows="6"></textarea>
                             </div>
                             <div class="form-group col-sm-12 col-md-4 col-lg-4">
                                 <div class="checkbox">

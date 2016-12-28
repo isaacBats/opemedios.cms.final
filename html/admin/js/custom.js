@@ -110,6 +110,18 @@ $(document).ready(function(){
         });
     });
 
+    // Agregar un autor si la seccion lo tiene al momento de agregar una noticia
+    $('#add-new-secction').change( function(){
+
+        var $seccion = $(this).val();
+        
+        $.get( '/panel/seccion/autor/' + $seccion, function( autor ){
+            
+            $('#autor').val(autor);
+            
+        } );
+    });
+
     /* Para el bloque de noticias */
     
     //muestra el area para agregar una noticia al un bloque

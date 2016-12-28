@@ -207,6 +207,16 @@ class AdminFonts extends Controller{
         }	
 	}
 
+	public function getAuthor( $id_seccion )
+	{
+		$autor = $this->sectionRepository->getAuthor( $id_seccion );
+
+		$autor = $autor->exito ? $autor->row : '';
+		
+		header('Content-type: text/json');
+	    echo json_encode( $autor );
+	}
+
 	//TODO: @Adminfonts Falta Editar una fuente
 	//TODO: @AdminFonts Falta borrar una fuente
 }

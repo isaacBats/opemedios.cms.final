@@ -315,6 +315,12 @@ $collection->attachRoute(new Route('/panel/get/seccion/:id', array(
     'methods' => 'GET'
 )));
 
+    // trae el nombre de un autor de una seccion 
+$collection->attachRoute(new Route('/panel/seccion/autor/:seccion', array(
+    '_controller' => 'AdminFonts::getAuthor',
+    'methods' => 'GET'
+)));
+
 $collection->attachRoute(new Route('/panel/font/section/change-state', array(
     '_controller' => 'AdminFonts::changeState',
     'methods' => 'GET'

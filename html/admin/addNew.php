@@ -44,8 +44,8 @@
                                 </select>
                             </div>
                             <div class="form-group col-sm-6"> 
-                                <label>Autor:</label>
-                                <input class="form-control" placeholder="Nombre Autor" name="autor" required>
+                                <label for="autor">Autor:</label>
+                                <input class="form-control" id="autor" placeholder="Nombre Autor" name="autor" required>
                             </div>
                             <div class="form-group col-sm-12 col-md-6 col-lg-3">
                                 <label>Tipo de autor:</label>

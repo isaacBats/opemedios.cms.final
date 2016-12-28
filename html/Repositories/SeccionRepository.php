@@ -98,4 +98,23 @@ class SeccionRepository extends BaseRepository{
 		
 		return $result;
 	}
+
+	public function getAuthor( $id_seccion )
+	{
+		$stmt = $this->pdo->prepare(' SELECT autor FROM seccion WHERE id_seccion = ?');
+		$rs = new stdClass();
+
+		if( $stmt->execute([ $id_seccion, ]) )
+		{
+			$rs->exito = TRUE;
+			$rs->row = ( $stmt->rowCount() > 0 ) ? $stmt->fetch(PDO::FETCH_COLUMN) : '';
+		}
+		else
+		{
+			$rs->exito = FALSE;
+			$rs->error = $stmt->errorInfo()[2];	
+		}
+
+		return $rs;
+	}
 }

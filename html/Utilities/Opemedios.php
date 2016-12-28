@@ -61,15 +61,6 @@ class Tendency extends PHPEnum
 	const NEGATIVA	= 3;
 }
 
-class UbicationNew extends PHPEnum
-{
-	const SI = [ 'id' => 1, 'value' => 'SUPERIOR_IZQUIERDO','image' => '/assets/images/image_ubicacion_rev_per/'];
-	const SD = [ 'id' => 2, 'value' => 'SUPERIOR_DERECHO',  'image' => '/assets/images/image_ubicacion_rev_per/'];
-	const CE = [ 'id' => 3, 'value' => 'CENTRO', 			'image' => '/assets/images/image_ubicacion_rev_per/'];
-	const II = [ 'id' => 4, 'value' => 'INFERIOR_IZQUIERDO','image' => '/assets/images/image_ubicacion_rev_per/'];
-	const ID = [ 'id' => 5, 'value' => 'INFERIOR_DERECHO',  'image' => '/assets/images/image_ubicacion_rev_per/'];
-}
-
 class Gender extends PHPEnum
 {
 	const REPORTAJE			 = 1;

@@ -145,7 +145,8 @@ class AdminNews extends Controller{
 						$html = '
 									<p>Página: <strong>' . $relatedNew['pagina'] . '</strong></p>
 									<p>Tamaño(%): <strong>' . $relatedNew['porcentaje_pagina'] . '</strong></p>
-						';					
+						';
+						$imageUbicacion = '<img src="'. Util::ubicationDetail( $relatedNew['ubicacion'] )['image'] .'" />'; 
 					}
 					break;
 				case '4':
@@ -155,7 +156,8 @@ class AdminNews extends Controller{
 						$html = '
 									<p>Página: <strong>' . $relatedNew['pagina'] . '</strong></p>
 									<p>Tamaño(%): <strong>' . $relatedNew['porcentaje_pagina'] . '</strong></p>
-						';					
+						';
+						$imageUbicacion = '<img src="'. Util::ubicationDetail( $relatedNew['ubicacion'] )['image'] .'" />';
 					}
 					break;
 				case '5':

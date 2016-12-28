@@ -20,6 +20,11 @@
 		<p>Tendencia: <strong><?= $newSelected['tendencia'] ?></strong></p>
 		<p>Comentarios:</p><p><?= $newSelected['comentario'] ?></p>
 		<p>Usuario que subio la nota : </p><strong><?= $newSelected['usuario'] . ' ' . $newSelected['apellidos'] ?></strong>
+		<div class="col-sm-6">
+			<?php if( isset( $imageUbicacion ) ): ?>
+				<?= $imageUbicacion; ?>
+			<?php endif; ?>
+		</div>
 	</div>
 	<div class="col-md-8">
 		<?= $htmlAdjunto ?>

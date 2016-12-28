@@ -39,6 +39,26 @@ class Util
 		return $tipoFuente[ $tipoFuenteId ];
 	}
 
+	public static function ubicationDetail( $ubicacionId )
+	{
+		$ubicacion = [ 
+						[ 'id' => 1, 'value' => 'SUPERIOR_IZQUIERDO','image' => '/assets/images/image_ubicacion_rev_per/sup_izquierda.jpg', 'label' => 'Superior Izquierdo', ],
+						[ 'id' => 2, 'value' => 'SUPERIOR_DERECHO',  'image' => '/assets/images/image_ubicacion_rev_per/sup_derecha.jpg',   'label' => 'Superior Derecho', ],
+						[ 'id' => 3, 'value' => 'CENTRO', 			 'image' => '/assets/images/image_ubicacion_rev_per/centro.jpg',        'label' => 'Central', ],
+						[ 'id' => 4, 'value' => 'INFERIOR_IZQUIERDO','image' => '/assets/images/image_ubicacion_rev_per/inf_izquierda.jpg', 'label' => 'Inferior Izquierdo', ],
+						[ 'id' => 5, 'value' => 'INFERIOR_DERECHO',  'image' => '/assets/images/image_ubicacion_rev_per/inf_derecha.jpg',   'label' => 'Inferior Derecha', ],
+					 ];
+
+		$ub = array_filter( $ubicacion, function( $ub ) use ( $ubicacionId ){
+
+			return $ub['value'] ===  $ubicacionId;
+		}); 
+
+		// echo '<pre>';print_r($ub[0]); exit;
+
+		return $ub[0];
+	}
+
 	public static function ubicationNew( $ubicationId ){
 		switch ( $ubicationId ) {
 			case 1:

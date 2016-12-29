@@ -8,7 +8,7 @@
     </div>
 </div>
 <div class="form-group col-sm-12 col-md-3 col-lg-3">
-    <label>Duracion</label>
+    <label>Duración</label>
     <div class="input-group relojd" >
         <input class="form-control height30 " name="duracion" />
         <span class="input-group-addon add-on">

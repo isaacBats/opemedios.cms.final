@@ -1,31 +1,26 @@
-<div class="form-group col-lg-3">
+<div class="form-group col-sm-3">
     <label>Pagina</label> 
     <input class="form-control" value="<?= $relatedNew['pagina'] ?>" name="pagina" required>
 </div>
-<div class="form-group col-lg-3"> 
+<div class="form-group col-sm-3"> 
     <label>Tamaño (%)</label>
-    <input class="form-control" value="<?= $relatedNew['porcentaje_pagina'] ?>" name="tamano" value="1" required>
-    <p class="help-block">Valor de 1 a 600.</p>
+    <input class="form-control" value="<?= $relatedNew['porcentaje_pagina'] ?>" name="tamano" placeholder="Valor de 1 a 600." required>
 </div>
-<div class="form-group col-lg-3">
+<div class="form-group col-sm-3">
     <label>Paginación</label>
      <select class="form-control" name="tipoPagina">
         <option value="">Tipo de Paginación</option>
         <?= $tipoPaginacion ?>
     </select>
 </div>
-<div class="well well-sm col-lg-6">
-<label>Ubicación</label>
-    <div class="form-group">
-        <?= $ub1 ?>
-    </div>
-    <div class="form-group">
-        <?= $ub2 ?>
-    </div>
-    <div class="form-group">
-        <?= $ub3 ?>
-    </div>
-    <div class="form-group">
-        <?= $ub4 ?>
-    </div>
+<div class="form-group col-sm-3">
+    <label>Ubicación:</label>
+    <select class="form-control" name="ubicacion">
+        <option value="">Ubicación de la nota</option>
+        <option value="1">Superior Izquierda</option>
+        <option value="2">Superior Derecha</option>
+        <option value="3">Centro</option>
+        <option value="4">Inferior Izquierda</option>
+        <option value="5">Inferior Derecha</option>
+    </select>
 </div>

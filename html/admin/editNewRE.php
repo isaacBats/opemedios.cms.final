@@ -13,7 +13,7 @@
         <?= $tipoPaginacion ?>
     </select>
 </div>
-<div class="form-group col-sm-3">
+<div class="form-group col-sm-3 col-sm-pull-3">
     <label>Ubicación:</label>
     <select class="form-control" name="ubicacion">
         <option value="">Ubicación de la nota</option>

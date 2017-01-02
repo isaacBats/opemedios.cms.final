@@ -335,6 +335,8 @@ class AdminNews extends Controller{
 					break;
 			}
 
+			echo '<pre>'; print_r(['noticia' => $newSelected, 'relacionada' => $relatedNew]);
+
 			$this->header_admin('Editar noticias: ' . $newSelected['encabezado'] . ' - ', $css );
 			require $this->adminviews . 'editNew.php';
 			$this->footer_admin( $js );	

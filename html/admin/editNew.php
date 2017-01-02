@@ -42,14 +42,14 @@
                                 <label>Autor:</label>
                                 <input class="form-control" value="<?= $newSelected['autor'] ?>" name="autor" required>
                             </div>
-                            <div class="form-group col-sm-12 col-md-6 col-lg-3">
+                            <div class="form-group col-sm-3">
                                 <label>Tipo de Autor:</label>
                                  <select class="form-control" name="tipoAutor">
                                     <option value="">Tipo de Autor</option>
                                     <?= $tipoAutor ?>
                                 </select>
                             </div>
-                            <div class="form-group col-sm-12 col-md-6 col-lg-3">
+                            <div class="form-group col-sm-3">
                                 <label>Género:</label>
                                  <select class="form-control" name="genero">
                                     <option value="">Género</option>
@@ -64,18 +64,16 @@
                                 </div>
                             </div>
                             <?= $campos ?>
-                            <div class="form-group">
-                                <div class="form-group col-sm-3">
-                                    <label>Costo:</label>
-                                    <input class="form-control" value="<?= $costo ?>" name="costoBeneficio">
-                                </div>
-                                <div class="form-group col-lg-6">
-                                    <label>Tendencia:</label>
-                                     <select class="form-control" name="tendencia">
-                                        <option value="">Tendencia</option>
-                                        <?= $tendencia ?>
-                                    </select>
-                                </div>
+                            <div class="form-group col-sm-3 <?= ( $newSelected['tipofuente_id'] == 3 || $newSelected['tipofuente_id'] == 4 ) ? 'col-sm-pull-3' : ''  ?>">
+                                <label>Costo Beneficio:</label>
+                                <input class="form-control" value="<?= $costo ?>" name="costoBeneficio">
+                            </div>
+                            <div class="form-group <?= ( $newSelected['tipofuente_id'] == 3 || $newSelected['tipofuente_id'] == 4 ) ? 'col-sm-3 col-sm-pull-3' : 'col-sm-6'  ?>">
+                                <label>Tendencia:</label>
+                                 <select class="form-control" name="tendencia">
+                                    <option value="">Tendencia</option>
+                                    <?= $tendencia ?>
+                                </select>
                             </div>
                             <div class="col-lg-12 form-group">
                                 <label>Comentarios:</label>

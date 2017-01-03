@@ -22,5 +22,6 @@
         <option value="3">Centro</option>
         <option value="4">Inferior Izquierda</option>
         <option value="5">Inferior Derecha</option>
+        <?= isset( $ubicationSelectedOption ) ? $ubicationSelectedOption : '' ?>
     </select>
 </div>

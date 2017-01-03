@@ -291,6 +291,9 @@ class AdminNews extends Controller{
 							}
 						}
 
+						$ubicationSelected = Util::ubicationDetail( $relatedNew['ubicacion'] );
+						$ubicationSelectedOption = '<option value="'. $ubicationSelected['id'] .'" selected >'. $ubicationSelected['label'] .'</option>';
+
 						ob_start();
 						require $this->adminviews . 'editNewPE.php';
 						$campos = ob_get_clean();
@@ -312,6 +315,9 @@ class AdminNews extends Controller{
 								$tipoPaginacion .= '<option value="'.$t['id_tipo_pagina'].'">'.$t['descripcion'].'</option>';							
 							}
 						}
+
+						$ubicationSelected = Util::ubicationDetail( $relatedNew['ubicacion'] );
+						$ubicationSelectedOption = '<option value="'. $ubicationSelected['id'] .'" selected >'. $ubicationSelected['label'] .'</option>';
 
 						ob_start();
 						require $this->adminviews . 'editNewRE.php';
@@ -335,7 +341,7 @@ class AdminNews extends Controller{
 					break;
 			}
 
-			echo '<pre>'; print_r(['noticia' => $newSelected, 'relacionada' => $relatedNew]);
+			// echo '<pre>'; print_r(['noticia' => $newSelected, 'relacionada' => $relatedNew, 'array_ubucacion' => $ubicationSelected,]);
 
 			$this->header_admin('Editar noticias: ' . $newSelected['encabezado'] . ' - ', $css );
 			require $this->adminviews . 'editNew.php';

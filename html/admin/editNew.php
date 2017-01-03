@@ -38,9 +38,13 @@
                                     <option value="<?= $seccion['id_seccion'] ?>"><?= $seccion['nombre'] ?></option>
                                 </select>
                             </div>
-                            <div class="form-group col-sm-6"> 
+                            <div class="form-group col-sm-3"> 
                                 <label>Autor:</label>
                                 <input class="form-control" value="<?= $newSelected['autor'] ?>" name="autor" required>
+                            </div>
+                            <div class="form-group col-sm-3">
+                                <label>Alcance</label>
+                                <input class="form-control" name="alcance" value="<?= $newSelected['alcance'] ?>">
                             </div>
                             <div class="form-group col-sm-3">
                                 <label>Tipo de Autor:</label>

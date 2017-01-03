@@ -149,6 +149,7 @@ class AdminNews extends Controller{
 				case '4':
 					$font = 'rev';
 					$relatedNew = $this->noticiasRepository->getNewById( $id, $font );
+					
 					if( is_array( $relatedNew ) ){
 						$html = '
 									<p>Página: <strong>' . $relatedNew['pagina'] . '</strong></p>
@@ -327,10 +328,7 @@ class AdminNews extends Controller{
 					break;
 				case '5':
 					$font = 'int';
-					$css .= '
-							<link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" rel="stylesheet">
-						    <link rel="stylesheet" type="text/css" media="screen" href="http://tarruda.github.com/bootstrap-datetimepicker/assets/css/bootstrap-datetimepicker.min.css">    			
-					';
+					
 					$relatedNew = $this->noticiasRepository->getNewById( $id, $font );
 					if( is_array( $relatedNew ) ){
 						ob_start();
@@ -374,39 +372,15 @@ class AdminNews extends Controller{
 
 					case '3':
 						$font = 'per';
-						$ubicacion = [];
-						for ($i=1; $i <= 12 ; $i++) { 
-							if ( isset( $updateNew['ubicacion'. $i] ) ){
-								$ub = 1;
-								array_push($ubicacion, $ub);
-							}else{
 
-								$ub = 0;
-								array_push($ubicacion, $ub);
-							}
-						}
-
-						$updateNew['ubicacion'] = $ubicacion;
-						$this->noticiasRepository->updateUbicacion( $updateNew['ubicacion'], $updateNew['noticia_id']);
+						$updateNew['ubicacion'] = Util::ubicationNew( $updateNew['ubicacion'] );
 						$updatenewson = $this->noticiasRepository->updateNewPerRev( $updateNew, $font );
 						break;
 
 					case '4':
 						$font = 'rev';
-						$ubicacion = [];
-						for ($i=1; $i <= 12 ; $i++) { 
-							if ( isset( $updateNew['ubicacion'. $i] ) ){
-								$ub = 1;
-								array_push($ubicacion, $ub);
-							}else{
-
-								$ub = 0;
-								array_push($ubicacion, $ub);
-							}
-						}
-
-						$updateNew['ubicacion'] = $ubicacion;
-						$this->noticiasRepository->updateUbicacion( $updateNew['ubicacion'], $updateNew['noticia_id']);
+						
+						$updateNew['ubicacion'] = Util::ubicationNew( $updateNew['ubicacion'] );
 						$updatenewson = $this->noticiasRepository->updateNewPerRev( $updateNew, $font );
 						break;
 

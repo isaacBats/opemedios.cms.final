@@ -41,6 +41,7 @@ class Util
 
 	public static function ubicationDetail( $ubicacionId )
 	{
+		
 		$ubicacion = [ 
 						[ 'id' => 1, 'value' => 'SUPERIOR_IZQUIERDO','image' => '/assets/images/image_ubicacion_rev_per/sup_izquierda.jpg', 'label' => 'Superior Izquierdo', ],
 						[ 'id' => 2, 'value' => 'SUPERIOR_DERECHO',  'image' => '/assets/images/image_ubicacion_rev_per/sup_derecha.jpg',   'label' => 'Superior Derecho', ],
@@ -49,14 +50,12 @@ class Util
 						[ 'id' => 5, 'value' => 'INFERIOR_DERECHO',  'image' => '/assets/images/image_ubicacion_rev_per/inf_derecha.jpg',   'label' => 'Inferior Derecha', ],
 					 ];
 
-		$ub = array_filter( $ubicacion, function( $ub ) use ( $ubicacionId ){
+		$ub = array_filter( $ubicacion, function( $ubi ) use ( $ubicacionId ){
 
-			return $ub['value'] ===  $ubicacionId;
-		}); 
+			return $ubi['value'] ===  $ubicacionId;
+		});
 
-		// echo '<pre>';print_r($ub[0]); exit;
-
-		return $ub[0];
+		return array_values( $ub )[0];
 	}
 
 	public static function ubicationNew( $ubicationId ){

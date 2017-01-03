@@ -111,9 +111,9 @@ class NoticiasRepository extends BaseRepository{
 								   autor	  				= :autor,
 								   fecha	  				= :fecha,
 								   comentario 				= :comentario,
+								   alcanse 				    = :alcance,
 								   id_fuente      			= :fuente_id,
 								   id_seccion     			= :seccion_id,
-								   id_sector      			= :sector_id,
 								   id_tipo_autor  			= :tipoautor_id,
 								   id_genero      			= :genero_id,
 								   id_tendencia_monitorista = :tendencia_id
@@ -126,9 +126,9 @@ class NoticiasRepository extends BaseRepository{
 	 	$query->bindParam(':autor', $new['autor']);
 	 	$query->bindParam(':fecha', $new['fecha']);
 	 	$query->bindParam(':comentario', $new['comentarios']);
+	 	$query->bindParam(':alcance', $new['alcance']);
 	 	$query->bindParam(':fuente_id', $new['fuente_id']);
 	 	$query->bindParam(':seccion_id', $new['seccion']);
-	 	$query->bindParam(':sector_id', $new['sector']);
 	 	$query->bindParam(':tipoautor_id', $new['tipoAutor']);
 	 	$query->bindParam(':genero_id', $new['genero']);
 	 	$query->bindParam(':tendencia_id', $new['tendencia']);
@@ -161,7 +161,8 @@ class NoticiasRepository extends BaseRepository{
 		$sql = 'UPDATE noticia_' . $typeFont . ' SET pagina            = :pagina,
 													 id_tipo_pagina    = :tipopag_id,
 													 porcentaje_pagina = :tamano,
-													 costo             = :costo
+													 costo             = :costo,
+													 ubicacion         = :ubicacion
 				WHERE id_noticia = :noticia_id;
 	
 		';
@@ -171,7 +172,9 @@ class NoticiasRepository extends BaseRepository{
 		$query->bindParam(':tipopag_id', $new['tipoPagina']);
 		$query->bindParam(':tamano', $new['tamano']);
 		$query->bindParam(':costo', $new['costoBeneficio']);
+		$query->bindParam(':ubicacion', $new['ubicacion']);
 		$query->bindParam(':noticia_id', $new['noticia_id']);
+		if( $query->execute() ) echo 'exito'; else echo $query->errorInfo()[2];
 
 		return $query->execute();
 	}

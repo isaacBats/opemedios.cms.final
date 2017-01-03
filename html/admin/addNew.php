@@ -43,9 +43,13 @@
                                     <option value="">Sección</option>
                                 </select>
                             </div>
-                            <div class="form-group col-sm-6"> 
+                            <div class="form-group col-sm-3"> 
                                 <label for="autor">Autor:</label>
                                 <input class="form-control" id="autor" placeholder="Nombre Autor" name="autor" required>
+                            </div>
+                            <div class="form-group col-sm-3">
+                                <label>Alcance</label>
+                                <input class="form-control" name="alcance" placeholder="1">
                             </div>
                             <div class="form-group col-sm-12 col-md-6 col-lg-3">
                                 <label>Tipo de autor:</label>

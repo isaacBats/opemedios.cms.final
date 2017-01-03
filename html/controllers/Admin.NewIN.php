@@ -69,7 +69,7 @@ class AdminNewIN extends AdminNews{
 			$_POST['archivos'] = $fil;
 			
 			$notice = $this->inRepository->addNewIN( $_POST );
-
+			
 			if( $notice->exito ){
 
 				/* guarda archivos */
@@ -96,7 +96,7 @@ class AdminNewIN extends AdminNews{
 
 				header('Location: /panel/news');
 			}else{
-				echo 'No se agrego a la tabla noticia_int';
+				echo 'No se agrego a la tabla noticia_int: ' . $notice->error;
 			}
 			
 		}else{

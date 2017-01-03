@@ -33,8 +33,8 @@ class BaseRepository {
 	}
 
 	public function addNews( $new ){
-		$sql = "INSERT INTO noticia (encabezado, sintesis, autor, fecha, comentario, id_tipo_fuente, id_fuente, id_seccion, id_sector, id_tipo_autor, id_genero, id_tendencia_monitorista, id_usuario) 
-							VALUES(:encabezado, :sintesis, :autor, :fecha, :comentario, :idTipoFuente, :idFuente, :idSeccion, :idSector, :idTipoAutor, :idGenero, :idTendenciaMonitorista, :idUsuario)";
+		$sql = "INSERT INTO noticia (encabezado, sintesis, autor, fecha, comentario, alcanse, id_tipo_fuente, id_fuente, id_seccion, id_sector, id_tipo_autor, id_genero, id_tendencia_monitorista, id_usuario) 
+							VALUES(:encabezado, :sintesis, :autor, :fecha, :comentario, :alcance, :idTipoFuente, :idFuente, :idSeccion, :idSector, :idTipoAutor, :idGenero, :idTendenciaMonitorista, :idUsuario)";
 		$new['sector'] = '49';
 		$new['fecha'] = date('Y-m-d');
 
@@ -44,6 +44,7 @@ class BaseRepository {
 		$query->bindParam(':autor',$new['autor']);
 		$query->bindParam(':fecha',$new['fecha']);
 		$query->bindParam(':comentario',$new['comentarios']);
+		$query->bindParam(':alcance',$new['alcance']);
 		$query->bindParam(':idTipoFuente',$new['tipoFuente']);
 		$query->bindParam(':idFuente',$new['fuente']);
 		$query->bindParam(':idSeccion',$new['seccion']);

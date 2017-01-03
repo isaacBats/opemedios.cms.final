@@ -57,6 +57,7 @@ class NoticiasRepository extends BaseRepository{
 					       n.autor 	    	AS 'autor', 
 					       n.fecha 	    	AS 'fecha', 
 					       n.comentario 	AS 'comentario', 
+					       n.alcanse 		AS 'alcance', 
 					       n.id_tipo_fuente	AS 'tipofuente_id',
 					       tf.descripcion	AS 'tipofuente',
 					       n.id_fuente		AS 'fuente_id',

@@ -29,6 +29,7 @@ class Encabezado
 		$this->numeroPagina = ( isset( $encabezado['num_pagina'] ) && !empty( $encabezado['num_pagina'] ) ) ? $encabezado['num_pagina'] : 0;
 		$this->seccion = ( isset( $encabezado['seccion'] ) && !empty( $encabezado['seccion'] ) ) ? $encabezado['seccion'] : null;
 		$this->tiraje = ( isset( $encabezado['tiraje'] ) && !empty( $encabezado['tiraje'] ) ) ? $encabezado['tiraje'] : 0;		
+		// TODO: @Encabezado LA fraccion debe de comprender dos valores; el string con el valor en fraccion y del valor de la fraccion es decir un decimal.
 		$this->fraccion = ( isset( $encabezado['fraccion'] ) && !empty( $encabezado['fraccion'] ) ) ? $this->validaFraccion( $encabezado['fraccion'] ) : 0.0;
 	}
 

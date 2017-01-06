@@ -72,4 +72,10 @@ class Util
 				return 'INFERIOR_DERECHO';
 		}
 	}
+
+	public function getUnixDate()
+	{
+		$fecha = new DateTime();
+		return $fecha->getTimestamp();
+	}
 }

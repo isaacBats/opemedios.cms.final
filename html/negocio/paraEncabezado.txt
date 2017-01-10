@@ -1,0 +1,2 @@
+
+Costo por nota es la tarifa dependiendo de la seccion  X el porcentaje de la nota 

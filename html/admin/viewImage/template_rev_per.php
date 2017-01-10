@@ -72,45 +72,44 @@
 <body>	
 	<header>
 		<figure id="img-fuente">
-			<img src="/media/daniel/Documentos/devAplication/opemedios.cms.com/data/fuentes/ID100_REFORMA.jpg">
+			<img src="<?= $logo ?>">
 			<figcaption>
-				15-06-2016
+				<?= $fecha ?>
 			</figcaption>
 		</figure>
-		<!-- <time>15-06-2016</time> -->
 		<table id="header-table">
 			<tr>
 				<th>Pag:</th>
-				<td>35</td>
+				<td><?= $pagina ?></td>
 				<th>Tiraje:</th>
-				<td>50,072</td>
+				<td><?= $tiraje ?></td>
 				<th>Porcentaje</th>
-				<td>4.00%</td>
+				<td><?= $porcentaje ?>%</td>
 			</tr>
 			<tr>
 				<th>Seccion:</th>
-				<td>CULTURA Y ENTRETENIMIENTO</td>
+				<td><?= $seccion ?></td>
 				<th>Impactos:</th>
-				<td>150,216</td>
+				<td><?= $impactos ?></td>
 				<th>Costo/cm2:</th>
-				<td>$126</td>
+				<td>$<?= $costoXcm ?></td>
 			</tr>
 			<tr>
 				<th>Cms2:</th>
-				<td>34</td>
+				<td><?= $tamanio ?></td>
 				<th>Fraccion:</th>
-				<td>1/25</td>
+				<td><?= $fraccion['string'] ?></td>
 				<th>Costo nota:</th>
-				<td>$4,420</td>
+				<td>$<?= $costoNota ?></td>
 			</tr>
 		</table>
 	</header>	
 	<figure id="img-principal">
-		<img src="/media/daniel/Documentos/DocumentacionApp/opemedios/tele/prueba_perio.jpg">
+		<img src="<?= $imageNota ?>">
 	</figure>
 	<footer>
 		<figure id="img-empresa">
-			<img src="/media/daniel/Documentos/devAplication/dev.opemedios.com/html/assets/images/logo_150X40.png">
+			<img src="/assets/images/logo_150X40.png">
 		</figure>
 		<p>© Opemedios</p>
 	</footer>

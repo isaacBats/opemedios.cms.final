@@ -78,4 +78,63 @@ class Util
 		$fecha = new DateTime();
 		return $fecha->getTimestamp();
 	}
+
+	/**
+	 * Convierte un porcentaje a una fracción 
+	 * @param  $percent 
+	 * @return string $fraction
+	 */
+	public function percentToFraction( $percent )
+	{
+		if( is_nan( $percent ) )
+			return 0;
+		
+		if( is_float( $percent ) )
+		{
+			$divisor = $percent * 10;
+			$dividendo = 1000;
+		}
+		elseif( is_int( $percent ) )
+		{
+			$divisor = $percent;
+			$dividendo = 100;
+		}
+		else
+			return 0;
+
+		
+		$factor_divisor = Util::factor( $divisor );
+		$factor_dividendo = Util::factor( $dividendo );
+
+		$factor_comun = array_intersect( $factor_divisor, $factor_dividendo );
+		$maximo_factor_comun = end( $factor_comun );
+		
+		$divisor_aux = $divisor / $maximo_factor_comun;
+		$dividendo_aux = $dividendo / $maximo_factor_comun;
+
+		$fraction = $divisor_aux . '/' . $dividendo_aux;
+
+		return $fraction;	
+	}
+
+
+	/**
+	 * Calcula los factores de un numero 
+	 * @param  int $num 
+	 * @return array() $res
+	 */
+	private function factor( $num )
+	{
+	    $res = array();
+
+	    for ($i = 1; $i <= $num; $i++) 
+	    { 
+	    	$mod = $num % $i;
+	    	if( $mod == 0 )
+	    		array_push( $res, $i );
+	    }
+
+	    return $res;
+	    
+	}
 }

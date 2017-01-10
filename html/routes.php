@@ -465,3 +465,11 @@ $collection->attachRoute(new Route('/panel/prensa/guardar-columna', array(
     '_controller' => 'AdminColumns::guardarColumna',
     'methods' => 'POST'
 )));
+
+
+// Reutas de prueba
+$collection->attachRoute(new Route('/calcula-fraccion', array(
+    '_controller' => 'Image::obtieneCifras',
+    'parameters' => ['new' => 'hola'],
+    'methods' => 'GET'
+)));

@@ -4,6 +4,7 @@ include_once('Admin.News.php');
 
 use utilities\MediaDirectory;
 use utilities\FontType;
+use utilities\Util;
 
 class AdminNewPE extends AdminNews{
 
@@ -11,6 +12,8 @@ class AdminNewPE extends AdminNews{
 	private $fuente;
 	private $urlArchivo;
 	private $bloqueRepo;
+	private $fuenteRepo;
+	private $seccionRepo;
 
 	public function __construct(){
 
@@ -18,6 +21,8 @@ class AdminNewPE extends AdminNews{
 		$this->bloqueRepo 			= new BloqueRepository();
 		$this->fuente 				= FontType::FONT_PERIODICO['fuente'];
 		$this->urlArchivo			= MediaDirectory::MEDIA_PERIODICO;
+		$this->fuenteRepo			= new FuentesRepository();
+		$this->seccionRepo			= new SeccionRepository();
 	}
 
 	public function getUrlArchivo(){
@@ -73,6 +78,22 @@ class AdminNewPE extends AdminNews{
 			}
 			$_POST['archivos'] = $fil;
 
+			
+			// Se preparan los datos para el encabezado de la noticia
+			$tiraje = intval( $this->peRepository->getTirajeById( $_POST['fuente'] )['tiraje'] );
+			$_POST['encabezado'] = [
+										'logo'       => $this->fuenteRepo->getLogoById( $_POST['fuente'] )['logo'],
+										'impactos'   => $tiraje * 3,
+										'fecha'	     => Util::getUnixDate(),
+										'fraccion'   => serialize( $this->validaFraccion( Util::percentToFraction( $_POST['tamano'] ) ) ),
+										'num_pagina' => $_POST['pagina'],
+										'porcentaje' => $_POST['tamano'],
+										'seccion'    => $this->seccionRepo->getSeccionById( $_POST['seccion'] )['nombre'],
+										'tiraje'     => $tiraje,
+								   ];
+
+			vdd($_POST);
+
 			$notice = $this->peRepository->addNewPE( $_POST );
 
 			if( $notice->exito ){
@@ -109,5 +130,16 @@ class AdminNewPE extends AdminNews{
 			header('Location: /panel/new/add/new-periodico');
 		}
 
+	}
+
+	private function validaFraccion( $fraccion )
+	{
+		if( is_array( $fraccion ) )
+			return $fraccion;
+
+		$explode = explode('/', $fraccion );
+		$float = $explode[0] / $explode[1];
+
+		return [ 'string' => $fraccion, 'float' => $float ];
 	}
 }

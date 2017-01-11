@@ -75,7 +75,7 @@ class Util
 
 	public function getUnixDate()
 	{
-		$fecha = new DateTime();
+		$fecha = new \DateTime();
 		return $fecha->getTimestamp();
 	}
 
@@ -86,8 +86,7 @@ class Util
 	 */
 	public function percentToFraction( $percent )
 	{
-		if( is_nan( $percent ) )
-			return 0;
+		$percent = Util::getNumeric( $percent );
 		
 		if( is_float( $percent ) )
 		{
@@ -98,7 +97,7 @@ class Util
 		{
 			$divisor = $percent;
 			$dividendo = 100;
-		}
+		}		
 		else
 			return 0;
 
@@ -137,4 +136,17 @@ class Util
 	    return $res;
 	    
 	}
+
+	/**
+	 * Valida si el argumento string es un numero y lo convierte al tipo de numero que es
+	 * @param   &$val 
+	 * @return $val ( Tipo de numero que es ) FALSE si no es numerico
+	 */
+	private function getNumeric( &$val )
+	{ 
+	  if( is_numeric( $val ) ) 
+	    return $val + 0; 
+
+	  return 0; 
+	} 
 }

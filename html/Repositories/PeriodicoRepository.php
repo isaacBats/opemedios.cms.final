@@ -37,6 +37,11 @@ class PeriodicoRepository extends BaseRepository{
 
 	}
 
+	public function getTirajeById( $fontId )
+	{
+		return $this->pdo->query("SELECT tiraje FROM fuente_per WHERE id_fuente = " . $fontId)->fetch(PDO::FETCH_ASSOC);
+	}
+
 	public function addNewPE( $new ){
 
 		$idNew = $this->addNews( $new );

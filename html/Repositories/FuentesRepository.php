@@ -63,5 +63,10 @@ class FuentesRepository extends BaseRepository{
 		return $rs;	
 	}
 
+	public function getLogoById( $fontId )
+	{
+		return $this->pdo->query('SELECT logo FROM fuente WHERE id_fuente = ' . $fontId)->fetch(PDO::FETCH_ASSOC);
+	}
+
 
 }

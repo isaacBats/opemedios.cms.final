@@ -90,4 +90,9 @@ class RevistaRepository extends BaseRepository{
 			echo $adjunto->name;
 		}
 	}
+
+	public function getTirajeById( $fontId )
+	{
+		return $this->pdo->query("SELECT tiraje FROM fuente_rev WHERE id_fuente = " . $fontId)->fetch(PDO::FETCH_ASSOC);
+	}
 }

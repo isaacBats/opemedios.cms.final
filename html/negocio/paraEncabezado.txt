@@ -1,2 +1,6 @@
 
 Costo por nota es la tarifa dependiendo de la seccion  X el porcentaje de la nota 
+Los impactos son el tiraje * 3
+El porcentaje es el equivalente a porciento de la fraccion 
+la fraccion es un numero decimal en fraccion 
+El costo por nota es la tarifa que aplica para la seccion * el pocentaje dado

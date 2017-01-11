@@ -468,8 +468,8 @@ $collection->attachRoute(new Route('/panel/prensa/guardar-columna', array(
 
 
 // Reutas de prueba
-$collection->attachRoute(new Route('/calcula-fraccion', array(
-    '_controller' => 'Image::obtieneCifras',
-    'parameters' => ['new' => 'hola'],
-    'methods' => 'GET'
-)));
+// $collection->attachRoute(new Route('/calcula-fraccion', array(
+//     '_controller' => 'Image::obtieneCifras',
+//     'parameters' => ['new' => 'hola'],
+//     'methods' => 'GET'
+// )));

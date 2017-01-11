@@ -13,16 +13,6 @@ class Image{
 		$this->pathFuentes = 'assets/fonts/font-image/';
 	}
 
-	public function obtieneCifras( $new )
-	{
-		echo 'Vamos a obtener una fraccion <br>
-			  El porcentaje a convertir es 75% <br>';
-
-		$fraccion = Util::percentToFraction( 45.5 );
-
-		echo 'La fraccion es <pre>';  print_r( $fraccion );
-	}
-
 	public function createImage(){
 
 		// $file = '/media/daniel/Documentos/DocumentacionApp/opemedios/PruebaImagen.jpg';

@@ -68,31 +68,32 @@ class AdminNewPE extends AdminNews{
 			$_POST['tipoFuente'] = $id_periodico;
 			$_POST['usuario'] = $_SESSION['admin']['id_usuario'];
 			$_POST['slug'] = $slug = $this->getUrlArchivo();
-			$_POST['principal'] = 0;				
+			$_POST['principal'] = 0;
+			// Se preparan los datos para el encabezado de la noticia
+			$tiraje = intval( $this->peRepository->getTirajeById( $_POST['fuente'] )['tiraje'] );
+			$encabezado = [
+								'logo'       => $this->fuenteRepo->getLogoById( $_POST['fuente'] )['logo'],
+								'impactos'   => $tiraje * 3,
+								'fecha'	     => Util::getUnixDate(),
+								'fraccion'   => serialize( $this->validaFraccion( Util::percentToFraction( $_POST['tamano'] ) ) ),
+								'num_pagina' => $_POST['pagina'],
+								'porcentaje' => $_POST['tamano'],
+								'seccion'    => $this->seccionRepo->getSeccionById( $_POST['seccion'] )['nombre'],
+								'tiraje'     => $tiraje,
+								'costo_cm'	 => 0,
+								'costo_nota' => 0,
+								'tamanio'	 => 0,
+						     ];				
 			
 			$fil = array();
 			if( $_FILES['primario']['name'][0] != '' ){
-				$fil = array_map(function ($name, $type, $tmp_name, $error, $size) use ($slug){
-					return ['name' => $name, 'type' => $type, 'tmp_name' => $tmp_name, 'error' => $error, 'size' => $size, 'slug' => $_POST['slug'], 'principal' => '0'];
+				$fil = array_map(function ($name, $type, $tmp_name, $error, $size) use ( $slug, $encabezado ){
+					return ['name' => $name, 'type' => $type, 'tmp_name' => $tmp_name, 'error' => $error, 'size' => $size, 'slug' => $_POST['slug'], 'principal' => '0', 'encabezado' => $encabezado, ];
 				}, $_FILES['primario']['name'], $_FILES['primario']['type'], $_FILES['primario']['tmp_name'], $_FILES['primario']['error'], $_FILES['primario']['size']);
 			}
 			$_POST['archivos'] = $fil;
 
-			
-			// Se preparan los datos para el encabezado de la noticia
-			$tiraje = intval( $this->peRepository->getTirajeById( $_POST['fuente'] )['tiraje'] );
-			$_POST['encabezado'] = [
-										'logo'       => $this->fuenteRepo->getLogoById( $_POST['fuente'] )['logo'],
-										'impactos'   => $tiraje * 3,
-										'fecha'	     => Util::getUnixDate(),
-										'fraccion'   => serialize( $this->validaFraccion( Util::percentToFraction( $_POST['tamano'] ) ) ),
-										'num_pagina' => $_POST['pagina'],
-										'porcentaje' => $_POST['tamano'],
-										'seccion'    => $this->seccionRepo->getSeccionById( $_POST['seccion'] )['nombre'],
-										'tiraje'     => $tiraje,
-								   ];
-
-			vdd($_POST);
+			// vdd($_POST);
 
 			$notice = $this->peRepository->addNewPE( $_POST );
 
@@ -123,7 +124,7 @@ class AdminNewPE extends AdminNews{
 				header('Location: /panel/news');
 			}else{
 				echo 'No se agrego a la tabla noticia_ped  <pre>';
-				print_r($notice->error);
+				print_r($notice);
 			}
 			
 		}else{

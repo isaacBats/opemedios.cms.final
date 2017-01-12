@@ -8,7 +8,7 @@ CREATE TABLE `opemedios`.`encabezados` (
   `costo_cm` VARCHAR(45) NULL,
   `costo_nota` VARCHAR(45) NULL,
   `fecha` VARCHAR(45) NULL,
-  `fraccion` VARCHAR(10) NULL,
+  `fraccion` VARCHAR(200) NULL,
   `num_pagina` INT NULL,
   `porcentaje` VARCHAR(10) NULL,
   `seccion` VARCHAR(150) NULL,
@@ -18,6 +18,10 @@ CREATE TABLE `opemedios`.`encabezados` (
   UNIQUE INDEX `id_UNIQUE` (`id` ASC));
 
 
+
+--Anteriormente el campo de fraccion estava con 10 de valor. Se modifico a 200
+ALTER TABLE `opemedios`.`encabezados` 
+CHANGE COLUMN `fraccion` `fraccion` VARCHAR(200) NULL DEFAULT NULL ;
 
 -- Se anula este cambio en la tabla adjunto ya que el id del archivo al que pertenece se pone en la tabla de encabezados
 ALTER TABLE `opemedios`.`adjunto` 

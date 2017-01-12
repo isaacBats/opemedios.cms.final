@@ -92,7 +92,10 @@ class PeriodicoRepository extends BaseRepository{
 
 			return $result;
 		}else{
-			echo $adjunto->name;
+			$result->exito = false;
+			$result->adjunto = $adjunto;
+			$result->error = 'No se pudo inserta en noticia_per por errores en la tabla adjunto';
+			return $result;
 		}
 	}
 

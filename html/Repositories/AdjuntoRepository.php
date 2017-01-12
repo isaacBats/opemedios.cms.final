@@ -5,6 +5,8 @@ include_once("BaseRepository.php");
 class AdjuntoRepository extends BaseRepository{
 
 	public function add ( $adjunto, $idNoticia ){
+
+		$encabezadoRepo = new EncabezadoRepository();
 	
 		$nombreArchivo = 'ID'.$idNoticia.'_'.uniqid().str_replace( ' ', '-', $adjunto['name'] );	
 
@@ -22,10 +24,14 @@ class AdjuntoRepository extends BaseRepository{
 		$result = new stdClass();
 
 		if($query->execute()){
+			$lastInsertId = $this->pdo->lastInsertId();
+			$adjunto['encabezado']['id_adjunto'] = $lastInsertId;
 			$result->exito = true;
+			$result->encabezado = $encabezadoRepo->add( $adjunto['encabezado'] );
 			$result->name = $nombreArchivo;
 			$result->size = $adjunto['size'];
 			$result->originName = $adjunto['name'];
+			$result->adjunto = $this->pdo->query( "SELECT * FROM adjunto WHERE id_adjunto = " . $lastInsertId )->fetch(\PDO::FETCH_ASSOC);
 		}else{
 			$error = $query->errorInfo();
 			$result->exito = false;

@@ -4,6 +4,7 @@ include_once('Admin.News.php');
 
 use utilities\MediaDirectory;
 use utilities\FontType;
+use utilities\Util;
 
 class AdminNewRE extends AdminNews{
 
@@ -11,6 +12,8 @@ class AdminNewRE extends AdminNews{
 	private $fuente;
 	private $urlArchivo;
 	private $bloqueRepo;
+	private $fuenteRepo;
+	private $seccionRepo;
 
 	public function __construct(){
 
@@ -18,6 +21,8 @@ class AdminNewRE extends AdminNews{
 		$this->bloqueRepo 			= new BloqueRepository();
 		$this->fuente 				= FontType::FONT_REVISTA['fuente'];
 		$this->urlArchivo			= MediaDirectory::MEDIA_REVISTA;
+		$this->fuenteRepo			= new FuentesRepository();
+		$this->seccionRepo			= new SeccionRepository();
 	}
 
 	public function getUrlArchivo(){
@@ -63,12 +68,27 @@ class AdminNewRE extends AdminNews{
 			$_POST['tipoFuente'] = $id_revista;
 			$_POST['usuario'] = $_SESSION['admin']['id_usuario'];
 			$_POST['slug'] = $slug = $this->getUrlArchivo();
-			$_POST['principal'] = 0;				
+			$_POST['principal'] = 0;
+			// Se preparan los datos para el encabezado de la noticia
+			$tiraje = intval( $this->reRepository->getTirajeById( $_POST['fuente'] )['tiraje'] );
+			$encabezado = [
+								'logo'       => $this->fuenteRepo->getLogoById( $_POST['fuente'] )['logo'],
+								'impactos'   => $tiraje * 3,
+								'fecha'	     => Util::getUnixDate(),
+								'fraccion'   => serialize( $this->validaFraccion( Util::percentToFraction( $_POST['tamano'] ) ) ),
+								'num_pagina' => $_POST['pagina'],
+								'porcentaje' => $_POST['tamano'],
+								'seccion'    => $this->seccionRepo->getSeccionById( $_POST['seccion'] )['nombre'],
+								'tiraje'     => $tiraje,
+								'costo_cm'	 => 0,
+								'costo_nota' => 0,
+								'tamanio'	 => 0,
+						     ];			
 			
 			$fil = array();
 			if( $_FILES['primario']['name'][0] != '' ){
-				$fil = array_map(function ($name, $type, $tmp_name, $error, $size) use ($slug){
-					return ['name' => $name, 'type' => $type, 'tmp_name' => $tmp_name, 'error' => $error, 'size' => $size, 'slug' => $_POST['slug'], 'principal' => '0'];
+				$fil = array_map(function ($name, $type, $tmp_name, $error, $size) use ( $slug, $encabezado ){
+					return ['name' => $name, 'type' => $type, 'tmp_name' => $tmp_name, 'error' => $error, 'size' => $size, 'slug' => $_POST['slug'], 'principal' => '0', 'encabezado' => $encabezado, ];
 				}, $_FILES['primario']['name'], $_FILES['primario']['type'], $_FILES['primario']['tmp_name'], $_FILES['primario']['error'], $_FILES['primario']['size']);
 			}
 			$_POST['archivos'] = $fil;
@@ -101,12 +121,23 @@ class AdminNewRE extends AdminNews{
 
 				header('Location: /panel/news');
 			}else{
-				echo 'No se agrego a la tabla noticia_rev';
+				echo 'No se agrego a la tabla noticia_rev <pre>';
+				print_r($notice);
 			}
 			
 		}else{
 			header('Location: /panel/new/add/new-revista');
 		}
+	}
 
+	private function validaFraccion( $fraccion )
+	{
+		if( is_array( $fraccion ) )
+			return $fraccion;
+
+		$explode = explode('/', $fraccion );
+		$float = $explode[0] / $explode[1];
+
+		return [ 'string' => $fraccion, 'float' => $float ];
 	}
 }

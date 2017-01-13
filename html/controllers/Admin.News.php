@@ -91,7 +91,8 @@ class AdminNews extends Controller{
 			$newSelected = $this->noticiasRepository->getNewById( $id ); 
 			$relatedNew = null ;
 
-			$adjunto = $this->adjuntoRepo->getAdjunto( $id );
+			$adjuntos = $this->adjuntoRepo->getAdjunto( $id );
+			$adjunto = $adjuntos[0];
 
 			$htmlAdjunto = '
 								<figure class="figure">
@@ -144,6 +145,16 @@ class AdminNews extends Controller{
 									<p>Tamaño(%): <strong>' . $relatedNew['porcentaje_pagina'] . '</strong></p>
 						';
 						$imageUbicacion = '<img src="'. Util::ubicationDetail( $relatedNew['ubicacion'] )['image'] .'" />'; 
+
+						
+						$htmlAdjunto .= '<ul class="adjunto-list">';
+						for($i = 0; $i < sizeof( $adjuntos ); $i++)
+						{
+							$htmlAdjunto .= '<li class="adjunto-item">
+									<a href="#"><img width="150" src="/' . $adjuntos[$i]['carpeta'] . $adjuntos[$i]['nombre_archivo'] . '" /></a>
+								</li>';
+						}
+						$htmlAdjunto .= '</ul>';
 					}
 					break;
 				case '4':
@@ -156,6 +167,15 @@ class AdminNews extends Controller{
 									<p>Tamaño(%): <strong>' . $relatedNew['porcentaje_pagina'] . '</strong></p>
 						';
 						$imageUbicacion = '<img src="'. Util::ubicationDetail( $relatedNew['ubicacion'] )['image'] .'" />';
+
+						$htmlAdjunto .= '<ul class="adjunto-list">';
+						for($i = 0; $i < sizeof( $adjuntos ); $i++)
+						{
+							$htmlAdjunto .= '<li class="adjunto-item">
+									<a href="#"><img width="150" src="/' . $adjuntos[$i]['carpeta'] . $adjuntos[$i]['nombre_archivo'] . '" /></a>
+								</li>';
+						}
+						$htmlAdjunto .= '</ul>';
 					}
 					break;
 				case '5':

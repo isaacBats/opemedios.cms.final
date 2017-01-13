@@ -176,7 +176,7 @@ class Controller
 		$adjuntoRepository = new AdjuntoRepository();		
 		$noticiaRepository = new NoticiasRepository();
 
-		$archivo = $adjuntoRepository->getAdjunto( $noticia );
+		$archivo = $adjuntoRepository->getAdjunto( $noticia )[0];
 		$noticia =  $noticiaRepository->getNewById( $noticia );
 
 		// $buffer = explode( '.', $archivo['nombre'] );

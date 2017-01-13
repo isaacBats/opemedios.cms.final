@@ -52,4 +52,9 @@ class AdjuntoRepository extends BaseRepository{
 
 		return $exito;
 	}
+
+	public function findById( $adjuntoId )
+	{
+		return $this->pdo->query('SELECT * FROM adjunto WHERE id_adjunto = ' . $adjuntoId )->fetch();	
+	}
 }

@@ -14,6 +14,8 @@ class AdminNewPE extends AdminNews{
 	private $bloqueRepo;
 	private $fuenteRepo;
 	private $seccionRepo;
+	private $encabezadoRepo;
+	private $adjuntoRepo;
 
 	public function __construct(){
 
@@ -23,6 +25,8 @@ class AdminNewPE extends AdminNews{
 		$this->urlArchivo			= MediaDirectory::MEDIA_PERIODICO;
 		$this->fuenteRepo			= new FuentesRepository();
 		$this->seccionRepo			= new SeccionRepository();
+		$this->encabezadoRepo	    = new EncabezadoRepository();
+		$this->adjuntoRepo	        = new AdjuntoRepository();
 	}
 
 	public function getUrlArchivo(){
@@ -142,5 +146,27 @@ class AdminNewPE extends AdminNews{
 		$float = $explode[0] / $explode[1];
 
 		return [ 'string' => $fraccion, 'float' => $float ];
+	}
+
+	// /panle/new/encabezado/:fuente/:adjuntoId
+	public function previewHeader( $fuente, $adjuntoId )
+	{
+		if( isset( $_SESSION['admin'] ) )
+		{
+
+			$encabezado = $this->encabezadoRepo->findByAdjuntoId( $adjuntoId );
+			$adjunto = $this->adjuntoRepo->findById( $adjuntoId );
+
+			$fraccion = unserialize($encabezado['fraccion']);
+			  // new DateTimeZone('America/Mexico_City')
+			$date = new \DateTime();
+			$fecha = $date->setTimestamp( $encabezado['fecha'] ); 
+
+			$this->header_admin('Vista previa adjunto de ' . ucfirst( $fuente ) . ' - ' );
+			require $this->adminviews . 'previewHeaderView.php';
+			$this->footer_admin();
+		}else{
+            header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
+        }
 	}
 }

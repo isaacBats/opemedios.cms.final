@@ -39,5 +39,10 @@ class EncabezadoRepository extends BaseRepository
 
 		return $result;
 	}
+
+	public function findByAdjuntoId( $adjuntoId )
+	{
+		return $this->pdo->query('SELECT * FROM ' . $this->table . ' WHERE id_adjunto = ' . $adjuntoId )->fetch();	
+	}
 }
 

@@ -16,6 +16,7 @@ class AdminNewPE extends AdminNews{
 	private $seccionRepo;
 	private $encabezadoRepo;
 	private $adjuntoRepo;
+	private $noticiaRepo;
 
 	public function __construct(){
 
@@ -27,6 +28,7 @@ class AdminNewPE extends AdminNews{
 		$this->seccionRepo			= new SeccionRepository();
 		$this->encabezadoRepo	    = new EncabezadoRepository();
 		$this->adjuntoRepo	        = new AdjuntoRepository();
+		$this->noticiaRepo	        = new NoticiasRepository();
 	}
 
 	public function getUrlArchivo(){
@@ -153,9 +155,15 @@ class AdminNewPE extends AdminNews{
 	{
 		if( isset( $_SESSION['admin'] ) )
 		{
-
 			$encabezado = $this->encabezadoRepo->findByAdjuntoId( $adjuntoId );
 			$adjunto = $this->adjuntoRepo->findById( $adjuntoId );
+
+			$noticiaId = $adjunto['id_noticia'];
+
+			$new = $this->noticiaRepo->getNewById( $noticiaId );
+
+			$fuentes   = $this->fuenteRepo->showAllFonts( 0, 0, $new['tipofuente_id'] );
+			$seccion = $this->seccionRepo->getSeccionById( $new['seccion_id'] );
 
 			$fraccion = unserialize($encabezado['fraccion']);
 			  // new DateTimeZone('America/Mexico_City')

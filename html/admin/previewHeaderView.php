@@ -1,4 +1,4 @@
-<!-- <style type="text/css">
+<style type="text/css">
 	header{
 		display: block;
 		margin: 15px 20%;
@@ -30,7 +30,15 @@
 		header table tr td {
 			padding: 0 .5em;
 		}
-</style> -->
+
+	#img-principal{
+		max-width: 800px;
+	}
+
+	#img-principal img{
+		width: 100%;
+	}
+</style>
 <header>
 		<figure id="img-fuente">
 			<img src="/assets/data/fuentes/<?= $encabezado['logo']; ?>">
@@ -68,3 +76,37 @@
 	<figure id="img-principal">
 		<img src="/<?= $adjunto['carpeta'] . $adjunto['nombre_archivo'] ?>">
 	</figure>
+
+	<div class="col-sm-12">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				Editar el encabezado
+			</div>
+			<div class="panel-body">
+				<form action="" method="post">
+					<input type="hidden" value="<?= $encabezado['id_adjunto'] ?>">
+					<div class="form-group col-sm-2">
+						<label>Pagina:</label>
+						<input type="text" class="form-control" value="<?= $encabezado['num_pagina'] ?>">
+					</div>
+					<div class="form-group col-sm-2">
+						<label>Porcentaje:</label>
+						<input type="text" class="form-control" value="<?= $encabezado['porcentaje'] ?>">
+					</div>
+					<div class="col-sm-6 form-group">
+                        <label>Fuente:</label>
+                        <select id="selectFuente" class="select2 form-control" name="fuente" required >
+                            <option value="">Seleccione una Fuente</option>
+                            <?= $optionFont ?>
+                        </select>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>Sección:</label>
+                         <select class="form-control" name="seccion" id="add-new-secction" disabled="disabled" >
+                            <option value="">Sección</option>
+                        </select>
+                    </div>
+				</form>
+			</div>
+		</div>
+	</div>

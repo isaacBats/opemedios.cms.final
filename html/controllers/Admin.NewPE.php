@@ -177,4 +177,27 @@ class AdminNewPE extends AdminNews{
             header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
         }
 	}
+
+	public function editHeaderAction()
+	{
+		$fuente   = $this->fuenteRepo->getFontById( $_POST['fuente'] );
+		$seccion = $this->seccionRepo->getSeccionById( $_POST['seccion'] );
+
+		// $tiraje = intval( $this->peRepository->getTirajeById( $_POST['fuente'] )['tiraje'] );
+		// $encabezado = [
+		// 					'logo'       => $this->fuenteRepo->getLogoById( $_POST['fuente'] )['logo'],
+		// 					'impactos'   => $tiraje * 3,
+		// 					'fecha'	     => Util::getUnixDate(),
+		// 					'fraccion'   => serialize( $this->validaFraccion( Util::percentToFraction( $_POST['tamano'] ) ) ),
+		// 					'num_pagina' => $_POST['pagina'],
+		// 					'porcentaje' => $_POST['tamano'],
+		// 					'seccion'    => $this->seccionRepo->getSeccionById( $_POST['seccion'] )['nombre'],
+		// 					'tiraje'     => $tiraje,
+		// 					'costo_cm'	 => 0,
+		// 					'costo_nota' => 0,
+		// 					'tamanio'	 => 0,
+		// 			     ];
+
+		vdd($_POST);
+	}
 }

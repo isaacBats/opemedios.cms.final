@@ -505,6 +505,19 @@ $(document).ready(function(){
         $('#cambiar-logo-action').hide('slow');
     });
 
+    // Esconder aparecer formulario de cambiar Headers
+    $('#editar-encabezado').on('click', function(){
+        $('#encabezados-adjunto').hide('slow');
+        $('#actions-headers').hide();
+        $('#headers-edit').slideToggle();
+    });
+
+    $('#cancel-edit-headers').on('click', function(){
+        $('#encabezados-adjunto').show('slow');
+        $('#actions-headers').show();
+        $('#headers-edit').hide('slow');
+    });
+
     // // Enviar Formulario cambiar logo
     // $('#form-cambia-imagen').validate({
     //     submitHandler: function(form){

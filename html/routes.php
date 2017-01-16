@@ -200,6 +200,11 @@ $collection->attachRoute(new Route('/panle/new/encabezado/:fuente/:adjuntoId', a
     'methods' => 'GET'
 )));
 
+$collection->attachRoute(new Route('/panle/new/encabezado/edit', array(
+    '_controller' => 'AdminNewPE::editHeaderAction',
+    'methods' => 'POST'
+)));
+
 //News Revista 
 $collection->attachRoute(new Route('/panel/new/add/new-revista', array(
     '_controller' => 'AdminNewRE::add',

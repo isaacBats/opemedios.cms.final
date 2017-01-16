@@ -122,7 +122,11 @@
 }
 
 .ml-20{
-	margin-left: 20px;
+  margin-left: 20px;
+}
+
+.mr-10{
+	margin-right: 10px;
 }
 
 .mt-10{

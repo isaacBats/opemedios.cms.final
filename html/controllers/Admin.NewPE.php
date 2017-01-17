@@ -89,6 +89,8 @@ class AdminNewPE extends AdminNews{
 								'costo_cm'	 => 0,
 								'costo_nota' => 0,
 								'tamanio'	 => 0,
+								'id_fuente'  => $_POST['fuente'],
+								'id_seccion'  => $_POST['seccion'],
 						     ];				
 			
 			$fil = array();
@@ -163,7 +165,7 @@ class AdminNewPE extends AdminNews{
 			$new = $this->noticiaRepo->getNewById( $noticiaId );
 
 			$fuentes   = $this->fuenteRepo->showAllFonts( 0, 0, $new['tipofuente_id'] );
-			$seccion = $this->seccionRepo->getSeccionById( $new['seccion_id'] );
+			$seccion = $this->seccionRepo->getSeccionById( $encabezado['id_seccion'] );
 
 			$fraccion = unserialize($encabezado['fraccion']);
 			  // new DateTimeZone('America/Mexico_City')
@@ -180,24 +182,31 @@ class AdminNewPE extends AdminNews{
 
 	public function editHeaderAction()
 	{
-		$fuente   = $this->fuenteRepo->getFontById( $_POST['fuente'] );
+		$encabezado = $this->encabezadoRepo->findById( $_POST['encabezadoId'] );	
+
+		$fuente   = $this->fuenteRepo->getFontById( $_POST['fuente'], substr( $_POST['tipo_fuente'], 0, 3 ) );
 		$seccion = $this->seccionRepo->getSeccionById( $_POST['seccion'] );
 
-		// $tiraje = intval( $this->peRepository->getTirajeById( $_POST['fuente'] )['tiraje'] );
-		// $encabezado = [
-		// 					'logo'       => $this->fuenteRepo->getLogoById( $_POST['fuente'] )['logo'],
-		// 					'impactos'   => $tiraje * 3,
-		// 					'fecha'	     => Util::getUnixDate(),
-		// 					'fraccion'   => serialize( $this->validaFraccion( Util::percentToFraction( $_POST['tamano'] ) ) ),
-		// 					'num_pagina' => $_POST['pagina'],
-		// 					'porcentaje' => $_POST['tamano'],
-		// 					'seccion'    => $this->seccionRepo->getSeccionById( $_POST['seccion'] )['nombre'],
-		// 					'tiraje'     => $tiraje,
-		// 					'costo_cm'	 => 0,
-		// 					'costo_nota' => 0,
-		// 					'tamanio'	 => 0,
-		// 			     ];
+		$tiraje = intval( $fuente['tiraje'] );
+		$updateEncabezado = [
+							'id'		 => $_POST['encabezadoId'],
+							'logo'       => $fuente['logo'],
+							'impactos'   => $tiraje * 3,
+							'fraccion'   => serialize( $this->validaFraccion( Util::percentToFraction( $_POST['porcentaje'] ) ) ),
+							'num_pagina' => $_POST['num_pagina'],
+							'porcentaje' => $_POST['porcentaje'],
+							'seccion'    => $seccion['nombre'],
+							'tiraje'     => $tiraje,
+							'costo_cm'	 => $encabezado['costo_cm'],
+							'costo_nota' => $encabezado['costo_nota'],
+							'tamanio'	 => $encabezado['tamanio'],
+							'id_fuente'  => $_POST['fuente'],
+							'id_seccion'  => $_POST['seccion'],
+					     ];
 
-		vdd($_POST);
+		
+		$update = $this->encabezadoRepo->edit( $updateEncabezado );
+		echo '<pre>'; print_r([ 'post' => $_POST, 'update' => $update, ]);
+		// vdd($_POST);
 	}
 }

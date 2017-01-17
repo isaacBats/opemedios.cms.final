@@ -50,7 +50,9 @@
 		</div>
 		<div class="panel-body">
 			<form action="/panle/new/encabezado/edit" method="post">
+				<input type="hidden" name="encabezadoId" value="<?= $encabezado['id'] ?>">
 				<input type="hidden" name="adjuntoId" value="<?= $encabezado['id_adjunto'] ?>">
+				<input type="hidden" name="tipo_fuente" value="<?= $fuente ?>">
 				<div class="col-sm-4 form-group">
                     <label>Fuente:</label>
                     <select id="selectFuente" class="select2 form-control" name="fuente" required >

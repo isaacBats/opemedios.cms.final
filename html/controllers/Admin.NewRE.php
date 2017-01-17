@@ -83,6 +83,8 @@ class AdminNewRE extends AdminNews{
 								'costo_cm'	 => 0,
 								'costo_nota' => 0,
 								'tamanio'	 => 0,
+								'id_fuente'  => $_POST['fuente'],
+								'id_seccion'  => $_POST['seccion'],
 						     ];			
 			
 			$fil = array();

@@ -39,6 +39,7 @@
 		width: 100%;
 	}
 </style>
+<?= $this->flashAlerts('update-header'); ?>
 <nav class="col-sm-offset-9" id="actions-headers">
 	<bottom class="btn btn-success" id="editar-encabezado">Editar</bottom>
 	<bottom class="btn btn-danger">Eliminar Adjunto</bottom>		
@@ -49,7 +50,7 @@
 			Editar el encabezado
 		</div>
 		<div class="panel-body">
-			<form action="/panle/new/encabezado/edit" method="post">
+			<form action="/panel/new/encabezado/edit" method="post">
 				<input type="hidden" name="encabezadoId" value="<?= $encabezado['id'] ?>">
 				<input type="hidden" name="adjuntoId" value="<?= $encabezado['id_adjunto'] ?>">
 				<input type="hidden" name="tipo_fuente" value="<?= $fuente ?>">

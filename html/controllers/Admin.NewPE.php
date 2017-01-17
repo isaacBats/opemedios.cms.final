@@ -204,9 +204,22 @@ class AdminNewPE extends AdminNews{
 							'id_seccion'  => $_POST['seccion'],
 					     ];
 
-		
+		$alert = new stdClass();
 		$update = $this->encabezadoRepo->edit( $updateEncabezado );
-		echo '<pre>'; print_r([ 'post' => $_POST, 'update' => $update, ]);
-		// vdd($_POST);
+		if( $update->exito )
+		{
+			$alert->tipo = 'alert-info';
+			$alert->mensaje = 'Se agrego actualizado la información  Correctamente!!!';
+			$_SESSION['alerts']['update-header'] = $alert;
+			header('Location: /panel/new/encabezado/'.$_POST['tipo_fuente'].'/'.$encabezado['id_adjunto']);
+		}
+		else
+		{
+			$alert->tipo = 'alert-danger';
+			$alert->mensaje = 'No se pudo actualizar la informacion';
+			$_SESSION['alerts']['update-header'] = $alert;
+			header( 'Location: ' . $_SERVER['HTTP_REFERER'] );
+		}
+
 	}
 }

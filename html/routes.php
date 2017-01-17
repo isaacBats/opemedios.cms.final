@@ -195,12 +195,12 @@ $collection->attachRoute(new Route('/panel/new/periodico/save', array(
     'methods' => 'POST'
 )));
 
-$collection->attachRoute(new Route('/panle/new/encabezado/:fuente/:adjuntoId', array(
+$collection->attachRoute(new Route('/panel/new/encabezado/:fuente/:adjuntoId', array(
     '_controller' => 'AdminNewPE::previewHeader',
     'methods' => 'GET'
 )));
 
-$collection->attachRoute(new Route('/panle/new/encabezado/edit', array(
+$collection->attachRoute(new Route('/panel/new/encabezado/edit', array(
     '_controller' => 'AdminNewPE::editHeaderAction',
     'methods' => 'POST'
 )));

@@ -83,18 +83,7 @@ class EncabezadoRepository extends BaseRepository
 				WHERE id = :id";
 
 		$stmt = $this->pdo->prepare( $qry );
-		// $stmt->bindParam(':logo', $encabezado['logo']);
-		// $stmt->bindParam(':impactos', $encabezado['impactos']);
-		// $stmt->bindParam(':costo_cm', $encabezado['costo_cm']);
-		// $stmt->bindParam(':costo_nota', $encabezado['costo_nota']);
-		// $stmt->bindParam(':fraccion', $encabezado['fraccion']);
-		// $stmt->bindParam(':num_pagina', $encabezado['num_pagina']);
-		// $stmt->bindParam(':porcentaje', $encabezado['porcentaje']);
-		// $stmt->bindParam(':seccion', $encabezado['seccion']);
-		// $stmt->bindParam(':tamanio', $encabezado['tamanio']);
-		// $stmt->bindParam(':tiraje', $encabezado['tiraje']);
-		// $stmt->bindParam(':id', $encabezado['id']);
-
+		
 		$result = new stdClass();
 
 		if( $stmt->execute( $encabezado ) )

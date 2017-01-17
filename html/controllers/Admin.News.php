@@ -151,7 +151,7 @@ class AdminNews extends Controller{
 						for($i = 0; $i < sizeof( $adjuntos ); $i++)
 						{
 							$htmlAdjunto .= '<li class="adjunto-item">
-									<a href="/panle/new/encabezado/periodico/'. $adjuntos[$i]['id_adjunto'] .'"><img width="150" src="/' . $adjuntos[$i]['carpeta'] . $adjuntos[$i]['nombre_archivo'] . '" /></a>
+									<a href="/panel/new/encabezado/periodico/'. $adjuntos[$i]['id_adjunto'] .'"><img width="150" src="/' . $adjuntos[$i]['carpeta'] . $adjuntos[$i]['nombre_archivo'] . '" /></a>
 								</li>';
 						}
 						$htmlAdjunto .= '</ul>';
@@ -172,7 +172,7 @@ class AdminNews extends Controller{
 						for($i = 0; $i < sizeof( $adjuntos ); $i++)
 						{
 							$htmlAdjunto .= '<li class="adjunto-item">
-									<a href="/panle/new/encabezado/revista/'. $adjuntos[$i]['id_adjunto'] .'"><img width="150" src="/' . $adjuntos[$i]['carpeta'] . $adjuntos[$i]['nombre_archivo'] . '" /></a>
+									<a href="/panel/new/encabezado/revista/'. $adjuntos[$i]['id_adjunto'] .'"><img width="150" src="/' . $adjuntos[$i]['carpeta'] . $adjuntos[$i]['nombre_archivo'] . '" /></a>
 								</li>';
 						}
 						$htmlAdjunto .= '</ul>';

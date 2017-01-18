@@ -4,6 +4,8 @@ include_once("BaseRepository.php");
 
 class AdjuntoRepository extends BaseRepository{
 
+	private $table = 'adjunto';
+	
 	public function add ( $adjunto, $idNoticia ){
 
 		$encabezadoRepo = new EncabezadoRepository();
@@ -56,5 +58,19 @@ class AdjuntoRepository extends BaseRepository{
 	public function findById( $adjuntoId )
 	{
 		return $this->pdo->query('SELECT * FROM adjunto WHERE id_adjunto = ' . $adjuntoId )->fetch();	
+	}
+
+	public function delete( $id )
+	{
+		$result = new stdClass();
+
+		if( $this->pdo->exec( "DELETE FROM {$this->table} WHERE id_adjunto = $id LIMIT 1;" ) === 1 ){
+			$result->exito = TRUE;
+		}else{
+			$result->exito = FALSE;
+			$result->error = $this->pdo->errorInfo()[2];
+		}
+		
+		return $result;
 	}
 }

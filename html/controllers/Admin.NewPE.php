@@ -222,4 +222,36 @@ class AdminNewPE extends AdminNews{
 		}
 
 	}
+
+	public function deleteHeaderAction()
+	{		
+		$alert = new stdClass();
+		$deleteHeader = $this->encabezadoRepo->delete( $_POST['id_encabezado'] );
+		if( $deleteHeader->exito )
+		{
+			$deleteAdjunto = $this->adjuntoRepo->delete( $_POST['id_adjunto'] );
+			if( $deleteAdjunto->exito )
+			{
+				$alert->tipo = 'alert-info';
+				$alert->mensaje = 'Se ha eliminado el archivo Correctamente!!!';
+				$alert->ruta = '/panel/new/view/' . $_POST['id_noticia'];				
+			}
+			else
+			{
+				$alert->tipo = 'alert-danger';
+				$alert->mensaje = 'No se pudo eliminar el archivo';
+				$alert->ruta = $_SERVER['HTTP_REFERER'];
+			}
+
+		}
+		else
+		{
+			$alert->tipo = 'alert-danger';
+			$alert->mensaje = 'No se pudo eliminar el archivo';
+			$alert->ruta = $_SERVER['HTTP_REFERER'];
+		}
+
+		header('Content-type: text/json');
+		echo json_encode($alert); 		
+	}
 }

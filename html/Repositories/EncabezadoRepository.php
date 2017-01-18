@@ -100,6 +100,20 @@ class EncabezadoRepository extends BaseRepository
 		return $result;
 	}
 
+	public function delete( $id )
+	{
+		$result = new stdClass();
+
+		if( $this->pdo->exec( "DELETE FROM {$this->table} WHERE id = $id LIMIT 1;" ) === 1 ){
+			$result->exito = TRUE;
+		}else{
+			$result->exito = FALSE;
+			$result->error = $this->pdo->errorInfo()[2];
+		}
+		
+		return $result;
+	}
+
 
 }
 

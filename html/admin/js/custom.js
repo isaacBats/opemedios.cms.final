@@ -600,6 +600,37 @@ $(document).ready(function(){
 
 
    });
+
+    //elimina un adjunto
+    $('#eliminar-encabezado').click(function( event ){
+        event.preventDefault();
+        var boton = $(this);
+        var data = {
+            id_encabezado: boton.data('idencabezado'),
+            id_adjunto: boton.data('idadjunto'),
+            id_noticia: boton.data('idnew')
+        };
+        var $alert = $('.alert');
+        var $modal = $('#myModal');
+        var $eliminar = $modal.find('.modal-footer .btn-primary');
+        $modal.find('#myModalLabel').html('Eliminar Archivo');
+        $modal.find('.modal-body').html('Esta seguro que decea eliminar este archivo?.');
+        $eliminar.html('Eliminar');
+        $eliminar.click(function(){
+            console.log('ouch');
+            $.post('/panel/new/encabezado/delete', data, function(json){
+                //if (json.exito) {
+                    $modal.modal('toggle');
+                    $alert.removeClass(json.tipo);
+                    $alert.removeAttr('style');
+                    $alert.addClass(json.tipo).html(json.mensaje).delay(3000).fadeOut('slow', function(){
+                        boton.parent().fadeOut('slow');
+                        window.location = json.ruta;
+                    });
+                //}
+            });            
+        });
+    });
     
 
     /********************** drag an drop  **************************/

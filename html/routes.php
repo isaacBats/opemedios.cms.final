@@ -205,6 +205,11 @@ $collection->attachRoute(new Route('/panel/new/encabezado/edit', array(
     'methods' => 'POST'
 )));
 
+$collection->attachRoute(new Route('/panel/new/encabezado/delete', array(
+    '_controller' => 'AdminNewPE::deleteHeaderAction',
+    'methods' => 'POST'
+)));
+
 //News Revista 
 $collection->attachRoute(new Route('/panel/new/add/new-revista', array(
     '_controller' => 'AdminNewRE::add',

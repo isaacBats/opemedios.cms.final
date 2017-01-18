@@ -42,7 +42,7 @@
 <?= $this->flashAlerts('update-header'); ?>
 <nav class="col-sm-offset-9" id="actions-headers">
 	<bottom class="btn btn-success" id="editar-encabezado">Editar</bottom>
-	<bottom class="btn btn-danger">Eliminar Adjunto</bottom>		
+	<bottom id="eliminar-encabezado" class="btn btn-danger" data-idencabezado="<?= $encabezado['id'] ?>" data-idnew="<?= $new['id'] ?>" data-idadjunto="<?= $encabezado['id_adjunto'] ?>" data-toggle="modal" data-target="#myModal" >Eliminar Adjunto</bottom>		
 </nav>
 <div id="headers-edit" class="col-sm-12" style="display: none">
 	<div class="panel panel-default">

@@ -498,47 +498,15 @@ class AdminNews extends Controller{
 
 	public static function guardaArchivo( $principal, $ruta ){
 
-		/*
-		
-			audio/x-ms-wma          
-			application/pdf         
-			video/x-ms-wmv          
-			application/msword      
-			audio/mpeg3             
-			video/mpeg4             
-			audio/mp3               
-			audio/wav               
-			image/pjpeg             
-			audio/mpeg              
-			application/vnd.ms-wpl  
-			application/octet-stream
-			video/3gpp              
-			image/bmp               
-			video/vnd.rn-realvideo  
-			video/mpeg              
-			image/png               
-			audio/mp4               
-			video/x-ms-wma          
-			image/gif               
-			image/x-png             
-			video/quicktime         
-
-		 */
-
-		$extencionesPermitidas = ['pdf', 'jpg', 'jpeg', 'gif', 'png', 'JPG', 'JPEG', 'PNG', 'mp4', 'wma', 'wmv', 'mp3', 'avi', 'xlsx', 'csv'];
+		// $extencionesPermitidas = ['pdf', 'jpg', 'jpeg', 'gif', 'png', 'JPG', 'JPEG', 'PNG', 'mp4', 'wma', 'wmv', 'mp3', 'avi', 'xlsx', 'csv'];
+		$extencionesPermitidas = ['jpg', 'jpeg', 'gif', 'png', 'JPG', 'JPEG', 'PNG', 'mp4', 'mp3', 'csv'];
 		$explode = explode(".", $principal["name"]);
 		$extension = end($explode);
 		if ((($principal['type'] == 'image/png')
 			|| ($principal['type'] == 'image/jpeg')
 			|| ($principal['type'] == 'image/jpg')
 			|| ($principal['type'] == 'image/PNG')
-			|| ($principal['type'] == 'audio/x-ms-wma')
-			|| ($principal['type'] == 'audio/mpeg')
 			|| ($principal['type'] == 'audio/mp3')
-			|| ($principal['type'] == 'application/pdf')
-			|| ($principal['type'] == 'video/x-ms-wmv')
-			|| ($principal['type'] == 'video/avi')
-			|| ($principal['type'] == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
 			|| ($principal['type'] == 'text/csv')
 			|| ($principal['type'] == 'video/mp4'))
 			&& in_array($extension, $extencionesPermitidas))

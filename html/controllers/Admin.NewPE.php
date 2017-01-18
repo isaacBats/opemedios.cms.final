@@ -254,4 +254,6 @@ class AdminNewPE extends AdminNews{
 		header('Content-type: text/json');
 		echo json_encode($alert); 		
 	}
+
+	// TODO: @AdminNewPE Falta el metodo para agregar un archivo con encabezados.
 }

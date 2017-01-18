@@ -99,7 +99,8 @@ class Image
 
 	public function saveFile( $file, $pathFile, $type ){
 
-            $extensiones_permitidas = ['pdf', 'jpg', 'jpeg', 'gif', 'png', 'JPG', 'JPEG', 'PNG', 'mp4', 'wma', 'wmv', 'mp3', 'avi', 'xlsx', 'csv'];
+            // $extensiones_permitidas = ['pdf', 'jpg', 'jpeg', 'gif', 'png', 'JPG', 'JPEG', 'PNG', 'mp4', 'wma', 'wmv', 'mp3', 'avi', 'xlsx', 'csv'];
+            $extencionesPermitidas = ['jpg', 'jpeg', 'gif', 'png', 'JPG', 'JPEG', 'PNG', 'mp4', 'mp3', 'csv'];
             $explode = explode(".", $file["name"]);
             $extension = end($explode);
             if ( ($file["type"] == $type) && in_array($extension, $extensiones_permitidas)){

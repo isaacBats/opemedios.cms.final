@@ -248,6 +248,16 @@ $collection->attachRoute(new Route('/panel/new/edit/:id', array(
     'methods' => 'GET'
 )));
 
+$collection->attachRoute(new Route('/panel/new/add-file/:id', array(
+    '_controller' => 'AdminNews::addFileView',
+    'methods' => 'GET'
+)));
+
+$collection->attachRoute(new Route('/panel/new/add-file/:id', array(
+    '_controller' => 'AdminNews::addFileAction',
+    'methods' => 'POST'
+)));
+
 $collection->attachRoute(new Route('/panel/new/send/:id', array(
     '_controller' => 'AdminNews::sendMailView',
     'methods' => 'GET'

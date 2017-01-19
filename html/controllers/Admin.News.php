@@ -5,11 +5,13 @@ use utilities\Util;
 class AdminNews extends Controller{
 
 	private $noticiasRepository;		
-	private $adjuntoRepo;		
+	private $adjuntoRepo;
+	private $encabezadoRepo;		
 
 	public function __construct(){
 		$this->noticiasRepository = new NoticiasRepository();
 		$this->adjuntoRepo = new AdjuntoRepository();
+		$this->encabezadoRepo = new EncabezadoRepository();
 	}
 
 	public function showNews(){
@@ -422,6 +424,97 @@ class AdminNews extends Controller{
             header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
         }
 
+	}
+
+	public function addFileView( $id )
+	{
+		if( isset( $_SESSION['admin'] ) )
+		{
+			$this->header_admin('Agregar nuevo archivo - ' );
+			require $this->adminviews . 'addFileView.php';
+			$this->footer_admin( );
+		}
+		else
+		{
+            header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
+        }
+	}
+
+	public function addFileAction( $id )
+	{
+		if( isset( $_SESSION['admin'] ) )
+		{
+			$adjuntos = $this->adjuntoRepo->getAdjunto( $id );
+			$encabezado = $this->encabezadoRepo->findByAdjuntoId( $adjuntos[0]['id_adjunto'] );
+			$noticia = $this->noticiasRepository->getNewById( $id );
+
+			if( $noticia['tipofuente'] === 'Revista' )
+			{
+				$url = 'assets/data/noticias/revista/';
+			}
+			else
+			{
+				$url = 'assets/data/noticias/periodico/';				
+			}
+
+			// si no existe un folder con el mes y el año se crea
+			$createdAt = new DateTime();
+			$folder = $createdAt->format('m-Y');
+			$url .= $folder . '/';
+			if( !is_dir( $url ) ){
+				mkdir( $url, 0755, true);
+			}
+
+			$files = array();
+			if( $_FILES['primario']['name'][0] != '' ){
+				$files = array_map(function ($name, $type, $tmp_name, $error, $size) use ( $url, $encabezado ){
+					return ['name' => $name, 'type' => $type, 'tmp_name' => $tmp_name, 'error' => $error, 'size' => $size, 'slug' => $url, 'principal' => '0', 'encabezado' => $encabezado, ];
+				}, $_FILES['primario']['name'], $_FILES['primario']['type'], $_FILES['primario']['tmp_name'], $_FILES['primario']['error'], $_FILES['primario']['size']);
+			}
+
+			$adjuntoFile = array();
+			foreach ($files as $file) {
+				$adjuntoFile[] = $this->adjuntoRepo->add( $file, $id );
+			}
+			$error = 0;
+			$fallidos = array();
+			foreach ($adjuntoFile as $adj) {
+				if(!$adj->exito){
+					$error++;
+					array_push($fallidos, $adj);
+				}
+			}
+
+			if( $error === 0 && sizeof( $fallidos ) == 0 )
+			{
+				foreach ($adjuntoFile as $file) {
+					foreach ($files as &$origin) {
+						if( $origin['name'] == $file->originName && $origin['size'] == $file->size ){
+							$origin['createdName'] = $file->name;
+							if( $this->guardaArchivo( $origin, $url ) ){
+								echo 'Archivo guardado en '. $url;
+							}							
+						}
+					}
+				}
+
+				header('Location: /panel/new/view/'. $id);			
+			}
+
+			header('Location: /panel/new/view/'. $id);
+			// else
+			// {
+				
+			// }			
+
+			// vdd(compact( 'adjuntos', 'encabezado', 'noticia', 'files' ));
+
+			//vdd(['post' => $_POST, 'files' => $_FILES, 'id' => $id]);
+		}
+		else
+		{
+            header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
+        }
 	}
 
 	protected function addNew( $campos, $fuente ){

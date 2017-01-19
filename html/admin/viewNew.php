@@ -1,7 +1,12 @@
 <div class="row">
-	<div class="col-lg-12">
+	<div class="col-sm-10">
 		<h1 class="page-header"><?= $newSelected['encabezado'] ?></h1>
-	</div>	
+	</div>
+	<?php if( $font === 'per' || $font === 'rev' ): ?>
+	<div class="col-sm-2">
+		<a href="/panel/new/add-file/<?= $newSelected['id'] ?>" class="btn btn-primary">Agregar archivo</a>
+	</div>
+	<?php endif; ?>	
 </div>
 <div class="row">
 	<div class="col-md-4">

@@ -24,15 +24,9 @@ class AdminColumns extends Controller
 		$this->fuentesRepo = new FuentesRepository();
 		$this->portadasRepo = new PortadasRepository();
 
-		$this->css = '
-				<!-- Select2 CSS -->
-			    <link href="/assets/css/select2.min.css" rel="stylesheet">
-			   ';
-
+		$this->css = '';
 		$this->js = '
-				<!-- Select2 JavaScript -->
-			    <script src="/assets/js/select2.min.js"></script>
-			    <script src="/admin/lib/jquery-form/jquery.form.min.js"></script>
+				<script src="/admin/lib/jquery-form/jquery.form.min.js"></script>
 			  ';
 		$this->getFuentes = $this->fuentesRepo->getFontsByTipeFont([3,]);
 			
@@ -139,9 +133,9 @@ class AdminColumns extends Controller
 			$this->css .= '<link rel="stylesheet" href="/admin/lib/summernote/summernote.css">';
 			$this->js .= '<script src="/admin/lib/summernote/summernote.js"></script>';
 
-
 			$titulo = 'Columnas Politicas';
 			$action = '/panel/prensa/guardar-columna';
+			$tipo_columna = TipoColumnas::COLUMNAS_POLITICAS;
 
 			$this->header_admin( $titulo . ' - ', $this->css );
 				require $this->adminviews . 'columnasView.php';
@@ -161,6 +155,7 @@ class AdminColumns extends Controller
 
 			$titulo = 'Columnas Financieras';
 			$action = '/panel/prensa/guardar-columna';
+			$tipo_columna = TipoColumnas::COLUMNAS_FINANCIERAS;
 
 			$this->header_admin( $titulo . ' - ', $this->css );
 				require $this->adminviews . 'columnasView.php';
@@ -183,9 +178,27 @@ class AdminColumns extends Controller
 				'tipo_portada' => $_POST['tipo_portada']
 				]);
 
-			// header('Content-type: text/json');
-			// echo json_encode($saveRow); 
 			$_SESSION['alerts']['portada'] = $saveRow;
+			header( 'Location: ' . $_SERVER['HTTP_REFERER'] );
+		}else{
+            header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
+        }		
+	}
+
+	public function guardarColumna()
+	{
+		if( isset( $_SESSION['admin'] ) ){
+			$path = $this->getPath( 'columnas', $_POST['tipo_columna'] );
+			echo '<pre>'; print_r(['path' => $path, 'post' => $_POST, 'files' => $_FILES]); exit;
+			// $nameImages = $this->saveImages($_FILES['file'], $path);
+			// $saveRow = $this->portadasRepo->create([
+			// 	'fuente' => $_POST['fuente'], 
+			// 	'imagen' => $nameImages['originName'], 
+			// 	'thumb' => $nameImages['thumbName'], 
+			// 	'tipo_portada' => $_POST['tipo_portada']
+			// 	]);
+
+			// $_SESSION['alerts']['columnas'] = $saveRow;
 			header( 'Location: ' . $_SERVER['HTTP_REFERER'] );
 		}else{
             header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");

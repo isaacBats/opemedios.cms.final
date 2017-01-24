@@ -204,18 +204,18 @@ class AdminNews extends Controller{
 
 		if( isset( $_SESSION['admin'] ) ){
 
-			$css = '
-					<!-- Select2 CSS -->
-				    <link href="/assets/css/select2.min.css" rel="stylesheet">
-				    <link href="/admin/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
-			';
+			// $css = '
+			// 		<!-- Select2 CSS -->
+			// 	    <link href="/assets/css/select2.min.css" rel="stylesheet">
+			// 	    <link href="/admin/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+			// ';
 
-			$js = '
-					<!-- Select2 JavaScript -->
-				    <script type="text/javascript" src="/assets/bower_components/moment/min/moment.min.js"></script>
-				    <script src="/admin/js/bootstrap-datetimepicker.min.js"></script>
-				    <script src="/assets/js/select2.min.js"></script>
-			';
+			// $js = '
+			// 		<!-- Select2 JavaScript -->
+			// 	    <script type="text/javascript" src="/assets/bower_components/moment/min/moment.min.js"></script>
+			// 	    <script src="/admin/js/bootstrap-datetimepicker.min.js"></script>
+			// 	    <script src="/assets/js/select2.min.js"></script>
+			// ';
 
 			$fr   = new FuentesRepository();
 			$gr   = new GeneroRepository();
@@ -536,18 +536,18 @@ class AdminNews extends Controller{
 			$bloques = $bloqueRepository->all();
 			$sbloques = ( $bloques->exito && !is_array($bloques->error) ) ? $bloques->rows : '<option value="">No hay bloques</option>';
 
-			$css = '
-					<!-- Select2 CSS -->
-				    <link href="/assets/css/select2.min.css" rel="stylesheet">
-				    <link href="/admin/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
-				   ';
+			// $css = '
+			// 		<!-- Select2 CSS -->
+			// 	    <link href="/assets/css/select2.min.css" rel="stylesheet">
+			// 	    <link href="/admin/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+			// 	   ';
 
-			$js = '
-					<!-- Select2 JavaScript -->
-				    <script type="text/javascript" src="/assets/bower_components/moment/min/moment.min.js"></script>
-				    <script src="/admin/js/datetimepicker.js"></script>
-				    <script src="/assets/js/select2.min.js"></script>
-			';
+			// $js = '
+			// 		<!-- Select2 JavaScript -->
+			// 	    <script type="text/javascript" src="/assets/bower_components/moment/min/moment.min.js"></script>
+			// 	    <script src="/admin/js/datetimepicker.js"></script>
+			// 	    <script src="/assets/js/select2.min.js"></script>
+			// ';
 			
 			if($fuente === 'Television'){
 	            $nomFuente = 'tele';
@@ -1035,17 +1035,17 @@ class AdminNews extends Controller{
 			$blocks = $blockRep->all();
 			$companies = $empresaRep->all();
 
-			$css = '
-					<!-- Select2 CSS -->
-				    <link href="/assets/css/select2.min.css" rel="stylesheet">
-				   ';
+			// $css = '
+			// 		<!-- Select2 CSS -->
+			// 	    <link href="/assets/css/select2.min.css" rel="stylesheet">
+			// 	   ';
 
-			$js = '
-					<!-- Select2 JavaScript -->
-				    <script src="/assets/js/select2.min.js"></script>
-				    <script src="/admin/js/bootstrap-datetimepicker.min.js"></script>
+			// $js = '
+			// 		<!-- Select2 JavaScript -->
+			// 	    <script src="/assets/js/select2.min.js"></script>
+			// 	    <script src="/admin/js/bootstrap-datetimepicker.min.js"></script>
 				    
-					';
+			// 		';
 			
 			$this->header_admin( 'Bloques de Noticias - ', $css );
 			require $this->adminviews . 'blockNewsView.php';
@@ -1073,8 +1073,8 @@ class AdminNews extends Controller{
 			$end = ( $page + $limit >= $count ) ? $count : $page + $limit;
 
 			$css = '
-					<!-- Select2 CSS -->
-				    <link href="/assets/css/select2.min.css" rel="stylesheet">
+					<!-- Select2 CSS 
+				    <link href="/assets/css/select2.min.css" rel="stylesheet"> -->
 				    <!-- panel_paginator CSS -->
 				    <link href="/admin/css/panel.main.css" rel="stylesheet">
 				    <!-- data tables bootstrap CSS -->
@@ -1082,9 +1082,9 @@ class AdminNews extends Controller{
 				   ';
 
 			$js = '
-					<!-- Select2 JavaScript -->
-				    <script src="/assets/js/select2.min.js"></script>
-				    <script src="/admin/js/bootstrap-datetimepicker.min.js"></script>
+					<!-- Select2 JavaScript 
+				    <script src="/assets/js/select2.min.js"></script> 
+				    <script src="/admin/js/bootstrap-datetimepicker.min.js"></script> -->
 				    <!-- Libreria jquery-bootpag --> 
 					<script src="/admin/js/vendors/bootstrap/jquery.bootpag.min.js"></script>
 					<!-- Libreria purl --> 

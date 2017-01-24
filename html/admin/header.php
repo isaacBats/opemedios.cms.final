@@ -26,6 +26,10 @@
     -->
     <link rel="stylesheet" href="/assets/css/font-awesome.min.css">
 
+    <!-- Select2 CSS -->
+    <link href="/assets/css/select2.min.css" rel="stylesheet">
+    <link href="/admin/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+
     <?= $stylesheet ?>
 
     <link rel="stylesheet" type="text/css" href="/admin/css/admin.css">

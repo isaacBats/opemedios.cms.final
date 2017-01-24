@@ -21,6 +21,8 @@ $(document).ready(function(){
         $.datepicker.setDefaults($.datepicker.regional['es']);
 
     try{
+
+        var moment = require('moment');
         $("#selectFuente").select2({
           allowClear: true
         });
@@ -55,13 +57,20 @@ $(document).ready(function(){
             $('.required-hour').val(hour.toLocaleTimeString());
         } 
 
+    }catch(e){
+        console.log(e);
+    }
+
+    try
+    {
         // Summernote
         $('#summernote').summernote({
             height: 200
         });
-
-    }catch(e){
-        console.log(e);
+    }
+    catch( err )
+    {
+        console.log( err );
     }
 
     $('.fechaNota').datepicker({

@@ -204,19 +204,6 @@ class AdminNews extends Controller{
 
 		if( isset( $_SESSION['admin'] ) ){
 
-			// $css = '
-			// 		<!-- Select2 CSS -->
-			// 	    <link href="/assets/css/select2.min.css" rel="stylesheet">
-			// 	    <link href="/admin/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
-			// ';
-
-			// $js = '
-			// 		<!-- Select2 JavaScript -->
-			// 	    <script type="text/javascript" src="/assets/bower_components/moment/min/moment.min.js"></script>
-			// 	    <script src="/admin/js/bootstrap-datetimepicker.min.js"></script>
-			// 	    <script src="/assets/js/select2.min.js"></script>
-			// ';
-
 			$fr   = new FuentesRepository();
 			$gr   = new GeneroRepository();
 			$sccr = new SeccionRepository();
@@ -361,11 +348,9 @@ class AdminNews extends Controller{
 					break;
 			}
 
-			// echo '<pre>'; print_r(['noticia' => $newSelected, 'relacionada' => $relatedNew, 'array_ubucacion' => $ubicationSelected,]);
-
-			$this->header_admin('Editar noticias: ' . $newSelected['encabezado'] . ' - ', $css );
+			$this->header_admin('Editar noticias: ' . $newSelected['encabezado'] . ' - ' );
 			require $this->adminviews . 'editNew.php';
-			$this->footer_admin( $js );	
+			$this->footer_admin();	
 		}else{
             header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
         }
@@ -502,14 +487,6 @@ class AdminNews extends Controller{
 			}
 
 			header('Location: /panel/new/view/'. $id);
-			// else
-			// {
-				
-			// }			
-
-			// vdd(compact( 'adjuntos', 'encabezado', 'noticia', 'files' ));
-
-			//vdd(['post' => $_POST, 'files' => $_FILES, 'id' => $id]);
 		}
 		else
 		{
@@ -522,33 +499,16 @@ class AdminNews extends Controller{
 		if( isset( $_SESSION['admin'] ) ){
 			$fuentesRepository    = new FuentesRepository();
 			$generoRepository     = new GeneroRepository();
-			// $sectorRepository     = new SectorRepository();
-			// $seccionRepository    = new SeccionRepository();
 			$tipoFuenteRepository = new TipoFuenteRepository();
 			$tipoAutorRepository  = new TipoAutorRepository();
 			$bloqueRepository = new BloqueRepository();
 			$genero		= '';
 			$optionFont = '';
-			//$sector		= '';
-			// $seccion	= '';
 			$tipoAutor	= '';
 
 			$bloques = $bloqueRepository->all();
 			$sbloques = ( $bloques->exito && !is_array($bloques->error) ) ? $bloques->rows : '<option value="">No hay bloques</option>';
 
-			// $css = '
-			// 		<!-- Select2 CSS -->
-			// 	    <link href="/assets/css/select2.min.css" rel="stylesheet">
-			// 	    <link href="/admin/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
-			// 	   ';
-
-			// $js = '
-			// 		<!-- Select2 JavaScript -->
-			// 	    <script type="text/javascript" src="/assets/bower_components/moment/min/moment.min.js"></script>
-			// 	    <script src="/admin/js/datetimepicker.js"></script>
-			// 	    <script src="/assets/js/select2.min.js"></script>
-			// ';
-			
 			if($fuente === 'Television'){
 	            $nomFuente = 'tele';
 	       	}elseif($fuente === 'Periodico'){
@@ -562,7 +522,6 @@ class AdminNews extends Controller{
 			$fuentes   = $fuentesRepository->showAllFonts( 0, 0, $idFuente );
 			$autores   = $tipoAutorRepository->allAuthors();
 			$generos   = $generoRepository->allGeneros();
-			//$sectores  = $sectorRepository->allSectors( 1 );
 			
 			foreach ($fuentes as $f) {
 				$optionFont .= '<option value="'.$f['id_fuente'].'">'.$f['nombre'].'</option>';
@@ -576,13 +535,9 @@ class AdminNews extends Controller{
 				$genero .= '<option value="'.$g['id_genero'].'">'.$g['descripcion'].'</option>';
 			}
 
-			// foreach ($sectores as $s) {
-			// 	$sector .= '<option value="'.$s['id_sector'].'">'.$s['nombre'].'</option>';
-			// }
-
-			$this->header_admin( 'Agregar Noticia de '.$fuente.' - ', $css );
+			$this->header_admin( 'Agregar Noticia de '.$fuente.' - ' );
 			require $this->adminviews . 'addNew.php';
-			$this->footer_admin( $js );
+			$this->footer_admin();
 		}else{
             header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
         }
@@ -774,10 +729,6 @@ class AdminNews extends Controller{
 
 		$tema  = $temRep->getThemaByEmpresaID( $empresaid );
 
-		// $temaid = null;
-		// if( is_array($tema) )
-		// 	$temaid = $tema['id_tema'];
-
 		$tendenciaid = $new['tendencia_id'];
 
 		$file = '';
@@ -894,17 +845,6 @@ class AdminNews extends Controller{
 		}
 	}
 
-	// public function advancedSearch(){
-
-	// 	if( isset( $_SESSION['admin'] ) ){
-	// 		$this->header_admin( 'Busqueda Avanzada - ' );
-	// 		require $this->adminviews . 'advancedSearchView.php';
-	// 		$this->footer_admin();
-	// 	}else{
- //            header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
- //        }
-	// }
-
 	public function advancedSearch(){
 
 		if( isset( $_SESSION['admin'] ) ){
@@ -993,8 +933,6 @@ class AdminNews extends Controller{
 
 	public function sendBlockAction(){
 
-		//echo '<pre>';print_r($_POST);
-
 		if( isset( $_SESSION['admin'] ) ){
 			$data = $_POST;
 			$noticiasid = array_keys($data);
@@ -1016,14 +954,6 @@ class AdminNews extends Controller{
             header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
         }
 
-		// ob_start();
-		// require $this->adminviews . 'viewsEmails/blockNewsEmail.php';
-		// $body = ob_get_clean();
-
-		// echo $body;
-		
-		// echo '<pre>';print_r($noticias); die('Fin');
-
 	}
 
 	public function blockNewsView ()
@@ -1035,21 +965,9 @@ class AdminNews extends Controller{
 			$blocks = $blockRep->all();
 			$companies = $empresaRep->all();
 
-			// $css = '
-			// 		<!-- Select2 CSS -->
-			// 	    <link href="/assets/css/select2.min.css" rel="stylesheet">
-			// 	   ';
-
-			// $js = '
-			// 		<!-- Select2 JavaScript -->
-			// 	    <script src="/assets/js/select2.min.js"></script>
-			// 	    <script src="/admin/js/bootstrap-datetimepicker.min.js"></script>
-				    
-			// 		';
-			
-			$this->header_admin( 'Bloques de Noticias - ', $css );
+			$this->header_admin( 'Bloques de Noticias - ' );
 			require $this->adminviews . 'blockNewsView.php';
-			$this->footer_admin( $js );
+			$this->footer_admin( );
 		}else{
             header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
         }		

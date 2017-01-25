@@ -16,6 +16,17 @@ class Util
 		}
 	}
 
+	public static function tipoColumna( $tipo )
+	{
+		switch ( $tipo )
+		{
+			case 1:
+				return 'COLUMNA_POLITICA';
+			case 2:
+				return 'COLUMNA_FINANCIERA';
+		}
+	}
+
 	public static function tipoUsuario( $tipo )
 	{
 		switch ( $tipo ) {

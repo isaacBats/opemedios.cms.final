@@ -1,3 +1,4 @@
+<?= $this->flashAlerts('columnas'); ?>
 <div class="row">
 	<div class="col-sm-12">
 		<h1 class="page-header"><?= $titulo ?></h1>

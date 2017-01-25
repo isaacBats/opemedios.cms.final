@@ -189,16 +189,19 @@ class AdminColumns extends Controller
 	{
 		if( isset( $_SESSION['admin'] ) ){
 			$path = $this->getPath( 'columnas', $_POST['tipo_columna'] );
-			echo '<pre>'; print_r(['path' => $path, 'post' => $_POST, 'files' => $_FILES]); exit;
-			// $nameImages = $this->saveImages($_FILES['file'], $path);
-			// $saveRow = $this->portadasRepo->create([
-			// 	'fuente' => $_POST['fuente'], 
-			// 	'imagen' => $nameImages['originName'], 
-			// 	'thumb' => $nameImages['thumbName'], 
-			// 	'tipo_portada' => $_POST['tipo_portada']
-			// 	]);
+			// echo '<pre>'; print_r(['path' => $path, 'post' => $_POST, 'files' => $_FILES]); exit;
+			$nameImages = $this->saveImages($_FILES['file'], $path);
+			$saveRow = $this->portadasRepo->saveColumna([
+				'fuente' => $_POST['fuente'], 
+				'imagen' => $nameImages['originName'], 
+				'thumb' => $nameImages['thumbName'], 
+				'tipo_columna' => $_POST['tipo_columna'],
+				'titulo' => $_POST['title'],
+				'autor' => $_POST['author'],
+				'contenido' => $_POST['contenido'],
+				]);
 
-			// $_SESSION['alerts']['columnas'] = $saveRow;
+			$_SESSION['alerts']['columnas'] = $saveRow;
 			header( 'Location: ' . $_SERVER['HTTP_REFERER'] );
 		}else{
             header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");

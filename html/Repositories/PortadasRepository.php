@@ -36,6 +36,35 @@ class PortadasRepository extends BaseRepository{
 		return $result;
 	}
 
+	public function saveColumna ( array $columna )
+	{
+		$sql = 'INSERT INTO columnas (fuente_id, tipo_columna, titulo, autor, contenido, imagen, thumb) 
+								VALUES(:fuente, :tipo, :titulo, :autor, :contenido, :imagen, :thumb)';
+
+		$query = $this->pdo->prepare($sql);
+		$query->bindParam(':fuente',$columna['fuente']);
+		$query->bindParam(':imagen',$columna['imagen']);
+		$query->bindParam(':thumb',$columna['thumb']);
+		$query->bindParam(':tipo',Util::tipoColumna($columna['tipo_columna']));
+		$query->bindParam(':titulo', $columna['titulo']);
+		$query->bindParam(':autor', $columna['autor']);
+		$query->bindParam(':contenido', $columna['contenido']);
+		$result = new stdClass();
+
+		if($query->execute()){
+			$result->exito = true;
+			$result->mensaje = 'Se agregado un nuevo elemento';
+			$result->tipo = 'alert-info';
+		}else{
+			$result->exito = false;
+			$result->mensaje = 'No se pude agregar el elemento';
+			$result->error = $query->errorInfo();
+			$result->tipo = 'alert-danger';
+		}
+
+		return $result;
+	}
+
 	private function getOrden ( $day, $type )
 	{
 		$ultimo = $this->pdo->query("SELECT MAX(orden) as 'orden' FROM portadas WHERE DATE_FORMAT(created_at, '%Y-%m-%d') = '{$day}' AND tipo_portada = '{$type}'")->fetch( \PDO::FETCH_ASSOC );

@@ -50,6 +50,17 @@ class Util
 		return $tipoFuente[ $tipoFuenteId ];
 	}
 
+	public static function tipoReporte( $tipoFuenteId ){
+		$tipoFuente = [
+						['id' => 1, 'Titulo' => 'Reporte por Ciente', 'descripcion' => 'Este reporte genera la información de las noticias por cliente', 'tema' => 'Reporte Excel', ], 
+						['id' => 2, 'Titulo' => 'Reporte por Area', 	  'descripcion' => 'Este reporte genera la información por area en Opemedios', 'tema' => 'Reporte Excel', ], 
+						['id' => 3, 'Titulo' => 'Reporte por Fuente',  'descripcion' => 'Este reporte genera la información de una fuente dada','tema' => 'Reporte Excel', ], 
+						['id' => 4, 'Titulo' => 'Reporte por Monitorista',    'descripcion' => 'Este reporte genera la información  de las notas que ha capturado un monitorista', 	 'tema' => 'Reporte Excel', ], 
+						['id' => 5, 'Titulo' => 'Reporte del Día',   'descripcion' => 'Este reporte genera la información del dia actual ha la hora pedida', 	 'tema' => 'Reporte Excel', ],
+					  ];
+		return $tipoFuente[ $tipoFuenteId ];
+	}
+
 	public static function ubicationDetail( $ubicacionId )
 	{
 		

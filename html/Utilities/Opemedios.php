@@ -33,6 +33,15 @@ class FontType extends PHPEnum
 
 }
 
+class Tiporeporte extends PHPEnum
+{
+	const REPORTE_CLIENTE = 1;
+	const REPORTE_AREA 	  = 2;
+	const REPORTE_FUENTE  = 3;
+	const REPORTE_MONITOR = 4;
+	const REPORTE_DIA     = 5;
+}
+
 class MediaDirectory extends PHPEnum
 {
 	const MEDIA_TELEVISION   = 'assets/data/noticias/television/';

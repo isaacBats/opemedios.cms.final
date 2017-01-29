@@ -27,16 +27,6 @@ $(document).ready(function(){
           allowClear: true
         });
 
-        $(".select2").select2({
-          allowClear: true
-        });    
-
-        $(function() {
-            $('.date_time').datetimepicker({
-              pickDate: false
-            });
-        });
-
         moment.updateLocale('en', {
             longDateFormat : {
                 LTS: "HH:mm:ss"
@@ -72,6 +62,16 @@ $(document).ready(function(){
     {
         console.log( err );
     }
+    
+    $(".select2").select2({
+      allowClear: true
+    });    
+    
+    $(function() {
+        $('.date_time').datetimepicker({
+          pickDate: false
+        });
+    });
 
     $('.fechaNota').datepicker({
     dateFormat: 'yy-mm-dd',

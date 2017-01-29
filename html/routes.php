@@ -491,6 +491,13 @@ $collection->attachRoute(new Route('/panel/prensa/guardar-columna', array(
     'methods' => 'POST'
 )));
 
+// Reportes
+$collection->attachRoute(new Route('/panel/reports/clients', array(
+    '_controller' => 'AdminReports::reportClientView',
+    'methods' => 'GET'
+)));
+
+
 
 // Reutas de prueba
 // $collection->attachRoute(new Route('/calcula-fraccion', array(

@@ -36,7 +36,7 @@ class EmpresaRepository extends BaseRepository{
 		
 		if($query->execute()){
 			$empresas->exito = true;
-			$empresas->rows = ( $query->rowCount() > 0 ) ? $query->fetchAll( \PDO::FETCH_ASSOC) : 'No hay empresas';
+			$empresas->rows = ( $query->rowCount() > 0 ) ? $query->fetchAll(\PDO::FETCH_ASSOC) : 'No hay empresas';
 			$empresas->error = 0;
 		}else{
 			$empresas->exito = false;

@@ -39,9 +39,9 @@
     <script src="/admin/js/jquery.validate.js"></script>
 
     <!-- Select2 JavaScript -->
+    <script type="text/javascript" src="/assets/js/select2.min.js"></script>
     <script type="text/javascript" src="/assets/bower_components/moment/min/moment.min.js"></script>
-    <script src="/admin/js/datetimepicker.js"></script>
-    <script src="/assets/js/select2.min.js"></script>
+    <script type="text/javascript" src="/admin/js/datetimepicker.js"></script>
                     
 
     <?= $javaScripts  ?>

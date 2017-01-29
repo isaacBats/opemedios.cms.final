@@ -51,14 +51,20 @@ class Util
 	}
 
 	public static function tipoReporte( $tipoFuenteId ){
-		$tipoFuente = [
-						['id' => 1, 'Titulo' => 'Reporte por Ciente', 'descripcion' => 'Este reporte genera la información de las noticias por cliente', 'tema' => 'Reporte Excel', ], 
-						['id' => 2, 'Titulo' => 'Reporte por Area', 	  'descripcion' => 'Este reporte genera la información por area en Opemedios', 'tema' => 'Reporte Excel', ], 
-						['id' => 3, 'Titulo' => 'Reporte por Fuente',  'descripcion' => 'Este reporte genera la información de una fuente dada','tema' => 'Reporte Excel', ], 
-						['id' => 4, 'Titulo' => 'Reporte por Monitorista',    'descripcion' => 'Este reporte genera la información  de las notas que ha capturado un monitorista', 	 'tema' => 'Reporte Excel', ], 
-						['id' => 5, 'Titulo' => 'Reporte del Día',   'descripcion' => 'Este reporte genera la información del dia actual ha la hora pedida', 	 'tema' => 'Reporte Excel', ],
+		$tipoReporte = [
+						['id' => 1, 'filename' => 'reporte_por_cliente', 'titulo' => 'Reporte por Ciente', 'descripcion' => 'Este reporte genera la información de las noticias por cliente', 'tema' => 'Reporte Excel', ], 
+						['id' => 2, 'filename' => 'reporte_por_area', 'titulo' => 'Reporte por Area', 	  'descripcion' => 'Este reporte genera la información por area en Opemedios', 'tema' => 'Reporte Excel', ], 
+						['id' => 3, 'filename' => 'reporte_por_fuente', 'titulo' => 'Reporte por Fuente',  'descripcion' => 'Este reporte genera la información de una fuente dada','tema' => 'Reporte Excel', ], 
+						['id' => 4, 'filename' => 'reporte_por_monitorista', 'titulo' => 'Reporte por Monitorista',    'descripcion' => 'Este reporte genera la información  de las notas que ha capturado un monitorista', 	 'tema' => 'Reporte Excel', ], 
+						['id' => 5, 'filename' => 'reporte_del_dia', 'titulo' => 'Reporte del Día',   'descripcion' => 'Este reporte genera la información del dia actual ha la hora pedida', 	 'tema' => 'Reporte Excel', ],
 					  ];
-		return $tipoFuente[ $tipoFuenteId ];
+		
+		$tp = array_filter($tipoReporte, function($tr) use ($tipoFuenteId){
+
+			return $tr['id'] ===  $tipoFuenteId;
+		});
+
+		return array_values($tp)[0];
 	}
 
 	public static function ubicationDetail( $ubicacionId )

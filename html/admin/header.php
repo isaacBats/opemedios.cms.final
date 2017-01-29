@@ -225,10 +225,10 @@
                             <a href="#"><i class="fa fa-file-excel-o fa-fw"></i> Reportes<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="flot.html">Noticias por Clientes</a>
+                                    <a href="/panel/reports/clients">Noticias por Clientes</a>
                                 </li>
                                 <li>
-                                    <a href="flot.html">Reporte de Notas por día</a>
+                                    <a href="/panel/reports/today">Reporte de Notas por día</a>
                                 </li>
                             </ul>
                         </li>

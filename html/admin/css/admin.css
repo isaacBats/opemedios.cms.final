@@ -169,6 +169,10 @@
     display: none;
 }
 
+.smt-marg{
+    margin-top: 10px;
+}
+
 /* layout.css Style */
 .upload-drop-zone {
     height: 200px;

@@ -119,6 +119,56 @@ $(document).ready(function(){
         });
     });
 
+    /** Reportes */
+    /* Trae los temas de una empresa para los reportes*/
+    $( '#empresa' ).change( function (){
+        $( '#empresa option:selected' ).each( function () {
+            var $elegido = $(this).val();
+            $.get( '/panel/get/temas/' + $elegido, function (data) {
+                var $stema = $('#tema');
+                $stema.removeAttr('disabled');
+                $('option', $stema).remove();
+                if( typeof(data) == 'string' ){
+                    $stema.append('<option value="">Tema</option>');
+                    $stema.append('<option value="">' + data + '</option>');
+                }else{
+                    $stema.append('<option value="">Tema</option>');                    
+                    $stema.append('<option value="0">Todos los temas</option>');                    
+                    $.each( data, function (i, item){
+                        $stema.append( $('<option>', {
+                            value: item.id_tema,
+                            text : item.nombre                            
+                        } ) );
+                    } );
+                }                
+            } );
+        });
+    });
+    /* Trae las fuentes de un tipo de fuente */
+    $( '#tipo_fuente' ).change( function (){
+        $( '#tipo_fuente option:selected' ).each( function () {
+            var $elegido = parseInt($(this).val());
+            //$('#fuente').find('option').remove();
+            if($elegido != 0 || $elegido != '')
+            {
+                $.get( '/panel/fonts/fonts-by-type/' + $elegido, function (data) {
+                    var $sfuente = $('#fuente');
+                    $sfuente.removeAttr('disabled');
+                    $('option', $sfuente).remove();                
+                    $sfuente.append('<option value="">Fuente</option>');                    
+                    $sfuente.append('<option value="0">Todas las fuentes</option>');                    
+                    $.each( data, function (i, item){
+                        $sfuente.append( $('<option>', {
+                            value: item.id_fuente,
+                            text : item.nombre                            
+                        } ) );
+                    } );                
+                } );                
+            }
+        });
+    });
+    /** Fin Reportes */
+
     // Agregar un autor si la seccion lo tiene al momento de agregar una noticia
     $('#add-new-secction').change( function(){
 

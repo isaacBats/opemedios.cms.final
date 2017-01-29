@@ -1,4 +1,5 @@
 <?php 
+use utilities\FontType;
 use utilities\Util;
 
 class AdminFonts extends Controller{
@@ -215,6 +216,32 @@ class AdminFonts extends Controller{
 		
 		header('Content-type: text/json');
 	    echo json_encode( $autor );
+	}
+
+	public function getFontsByTypeFont($idTypeFont)
+	{
+		$tFonts = array();
+		$fonts = array();
+
+		if($idTypeFont == 0){
+			$tFonts = [FontType::FONT_TELEVISION['key'],
+							FontType::FONT_RADIO['key'],
+							FontType::FONT_PERIODICO['key'],
+							FontType::FONT_REVISTA['key'],
+							FontType::FONT_INTERNET['key']];
+		}else
+			$tFonts = [$idTypeFont,];
+
+		$getFonts = $this->fuentesRepository->getFontsByTipeFont($tFonts);
+		
+		if($getFonts->exito)
+			$fonts = $getFonts->rows;
+		else
+			$fonts = ['No se encontraron fuentes para este medio'];
+
+		header('Content-type: text/json');
+		echo json_encode($fonts);
+		
 	}
 
 	//TODO: @Adminfonts Falta Editar una fuente

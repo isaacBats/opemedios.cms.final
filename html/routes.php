@@ -346,6 +346,11 @@ $collection->attachRoute(new Route('/panel/seccion/autor/:seccion', array(
     'methods' => 'GET'
 )));
 
+$collection->attachRoute(new Route('/panel/fonts/fonts-by-type/:typefont', array(
+    '_controller' => 'AdminFonts::getFontsByTypeFont',
+    'methods' => 'GET'
+)));
+
 $collection->attachRoute(new Route('/panel/font/section/change-state', array(
     '_controller' => 'AdminFonts::changeState',
     'methods' => 'GET'

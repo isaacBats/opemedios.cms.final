@@ -33,16 +33,17 @@
 		    <label for="tendencia">Tendencia</label>
 		     <select class="form-control" name="tendencia">
                  <option value="">Tendencia</option>
+                 <option value="0" >Todas las tendencias</option>
                  <option value="1" >Positiva</option>
                  <option value="2" >Neutral</option>
                  <option value="3" >Negativa</option>
              </select>
 		</div>
 		<div class="form-group col-sm-4">
-		    <label>Tipo de fuente</label>
-		     <select class="form-control" name="tipo_fuente">
+		    <label for="tipo_fuente">Tipo de fuente</label>
+		     <select class="form-control" name="tipo_fuente" id="tipo_fuente">
                  <option value="">Tipo de fuente</option>
-                 <option value="0" >Todas</option>
+                 <option value="0" >Todos los tipos</option>
                  <?php foreach ($tiposFuente as $tf): ?>
                  <option value="<?= $tf['id_tipo_fuente'] ?>"><?= $tf['descripcion'] ?></option>
                  <?php endforeach; ?>

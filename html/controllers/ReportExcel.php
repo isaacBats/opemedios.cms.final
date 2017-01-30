@@ -18,19 +18,19 @@ class ReportExcel
 		$this->objPHPExcel->getProperties()->setLastModifiedBy("Opemedios");
 		$this->objPHPExcel->getProperties()->setTitle($this->typeReport['titulo']);
 		$this->objPHPExcel->getProperties()->setSubject($this->typeReport['tema']);
-		$this->objPHPExcel->getProperties()->setDescription($this->typeReport['description']);
+		$this->objPHPExcel->getProperties()->setDescription($this->typeReport['descripcion']);
 	}
 
-	protected function make(array $data)
+	public function make(array $data)
 	{
 		$this->objPHPExcel->setActiveSheetIndex(0);
   		$this->objPHPExcel->getActiveSheet()->fromArray($data, null, 'A1');
 		$this->objPHPExcel->getActiveSheet()->setTitle($this->typeReport['titulo']);
 
-		return $this->objPHPExcel;
+		return $this;
 	}
 
-	protected function download($type = 'xls')
+	public function download($type = 'xls')
 	{
 		$this->objPHPExcel->setActiveSheetIndex(0);
 		
@@ -56,7 +56,7 @@ class ReportExcel
 		exit;
 	}
 
-	protected function save($type = 'xls')
+	public function save($type = 'xls')
 	{
 		$objPHPExcel->setActiveSheetIndex(0);
 		if($type === 'xls'){

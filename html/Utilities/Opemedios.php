@@ -33,7 +33,7 @@ class FontType extends PHPEnum
 
 }
 
-class Tiporeporte extends PHPEnum
+class TipoReporte extends PHPEnum
 {
 	const REPORTE_CLIENTE = 1;
 	const REPORTE_AREA 	  = 2;

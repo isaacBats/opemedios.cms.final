@@ -502,6 +502,11 @@ $collection->attachRoute(new Route('/panel/reports/clients', array(
     'methods' => 'GET'
 )));
 
+$collection->attachRoute(new Route('/panel/reports/clients', array(
+    '_controller' => 'AdminReports::getReportClient',
+    'methods' => 'POST'
+)));
+
 
 
 // Reutas de prueba

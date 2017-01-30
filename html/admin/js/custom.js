@@ -148,7 +148,6 @@ $(document).ready(function(){
     $( '#tipo_fuente' ).change( function (){
         $( '#tipo_fuente option:selected' ).each( function () {
             var $elegido = parseInt($(this).val());
-            //$('#fuente').find('option').remove();
             if($elegido != 0 || $elegido != '')
             {
                 $.get( '/panel/fonts/fonts-by-type/' + $elegido, function (data) {
@@ -163,6 +162,34 @@ $(document).ready(function(){
                             text : item.nombre                            
                         } ) );
                     } );                
+                } );                
+            }
+        });
+    });
+
+    /* Obtiene las secciones de una fuente */
+    $( '#fuente' ).change( function (){
+        $( '#fuente option:selected' ).each( function () {
+            var $elegido = parseInt($(this).val());
+            if($elegido != 0 || $elegido != '')
+            {
+                $.get( '/panel/get/seccion/' + $elegido, function (data) {
+                    var $sseccion = $('#seccion');
+                    $sseccion.removeAttr('disabled');
+                    $('option', $sseccion).remove();
+                    if(typeof(data) == 'string'){
+                        $sseccion.append('<option value="">Sección</option>');
+                        $sseccion.append('<option value="">' + data + '</option>');  
+                    }else{
+                        $sseccion.append('<option value="">Sección</option>');                    
+                        $sseccion.append('<option value="0">Todas las secciones</option>');                    
+                        $.each( data, function (i, item){
+                            $sseccion.append( $('<option>', {
+                                value: item.id_seccion,
+                                text : item.nombre                            
+                            } ) );
+                        } );
+                    }                
                 } );                
             }
         });

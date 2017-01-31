@@ -6,11 +6,13 @@ class AdminReports extends Controller
 {
 	private $empresasRepo;
 	private $tipoFuenteRepo;
+	private $reportsRepo;
 
 	function __construct()
 	{
 		$this->empresasRepo = new EmpresaRepository();
 		$this->tipoFuenteRepo = new TipoFuenteRepository();
+		$this->reportsRepo = new ReportesRepository();
 	}
 
 	public function reportClientView()
@@ -47,14 +49,18 @@ class AdminReports extends Controller
 		    $fuente = isset($_POST['fuente']) ? $_POST['fuente'] : 0;
 		    $seccion = isset($_POST['seccion']) ? $_POST['seccion'] : 0;
 
-		    $notirepo = new NoticiasRepository();
 		    $reportExcel = new ReportExcel(TipoReporte::REPORTE_CLIENTE);
 
-		    $data = $notirepo->showAllNews();
-		    $reportExcel->make($data)->download();
-
-		    // echo '<pre>'; print_r($data); exit;
-
+		    $data = $this->reportsRepo->reportForClient($empresa, $fecha_inicio, $fecha_fin, $tema, $tendencia, $tipo_fuente, $fuente, $seccion);
+		    if($data->exito){
+		    	if(sizeof($data->rows) > 0)
+		    		$reportExcel->make($data->rows)->download();
+		    	else
+		    		throw new Exception("No hubo resultados que procesar");
+		    		die();	    				    			    	
+		    }
+		    else
+		    	throw new Exception("Error al procesar el reporte por clientes: <br>" . $data->error);
 
 		}else{
             header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");

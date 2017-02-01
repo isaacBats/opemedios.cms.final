@@ -24,8 +24,24 @@ class ReportExcel
 	public function make(array $data)
 	{
 		$this->objPHPExcel->setActiveSheetIndex(0);
-  		$this->objPHPExcel->getActiveSheet()->fromArray($data, null, 'A1');
+  		$this->objPHPExcel->getActiveSheet()->fromArray($data, null, 'A2');
 		$this->objPHPExcel->getActiveSheet()->setTitle($this->typeReport['titulo']);
+
+		return $this;
+	}
+
+	public function setHeaders(array $headers)
+	{
+		// se puede iterar de esta forma
+		// $letra = 'A';
+		// foreach($headers as $header)
+		// {
+		// 		$this->objPHPExcel->getactiveSheet()->->setCellValue($letra.'1', $header);
+		// 		$letra++;
+		// }
+
+		$this->objPHPExcel->setActiveSheetIndex(0);
+		$this->objPHPExcel->getActiveSheet()->fromArray($headers, null, 'A1');
 
 		return $this;
 	}

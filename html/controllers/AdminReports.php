@@ -49,12 +49,14 @@ class AdminReports extends Controller
 		    $fuente = isset($_POST['fuente']) ? $_POST['fuente'] : 0;
 		    $seccion = isset($_POST['seccion']) ? $_POST['seccion'] : 0;
 
+		    $encabezados = ['Medio','Fuente','Encabezado','Síntesis','Tendencia','Costo','Alcance','Fecha', 'Link'];
+
 		    $reportExcel = new ReportExcel(TipoReporte::REPORTE_CLIENTE);
 
 		    $data = $this->reportsRepo->reportForClient($empresa, $fecha_inicio, $fecha_fin, $tema, $tendencia, $tipo_fuente, $fuente, $seccion);
 		    if($data->exito){
 		    	if(sizeof($data->rows) > 0)
-		    		$reportExcel->make($data->rows)->download();
+		    		$reportExcel->setHeaders($encabezados)->make($data->rows)->download();
 		    	else
 		    		throw new Exception("No hubo resultados que procesar");
 		    		die();	    				    			    	

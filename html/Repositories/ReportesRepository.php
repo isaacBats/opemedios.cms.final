@@ -12,7 +12,7 @@ class ReportesRepository extends BaseRepository
 
 	public function reportForClient($empresaid, $fecha_inicio = null, $fecha_fin = null, $tema = 0, $tendencia = 0, $tipo_fuente = 0, $fuente = 0, $seccion = 0)
 	{
-		$sql = "SELECT noti.id_noticia, noti.id_tipo_fuente, tema.id_tema, tema.nombre AS tema, tf.descripcion AS tipo_fuente, fue.nombre AS fuente, noti.encabezado, noti.sintesis, ten.descripcion, noti.alcanse AS alcance, noti.fecha  FROM asigna asig INNER JOIN noticia noti ON asig.id_noticia = noti.id_noticia INNER JOIN fuente fue ON noti.id_fuente = fue.id_fuente INNER JOIN tipo_fuente tf ON noti.id_tipo_fuente = tf.id_tipo_fuente INNER JOIN tendencia ten ON noti.id_tendencia_monitorista = ten.id_tendencia INNER JOIN tema ON asig.id_tema = tema.id_tema ";
+		$sql = "SELECT noti.id_noticia, noti.id_tipo_fuente, tema.id_tema, tema.nombre AS tema, tf.descripcion AS tipo_fuente, fue.nombre AS fuente, noti.encabezado, noti.sintesis, ten.descripcion AS tendencia, noti.alcanse AS alcance, noti.fecha  FROM asigna asig INNER JOIN noticia noti ON asig.id_noticia = noti.id_noticia INNER JOIN fuente fue ON noti.id_fuente = fue.id_fuente INNER JOIN tipo_fuente tf ON noti.id_tipo_fuente = tf.id_tipo_fuente INNER JOIN tendencia ten ON noti.id_tendencia_monitorista = ten.id_tendencia INNER JOIN tema ON asig.id_tema = tema.id_tema ";
 		$where = "WHERE asig.id_empresa = $empresaid ";
 
 		if($fecha_inicio != null)

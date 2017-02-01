@@ -32,14 +32,6 @@ class ReportExcel
 
 	public function setHeaders(array $headers)
 	{
-		// se puede iterar de esta forma
-		// $letra = 'A';
-		// foreach($headers as $header)
-		// {
-		// 		$this->objPHPExcel->getactiveSheet()->->setCellValue($letra.'1', $header);
-		// 		$letra++;
-		// }
-
 		$this->objPHPExcel->setActiveSheetIndex(0);
 		$this->objPHPExcel->getActiveSheet()->fromArray($headers, null, 'A1');
 

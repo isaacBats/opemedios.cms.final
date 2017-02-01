@@ -1,6 +1,7 @@
 <?php 
 
 use utilities\TipoReporte;
+use utilities\Util;
 
 class AdminReports extends Controller
 {
@@ -55,8 +56,22 @@ class AdminReports extends Controller
 
 		    $data = $this->reportsRepo->reportForClient($empresa, $fecha_inicio, $fecha_fin, $tema, $tendencia, $tipo_fuente, $fuente, $seccion);
 		    if($data->exito){
-		    	if(sizeof($data->rows) > 0)
-		    		$reportExcel->setHeaders($encabezados)->make($data->rows)->download();
+		    	if(sizeof($data->rows) > 0){
+
+		    		$results = array_map(function ($data) {
+		    			
+		    			$notiRepo = new NoticiasRepository();
+		    			$tipoFuente = Util::tipoFuente($data['id_tipo_fuente']);
+		    			$new_by_type = $notiRepo->getNewById($data['id_noticia'], $tipoFuente['pref']);
+		    			$link = '<a href="'.$_SERVER['HTTP_HOST'].'/media/'.$tipoFuente['url'].'/'.$data['id_noticia'].'">Ver noticia</a>';
+
+
+		    			return ['medio' => $data['tipo_fuente'], 'fuente' => $data['fuente'], 'encabezado' => $data['encabezado'], 'sintesis' => $data['sintesis'], 'tendencia' => $data['tendencia'], 'costo' => $new_by_type['costo'], 'alcance' => $data['alcance'], 'fecha' => $data['fecha'], 'link' => $link, ];
+
+		    		}, $data->rows);
+
+		    		$reportExcel->setHeaders($encabezados)->make($results)->download();
+		    	}
 		    	else
 		    		throw new Exception("No hubo resultados que procesar");
 		    		die();	    				    			    	

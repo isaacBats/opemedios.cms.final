@@ -41,13 +41,14 @@ class Util
 
 	public static function tipoFuente( $tipoFuenteId ){
 		$tipoFuente = [
-						['id' => 1, 'fuente' => 'Televisión', 'icon' => 'fa-television', 'pref' => 'tel', ], 
-						['id' => 2, 'fuente' => 'Radio', 	  'icon' => 'fa-microphone', 'pref' => 'rad', ], 
-						['id' => 3, 'fuente' => 'Periódico',  'icon' => 'fa-newspaper-o','pref' => 'per', ], 
-						['id' => 4, 'fuente' => 'Revista',    'icon' => 'fa-columns', 	 'pref' => 'rev', ], 
-						['id' => 5, 'fuente' => 'Internet',   'icon' => 'fa-chrome', 	 'pref' => 'int', ],
+						['id' => 1, 'url' => 'television', 'fuente' => 'Televisión', 'icon' => 'fa-television', 'pref' => 'tel', ], 
+						['id' => 2, 'url' => 'radio',      'fuente' => 'Radio', 	  'icon' => 'fa-microphone', 'pref' => 'rad', ], 
+						['id' => 3, 'url' => 'periodico',  'fuente' => 'Periódico',  'icon' => 'fa-newspaper-o','pref' => 'per', ], 
+						['id' => 4, 'url' => 'revista',    'fuente' => 'Revista',    'icon' => 'fa-columns', 	 'pref' => 'rev', ], 
+						['id' => 5, 'url' => 'internet',   'fuente' => 'Internet',   'icon' => 'fa-chrome', 	 'pref' => 'int', ],
 					  ];
-		return $tipoFuente[ $tipoFuenteId ];
+		// TODO: @Util Verificar si en todos los lugares donde se invoca regresa el valor correcto ya que regresava indices equivocados -- 31012017
+		return $tipoFuente[ $tipoFuenteId -1 ];
 	}
 
 	public static function tipoReporte( $tipoFuenteId ){

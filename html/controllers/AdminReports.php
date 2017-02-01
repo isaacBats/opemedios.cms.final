@@ -74,6 +74,7 @@ class AdminReports extends Controller
 		    	}
 		    	else
 		    		// throw new Exception("No hubo resultados que procesar");
+		    		// TODO: @Reportes Crear una alerta de sesion para este caso.
 		    		echo "No hubo resultados que procesar";
 		    		die();	    				    			    	
 		    }

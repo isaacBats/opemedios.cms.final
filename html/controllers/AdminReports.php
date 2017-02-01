@@ -73,7 +73,8 @@ class AdminReports extends Controller
 		    		$reportExcel->setHeaders($encabezados)->make($results)->download();
 		    	}
 		    	else
-		    		throw new Exception("No hubo resultados que procesar");
+		    		// throw new Exception("No hubo resultados que procesar");
+		    		echo "No hubo resultados que procesar";
 		    		die();	    				    			    	
 		    }
 		    else

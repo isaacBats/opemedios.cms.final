@@ -307,63 +307,41 @@ class NoticiasRepository extends BaseRepository{
 					INNER JOIN tendencia t 	  ON n.id_tendencia_monitorista = t.id_tendencia
 					INNER JOIN usuario u 	  ON n.id_usuario = u.id_usuario ";
 
+		$sqlCount = "SELECT COUNT(*) AS count FROM noticia n INNER JOIN tipo_fuente tf ON n.id_tipo_fuente = tf.id_tipo_fuente INNER JOIN fuente f ON n.id_fuente = f.id_fuente INNER JOIN seccion scc ON n.id_seccion = scc.id_seccion INNER JOIN sector sec ON n.id_sector = sec.id_sector INNER JOIN tipo_autor ta ON n.id_tipo_autor = ta.id_tipo_autor INNER JOIN genero g ON n.id_genero = g.id_genero INNER JOIN tendencia t ON n.id_tendencia_monitorista = t.id_tendencia INNER JOIN usuario u ON n.id_usuario = u.id_usuario ";
+
 		if( count( $data ) > 0 ){
 			
 			extract( $data );
-			
-			$w = ' WHERE ';
-			if( $titulo != null ){
-				$w .= "n.encabezado LIKE '%" . $titulo . "%' ";
+			if($tipoFuente === 0)
+				$w = " WHERE n.id_tipo_fuente in ('1', '2', '3', '4', '5') ";
+			else
+				$w = " WHERE n.id_tipo_fuente = $tipoFuente ";
 
-				if( @$finicio != null && !isset( $ffin ) ){
-					$w .= " AND n.fecha = '" . $finicio . "' ";
-				}
+			if( $titulo != '' )
+				$w .= " AND n.encabezado LIKE '%" . $titulo . "%' ";
 
-				if( @$finicio != null && ( isset( $ffin ) && $ffin != null ) ){
-					$w .= " AND n.fecha > '" . $finicio . "' AND n.fecha < '" . $ffin . "' ";
-				}
+			if($finicio != '')
+				$w .= " AND n.fecha >= '" . $finicio . "' ";
 
-				if( $tipoFuente > 0 ){
-					$w .= " AND n.id_tipo_fuente = $tipoFuente";
-				}else{
-					$w .= " AND n.id_tipo_fuente in ('1', '2', '3', '4', '5')";					
-				}
-			}elseif( $titulo == ''){
-
-				if( @$finicio != null && !isset( $ffin ) ){
-					$w .= " n.fecha = '" . $finicio . "' ";
-				}
-
-				if( @$finicio != null && ( isset( $ffin ) && $ffin != null ) ){
-					$w .= " AND n.fecha > '" . $finicio . "' AND n.fecha < '" . $ffin . "' ";
-				}
-
-				if( $tipoFuente > 0 ){
-
-					$w .= " AND n.id_tipo_fuente = $tipoFuente";
-
-				}else{
-
-					$w .= " AND n.id_tipo_fuente in ('1', '2', '3', '4', '5')";
-				}
-			}
+			if($ffin != '')
+				$w .= " AND n.fecha <= '" . $ffin . "' ";
 
 			$l = ' LIMIT ' . $limit . ' OFFSET ' . $page;
 			$o = ' ORDER BY n.fecha';
 
-			// echo $sql . $w . $o . $l; exit();
 			$query = $this->pdo->prepare ( $sql . $w . $o . $l );
 		}
-		// else{
-			
-		// 	$sql = 'SELECT COUNT(*) AS count FROM noticia';
-
-		// 	$query = $this->pdo->prepare( $sql );			
-		// }
-
-		$value = ( $query->execute() ) ? $query->fetchAll( \PDO::FETCH_ASSOC ) : 'No ahi resultados para tu filtro';
-
-		// echo $sql . $w . $o . $l; echo '<pre>'; print_r($value); exit(); 
+		
+		$value = new stdClass();
+		
+		if ($query->execute()) {
+			$value->exito = true;
+			$value->rows = ($query->rowCount() > 0) ? $query->fetchAll( \PDO::FETCH_ASSOC ) : [];
+			$value->count = $this->pdo->query($sqlCount.$w)->fetch()['count'];
+		} else {
+			$value->exito = false;
+			$value->error = $query->errorInfo()[2];
+		}
 
 		return $value;
 	}	

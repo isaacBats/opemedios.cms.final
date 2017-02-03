@@ -3,7 +3,17 @@ $(document).ready(function () {
     var url = $.url();
     
     $("#btnbuscar").click(function () {
-        $("#bootpag_text_count").submit();
+        $("#bootpag_text_count").validate({
+            rules: {
+                tipoFuente: "required",
+            },
+            messages: {
+                tipoFuente: "Selecciona una opción",
+            },
+            submitHandler: function (form) {
+                $(form).submit();
+            }
+        });
     });
     
     $("#bootpag_text_count_select").change(function () {

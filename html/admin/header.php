@@ -169,18 +169,14 @@
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
-                        <li>
+                        <!-- <li>
                             <a href="javascript:void(0);"><i class="fa fa-database"></i> Tarifario<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
                                     <a href="/panel/tariff">Tarifarios</a>
                                 </li>
-                                <!-- <li>
-                                    <a href="/panel/sector/show-list">Administrar Sectores</a>
-                                </li> -->
                             </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
+                        </li> -->
                         <!-- <li>
                             <a href="#"><i class="fa fa-th fa-fw"></i> Sectores<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">

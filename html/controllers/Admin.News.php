@@ -852,38 +852,22 @@ class AdminNews extends Controller{
 			$js = '';
 			$css = '';
 
-			$limit = isset( $_GET['numpp'] ) ? $_GET['numpp'] : 10;
-			$page = isset( $_GET['page'] ) ? ( $_GET['page'] * $limit ) - $limit : 0;
-			$titulo = isset( $_GET['titulo'] ) ? $_GET['titulo'] : null;
-			$finicio = isset( $_GET['finicio'] ) ? $_GET['finicio'] : null;
-			$ffin = isset( $_GET['ffin'] ) ? $_GET['ffin'] : null;
-			$tipoFuente = isset( $_GET['tipoFuente'] ) ? $_GET['tipoFuente'] : null;
-
-			$countWithoutFilter = $this->noticiasRepository->getCountNews();
-
-			$countWithFilter = null;
-			$resultados = null;
-
-			if( $finicio === $ffin || ( $finicio != null && empty($ffin) ) ){
-				
-				$countWithFilter = $this->noticiasRepository->getCountNews( compact('limit', 'page', 'titulo', 'tipoFuente',  'finicio') );
-				$resultados = $this->noticiasRepository->getNewsWithFilters( compact('limit', 'page', 'titulo', 'tipoFuente',  'finicio') );
+			$limit = (isset($_GET['numpp'])) ? $_GET['numpp'] : 10;
+			$page = (isset($_GET['page'])) ? ( $_GET['page'] * $limit ) - $limit : 0;
+			$titulo = (isset($_GET['titulo'])) ? $_GET['titulo'] : '';
+			$finicio = (isset($_GET['finicio'])) ? $_GET['finicio'] : '';
+			$ffin = (isset($_GET['ffin'])) ? $_GET['ffin'] : '';
+			$tipoFuente = (isset($_GET['tipoFuente'])) ? intval($_GET['tipoFuente']) : '';
 			
-			}else{
-
-				$countWithFilter = $this->noticiasRepository->getCountNews( compact('limit', 'page', 'titulo', 'tipoFuente',  'finicio', 'ffin') );
-				$resultados = $this->noticiasRepository->getNewsWithFilters( compact('limit', 'page', 'titulo', 'tipoFuente',  'finicio', 'ffin') );
-			}
-
-			$count = $countWithFilter;
-
-			$ini = $page + 1;
-			$end = ( $page + $limit >= $count ) ? $count : $page + $limit;
+			$resultados = $this->noticiasRepository->getNewsWithFilters(compact('limit', 'page', 'titulo', 'finicio', 'ffin', 'tipoFuente'));
 
 			$html = '';
-
-			if( is_array($resultados) ){
-				foreach ( $resultados as $noticia ) {
+			$count = $end = 0;
+			$ini = $page + 1;
+			if( $resultados->exito ){
+				$count = $resultados->count;
+				$end = ( $page + $limit >= $count ) ? $count : $page + $limit;
+				foreach ( $resultados->rows as $noticia ) {
 					$html .= '	<tr>
 					            	<td class="text-center">
 						                <label class="ckbox">
@@ -922,9 +906,9 @@ class AdminNews extends Controller{
 			foreach ($tiposFuente as $tf) {
 				$typeFont .= '<option value="'.$tf['id_tipo_fuente'].'">'.$tf['descripcion'].'</option>';							
 			}
-			
+
 			$this->header_admin( 'Busqueda Avanzada - ', $css );
-			require $this->adminviews . 'sendBlockView.php';
+			require $this->adminviews . 'advancedSearchView.php';
 			$this->footer_admin( $js );
 		}else{
             header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");

@@ -49,6 +49,24 @@
 				</form>			
 			</div>
 			<div class="col-sm-2"></div>
+			<div class="col-sm-12">
+				<?php if( sizeof( $covers ) > 0 ): ?> 
+					<article class="items-covers col-sm-12">
+					<?php foreach ($covers as $thumbCover): ?>
+							<figure class="items-img col-xs-6 col-sm-6 col-md-4 col-lg-3">
+								<img src="/<?= $thumbCover['thumb'] ?>" alt="<?= $titulo . ' - ' . $thumbCover['nombre_fuente'] ?>" width="180" heigth="240">
+								<figcaption class="items-descripcion">
+									<strong><?= $thumbCover['nombre_fuente'] ?></strong>
+									<p><?= $thumbCover['created_at'] ?></p>
+								</figcaption>
+							</figure>
+					<?php endforeach; ?>
+					</article>
+				<?php else: 
+						echo '<strong>No cuentas con '.$titulo.' para este día</strong>'; 
+					  endif; 
+				?>
+			</div>
 		</div>
 	</div>
 </div>

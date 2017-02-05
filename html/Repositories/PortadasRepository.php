@@ -90,7 +90,24 @@ class PortadasRepository extends BaseRepository{
 			$result->rows = ( sizeof( $portadas ) > 0 ) ? $portadas->fetchAll( \PDO::FETCH_ASSOC ) : 'No hay elementos aun';			
 		}else{
 			$result->exito = FALSE;
-			$result->error = $this->pdo->errorInfo();
+			$result->error = $this->pdo->errorInfo()[2];
+		}
+
+		return $result;
+	}
+
+	public function getCoversColumnas ($day, $type)
+	{
+		$columnas = $this->pdo->prepare("SELECT * FROM columnas WHERE DATE_FORMAT(created_at, '%Y-%m-%d') = '{$day}' AND tipo_columna = '{$type}' ORDER BY created_at DESC");
+
+		$result = new stdClass();
+
+		if ($columnas->execute()) {
+			$result->exito = TRUE;
+			$result->rows = ($columnas->rowCount() > 0) ? $columnas->fetchAll(\PDO::FETCH_ASSOC) : 'No hay elementos aun';			
+		}else{
+			$result->exito = FALSE;
+			$result->error = $columnas->errorInfo()[2];
 		}
 
 		return $result;

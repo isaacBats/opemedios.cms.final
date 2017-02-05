@@ -137,6 +137,21 @@ class AdminColumns extends Controller
 			$action = '/panel/prensa/guardar-columna';
 			$tipo_columna = TipoColumnas::COLUMNAS_POLITICAS;
 
+			$coversColumnas = $this->portadasRepo->getCoversColumnas (date('Y-m-d'), Util::tipoColumna($tipo_columna));
+			$covers = null;
+
+			if ($coversColumnas->exito && is_array($coversColumnas->rows)) {
+				foreach ($coversColumnas->rows as &$cover) {
+					$font = $this->fuentesRepo->getFontById( $cover['fuente_id'] );
+					if (is_array ($font)) {
+						$cover['nombre_fuente'] = $font['nombre']; 
+					}
+					$createdAt = new DateTime( $cover['created_at'] );
+					$cover['created_at'] = $createdAt->format('Y-m-d');
+				}
+				$covers = $coversColumnas->rows;
+			}
+
 			$this->header_admin( $titulo . ' - ', $this->css );
 				require $this->adminviews . 'columnasView.php';
 			$this->footer_admin( $this->js );
@@ -157,6 +172,8 @@ class AdminColumns extends Controller
 			$action = '/panel/prensa/guardar-columna';
 			$tipo_columna = TipoColumnas::COLUMNAS_FINANCIERAS;
 
+			$covers = $this->getCovers($tipo_columna, 'columna', date('Y-m-d'));
+			
 			$this->header_admin( $titulo . ' - ', $this->css );
 				require $this->adminviews . 'columnasView.php';
 			$this->footer_admin( $this->js );
@@ -164,6 +181,31 @@ class AdminColumns extends Controller
             header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
         }
 
+	}
+
+	private function getCovers ($tipo, $article, $date)
+	{
+		
+		if ($article == 'portada')
+			$getcovers = $this->portadasRepo->getCovers ($date, Util::tipoPortada($tipo));
+		elseif ($article == 'columna')
+			$getcovers = $this->portadasRepo->getCoversColumnas ($date, Util::tipoColumna($tipo));
+
+		$covers = null;
+
+		if ($getcovers->exito && is_array($getcovers->rows)) {
+			foreach ($getcovers->rows as &$cover) {
+				$font = $this->fuentesRepo->getFontById( $cover['fuente_id'] );
+				if (is_array ($font)) {
+					$cover['nombre_fuente'] = $font['nombre']; 
+				}
+				$createdAt = new DateTime( $cover['created_at'] );
+				$cover['created_at'] = $createdAt->format('Y-m-d');
+			}
+			$covers = $getcovers->rows;
+		}
+
+		return $covers;
 	}
 
 	public function guardarPortada()

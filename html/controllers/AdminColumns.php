@@ -261,4 +261,27 @@ class AdminColumns extends Controller
 			'thumbName'  => $path.$name.'_thumb.png',
 		];
 	}
+
+	public function editColumn ($typeColumn, $id)
+	{
+		if( isset( $_SESSION['admin'] ) ){
+			$this->css .= '<link rel="stylesheet" href="/admin/lib/summernote/summernote.css">';
+			$this->js .= '<script src="/admin/lib/summernote/summernote.js"></script>';
+			
+			$column = $this->portadasRepo->getColumna($id);
+			$titulo = ucfirst(str_replace('-', ' ', $typeColumn));			
+
+			$this->header_admin( $titulo . ' - ', $this->css );
+			require $this->adminviews . 'editColumnView.php';
+			$this->footer_admin( $this->js );
+		}else{
+            header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
+        }				
+	}
+
+	public function updateColumn ($typeColumn, $id)
+	{
+		echo '<pre>';
+		print_r(['post' => $_POST, 'file' => $_FILES, 'data' => [$typeColumn, $id]]);
+	}
 }

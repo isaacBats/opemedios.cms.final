@@ -113,4 +113,59 @@ class PortadasRepository extends BaseRepository{
 		return $result;
 	}
 
+	public function getColumna($id)
+	{
+		return $this->pdo->query("SELECT * FROM columnas WHERE id = $id")->fetch(\PDO::FETCH_ASSOC);
+	}
+
+	public function editColumna($data)
+	{
+		$rs = new stdClass();
+
+		$stmt = $this->pdo->prepare("UPDATE columnas SET titulo = :titulo, autor = :autor, contenido = :contenido, fuente_id = :fuente_id WHERE id = :id");
+		
+		if ($stmt->execute($data)) {
+			$rs->exito = true;
+			$rs->column = $this->getColumna($data['id']);
+		} else {
+			$rs->exito = false;
+			$rs->error = $stmt->errorInfo()[2];
+			$rs->data = $data;
+		}
+
+		return $rs;	
+	}
+
+	public function deleteColumna($id)
+	{
+		$rs = new stdClass();
+
+		$stmt = $this->pdo->prepare("DELETE FROM columnas WHERE id = :id");
+		
+		if ($stmt->execute([':id' => $id])) {
+			$rs->exito = true;
+		} else {
+			$rs->exito = false;
+			$rs->error = $stmt->errorInfo()[2];
+		}
+
+		return $rs;
+	}
+
+	public function deletePortada($id)
+	{
+		$rs = new stdClass();
+
+		$stmt = $this->pdo->prepare("DELETE FROM portadas WHERE id = :id");
+		
+		if ($stmt->execute([':id' => $id])) {
+			$rs->exito = true;
+		} else {
+			$rs->exito = false;
+			$rs->error = $stmt->errorInfo()[2];
+		}
+
+		return $rs;
+	}	
+
 }

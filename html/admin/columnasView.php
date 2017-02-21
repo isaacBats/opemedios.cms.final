@@ -54,6 +54,23 @@
 					<article class="items-covers col-sm-12">
 					<?php foreach ($covers as $thumbCover): ?>
 							<figure class="items-img col-xs-6 col-sm-6 col-md-4 col-lg-3">
+								<div class="btn-group pull-right">
+	                                <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+	                                    <i class="fa fa-chevron-down"></i>
+	                                </button>
+	                                <ul class="dropdown-menu slidedown">
+	                                    <li>
+	                                        <a href="/panel/prensa/editar/<?= str_replace(' ','-', strtolower($titulo)) . '/' . $thumbCover['id'] ?>">
+	                                            <i class="fa fa-edit fa-fw"></i> Editar
+	                                        </a>
+	                                    </li>
+	                                    <li>
+	                                        <a href="#">
+	                                            <i class="fa fa-times fa-fw"></i> Eliminar
+	                                        </a>
+	                                    </li>
+	                                </ul>
+	                            </div>
 								<img src="/<?= $thumbCover['thumb'] ?>" alt="<?= $titulo . ' - ' . $thumbCover['nombre_fuente'] ?>" width="180" heigth="240">
 								<figcaption class="items-descripcion">
 									<strong><?= $thumbCover['nombre_fuente'] ?></strong>

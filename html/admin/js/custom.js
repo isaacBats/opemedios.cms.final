@@ -717,6 +717,16 @@ $(document).ready(function(){
             });            
         });
     });
+
+    jQuery('#btn-changeImage').on('click', function (event) {
+        var $boton = $(this);
+        var contenedor = $boton.parent();
+        contenedor.find('img').remove();
+        contenedor.find('input.inp-thum').attr('disabled', false).show();
+        var input = contenedor.find('input.imagen');
+        input.attr('value', '');
+        $boton.remove();
+    });
     
 
     /********************** drag an drop  **************************/

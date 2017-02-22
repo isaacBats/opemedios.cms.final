@@ -122,7 +122,14 @@ class PortadasRepository extends BaseRepository{
 	{
 		$rs = new stdClass();
 
-		$stmt = $this->pdo->prepare("UPDATE columnas SET titulo = :titulo, autor = :autor, contenido = :contenido, fuente_id = :fuente_id WHERE id = :id");
+		$stmt = $this->pdo->prepare("UPDATE columnas SET fuente_id = :fuente_id, 
+														 tipo_columna = :tipo_columna, 
+														 titulo = :titulo, 
+														 autor = :autor, 
+														 contenido = :contenido, 
+														 imagen = :imagen, 
+														 thumb = :thumb 
+									WHERE id = :id");
 		
 		if ($stmt->execute($data)) {
 			$rs->exito = true;

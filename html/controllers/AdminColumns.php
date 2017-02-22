@@ -281,7 +281,47 @@ class AdminColumns extends Controller
 
 	public function updateColumn ($typeColumn, $id)
 	{
-		echo '<pre>';
-		print_r(['post' => $_POST, 'file' => $_FILES, 'data' => [$typeColumn, $id]]);
+		if( isset( $_SESSION['admin'] ) ){
+			
+			$column = $this->portadasRepo->getColumna($id);
+			$tipoColumna = ($typeColumn === 'columnas-politicas') 
+						 ? TipoColumnas::COLUMNAS_POLITICAS 
+						 : TipoColumnas::COLUMNAS_FINANCIERAS;
+			$data = [
+						'fuente_id' => $_POST['fuente_id'],
+						'tipo_columna' => $column['tipo_columna'],
+						'titulo' => $_POST['title'],
+						'autor' => $_POST['author'],
+						'contenido' => $_POST['contenido']
+					];
+			if (!empty($_FILES['imagen']['name']) && $_FILES['imagen']['error'] == 0) {
+				$path = $this->getPath( 'columnas', $tipoColumna );
+				$newsImages = $this->saveImages($_FILES['imagen'], $path);
+				$data['imagen'] = $newsImages['originName'];
+				$data['thumb'] = $newsImages['thumbName'];
+				$im = new Image();
+				$column['imagen'] = __APP__ . '/' .$column['imagen'];
+				$column['thumb'] = __APP__ . '/' .$column['thumb'];
+				$imagesDelete = $im->deleteImage([$column['imagen'], $column['thumb']]);
+			} else {
+				$data['imagen'] = $column['imagen'];
+				$data['thumb'] = $column['thumb'];
+			}
+
+			$data['id'] = $id;
+
+			$result = new stdClass();
+			$updateColumn = $this->portadasRepo->editColumna($data);
+			
+			if ($updateColumn->exito) {
+				echo 'Se ha actualizado lal nota'; exit;
+			} else {
+				echo 'Hubo error al actualizar la nota'; exit;
+			}
+
+		}else{
+            header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
+        }
+
 	}
 }

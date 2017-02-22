@@ -99,28 +99,49 @@ class Image
 
 	public function saveFile( $file, $pathFile, $type ){
 
-            // $extensiones_permitidas = ['pdf', 'jpg', 'jpeg', 'gif', 'png', 'JPG', 'JPEG', 'PNG', 'mp4', 'wma', 'wmv', 'mp3', 'avi', 'xlsx', 'csv'];
-            $extencionesPermitidas = ['jpg', 'jpeg', 'gif', 'png', 'JPG', 'JPEG', 'PNG', 'mp4', 'mp3', 'csv'];
-            $explode = explode(".", $file["name"]);
-            $extension = end($explode);
-            if ( ($file["type"] == $type) && in_array($extension, $extencionesPermitidas)){
-                if ($file["error"] > 0)
-                {
-                    echo "ERROR: " . $file["error"] . "<br>";
-                }
-                else
-                {
-                    $path = __DIR__ . '/../' . $pathFile . $file["createdName"];
-					$move = move_uploaded_file($file["tmp_name"],$path);
+        // $extensiones_permitidas = ['pdf', 'jpg', 'jpeg', 'gif', 'png', 'JPG', 'JPEG', 'PNG', 'mp4', 'wma', 'wmv', 'mp3', 'avi', 'xlsx', 'csv'];
+        $extencionesPermitidas = ['jpg', 'jpeg', 'gif', 'png', 'JPG', 'JPEG', 'PNG', 'mp4', 'mp3', 'csv'];
+        $explode = explode(".", $file["name"]);
+        $extension = end($explode);
+        if ( ($file["type"] == $type) && in_array($extension, $extencionesPermitidas)){
+            if ($file["error"] > 0)
+            {
+                echo "ERROR: " . $file["error"] . "<br>";
+            }
+            else
+            {
+                $path = __DIR__ . '/../' . $pathFile . $file["createdName"];
+				$move = move_uploaded_file($file["tmp_name"],$path);
 
-                    if(!$move){
-                        throw new Exception("Error al mover el archivo", 1);
-                    }else{
-                        return TRUE;
-                    }
+                if(!$move){
+                    throw new Exception("Error al mover el archivo", 1);
+                }else{
+                    return TRUE;
                 }
             }
+        }
 
-        } 
+    }
+
+    public function deleteImage(array $files)
+    {
+    	$errors = new \stdClass();
+    	$errors->count = 0;
+    	
+    	foreach ($files as $file) {
+    		if (!unlink($file)){
+    			$errors->count ++;
+    			$errors->file[] = $file;
+    		}
+    	}
+
+    	if ($errors->count === 0)
+    		$errors->exito = true;
+    	else
+    		$errors->exito = false;
+
+    	return $errors;
+
+    }
 	
 }

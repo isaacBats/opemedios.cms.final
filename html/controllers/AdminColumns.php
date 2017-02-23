@@ -279,6 +279,22 @@ class AdminColumns extends Controller
         }				
 	}
 
+	public function showColumn($typeColumn, $id)
+	{
+		if( isset( $_SESSION['admin'] ) ){
+			
+			$column = $this->portadasRepo->getColumna($id);
+			$titulo = ucfirst(str_replace('-', ' ', $typeColumn));
+			$fuente = $this->fuentesRepo->getFontById($column['fuente_id']);
+
+			$this->header_admin( $titulo . ' - ', $this->css );
+			require $this->adminviews . 'columnView.php';
+			$this->footer_admin( $this->js );
+		}else{
+            header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
+        }	
+	}
+
 	public function updateColumn ($typeColumn, $id)
 	{
 		if( isset( $_SESSION['admin'] ) ){
@@ -312,16 +328,53 @@ class AdminColumns extends Controller
 
 			$result = new stdClass();
 			$updateColumn = $this->portadasRepo->editColumna($data);
-			
+			$rs = new stdClass();
 			if ($updateColumn->exito) {
-				echo 'Se ha actualizado lal nota'; exit;
+				$rs->tipo = 'alert-info';
+				$rs->mensaje = 'Se ha actualizado al columna con <strong>exito</strong>';
 			} else {
-				echo 'Hubo error al actualizar la nota'; exit;
+				$rs->tipo = 'alert-warning';
+				$rs->mensaje = 'Hubo error al actualizar la columna';
 			}
+
+			$_SESSION['alerts']['columnas'] = $rs;
+			header( 'Location: /panel/prensa/show/' . $typeColumn . '/' . $id);
 
 		}else{
             header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
         }
 
+	}
+
+	public function deleteColumn ($id) 
+	{
+		if( isset( $_SESSION['admin'] ) ){
+			$column = $this->portadasRepo->getColumna($id);
+			$rs = new stdClass();
+
+			$deleteColumn = $this->portadasRepo->deleteColumna($id);
+			if ($deleteColumn->exito) {
+				$im = new Image();
+				$column['imagen'] = __APP__ . '/' .$column['imagen'];
+				$column['thumb'] = __APP__ . '/' .$column['thumb'];
+				$imagesDelete = $im->deleteImage([$column['imagen'], $column['thumb']]);
+				$rs->exito = true;
+				$rs->tipo = 'alert-info';
+				$rs->mensaje ='Se a eliminado la columna exitosamente!!!';
+			} else {
+				$rs->exito = false;
+				$rs->tipo = 'alert-warning';
+				$rs->mensaje ='No se pudo eliminar la columna';
+				$rs->error[2] = $deleteColumn->error;
+			}
+			$typeColumn = ($column['tipo_columna'] == 'COLUMNA_FINANCIERA') ? 'columnas-financieras' : 'columnas-politicas';
+			$rs->url = '/panel/prensa/' . $typeColumn;
+			
+			header('Content-type: text/json');
+			echo json_encode($rs); 
+
+		}else{
+            header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
+        }
 	}
 }

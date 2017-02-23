@@ -60,15 +60,15 @@
 	                                </button>
 	                                <ul class="dropdown-menu slidedown">
 	                                    <li>
-	                                        <a href="/panel/prensa/editar/<?= str_replace(' ','-', strtolower($titulo)) . '/' . $thumbCover['id'] ?>">
-	                                            <i class="fa fa-edit fa-fw"></i> Editar
+	                                        <a href="/panel/prensa/show/<?= str_replace(' ','-', strtolower($titulo)) . '/' . $thumbCover['id'] ?>">
+	                                            <i class="fa fa-edit fa-fw"></i> Ver
 	                                        </a>
 	                                    </li>
-	                                    <li>
+	                                    <!-- <li>
 	                                        <a href="#">
 	                                            <i class="fa fa-times fa-fw"></i> Eliminar
 	                                        </a>
-	                                    </li>
+	                                    </li> -->
 	                                </ul>
 	                            </div>
 								<img src="/<?= $thumbCover['thumb'] ?>" alt="<?= $titulo . ' - ' . $thumbCover['nombre_fuente'] ?>" width="180" heigth="240">

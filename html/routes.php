@@ -486,8 +486,18 @@ $collection->attachRoute(new Route('/panel/prensa/columnas-financieras', array(
     'methods' => 'GET'
 )));
 
+$collection->attachRoute(new Route('/panel/prensa/show/:tipo/:id', array(
+    '_controller' => 'AdminColumns::showColumn',
+    'methods' => 'GET'
+)));
+
 $collection->attachRoute(new Route('/panel/prensa/editar/:tipo/:id', array(
     '_controller' => 'AdminColumns::editColumn',
+    'methods' => 'GET'
+)));
+
+$collection->attachRoute(new Route('/panel/prensa/delete/column/:id', array(
+    '_controller' => 'AdminColumns::deleteColumn',
     'methods' => 'GET'
 )));
 

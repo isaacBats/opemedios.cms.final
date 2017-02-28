@@ -501,6 +501,11 @@ $collection->attachRoute(new Route('/panel/prensa/delete/column/:id', array(
     'methods' => 'GET'
 )));
 
+$collection->attachRoute(new Route('/panel/prensa/delete/cover/:id', array(
+    '_controller' => 'AdminColumns::deleteCover',
+    'methods' => 'GET'
+)));
+
 $collection->attachRoute(new Route('/panel/prensa/editar/:tipo/:id', array(
     '_controller' => 'AdminColumns::updateColumn',
     'methods' => 'POST'

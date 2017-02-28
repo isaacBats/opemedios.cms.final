@@ -377,4 +377,36 @@ class AdminColumns extends Controller
             header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
         }
 	}
+
+	public function deleteCover ($id) 
+	{
+		if( isset( $_SESSION['admin'] ) ){
+			$cover = $this->portadasRepo->getPortada($id);
+			$rs = new stdClass();
+
+			$deleteCover = $this->portadasRepo->deletePortada($id);
+			if ($deleteCover->exito) {
+				$im = new Image();
+				$cover['imagen'] = __APP__ . '/' .$cover['imagen'];
+				$cover['thumb'] = __APP__ . '/' .$cover['thumb'];
+				$imagesDelete = $im->deleteImage([$cover['imagen'], $cover['thumb']]);
+				$rs->exito = true;
+				$rs->tipo = 'alert-info';
+				$rs->mensaje ='Se a eliminado la portada exitosamente!!!';
+			} else {
+				$rs->exito = false;
+				$rs->tipo = 'alert-warning';
+				$rs->mensaje ='No se pudo eliminar la portada';
+				$rs->error[2] = $deleteCover->error;
+			}
+			$typeCover = ($cover['tipo_portada'] == 'PRIMERAS_PLANAS') ? 'primeras-planas' : ($cover['tipo_portada'] == 'PORTADA_FINANCIERA') ? 'portadas-financieras' : 'cartones';
+			$rs->url = '/panel/prensa/' . $typeCover;
+			
+			header('Content-type: text/json');
+			echo json_encode($rs); 
+
+		}else{
+            header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
+        }
+	}
 }

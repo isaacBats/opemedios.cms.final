@@ -118,6 +118,11 @@ class PortadasRepository extends BaseRepository{
 		return $this->pdo->query("SELECT * FROM columnas WHERE id = $id")->fetch(\PDO::FETCH_ASSOC);
 	}
 
+	public function getPortada ($id)
+	{
+		return $this->pdo->query("SELECT * FROM portadas WHERE id = $id")->fetch(\PDO::FETCH_ASSOC);
+	}
+
 	public function editColumna($data)
 	{
 		$rs = new stdClass();

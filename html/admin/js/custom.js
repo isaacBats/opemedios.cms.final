@@ -737,11 +737,37 @@ $(document).ready(function(){
         var $modal = $('#myModal');
         var $eliminar = $modal.find('.modal-footer .btn-primary');
         $modal.find('#myModalLabel').html('Eliminar Columna');
-        $modal.find('.modal-body').html('Esta seguro que decea eliminar esta columna.');
+        $modal.find('.modal-body').html('Esta seguro que decea eliminar esta columna?');
         $eliminar.html('Eliminar');
         
         $eliminar.click(function(){
             $.get('/panel/prensa/delete/column/' + id, function(json){
+                if (json.exito) {
+                    $modal.modal('toggle');
+                    $alert.removeClass(json.tipo);
+                    $alert.removeAttr('style');
+                    $alert.addClass(json.tipo).html(json.mensaje).delay(3000).fadeOut('slow', function(){
+                        window.location = json.url;
+                    });
+                }
+            });            
+        });
+    });
+
+    // Eliminar una portada
+    $('.delete-portada').click(function( event ){
+        event.preventDefault();
+        var $boton = $(this);
+        var id = $boton.data('id');
+        var $alert = $('.alert');
+        var $modal = $('#myModal');
+        var $eliminar = $modal.find('.modal-footer .btn-primary');
+        $modal.find('#myModalLabel').html('Eliminar Portada');
+        $modal.find('.modal-body').html('Esta seguro que decea eliminar esta portada?');
+        $eliminar.html('Eliminar');
+        
+        $eliminar.click(function(){
+            $.get('/panel/prensa/delete/cover/' + id, function(json){
                 if (json.exito) {
                     $modal.modal('toggle');
                     $alert.removeClass(json.tipo);

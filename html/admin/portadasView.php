@@ -44,9 +44,7 @@
 	                                </button>
 	                                <ul class="dropdown-menu slidedown">
 	                                    <li>
-	                                        <a href="#">
-	                                            <i class="fa fa-times fa-fw"></i> Eliminar
-	                                        </a>
+	                                        <a href="javascript:void(0);" class="delete-portada" data-id="<?= $thumbCover['id'] ?>" data-toggle="modal" data-target="#myModal" ><i class="fa fa-times fa-fw"></i> Eliminar</a>
 	                                    </li>
 	                                </ul>
 	                            </div>

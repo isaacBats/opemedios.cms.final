@@ -4,10 +4,13 @@ include_once("BaseRepository.php");
 
 class FuentesRepository extends BaseRepository{
 
-	public function showAllFonts( $limit, $offset, $id = -1 ){
+	public function showAllFonts( $limit, $offset, $id = -1, $search = '' ){
 		
 		if( $id != -1){
 			$query = $this->pdo->prepare("SELECT * FROM fuente where id_tipo_fuente = $id ORDER BY id_fuente DESC;");			
+		} elseif ($search != '') {
+
+			$query = $this->pdo->prepare("SELECT * FROM fuente WHERE nombre LIKE '%{$search}%' ORDER BY id_fuente DESC LIMIT $limit OFFSET $offset;");			
 		}else{
 			$query = $this->pdo->prepare("SELECT * FROM fuente ORDER BY id_fuente DESC LIMIT $limit OFFSET $offset;");			
 		}
@@ -19,9 +22,14 @@ class FuentesRepository extends BaseRepository{
 		}
 	}
 
-	public function getCountAllFonts()
+	public function getCountAllFonts($search = '')
 	{
-		$stmt = $this->pdo->query(' SELECT COUNT(*) AS count FROM fuente; ');
+		if ($search != '')
+			$qry = "SELECT COUNT(*) AS count FROM fuente WHERE nombre LIKE '%{$search}%'";
+		else
+			$qry = 'SELECT COUNT(*) AS count FROM fuente;';
+		
+		$stmt = $this->pdo->query($qry);
 		return $stmt->fetch()['count'];
 	}
 

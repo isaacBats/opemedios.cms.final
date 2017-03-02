@@ -37,12 +37,13 @@ class AdminFonts extends Controller{
 				    <link href="/admin/css/dataTables.bootstrap.css" rel="stylesheet">
 			';
 
-			$limit = isset( $_GET['numpp'] ) ? $_GET['numpp'] : 10;
-			$page = isset( $_GET['page'] ) ? ( $_GET['page'] * $limit ) - $limit : 0;
+			$limit = isset($_GET['numpp'] ) ? $_GET['numpp'] : 10;
+			$page = isset($_GET['page'] ) ? ( $_GET['page'] * $limit ) - $limit : 0;
+			$search = isset($_GET['font_name']) ? $_GET['font_name'] : '';
 
-			$fuentes = $this->fuentesRepository->showAllFonts( $limit, $page);
+			$fuentes = $this->fuentesRepository->showAllFonts( $limit, $page, -1, $search);
 
-			$count = $this->fuentesRepository->getCountAllFonts();
+			$count = $this->fuentesRepository->getCountAllFonts($search);
 			$ini = $page + 1;
 			$end = ( $page + $limit >= $count ) ? $count : $page + $limit;
 			

@@ -61,7 +61,7 @@ class AdminReports extends Controller
 		    		$results = array_map(function ($data) {
 		    			
 		    			$notiRepo = new NoticiasRepository();
-		    			$tipoFuente = Util::tipoFuente($data['id_tipo_fuente']);
+		    			$tipoFuente = Util::tipoFuente($data['id_tipo_fuente'] -1);
 		    			$new_by_type = $notiRepo->getNewById($data['id_noticia'], $tipoFuente['pref']);
 		    			$link = '<a href="'.$_SERVER['HTTP_HOST'].'/media/'.$tipoFuente['url'].'/'.$data['id_noticia'].'">Ver noticia</a>';
 

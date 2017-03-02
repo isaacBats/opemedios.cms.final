@@ -47,6 +47,10 @@ $(document).ready(function () {
     if (url.param('numpp') != null) {
         $('#bootpag_text_count_select').val(url.param('numpp'));
     }
+
+    if (url.param('font_name') != null) {
+        $('#bootpag_search_input').val(url.param('font_name'));
+    }
     
     /*Producto*/
     //$("#tiposproductos").change(function () {

@@ -48,7 +48,7 @@ class Util
 						['id' => 5, 'url' => 'internet',   'fuente' => 'Internet',   'icon' => 'fa-chrome', 	 'pref' => 'int', ],
 					  ];
 		// TODO: @Util Verificar si en todos los lugares donde se invoca regresa el valor correcto ya que regresava indices equivocados -- 31012017
-		return $tipoFuente[ $tipoFuenteId -1 ];
+		return $tipoFuente[ $tipoFuenteId ];
 	}
 
 	public static function tipoReporte( $tipoFuenteId ){

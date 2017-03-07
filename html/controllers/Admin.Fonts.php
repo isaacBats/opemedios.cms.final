@@ -60,7 +60,10 @@ class AdminFonts extends Controller{
 		if( isset( $_SESSION['admin'] ) ){
 
 			$explode = explode('-', $id);
+			$fontType = $explode[0];
 			$fontId = $explode[1];
+			$signs = $this->senalRepository->all();
+			$coverage = $this->coberturaRepository->all();
 			$font = $this->fuentesRepository->getFontById( $fontId, Util::tipoFuente($explode[0] - 1 )['pref']);
 			$font['tipo fuente'] = Util::tipoFuente( $explode[0] -1 )['fuente'];
 			$cobertura = $this->coberturaRepository->getCoberturaById( $font['id_cobertura'] );
@@ -83,8 +86,6 @@ class AdminFonts extends Controller{
 					return $s;
 				}, $sections);
 			}
-			// echo '<pre>';print_r($font);
-			
 			$this->header_admin('Detalle - ' . $font['nombre'] . ' - ');
 				require $this->adminviews . 'detailFontView.php';
 			$this->footer_admin();
@@ -98,20 +99,9 @@ class AdminFonts extends Controller{
 
 		if( isset( $_SESSION['admin'] ) ){
 
-			$css = '
-					<link href="/admin/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
-				   ';
-
-			$js = '
-					<!-- Select2 JavaScript -->
-				    <script type="text/javascript" src="/assets/bower_components/moment/min/moment.min.js"></script>
-				    <script src="/admin/js/datetimepicker.js"></script>
-				  ';
-			
-
-			$this->header_admin('Agregar Fuente de '.$fuente.' - ', $css);
+			$this->header_admin('Agregar Fuente de '.$fuente.' - ');
 			require $this->adminviews . 'addFont.php';
-			$this->footer_admin( $js );
+			$this->footer_admin();
 		}else{
             header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
         }

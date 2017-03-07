@@ -20,13 +20,8 @@ $(document).ready(function(){
         };
         $.datepicker.setDefaults($.datepicker.regional['es']);
 
-    try{
-
-        var moment = require('moment');
-        $("#selectFuente").select2({
-          allowClear: true
-        });
-
+    
+    // var moment = require('moment');
         moment.updateLocale('en', {
             longDateFormat : {
                 LTS: "HH:mm:ss"
@@ -45,7 +40,14 @@ $(document).ready(function(){
 
             var hour = new Date();
             $('.required-hour').val(hour.toLocaleTimeString());
-        } 
+        }
+
+
+    try{
+
+        $("#selectFuente").select2({
+          allowClear: true
+        }); 
 
     }catch(e){
         console.log(e);

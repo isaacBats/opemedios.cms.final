@@ -33,4 +33,9 @@ class SenalRepository extends BaseRepository{
 		return $result;
 	}
 
+	public function all () 
+	{
+		return $this->pdo->query("SELECT * FROM senal")->fetchAll(\PDO::FETCH_ASSOC);
+	}
+
 }

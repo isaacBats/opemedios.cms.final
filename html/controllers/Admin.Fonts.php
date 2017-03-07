@@ -46,26 +46,6 @@ class AdminFonts extends Controller{
 			$count = $this->fuentesRepository->getCountAllFonts($search);
 			$ini = $page + 1;
 			$end = ( $page + $limit >= $count ) ? $count : $page + $limit;
-			
-			$html = '';
-			foreach ($fuentes as $fuente) {
-				$html .= '
-						<tr>
-	                        <td style="text-align: center;">
-	                        	<i class="fa ' . Util::tipoFuente($fuente['id_tipo_fuente'] - 1)['icon'] . ' fa-3" style="font-size:40px;"></i>
-	                        </td>
-	                        <td>'.$fuente['nombre'].'</td>
-	                        <td>'.$fuente['empresa'].'</td>
-	                        <td><img src="/'.$fuente['logo'].'" alt="'.$fuente['nombre'].'" width="150" /></td>
-	                        <td width="170">
-	          					<a class="btn btn-default" href="/panel/fonts/detail/'.$fuente['id_tipo_fuente'].'-'.$fuente['id_fuente'].'">Ver</a>
-	          					<a class="btn btn-danger" href="javascript:void(0);">Dar de baja</a>
-	          				</td>
-	                    </tr>
-				';
-			}
-
-
 
 			$this->header_admin('Fuentes - ', $css);
 			require $this->adminviews . 'showFonts.php';

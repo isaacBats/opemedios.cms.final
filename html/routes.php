@@ -146,6 +146,11 @@ $collection->attachRoute(new Route('/panel/font/add/font-internet', array(
     'methods' => 'POST'
 )));
 
+$collection->attachRoute(new Route('/panel/font/edit/:id', array(
+    '_controller' => 'AdminFonts::update',
+    'methods' => 'POST'
+)));
+
 //Agregar Sector
 $collection->attachRoute(new Route('/panel/sector/add', array(
     '_controller' => 'AdminSector::add',

@@ -1,5 +1,8 @@
 <?php 
 
+use utilities\FontType;
+use utilities\Util;
+
 include_once("BaseRepository.php");
 
 class FuentesRepository extends BaseRepository{
@@ -76,5 +79,46 @@ class FuentesRepository extends BaseRepository{
 		return $this->pdo->query('SELECT logo FROM fuente WHERE id_fuente = ' . $fontId)->fetch(PDO::FETCH_ASSOC);
 	}
 
+	public function updateFont(array $data, $fontType = null) 
+	{
+		$Ftype = (!is_null($fontType)) ? Util::tipoFuente($fontType - 1) : null;
+		$rs = new stdClass();
 
+		$sql = "UPDATE fuente f ";
+		
+		if (is_array($Ftype)) {
+			$sql .= " INNER JOIN fuente_{$Ftype['pref']} ff ";
+		}
+
+		$sql .= " SET f.nombre = :nombre, f.empresa = :empresa, f.comentario = :comentario, f.logo = :logo, f.activo = :activo,";
+
+		if (!is_null($fontType)) {
+			if ($fontType == FontType::FONT_TELEVISION['key'])
+				$sql .= " ff.conductor = :conductor, ff.canal = :canal, ff.desde = :desde, ff.hasta = :hasta, ff.id_senal = :senal, ";
+
+			if ($fontType == FontType::FONT_RADIO['key'])
+				$sql .= " ff.conductor = :conductor, ff.estacion = :estacion, ff.horario = :horario, ";
+
+			if ($fontType == FontType::FONT_REVISTA['key'] || $fontType == FontType::FONT_PERIODICO['key'])
+				$sql .= " ff.tiraje = :tiraje, ";
+
+			if ($fontType == FontType::FONT_INTERNET['key'])
+				$sql .= " ff.url = :url, ";
+		}
+
+		$sql .= " f.id_cobertura = :id_cobertura WHERE f.id_fuente = :id_fuente";
+
+		$stmt = $this->pdo->prepare($sql);
+		if($stmt->execute($data)) {
+			$rs->exito = true;
+			$rs->row   = $this->pdo->query("SELECT * FROM fuente WHERE id_fuente = {$data['id_fuente']}")->fetch(\PDO::FETCH_ASSOC);
+		} else {
+			$rs->exito = false;
+			$rs->error = $stmt->errorInfo()[2];
+
+		}
+
+		return $rs;
+
+	}
 }

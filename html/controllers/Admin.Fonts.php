@@ -76,6 +76,7 @@ class AdminFonts extends Controller{
 				$font['desde'] = $desde->format('H:i');
 				$font['hasta'] = $hasta->format('H:i');
 			}
+			$font['is_active'] = $font['activo'];
 			$font['activo'] = ( $font['activo'] ) ? 'Si' : 'No';
 
 			$getSections = $this->sectionRepository->getSectionsByFont( $fontId );	
@@ -106,6 +107,48 @@ class AdminFonts extends Controller{
             header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
         }
 
+	}
+
+	public function update ($id) 
+	{
+		if( isset( $_SESSION['admin'] ) ){
+			
+			$explode = explode('-', $id);
+			$font = $this->fuentesRepository->getFontById($explode[1]);
+			$data = array();
+			$data['id_tipo_fuente'] = $explode[0];
+			$data['id_fuente'] = $explode[1];
+			$data['nombre'] = $_POST['nombre'];
+			$data['empresa'] = $_POST['empresa'];
+			$data['comentario'] = $_POST['comentario'];
+			$data['logo'] = ($_FILES['logo']['error'] != 0) ? $font['logo'] : $_FILES['logo']['name'];
+			$data['activo'] = isset($_POST['activo']) ? 1 : 0;
+			$data['id_cobertura'] = $_POST['cobertura'];
+
+			if ($data['id_tipo_fuente'] == FontType::FONT_TELEVISION['key']){
+				$data['conductor'] = $_POST['conductor'];
+				$data['canal'] = $_POST['canal'];
+				$data['desde'] = $_POST['desde'];
+				$data['hasta'] = $_POST['hasta'];
+				$data['id_senal'] = $_POST['senal'];
+			}
+
+			if ($data['id_tipo_fuente'] == FontType::FONT_RADIO['key']){
+				$data['conductor'] = $_POST['conductor'];
+				$data['estacion'] = $_POST['estacion'];
+				$data['horario'] = $_POST['horario'];
+			}
+
+			if ($data['id_tipo_fuente'] == FontType::FONT_REVISTA['key'] || $data['id_tipo_fuente'] == FontType::FONT_PERIODICO['key'])
+				$data['tiraje'] = $_POST['tiraje'];
+
+			if ($data['id_tipo_fuente'] == FontType::FONT_INTERNET['key'])
+				$data['url'] = $_POST['url'];
+
+			vdd([ 'post' => $_POST, 'data' => $data, 'files' => $_FILES, 'font' => $font]);
+		}else{
+            header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
+        }	
 	}
 
 	/**

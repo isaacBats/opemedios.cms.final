@@ -1,3 +1,5 @@
+<?php use utilities\FontType; ?>
+
 <div class="panel panel-default">
 	<div class="panel-heading">
 		Fuente
@@ -27,13 +29,13 @@
 			</div>
 			<div class="col-md-6">
 				<?php foreach ($font as $key => $value): 
-						if( $key != 'id_fuente' && $key != 'id_cobertura' && $key != 'logo' && $key != 'id_tipo_fuente' && $key != 'id_senal' ): ?>
+						if( $key != 'id_fuente' && $key != 'id_cobertura' && $key != 'logo' && $key != 'id_tipo_fuente' && $key != 'id_senal' && $key != 'is_active' ): ?>
 							<p><strong><?= ucwords( $key ) ?>: </strong><?= $value ?></p>
 				<?php endif; endforeach; ?>
 			</div>
 		</div>
-		<div id="edit-font">
-			<form>
+		<div id="edit-font" class="col-sm-12">
+			<form action="/panel/font/edit/<?= $id ?>" method="post" enctype="multipart/form-data">
 				<div class="form-group col-sm-4">
 					<label>Nombre:</label>
 					<input type="text" name="nombre" class="form-control" value="<?= $font['nombre'] ?>">
@@ -42,7 +44,8 @@
 					<label>Empresa:</label>
 					<input type="text" name="empresa" class="form-control" value="<?= $font['empresa'] ?>">
 				</div>
-				<?php if ($fontType == 1): ?>
+				<!-- Para la fuente de televisión -->
+				<?php if ($fontType == FontType::FONT_TELEVISION['key']): ?>
 					<div class="form-group col-sm-4">
 						<label>Conductor:</label>
 						<input type="text" name="conductor" class="form-control" value="<?= $font['conductor'] ?>">
@@ -74,29 +77,64 @@
 					     <select class="form-control" name="senal">
 					        <option value="">Señal</option>
 					        <?php foreach ($signs as $signal): ?>
-					        	<option value="<?= $signal['id_senal'] ?>"><?= $signal['descripcion'] ?></option>      	
+					        	<option value="<?= $signal['id_senal'] ?>" <?= ($signal['id_senal'] == $font['id_senal']) ? 'selected' : '' ?> ><?= $signal['descripcion'] ?></option>
 					        <?php endforeach ?>
 					    </select>
 					</div>
+				<?php endif ?>
+				<?php if ($fontType == FontType::FONT_RADIO['key']): ?>
+					<div class="form-group col-sm-4">
+						<label>Conductor:</label>
+						<input type="text" name="conductor" class="form-control" value="<?= $font['conductor'] ?>">
+					</div>
+					<div class="form-group col-sm-4">
+						<label>Estacion:</label>
+						<input type="text" name="estacion" class="form-control" value="<?= $font['estacion'] ?>">
+					</div>
+					<div class="form-group col-sm-4">
+						<label>Horario:</label>
+						<input type="text" name="horario" class="form-control" value="<?= $font['horario'] ?>">
+					</div>
+				<?php endif ?>
+				<?php if ($fontType == FontType::FONT_REVISTA['key'] || $fontType == FontType::FONT_PERIODICO['key']): ?>
+					<div class="form-group col-sm-4">
+						<label>Tiraje:</label>
+						<input type="text" name="tiraje" class="form-control" value="<?= $font['tiraje'] ?>">
+					</div>					
+				<?php endif ?>
+				<?php if ($fontType == FontType::FONT_INTERNET['key']): ?>
+					<div class="form-group col-sm-4">
+						<label>Url:</label>
+						<input type="url" name="url" class="form-control" value="<?= $font['url'] ?>">
+					</div>					
 				<?php endif ?>
 				<div class="form-group col-sm-4">
 				    <label>Cobertura</label>
 				     <select class="form-control" name="cobertura">
 				        <option value="">Cobertura</option>
 				        <?php foreach ($coverage as $co): ?>
-				        	<option value="<?= $co['id_cobertura'] ?>"><?= $co['descripcion'] ?></option>
+				        	<option value="<?= $co['id_cobertura'] ?>" <?= ($co['id_cobertura'] == $font['id_cobertura']) ? 'selected' : '' ?> ><?= $co['descripcion'] ?></option>
 				        <?php endforeach ?>
 				    </select>
 				</div>
-				<div class="col-sm-4">
+				<div class="form-group col-sm-12">
+		        	<img src="/<?= $font['logo']?>" width="220" />			            
+		          	<input type="file" name="logo" id="input-imagen" class="inp-thum" style="display: none;">
+		          	<a href="javascript:void(0);" id="btn-changeImage" class="btn btn-default" ><i class="fa fa-pencil-square-o"> Cambiar</i></a>
+		          	<span class="help-block">Logo de la fuente</span>
+		        </div>
+				<div class="checkbox col-sm-12">
                     <label>
-                        <input type="checkbox" name="activo" value="<?= $font['activo'] ?>">Activo
+                        <input type="checkbox" name="activo" <?= ($font['is_active'] != 0) ? 'checked' : '' ?> />Activo
                     </label>                                    
                 </div>
 				<div class="form-group col-sm-12">
                     <label>Comentarios:</label>
                     <textarea class="form-control" name="comentario" rows="3"><?= $font['comentario'] ?></textarea>
                 </div>
+				<div class="col-sm-12">
+                	<input type="submit" value="Actualizar" class="btn btn-primary pull-right" />
+				</div>	
 			</form>
 		</div>		
 	</div>

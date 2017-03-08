@@ -87,7 +87,7 @@ class FuentesRepository extends BaseRepository{
 		$sql = "UPDATE fuente f ";
 		
 		if (is_array($Ftype)) {
-			$sql .= " INNER JOIN fuente_{$Ftype['pref']} ff ";
+			$sql .= " INNER JOIN fuente_{$Ftype['pref']} ff ON f.id_fuente = ff.id_fuente ";
 		}
 
 		$sql .= " SET f.nombre = :nombre, f.empresa = :empresa, f.comentario = :comentario, f.logo = :logo, f.activo = :activo,";

@@ -110,7 +110,6 @@ class NoticiasRepository extends BaseRepository{
 								   sintesis	  				= :sintesis,
 								   autor	  				= :autor,
 								   fecha	  				= :fecha,
-								   comentario 				= :comentario,
 								   alcanse 				    = :alcance,
 								   id_fuente      			= :fuente_id,
 								   id_seccion     			= :seccion_id,
@@ -125,7 +124,6 @@ class NoticiasRepository extends BaseRepository{
 	 	$query->bindParam(':sintesis', $new['sintesis']);
 	 	$query->bindParam(':autor', $new['autor']);
 	 	$query->bindParam(':fecha', $new['fecha']);
-	 	$query->bindParam(':comentario', $new['comentarios']);
 	 	$query->bindParam(':alcance', $new['alcance']);
 	 	$query->bindParam(':fuente_id', $new['fuente_id']);
 	 	$query->bindParam(':seccion_id', $new['seccion']);

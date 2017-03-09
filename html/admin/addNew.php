@@ -28,7 +28,7 @@
                             </div>
                             <div class="form-group col-sm-12 col-md-12 col-lg-12">
                                 <label>Síntesis:</label>
-                                <textarea class="form-control" name="sintesis" rows="10"></textarea>
+                                <textarea id="summernote" class="form-control" name="sintesis" rows="10"></textarea>
                             </div>
                             <div class="col-sm-6 form-group">
                                 <label>Fuente:</label>
@@ -94,11 +94,11 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-sm-12 col-md-12 col-lg-12 form-group">
+                            <!-- <div class="col-sm-12 col-md-12 col-lg-12 form-group">
                                 <label>Comentarios:</label>
                                 <textarea class="form-control" name="comentarios" rows="6"></textarea>
-                            </div>
-                            <div class="form-group col-sm-12 col-md-4 col-lg-4">
+                            </div> -->
+                            <div class="form-group col-sm-12">
                                 <div class="checkbox">
                                     <label>
                                         <input type="checkbox" id="checkBlock"/>Incluir a bloque de noticias

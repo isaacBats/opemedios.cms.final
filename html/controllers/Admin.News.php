@@ -210,6 +210,9 @@ class AdminNews extends Controller{
 			$tfr  = new TipoFuenteRepository();
 			$tar  = new TipoAutorRepository();
 
+			$css = '<link rel="stylesheet" href="/admin/lib/summernote/summernote.css">';
+			$js = '<script src="/admin/lib/summernote/summernote.js"></script>';
+
 			$optionFont = '';
 			$genero		= '';
 			$seccion	= '';
@@ -348,9 +351,9 @@ class AdminNews extends Controller{
 					break;
 			}
 
-			$this->header_admin('Editar noticias: ' . $newSelected['encabezado'] . ' - ' );
+			$this->header_admin('Editar noticias: ' . $newSelected['encabezado'] . ' - ', $css );
 			require $this->adminviews . 'editNew.php';
-			$this->footer_admin();	
+			$this->footer_admin($js);	
 		}else{
             header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
         }
@@ -497,6 +500,10 @@ class AdminNews extends Controller{
 	protected function addNew( $campos, $fuente ){
 
 		if( isset( $_SESSION['admin'] ) ){
+			
+			$css = '<link rel="stylesheet" href="/admin/lib/summernote/summernote.css">';
+			$js = '<script src="/admin/lib/summernote/summernote.js"></script>';
+
 			$fuentesRepository    = new FuentesRepository();
 			$generoRepository     = new GeneroRepository();
 			$tipoFuenteRepository = new TipoFuenteRepository();
@@ -535,9 +542,9 @@ class AdminNews extends Controller{
 				$genero .= '<option value="'.$g['id_genero'].'">'.$g['descripcion'].'</option>';
 			}
 
-			$this->header_admin( 'Agregar Noticia de '.$fuente.' - ' );
+			$this->header_admin( 'Agregar Noticia de '.$fuente.' - ', $css );
 			require $this->adminviews . 'addNew.php';
-			$this->footer_admin();
+			$this->footer_admin($js);
 		}else{
             header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
         }

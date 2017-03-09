@@ -24,7 +24,7 @@
 		<p>Género: <strong><?= $newSelected['genero'] ?></strong></p>
 		<p>Tendencia: <strong><?= $newSelected['tendencia'] ?></strong></p>
 		<p>Alcance: <strong><?= $newSelected['alcance'] ?></strong></p>
-		<p>Comentarios:</p><p><?= $newSelected['comentario'] ?></p>
+		<!-- <p>Comentarios:</p><p><?php //echo $newSelected['comentario'] ?></p> -->
 		<p>Usuario que subio la nota : </p><strong><?= $newSelected['usuario'] . ' ' . $newSelected['apellidos'] ?></strong>
 		<div class="col-sm-6">
 			<?php if( isset( $imageUbicacion ) ): ?>

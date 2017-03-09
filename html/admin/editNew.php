@@ -23,7 +23,7 @@
                             </div>
                             <div class="form-group col-sm-12">
                                 <label>Síntesis:</label>
-                                <textarea class="form-control" rows="10" name="sintesis"><?= $newSelected['sintesis'] ?></textarea>
+                                <textarea id="summernote" class="form-control" rows="10" name="sintesis"><?= $newSelected['sintesis'] ?></textarea>
                             </div>
                             <div class="form-group col-sm-6">
                                 <label>Fuente:</label>
@@ -79,11 +79,11 @@
                                     <?= $tendencia ?>
                                 </select>
                             </div>
-                            <div class="col-lg-12 form-group">
+                            <!-- <div class="col-lg-12 form-group">
                                 <label>Comentarios:</label>
-                                <textarea class="form-control" name="comentarios" rows="6" ><?= $newSelected['comentario'] ?></textarea>
+                                <textarea class="form-control" name="comentarios" rows="6" ><?php //echo $newSelected['comentario'] ?></textarea>
                             </div>
-                            <!-- <div class="form-group col-lg-6">
+                            <div class="form-group col-lg-6">
                                 <label>Archivo de <?php //echo $newSelected['tipofuente'] ?></label>
                                 <input type="file" name="primario" />
                             </div> -->

@@ -50,7 +50,7 @@ class AdjuntoRepository extends BaseRepository{
 		
 		$query = $this->pdo->prepare( "SELECT * FROM adjunto WHERE id_noticia = $idNoticia" );
 
-		$exito = ( $query->execute() ) ? $query->fetchAll(\PDO::FETCH_ASSOC) : 'No se pudo ejecutar la consulta para buscar el archivo adjunto';
+		$exito = ( $query->execute() ) ? $query->fetch(\PDO::FETCH_ASSOC) : 'No se pudo ejecutar la consulta para buscar el archivo adjunto';
 
 		return $exito;
 	}

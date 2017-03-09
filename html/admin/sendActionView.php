@@ -28,7 +28,12 @@
 
 			<input type="hidden" name="empresaid" value="<?= $empresaid ?>">			
 			<div class="table-responsive">
-		        <table class="table table-bordered table-inverse nomargin">
+				<div class="checkbox">
+		            <label>
+		                <input type="checkbox" class="checkbox-todos">Seleccionar todos
+		            </label>
+		        </div>
+		        <table class="table table-bordered table-inverse nomargin checkbox-active">
 			        <thead>
 				    	<tr>
 				        	<th class="text-center">Enviar</th>

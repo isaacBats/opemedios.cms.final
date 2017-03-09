@@ -698,7 +698,7 @@ class AdminNews extends Controller{
 						$html .= '	<tr>
 						            	<td class="text-center">
 							                <label class="ckbox">
-							                  <input type="checkbox" name="' . $acount['nombre'] . ' ' . $acount['apellidos'] . '" value="' . $acount['email'] . '" checked ><span></span>
+							                  <input type="checkbox" name="' . $acount['nombre'] . ' ' . $acount['apellidos'] . '" value="' . $acount['email'] . '" ><span></span>
 							                </label>
 							            </td>
 						            	<td>' . $acount['nombre'] . ' ' . $acount['apellidos'] . '</td>
@@ -735,6 +735,7 @@ class AdminNews extends Controller{
 		$adjunto = $adjuntoRepo->getAdjunto( $noticiaid );
 
 		$tema  = $temRep->getThemaByEmpresaID( $empresaid );
+		$temaid = $tema[0]['id_tema'];
 
 		$tendenciaid = $new['tendencia_id'];
 
@@ -744,34 +745,35 @@ class AdminNews extends Controller{
 			case '1':
 				$font = 'tel';
 				$relatedNew = $this->noticiasRepository->getNewById( $noticiaid, $font );
-				$file = '<embed src="/assets/data/noticias/television/' . $adjunto['nombre_archivo'] . '" width="600" height="300" align="center" border="3"></embed>';
+				$file = '<embed src="/' . $adjunto['carpeta'].$adjunto['nombre_archivo'] . '" width="600" height="300" align="center" border="3"></embed>';
 				break;
 			case '2':
 				$font = 'rad';
 				$relatedNew = $this->noticiasRepository->getNewById( $noticiaid, $font );
-				$file = '<embed src="/assets/data/noticias/radio/' . $adjunto['nombre_archivo'] . '" width="600" height="300" align="center" border="3"></embed>';
+				$file = '<embed src="/' . $adjunto['carpeta'].$adjunto['nombre_archivo'] . '" width="600" height="300" align="center" border="3"></embed>';
 				break;
 			case '3':
 				$font = 'per';
 				$relatedNew = $this->noticiasRepository->getNewById( $noticiaid, $font );
-				$file = '<img src="/assets/data/noticias/periodico/' . $adjunto['nombre_archivo'] . '" width="600" alt="' . $new['encabezado'] . '" border="0" align="center" style="width: 100%; max-width: 600px;">';
+				$file = '<img src="/' . $adjunto['carpeta'].$adjunto['nombre_archivo'] . '" width="600" alt="' . $new['encabezado'] . '" border="0" align="center" style="width: 100%; max-width: 600px;">';
 				break;
 			case '4':
 				$font = 'rev';
 				$relatedNew = $this->noticiasRepository->getNewById( $noticiaid, $font );
-				$file = '<img src="/assets/data/noticias/revista/' . $adjunto['nombre_archivo'] . '" width="600" alt="' . $new['encabezado'] . '" border="0" align="center" style="width: 100%; max-width: 600px;">';
+				$file = '<img src="/' . $adjunto['carpeta'].$adjunto['nombre_archivo'] . '" width="600" alt="' . $new['encabezado'] . '" border="0" align="center" style="width: 100%; max-width: 600px;">';
 				break;
 			case '5':
 				$font = 'int';
 				$relatedNew = $this->noticiasRepository->getNewById( $noticiaid, $font );
 				//$file = '<embed src="/assets/data/noticias/internet/' . $adjunto['nombre_archivo'] . '" width="600" height="300" align="center" border="3"></embed>';
-				$file = '<embed src="http://sistema.opemedios.com.mx/data/noticias/internet/' . $adjunto['nombre_archivo'] . '" width="600" height="300" align="center" border="3"></embed>';
+				$file = '<embed src="/' . $adjunto['carpeta'].$adjunto['nombre_archivo'] . '" width="600" height="300" align="center" border="3"></embed>';
 				break;
 		}
 
 		ob_start();
 		require $this->adminviews . 'viewsEmails/oneNewEmail2.php';
 		$body = ob_get_clean();
+		// echo $body; exit;
 
 		$mail = new Mail();
 		$mail->setSubject('Noticia Operadora de medios - ' . strtoupper($new['tipofuente']));

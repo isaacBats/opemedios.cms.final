@@ -87,6 +87,7 @@ class AdminFonts extends Controller{
 					return $s;
 				}, $sections);
 			}
+
 			$this->header_admin('Detalle - ' . $font['nombre'] . ' - ');
 				require $this->adminviews . 'detailFontView.php';
 			$this->footer_admin();
@@ -116,7 +117,7 @@ class AdminFonts extends Controller{
 			$explode = explode('-', $id);
 			$font = $this->fuentesRepository->getFontById($explode[1]);
 			$data = array();
-			$data['id_tipo_fuente'] = $explode[0];
+			$fontType = $explode[0];
 			$data['id_fuente'] = $explode[1];
 			$data['nombre'] = $_POST['nombre'];
 			$data['empresa'] = $_POST['empresa'];
@@ -125,7 +126,7 @@ class AdminFonts extends Controller{
 			$data['activo'] = isset($_POST['activo']) ? 1 : 0;
 			$data['id_cobertura'] = $_POST['cobertura'];
 
-			if ($data['id_tipo_fuente'] == FontType::FONT_TELEVISION['key']){
+			if ($fontType == FontType::FONT_TELEVISION['key']){
 				$data['conductor'] = $_POST['conductor'];
 				$data['canal'] = $_POST['canal'];
 				$data['desde'] = $_POST['desde'];
@@ -133,19 +134,33 @@ class AdminFonts extends Controller{
 				$data['id_senal'] = $_POST['senal'];
 			}
 
-			if ($data['id_tipo_fuente'] == FontType::FONT_RADIO['key']){
+			if ($fontType == FontType::FONT_RADIO['key']){
 				$data['conductor'] = $_POST['conductor'];
 				$data['estacion'] = $_POST['estacion'];
 				$data['horario'] = $_POST['horario'];
 			}
 
-			if ($data['id_tipo_fuente'] == FontType::FONT_REVISTA['key'] || $data['id_tipo_fuente'] == FontType::FONT_PERIODICO['key'])
+			if ($fontType == FontType::FONT_REVISTA['key'] || $fontType == FontType::FONT_PERIODICO['key'])
 				$data['tiraje'] = $_POST['tiraje'];
 
-			if ($data['id_tipo_fuente'] == FontType::FONT_INTERNET['key'])
+			if ($fontType == FontType::FONT_INTERNET['key'])
 				$data['url'] = $_POST['url'];
 
-			vdd([ 'post' => $_POST, 'data' => $data, 'files' => $_FILES, 'font' => $font]);
+			$fontUpdated = $this->fuentesRepository->updateFont($data, $fontType);
+			$result = new stdClass();
+			if ($fontUpdated->exito){
+				$result->tipo = 'alert-info';
+				$result->mensaje = 'La fuente <strong>' . $data['nombre'] . '</strong>. Se actualizo correctamente!.';
+			}
+			else{
+				$result->tipo = 'alert-warning';
+				$result->mensaje = 'La fuente <strong>' . $data['nombre'] . '</strong>. No se pudo actualizar.';
+				$result->error[2] = $fontUpdated->error;
+			}
+
+			$_SESSION['alerts']['fuentes'] = $result;
+			header( 'Location: /panel/fonts/show-list');
+
 		}else{
             header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
         }	

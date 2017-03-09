@@ -94,7 +94,7 @@ class FuentesRepository extends BaseRepository{
 
 		if (!is_null($fontType)) {
 			if ($fontType == FontType::FONT_TELEVISION['key'])
-				$sql .= " ff.conductor = :conductor, ff.canal = :canal, ff.desde = :desde, ff.hasta = :hasta, ff.id_senal = :senal, ";
+				$sql .= " ff.conductor = :conductor, ff.canal = :canal, ff.desde = :desde, ff.hasta = :hasta, ff.id_senal = :id_senal, ";
 
 			if ($fontType == FontType::FONT_RADIO['key'])
 				$sql .= " ff.conductor = :conductor, ff.estacion = :estacion, ff.horario = :horario, ";
@@ -108,6 +108,7 @@ class FuentesRepository extends BaseRepository{
 
 		$sql .= " f.id_cobertura = :id_cobertura WHERE f.id_fuente = :id_fuente";
 
+		// vdd(compact('data', 'fontType', 'Ftype', 'sql'));
 		$stmt = $this->pdo->prepare($sql);
 		if($stmt->execute($data)) {
 			$rs->exito = true;

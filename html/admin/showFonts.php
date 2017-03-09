@@ -75,7 +75,7 @@
                                     </td>
                                     <td width="170">
                                         <a class="btn btn-default" href="/panel/fonts/detail/<?= $fuente['id_tipo_fuente'].'-'.$fuente['id_fuente'] ?>">Ver</a>
-                                        <a class="btn btn-danger" href="javascript:void(0);">Dar de baja</a>
+                                        <!-- <a class="btn btn-danger" href="javascript:void(0);">Dar de baja</a> -->
                                     </td>
                                 </tr>
                             <?php endforeach; ?>

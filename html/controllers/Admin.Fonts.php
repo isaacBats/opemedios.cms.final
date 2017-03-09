@@ -289,6 +289,5 @@ class AdminFonts extends Controller{
 		
 	}
 
-	//TODO: @Adminfonts Falta Editar una fuente
 	//TODO: @AdminFonts Falta borrar una fuente
 }

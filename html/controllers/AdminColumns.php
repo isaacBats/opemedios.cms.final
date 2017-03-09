@@ -316,8 +316,8 @@ class AdminColumns extends Controller
 				$data['imagen'] = $newsImages['originName'];
 				$data['thumb'] = $newsImages['thumbName'];
 				$im = new Image();
-				$column['imagen'] = __APP__ . '/' .$column['imagen'];
-				$column['thumb'] = __APP__ . '/' .$column['thumb'];
+				$column['imagen'] = __APP__ . $column['imagen'];
+				$column['thumb'] = __APP__ .  $column['thumb'];
 				$imagesDelete = $im->deleteImage([$column['imagen'], $column['thumb']]);
 			} else {
 				$data['imagen'] = $column['imagen'];

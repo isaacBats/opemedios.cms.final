@@ -1,5 +1,7 @@
 <?php 
 use utilities\FontType;
+use utilities\Image;
+use utilities\MediaDirectory;
 use utilities\Util;
 
 class AdminFonts extends Controller{
@@ -8,12 +10,14 @@ class AdminFonts extends Controller{
 	private $sectionRepository;
 	private $coberturaRepository;
 	private $senalRepository;
+	private $path_media;
 
 	public function __construct(){
 		$this->fuentesRepository = new FuentesRepository();
 		$this->sectionRepository 	= new SeccionRepository();
 		$this->coberturaRepository 	= new CoberturaRepository();
 		$this->senalRepository 	= new SenalRepository();
+		$this->path_media = MediaDirectory::LOGO_FUENTES;
 	}
 
 	public function showFonts(){
@@ -112,17 +116,29 @@ class AdminFonts extends Controller{
 
 	public function update ($id) 
 	{
-		if( isset( $_SESSION['admin'] ) ){
-			
+		if( isset( $_SESSION['admin'] ) ){			
+
 			$explode = explode('-', $id);
 			$font = $this->fuentesRepository->getFontById($explode[1]);
+			$newCover = null;
+			
+			if ($_FILES['logo']['error'] == 0) {
+				$adminColumn = new AdminColumns();
+				$newCover = $adminColumn->saveImages($_FILES['logo'], $this->path_media);
+				$im = new Image();
+				$imageExplode = explode('.', $font['logo']);
+				$old_image = __APP__ . $font['logo'];
+				$old_thumb = __APP__ . $imageExplode[0].'_thumb.'.$imageExplode[1];
+				$imagesDelete = $im->deleteImage([$old_image, $old_thumb]);
+			}
+
 			$data = array();
 			$fontType = $explode[0];
 			$data['id_fuente'] = $explode[1];
 			$data['nombre'] = $_POST['nombre'];
 			$data['empresa'] = $_POST['empresa'];
 			$data['comentario'] = $_POST['comentario'];
-			$data['logo'] = ($_FILES['logo']['error'] != 0) ? $font['logo'] : $_FILES['logo']['name'];
+			$data['logo'] = ($_FILES['logo']['error'] != 0) ? $font['logo'] : $newCover['originName'];
 			$data['activo'] = isset($_POST['activo']) ? 1 : 0;
 			$data['id_cobertura'] = $_POST['cobertura'];
 

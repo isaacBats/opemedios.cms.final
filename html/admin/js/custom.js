@@ -781,6 +781,24 @@ $(document).ready(function(){
             });            
         });
     });
+
+    // Show form edit font
+    $('#btn-font-edit').on('click', function (event){
+        event.preventDefault();
+        var $infoFont = $('#view-font');
+        var $formEditFont = $('#edit-font');
+        $infoFont.hide('slow');
+        $formEditFont.show('slow');
+
+    });
+    $('#btn-font-cancel-edit').on('click', function (event){
+        event.preventDefault();
+        var $infoFont = $('#view-font');
+        var $formEditFont = $('#edit-font');
+        $infoFont.show('slow');
+        $formEditFont.hide('slow');
+
+    })
     
 
     /********************** drag an drop  **************************/

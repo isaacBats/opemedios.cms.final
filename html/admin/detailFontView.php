@@ -34,7 +34,7 @@
 				<?php endif; endforeach; ?>
 			</div>
 		</div>
-		<div id="edit-font" class="col-sm-12">
+		<div id="edit-font" class="col-sm-12" style="display: none">
 			<form action="/panel/font/edit/<?= $id ?>" method="post" enctype="multipart/form-data">
 				<div class="form-group col-sm-4">
 					<label>Nombre:</label>
@@ -134,6 +134,7 @@
                 </div>
 				<div class="col-sm-12">
                 	<input type="submit" value="Actualizar" class="btn btn-primary pull-right" />
+                	<input id="btn-font-cancel-edit" type="button" value="Cancelar" class="btn btn-danger pull-right" style="margin-right: 10px;" />
 				</div>	
 			</form>
 		</div>		

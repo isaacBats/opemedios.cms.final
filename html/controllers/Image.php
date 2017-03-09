@@ -1,7 +1,5 @@
 <?php 
 
-use utilities\Util;
-
 class Image{
 
 	private $new;

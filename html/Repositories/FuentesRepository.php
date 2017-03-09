@@ -108,7 +108,6 @@ class FuentesRepository extends BaseRepository{
 
 		$sql .= " f.id_cobertura = :id_cobertura WHERE f.id_fuente = :id_fuente";
 
-		// vdd(compact('data', 'fontType', 'Ftype', 'sql'));
 		$stmt = $this->pdo->prepare($sql);
 		if($stmt->execute($data)) {
 			$rs->exito = true;

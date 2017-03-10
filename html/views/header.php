@@ -1,6 +1,30 @@
 <!DOCTYPE html>
-<html>
-    <?php require "head.php" ?>
+<html lang="es">
+    <head>
+		<meta charset="utf-8">
+		<meta name="viewport"    content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="Operadora de Medios Informativos 2016">
+		<meta name="author"      content="Isaac Daniel Batista">
+	
+		<title><?php echo $titleTab ?></title>
+
+		<link rel="shortcut icon" href="/assets/images/favicon.ico">
+		
+		<link rel="stylesheet" media="screen" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
+		<link rel="stylesheet" href="assets/assets_client/css/bootstrap.min.css">
+		<link rel="stylesheet" href="assets/assets_client/css/font-awesome.min.css">
+
+		<!-- Custom styles for our template -->
+		<link rel="stylesheet" href="assets/assets_client/css/bootstrap-theme.css" media="screen" >
+		<link rel="stylesheet" href="assets/assets_client/css/main.css">
+		<?= $css ?>
+
+		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!--[if lt IE 9]>
+		<script src="assets/js/html5shiv.js"></script>
+		<script src="assets/js/respond.min.js"></script>
+		<![endif]-->
+	</head>
 <body class="home">
 	<!-- Fixed navbar -->
 	<div class="navbar navbar-inverse navbar-fixed-top headroom" >
@@ -18,16 +42,7 @@
 						<li><a href="/quienes-somos">Quiénes somos</a></li>
 						<li><a href="/clientes">Clientes</a></li>
 						<li><a href="/contacto">Contacto</a></li>
-						<!-- <form class="navbar-form navbar-left" method="POST" action="/login">
-							<div class="form-group">
-						    	<input type="text" class="form-control" required="true" name="user" placeholder="Usuario">
-						  	</div>
-						  	<div class="form-group">
-						    	<input type="password" class="form-control" required="true" name="password" placeholder="Contraseña">
-						  	</div>
-						  <button class="btn btn-default">Ingresar</button>
-						</form> -->
-						<li><a class="btn" href="/sign-in">Mi cuenta</a></li>
+						<li><a class="btn" href="/sign-in">Iniciar Sesión</a></li>
 					<?php else: ?>
 						<li><a href="/noticias">Noticias</a></li>
 						<li class="dropdown">

@@ -109,7 +109,7 @@ class Controller
 
 										
 
-	public function header( $title = "" ){
+	public function header($title = "", $css = ''){
 		
 		$titleTab = $this->titleTab($title);
 		require $this->views."header.php";
@@ -122,7 +122,7 @@ class Controller
      */
     private function titleTab($title = ""){
 
-    	$title .= " Operadora de Medios Informativos 2016";
+    	$title .= " Opemedios 2016";
 
     	return $title;
     }
@@ -151,6 +151,37 @@ class Controller
 //            'page-height' => 10000,
             'encoding' => 'utf-8'
         ));
+    }
+
+    /**
+     * Render View method
+     * @param  string $template Name of template
+     * @param  string $title    Title of the page
+     * @param  array  $data     Data of the page
+     * @param  string $css      Include css's plus
+     * @param  string $js       Include JavaScript plus
+     */
+    public function renderView($template, $title = '', $data = [], $css = '', $js = '') 
+    {
+        $this->header($title, $css);
+		require $this->views . $template . '.php';
+		$this->footer($js);
+    }
+
+    /**
+     * Render View method for Client
+     * @param  string $template Name of template
+     * @param  string $title    Title of the page
+     * @param  array  $data     Data of the page
+     * @param  string $css      Include css's plus
+     * @param  string $js       Include JavaScript plus
+     */
+    public function renderViewClient($template, $title = '', $data = [], $css = '', $js = '') 
+    {
+        $titleTab = $this->titleTab($title);
+		require $this->views."client/header.client.php";
+		require $this->views . 'client/'.$template . '.client.php';
+		require  $this->views."client/footer.client.php";
     }
 
 

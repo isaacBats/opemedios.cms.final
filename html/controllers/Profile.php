@@ -18,11 +18,13 @@ class Profile extends Controller{
 		if( isset( $_SESSION['user'] ) ){			
 			
 			// $temasIds = implode(',', array_column( $this->temas, 'id_tema'));
-			$totales = $this->perfilRepository->getCountAllNewsOfClient( $_SESSION['user']['id_empresa'], $this->temas );
+			// $totales = $this->perfilRepository->getCountAllNewsOfClient( $_SESSION['user']['id_empresa'], $this->temas );
 			
-			$this->header('Noticias - ' . $_SESSION['user']['empresa'] . ' - ');
-			require $this->views.'noticias.php';
-			$this->footer();
+			// $this->header('Noticias - ' . $_SESSION['user']['empresa'] . ' - ');
+			// require $this->views.'noticias.php';
+			// $this->footer();
+			// 
+			$this->renderViewClient('home', 'Empresa - ');
 		}else{
             header( "Location: http://{$_SERVER["HTTP_HOST"]}/sign-in");
         }

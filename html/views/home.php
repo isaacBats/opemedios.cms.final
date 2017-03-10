@@ -2,8 +2,7 @@
 	<header id="head">
 		<div class="container">
 			<div class="row">
-				<h1 class="lead">Operadora de Medios Informativos</h1>
-				<p class="tagline">Opemedios</p>
+				<h1 class="lead">Opemedios</h1>
 			</div>
 		</div>
 	</header>
@@ -73,7 +72,6 @@
 		</div> <!-- /row -->
 </div>	<!-- /container -->
 	
-	<!-- Social links. @TODO: replace by link/instructions in template -->
 	<section id="social">
 		<div class="container">
 			<div class="wrapper clearfix">

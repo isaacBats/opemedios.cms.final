@@ -39,6 +39,7 @@ $collection->attachRoute(new Route('/sign-in', array(
     '_controller' => 'User::loginAction',
     'methods' => 'POST'
 )));
+
 // Usuario noticias
 $collection->attachRoute(new Route('/noticias', array(
     '_controller' => 'Profile::showNews',

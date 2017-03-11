@@ -27,9 +27,13 @@ class Profile extends Controller{
 			
 			$news = array_map(function ($asigna) {				
 				
-				return $this->noticiasRepo->getNewById($asigna['id_noticia']);
+				$new = $this->noticiasRepo->getNewById($asigna['id_noticia']);
+				$new['adjunto'] = $this->getMediaHTML($new['tipofuente_id'], $new['id']);
+				return $new;
 
 			}, $this->asignaRepo->findByThemeIdAndCompanyId($this->companyId, $this->temasId));
+
+
 
 			$this->renderViewClient('home', 'Noticias - ' . $_SESSION['user']['empresa'] . ' - ', compact('news'));
 		}else{

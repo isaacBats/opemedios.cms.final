@@ -2,13 +2,21 @@
 
 class Profile extends Controller{
 
-	private $temas;
+	private $temasId;
 	private $perfilRepository;
+	private $asignaRepo;
+	private $companyId;
+	private $noticiaRepo;
 
 	function __construct()
 	{
 		$this->perfilRepository = new PefilRepository ();
-		$this->temas = $_SESSION['user']['temas'];		
+		$this->asignaRepo = new AsignaRepository ();
+		$this->noticiasRepo = new NoticiasRepository ();
+		$this->temasId = array_map(function($theme) {
+			return $theme['id_tema'];
+		}, $_SESSION['user']['temas']);
+		$this->companyId = $_SESSION['user']['id_empresa'];
 	}
 
 
@@ -17,23 +25,17 @@ class Profile extends Controller{
 	{
 		if( isset( $_SESSION['user'] ) ){			
 			
-			// $temasIds = implode(',', array_column( $this->temas, 'id_tema'));
-			// $totales = $this->perfilRepository->getCountAllNewsOfClient( $_SESSION['user']['id_empresa'], $this->temas );
-			
-			// $this->header('Noticias - ' . $_SESSION['user']['empresa'] . ' - ');
-			// require $this->views.'noticias.php';
-			// $this->footer();
-			// 
-			$this->renderViewClient('home', 'Empresa - ');
+			$news = array_map(function ($asigna) {				
+				
+				return $this->noticiasRepo->getNewById($asigna['id_noticia']);
+
+			}, $this->asignaRepo->findByThemeIdAndCompanyId($this->companyId, $this->temasId));
+
+			$this->renderViewClient('home', 'Noticias - ' . $_SESSION['user']['empresa'] . ' - ', compact('news'));
 		}else{
             header( "Location: http://{$_SERVER["HTTP_HOST"]}/sign-in");
         }
 
-	}
-
-	public function getTemas(){
-
-		return $this->temas; 
 	}
 
 }

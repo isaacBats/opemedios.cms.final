@@ -178,6 +178,7 @@ class Controller
      */
     public function renderViewClient($template, $title = '', $data = [], $css = '', $js = '') 
     {
+        extract($data);
         $titleTab = $this->titleTab($title);
 		require $this->views."client/header.client.php";
 		require $this->views . 'client/'.$template . '.client.php';

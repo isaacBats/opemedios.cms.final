@@ -90,7 +90,7 @@ class NoticiasRepository extends BaseRepository{
 		}
 		$query->bindParam( ':id', $id, \PDO::PARAM_INT);
 
-		$rs = ( $query->execute() ) ? $query->fetch() : 'No se ejecuto la consulta para buscar la noticia';
+		$rs = ( $query->execute() ) ? $query->fetch(\PDO::FETCH_ASSOC) : 'No se ejecuto la consulta para buscar la noticia';
 
 		return $rs;	
 	}

@@ -1,8 +1,8 @@
 <?php 
 
-use Knp\Snappy\Pdf;
-
 use Knp\Snappy\Image;
+use Knp\Snappy\Pdf;
+use utilities\Util;
 
 require_once __DIR__ . '/../Utilities/Opemedios.php';
 require_once __DIR__ . '/../Utilities/Image.php';
@@ -211,36 +211,42 @@ class Controller
 
 		switch ($fontTypeId) {
 			case '1':
-				$media = '
+				$media['file'] = '
 					<video class="adjunto-media" src="/'. $adjunto['carpeta'] . $adjunto['nombre_archivo'] .'" controls  >
 						<p>Tu navegador no implementa el elemento video</p>
 					</video>
 			   ';
+			   $media['icon'] = '<i class="fa ' . Util::tipoFuente($fontTypeId - 1)['icon'] . '" ></i>';
+
 				break;
 			case '2':
-				$media = '
+				$media['file'] = '
 					<audio class="adjunto-media" src="/'. $adjunto['carpeta'] . $adjunto['nombre_archivo'] .'" controls  >
 						<p>Tu navegador no implementa el elemento audio</p>
 					</audio>
 			   ';
+			   $media['icon'] = '<i class="fa ' . Util::tipoFuente($fontTypeId - 1)['icon'] . '" ></i>';
 
 				break;
 			case '3':
-				$media = '
-					<img src="/'. $adjunto['carpeta'] . $adjunto['nombre_archivo'] .'" class="img-responsive" alt="'.$adjunto['nombre'].'" style="max-height: 300px;" >
+				$media['file'] = '
+					<img src="/'. $adjunto['carpeta'] . $adjunto['nombre_archivo'] .'" class="img-responsive" alt="'.$adjunto['nombre'].'" >
 			   ';
+			   $media['icon'] = '<i class="fa ' . Util::tipoFuente($fontTypeId - 1)['icon'] . '" ></i>';
 
 				break;
 			case '4':
-				$media = '
-					<img src="/'. $adjunto['carpeta'] . $adjunto['nombre_archivo'] .'" class="img-responsive" alt="'.$adjunto['nombre'].'" style="max-height: 300px;" >
+				$media['file'] = '
+					<img src="/'. $adjunto['carpeta'] . $adjunto['nombre_archivo'] .'" class="img-responsive" alt="'.$adjunto['nombre'].'" >
 			   ';
+			   $media['icon'] = '<i class="fa ' . Util::tipoFuente($fontTypeId - 1)['icon'] . '" ></i>';
 
 				break;
 			case '5':
-				$media = '
-					<img src="/'. $adjunto['carpeta'] . $adjunto['nombre_archivo'] .'" class="img-responsive" alt="'.$adjunto['nombre'].'" style="max-height: 300px;">
+				$media['file'] = '
+					<img src="/'. $adjunto['carpeta'] . $adjunto['nombre_archivo'] .'" class="img-responsive" alt="'.$adjunto['nombre'].'" >
 			   ';
+			   $media['icon'] = '<i class="fa ' . Util::tipoFuente($fontTypeId - 1)['icon'] . '" ></i>';
 				
 				break;
 			default:

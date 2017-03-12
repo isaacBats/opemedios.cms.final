@@ -46,6 +46,11 @@ $collection->attachRoute(new Route('/noticias', array(
     'methods' => 'GET'
 )));
 
+$collection->attachRoute(new Route('/noticia/:fontType/:id', array(
+    '_controller' => 'Profile::detailNewView',
+    'methods' => 'GET'
+)));
+
 $collection->attachRoute(new Route('/media/:fuente/:noticia', array(
     '_controller' => 'Plain::viewMedia',
     'methods' => 'GET'

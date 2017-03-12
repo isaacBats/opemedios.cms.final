@@ -82,6 +82,47 @@ img.pull-left { margin-right: 10px; }
 	.widget-simplenav a{ margin:0 5px; }		
 
 
+.adjunto-icon {
+    font-size: 11em;
+	max-height: 300px;
+    text-align: center;
+}
+
+.adjunto-link {
+    padding: 4% 38% 5% 38%;
+}
+
+.card-company {
+	padding: 35px;
+}
+
+.card-company-name {
+	margin-top: 10px;
+}
+
+.card-filters {
+	color: #428bca;
+}
+
+.color-periodico {
+	background-color: bisque;
+}
+.color-radio {
+	background-color: antiquewhite;
+}
+
+.color-revista {
+	background-color: ghostwhite;
+}
+
+.color-internet {
+	background-color: lavender;
+}
+
+.color-television {
+	background-color: #f1e7ca;
+}
+
 .clientes{
 }
 .clientes #img_client img{
@@ -90,6 +131,10 @@ img.pull-left { margin-right: 10px; }
 }
 .clientes #img_client img:hover{
 	transform: scale(1.1);
+}
+
+.label-red {
+	color: #e21b31;
 }
 
 .user{
@@ -229,6 +274,7 @@ img.pull-left { margin-right: 10px; }
 				display: block;
 				margin:0;
 			}
+
 
 @media screen and (min-width: 680px){
 

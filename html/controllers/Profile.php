@@ -10,12 +10,16 @@ class Profile extends Controller{
 	private $asignaRepo;
 	private $noticiaRepo;
 	private $company;
+	private $portadasRepo;
+	private $fuentesRepo;
 
 	function __construct()
 	{
 		$this->perfilRepository = new PefilRepository ();
 		$this->asignaRepo = new AsignaRepository ();
 		$this->noticiasRepo = new NoticiasRepository ();
+		$this->portadasRepo = new PortadasRepository ();
+		$this->fuentesRepo = new FuentesRepository ();
 		$this->temasId = array_map(function($theme) {
 			return $theme['id_tema'];
 		}, $_SESSION['user']['temas']);
@@ -135,6 +139,51 @@ class Profile extends Controller{
 		}else{
             header( "Location: http://{$_SERVER["HTTP_HOST"]}/sign-in");
         }	
+	}
+
+	public function columnasPoliticas()
+	{
+		if( isset( $_SESSION['user'] ) ){
+
+			$title = 'Columnas Politicas';
+			$tipo_columna = TipoColumnas::COLUMNAS_POLITICAS;
+			$segment = 'politicas';
+			$adminColumns = new AdminColumns();
+			$covers = $adminColumns->getCovers($tipo_columna, 'columna', date('Y-m-d'));
+			
+			$this->renderViewClient('columns', $title . ' - ', compact('title', 'covers', 'segment'));
+		}else{
+            header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
+        }
+	}
+
+	public function columnasFinancieras()
+	{
+		if( isset( $_SESSION['user'] ) ){
+
+			$title = 'Columnas Financieras';
+			$tipo_columna = TipoColumnas::COLUMNAS_FINANCIERAS;
+			$segment = 'financieras';
+			$adminColumns = new AdminColumns();
+			$covers = $adminColumns->getCovers($tipo_columna, 'columna', date('Y-m-d'));
+			
+			$this->renderViewClient('columns', $title . ' - ', compact('title', 'covers', 'segment'));
+		}else{
+            header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
+        }
+	}
+
+	public function detailColumn ($type, $columnId) 
+	{
+		if( isset( $_SESSION['user'] ) ){
+			$column = $this->portadasRepo->getColumna($columnId);
+
+			$font = $this->fuentesRepo->getFontById($column['fuente_id']);
+
+			$this->renderViewClient('columnDetail', $column['titulo'] . ' - ', compact('column', 'font'));
+		}else{
+            header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
+        }
 	}
 
 }

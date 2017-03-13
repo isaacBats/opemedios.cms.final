@@ -68,6 +68,21 @@ $collection->attachRoute(new Route('/cartones', array(
     'methods' => 'GET'
 )));
 
+$collection->attachRoute(new Route('/columnas-financieras', array(
+    '_controller' => 'Profile::columnasFinancieras',
+    'methods' => 'GET'
+)));
+
+$collection->attachRoute(new Route('/columnas-politicas', array(
+    '_controller' => 'Profile::columnasPoliticas',
+    'methods' => 'GET'
+)));
+
+$collection->attachRoute(new Route('/columnas/:type/:id', array(
+    '_controller' => 'Profile::detailColumn',
+    'methods' => 'GET'
+)));
+
 
 
 $collection->attachRoute(new Route('/media/:fuente/:noticia', array(

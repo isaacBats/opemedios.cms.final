@@ -10,9 +10,9 @@
                 <h1><?= $this->getCompany()['name'] ?></h1>
                 <small class="card-filters">
                         <!-- <a class="card-company-filters" href="javascript_void(0);">Noticias de hoy: <strong>10</strong></a> -->
-                      Noticias de hoy: <strong>10</strong> 
-                    | Noticias del mes: <strong>30</strong> 
-                    | Total: <strong>1000</strong>
+                      Noticias de hoy: <strong><?= count($newsToday) ?></strong> 
+                    | Noticias del mes: <strong><?= count($newsMonth) ?></strong> 
+                    | Total: <strong><?= count($news) ?></strong>
                 </small>
             </div>
         </div>

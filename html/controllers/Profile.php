@@ -1,5 +1,8 @@
 <?php 
 
+use utilities\TipoPortadas;
+use utilities\TipoColumnas;
+
 class Profile extends Controller{
 
 	private $temasId;
@@ -46,9 +49,20 @@ class Profile extends Controller{
 
 			}, $this->asignaRepo->findByThemeIdAndCompanyId($this->company['id'], $this->temasId));
 
+			$newsMonth = array_filter($news, function($row) {
+				
+				return substr($row['fecha'], 0, 7) == date('Y-m');
+
+			});
+
+			$newsToday = array_filter($news, function($row) {
+				
+				return $row['fecha'] == date('Y-m-d');
+
+			});
 
 
-			$this->renderViewClient('home', 'Noticias - ' . $_SESSION['user']['empresa'] . ' - ', compact('news'));
+			$this->renderViewClient('home', 'Noticias - ' . $_SESSION['user']['empresa'] . ' - ', compact('news', 'newsMonth', 'newsToday'));
 		}else{
             header( "Location: http://{$_SERVER["HTTP_HOST"]}/sign-in");
         }
@@ -62,10 +76,65 @@ class Profile extends Controller{
 
 			$new = $this->noticiasRepo->getNewById($newId);
 			$media = $this->getMediaHTML($new['tipofuente_id'], $newId);
-			$this->renderViewClient('detailNew', $new['encabezado'] . ' - ', compact('new', 'media'));
+			
+			if ($fontType === 'internet')
+				$newInternet = $this->noticiasRepo->getNewById($newId, 'int');
+
+			$this->renderViewClient('detailNew', $new['encabezado'] . ' - ', compact('new', 'media', 'newInternet'));
 		}else{
             header( "Location: http://{$_SERVER["HTTP_HOST"]}/sign-in");
         }		
+	}
+
+	public function primerasPlanas ()
+	{
+		if( isset( $_SESSION['user'] ) ){
+			$js = '<script src="/assets/assets_client/js/lightbox.min.js"></script>';
+			$css = '<link href="/assets/assets_client/css/lightbox.min.css" rel="stylesheet">';
+
+			$title = 'Primeras Planas';
+			$tipo_portada = TipoPortadas::PRIMERAS_PLANAS;
+			$adminColumns = new AdminColumns();
+			$covers = $adminColumns->getCovers($tipo_portada, 'portada', date('Y-m-d'));
+
+			$this->renderViewClient('covers', $title . ' - ', compact('title', 'covers'), $css, $js);
+		}else{
+            header( "Location: http://{$_SERVER["HTTP_HOST"]}/sign-in");
+        }	
+	}
+
+	public function portadasFinancieras ()
+	{
+		if( isset( $_SESSION['user'] ) ){
+			$js = '<script src="/assets/assets_client/js/lightbox.min.js"></script>';
+			$css = '<link href="/assets/assets_client/css/lightbox.min.css" rel="stylesheet">';
+
+			$title = 'Portadas Financieras';
+			$tipo_portada = TipoPortadas::PORTADAS_FINANCIERAS;
+			$adminColumns = new AdminColumns();
+			$covers = $adminColumns->getCovers($tipo_portada, 'portada', date('Y-m-d'));
+
+			$this->renderViewClient('covers', $title . ' - ', compact('title', 'covers'), $css, $js);
+		}else{
+            header( "Location: http://{$_SERVER["HTTP_HOST"]}/sign-in");
+        }	
+	}
+
+	public function cartones ()
+	{
+		if( isset( $_SESSION['user'] ) ){
+			$js = '<script src="/assets/assets_client/js/lightbox.min.js"></script>';
+			$css = '<link href="/assets/assets_client/css/lightbox.min.css" rel="stylesheet">';
+
+			$title = 'Cartones';
+			$tipo_portada = TipoPortadas::CARTONES;
+			$adminColumns = new AdminColumns();
+			$covers = $adminColumns->getCovers($tipo_portada, 'portada', date('Y-m-d'));
+
+			$this->renderViewClient('covers', $title . ' - ', compact('title', 'covers'), $css, $js);
+		}else{
+            header( "Location: http://{$_SERVER["HTTP_HOST"]}/sign-in");
+        }	
 	}
 
 }

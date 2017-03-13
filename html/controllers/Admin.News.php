@@ -93,8 +93,8 @@ class AdminNews extends Controller{
 			$newSelected = $this->noticiasRepository->getNewById( $id ); 
 			$relatedNew = null ;
 
-			$adjunto = $this->adjuntoRepo->getAdjunto( $id );
-			// $adjunto = $adjuntos[0];
+			$adjuntos = $this->adjuntoRepo->getAdjunto( $id );
+			$adjunto = $adjuntos[0];
 
 			$htmlAdjunto = '
 								<figure class="figure">

@@ -39,6 +39,10 @@
                 <span class="label-red">Genero:</span> <?= $new['genero'] ?>
                 <br>
                 <span class="label-red">Tendencia:</span> <?= $new['tendencia'] ?>
+                <?php if (isset($newInternet)): ?>
+                    <br>
+                    <span class="label-red">URL:</span> <a target="_blank" href="<?= $newInternet['url'] ?>">Ver pagina</a>                    
+                <?php endif ?>
             </div>
 
         </div>
@@ -80,4 +84,4 @@
         <hr>
 
     </div>
-<!-- /.container
+<!-- /.container -->

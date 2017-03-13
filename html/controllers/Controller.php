@@ -207,7 +207,7 @@ class Controller
 	{
 
 		$adjuntoRepo = new AdjuntoRepository();
-		$adjunto = $adjuntoRepo->getAdjunto($newId);
+		$adjunto = current($adjuntoRepo->getAdjunto($newId));
 
 		switch ($fontTypeId) {
 			case '1':

@@ -134,7 +134,7 @@ class AdminColumns extends Controller
 
 	}
 
-	private function getCovers ($tipo, $article, $date)
+	public function getCovers ($tipo, $article, $date)
 	{
 		
 		if ($article == 'portada')

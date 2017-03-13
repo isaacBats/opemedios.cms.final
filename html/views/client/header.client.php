@@ -17,12 +17,12 @@
     <link rel="stylesheet" href="/assets/css/font-awesome.min.css">
     <link rel="stylesheet" href="/assets/assets_client/css/font-awesome.min.css">
     <link rel="stylesheet" href="/assets/assets_client/css/bootstrap-theme.css">
+    <?= $css ?>
 
     <!-- Custom styles for our template -->
     <link rel="stylesheet" href="/assets/assets_client/css/main.css">
     <link href="/assets/assets_client/css/1-col-portfolio.css" rel="stylesheet">
 
-    <?= $css ?>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->

@@ -40,7 +40,8 @@ $collection->attachRoute(new Route('/sign-in', array(
     'methods' => 'POST'
 )));
 
-// Usuario noticias
+// Usuario Perfil
+    //Noticias 
 $collection->attachRoute(new Route('/noticias', array(
     '_controller' => 'Profile::showNews',
     'methods' => 'GET'
@@ -51,12 +52,28 @@ $collection->attachRoute(new Route('/noticia/:fontType/:id', array(
     'methods' => 'GET'
 )));
 
-$collection->attachRoute(new Route('/media/:fuente/:noticia', array(
-    '_controller' => 'Plain::viewMedia',
+    //Portadas
+$collection->attachRoute(new Route('/primeras-planas', array(
+    '_controller' => 'Profile::primerasPlanas',
+    'methods' => 'GET'
+)));
+
+$collection->attachRoute(new Route('/portadas-financieras', array(
+    '_controller' => 'Profile::portadasFinancieras',
+    'methods' => 'GET'
+)));
+
+$collection->attachRoute(new Route('/cartones', array(
+    '_controller' => 'Profile::Cartones',
     'methods' => 'GET'
 )));
 
 
+
+$collection->attachRoute(new Route('/media/:fuente/:noticia', array(
+    '_controller' => 'Plain::viewMedia',
+    'methods' => 'GET'
+)));
 
 
 //  ADMIN

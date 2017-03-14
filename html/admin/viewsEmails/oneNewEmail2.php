@@ -193,7 +193,7 @@
                     <table cellspacing="0" cellpadding="0" border="0" align="center" style="margin: auto">
                         <tr>
                             <td style="border-radius: 3px; background: #1c0e0e; text-align: center;" class="button-td">
-                                <a href="http://<?= $_SERVER["HTTP_HOST"] ?>/panel/noticia/<?= $new['tipofuente_id'].'/'.$new['id'] ?>" target="_blank" style="background: #1c0e0e; border: 15px solid #1c0e0e; font-family: sans-serif; font-size: 13px; line-height: 1.1; text-align: center; text-decoration: none; display: block; border-radius: 3px; font-weight: bold;" class="button-a">
+                                <a href="http://<?= $_SERVER["HTTP_HOST"] ?>/noticia/<?= $new['tipofuente_id'].'/'.$new['id'] ?>" target="_blank" style="background: #1c0e0e; border: 15px solid #1c0e0e; font-family: sans-serif; font-size: 13px; line-height: 1.1; text-align: center; text-decoration: none; display: block; border-radius: 3px; font-weight: bold;" class="button-a">
                                     &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#ffffff">Ver noticia completa</span>&nbsp;&nbsp;&nbsp;&nbsp;
                                 </a>
                             </td>

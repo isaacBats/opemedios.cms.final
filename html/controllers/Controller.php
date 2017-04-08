@@ -212,7 +212,7 @@ class Controller
 		switch ($fontTypeId) {
 			case '1':
 				$media['file'] = '
-					<video class="adjunto-media" src="/'. $adjunto['carpeta'] . $adjunto['nombre_archivo'] .'" controls  >
+					<video style="width: 100%;" class="adjunto-media" src="/'. $adjunto['carpeta'] . $adjunto['nombre_archivo'] .'" controls  >
 						<p>Tu navegador no implementa el elemento video</p>
 					</video>
 			   ';

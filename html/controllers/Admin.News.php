@@ -878,13 +878,8 @@ class AdminNews extends Controller{
 				$end = ( $page + $limit >= $count ) ? $count : $page + $limit;
 				foreach ( $resultados->rows as $noticia ) {
 					$html .= '	<tr>
-					            	<td class="text-center">
-						                <label class="ckbox">
-						                  <input type="checkbox" name="' . $noticia['id'] . '" value="' . $noticia['encabezado'] . '"><span></span>
-						                </label>
-						            </td>
 					            	<td>' . $noticia['tipofuente'] . '</td>
-					            	<td>' . $noticia['encabezado'] . '</td>
+					            	<td><a href="/panel/new/view/'.$noticia['id'].'">' . $noticia['encabezado'] . '</a></td>
 					              	<td>' . $noticia['fuente'] . '</td>
 					              	<td>Enviado a</td>
 					           	</tr>';

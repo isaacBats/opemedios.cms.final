@@ -47,7 +47,7 @@ class Profile extends Controller{
 			
 			$limit = (isset($_GET['numpp'])) ? $_GET['numpp'] : 10;
 			$page = (isset($_GET['page'])) ? ( $_GET['page'] * $limit ) - $limit : 0;
-			$search = (isset($_GET['search'])) ? $_GET['search'] : '';
+			$search = (isset($_GET['search'])) ? $_GET['search'] : NULL;
 
 			$js = '
 					<!-- Libreria jquery-bootpag --> 
@@ -66,34 +66,30 @@ class Profile extends Controller{
 				    <link href="/admin/css/dataTables.bootstrap.css" rel="stylesheet">
 			';
 			
-			$asignations = $this->asignaRepo->findByThemeIdAndCompanyId($this->company['id'], $this->temasId, $limit, $page);
+			$asignations = $this->asignaRepo->findByThemeIdAndCompanyId($this->company['id'], $this->temasId, $search, $limit, $page);
 
 			$count = $asignations['count'];
 			$ini = $page + 1;
 			$end = ( $page + $limit >= $count ) ? $count : $page + $limit;
 
-			$news = array_map(function ($asigna) use ($search){				
-				
-				$new = $this->noticiasRepo->getNewById($asigna['id_noticia']);
-				$new['adjunto'] = $this->getMediaHTML($new['tipofuente_id'], $new['id']);
-				return $new;
+			if ($asignations['rows'] != 0) {
+				$news = array_map(function ($asigna){				
+					
+					$new = $this->noticiasRepo->getNewById($asigna['id_noticia']);
+					$new['adjunto'] = $this->getMediaHTML($new['tipofuente_id'], $new['id']);
+					return $new;
 
-			}, $asignations['rows']);
+				}, $asignations['rows']);
+			} else {
+				$news = $asignations['rows'];
+			}
 
-			$newsMonth = array_filter($news, function($row) {
-				
-				return substr($row['fecha'], 0, 7) == date('Y-m');
-
-			});
-
-			$newsToday = array_filter($news, function($row) {
-				
-				return $row['fecha'] == date('Y-m-d');
-
-			});
+			
+			$countAsigned = $this->asignaRepo->countNewsAsigned($this->company['id'], $this->temasId);
 
 
-			$this->renderViewClient('home', 'Noticias - ' . $_SESSION['user']['empresa'] . ' - ', compact('news', 'newsMonth', 'newsToday', 'count', 'ini', 'end', 'css', 'js'));
+
+			$this->renderViewClient('home', 'Noticias - ' . $_SESSION['user']['empresa'] . ' - ', compact('news', 'countAsigned', 'count', 'ini', 'end', 'css', 'js'));
 		}else{
             header( "Location: http://{$_SERVER["HTTP_HOST"]}/sign-in");
         }

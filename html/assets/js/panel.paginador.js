@@ -51,6 +51,11 @@ $(document).ready(function () {
     if (url.param('font_name') != null) {
         $('#bootpag_search_input').val(url.param('font_name'));
     }
+
+    /* Noticias cliente */
+    if (url.param('search') != null) {
+        $('#search_client').val(url.param('search'));
+    }
     
     /*Producto*/
     //$("#tiposproductos").change(function () {

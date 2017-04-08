@@ -10,9 +10,9 @@
                 <h1><?= $this->getCompany()['name'] ?></h1>
                 <small class="card-filters">
                         <!-- <a class="card-company-filters" href="javascript_void(0);">Noticias de hoy: <strong>10</strong></a> -->
-                      Noticias de hoy: <strong><?= count($newsToday) ?></strong> 
-                    | Noticias del mes: <strong><?= count($newsMonth) ?></strong> 
-                    | Total: <strong><?= count($news) ?></strong>
+                      Noticias de hoy: <strong><?= $countAsigned['today'] ?></strong> 
+                    | Noticias del mes: <strong><?= $countAsigned['mounth'] ?></strong> 
+                    | Total: <strong><?= $countAsigned['total'] ?></strong>
                 </small>
             </div>
         </div>
@@ -22,9 +22,9 @@
             <form action="" id="bootpag_text_count">
                 <div class="form-inline">
                     <div class="input-group custom-search-form">
-                        <input type="text" class="form-control" placeholder="Search..." name="search">
+                        <input type="text" class="form-control" placeholder="Search..." name="search" id="search_client">
                         <span class="input-group-btn">
-                            <button class="btn" type="button" style="padding: 8px 40px;">
+                            <button class="btn" type="submit" style="padding: 8px 40px;">
                                 <i class="fa fa-search"></i>
                             </button>
                         </span>
@@ -45,7 +45,8 @@
             </form>
         </div> 
 
-        <?php foreach ($news as $key => $notice): ?>            
+        <?php if($news != 0):
+                foreach ($news as $key => $notice): ?>            
             <div class="row">
                 <div class="col-md-7 adjunto-icon color-<?= without_accents(strtolower($notice['tipofuente'])) ?>" >
                     <a href="/noticia/<?= without_accents(strtolower($notice['tipofuente'])) .'/'. $notice['id'] ?>" class="adjunto-link">
@@ -65,7 +66,13 @@
                 </div>
             </div>
             <hr>
-        <?php endforeach; ?>
+        <?php endforeach; 
+            else:
+        ?>
+
+            <strong>No hay Noticias que mostrar</strong>
+
+        <?php endif; ?>
         <div class="col-md-6">
             <p id="bootpag_text">
                 Mostrando registros del <b><?= $ini ?></b> al <b><?= $end ?></b> de un total de <b><?= $count ?></b> registros.

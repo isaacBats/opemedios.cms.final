@@ -118,11 +118,12 @@ class Profile extends Controller{
 		if( isset( $_SESSION['user'] ) ){
 			$js = '<script src="/assets/assets_client/js/lightbox.min.js"></script>';
 			$css = '<link href="/assets/assets_client/css/lightbox.min.css" rel="stylesheet">';
+			$date = isset($_GET['fecha']) ? $_GET['fecha'] : date('Y-m-d');
 
 			$title = 'Primeras Planas';
 			$tipo_portada = TipoPortadas::PRIMERAS_PLANAS;
 			$adminColumns = new AdminColumns();
-			$covers = $adminColumns->getCovers($tipo_portada, 'portada', date('Y-m-d'));
+			$covers = $adminColumns->getCovers($tipo_portada, 'portada', $date);
 
 			$this->renderViewClient('covers', $title . ' - ', compact('title', 'covers'), $css, $js);
 		}else{
@@ -135,11 +136,12 @@ class Profile extends Controller{
 		if( isset( $_SESSION['user'] ) ){
 			$js = '<script src="/assets/assets_client/js/lightbox.min.js"></script>';
 			$css = '<link href="/assets/assets_client/css/lightbox.min.css" rel="stylesheet">';
+			$date = isset($_GET['fecha']) ? $_GET['fecha'] : date('Y-m-d');
 
 			$title = 'Portadas Financieras';
 			$tipo_portada = TipoPortadas::PORTADAS_FINANCIERAS;
 			$adminColumns = new AdminColumns();
-			$covers = $adminColumns->getCovers($tipo_portada, 'portada', date('Y-m-d'));
+			$covers = $adminColumns->getCovers($tipo_portada, 'portada', $date);
 
 			$this->renderViewClient('covers', $title . ' - ', compact('title', 'covers'), $css, $js);
 		}else{
@@ -152,11 +154,12 @@ class Profile extends Controller{
 		if( isset( $_SESSION['user'] ) ){
 			$js = '<script src="/assets/assets_client/js/lightbox.min.js"></script>';
 			$css = '<link href="/assets/assets_client/css/lightbox.min.css" rel="stylesheet">';
+			$date = isset($_GET['fecha']) ? $_GET['fecha'] : date('Y-m-d');
 
 			$title = 'Cartones';
 			$tipo_portada = TipoPortadas::CARTONES;
 			$adminColumns = new AdminColumns();
-			$covers = $adminColumns->getCovers($tipo_portada, 'portada', date('Y-m-d'));
+			$covers = $adminColumns->getCovers($tipo_portada, 'portada', $date);
 
 			$this->renderViewClient('covers', $title . ' - ', compact('title', 'covers'), $css, $js);
 		}else{

@@ -22,7 +22,7 @@
             <form action="" id="bootpag_text_count">
                 <div class="form-inline">
                     <div class="input-group custom-search-form">
-                        <input type="text" class="form-control" placeholder="Search..." name="search" id="search_client">
+                        <input type="text" class="form-control" placeholder="Buscar..." name="search" id="search_client">
                         <span class="input-group-btn">
                             <button class="btn" type="submit" style="padding: 8px 40px;">
                                 <i class="fa fa-search"></i>

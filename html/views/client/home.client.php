@@ -3,7 +3,7 @@
 
         <!-- Page Heading -->
         <div class="row card-company">
-            <div class="col-sm-4">
+            <div class="col-sm-3">
                 <img src="/<?= $this->getCompany()['logo'] ?>" alt="<?= $this->getCompany()['name'] ?>">
             </div>
             <div class="col-sm-8 page-header card-company-name">
@@ -18,7 +18,34 @@
         </div>
         <!-- /.row -->
 
-        <?php foreach (array_reverse($news) as $key => $notice): ?>            
+        <div class="row">
+            <form action="" id="bootpag_text_count">
+                <div class="form-inline">
+                    <div class="input-group custom-search-form">
+                        <input type="text" class="form-control" placeholder="Search..." name="search">
+                        <span class="input-group-btn">
+                            <button class="btn" type="button" style="padding: 8px 40px;">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </span>
+                    </div>
+                    <div class="col-sm-12" id="bootpag_nummc" style="padding: 15px 0;">
+                        <label for="exampleInputName2">Mostrar &nbsp;</label>
+                        <input type="hidden" value="1" name="page" id="current_page">
+                        <select name="numpp" id="bootpag_text_count_select" class="form-control input-sm">
+                            <option value="5">5</option>
+                            <option value="10">10</option>
+                            <option value="25">25</option>
+                            <option value="50">50</option>
+                            <option value="100">100</option>
+                        </select>
+                        <label for="exampleInputName2">&nbsp; Noticias</label>
+                    </div>                  
+                </div>
+            </form>
+        </div> 
+
+        <?php foreach ($news as $key => $notice): ?>            
             <div class="row">
                 <div class="col-md-7 adjunto-icon color-<?= without_accents(strtolower($notice['tipofuente'])) ?>" >
                     <a href="/noticia/<?= without_accents(strtolower($notice['tipofuente'])) .'/'. $notice['id'] ?>" class="adjunto-link">
@@ -39,6 +66,12 @@
             </div>
             <hr>
         <?php endforeach; ?>
+        <div class="col-md-6">
+            <p id="bootpag_text">
+                Mostrando registros del <b><?= $ini ?></b> al <b><?= $end ?></b> de un total de <b><?= $count ?></b> registros.
+            </p>
+        </div>
+        <div class="col-md-6"><p id="bootpag_pag" data-count="<?= $count ?>"></p></div> 
 
         
         <!-- Pagination -->

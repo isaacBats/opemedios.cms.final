@@ -878,7 +878,7 @@ class AdminNews extends Controller{
 				$end = ( $page + $limit >= $count ) ? $count : $page + $limit;
 				foreach ( $resultados->rows as $noticia ) {
 					$html .= '	<tr>
-					            	<td>' . $noticia['tipofuente'] . '</td>
+					            	<td class="text-center"><i class="fa ' . Util::tipoFuente($noticia['tipofuente_id'] - 1)['icon'] . ' fa-3" style="font-size:40px; "></i></td>
 					            	<td><a href="/panel/new/view/'.$noticia['id'].'">' . $noticia['encabezado'] . '</a></td>
 					              	<td>' . $noticia['fuente'] . '</td>
 					              	<td>Enviado a</td>

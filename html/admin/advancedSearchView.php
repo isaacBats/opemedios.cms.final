@@ -59,7 +59,7 @@
 	        <table class="table table-bordered table-inverse nomargin">
 		        <thead>
 			    	<tr>
-			        	<th class="text-center">TipoFuente</th>
+			        	<th class="text-center"></th>
 			        	<th class="text-center">Noticia</th>
 			            <th class="text-center">Fuente</th>
 			            <th class="text-center">Enviado a</th>

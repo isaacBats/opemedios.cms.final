@@ -45,13 +45,40 @@ class Profile extends Controller{
 	{
 		if( isset( $_SESSION['user'] ) ){			
 			
-			$news = array_map(function ($asigna) {				
+			$limit = (isset($_GET['numpp'])) ? $_GET['numpp'] : 10;
+			$page = (isset($_GET['page'])) ? ( $_GET['page'] * $limit ) - $limit : 0;
+			$search = (isset($_GET['search'])) ? $_GET['search'] : '';
+
+			$js = '
+					<!-- Libreria jquery-bootpag --> 
+					<script src="/admin/js/vendors/bootstrap/jquery.bootpag.min.js"></script>
+					<!-- Libreria purl --> 
+					<script src="/admin/js/vendors/purl/purl.min.js"></script>
+					<!-- Paginador con js --> 
+					<script src="/assets/js/panel.paginador.js"></script>
+			';
+
+			$css = '
+
+					<!-- panel_paginator CSS -->
+				    <link href="/admin/css/panel.main.css" rel="stylesheet">
+				    <!-- data tables bootstrap CSS -->
+				    <link href="/admin/css/dataTables.bootstrap.css" rel="stylesheet">
+			';
+			
+			$asignations = $this->asignaRepo->findByThemeIdAndCompanyId($this->company['id'], $this->temasId, $limit, $page);
+
+			$count = $asignations['count'];
+			$ini = $page + 1;
+			$end = ( $page + $limit >= $count ) ? $count : $page + $limit;
+
+			$news = array_map(function ($asigna) use ($search){				
 				
 				$new = $this->noticiasRepo->getNewById($asigna['id_noticia']);
 				$new['adjunto'] = $this->getMediaHTML($new['tipofuente_id'], $new['id']);
 				return $new;
 
-			}, $this->asignaRepo->findByThemeIdAndCompanyId($this->company['id'], $this->temasId));
+			}, $asignations['rows']);
 
 			$newsMonth = array_filter($news, function($row) {
 				
@@ -66,7 +93,7 @@ class Profile extends Controller{
 			});
 
 
-			$this->renderViewClient('home', 'Noticias - ' . $_SESSION['user']['empresa'] . ' - ', compact('news', 'newsMonth', 'newsToday'));
+			$this->renderViewClient('home', 'Noticias - ' . $_SESSION['user']['empresa'] . ' - ', compact('news', 'newsMonth', 'newsToday', 'count', 'ini', 'end', 'css', 'js'));
 		}else{
             header( "Location: http://{$_SERVER["HTTP_HOST"]}/sign-in");
         }

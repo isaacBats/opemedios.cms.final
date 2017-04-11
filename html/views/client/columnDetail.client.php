@@ -24,7 +24,7 @@
             <div class="col-sm-2">
                 <img class="img-responsive portfolio-item" src="/<?= $column['imagen'] ?>" alt="<?= $column['tipo_columna'] ?>" style="max-height: 250px;">
                 <figcaption class="items-descripcion">
-                    <strong><a href="javaScripts:void(0);">Descargar Documento</a></strong>
+                    <!-- <strong><a href="javaScripts:void(0);">Descargar Documento</a></strong> -->
                 </figcaption>
             </div>
             <div class="col-sm-8">

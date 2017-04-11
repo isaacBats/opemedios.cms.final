@@ -142,7 +142,7 @@ class AdminColumns extends Controller
 		elseif ($article == 'columna')
 			$getcovers = $this->portadasRepo->getCoversColumnas ($date, Util::tipoColumna($tipo));
 
-		$covers = null;
+		$covers = array();
 
 		if ($getcovers->exito && is_array($getcovers->rows)) {
 			foreach ($getcovers->rows as &$cover) {

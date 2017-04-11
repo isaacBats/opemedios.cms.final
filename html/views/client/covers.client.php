@@ -15,7 +15,7 @@
                     Buscar <?= strtolower($title) ?> por fecha  
                 </div>
                 <div class="panel-body">
-                    <form>
+                    <form method="get" action="">
                         <div class="form-inline">
                             <div class="input-group custom-search-form">
                                 <label for="fecha">Fecha</label>

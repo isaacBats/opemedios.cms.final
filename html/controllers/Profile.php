@@ -171,11 +171,12 @@ class Profile extends Controller{
 	{
 		if( isset( $_SESSION['user'] ) ){
 
+			$date = isset($_GET['fecha']) ? $_GET['fecha'] : date('Y-m-d');
 			$title = 'Columnas Politicas';
 			$tipo_columna = TipoColumnas::COLUMNAS_POLITICAS;
 			$segment = 'politicas';
 			$adminColumns = new AdminColumns();
-			$covers = $adminColumns->getCovers($tipo_columna, 'columna', date('Y-m-d'));
+			$covers = $adminColumns->getCovers($tipo_columna, 'columna', $date);
 			
 			$this->renderViewClient('columns', $title . ' - ', compact('title', 'covers', 'segment'));
 		}else{
@@ -187,11 +188,12 @@ class Profile extends Controller{
 	{
 		if( isset( $_SESSION['user'] ) ){
 
+			$date = isset($_GET['fecha']) ? $_GET['fecha'] : date('Y-m-d');
 			$title = 'Columnas Financieras';
 			$tipo_columna = TipoColumnas::COLUMNAS_FINANCIERAS;
 			$segment = 'financieras';
 			$adminColumns = new AdminColumns();
-			$covers = $adminColumns->getCovers($tipo_columna, 'columna', date('Y-m-d'));
+			$covers = $adminColumns->getCovers($tipo_columna, 'columna', $date);
 			
 			$this->renderViewClient('columns', $title . ' - ', compact('title', 'covers', 'segment'));
 		}else{

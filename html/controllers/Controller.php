@@ -122,7 +122,7 @@ class Controller
      */
     private function titleTab($title = ""){
 
-    	$title .= " Opemedios 2016";
+    	$title .= " Antena Informativa 2016";
 
     	return $title;
     }

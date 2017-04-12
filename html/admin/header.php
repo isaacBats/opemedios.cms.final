@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Sistema Integral de Administración de Opemedios">
+    <meta name="description" content="Sistema Integral de Administración de Antena Informativa">
     <meta name="author" content="Isaac Batista">
 
     <title><?= $titleTab ?></title>
@@ -57,7 +57,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/panel">Sistema de administracion Opemedios</a>
+                <a class="navbar-brand" href="/panel/news">Sistema de administracion Antena Informativa</a>
             </div>
             <!-- /.navbar-header -->
 

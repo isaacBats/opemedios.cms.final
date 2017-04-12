@@ -2,7 +2,7 @@
 	<header id="head">
 		<div class="container">
 			<div class="row">
-				<h1 class="lead">Opemedios</h1>
+				<h1 class="lead">Antena Informativa</h1>
 			</div>
 		</div>
 	</header>
@@ -12,7 +12,7 @@
 		<br> <br>
 		<h2 class="thin">Expertos en monitoreo</h2>
 		<p class="text-muted">
-			Somos una empresa especializada en el monitoreo de medios y análisis de información, con más veinte años de experiencia.
+			Somos una empresa especializada en el monitoreo de medios y análisis de información, con más de 20 años de experiencia.
 		</p>
 	</div>
 	<!-- /Intro-->
@@ -24,28 +24,37 @@
 			<h3 class="text-center thin">Nuestros Servicios</h3>
 			
 			<div class="row">
-				<div class="col-md-3 col-sm-6 highlight">
+				<div class="col-md-4 col-sm-4 highlight">
 					<div class="h-caption"><h4><i class="fa fa-microphone fa-5"></i>Radio</h4></div>
-					<div class="h-body text-center">
-						<p>Durante los 365 días del año, las 24 horas, grabamos de manera continua 48 estaciones de radio en las frecuencias de AM y FM. Monitoreamos los programas más importantes de noticias, opinión, salud, espectáculos, cultura, finanzas, de portes. Contamos con personal altamente calificado, mediante el cual estaremos atentos a cualquier información directa o indirecta de su empresa, así como el comportamiento de su competencia.</p>
+					<div class="h-body text-justify">
+						<p>Se realizará un monitoreo diario de los programas y estaciones de radio a partir de las 6:00 horas de cada día.<br>Dicho monitoreo se realizará diariamente, incluyendo sábados y domingo y se identificarán los casos en los que se trate de repeticiones o retransmisiones de estos programas de noticia y comentario.</p>
 					</div>
 				</div>
-				<div class="col-md-3 col-sm-6 highlight">
+				<div class="col-md-4 col-sm-4 highlight">
 					<div class="h-caption"><h4><i class="fa fa-television fa-5"></i>Televisión</h4></div>
-					<div class="h-body text-center">
-						<p>Grabamos las 24 horas, de lunes a domingo, los 365 días del año, 25 canales de televisión de señales abiertas y del servicio de paga. Monitoreamos los programas más importantes de noticias, opinión, salud, espectáculos, cultura, finanzas, deportes.</p>
+					<div class="h-body text-justify">
+						<p>Se realizará un monitoreo diario de los programas y estaciones de  televisión, a partir de las 6:00 horas de cada día. <br>Dicho monitoreo se realizará diariamente, incluyendo sábados y domingo y se identificarán los casos en los que se trate de repeticiones o retransmisiones de estos programas de noticia y comentario.</p>
 					</div>
 				</div>
-				<div class="col-md-3 col-sm-6 highlight">
+				<div class="col-md-4 col-sm-4 highlight">
 					<div class="h-caption"><h4><i class="fa fa-newspaper-o fa-5"></i>Periódicos y Revistas</h4></div>
-					<div class="h-body text-center">
-						<p>Búsqueda de información en los principales diarios y revistas de circulación nacional como Reforma, El Universal, Milenio, La Jornada, Excélsior, Economista, El Financiero; Unomásuno, El Sol de México, La Crónica de Hoy, revistas de diferentes cortes: política, moda, espectáculos, salud, deportes, turismo, entretenimiento, arte, entre otras.</p>
-					</div>
-				</div>
-				<div class="col-md-3 col-sm-6 highlight">
-					<div class="h-caption"><h4><i class="fa fa-chrome fa-5"></i>Sitios Web y Redes Sociales</h4></div>
-					<div class="h-body text-center">
-						<p>Búsqueda de información de temas encomendados en muchos portales existentes de información general y especializados en temas como política, moda, espectáculos, cultura, salud, deportes, por mencionar algunos. Rankeo integral (tu posicionamiento y el de tus competidores ante búsquedas), análisis estratégico.</p>
+					<div class="h-body text-justify">
+						<p>El proceso de monitoreo de medios impresos se compone de 4  partes</p>
+						<ol>
+							<li>
+								Revisión el mismo día de su publicación de cada uno de los medios impresos para localizar cada una de las notas.
+							</li>
+							<li>
+								Captura para convertirlo en archivo Portable Document Format (PDF) y almacenamiento para su análisis y clasificación por parte de los monitoristas.						
+							</li>
+							<li>
+								Clasificación de información y elaboración del reporte con una valoración cualitativa sobre la información que se incluirá el medio de comunicación en el que se difundió la información pagina y sección.
+							</li>
+							<li>
+								La entrega de los reportes de monitoreo que se hará s diario  de forma impresa y en archivo digital.
+							</li>
+							
+						</ol>
 					</div>
 				</div>
 			</div> <!-- /row  -->
@@ -55,6 +64,7 @@
 	<!-- /Highlights -->
 
 	<!-- container -->
+	<!-- 
 	<div class="container">
 
 		<h2 class="text-center top-space">Análisis de Información</h2>
@@ -69,8 +79,10 @@
 				<h3>Análisis de Cobertura Mediática :</h3>
 				<p>Estos estudios están centrados básicamente en los medios de impacto visual como la televisión, periódicos, revistas e internet. El objetivo central es determinar los momentos y espacios en que aparece el objeto del estudio para finalmente evaluar los costos por esas publicidades que no generaron costos directos.</p>
 			</div>
-		</div> <!-- /row -->
-</div>	<!-- /container -->
+		</div> 
+	</div>
+	-->	
+	<!-- /container -->
 	
 	<section id="social">
 		<div class="container">

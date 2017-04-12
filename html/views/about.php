@@ -15,14 +15,13 @@
 				<header class="page-header">
 					<h1 class="page-title">Quiénes Somos</h1>
 				</header>
-				<h3>Quiénes Somos :</h3>
-				<p><img src="assets/images/mac.jpg" alt="" class="img-rounded pull-right" width="300" > Somos una empresa líder en el monitoreo y análisis de medios. Nuestro capital y talento humano está conformado por profesionales especializados en el área de la comunicación.</p>
+				<p><img src="assets/images/mac.jpg" alt="" class="img-rounded pull-right" width="300" > Somos una empresa Mexicana dedicada al monitoreo de medios de comunicación que proporciona información del segmento noticioso de su interés, que aparezca en diversos medios de comunicación para facilitar la toma de decisiones de cualquier empresa o institución.</p>
 				
 				<h3>Misión:</h3>
-				<p>Convertirnos en tus ojos y oídos para tu toma de decisiones.</p>
+				<p>Brindar a nuestros clientes el mejor servicio de monitoreo de medios de manera oportuna y eficaz por medio de un equipo de profesionales.</p>
 				<h3>Visión:</h3>
-				<p>Seguir brindando un servicio personalizado, lo que nos ha caracterizado en los casi 20 años de trayectoria</p>
-				<h3>Nuestros Valores:</h3>
+				<p>Seguir siendo el mejor centro de monitoreo utilizando tecnología avanzada.</p>
+				<!-- <h3>Nuestros Valores:</h3>
 				<ul>
 					<li><span>Comunicación: </span>Estar en estrecho contacto contigo.</li>
 					<li><span>Servicio: </span>Responder con responsabilidad y eficiencia las particularidades que tú necesitas.</li>
@@ -30,7 +29,7 @@
 				</ul>
 				<div class="jumbotron top-space">
 						<h4>En OPEMEDIOS nos distinguimos por nuestro servicio personalizado.</h4>
-					</div>
+					</div> -->
 			</article>
 			<!-- /Article -->
 			

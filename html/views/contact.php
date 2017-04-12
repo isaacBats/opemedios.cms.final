@@ -57,11 +57,11 @@
 			<div class="widget">
 				<h4>Direccion</h4>
 				<address>
-					Ures 69, Col. Roma Sur CP. 06760, México, DF, Del. Cuauhtémoc
+					Dirección de la empresa
 				</address>
 				<h4>Teléfono:</h4>
 				<address>
-					+52 1 55 5584-6410
+					+52 1 55 3345-1982
 				</address>
 			</div>
 

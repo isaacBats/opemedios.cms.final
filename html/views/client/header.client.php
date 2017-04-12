@@ -4,12 +4,12 @@
 
     <meta charset="utf-8">
     <meta name="viewport"    content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Operadora de Medios Informativos 2016">
+    <meta name="description" content="Antena Informativa 2016">
     <meta name="author"      content="Isaac Daniel Batista">
 
     <title><?= $titleTab ?></title>
 
-    <link rel="shortcut icon" href="/assets/images/favicon.ico">
+    <link rel="shortcut icon" href="/assets/images/favicon_antena.ico">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" media="screen" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
@@ -42,7 +42,7 @@
             <div class="navbar-header">
                 <!-- Button for smallest screens -->
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
-                <a class="navbar-brand" href="/"><img src="/assets/images/logo.png" alt="Opemedios"></a>
+                <a class="navbar-brand" href="/"><img src="/assets/images/logo_antena.png" alt="Antena Informativa"></a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav pull-right">
@@ -76,7 +76,7 @@
                                 <li><a href="/columnas-politicas">Columnas Politicas</a></li>
                             </ul>
                         </li>
-                        <li><a href="/reporte">Reporte</a></li>                             
+                        <!-- <li><a href="/reporte">Reporte</a></li>                              -->
                         <li>
                             <div class="dropdown">
                                 <button class="btn dropdown-toggle user" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">

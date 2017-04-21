@@ -114,6 +114,20 @@ class AdminFonts extends Controller{
 
 	}
 
+	public function deleteFont ($id)
+	{
+		if( isset( $_SESSION['admin'] ) ){
+			
+            exit($id);
+            header('Content-type: text/json');
+	        echo json_encode($row);
+		}else{
+            header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
+        }		
+	}
+
+
+
 	public function update ($id) 
 	{
 		if( isset( $_SESSION['admin'] ) ){			
@@ -251,6 +265,52 @@ class AdminFonts extends Controller{
 		}else{
             header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
         }	
+	}
+
+	public function editSection ($idSection)
+	{	
+		if (isset($_SESSION['admin'])) {
+			$section = $this->sectionRepository->getSeccionById($idSection);
+			$section['nombre'] = $_POST['nombre'];
+			$section['autor'] = $_POST['autor'];
+			$section['descripcion'] = $_POST['decripcion'];
+
+			$updateSection = $this->sectionRepository->update($section);
+			$res = new stdClass;
+			if ($updateSection->exito) {
+				$res->exito = true;
+				$res->class = 'alert-info';
+				$res->object = $updateSection->row;
+				$res->text = 'Se ha actualizado la sección con exito';
+			} else {
+				$res->exito = false;
+				$res->class = 'alert-warning';
+				$res->error = $updateSection->error;
+			}
+			header('Content-type: text/json');
+	        echo json_encode($res);
+		} else {
+            header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
+		}
+	}
+
+	public function deleteSection ($id)
+	{
+		if (isset($_SESSION['admin'])) {
+			
+			$row = new stdClass;
+			if ($del = $this->sectionRepository->delete($id))
+				$row->exito = true;
+			else {
+				$row->exito = false;
+				$row->error = 'No se pudo borrar el elemento. Contacte con el administrador';
+			}
+
+			header('Content-type: text/json');
+	        echo json_encode($row);
+		} else {
+            header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
+		}
 	}
 
 	public function getAuthor( $id_seccion )

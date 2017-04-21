@@ -799,7 +799,62 @@ $(document).ready(function(){
         $formEditFont.hide('slow');
 
     })
+
+    // Edit section font
+    $('th .edit-section').on('click', function (event){
+        event.preventDefault();
+        var $id = $(this).data('id');
+        var $name = $(this).parent().parent().find('.name-sect').text();
+        var $author = $(this).parent().parent().find('.author-sect').text();
+        var $description = $(this).parent().parent().find('.description-sect').text();
+        $('#section-name').val($name);
+        $('#section-author').val($author);
+        $('#section-description').text($description);
+        $('#section-confirmation').text('Editar'); 
+        var $formulario = $('form#form-agrega-seccion');
+        $formulario.attr('action', '/panel/font/section/edit/' + $id);
+        $('.form-agregar-seccion').show('slow');
+    });
+    // Delete section Font
+    $('th .delete-section').click(function( e ){
+        e.preventDefault();
+        var $href = $(this).data('href');
+        var $alert = $('.alert');
+        var $modal = $('#myModal');
+        var $state = $modal.find('.modal-footer .btn-primary');
+        $modal.find('#myModalLabel').html('Vas a eliminar esta seccion');
+        $modal.find('.modal-body').html('Esta seguro que eliminar la sección <strong>' + $(this).parent().parent().find('.name-sect').text() + '</strong>');
+        $state.html('Eliminar');
+        $state.click(function(){
+            $.get($href, function(json){
+                if (json.exito) {
+                    window.location.reload();
+                }
+            });            
+        });
+    });
+
+    // Delete Font
+    $('li .delete-font').click(function( e ){
+        e.preventDefault();
+        var $href = $(this).data('href');
+        var $nombreFuente = $(this).data('name');
+        var $alert = $('.alert');
+        var $modal = $('#myModal');
+        var $state = $modal.find('.modal-footer .btn-primary');
+        $modal.find('#myModalLabel').html('Vas a eliminar esta fuente y todas sus secciones');
+        $modal.find('.modal-body').html('Al eliminar esta fuente tambien eliminaras todas sus secciones.<br> ¿Esta seguro que quieres eliminar la fuente <strong>' + $nombreFuente + '</strong>?');
+        $state.html('Eliminar');
+        $state.click(function(){
+            $.get($href, function(json){
+                if (json.exito) {
+                    window.location = '/panel/fonts/show-list';
+                }
+            });            
+        });
+    });
     
+
 
     /********************** drag an drop  **************************/
 

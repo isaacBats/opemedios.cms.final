@@ -15,6 +15,9 @@
 		            		Editar Fuente
 		            	</a>
 		            </li>
+		            <li>
+		            	<a href="javascript:void(0);" data-toggle="modal" data-target="#myModal" data-href="/panel/font/delete/<?= $fontId ?>" data-name="<?= $font['nombre'] ?>"" class="delete-font">Eliminar</a>
+		            </li>
 		        </ul>
 		    </div>
 		</div>		
@@ -140,8 +143,8 @@
 		</div>		
 	</div>
 </div>
-<!-- Formulario para agregar una seccion -->
-<div class="row">
+<!-- Formulario para agregar y editar una seccion -->
+<div class="row" id="form-section-actions">
 	<div class="col-sm-12 form-agregar-seccion" style="display: none">
 		<div class="col-sm-3 plus-secction"></div>
 		<form action="/panel/font/section/add" method="post" class="form-horizontal col-sm-6" id="form-agrega-seccion">
@@ -150,6 +153,7 @@
 				<label class="col-sm-3 control-label">Nombre</label>
 				<div class="col-sm-8">
 					<input 
+						id="section-name" 
 						class="form-control" 
 						name="nombre"  
 						autocomplete="off" 
@@ -163,22 +167,21 @@
 				<label class="col-sm-3 control-label">Autor</label>
 				<div class="col-sm-8">
 					<input 
+						id="section-author" 
 						class="form-control" 
 						name="autor"  
 						autocomplete="off" 
 						placeholder="Ejem.: Eduardo Vega" 
-						required="required" 
-						data-rule-required="true" 
-						data-msg="Introduce el nombre del autor de la sección" />	
+					/>	
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-sm-3 control-label">Descripción</label>
 				<div class="col-sm-8">
-					<textarea class="form-control" name="decripcion" rows="6" required></textarea>					
+					<textarea id="section-description" class="form-control" name="decripcion" rows="6"></textarea>					
 				</div>
 			</div>
-			<button class="btn btn-primary pull-right">Crear</button>
+			<button class="btn btn-primary pull-right" id="section-confirmation">Crear</button>
 			<button class="btn btn-warning pull-right cancelar" type="button" style="margin: 0 10px 0 0;">Cancelar</button>
 		</form>
 		<div class="col-sm-3 plus-secction"></div>
@@ -225,17 +228,20 @@
 	                    	<?php foreach( $sections as $key => $section ): ?>
 	                        <tr>
 	                            <td><?= $key + 1 ?></td>
-	                            <td><?= $section['nombre'] ?></td>
-	                            <td><?= $section['autor'] ?></td>
-	                            <td><?= $section['descripcion'] ?></td>
-	                            <td class="fa <?= $section['activo']['class'] ?>">
-	                            </td>
+	                            <td class="name-sect" ><?= $section['nombre'] ?></td>
+	                            <td class="author-sect" ><?= $section['autor'] ?></td>
+	                            <td class="description-sect" ><?= $section['descripcion'] ?></td>
+	                            <td class="fa <?= $section['activo']['class'] ?>"></td>
 	                            <td>
-	                            	<?php if ( $section['activo']['activo'] ): ?>
-	                            		<a href="javascript:void(0);" data-toggle="modal" data-target="#myModal" data-href="/panel/font/section/change-state?section=<?= $section['id_seccion'] ?>&action=desactivado" class="change-state">Desactivar</a>
-	                            	<?php else: ?>
-										<a href="javascript:void(0);" data-toggle="modal" data-target="#myModal" data-href="/panel/font/section/change-state?section=<?= $section['id_seccion'] ?>&action=activado" class="change-state">Activar</a>
-									<?php endif; ?>	                            	
+	                            	<th>
+										<a href="javascript:void(0);" data-toggle="modal" data-target="#myModal" data-href="/panel/font/section/change-state?section=<?= $section['id_seccion'] ?>&action=<?= ($section['activo']['activo']) ? 'desactivado' : 'activado' ?>" class="btn btn-primary change-state"><?= ($section['activo']['activo']) ? 'Desactivar' : 'Activar'?></a>
+	                            	</th>
+	                            	<th>
+										<a href="javascript:void(0);" class="btn btn-success edit-section" data-id=<?= $section['id_seccion'] ?>>Editar</a>
+	                            	</th>
+	                            	<th>
+										<a href="javascript:void(0);" data-toggle="modal" data-target="#myModal" data-href="/panel/font/section/delete/<?= $section['id_seccion']?>" class="btn btn-danger delete-section" data-id=<?= $section['id_seccion'] ?>>Eliminar</a>	                            	
+	                            	</th>
 	                            </td>
 	                        </tr>
 	                    <?php endforeach; ?>

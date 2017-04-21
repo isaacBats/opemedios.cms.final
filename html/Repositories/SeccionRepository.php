@@ -8,7 +8,7 @@ class SeccionRepository extends BaseRepository{
 		
 		$query = $this->pdo->prepare("SELECT * FROM seccion WHERE id_seccion = '$id' LIMIT 1;");
 		
-		$rs = ($query->execute()) ? $query->fetch() : 'No se pudo ejecutar la consulta para buscar la sección';
+		$rs = ($query->execute()) ? $query->fetch(PDO::FETCH_ASSOC) : 'No se pudo ejecutar la consulta para buscar la sección';
 		return $rs;
 	}
 
@@ -116,5 +116,39 @@ class SeccionRepository extends BaseRepository{
 		}
 
 		return $rs;
+	}
+
+	public function update(array $section) 
+	{
+		$res = new stdClass;
+		$stmt = $this->pdo->prepare("UPDATE seccion SET nombre = :nombre, descripcion = :descripcion, autor = :autor, activo = :activo, id_fuente = :id_fuente WHERE id_seccion = :id_seccion LIMIT 1");
+
+		if ($stmt->execute($section)) {
+			$res->exito = true;
+			$res->row = $this->pdo->query("SELECT * FROM seccion WHERE id_seccion = " . $section['id_seccion'])->fetch(PDO::FETCH_ASSOC);
+		} else {
+			$res->exito = false;
+			$res->error = $stmt->errorInfo()[2];
+		}
+
+		return $res;
+	}
+
+	public function delete ($id) 
+	{
+		if ($this->pdo->exec("DELETE FROM seccion WHERE id_seccion = $id LIMIT 1")) 
+			return true;
+		else {
+			throw new Exception("Error al borrar la seccion $id ");
+		}
+	}
+
+	public function deleteByFontId ($fontId) 
+	{
+		if ($rows = $this->pdo->exec("DELETE FROM seccion WHERE id_fuente = $fontId")) 
+			return $rows;
+		else {
+			throw new Exception("Error al borrar las secciones el la fuente con el id: $id ");
+		}
 	}
 }

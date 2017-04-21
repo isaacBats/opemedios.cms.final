@@ -128,6 +128,11 @@ $collection->attachRoute(new Route('/panel/fonts/detail/:id', array(
     'methods' => 'GET'
 )));
 
+$collection->attachRoute(new Route('/panel/font/delete/:id', array(
+    '_controller' => 'AdminFonts::deleteFont',
+    'methods' => 'GET'
+)));
+
 
 //Fonts Television 
 $collection->attachRoute(new Route('/panel/font/add/font-television', array(
@@ -402,6 +407,16 @@ $collection->attachRoute(new Route('/panel/font/section/change-state', array(
 $collection->attachRoute(new Route('/panel/font/section/add', array(
     '_controller' => 'AdminFonts::addSection',
     'methods' => 'POST'
+)));
+
+$collection->attachRoute(new Route('/panel/font/section/edit/:id', array(
+    '_controller' => 'AdminFonts::editSection',
+    'methods' => 'POST'
+)));
+
+$collection->attachRoute(new Route('/panel/font/section/delete/:id', array(
+    '_controller' => 'AdminFonts::deleteSection',
+    'methods' => 'GET'
 )));
 
 //Selection of Tema

@@ -47,3 +47,6 @@ html/assets/data/empresas/
 
 #archivos de sublime
 *.sublime-*
+
+#archivo fuse 
+.fuse_hidden*

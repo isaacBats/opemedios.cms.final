@@ -555,6 +555,32 @@ $(document).ready(function(){
         }
     });
 
+    //Activar desactivar Cuenta de Empresa
+    //Cambia el estado de una seccion en una fuente
+    $('.change-state-acount').click(function( e ){
+        e.preventDefault();
+        var $href = $(this).data('href');
+        var $alert = $('.alert');
+        var $modal = $('#myModal');
+        var $state = $modal.find('.modal-footer .btn-primary');
+        $modal.find('#myModalLabel').html('Va ha cambiar el estado de esta cuenta');
+        $modal.find('.modal-body').html('¿Esta seguro que decea cambiar el estado de la cuenta?.');
+        $state.html('Cambiar');
+        // debugger;
+        $state.click(function(){
+            $.get($href, function(json){
+                if (json.exito) {
+                    $modal.modal('toggle');
+                    $alert.removeClass(json.class);
+                    $alert.removeAttr('style');
+                    $alert.addClass(json.class).html(json.text).delay(3000).fadeOut('slow', function(){
+                        window.location.reload();
+                    });
+                }
+            });            
+        });
+    });
+
     // Esconder aparecer formulario de editar cliente
     $('#datos-cliente button').on('click', function(){
         $('#datos-cliente').hide('slow');

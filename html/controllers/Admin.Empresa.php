@@ -64,8 +64,7 @@ class AdminEmpresa extends Controller
         }
 	}
 
-	/**'#FFF';
-'#FFF';
+	/**
 	 * Formularion para agregar a un cliente
 	 */
 	public function addClientView()
@@ -364,7 +363,27 @@ class AdminEmpresa extends Controller
             header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
         }
 	}
-	
 
-	// TODO: @AdminEmpresa Formulario para crear un cliente.
+	public function changeStateAcount()
+	{
+		if( isset( $_SESSION['admin'] ) ){
+			$acount = $_GET['acount'];
+			$action = $_GET['action'];
+			$res = new stdClass();
+			$row = $this->cuentaRepo->changeActive( $acount );
+			if( $row->exito ){
+				$res->exito = TRUE;
+				$res->class = 'alert-info';
+				$res->text = 'Se ha ' . $action . ' la cuenta con exito!!!';
+			}else{
+				$res->exito = FALSE;
+				$res->class = 'alert-warning';
+				$res->text = $row->error;
+			}
+			header('Content-type: text/json');
+	        echo json_encode($res);		
+		}else{
+            header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
+        }
+	}
 }

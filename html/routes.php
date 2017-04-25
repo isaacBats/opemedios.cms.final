@@ -456,6 +456,11 @@ $collection->attachRoute(new Route('/panel/client/cuenta/add', array(
     'methods' => 'POST'
 )));
 
+$collection->attachRoute(new Route('/panel/client/cuenta/change-state', array(
+    '_controller' => 'AdminEmpresa::changeStateAcount',
+    'methods' => 'GET'
+)));
+
 $collection->attachRoute(new Route('/panel/client/theme-acount', array(
     '_controller' => 'AdminEmpresa::relatedAccountThemeAction',
     'methods' => 'POST'

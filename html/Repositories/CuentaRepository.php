@@ -55,4 +55,18 @@ class CuentaRepository extends BaseRepository{
 		
 		return $result;
 	}
+
+	public function changeActive( $cuentaId )
+	{
+		$result = new stdClass();
+
+		if( $this->pdo->exec( "UPDATE cuenta SET activo = NOT activo WHERE id_cuenta = $cuentaId;" ) === 1 ){
+			$result->exito = TRUE;
+		}else{
+			$result->exito = FALSE;
+			$result->error = $this->pdo->errorInfo()[2];
+		}
+		
+		return $result;
+	}
 }

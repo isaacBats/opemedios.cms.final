@@ -295,7 +295,7 @@
 	                            <th>Cargo</th>
 	                            <th>Correo</th>
 	                            <th>Activo</th>
-	                            <!-- <th>Acción</th> -->
+	                            <th>Acción</th>
 	                        </tr>
 	                    </thead>
 	                    <tbody>
@@ -307,7 +307,7 @@
                         			<td><?= $userData['cargo'] ?></td>
                         			<td><?= $userData['email'] ?></td>
                         			<td class="fa <?= ( $userData['activo'] ) ? 'fa-check-circle green' : 'fa-times-circle red' ?>" ></td>
-                        			<!-- <td class="menu-actions-icon">
+                        			<td class="menu-actions-icon">
 		                            	<ul>
 		                            		<li>
 		                            			<a class="d-success" href="javascript:void(0)"><i class="p5 fa fa-eye" style="font-size: 1.3em;"></i></a>
@@ -319,10 +319,10 @@
 		                            			<a class="d-warning" href="javascript:void(0)"><i class="p5 fa fa-trash-o" style="font-size: 1.3em;"></i></a>
 		                            		</li>
 		                            		<li>
-		                            			<a href="javascript:void(0)">Desactivar</a>
+		                            			<a href="javascript:void(0);" data-toggle="modal" data-target="#myModal" data-href="/panel/client/cuenta/change-state?acount=<?= $userData['id_cuenta'] ?>&action=<?= ($userData['activo']) ? 'desactivado' : 'activado' ?>" class="change-state-acount"><?= ($userData['activo']) ? 'Desactivar' : 'Activar'?></a>
 		                            		</li>
 		                            	</ul>	                            	
-		                            </td> -->
+		                            </td>
                         		</tr>
 			                <?php endforeach; ?>
 	                    </tbody>

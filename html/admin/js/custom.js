@@ -556,7 +556,6 @@ $(document).ready(function(){
     });
 
     //Activar desactivar Cuenta de Empresa
-    //Cambia el estado de una seccion en una fuente
     $('.change-state-acount').click(function( e ){
         e.preventDefault();
         var $href = $(this).data('href');
@@ -566,7 +565,6 @@ $(document).ready(function(){
         $modal.find('#myModalLabel').html('Va ha cambiar el estado de esta cuenta');
         $modal.find('.modal-body').html('¿Esta seguro que decea cambiar el estado de la cuenta?.');
         $state.html('Cambiar');
-        // debugger;
         $state.click(function(){
             $.get($href, function(json){
                 if (json.exito) {
@@ -579,6 +577,20 @@ $(document).ready(function(){
                 }
             });            
         });
+    });
+
+    //Para editar los datos de una cuenta
+    $('td .edit-acount').on('click', function (event){
+        event.preventDefault();
+        var $id = $(this).data('id');
+        
+
+
+
+        $('#section-confirmation').text('Editar'); 
+        var $formulario = $('form#form-agrega-seccion');
+        $formulario.attr('action', '/panel/font/section/edit/' + $id);
+        $('.form-agregar-seccion').show('slow');
     });
 
     // Esconder aparecer formulario de editar cliente

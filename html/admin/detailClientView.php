@@ -295,7 +295,7 @@
 	                            <th>Cargo</th>
 	                            <th>Correo</th>
 	                            <th>Activo</th>
-	                            <th>Acción</th>
+	                            <th style="text-align: center">Acción</th>
 	                        </tr>
 	                    </thead>
 	                    <tbody>
@@ -307,13 +307,10 @@
                         			<td><?= $userData['cargo'] ?></td>
                         			<td><?= $userData['email'] ?></td>
                         			<td class="fa <?= ( $userData['activo'] ) ? 'fa-check-circle green' : 'fa-times-circle red' ?>" ></td>
-                        			<td class="menu-actions-icon">
+                        			<td class="menu-actions-icon" style="text-align: center">
 		                            	<ul>
 		                            		<li>
-		                            			<a class="d-success" href="javascript:void(0)"><i class="p5 fa fa-eye" style="font-size: 1.3em;"></i></a>
-		                            		</li>
-		                            		<li>
-		                            			<a class="d-info" href="javascript:void(0)"><i class="p5 fa fa-pencil" style="font-size: 1.3em;"></i></a>
+		                            			<a class="d-info edit-acount" data-id="<?= $userData['id_cuenta'] ?>" href="javascript:void(0)"><i class="p5 fa fa-pencil" style="font-size: 1.3em;"></i></a>
 		                            		</li>
 		                            		<li>
 		                            			<a class="d-warning" href="javascript:void(0)"><i class="p5 fa fa-trash-o" style="font-size: 1.3em;"></i></a>
@@ -353,31 +350,31 @@
 					<div class="form-group">
 						<label class="col-sm-2 control-label">Nombre*</label>
 						<div class="col-sm-8">
-							<input type="text" placeholder="Juan" class="form-control" name="nombre" required="required" />
+							<input type="text" placeholder="Juan" class="form-control" name="nombre" id="nombre" required="required" />
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="col-sm-2 control-label">Apellidos*</label>
 						<div class="col-sm-8">
-							<input type="text" placeholder="Perez" class="form-control col-sm-8" name="apellidos" required="required" />
+							<input type="text" placeholder="Perez" class="form-control col-sm-8" name="apellidos" id="apellidos" required="required" />
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="col-sm-2 control-label">Correo*</label>
 						<div class="col-sm-8">
-							<input type="email" placeholder="juan@opemedios.com.mx" class="form-control col-sm-8" name="correo" required="required" />
+							<input type="email" placeholder="juan@opemedios.com.mx" class="form-control col-sm-8" name="correo" id="correo" required="required" />
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="col-sm-2 control-label">Tel. Casa*</label>
 						<div class="col-sm-8">
-							<input type="tel" placeholder="5545768789" maxlength="12" minlength="8" class="form-control col-sm-8" name="tel_casa" required="required" />
+							<input type="tel" placeholder="5545768789" maxlength="12" minlength="8" class="form-control col-sm-8" name="tel_casa" id="tel_casa" required="required" />
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="col-sm-2 control-label">Celular</label>
 						<div class="col-sm-8">
-							<input type="tel" placeholder="0445567890485" maxlength="15" minlength="10" class="form-control col-sm-8" name="celular" />
+							<input type="tel" placeholder="0445567890485" maxlength="15" minlength="10" class="form-control col-sm-8" name="celular" id="celular" />
 						</div>
 					</div>			
 				</div>
@@ -387,13 +384,13 @@
 					<div class="form-group">
 						<label class="col-sm-2 control-label">Cargo</label>
 						<div class="col-sm-8">
-							<input type="text" placeholder="Encargado de Internet" class="form-control col-sm-8" name="cargo" />
+							<input type="text" placeholder="Encargado de Internet" class="form-control col-sm-8" name="cargo" id="cargo" />
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="col-sm-2 control-label">Comentarios</label>
 						<div class="col-sm-8">
-							<textarea class="form-control" name="comentarios" rows="6" ></textarea>
+							<textarea class="form-control" name="comentarios" id="comentarios" rows="6" ></textarea>
 						</div>
 					</div>
 					<p>Datos de sistema: </p>
@@ -401,13 +398,13 @@
 					<div class="form-group">
 						<label class="col-sm-2 control-label">Username*</label>
 						<div class="col-sm-8">
-							<input placeholder="juan1234" class="form-control col-sm-8" name="username" required="required" />
+							<input placeholder="juan1234" class="form-control col-sm-8" name="username" id="username" required="required" />
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="col-sm-2 control-label">Password*</label>
 						<div class="col-sm-8">
-							<input type="password" class="form-control col-sm-8" name="password" required="required" />
+							<input type="password" class="form-control col-sm-8" name="password" id="password" required="required" />
 						</div>
 					</div>
 				</div>

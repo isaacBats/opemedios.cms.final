@@ -164,6 +164,18 @@ class AdminEmpresa extends Controller
         }
 	}
 
+	public function getAcountJsonById($id)
+	{
+		try {
+			$cuenta = $this->cuentaRepo->get($id);
+			vdd($cuenta);
+		} catch (PDOException $e) {
+			echo $e->getMessage();
+		}
+		
+
+	}
+
 	/**
 	 * Edita una empresa
 	 * @param  int $id

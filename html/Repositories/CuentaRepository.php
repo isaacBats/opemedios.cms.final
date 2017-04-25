@@ -15,6 +15,17 @@ class CuentaRepository extends BaseRepository{
 		return $acounts;
 	}
 
+	public function getAcountsActivesByCompany ( $company ){
+
+		$sql = "SELECT * FROM cuenta WHERE activo != 0 AND id_empresa = $company";
+
+		$query = $this->pdo->prepare($sql);
+		
+		$acounts = ( $query->execute() ) ? $query->fetchAll(\PDO::FETCH_ASSOC) : 'No se encontraron cuentas con ese criterio';
+
+		return $acounts;
+	}
+
 	/**
 	 * Crea una cuenta para un cliente
 	 * @param  array  $cuenta Datos de la cuenta

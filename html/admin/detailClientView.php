@@ -299,7 +299,7 @@
 	                        </tr>
 	                    </thead>
 	                    <tbody>
-	                    	<?php // TODO: @DetailclientView Desarrollar las acciones para una cuenta (Editar, ver, eliminar, desactivar). ?>
+	                    	<?php // TODO: @DetailclientView Desarrollar las acciones para una cuenta (Editar, ver, eliminar). ?>
 	                    	<?php foreach ($counts as $number => $userData): ?>
                         		<tr>
                         			<td><?= $number + 1 ?></td>

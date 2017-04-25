@@ -147,8 +147,9 @@ class SeccionRepository extends BaseRepository{
 	{
 		if ($rows = $this->pdo->exec("DELETE FROM seccion WHERE id_fuente = $fontId")) 
 			return $rows;
-		else {
-			throw new Exception("Error al borrar las secciones el la fuente con el id: $id ");
-		}
+		else
+			new Exception("Error al borrar las secciones el la fuente con el id: $fontId ");
+		
+		return false;
 	}
 }

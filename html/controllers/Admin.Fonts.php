@@ -117,10 +117,28 @@ class AdminFonts extends Controller{
 	public function deleteFont ($id)
 	{
 		if( isset( $_SESSION['admin'] ) ){
-			
-            exit($id);
-            header('Content-type: text/json');
-	        echo json_encode($row);
+			try {
+	            $row = new stdClass;
+	            $sections = $this->sectionRepository->deleteByFontId($id);
+	            $row->sectionsDeleted = $sections;
+	            $logo = $this->fuentesRepository->getLogoById($id);
+	            $image = __DIR__ . '/../' . $logo['logo'];
+	            if(file_exists($image) && !is_dir($image)){
+	            	unlink($image);
+	            	$row->imageDeleted = $image;
+	            }
+	            $fontDelete = $this->fuentesRepository->delete($id);
+
+	            if($fontDelete)
+	            	$row->exito = true;
+	            else
+	            	$row->exito = false;
+
+	            header('Content-type: text/json');
+		        echo json_encode($row);
+			} catch (Exception $e) {
+				throw new Exception($e->getMessage());
+			}
 		}else{
             header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
         }		

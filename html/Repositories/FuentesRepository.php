@@ -126,8 +126,9 @@ class FuentesRepository extends BaseRepository{
 	{
 		if ($this->pdo->exec("DELETE FROM fuente WHERE id_fuente = $id LIMIT 1")) 
 			return true;
-		else {
-			throw new Exception("Error al borrar la fuente $id ");
-		}
+		else
+			new Exception("Error al borrar la fuente $id ");
+		
+		return false;
 	}
 }

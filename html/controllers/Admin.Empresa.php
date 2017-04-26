@@ -166,15 +166,56 @@ class AdminEmpresa extends Controller
 
 	public function getAcountJsonById($id)
 	{
-		try {
-			$cuenta = $this->cuentaRepo->get($id);
-			vdd($cuenta);
-		} catch (PDOException $e) {
-			echo $e->getMessage();
-		}
+		$cuenta = $this->cuentaRepo->get($id);
 		
+		if($cuenta)
+			json_response($cuenta);
+		else
+			json_response(false);
 
 	}
+
+	public function updateAcount($id)
+	{
+		if( isset( $_SESSION['admin'] ) )
+		{
+			$acount = $this->cuentaRepo->get($id);
+			$acount['nombre'] = $_POST['nombre']; 
+		    $acount['apellidos'] = $_POST['apellidos'];
+		    $acount['cargo'] = $_POST['cargo']; 
+		    $acount['telefono1'] = $_POST['tel_casa']; 
+		    $acount['telefono2'] = $_POST['celular']; 
+		    $acount['email'] = $_POST['correo']; 
+		    $acount['comentario'] = $_POST['comentarios']; 
+		    $acount['username'] = $_POST['username']; 
+		    $acount['password'] = ($_POST['password'] != '') ? md5($_POST['password']) : $acount['password']; 
+		    
+			$json = new stdClass();
+			
+			if( $update = $this->cuentaRepo->updateAcount( $acount )->exito )
+			{
+				$json->exito = TRUE;
+				$json->class = 'alert-info';
+				$json->text = '<strong>Exito:</strong> Se ha editado la cuenta con exito!!!';
+			}
+			else
+			{
+				$json->exito = FALSE;
+				$json->class = 'alert-warning';
+				$json->text = '<strong>Error:</strong> No se pudo editar la cuenta';	
+				$json->error = $update->error;	
+			}
+
+			json_response($json);
+			// $_SESSION['alerts']['empresa'] = $json;
+			// header( 'Location: /panel/client/' . $acount['id_empresa']);
+		}
+		else
+		{
+            header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
+        }	
+	}
+
 
 	/**
 	 * Edita una empresa

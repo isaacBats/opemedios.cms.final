@@ -583,14 +583,33 @@ $(document).ready(function(){
     $('td .edit-acount').on('click', function (event){
         event.preventDefault();
         var $id = $(this).data('id');
-        
+        $.get('/panel/client/cuenta/get/' + $id, function(json) {
+            if(json) {
+                $('.form-agregar-cuenta div.panel-heading').text('Editar cuenta');
+                $('#nombre').val(json.nombre).attr('required', false);
+                $('#apellidos').val(json.apellidos).attr('required', false);
+                $('#correo').val(json.email).removeAttr('required').removeAttr('aria-required').validate(false);
+                $('#tel_casa').val(json.telefono1).removeAttr('required').removeAttr('aria-required').validate(false);
+                $('#celular').val(json.telefono2).removeAttr('required').removeAttr('aria-required').validate(false);
+                $('#cargo').val(json.cargo).removeAttr('required').removeAttr('aria-required').validate(false);
+                $('#comentarios').val(json.comentario).removeAttr('required').removeAttr('aria-required').validate(false);
+                $('#username').val(json.username).removeAttr('required').removeAttr('aria-required').validate(false);
+                $('#password').removeAttr('required').removeAttr('aria-required').validate(false);
+                
+                $('#acount-confirmation').val('Editar'); 
+                var $formulario = $('form#form-agrega-cuenta');
+                $formulario.attr('action', '/panel/client/cuenta/update/' + $id);
+                $('.form-agregar-cuenta').show('slow');
+                var posicion = $(".form-agregar-cuenta").offset().top;
+                $("html, body").animate({
+                    scrollTop: posicion
+                }, 2000);    
+            }
+            
+        });
 
 
 
-        $('#section-confirmation').text('Editar'); 
-        var $formulario = $('form#form-agrega-seccion');
-        $formulario.attr('action', '/panel/font/section/edit/' + $id);
-        $('.form-agregar-seccion').show('slow');
     });
 
     // Esconder aparecer formulario de editar cliente
@@ -700,6 +719,27 @@ $(document).ready(function(){
                 }
             });
         }
+    });
+
+    // edita cuenta ajax
+    $('#acount-confirmation').on('click', function(){
+        $('#form-agrega-cuenta').validate({
+            submitHandler: function(form){
+                var $formulario = $(form);
+                var datos = $formulario.serialize();
+                $.post( $formulario.attr('action'), datos, function(json){
+                    if (json.exito) {
+                        console.log(json);
+                        debugger;
+                        var $alert = $('.alert');
+                        $alert.addClass(json.class).html(json.text).delay(3000).fadeOut('slow', function() {
+                            window.location.reload();
+                        });
+
+                    }
+                });
+            }
+        });
     });
 
     // Muestra el formulario para editar un usuario

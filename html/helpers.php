@@ -76,3 +76,13 @@ function without_accents ($cadena){
     $cadena = strtolower($cadena);
     return utf8_encode($cadena);
 }
+
+
+/**
+ * Header response type json  
+ */
+function json_response($mixed)
+{
+    header('Content-type: text/json');
+    echo json_encode($mixed);
+}

@@ -263,6 +263,7 @@
 </div>
 <!-- /Temas -->
 <!-- Cuentas -->
+<div class="aalert"></div>
 <div class="row">
 	<div class="col-sm-12">
 	    <div class="panel panel-default">
@@ -408,7 +409,7 @@
 						</div>
 					</div>
 				</div>
-				<input type="submit" value="Guardar" class="btn btn-success pull-right" />
+				<input type="submit" value="Guardar" class="btn btn-success pull-right" id="acount-confirmation" />
 				<input type="button" value="Cancelar" class="btn btn-danger pull-right" id="cancela-nueva-cuenta" style="margin-right: 2.5em;" />
 			</form>			
 		</div>

@@ -466,6 +466,11 @@ $collection->attachRoute(new Route('/panel/client/cuenta/get/:id', array(
     'methods' => 'GET'
 )));
 
+$collection->attachRoute(new Route('/panel/client/cuenta/update/:id', array(
+    '_controller' => 'AdminEmpresa::updateAcount',
+    'methods' => 'POST'
+)));
+
 $collection->attachRoute(new Route('/panel/client/theme-acount', array(
     '_controller' => 'AdminEmpresa::relatedAccountThemeAction',
     'methods' => 'POST'

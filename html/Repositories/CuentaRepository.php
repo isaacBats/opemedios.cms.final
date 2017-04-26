@@ -83,13 +83,22 @@ class CuentaRepository extends BaseRepository{
 
 	public function get($id)
 	{	
-		print_r ($row = $this->pdo->query("SELECT * FROMO cuenta WHERE id_cuenta = $id") ); exit;
-			var_dump($row); exit;
-			return $row->fetch(PDO::FETCH_ASSOC);
-			
-		// }
-		// else
-		// 	new PDOException("No se puede obtener la cuenta con id  $id Error: " . $this->pdo->errorInfo()[2]);
-			
+		return  $this->pdo->query("SELECT * FROM cuenta WHERE id_cuenta = $id")->fetch(PDO::FETCH_ASSOC);
+	}
+
+	public function updateAcount($data)
+	{
+		$stmt = $this->pdo->prepare("UPDATE cuenta SET nombre = :nombre, apellidos = :apellidos, cargo = :cargo, telefono1 = :telefono1, telefono2 = :telefono2, email = :email, comentario = :comentario, username = :username, password = :password, id_empresa = :id_empresa, activo = :activo WHERE id_cuenta = :id_cuenta");
+
+		$result = new stdClass;
+		
+		if ($stmt->execute($data)) {
+			$result->exito = TRUE;
+		}else{
+			$result->exito = FALSE;
+			$result->error = $this->pdo->errorInfo()[2];
+		}
+		
+		return $result;	
 	}
 }

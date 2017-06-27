@@ -11,7 +11,7 @@
 	// }
 	
 
-	
+	define('__OPEMEDIOS__', __DIR__ . "/");	
 	// CONFIG
 	require_once( __DIR__.'/config.php' );
 

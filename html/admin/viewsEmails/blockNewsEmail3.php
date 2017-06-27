@@ -40,7 +40,7 @@
 						<tr>
 							<td>
 								<div class="header-ini">
-									<span>Noticias</span>
+									<span>Noticias del día</span>
 								</div>
 								<!-- <h1><?php //echo $first['title']; ?></h1> -->
 								<!-- <p class="lead"><?php //echo $first['extract'] ?></p> -->
@@ -66,7 +66,8 @@
 						<div class="content">
 							<table bgcolor="">
 								<tr>
-									<!-- <td class="small" width="20%" style="vertical-align: top; padding-right:10px;"><img src="http://lorempixel.com/200/200/16/Font<?php //echo $value['logo_font'] ?>" /></td> -->
+									<!-- src="http://lorempixel.com/200/200/16/Font" --> 
+									<!-- <td class="small" width="20%" style="vertical-align: top; padding-right:10px;"><img src="/<?php //echo $value['logo_font'] ?>" /></td> -->
 									<td>
 										<h4><?= $value['title'] ?></h4>
 										<p class=""><?= cortarTexto($value['extract'], 150) ?></p>

@@ -1258,8 +1258,18 @@ class AdminNews extends Controller{
 	{
 		$qry2 = "SELECT * FROM noticia WHERE id_noticia <= 598970 ORDER BY id_noticia DESC LIMIT 30";
 		$qry = "SELECT bn.id AS bnid, b.name, bn.noticia_id AS noticiaId, n.encabezado, n.sintesis, n.id_seccion, n.autor, n.id_tipo_fuente, n.id_tipo_autor, f.nombre AS fuente, f.id_fuente, bn.tema_id AS temaId, t.nombre AS tema FROM bloques_noticias bn INNER JOIN bloques b ON bn.bloque_id = b.id INNER JOIN noticia n ON bn.noticia_id = n.id_noticia INNER JOIN fuente f ON n.id_fuente = f.id_fuente INNER JOIN tema t ON bn.tema_id = t.id_tema WHERE bn.bloque_id = 3";
-		$noticias = $this->mapNewsForEmail($this->noticiasRepository->query($qry));
-
+		$pre = $this->mapNewsForEmail($this->noticiasRepository->query($qry));
+		$noticias = null;
+		$themeRep = new TemaRepository();
+		$blockRepo = new BloqueRepository();
+		$block = $blockRepo->getBlockById( 3 );
+		$thems = $themeRep->getThemaByEmpresaID( $block->rows['empresa_id'] );
+		$themesId = array_column( $thems, 'id_tema');
+		foreach ($pre as $new) {
+			if( in_array( $new['temaId'], $themesId ) ){
+				$noticias[$new['tema']][] = $new;
+			}
+		}				
 		// echo '<pre>'; print_r($noticias); exit;
 		
 		ob_start();

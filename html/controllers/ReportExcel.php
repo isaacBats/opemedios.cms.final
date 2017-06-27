@@ -1,9 +1,7 @@
 <?php
 
-//Warning: The use statement with non-compound name 'PHPExcel' has no effect in /media/daniel/Documentos/devAplication/dev.opemedios.com/html/controllers/ReportExcel.php on line 3
-
-use \PHPExcel;
 use utilities\Util;
+require __OPEMEDIOS__ . 'vendor/phpoffice/phpexcel/Classes/PHPExcel.php';
 
 class ReportExcel
 {

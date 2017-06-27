@@ -40,7 +40,7 @@
 						<tr>
 							<td>
 								<div class="header-ini">
-									<span>Noticias del día</span>
+									<span>Noticias</span>
 								</div>
 								<!-- <h1><?php //echo $first['title']; ?></h1> -->
 								<!-- <p class="lead"><?php //echo $first['extract'] ?></p> -->

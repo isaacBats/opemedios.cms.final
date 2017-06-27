@@ -1195,11 +1195,11 @@ class AdminNews extends Controller{
 				}
 
 				$news = $blockRepo->getNewsOfBlock( $blockId );
-				vdd($news);
 				$noticias = null;
 			
 				if( is_array($news->rows) ){
-					foreach ($news->rows as $new) {
+					$pre = $this->mapNewsForEmail($news->rows);
+					foreach ($pre as $new) {
 						if( in_array( $new['temaId'], $themesId ) ){
 							$noticias[$new['tema']][] = $new;
 						}
@@ -1207,14 +1207,13 @@ class AdminNews extends Controller{
 				}else{
 					$noticias = $news->rows;
 				}
-				
 
 				ob_start();
 				require $this->adminviews . 'viewsEmails/blockNewsEmail3.php';
 				$body = ob_get_clean();
 
 				// vdd($body);
-				echo $body; exit(); 
+				// echo $body; exit(); 
 				
 				$mail = new Mail();
 				$mail->setSubject('Bloque de Noticias Operadora de medios');
@@ -1296,6 +1295,9 @@ class AdminNews extends Controller{
 				'tipoAutor' => $tipoAutor['descripcion'],
 				'seccion' => $seccion['nombre'],
 				'autor_seccion' => $seccion['autor'],
+				'temaId' => $row['temaId'],
+				'tema' => $row['tema'],
+				'nombre_bloque' => $row['name']
 			];
 		}, $data);	
 	}

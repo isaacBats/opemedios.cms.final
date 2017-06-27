@@ -83,8 +83,8 @@
 			        </tr>
 		        </thead>
 	          	<tbody>
-					<?php if( is_array( $resultados ) ){
-							foreach ($resultados as $res) { ?>
+					<?php if( is_array( $resultados->rows ) ){
+							foreach ($resultados->rows as $res) { ?>
 							<tr>
 				            	<td class="text-center"></td>
 				            	<td><?= $res['encabezado'] ?></td>

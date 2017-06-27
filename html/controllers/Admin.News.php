@@ -972,7 +972,6 @@ class AdminNews extends Controller{
 
 			$countWithFilter = $this->noticiasRepository->getCountNews( compact('limit', 'page', 'titulo', 'tipoFuente' ) );
 			$resultados = $this->noticiasRepository->getNewsWithFilters( compact('limit', 'page', 'titulo', 'tipoFuente') );
-
 			$count = $countWithFilter;
 
 			$ini = $page + 1;
@@ -1188,8 +1187,7 @@ class AdminNews extends Controller{
 				$thems = $themeRep->getThemaByEmpresaID( $block->rows['empresa_id'] );
 				$themesId = array_column( $thems, 'id_tema');
 				$empresa = $empresaRep->getEmpresaById( $block->rows['empresa_id'] );
-				// vdd($empresa);
-
+				
 				$contacts = [];
 				foreach ($_POST as $key => $contact) {
 					if($key != 'block')
@@ -1197,7 +1195,7 @@ class AdminNews extends Controller{
 				}
 
 				$news = $blockRepo->getNewsOfBlock( $blockId );
-
+				vdd($news);
 				$noticias = null;
 			
 				if( is_array($news->rows) ){
@@ -1212,11 +1210,11 @@ class AdminNews extends Controller{
 				
 
 				ob_start();
-				require $this->adminviews . 'viewsEmails/blockNews.php';
+				require $this->adminviews . 'viewsEmails/blockNewsEmail3.php';
 				$body = ob_get_clean();
 
 				// vdd($body);
-				// echo $body; exit(); 
+				echo $body; exit(); 
 				
 				$mail = new Mail();
 				$mail->setSubject('Bloque de Noticias Operadora de medios');
@@ -1259,11 +1257,11 @@ class AdminNews extends Controller{
 
 	public function testSendMail()
 	{
-		$noticias = $this->mapNewsForEmail($this->noticiasRepository->query("SELECT * FROM noticia WHERE id_noticia <= 598970 ORDER BY id_noticia DESC LIMIT 30"));
+		$qry2 = "SELECT * FROM noticia WHERE id_noticia <= 598970 ORDER BY id_noticia DESC LIMIT 30";
+		$qry = "SELECT bn.id AS bnid, b.name, bn.noticia_id AS noticiaId, n.encabezado, n.sintesis, n.id_seccion, n.autor, n.id_tipo_fuente, n.id_tipo_autor, f.nombre AS fuente, f.id_fuente, bn.tema_id AS temaId, t.nombre AS tema FROM bloques_noticias bn INNER JOIN bloques b ON bn.bloque_id = b.id INNER JOIN noticia n ON bn.noticia_id = n.id_noticia INNER JOIN fuente f ON n.id_fuente = f.id_fuente INNER JOIN tema t ON bn.tema_id = t.id_tema WHERE bn.bloque_id = 3";
+		$noticias = $this->mapNewsForEmail($this->noticiasRepository->query($qry));
 
-		$first = current($noticias);
-
-		// echo '<pre>'; print_r([$first, $noticias]); exit;
+		// echo '<pre>'; print_r($noticias); exit;
 		
 		ob_start();
 		require $this->adminviews . 'viewsEmails/blockNewsEmail3.php';
@@ -1279,13 +1277,25 @@ class AdminNews extends Controller{
 	private function mapNewsForEmail ($data)
 	{
 		return array_map(function($row){
-			$fuenteRepo = new FuentesRepository();			
+			$fuenteRepo = new FuentesRepository();
+			$tipoFuenteRepo = new TipoFuenteRepository();
+			$tipoAutorRepo = new TipoAutorRepository();	
+			$seccionRepo = new SeccionRepository(); 		
+			$tipoFuente = $tipoFuenteRepo->get($row['id_tipo_fuente']);		
+			$tipoAutor = $tipoAutorRepo->get($row['id_tipo_autor']);
+			$seccion = $seccionRepo->getSeccionById($row['id_seccion']);
 
 			return [
-				'id_new' => $row['id_noticia'],
+				'id_new' => $row['noticiaId'],
 				'title' => $row['encabezado'],
 				'extract' => $row['sintesis'],
+				'autor' => $row['autor'],
+				'fuente' => $row['fuente'],
 				'logo_font' => $fuenteRepo->getLogoById($row['id_fuente'])['logo'],
+				'tipoFuente' => $tipoFuente['descripcion'],
+				'tipoAutor' => $tipoAutor['descripcion'],
+				'seccion' => $seccion['nombre'],
+				'autor_seccion' => $seccion['autor'],
 			];
 		}, $data);	
 	}

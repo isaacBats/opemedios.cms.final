@@ -318,11 +318,11 @@ class NoticiasRepository extends BaseRepository{
 			if( $titulo != '' )
 				$w .= " AND n.encabezado LIKE '%" . $titulo . "%' ";
 
-			if($finicio != '')
-				$w .= " AND n.fecha >= '" . $finicio . "' ";
+			if(@$finicio != '')
+				$w .= " AND n.fecha >= '" . @$finicio . "' ";
 
-			if($ffin != '')
-				$w .= " AND n.fecha <= '" . $ffin . "' ";
+			if(@$ffin != '')
+				$w .= " AND n.fecha <= '" . @$ffin . "' ";
 
 			$l = ' LIMIT ' . $limit . ' OFFSET ' . $page;
 			$o = ' ORDER BY n.fecha';

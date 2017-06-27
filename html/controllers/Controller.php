@@ -265,14 +265,9 @@ class Controller
 		$archivo = $adjuntoRepository->getAdjunto( $noticia )[0];
 		$noticia =  $noticiaRepository->getNewById( $noticia );
 
-		// $buffer = explode( '.', $archivo['nombre'] );
-
-		// $title = current( $buffer );
 		$title = $noticia['encabezado'];
 
 		$media = '';
-
-		// vdd($archivo);
 
 		switch ( $fuente ) {
 			case ( $fuente == 1 || $fuente == 'television'):

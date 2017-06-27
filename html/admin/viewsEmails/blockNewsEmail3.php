@@ -40,7 +40,9 @@
 		.btn {
 			text-decoration:none;
 			color: #FFF;
-			background-color: #666;
+			background-color: #5bc0de;
+    		border-color: #46b8da;
+    		border-radius: 4px;
 			padding:10px 16px;
 			font-weight:bold;
 			margin-right:10px;
@@ -61,10 +63,11 @@
 
 		table.social {
 		/* 	padding:15px; */
-			background-color: #ebebeb;
+			/*background-color: #ebebeb;*/
 			
 		}
 		.social .soc-btn {
+			border-radius: 10px;
 			padding: 3px 7px;
 			font-size:12px;
 			margin-bottom:10px;
@@ -215,7 +218,7 @@
 		/* Be sure to place a .clear element after each set of columns, just to be safe */
 		.clear { display: block; clear: both; }
 
-		// para el menu
+		/* para el menu */
 		.lista ul
 		{
 		   padding: 0;
@@ -229,6 +232,40 @@
 		   padding-right: 5px;
 		}
 
+		/* Para header-ini */
+		.header-ini{
+		    background-color: rgba(255, 228, 196, 0.9);
+		    color: white;
+		    font-size: 40px;
+		    margin-top: -20px;
+		    text-align: center;
+		    text-transform: uppercase;
+		    padding: 18% 0;
+		}
+
+		.header-ini span{
+			background-color: rgba(0,0,25,.2);
+		    padding: 0 18%;
+		    width: 100%;
+		}
+
+		.text-help{
+			color: #a9a9a9;
+    		font-size: 10px;
+		}
+
+		.copy{
+			text-align: center;
+    		font-size: 12px;
+		}
+
+		.copy a{
+			text-decoration: none;
+		}
+
+		.social-networks{
+
+		}
 
 		/* ------------------------------------------- 
 				PHONE
@@ -250,7 +287,7 @@
 </head>
 <body bgcolor="#FFFFFF" topmargin="0" leftmargin="0" marginheight="0" marginwidth="0">
 	<!-- HEADER -->
-	<table class="head-wrap" bgcolor="#bbdefb">
+	<table class="head-wrap container" bgcolor="#bbdefb">
 		<tr>
 			<td></td>
 			<td class="header container" align="">
@@ -259,7 +296,7 @@
 					<table bgcolor="#bbdefb" >
 						<tr>
 							<td></td>
-							<td><img src="/assets/images/logo_110X40.png" style="float: right;" /></td>
+							<td><img src="http://<?= $_SERVER['HTTP_HOST'] ?>/assets/images/logo_110X40.png" style="float: right;" /></td>
 							<!-- <td align="right"><h6 class="collapse">Newsletter</h6></td> -->
 						</tr>
 					</table>
@@ -278,96 +315,63 @@
 					<table>
 						<tr>
 							<td>
-								<h1><?= $first['title']; ?></h1>
-								<p class="lead"><?= $first['extract'] ?></p>
-								<!-- A Real Hero (and a real human being) -->
-								<p><img src="<?= $first['logo_font'] ?>" /></p><!-- /hero -->
-								<!-- <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p> -->
+								<div class="header-ini">
+									<span>Noticias del día</span>
+								</div>
+								<!-- <h1><?php //echo $first['title']; ?></h1> -->
+								<!-- <p class="lead"><?php //echo $first['extract'] ?></p> -->
+								<!-- <p><img src="<?php //echo $first['logo_font'] ?>" /></p>-->
 								<div class="lista">
 									<ul>
-										<li><a href="">Primeras planas</a></li> |
-										<li><a href="">Portadas Financieras</a></li> |
-										<li><a href="">Columnas Financieras</a></li> |
-										<li><a href="">Columnas Politicas</a></li> |
-										<li><a href="">Cartones</a></li>
+										<li><a target="_blank" href="http://<?= $_SERVER['HTTP_HOST'] ?>/primeras-planas">Primeras planas</a></li> |
+										<li><a target="_blank" href="http://<?= $_SERVER['HTTP_HOST'] ?>/portadas-financieras">Portadas Financieras</a></li> |
+										<li><a target="_blank" href="http://<?= $_SERVER['HTTP_HOST'] ?>/columnas-financieras">Columnas Financieras</a></li> |
+										<li><a target="_blank" href="http://<?= $_SERVER['HTTP_HOST'] ?>/columnas-politicas">Columnas Politicas</a></li> |
+										<li><a target="_blank" href="http://<?= $_SERVER['HTTP_HOST'] ?>/cartones">Cartones</a></li>
 									</ul>
 								</div>
 							</td>
 						</tr>
 					</table>
 				</div><!-- /content -->
-				<?php foreach ($noticias as $key => $value): 
-						if($key != 0):
-				?>
+				<?php foreach ($noticias as $key => $value): ?>
 					<!-- content -->
 					<div class="content">
 						<table bgcolor="">
 							<tr>
-								<td class="small" width="20%" style="vertical-align: top; padding-right:10px;"><img src="<?= $value['logo_font'] ?>" /></td>
+								<!-- <td class="small" width="20%" style="vertical-align: top; padding-right:10px;"><img src="http://lorempixel.com/200/200/16/Font<?php //echo $value['logo_font'] ?>" /></td> -->
 								<td>
-									<h4><?= $value['title'] ?><small><?= $value['id_new'] ?></small></h4>
-									<p class=""><?= $value['extract'] ?></p>
-									<a class="btn">Clickity Click &raquo;</a>
+									<h4><?= $value['title'] ?></h4>
+									<p class=""><?= cortarTexto($value['extract'], 150) ?></p>
+									<p>
+										<small class="text-help">(
+											<?= "{$value['fuente']}-{$value['seccion']}, " . 
+												(empty($value['autor_seccion']) 
+												? $value['autor'] 
+												: $value['autor_seccion']) 
+											?>			
+										)</small>
+									</p>
+									<a href="http://<?= $_SERVER['HTTP_HOST'] ?>/media/<?= strtolower(without_accents($value['tipoFuente'])) .'/'. $value['id_new'] ?>" class="btn" target="_blank">Ver mas &raquo;</a>
 								</td>
 							</tr>
 						</table>
 					</div><!-- /content -->
-				<?php 	endif; 
-					endforeach; 
-				?>
-				<!-- content -->
-				<!-- <div class="content">
-					<table bgcolor="">
+				<?php endforeach; ?>
+				<div class="content" style="max-width: 25%; margin-top: 35px;">
+					<!-- social & contact -->
+					<table bgcolor="" class="social" width="100%">
 						<tr>
+							<td></td>
 							<td>
-								Callout Panel **comentario
-								<p class="callout">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt. <a href="#">Do it Now! &raquo;</a>	</p>
-								/Callout panel **comentario
-								
+								<p class="social-networks">
+									<a href="https://www.facebook.com/Opemedios-586086271483511/" target="_blank" class="soc-btn fb">Facebook</a> 
+									<a href="https://twitter.com/DeMonitoreo" target="_blank" class="soc-btn tw">Twitter</a> 
+								</p>
 							</td>
+							<td></td>
 						</tr>
-					</table>
-				</div> -->
-				<!-- /content -->
-				<!-- content -->
-				<div class="content">
-					<table bgcolor="">
-						<tr>
-							<td>
-								<!-- social & contact -->
-								<table bgcolor="" class="social" width="100%">
-									<tr>
-										<td>
-											<!--- column 1 -->
-											<div class="column">
-												<table bgcolor="" cellpadding="" align="left">
-											<tr>
-												<td>				
-													<h5 class="">Connect with Us:</h5>
-													<p class=""><a href="#" class="soc-btn fb">Facebook</a> <a href="#" class="soc-btn tw">Twitter</a> <a href="#" class="soc-btn gp">Google+</a></p>
-												</td>
-											</tr>
-										</table><!-- /column 1 -->
-											</div>
-											<!--- column 2 -->
-											<div class="column">
-												<table bgcolor="" cellpadding="" align="left">
-											<tr>
-												<td>				
-													<h5 class="">Contact Info:</h5>												
-													<p>Phone: <strong>408.341.0600</strong><br/>
-	                Email: <strong><a href="emailto:hseldon@trantor.com">hseldon@trantor.com</a></strong></p>
-												</td>
-											</tr>
-										</table><!-- /column 2 -->	
-											</div>
-											<div class="clear"></div>
-										</td>
-									</tr>
-								</table><!-- /social & contact -->
-							</td>
-						</tr>
-					</table>
+					</table><!-- /social & contact -->
 				</div><!-- /content -->
 			</td>
 			<td></td>
@@ -378,20 +382,10 @@
 		<tr>
 			<td></td>
 			<td class="container">
-					<!-- content -->
-					<div class="content">
-						<table>
-							<tr>
-								<td align="center">
-									<p>
-										<a href="#">Terms</a> |
-										<a href="#">Privacy</a> |
-										<a href="#"><unsubscribe>Unsubscribe</unsubscribe></a>
-									</p>
-								</td>
-							</tr>
-						</table>
-					</div><!-- /content -->
+				<!-- content -->
+				<div class="content copy" style="margin-top: -25px;">
+					<a href="http://opemedios.com.mx">Copyright &copy; 2016, Opemedios</a>
+				</div><!-- /content -->
 			</td>
 			<td></td>
 		</tr>

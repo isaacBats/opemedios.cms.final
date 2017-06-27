@@ -29,5 +29,10 @@ class TipoFuenteRepository extends BaseRepository{
 		return $resultado;
 	}
 
+	public function get($id)
+	{
+		return $this->pdo->query("SELECT * FROM tipo_fuente WHERE id_tipo_fuente = $id")->fetch(\PDO::FETCH_ASSOC);
+	}
+
 	
 }

@@ -128,6 +128,17 @@ class Controller
     	return $title;
     }
 
+    /**
+	 * Create slug for urls
+	 * @param  string $str 
+	 * @return string
+	 */
+	public function url_slug($str) 
+	{ 
+	  return strtolower(preg_replace(array('/[^a-zA-Z0-9 -]/', '/[ -]+/', '/^-|-$/'), 
+	  	array('', '-', ''), without_accents($str))); 
+	}
+
     public function generarPdf($res, $data, $template) {
         $snappy = new Pdf('/usr/bin/wkhtmltopdf');
         $pd = $res->mustache->loadTemplate($template);

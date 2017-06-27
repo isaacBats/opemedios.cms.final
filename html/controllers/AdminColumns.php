@@ -250,7 +250,7 @@ class AdminColumns extends Controller
 		$im = new Image();
 
 		$explode = explode('.', $file['name']);
-		$name = $explode[0].'_'.uniqid();
+		$name = $this->url_slug($explode[0]).'_'.uniqid();
 		$file['createdName'] = $name.'.'.end($explode);
 		
 		$im->CreateThumb( $file['tmp_name'], $path, $name, 360, 480);

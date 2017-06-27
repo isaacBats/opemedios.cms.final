@@ -132,6 +132,8 @@
                                     </div>
                                 </div>                                
                             </div>
+
+                            <?php //Falta validacion de archivos ?>
                             <div class="form-group col-sm-12 col-md-12 col-lg-12">
                                 <label>Archivo de <?php if($fuente === 'Television'){
                                                                 echo str_replace('Television', 'Video', ucwords($fuente));
@@ -141,7 +143,7 @@
                                                                 echo $fuente;
                                                             } 
                                                       ?></label>
-                                <input type="file" name="primario[]" multiple />
+                                <input type="file" id="primario" name="primario[]" multiple />
                             </div>
                             <div class="col-sm-12 col-md-12 col-lg-12">
                                 <input type="submit" class="btn btn-primary" value="Guardar">

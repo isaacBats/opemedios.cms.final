@@ -80,6 +80,11 @@ $(document).ready(function(){
     startDate: '-3d'
     });
 
+    //  Valida extenciones de archivos
+    $('input#primario').on('change', function(){
+        alert('Tengo: ' + $(this).val());
+    })
+
 
     /* Filtro clientes envia correo */
     jQuery('input.filtro-clientes').on('keyup', function(event) {

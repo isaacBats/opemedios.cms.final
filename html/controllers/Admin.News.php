@@ -1256,4 +1256,37 @@ class AdminNews extends Controller{
             header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
         }	
 	}
+
+	public function testSendMail()
+	{
+		$noticias = $this->mapNewsForEmail($this->noticiasRepository->query("SELECT * FROM noticia WHERE id_noticia <= 598970 ORDER BY id_noticia DESC LIMIT 30"));
+
+		$first = current($noticias);
+
+		// echo '<pre>'; print_r([$first, $noticias]); exit;
+		
+		ob_start();
+		require $this->adminviews . 'viewsEmails/blockNewsEmail3.php';
+		$body = ob_get_clean();
+
+		echo $body; exit(); 
+		
+		// $mail = new Mail();
+		// $mail->setSubject('Bloque de Noticias Operadora de medios');
+		// $mail->setBody( $body );
+	}
+
+	private function mapNewsForEmail ($data)
+	{
+		return array_map(function($row){
+			$fuenteRepo = new FuentesRepository();			
+
+			return [
+				'id_new' => $row['id_noticia'],
+				'title' => $row['encabezado'],
+				'extract' => $row['sintesis'],
+				'logo_font' => $fuenteRepo->getLogoById($row['id_fuente'])['logo'],
+			];
+		}, $data);	
+	}
 }

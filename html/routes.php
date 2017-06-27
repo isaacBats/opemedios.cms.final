@@ -613,3 +613,8 @@ $collection->attachRoute(new Route('/panel/reports/clients', array(
 //     'parameters' => ['new' => 'hola'],
 //     'methods' => 'GET'
 // )));
+// 
+$collection->attachRoute(new Route('/test/mail-block', array(
+    '_controller' => 'AdminNews::testSendMail',
+    'methods' => 'GET'
+)));

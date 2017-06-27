@@ -342,6 +342,10 @@ class NoticiasRepository extends BaseRepository{
 		}
 
 		return $value;
+	}
+
+	public function query($qry){
+		return $this->pdo->query($qry)->fetchAll(PDO::FETCH_ASSOC);
 	}	
 
 }

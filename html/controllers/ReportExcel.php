@@ -23,10 +23,8 @@ class ReportExcel
 
 	public function make(array $data)
 	{
-		// vdd($data);
 		$i = 2;
 		foreach ($data as $key => $value) {
-			// echo '<pre>'; print_r($value); exit;
 			$this->objPHPExcel->setActiveSheetIndex(0)
 			->setCellValue("A{$i}", $value['medio'])
 			->setCellValue("B{$i}", $value['fuente'])
@@ -41,7 +39,6 @@ class ReportExcel
 			$this->objPHPExcel->getActiveSheet()->getCell("I{$i}")->getHyperlink()->setUrl(strip_tags('http://'.$value['link']));
 			$i++;
 		}
-  		// $this->objPHPExcel->getActiveSheet()->fromArray($data, null, 'A2');
 		$this->objPHPExcel->getActiveSheet()->setTitle($this->typeReport['titulo']);
 
 		return $this;

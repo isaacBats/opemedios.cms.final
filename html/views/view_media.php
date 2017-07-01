@@ -20,14 +20,18 @@
     <![endif]-->
 </head>
 <body>
-	<h2 class="text-center"><?= $title ?></h2>
-	<center>
-		<?= $media ?>		
-	</center>
-	<footer class="footer">
-	    <div class="container">
-	    	<p class="text-muted text-center"> © Opemedios 2016</p>
-	    </div>
-    </footer>	
+    <section class="container">
+    	<?php require $header; ?>
+        <center>
+    		<?= $media; ?>
+    	</center>
+    	<footer class="footer">
+    	    <div class="container">
+    	    	<p class="text-muted text-center"> © Opemedios 2016</p>
+    	    </div>
+        </footer>	
+        <script type="text/javascript" src="/assets/bower_components/jquery/dist/jquery.min.js"></script>
+        <script type="text/javascript" src="/assets/js/bootstrap.min.js"></script>
+    </section>
 </body>
 </html>

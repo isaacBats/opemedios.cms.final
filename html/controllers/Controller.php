@@ -277,6 +277,7 @@ class Controller
 		$noticia =  $noticiaRepository->getNewById( $noticia );
 
 		$title = $noticia['encabezado'];
+		$header = __OPEMEDIOS__ . "views/header_media/header_{$fuente}.php";
 
 		$media = '';
 
@@ -285,7 +286,6 @@ class Controller
 				$media = '<embed width="600" height="350" type="' . $archivo['tipo'] . '" src="/assets/data/noticias/' . $fuente . '/' . $archivo['nombre_archivo'] . '" title="' . $title . '" />';
 				break;
 			case ( $fuente == 2 || $fuente == 'radio'):
-				//$media = '<embed type="' . $archivo['tipo'] . '" src="/assets/data/noticias/' . $fuente . '/' . $archivo['nombre_archivo'] . '" title="' . $title . '" />';
 				$media = '
 							<audio controls preload>
 								<source src="/assets/data/noticias/' . $fuente . '/' . $archivo['nombre_archivo'] . '" type="' . $archivo['tipo'] . '" />
@@ -294,13 +294,13 @@ class Controller
 				';
 				break;
 			case ( $fuente == 3 || $fuente == 'periodico'):
-				$media = '<embed width="850" height="600" src="/assets/data/noticias/' . $fuente . '/' . $archivo['nombre_archivo'] . '" title="' . $title . '" />';
+				$media = "<img class='img-responsive' src='/assets/data/noticias/{$fuente}/{$archivo['nombre_archivo']}' alt='{$title}' />";
 				break;
 			case ( $fuente == 4 || $fuente == 'revista'):
-				$media = '<embed width="850" height="600" src="/assets/data/noticias/' . $fuente . '/' . $archivo['nombre_archivo'] . '" title="' . $title . '" />';
+				$media = "<img class='img-responsive' src='/assets/data/noticias/{$fuente}/{$archivo['nombre_archivo']}' alt='{$title}' />";
 				break;
 			case ( $fuente == 5 || $fuente == 'internet'):
-				$media = '<embed width="850" height="600" src="/assets/data/noticias/' . $fuente . '/' . $archivo['nombre_archivo'] . '" title="' . $title . '" />';
+				$media = "<img class='img-responsive' src='/assets/data/noticias/{$fuente}/{$archivo['nombre_archivo']}' alt='{$title}' />";
 				break;
 			
 			default:

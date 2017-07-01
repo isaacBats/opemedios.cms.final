@@ -23,8 +23,25 @@ class ReportExcel
 
 	public function make(array $data)
 	{
-		$this->objPHPExcel->setActiveSheetIndex(0);
-  		$this->objPHPExcel->getActiveSheet()->fromArray($data, null, 'A2');
+		// vdd($data);
+		$i = 2;
+		foreach ($data as $key => $value) {
+			// echo '<pre>'; print_r($value); exit;
+			$this->objPHPExcel->setActiveSheetIndex(0)
+			->setCellValue("A{$i}", $value['medio'])
+			->setCellValue("B{$i}", $value['fuente'])
+			->setCellValue("C{$i}", $value['encabezado'])
+			->setCellValue("D{$i}", $value['sintesis'])
+			->setCellValue("E{$i}", $value['tendencia'])
+			->setCellValue("F{$i}", $value['costo'])
+			->setCellValue("G{$i}", $value['alcance'])
+			->setCellValue("H{$i}", $value['fecha'])
+			->setCellValue("I{$i}", 'Ver');
+			$this->objPHPExcel->getActiveSheet()->getCell("I{$i}")->setDataType(PHPExcel_Cell_DataType::TYPE_STRING2);
+			$this->objPHPExcel->getActiveSheet()->getCell("I{$i}")->getHyperlink()->setUrl(strip_tags('http://'.$value['link']));
+			$i++;
+		}
+  		// $this->objPHPExcel->getActiveSheet()->fromArray($data, null, 'A2');
 		$this->objPHPExcel->getActiveSheet()->setTitle($this->typeReport['titulo']);
 
 		return $this;
@@ -44,11 +61,11 @@ class ReportExcel
 		
 		if($type === 'xls'){
 			header('Content-Type: application/vnd.ms-excel');
-			header('Content-Disposition: attachment;filename="'.$this->typeReport['filename'].'.xls"');
+			header('Content-Disposition: attachment;filename="'.$this->typeReport['filename'].'_'.date(YmdHis).'.xls"');
 			$objWriter = \PHPExcel_IOFactory::createWriter($this->objPHPExcel, 'Excel5');
 		}else{
 			header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-			header('Content-Disposition: attachment;filename="'.$this->typeReport['filename'].'.xlsx"');
+			header('Content-Disposition: attachment;filename="'.$this->typeReport['filename'].'_'.date(YmdHis).'.xlsx"');
 			$objWriter = \PHPExcel_IOFactory::createWriter($this->objPHPExcel, 'Excel2007');			
 		}
 

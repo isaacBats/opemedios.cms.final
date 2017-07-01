@@ -33,14 +33,9 @@ class ReportesRepository extends BaseRepository
 		$order = " ORDER BY noti.fecha DESC";
 		try{
 			$stmt = $this->pdo->prepare($sql.$where.$order);
-
-			if($stmt->execute()){
-				$this->result->exito = TRUE;
-				$this->result->rows = ($stmt->rowCount() > 0) ? $stmt->fetchAll(PDO::FETCH_ASSOC) : [];
-			}else{
-				$this->result->exito = FALSE;
-				$this->result->error = $stmt->errorInfo()[2];
-			}			
+			$stmt->execute();
+			return $stmt->fetchAll(PDO::FETCH_ASSOC);
+						
 		}catch(PDOException $err){
 			throw new PDOException("Error Processing Request: " . $err->getMessage());			
 		}

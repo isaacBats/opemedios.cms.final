@@ -16,11 +16,11 @@
 		</div>
 		<div class="form-group col-sm-4 col-sm-offset-2">
 			<label>Fecha inicio</label>
-			<input name="fecha_inicio" class="fechaNota form-control" required />			
+			<input name="fecha_inicio" class="fechaNota form-control" value="<?= date('Y-m-d') ?>" />			
 		</div>
 		<div class="form-group col-sm-4">
 			<label>Fecha final</label>
-			<input name="fecha_fin" class="fechaNota form-control" required />			
+			<input name="fecha_fin" class="fechaNota form-control" value="<?= date('Y-m-d') ?>" />			
 		</div>
 		<div class="form-group col-sm-8 col-sm-offset-2">
 		    <label for="tema">Tema</label>

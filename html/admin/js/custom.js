@@ -42,6 +42,19 @@ $(document).ready(function(){
             $('.required-hour').val(hour.toLocaleTimeString());
         }
 
+        // function cargaFechaReporte(){
+        //     var fechaInicio = $('#fechaInicio');
+        //     var fechaFin = $('#fechaFin');
+        //     var date = new Date.prototype.getTime();
+        //     console.log(date);
+        //     fechaInicio.val(date);            
+
+        //     // fechaInicio.datetimepicker({
+        //     //     format: 'YYYY-MM-D'
+        //     // });
+        // }
+        //  cargaFechaReporte();
+
 
     try{
 

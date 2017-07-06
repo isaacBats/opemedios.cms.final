@@ -81,7 +81,7 @@ class AdminNewRE extends AdminNews{
 								'seccion'    => $this->seccionRepo->getSeccionById( $_POST['seccion'] )['nombre'],
 								'tiraje'     => $tiraje,
 								'costo_cm'	 => 0,
-								'costo_nota' => 0,
+								'costo_nota' => $_POST['costoBeneficio'],
 								'tamanio'	 => 0,
 								'id_fuente'  => $_POST['fuente'],
 								'id_seccion'  => $_POST['seccion'],

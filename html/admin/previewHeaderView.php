@@ -54,16 +54,12 @@
 				<input type="hidden" name="encabezadoId" value="<?= $encabezado['id'] ?>">
 				<input type="hidden" name="adjuntoId" value="<?= $encabezado['id_adjunto'] ?>">
 				<input type="hidden" name="tipo_fuente" value="<?= $fuente ?>">
-				<div class="col-sm-4 form-group">
+				<div class="form-group col-sm-12">
                     <label>Fuente:</label>
                     <select id="selectFuente" class="select2 form-control" name="fuente" required >
                         <option value="">Seleccione una Fuente</option>
                         <?php foreach ($fuentes as $f): ?>
-                        	<?php if( $f['id_fuente'] == $seccion['id_fuente'] ): ?>
-                        		<option value="<?= $f['id_fuente'] ?>" selected ><?= $f['nombre'] ?></option>
-                        	<?php else: ?>
-                        		<option value="<?= $f['id_fuente'] ?>"><?= $f['nombre'] ?></option>
-                        	<?php endif; ?>
+                        	<option value="<?= $f['id_fuente'] ?>" <?= ($f['id_fuente'] == $seccion['id_fuente']) ? 'selected' : '' ?>><?= $f['nombre'] ?></option>
                         <?php endforeach; ?>
                     </select>
                 </div>
@@ -81,9 +77,21 @@
 					<label>Porcentaje:</label>
 					<input type="text" name="porcentaje" class="form-control" value="<?= $encabezado['porcentaje'] ?>">
 				</div>
-				<div class="col-sm-12">
-					<input type="submit" value="Guardar" class="btn btn-success pull-right">
-					<button id="cancel-edit-headers" type="button" class="btn btn-warning pull-right mr-10" >Cancelar</button>
+				<div class="form-group col-sm-2">
+					<label>Tamaño Cm<sup>2</sup></label>
+					<input type="text" name="cm2" class="form-control" value="<?= $encabezado['tamanio'] ?>">
+				</div>
+				<div class="form-group col-sm-2">
+					<label>Costo Cm<sup>2</sup></label>
+					<input type="text" name="costocm2" class="form-control" value="<?= $encabezado['costo_cm'] ?>">
+				</div>
+				<div class="form-group col-sm-2">
+					<label>Costo de la nota:</label>
+					<input type="text" name="costonota" class="form-control" value="<?= $encabezado['costo_nota'] ?>">
+				</div>
+				<div class="col-sm-4 col-sm-offset-6 mt-20">
+					<input type="submit" value="Guardar" class="btn btn-success">
+					<button id="cancel-edit-headers" type="button" class="btn btn-warning mr-10" >Cancelar</button>
 				</div>
 			</form>
 		</div>
@@ -110,11 +118,11 @@
 				<td><?= $encabezado['seccion']; ?></td>
 				<th>Impactos:</th>
 				<td><?= $encabezado['impactos']; ?></td>
-				<th>Costo/cm2:</th>
+				<th>Costo/cm<sup>2</sup>:</th>
 				<td>$<?= $encabezado['costo_cm']; ?></td>
 			</tr>
 			<tr>
-				<th>Cms2:</th>
+				<th>Cms<sup>2</sup>:</th>
 				<td><?= $encabezado['tamanio']; ?></td>
 				<th>Fraccion:</th>
 				<td><?= $fraccion['string']; ?></td>

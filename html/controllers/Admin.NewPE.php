@@ -86,7 +86,7 @@ class AdminNewPE extends AdminNews{
 								'seccion'    => $this->seccionRepo->getSeccionById( $_POST['seccion'] )['nombre'],
 								'tiraje'     => $tiraje,
 								'costo_cm'	 => 0,
-								'costo_nota' => 0,
+								'costo_nota' => $_POST['costoBeneficio'],
 								'tamanio'	 => 0,
 								'id_fuente'  => $_POST['fuente'],
 								'id_seccion'  => $_POST['seccion'],
@@ -159,7 +159,6 @@ class AdminNewPE extends AdminNews{
 			$seccion = $this->seccionRepo->getSeccionById( $encabezado['id_seccion'] );
 
 			$fraccion = unserialize($encabezado['fraccion']);
-			  // new DateTimeZone('America/Mexico_City')
 			$date = new \DateTime();
 			$fecha = $date->setTimestamp( $encabezado['fecha'] ); 
 
@@ -177,7 +176,6 @@ class AdminNewPE extends AdminNews{
 
 		$fuente   = $this->fuenteRepo->getFontById( $_POST['fuente'], substr( $_POST['tipo_fuente'], 0, 3 ) );
 		$seccion = $this->seccionRepo->getSeccionById( $_POST['seccion'] );
-
 		$tiraje = intval( $fuente['tiraje'] );
 		$updateEncabezado = [
 							'id'		 => $_POST['encabezadoId'],
@@ -188,9 +186,9 @@ class AdminNewPE extends AdminNews{
 							'porcentaje' => $_POST['porcentaje'],
 							'seccion'    => $seccion['nombre'],
 							'tiraje'     => $tiraje,
-							'costo_cm'	 => $encabezado['costo_cm'],
-							'costo_nota' => $encabezado['costo_nota'],
-							'tamanio'	 => $encabezado['tamanio'],
+							'costo_cm'	 => $_POST['costocm2'],
+							'costo_nota' => $_POST['costonota'],
+							'tamanio'	 => $_POST['cm2'],
 							'id_fuente'  => $_POST['fuente'],
 							'id_seccion'  => $_POST['seccion'],
 					     ];

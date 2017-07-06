@@ -64,8 +64,6 @@ class NoticiasRepository extends BaseRepository{
 					       f.nombre			AS 'fuente',
 					       n.id_seccion		AS 'seccion_id',
 					       scc.nombre		AS 'seccion',
-					       n.id_sector		AS 'sector_id',
-					       sec.nombre		AS 'sector',
 					       n.id_tipo_autor	AS 'tipoautor_id',
 					       ta.descripcion	AS 'tipoautor',
 					       n.id_genero		AS 'genero_id',
@@ -79,7 +77,6 @@ class NoticiasRepository extends BaseRepository{
 					INNER JOIN tipo_fuente tf ON n.id_tipo_fuente = tf.id_tipo_fuente
 					INNER JOIN fuente f 	  ON n.id_fuente = f.id_fuente
 					INNER JOIN seccion scc    ON n.id_seccion = scc.id_seccion
-					INNER JOIN sector sec     ON n.id_sector = sec.id_sector 
 					INNER JOIN tipo_autor ta  ON n.id_tipo_autor = ta.id_tipo_autor
 					INNER JOIN genero g 	  ON n.id_genero = g.id_genero
 					INNER JOIN tendencia t 	  ON n.id_tendencia_monitorista = t.id_tendencia
@@ -285,8 +282,6 @@ class NoticiasRepository extends BaseRepository{
 					       f.nombre			AS 'fuente',
 					       n.id_seccion		AS 'seccion_id',
 					       scc.nombre		AS 'seccion',
-					       n.id_sector		AS 'sector_id',
-					       sec.nombre		AS 'sector',
 					       n.id_tipo_autor	AS 'tipoautor_id',
 					       ta.descripcion	AS 'tipoautor',
 					       n.id_genero		AS 'genero_id',
@@ -299,13 +294,12 @@ class NoticiasRepository extends BaseRepository{
 					INNER JOIN tipo_fuente tf ON n.id_tipo_fuente = tf.id_tipo_fuente
 					INNER JOIN fuente f 	  ON n.id_fuente = f.id_fuente
 					INNER JOIN seccion scc    ON n.id_seccion = scc.id_seccion
-					INNER JOIN sector sec     ON n.id_sector = sec.id_sector 
 					INNER JOIN tipo_autor ta  ON n.id_tipo_autor = ta.id_tipo_autor
 					INNER JOIN genero g 	  ON n.id_genero = g.id_genero
 					INNER JOIN tendencia t 	  ON n.id_tendencia_monitorista = t.id_tendencia
 					INNER JOIN usuario u 	  ON n.id_usuario = u.id_usuario ";
 
-		$sqlCount = "SELECT COUNT(*) AS count FROM noticia n INNER JOIN tipo_fuente tf ON n.id_tipo_fuente = tf.id_tipo_fuente INNER JOIN fuente f ON n.id_fuente = f.id_fuente INNER JOIN seccion scc ON n.id_seccion = scc.id_seccion INNER JOIN sector sec ON n.id_sector = sec.id_sector INNER JOIN tipo_autor ta ON n.id_tipo_autor = ta.id_tipo_autor INNER JOIN genero g ON n.id_genero = g.id_genero INNER JOIN tendencia t ON n.id_tendencia_monitorista = t.id_tendencia INNER JOIN usuario u ON n.id_usuario = u.id_usuario ";
+		$sqlCount = "SELECT COUNT(*) AS count FROM noticia n INNER JOIN tipo_fuente tf ON n.id_tipo_fuente = tf.id_tipo_fuente INNER JOIN fuente f ON n.id_fuente = f.id_fuente INNER JOIN seccion scc ON n.id_seccion = scc.id_seccion INNER JOIN tipo_autor ta ON n.id_tipo_autor = ta.id_tipo_autor INNER JOIN genero g ON n.id_genero = g.id_genero INNER JOIN tendencia t ON n.id_tendencia_monitorista = t.id_tendencia INNER JOIN usuario u ON n.id_usuario = u.id_usuario ";
 
 		if( count( $data ) > 0 ){
 			

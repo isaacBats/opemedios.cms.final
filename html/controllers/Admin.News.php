@@ -86,11 +86,11 @@ class AdminNews extends Controller{
         }
 	}
 
-	public function viewNew ( $id ){
+	public function viewNew ($id){
 
 		if( isset( $_SESSION['admin'] ) ){
 			$fr = new FuentesRepository();
-			$newSelected = $this->noticiasRepository->getNewById( $id ); 
+			$newSelected = $this->noticiasRepository->getNewById($id); 
 			$relatedNew = null ;
 
 			$adjuntos = $this->adjuntoRepo->getAdjunto( $id );

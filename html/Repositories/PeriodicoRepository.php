@@ -45,7 +45,7 @@ class PeriodicoRepository extends BaseRepository{
 	public function addNewPE( $new ){
 
 		$idNew = $this->addNews( $new );
-
+		
 		$adjuntoRepo = new AdjuntoRepository();
 		
 		$adjunto = array();

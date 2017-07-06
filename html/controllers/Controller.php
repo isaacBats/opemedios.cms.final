@@ -268,14 +268,19 @@ class Controller
 		return $media;		
 	}
 
-	public function viewMedia( $fuente, $noticia){
+	public function viewMedia( $fuente, $new){
 
 		$adjuntoRepository = new AdjuntoRepository();		
 		$noticiaRepository = new NoticiasRepository();
+		$fuenteRepo = new FuentesRepository();
 
-		$archivo = $adjuntoRepository->getAdjunto( $noticia )[0];
-		$noticia =  $noticiaRepository->getNewById( $noticia );
-
+		$archivo = $adjuntoRepository->getAdjunto($new)[0];
+		$noticia =  $noticiaRepository->getNewById($new);
+		$pref = Util::tipoFuente($noticia['tipofuente_id'] -1)['pref'];
+		$comNoticia = $noticiaRepository->getNewById($new, $pref);
+		$noticia = array_merge($noticia, $comNoticia);
+		$font = $fuenteRepo->getFontById($noticia['fuente_id'], $pref);
+		vdd([$noticia, $font, $comNoticia]);
 		$title = $noticia['encabezado'];
 		$header = __OPEMEDIOS__ . "views/header_media/header_{$fuente}.php";
 

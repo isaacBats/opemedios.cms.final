@@ -49,7 +49,7 @@ class NoticiasRepository extends BaseRepository{
 	public function getNewById( $id, $font = '' ) {
 
 		if( $font != '' || $font != null ){
-			$query = $this->pdo->prepare( 'SELECT * FROM noticia_' . $font . ' WHERE id_noticia = :id' );			
+			$query = $this->pdo->prepare('SELECT * FROM noticia_' . $font . ' WHERE id_noticia = :id');			
 		}else{
 			$sql = "SELECT n.id_noticia 	AS 'id', 
 					       n.encabezado 	AS 'encabezado', 

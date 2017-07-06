@@ -33,9 +33,8 @@ class BaseRepository {
 	}
 
 	public function addNews( $new ){
-		$sql = "INSERT INTO noticia (encabezado, sintesis, autor, fecha, alcanse, id_tipo_fuente, id_fuente, id_seccion, id_sector, id_tipo_autor, id_genero, id_tendencia_monitorista, id_usuario) 
-							VALUES(:encabezado, :sintesis, :autor, :fecha, :alcance, :idTipoFuente, :idFuente, :idSeccion, :idSector, :idTipoAutor, :idGenero, :idTendenciaMonitorista, :idUsuario)";
-		$new['sector'] = '49';
+		$sql = "INSERT INTO noticia (encabezado, sintesis, autor, fecha, alcanse, id_tipo_fuente, id_fuente, id_seccion, id_tipo_autor, id_genero, id_tendencia_monitorista, id_usuario) 
+							VALUES(:encabezado, :sintesis, :autor, :fecha, :alcance, :idTipoFuente, :idFuente, :idSeccion, :idTipoAutor, :idGenero, :idTendenciaMonitorista, :idUsuario)";
 		$new['fecha'] = date('Y-m-d');
 
 		$query = $this->pdo->prepare($sql);
@@ -47,18 +46,15 @@ class BaseRepository {
 		$query->bindParam(':idTipoFuente',$new['tipoFuente']);
 		$query->bindParam(':idFuente',$new['fuente']);
 		$query->bindParam(':idSeccion',$new['seccion']);
-		$query->bindParam(':idSector',$new['sector']);
 		$query->bindParam(':idTipoAutor',$new['tipoAutor']);
 		$query->bindParam(':idGenero',$new['genero']);
 		$query->bindParam(':idTendenciaMonitorista',$new['tendencia']);
 		$query->bindParam(':idUsuario',$new['usuario']);
 			
 		if($query->execute()){
-			$lastInsert = $this->pdo->prepare('SELECT LAST_INSERT_ID() AS id;');
-			if($lastInsert->execute()){
-				$lastInsertID = $lastInsert->fetch();
-				return $lastInsertID['id'];
-			}
+			return $this->pdo->lastInsertId();
+		} else {
+			echo $query->errorInfo()[2]; exit;
 		}
 
 	}

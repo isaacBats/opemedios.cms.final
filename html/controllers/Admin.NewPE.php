@@ -60,8 +60,7 @@ class AdminNewPE extends AdminNews{
 
 	public function save(){
 
-		if( !empty($_POST) ){
-
+		if( !empty($_POST) ) {
 			// si no existe un folder con el mes y el año se crea
 			$createdAt = new DateTime();
 			$folder = $createdAt->format('m-Y');
@@ -100,13 +99,8 @@ class AdminNewPE extends AdminNews{
 				}, $_FILES['primario']['name'], $_FILES['primario']['type'], $_FILES['primario']['tmp_name'], $_FILES['primario']['error'], $_FILES['primario']['size']);
 			}
 			$_POST['archivos'] = $fil;
-
-			// vdd($_POST);
-
 			$notice = $this->peRepository->addNewPE( $_POST );
-
 			if( $notice->exito ){
-
 				/* guarda archivos */
 				foreach ($notice->fileName as $file) {
 					foreach ($fil as &$origin) {
@@ -128,17 +122,14 @@ class AdminNewPE extends AdminNews{
 
 					$this->bloqueRepo->insertNewToBlock( $bloque );
 				}
-
 				header('Location: /panel/news');
 			}else{
-				echo 'No se agrego a la tabla noticia_ped  <pre>';
+				echo 'No se agrego a la tabla noticia_per  <pre>';
 				print_r($notice);
 			}
-			
 		}else{
 			header('Location: /panel/new/add/new-periodico');
 		}
-
 	}
 
 	private function validaFraccion( $fraccion )

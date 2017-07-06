@@ -273,17 +273,16 @@ class Controller
 		$adjuntoRepository = new AdjuntoRepository();		
 		$noticiaRepository = new NoticiasRepository();
 		$fuenteRepo = new FuentesRepository();
+		$encabezadoRepo = new EncabezadoRepository();
 
 		$archivo = $adjuntoRepository->getAdjunto($new)[0];
 		$noticia =  $noticiaRepository->getNewById($new);
-		$pref = Util::tipoFuente($noticia['tipofuente_id'] -1)['pref'];
-		$comNoticia = $noticiaRepository->getNewById($new, $pref);
-		$noticia = array_merge($noticia, $comNoticia);
-		$font = $fuenteRepo->getFontById($noticia['fuente_id'], $pref);
-		vdd([$noticia, $font, $comNoticia]);
-		$title = $noticia['encabezado'];
+		$encabezado = $encabezadoRepo->findByAdjuntoId($archivo['id_adjunto']);
+		$font = $fuenteRepo->getFontById($noticia['fuente_id']);
+		$fraccion = unserialize($encabezado['fraccion']);
+		$date = new \DateTime();
+		$fecha = $date->setTimestamp( $encabezado['fecha'] ); 
 		$header = __OPEMEDIOS__ . "views/header_media/header_{$fuente}.php";
-
 		$media = '';
 
 		switch ( $fuente ) {
@@ -299,13 +298,13 @@ class Controller
 				';
 				break;
 			case ( $fuente == 3 || $fuente == 'periodico'):
-				$media = "<img class='img-responsive' src='/assets/data/noticias/{$fuente}/{$archivo['nombre_archivo']}' alt='{$title}' />";
+				$media = "<img class='img-responsive' src='/{$archivo['carpeta']}{$archivo['nombre_archivo']}' alt='{$title}' />";
 				break;
 			case ( $fuente == 4 || $fuente == 'revista'):
-				$media = "<img class='img-responsive' src='/assets/data/noticias/{$fuente}/{$archivo['nombre_archivo']}' alt='{$title}' />";
+				$media = "<img class='img-responsive' src='/{$archivo['carpeta']}{$archivo['nombre_archivo']}' alt='{$title}' />";
 				break;
 			case ( $fuente == 5 || $fuente == 'internet'):
-				$media = "<img class='img-responsive' src='/assets/data/noticias/{$fuente}/{$archivo['nombre_archivo']}' alt='{$title}' />";
+				$media = "<img class='img-responsive' src='/{$archivo['carpeta']}{$archivo['nombre_archivo']}' alt='{$title}' />";
 				break;
 			
 			default:

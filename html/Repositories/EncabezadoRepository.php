@@ -46,7 +46,7 @@ class EncabezadoRepository extends BaseRepository
 	{
 		try
 		{
-			return $this->pdo->query('SELECT * FROM ' . $this->table . ' WHERE id_adjunto = ' . $adjuntoId )->fetch();	
+			return $this->pdo->query('SELECT * FROM ' . $this->table . ' WHERE id_adjunto = ' . $adjuntoId )->fetch(PDO::FETCH_ASSOC);	
 		}
 		catch( PDOException $error )
 		{

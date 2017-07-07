@@ -1,7 +1,7 @@
 <div class="row">
 	<div class="media">
 		<div class="media-left media-middle">
-		    <img class="media-object" src="/<?= $font['logo'] ?>" alt="<?= $font['nombre'] ?>">
+		    <img class="media-object" src="/<?= $font['logo'] ?>" alt="<?= $font['nombre'] ?>" style="max-width: 200px;">
 	  	</div>
 	  	<div class="media-body">
 	  		<div class="row">

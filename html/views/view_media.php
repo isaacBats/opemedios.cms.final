@@ -27,7 +27,7 @@
     	</center>
     	<footer class="footer">
     	    <div class="container">
-    	    	<p class="text-muted text-center"> © Opemedios 2016</p>
+    	    	<p class="text-muted text-center"> © Opemedios 2017</p>
     	    </div>
         </footer>	
         <script type="text/javascript" src="/assets/bower_components/jquery/dist/jquery.min.js"></script>

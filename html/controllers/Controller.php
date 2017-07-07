@@ -304,7 +304,9 @@ class Controller
 				$media = "<img class='img-responsive' src='/{$archivo['carpeta']}{$archivo['nombre_archivo']}' alt='{$title}' />";
 				break;
 			case ( $fuente == 5 || $fuente == 'internet'):
-				$media = "<img class='img-responsive' src='/{$archivo['carpeta']}{$archivo['nombre_archivo']}' alt='{$title}' />";
+				$media = "<div class'embed-responsive embed-responsive-16by9'>
+							<embed class='embed-responsive-item' type='{$archivo['tipo']}' src='/{$archivo['carpeta']}{$archivo['nombre_archivo']}' title='{$title}' />
+						  </div>";
 				break;
 			
 			default:

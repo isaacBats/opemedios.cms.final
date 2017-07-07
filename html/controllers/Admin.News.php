@@ -554,7 +554,7 @@ class AdminNews extends Controller{
 	public static function guardaArchivo( $principal, $ruta ){
 
 		// $extencionesPermitidas = ['pdf', 'jpg', 'jpeg', 'gif', 'png', 'JPG', 'JPEG', 'PNG', 'mp4', 'wma', 'wmv', 'mp3', 'avi', 'xlsx', 'csv'];
-		$extencionesPermitidas = ['jpg', 'jpeg', 'gif', 'png', 'JPG', 'JPEG', 'PNG', 'mp4', 'mp3', 'csv'];
+		$extencionesPermitidas = ['jpg', 'jpeg', 'gif', 'png', 'JPG', 'JPEG', 'PNG', 'mp4', 'mp3', 'csv', 'pdf'];
 		$explode = explode(".", $principal["name"]);
 		$extension = end($explode);
 		if ((($principal['type'] == 'image/png')
@@ -563,6 +563,7 @@ class AdminNews extends Controller{
 			|| ($principal['type'] == 'image/PNG')
 			|| ($principal['type'] == 'audio/mp3')
 			|| ($principal['type'] == 'text/csv')
+			|| ($principal['type'] == 'application/pdf')
 			|| ($principal['type'] == 'video/mp4'))
 			&& in_array($extension, $extencionesPermitidas))
 		{

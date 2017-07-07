@@ -95,7 +95,29 @@ $(document).ready(function(){
 
     //  Valida extenciones de archivos
     $('input#primario').on('change', function(){
-        alert('Tengo: ' + $(this).val());
+        console.log($(this).val())
+        var file = $(this).val().split('\\').pop()
+        var ext = file.split('.').pop()
+        var extPermitidas = ['pdf', 'jpg', 'jpeg', 'png', 'mp4', 'mp3']
+        if (extPermitidas.indexOf(ext.toLowerCase()) == -1) {
+            var $modal = $('#myModal')
+            var $modalTitle = $('#myModalLabel')
+            var $modalBody = $modal.find('.modal-body')
+            var $btnConfirmation = $modal.find('.btn-primary')
+                $btnConfirmation.attr('id', 'btn-confirmation')
+
+            $modalTitle.text('Archivo no soportado')
+            $modalBody.append('<p>El archivo que seleccionaste no es valido ó no es soportado por la plataforma, por favor selecciona otro archivo.</p>')
+            $btnConfirmation.text('Aceptar')
+            $modal.modal()
+            // debugger
+        }
+    })
+
+    // Si se confirma el modal que te dice que el archivo no es valido
+    $('#wrapper').on('click', '#btn-confirmation', function () {
+        $('input#primario').val('')
+        $('#myModal').modal('hide')
     })
 
 

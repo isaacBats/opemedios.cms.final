@@ -281,13 +281,15 @@ class Controller
 		$font = $fuenteRepo->getFontById($noticia['fuente_id']);
 		$fraccion = unserialize($encabezado['fraccion']);
 		$date = new \DateTime();
-		$fecha = $date->setTimestamp( $encabezado['fecha'] ); 
+		$fecha = ($encabezado) ? $date->setTimestamp( $encabezado['fecha'] ) : $date->createFromFormat('Y-m-d', $noticia['fecha']);
 		$header = __OPEMEDIOS__ . "views/header_media/header_{$fuente}.php";
 		$media = '';
-
+		
 		switch ( $fuente ) {
 			case ( $fuente == 1 || $fuente == 'television'):
-				$media = '<embed width="600" height="350" type="' . $archivo['tipo'] . '" src="/assets/data/noticias/' . $fuente . '/' . $archivo['nombre_archivo'] . '" title="' . $title . '" />';
+				$media = "<div class='embed-responsive embed-responsive-16by9'>
+						  		<iframe class='embed-responsive-item' src='/{$archivo['carpeta']}{$archivo['nombre_archivo']}'></iframe>
+							</div>";
 				break;
 			case ( $fuente == 2 || $fuente == 'radio'):
 				$media = '
@@ -304,9 +306,15 @@ class Controller
 				$media = "<img class='img-responsive' src='/{$archivo['carpeta']}{$archivo['nombre_archivo']}' alt='{$title}' />";
 				break;
 			case ( $fuente == 5 || $fuente == 'internet'):
-				$media = "<div class'embed-responsive embed-responsive-16by9'>
-							<embed class='embed-responsive-item' type='{$archivo['tipo']}' src='/{$archivo['carpeta']}{$archivo['nombre_archivo']}' title='{$title}' />
-						  </div>";
+				$tipo = explode('/', $archivo['tipo'])[1];
+				$img_permitidas = ['jpg', 'png', 'jpeg', 'gif'];
+				if (in_array($tipo, $img_permitidas)) {
+					$media = "<img class='img-responsive' src='/{$archivo['carpeta']}{$archivo['nombre_archivo']}' alt='{$title}' />";
+				} else {
+					$media = "<div class='embed-responsive embed-responsive-16by9'>
+							  		<iframe class='embed-responsive-item' src='/{$archivo['carpeta']}{$archivo['nombre_archivo']}'></iframe>
+								</div>";
+				}
 				break;
 			
 			default:

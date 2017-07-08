@@ -184,10 +184,18 @@ class AdminNews extends Controller{
 					$font = 'int';
 					$relatedNew = $this->noticiasRepository->getNewById( $id, $font );
 					if( is_array( $relatedNew ) ){
+						$tipo = explode('/', $adjunto['tipo'])[1];
+						$img_permitidas = ['jpg', 'png', 'jpeg', 'gif'];
+						if (!in_array($tipo, $img_permitidas)) {
+							$htmlAdjunto = "<div class='embed-responsive embed-responsive-16by9'>
+						  		<iframe class='embed-responsive-item' src='/{$adjunto['carpeta']}{$adjunto['nombre_archivo']}'></iframe>
+							</div>";
+						}
+
 						$html = '
 									<p>Hora de captura: <strong>' . $relatedNew['hora_publicacion'] . '</strong></p>
 									<p>URL: <a href="' . $relatedNew['url'] . '" target="_blank" >' . $relatedNew['url'] . '</a></p>							
-						';					
+						';
 					}
 					break;
 			}

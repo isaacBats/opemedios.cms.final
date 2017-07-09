@@ -220,50 +220,8 @@ class Controller
 
 		$adjuntoRepo = new AdjuntoRepository();
 		$adjunto = current($adjuntoRepo->getAdjunto($newId));
-
-		switch ($fontTypeId) {
-			case '1':
-				$media['file'] = '
-					<video style="width: 100%;" class="adjunto-media" src="/'. $adjunto['carpeta'] . $adjunto['nombre_archivo'] .'" controls  >
-						<p>Tu navegador no implementa el elemento video</p>
-					</video>
-			   ';
-			   $media['icon'] = '<i class="fa ' . Util::tipoFuente($fontTypeId - 1)['icon'] . '" ></i>';
-
-				break;
-			case '2':
-				$media['file'] = '
-					<audio class="adjunto-media" src="/'. $adjunto['carpeta'] . $adjunto['nombre_archivo'] .'" controls  >
-						<p>Tu navegador no implementa el elemento audio</p>
-					</audio>
-			   ';
-			   $media['icon'] = '<i class="fa ' . Util::tipoFuente($fontTypeId - 1)['icon'] . '" ></i>';
-
-				break;
-			case '3':
-				$media['file'] = '
-					<img src="/'. $adjunto['carpeta'] . $adjunto['nombre_archivo'] .'" class="img-responsive" alt="'.$adjunto['nombre'].'" >
-			   ';
-			   $media['icon'] = '<i class="fa ' . Util::tipoFuente($fontTypeId - 1)['icon'] . '" ></i>';
-
-				break;
-			case '4':
-				$media['file'] = '
-					<img src="/'. $adjunto['carpeta'] . $adjunto['nombre_archivo'] .'" class="img-responsive" alt="'.$adjunto['nombre'].'" >
-			   ';
-			   $media['icon'] = '<i class="fa ' . Util::tipoFuente($fontTypeId - 1)['icon'] . '" ></i>';
-
-				break;
-			case '5':
-				$media['file'] = '
-					<img src="/'. $adjunto['carpeta'] . $adjunto['nombre_archivo'] .'" class="img-responsive" alt="'.$adjunto['nombre'].'" >
-			   ';
-			   $media['icon'] = '<i class="fa ' . Util::tipoFuente($fontTypeId - 1)['icon'] . '" ></i>';
-				
-				break;
-			default:
-				$media = '<strong>Esa fuente no existe</strong>';
-		}
+		$media['icon'] = '<i class="fa ' . Util::tipoFuente($fontTypeId - 1)['icon'] . '" ></i>';
+		$media['file'] = $this->getMedia($adjunto);
 
 		return $media;		
 	}
@@ -283,48 +241,67 @@ class Controller
 		$date = new \DateTime();
 		$fecha = ($encabezado) ? $date->setTimestamp( $encabezado['fecha'] ) : $date->createFromFormat('Y-m-d', $noticia['fecha']);
 		$header = __OPEMEDIOS__ . "views/header_media/header_{$fuente}.php";
-		$media = '';
-		
-		switch ( $fuente ) {
-			case ( $fuente == 1 || $fuente == 'television'):
-				$media = "<div class='embed-responsive embed-responsive-16by9'>
-						  		<iframe class='embed-responsive-item' src='/{$archivo['carpeta']}{$archivo['nombre_archivo']}'></iframe>
-							</div>";
-				break;
-			case ( $fuente == 2 || $fuente == 'radio'):
-				$media = '
-							<audio controls preload>
-								<source src="/assets/data/noticias/' . $fuente . '/' . $archivo['nombre_archivo'] . '" type="' . $archivo['tipo'] . '" />
-								Tu navegador no soporta la caracteristica de escuchar Audio
-							</audio>
-				';
-				break;
-			case ( $fuente == 3 || $fuente == 'periodico'):
-				$media = "<img class='img-responsive' src='/{$archivo['carpeta']}{$archivo['nombre_archivo']}' alt='{$title}' />";
-				break;
-			case ( $fuente == 4 || $fuente == 'revista'):
-				$media = "<img class='img-responsive' src='/{$archivo['carpeta']}{$archivo['nombre_archivo']}' alt='{$title}' />";
-				break;
-			case ( $fuente == 5 || $fuente == 'internet'):
-				$tipo = explode('/', $archivo['tipo'])[1];
-				$img_permitidas = ['jpg', 'png', 'jpeg', 'gif'];
-				if (in_array($tipo, $img_permitidas)) {
-					$media = "<img class='img-responsive' src='/{$archivo['carpeta']}{$archivo['nombre_archivo']}' alt='{$title}' />";
-				} else {
-					$media = "<div class='embed-responsive embed-responsive-16by9'>
-							  		<iframe class='embed-responsive-item' src='/{$archivo['carpeta']}{$archivo['nombre_archivo']}'></iframe>
-								</div>";
-				}
-				break;
-			
-			default:
-				echo 'No existe esa fuente';
-				break;
-		}
+		$media = $this->getMedia($archivo);
 
 		require $this->views . 'view_media.php';
 	}
+	
+	protected function getMedia($file)
+	{
+		$img_allowed = ['jpg', 'png', 'jpeg', 'gif', 'pjpeg'];
+		$doc_allowed = ['csv', 'pdf'];
+		$media_allowed_old = ['x-ms-wma', 'x-ms-wmv', 'mpeg3', 'mpeg4'];
+		$media_allowed = ['webm', 'mp4', 'ogv', 'ogg'];
+		$audio_allowed = ['mp3', 'wav', 'x-pn-wav', 'x-wav'];
+		$type = end(explode('/', $file['tipo']));
 		
+		$html = "El sistema no soporta elementos de tipo <strong>{$type}</strong>";
+		if(in_array($type, $img_allowed)) {
+			$html = "<img class='img-responsive' src='/{$file['carpeta']}{$file['nombre_archivo']}' alt='Opemedios - {$file['nombre']}' />";
+		}
+
+		if(in_array($type, $doc_allowed)) {
+			$html = "<div class='embed-responsive embed-responsive-16by9'>
+		  		<iframe class='embed-responsive-item' src='/{$file['carpeta']}{$file['nombre_archivo']}'></iframe>
+			</div>";
+		}
+
+		if(in_array($type, $media_allowed_old)) {
+			$html = "<div class='embed-responsive embed-responsive-16by9'>
+		  		<object class='embed-responsive-item' data='{$file['nombre_archivo']}' type='{$file['tipo']}'>
+					   <param name='src' value='/{$file['carpeta']}{$file['nombre_archivo']}'>
+					   <param name='autostart' value='0'>
+					   <param name='volume' value='0'>
+					   <param name='showcontrols' value='1'>
+					   <param name='showdisplay' value='1'>
+					   <param name='showstatusbar' value='1'>
+					   <param name='playcount' value='1'>
+		  		</object>
+			</div>";
+		}
+
+		if(in_array($type, $media_allowed)) {
+			$html = "<div class='embed-responsive embed-responsive-16by9'>
+				<video class='embed-responsive-item' controls
+				  <source
+				    src='/{$file['carpeta']}{$file['nombre_archivo']}'
+				    type='{$file['tipo']}' />
+				  Your browser doesn't support HTML5 video tag.
+				</video>
+			</div>";
+		}
+
+		if(in_array($type, $audio_allowed)) {
+			$html = "<div class='embed-responsive embed-responsive-16by9'>
+				<audio controls='controls'>
+				  <source src='/{$file['carpeta']}{$file['nombre_archivo']}' type='{$file['tipo']}' />
+				  Your browser does not support the <code>audio</code> element.
+				</audio>
+			</div>";
+		}
+
+		return $html;
+	}
 		
 }
 

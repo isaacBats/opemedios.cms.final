@@ -136,7 +136,7 @@ table.reporte a{
 /*-----------------------Ajuste botones panel admin--------------------*/
 @media screen and (max-width:1300px) {
     .btn-primary {
-        width: 93px;
+        /*width: 93px;*/
         margin-right: 8px;
     }
 }

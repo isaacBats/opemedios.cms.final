@@ -282,6 +282,11 @@
 
 		}
 
+		.title-teme {
+		    color: blue;
+			font-weight: bolder;
+		}
+
 		.social-networks{
 
 		}
@@ -359,7 +364,7 @@
 					</table>
 				</div><!-- /content -->
 				<?php foreach ($noticias as $tema => $notis): ?>
-					<h3><?= $tema ?></h3>
+					<h3 class="title-teme"><?= $tema ?></h3>
 					<hr>
 					<!-- content -->
 					<?php foreach ($notis as $value): ?>

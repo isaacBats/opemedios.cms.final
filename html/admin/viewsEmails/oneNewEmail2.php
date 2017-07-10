@@ -179,7 +179,7 @@
             <!-- Hero Image, Flush : BEGIN -->
             <tr>
                 <td bgcolor="#ffffff">
-                    <?= $file ?>
+                    <?php //echo $file ?>
                 </td>
             </tr>
             <!-- Hero Image, Flush : END -->
@@ -187,7 +187,19 @@
             <!-- 1 Column Text : BEGIN -->
             <tr>
                 <td bgcolor="#ffffff" style="padding: 40px; text-align: justify; font-family: sans-serif; font-size: 15px; mso-height-rule: exactly; line-height: 20px; color: #555555;">
-                    <?= $new['sintesis'] ?>
+                    <?= cortarTexto($new['sintesis'], 200) ?>
+                    <table>
+                        <tr>
+                            <td><strong>Autor: </strong> <?= $new['autor'] ?></td>
+                            <td><strong>Alcance: </strong> <?= $new['alcance'] ?></td>
+                            <td><strong>Fuente: </strong> <?= $new['fuente'] ?></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Sección: </strong> <?= $new['seccion'] ?></td>
+                            <td><strong>Tendencia: </strong> <?= $new['tendencia'] ?></td>
+                            <td><strong>Fecha: </strong> <?= $new['fecha'] ?></td>
+                        </tr>
+                    </table>
                     <br><br>
                     <!-- Button : Begin -->
                     <table cellspacing="0" cellpadding="0" border="0" align="center" style="margin: auto">

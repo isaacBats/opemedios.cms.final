@@ -2,8 +2,9 @@
 <html>
 <head>
 	<!-- If you delete this meta tag, the ground will open and swallow you. -->
+	<meta charset="utf-8"> 
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"> 
 	<meta name="viewport" content="width=device-width" />
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title>Bloque de noticias OPEMEDIOS</title>
 	<style type="text/css">
 		/* ------------------------------------- 

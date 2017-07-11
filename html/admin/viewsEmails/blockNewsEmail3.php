@@ -321,8 +321,7 @@
 						<tr>
 							<td></td>
 							<!-- Esta sería la imagen del logo del cliente -->
-							<!-- <td><img src="http://<?php //echo $_SERVER['HTTP_HOST'] ?>/assets/images/logo_110X40.png" style="float: right;" /></td> -->
-							<td><img src="https://lh6.googleusercontent.com/rTTH0knFU5H6mEdM2_qPGAYMFZSxzpy3x2b3E4M3btKGEunuUcV7me-CrhPQvHT5btR91pEMd8C9mHU=w2552-h1318" style="float: right;" /></td>
+							<td><img src="http://<?= $_SERVER['HTTP_HOST'] ?>/assets/images/logo_110X40.png" style="float: right;" /></td>
 							<!-- <td align="right"><h6 class="collapse">Newsletter</h6></td> -->
 						</tr>
 					</table>
@@ -347,8 +346,7 @@
 									<figcaption>
 										Noticias
 									</figcaption>
-									<!-- <img src="http://<?php //echo $_SERVER['HTTP_HOST'] ?>/assets/images/email/1.jpg" width="600" height="300" /> -->
-									<img src="https://lh3.googleusercontent.com/ApSjswIdgez0emWd13z9H2GWoVQUZ22pIEahH4i6Q0HLEacqMJSsBkmg-sfrSwzJnj23P0NE7K4atZ0=w2552-h1318-rw" width="600" height="300" />
+									<img src="http://<?= $_SERVER['HTTP_HOST'] ?>/assets/images/email/1.jpg" width="600" height="300" />
 								</figure>
 								<div class="lista">
 									<ul>

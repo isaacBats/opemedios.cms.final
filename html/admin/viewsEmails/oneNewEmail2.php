@@ -65,6 +65,10 @@
         table table table {
             table-layout: auto; 
         }
+
+        .table-info {
+            margin-top: 15px !important;
+        }
         
         /* What it does: Uses a better rendering method when resizing images in IE. */
         img {
@@ -159,7 +163,7 @@
         <table cellspacing="0" cellpadding="0" border="0" align="center" width="600" style="margin: auto;" class="email-container">
             <tr>
                 <td style="padding: 20px 0; text-align: center">
-                    <img src="http://www.opemedios.com.mx/images/logo.png" width="230" height="100" alt="opemedios logo" border="0">
+                    <img src="http://<?= $_SERVER['HTTP_HOST'] ?>/assets/images/logo.png" width="230" height="100" alt="opemedios logo" border="0">
                 </td>
             </tr>
         </table>
@@ -188,15 +192,17 @@
             <tr>
                 <td bgcolor="#ffffff" style="padding: 40px; text-align: justify; font-family: sans-serif; font-size: 15px; mso-height-rule: exactly; line-height: 20px; color: #555555;">
                     <?= cortarTexto($new['sintesis'], 200) ?>
-                    <table>
+                    <table cellpadding="5" class="table-info" width="100%" >
                         <tr>
                             <td><strong>Autor: </strong> <?= $new['autor'] ?></td>
-                            <td><strong>Alcance: </strong> <?= $new['alcance'] ?></td>
-                            <td><strong>Fuente: </strong> <?= $new['fuente'] ?></td>
+                            <td><strong>Sección: </strong> <?= $new['seccion'] ?></td>
                         </tr>
                         <tr>
-                            <td><strong>Sección: </strong> <?= $new['seccion'] ?></td>
+                            <td><strong>Alcance: </strong> <?= $new['alcance'] ?></td>
                             <td><strong>Tendencia: </strong> <?= $new['tendencia'] ?></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Fuente: </strong> <?= $new['fuente'] ?></td>
                             <td><strong>Fecha: </strong> <?= $new['fecha'] ?></td>
                         </tr>
                     </table>
@@ -205,7 +211,7 @@
                     <table cellspacing="0" cellpadding="0" border="0" align="center" style="margin: auto">
                         <tr>
                             <td style="border-radius: 3px; background: #1c0e0e; text-align: center;" class="button-td">
-                                <a href="http://<?= $_SERVER["HTTP_HOST"] ?>/noticia/<?= $new['tipofuente_id'].'/'.$new['id'] ?>" target="_blank" style="background: #1c0e0e; border: 15px solid #1c0e0e; font-family: sans-serif; font-size: 13px; line-height: 1.1; text-align: center; text-decoration: none; display: block; border-radius: 3px; font-weight: bold;" class="button-a">
+                                <a href="http://<?= "{$_SERVER['HTTP_HOST']}/noticia/".strtolower($new['tipofuente'])."/{$new['id']}" ?>" target="_blank" style="background: #1c0e0e; border: 15px solid #1c0e0e; font-family: sans-serif; font-size: 13px; line-height: 1.1; text-align: center; text-decoration: none; display: block; border-radius: 3px; font-weight: bold;" class="button-a">
                                     &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#ffffff">Ver noticia completa</span>&nbsp;&nbsp;&nbsp;&nbsp;
                                 </a>
                             </td>

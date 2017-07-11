@@ -322,7 +322,7 @@
 						<tr>
 							<td></td>
 							<!-- Esta sería la imagen del logo del cliente -->
-							<td><img src="http://<?= $_SERVER['HTTP_HOST'] ?>/assets/images/logo_110X40.png" style="float: right;" /></td>
+							<td><img src="http://<?= "{$_SERVER['HTTP_HOST']}/{$empresa['logo']}" ?>" style="float: right;" width="110px" /></td>
 							<!-- <td align="right"><h6 class="collapse">Newsletter</h6></td> -->
 						</tr>
 					</table>
@@ -363,7 +363,7 @@
 					</table>
 				</div><!-- /content -->
 				<?php foreach ($noticias as $tema => $notis): ?>
-					<h3 class="title-teme"><?= $tema ?></h3>
+					<h3 class="title-teme"><?= utf8_decode($tema) ?></h3>
 					<hr>
 					<!-- content -->
 					<?php foreach ($notis as $value): ?>
@@ -374,7 +374,7 @@
 									<!-- <td class="small" width="20%" style="vertical-align: top; padding-right:10px;"><img src="/<?php //echo $value['logo_font'] ?>" /></td> -->
 									<td>
 										<h4><?= $value['title'] ?></h4>
-										<p class=""><?= cortarTexto($value['extract'], 150) ?></p>
+										<p class=""><?= utf8_decode(cortarTexto($value['extract'], 150)) ?></p>
 										<p>
 											<small class="text-help">(
 												<?= "{$value['fuente']}-{$value['seccion']}, " . 

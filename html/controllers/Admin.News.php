@@ -783,6 +783,8 @@ class AdminNews extends Controller{
 		}
 	}
 
+	// Esta funcion ya no se usa para mandar noticias. El metodo vigente es sendBlock()
+	// 11-07-2017
 	public function sendBlockNewsAction(){
 
 		if( isset( $_SESSION['noticias'] ) && count( $_SESSION['noticias'] ) > 0 )
@@ -799,10 +801,6 @@ class AdminNews extends Controller{
 			ob_start();
 			require $this->adminviews . 'viewsEmails/blockNewsEmail3.php';
 			$body = ob_get_clean();
-
-			/*echo '<pre>'; print_r( $noticias ); print_r($_POST); exit();*/
-			echo $body; exit(); 
-			//echo '<pre>'; print_r($noticiaPrincipal); exit();
 
 			$mail = new Mail();
 			$mail->setSubject('Bloque de Noticias Operadora de medios');
@@ -1191,7 +1189,6 @@ class AdminNews extends Controller{
 				require $this->adminviews . 'viewsEmails/blockNewsEmail3.php';
 				$body = ob_get_clean();
 
-				// vdd($body);
 				// echo $body; exit(); 
 				
 				$mail = new Mail();

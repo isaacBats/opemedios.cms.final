@@ -747,15 +747,19 @@ class AdminNews extends Controller{
 				}
 			}
 		}
-		if( count($noenviados) == 0 && $this->noticiasRepository->insertAsigna( compact('noticiaid', 'empresaid', 'temaid', 'tendenciaid') ) ){
-			
-			echo 'Se mando el correo correctamente';
+		$alert = new stdClass();
+		if (count($noenviados) == 0 && $this->noticiasRepository->insertAsigna( compact('noticiaid', 'empresaid', 'temaid', 'tendenciaid'))) {
+			$alert->exito = true;
+			$alert->tipo = 'alert-info';
+			$alert->mensaje = 'Se mando el correo correctamente';
 
 		}else{
-			echo 'No se puede mandar el correo a: <br>';
-			echo '<pre>';
-			print_r($noenviados);
+			$alert->exito = false;
+			$alert->tipo = 'alert-warning';
+			$alert->mensaje = 'No se puede mandar el correo a: ' . implode(', ', $noenviados);
 		}
+		$_SESSION['alerts']['sendMail'] = $alert;
+		header( 'Location: /panel/news');		
 	}
 
 	public function advancedSearch(){

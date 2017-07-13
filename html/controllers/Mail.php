@@ -2,25 +2,28 @@
 
 require_once(__DIR__ . '/../admin/lib/php-mailer/PHPMailerAutoload.php');
 
-Class Mail{
+Class Mail 
+{
 
 	private $mail;
 	
 	public function __construct(){
 
 		$properties = parse_ini_file(__DIR__ . '/../config.ini');
+
+		$serverMail = $properties['WebMailType'];
 			
 		$this->mail = new PHPMailer();
-		$this->mail->IsSMTP();
 		$this->mail->isHTML(true);
-		$this->mail->SMTPAuth = true;
-
-		$this->mail->SMTPSecure = $properties['SMTPSecure'];
-		$this->mail->Host = $properties['hostEmail'];
-		$this->mail->Port = $properties['port'];
-		$this->mail->Username = $properties['email'];
-		$this->mail->Password = $properties['passwordEmail'];
-		//$this->mail->AddAddress( $properties['emailReceptor'], 'Usuario Opemedios' );
+		if ($serverMail == 'smtp') {
+			$this->mail->IsSMTP();
+			$this->mail->SMTPAuth = true;
+			$this->mail->SMTPSecure = $properties['SMTPSecure'];
+			$this->mail->Host = $properties['hostEmail'];
+			$this->mail->Port = $properties['port'];
+			$this->mail->Username = $properties['email'];
+			$this->mail->Password = $properties['passwordEmail'];
+		}		
 		$this->mail->SetFrom($properties['emailSender'], 'Noticias OPEMEDIOS');
 		$this->mail->Subject = 'Mensaje de prueba';
 		$this->mail->Body =

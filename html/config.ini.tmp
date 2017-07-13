@@ -1,3 +1,9 @@
+;Esta configuracion acepta dos parametros
+;	smtp: cuando tienes un servidor SMTP que configurar
+;	mail: cuando usas la funcion mail() nativa de php
+[Server mail]
+	WebMailType 	= smtp
+	
 ;mail: correo que se va a configurar para el envio de correos
 ;mailReceptor: Un correo que recibe
 ;passwordEmail: la clave para poder mandar correos desde la cuelta asignada

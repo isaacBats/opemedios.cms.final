@@ -758,54 +758,6 @@ class AdminNews extends Controller{
 		}
 	}
 
-	// Esta funcion ya no se usa para mandar noticias. El metodo vigente es sendBlock()
-	// 11-07-2017
-	public function sendBlockNewsAction(){
-
-		if( isset( $_SESSION['noticias'] ) && count( $_SESSION['noticias'] ) > 0 )
-		{
-			$noticias = $_SESSION['noticias'];
-
-			$usuarios = $_POST;
-			$resultado = $usuarios;
-
-			$noticiaPrincipal =  current($noticias);
-			
-			$empresaid = array_shift($resultado);
-
-			ob_start();
-			require $this->adminviews . 'viewsEmails/blockNewsEmail3.php';
-			$body = ob_get_clean();
-
-			$mail = new Mail();
-			$mail->setSubject('Bloque de Noticias Operadora de medios');
-			$mail->setBody( $body );
-			// exit();
-			$noenviados = [];
-
-			foreach ($usuarios as $key => $email) {
-				if( $key != 'empresaid' ){
-					$key = str_replace('_', ' ', $key);
-					$exito = $mail->sendMail( $email, $key );
-					if( !$exito ){
-						$noenviado = [$key => $email ];
-						array_push($noenviados, $noenviado);
-					}					
-				}
-			}
-			if( count($noenviados) == 0 ){
-				
-				unset($_SESSION['noticias']);
-				echo 'Se mando el correo correctamente';
-
-			}else{
-				echo 'No se puede mandar el correo a: <br>';
-				echo '<pre>';
-				print_r($noenviados);
-			}
-		}
-	}
-
 	public function advancedSearch(){
 
 		if( isset( $_SESSION['admin'] ) ){

@@ -595,31 +595,6 @@ class AdminNews extends Controller{
 		}
 	}
 
-	public function createImage( $id ){
-
-		// $new = $this->noticiasRepository->getNewById( $id );
-		// print_r($new); exit();
-		
-		$new = [
-			'pagina'	=> '35',
-			'seccion' 	=> 'CULTURA Y ENTRETENIMIENTO',
-			'cm2'		=> '34',
-			'tiraje'	=> '50,072',
-			'impactos'	=> '150,216',
-			'fraccion'	=> '1/25',
-			'porcentaje'=> '4.00%',
-			'cost/Cm2'	=> '$126',
-			'costoNota' => '$4,420'
-		];
-
-		$imagen = new Image( $new );
-
-		header('Content-Type: image/jpeg');
-		$nueva = $imagen->createImage();		
-		imagejpeg($nueva);
-		imagedestroy($nueva);
-	}
-
 	public function sendMailView( $id ){
 
 		if( isset( $_SESSION['admin'] ) ){

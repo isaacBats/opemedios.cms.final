@@ -195,7 +195,7 @@
                     <table cellpadding="5" class="table-info" width="100%" >
                         <tr>
                             <td><strong>Autor: </strong> <?= $new['autor'] ?></td>
-                            <td><strong>Sección: </strong> <?= $new['seccion'] ?></td>
+                            <td><strong>Secci&oacute;n: </strong> <?= $new['seccion'] ?></td>
                         </tr>
                         <tr>
                             <td><strong>Alcance: </strong> <?= $new['alcance'] ?></td>

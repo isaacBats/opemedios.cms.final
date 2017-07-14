@@ -1,4 +1,5 @@
-	<?= $this->flashAlerts('sendMail'); ?>
+    <?= $this->flashAlerts('sendMail'); ?>
+	<?= $this->flashAlerts('saven'); ?>
     <div class="row">
         <div class="col-lg-12">
             <h1 class="page-header">Noticias de hoy</h1>

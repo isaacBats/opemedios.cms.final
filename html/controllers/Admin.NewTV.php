@@ -68,9 +68,11 @@ class AdminNewTV extends AdminNews{
 				}, $_FILES['primario']['name'], $_FILES['primario']['type'], $_FILES['primario']['tmp_name'], $_FILES['primario']['error'], $_FILES['primario']['size']);
 			}
 			$_POST['archivos'] = $fil;
+			$archivosGuardados = array();
 			
 			$notice = $this->tvRepository->addNewTV( $_POST );
 
+			$res = new stdClass();
 			if( $notice->exito ){
 
 				/* guarda archivos */
@@ -79,7 +81,8 @@ class AdminNewTV extends AdminNews{
 						if( $origin['name'] == $file->originName && $origin['size'] == $file->size ){
 							$origin['createdName'] = $file->name;
 							if( $this->guardaArchivo( $origin, $this->getUrlArchivo() ) ){
-								echo 'Archivo guardado en '. $this->getUrlArchivo();
+								$message = 'Archivo guardado en '. $this->getUrlArchivo() . $file->name;
+								array_push($archivosGuardados, $message);
 							}							
 						}
 					}
@@ -94,12 +97,14 @@ class AdminNewTV extends AdminNews{
 
 					$this->bloqueRepo->insertNewToBlock( $bloque );
 				}
-				
-				header('Location: /panel/news');
+				$res->tipo = 'alert-info';
+				$res->mensaje = '<strong>Éxito!. </strong> Noticia creada satisfactoriamente';
 			}else{
-				echo 'No se agrego a la tabla noticia_tel';
+				$res->tipo = 'alert-warning';
+				$res->mensaje = "No se agregó a la tabla de {$this->fuente}";
 			}
-			
+			$_SESSION['alerts']['saven'] = $res;			
+			header('Location: /panel/news');
 		}else{
 			header('Location: /panel/new/add/new-television');
 		}

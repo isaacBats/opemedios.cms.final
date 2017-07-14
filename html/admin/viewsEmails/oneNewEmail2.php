@@ -172,7 +172,7 @@
         <table cellspacing="0" cellpadding="0" border="0" align="center" width="600" style="margin: auto;" class="email-container">
             <tr>
                 <td bgcolor="#ffffff" style="padding: 20px 0; text-align: center">
-                    <h1 style="margin: 10px; padding-top: 30px; text-align: center;"><?= uft8_decode($new{'encabezado'}) ?></h1>                                
+                    <h1 style="margin: 10px; padding-top: 30px; text-align: center;"><?= utf8_decode($new{'encabezado'}) ?></h1>                                
                 </td>
             </tr>
         </table>
@@ -191,7 +191,7 @@
             <!-- 1 Column Text : BEGIN -->
             <tr>
                 <td bgcolor="#ffffff" style="padding: 40px; text-align: justify; font-family: sans-serif; font-size: 15px; mso-height-rule: exactly; line-height: 20px; color: #555555;">
-                    <?= uft8_decode(cortarTexto($new['sintesis'], 200)) ?>
+                    <?= utf8_decode(cortarTexto($new['sintesis'], 200)) ?>
                     <table cellpadding="5" class="table-info" width="100%" >
                         <tr>
                             <td><strong>Autor: </strong> <?= $new['autor'] ?></td>

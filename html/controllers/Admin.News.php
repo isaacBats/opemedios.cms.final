@@ -730,7 +730,7 @@ class AdminNews extends Controller{
 		// echo $body; exit;
 
 		$mail = new Mail();
-		$mail->setSubject('Noticia Operadora de medios - ' . utf8_decode(strtoupper($new['tipofuente'])));
+		$mail->setSubject('Noticia Operadora de medios - ' . utf8_decode(ucfirst(strtolower($new['tipofuente']))));
 		$mail->setBody( $body );
 		// exit();
 		$noenviados = [];

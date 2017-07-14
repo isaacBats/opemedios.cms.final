@@ -20,9 +20,7 @@ class Profile extends Controller{
 		$this->noticiasRepo = new NoticiasRepository ();
 		$this->portadasRepo = new PortadasRepository ();
 		$this->fuentesRepo = new FuentesRepository ();
-		$this->temasId = array_map(function($theme) {
-			return $theme['id_tema'];
-		}, $_SESSION['user']['temas']);
+		$this->temasId = $this->getTemesProfile();
 		$this->company = [
 			'id' => $_SESSION['user']['id_empresa'],
 			'name' => $_SESSION['user']['empresa'], 
@@ -33,6 +31,17 @@ class Profile extends Controller{
 			'logo' => $_SESSION['user']['logo_empresa'],
 			'giro' => $_SESSION['user']['giro'],
 		];
+	}
+
+	private function getTemesProfile()
+	{
+		if (isset($_SESSION['user']['temas'])) {
+			return array_map(function($theme) {
+				return $theme['id_tema'];
+			}, $_SESSION['user']['temas']);
+		}
+
+		return [];
 	}
 
 	public function getCompany()
@@ -98,12 +107,10 @@ class Profile extends Controller{
 
 	public function detailNewView($fontType, $newId)
 	{
-		if( isset( $_SESSION['user'] ) ){
-
-
+		if(isset($_SESSION['user'])){
 			$new = $this->noticiasRepo->getNewById($newId);
 			$media = $this->getMediaHTML($new['tipofuente_id'], $newId);
-			
+ 			
 			if ($fontType === 'internet')
 				$newInternet = $this->noticiasRepo->getNewById($newId, 'int');
 

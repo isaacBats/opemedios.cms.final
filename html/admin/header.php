@@ -112,19 +112,19 @@
                                     <a href="javascript:void(0)">Agregar Noticia <span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
                                         <li>
-                                            <a href="/panel/new/add/new-television"><i class="fa fa-television fa-fw"></i> Televisión</a>
+                                            <a href="#" onclick="window.open('/panel/new/add/new-television','','scrollbars=yes,resizable=yes,width=522,height=660')"><i class="fa fa-television fa-fw"></i> Televisión</a>
                                         </li>
                                         <li>
-                                            <a href="/panel/new/add/new-radio"><i class="fa fa-microphone fa-fw"></i> Radio</a>
+                                            <a href="#" onclick="window.open('/panel/new/add/new-radio','','scrollbars=yes,resizable=yes,width=522,height=660')" ><i class="fa fa-microphone fa-fw"></i> Radio</a>
                                         </li>
                                         <li>
-                                            <a href="/panel/new/add/new-periodico"><i class="fa fa-newspaper-o fa-fw"></i> Periódico</a>
+                                            <a href="#" onclick="window.open('/panel/new/add/new-periodico','','scrollbars=yes,resizable=yes,width=522,height=660')" ><i class="fa fa-newspaper-o fa-fw"></i> Periódico</a>
                                         </li>
                                         <li>
-                                            <a href="/panel/new/add/new-revista"><i class="fa fa-columns fa-fw"></i> Revista</a>
+                                            <a href="#" onclick="window.open('/panel/new/add/new-revista','','scrollbars=yes,resizable=yes,width=522,height=660')" ><i class="fa fa-columns fa-fw"></i> Revista</a>
                                         </li>
                                         <li>
-                                            <a href="/panel/new/add/new-internet"><i class="fa fa-chrome fa-fw"></i> Internet</a>
+                                            <a href="#" onclick="window.open('/panel/new/add/new-internet','','scrollbars=yes,resizable=yes,width=522,height=660')" ><i class="fa fa-chrome fa-fw"></i> Internet</a>
                                         </li>
                                     </ul>
                                 </li>

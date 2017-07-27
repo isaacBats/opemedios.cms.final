@@ -53,14 +53,14 @@
                             </div>
                             <div class="form-group col-sm-12 col-md-6 col-lg-3">
                                 <label>Tipo de autor:</label>
-                                 <select class="form-control" name="tipoAutor">
+                                 <select class="form-control" name="tipoAutor" required >
                                     <option value="">Tipo de Autor</option>
                                     <?= $tipoAutor ?>
                                 </select>
                             </div>
                             <div class="form-group col-sm-12 col-md-6 col-lg-3">
                                 <label>Genero:</label>
-                                 <select class="form-control" name="genero">
+                                 <select class="form-control" name="genero" required >
                                     <option value="">Género</option>
                                     <?= $genero ?>
                                 </select>
@@ -86,7 +86,7 @@
                                 </div>
                                 <div class="form-group col-sm-3">
                                     <label>Tendencia:</label>
-                                     <select class="form-control" name="tendencia">
+                                     <select class="form-control" name="tendencia" required>
                                         <option value="">Tendencia</option>
                                         <option value="1" >Positiva</option>
                                         <option value="2" >Neutral</option>

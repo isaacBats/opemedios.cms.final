@@ -785,11 +785,14 @@ class AdminNews extends Controller{
 				$count = $resultados->count;
 				$end = ( $page + $limit >= $count ) ? $count : $page + $limit;
 				foreach ( $resultados->rows as $noticia ) {
+					$asigna = $this->noticiasRepository->asignaByIdNoticia( $noticia['id'] );
+					$enviado = ( is_array( $asigna ) ) ? $asigna['empresa'] : 'No enviado';
+
 					$html .= '	<tr>
 					            	<td class="text-center"><i class="fa ' . Util::tipoFuente($noticia['tipofuente_id'] - 1)['icon'] . ' fa-3" style="font-size:40px; "></i></td>
 					            	<td><a href="/panel/new/view/'.$noticia['id'].'">' . $noticia['encabezado'] . '</a></td>
 					              	<td>' . $noticia['fuente'] . '</td>
-					              	<td>Enviado a</td>
+					              	<td>' . $enviado . '</td>
 					           	</tr>';
 				}
 			}

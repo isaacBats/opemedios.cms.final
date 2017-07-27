@@ -319,7 +319,7 @@ class NoticiasRepository extends BaseRepository{
 				$w .= " AND n.fecha <= '" . @$ffin . "' ";
 
 			$l = ' LIMIT ' . $limit . ' OFFSET ' . $page;
-			$o = ' ORDER BY n.fecha';
+			$o = ' ORDER BY n.fecha DESC';
 
 			$query = $this->pdo->prepare ( $sql . $w . $o . $l );
 		}

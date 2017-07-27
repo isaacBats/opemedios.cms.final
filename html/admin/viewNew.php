@@ -37,6 +37,7 @@
 		<p>Sección: <strong><?= $newSelected['seccion'] ?></strong></p>
 		<p>Género: <strong><?= $newSelected['genero'] ?></strong></p>
 		<p>Tendencia: <strong><?= $newSelected['tendencia'] ?></strong></p>
+		<p>Costo: <strong>$<?= number_format($relatedNew['costo'], 2, '.', ',') ?></strong></p>
 		<p>Alcance: <strong><?= $newSelected['alcance'] ?></strong></p>
 		<p>Usuario que subio la nota : </p><strong><?= $newSelected['usuario'] . ' ' . $newSelected['apellidos'] ?></strong>
 		<div class="col-sm-6">

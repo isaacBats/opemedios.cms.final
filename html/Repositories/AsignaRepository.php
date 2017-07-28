@@ -18,17 +18,14 @@ class AsignaRepository extends BaseRepository
 			$qry_count = "SELECT COUNT(*) AS count FROM asigna a INNER JOIN noticia n ON a.id_noticia = n.id_noticia WHERE a.id_empresa = $empresa AND a.id_tema in ($tema) AND (n.encabezado LIKE '%{$search}%' OR n.sintesis LIKE '%{$search}%')";
 		}
 		// exit($qry_news . PHP_EOL . $qry_count);
-		$stmt_news = $this->pdo->prepare($qry_news);
-		$stmt_count = $this->pdo->prepare($qry_count);
 
-		if ($stmt_news->execute())
-			$news = ($stmt_news->rowCount() > 0) ? $stmt_news->fetchAll(PDO::FETCH_ASSOC) : 0;
-		if($stmt_count->execute())
-			$count = ($stmt_count->rowCount() > 0) ? $stmt_count->fetchAll(PDO::FETCH_ASSOC)['count'] : 0;
-		
+		$news = $this->pdo->query($qry_news)->fetchAll(\PDO::FETCH_ASSOC);
+		$count = $this->pdo->query($qry_count)->fetch(\PDO::FETCH_ASSOC);
+
+
 		return [
-			'rows' => $news, 
-			'count' => $count
+			'rows' => (!$news) ? 0 : $news, 
+			'count' => (!$count) ? 0 : $count['count']
 			];
 	}
 
@@ -37,12 +34,13 @@ class AsignaRepository extends BaseRepository
 		if (is_array($tema))
 			$tema = implode(",", $tema);
 
-		$news = $this->pdo->query("SELECT a.id_noticia, n.fecha FROM asigna a 
+		$stmt = $this->pdo->prepare("SELECT a.id_noticia, n.fecha FROM asigna a 
 			INNER JOIN noticia n ON a.id_noticia = n.id_noticia 
-			WHERE id_empresa = $empresa AND id_tema in ($tema)")->fetchAll(\PDO::FETCH_ASSOC);
+			WHERE id_empresa = $empresa AND id_tema in ($tema)");
 		
 		$totals = array();
-		if($news) {
+		if($stmt->execute()) {
+			$news = $stmt->fetchAll(PDO::FETCH_ASSOC);
 			
 			$totals['mounth'] = count(array_filter($news, function($row) {
 				

@@ -22,8 +22,8 @@ class AsignaRepository extends BaseRepository
 			$news = $this->pdo->query($qry_news)->fetchAll(\PDO::FETCH_ASSOC);
 			$count = $this->pdo->query($qry_count)->fetch(\PDO::FETCH_ASSOC);
 		} catch (Exception $e) {
-			$news = false;
-			$count = false;			
+			echo $e->getMessage();
+			exit;			
 		}
 
 

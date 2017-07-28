@@ -18,9 +18,13 @@ class AsignaRepository extends BaseRepository
 			$qry_count = "SELECT COUNT(*) AS count FROM asigna a INNER JOIN noticia n ON a.id_noticia = n.id_noticia WHERE a.id_empresa = $empresa AND a.id_tema in ($tema) AND (n.encabezado LIKE '%{$search}%' OR n.sintesis LIKE '%{$search}%')";
 		}
 		// exit($qry_news . PHP_EOL . $qry_count);
-
-		$news = $this->pdo->query($qry_news)->fetchAll(\PDO::FETCH_ASSOC);
-		$count = $this->pdo->query($qry_count)->fetch(\PDO::FETCH_ASSOC);
+		try {
+			$news = $this->pdo->query($qry_news)->fetchAll(\PDO::FETCH_ASSOC);
+			$count = $this->pdo->query($qry_count)->fetch(\PDO::FETCH_ASSOC);
+		} catch (Exception $e) {
+			$news = false;
+			$count = false;			
+		}
 
 
 		return [

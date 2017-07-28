@@ -19,9 +19,14 @@ class AsignaRepository extends BaseRepository
 		}
 		// exit($qry_news . PHP_EOL . $qry_count);
 
-		$news = $this->pdo->query($qry_news)->fetchAll(\PDO::FETCH_ASSOC);
-		$count = $this->pdo->query($qry_count)->fetch(\PDO::FETCH_ASSOC);
+		$stmt_news = $this->pdo->prepare($qry_news);
+		$stmt_count = $this->pdo->prepare($qry_count);
 
+		if ($stmt_news->execute())
+			$news = ($stmt_news->rowCount() > 0) ? $stmt_news->fetchAll(PDO::FETCH_ASSOC) : 0;
+
+		if ($stmt_couunt->execute())
+			$count = ($stmt_couunt->rowCount() > 0) ? $stmt_couunt->fetch(PDO::FETCH_ASSOC) : 0;
 
 		return [
 			'rows' => (!$news) ? 0 : $news, 

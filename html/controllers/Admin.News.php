@@ -96,12 +96,7 @@ class AdminNews extends Controller{
 			$adjuntos = $this->adjuntoRepo->getAdjunto( $id );
 			$adjunto = $adjuntos[0];
 
-			$htmlAdjunto = '
-								<figure class="figure">
-								  <img src="/'. $adjunto['carpeta'] . $adjunto['nombre_archivo'] .'" class="figure-img img-fluid rounded" alt="'.$adjunto['nombre'].'" style="max-width: 100%;">
-								  <figcaption class="figure-caption text-xs-right">'.$newSelected['encabezado'].'.</figcaption>
-								</figure>
-						   ';
+			$htmlAdjunto = $this->getMedia($adjunto);
 
 			$html = '';
 			switch ($newSelected['tipofuente_id']) {
@@ -114,12 +109,6 @@ class AdminNews extends Controller{
 									<p>Duración: <strong>' . $relatedNew['duracion'] . '</strong></p>
 						';					
 					}
-
-					$htmlAdjunto = '
-										<video class="adjunto-media" src="/'. $adjunto['carpeta'] . $adjunto['nombre_archivo'] .'" controls style="max-width: 100%;" >
-											<p>Tu navegador no implementa el elemento video</p>
-										</video>
-								   ';
 					break;
 				case '2':
 					$font = 'rad';
@@ -130,13 +119,6 @@ class AdminNews extends Controller{
 									<p>Duración: <strong>' . $relatedNew['duracion'] . '</strong></p>
 						';					
 					}
-
-					$htmlAdjunto = '
-										<audio class="adjunto-media" src="/'. $adjunto['carpeta'] . $adjunto['nombre_archivo'] .'" controls style="max-width: 100%;" >
-											<p>Tu navegador no implementa el elemento audio</p>
-										</audio>
-								   ';
-
 					break;
 				case '3':
 					$font = 'per';
@@ -150,10 +132,9 @@ class AdminNews extends Controller{
 
 						
 						$htmlAdjunto .= '<ul class="adjunto-list">';
-						for($i = 0; $i < sizeof( $adjuntos ); $i++)
-						{
+						foreach ($adjuntos as $adj) {
 							$htmlAdjunto .= '<li class="adjunto-item">
-									<a href="/panel/new/encabezado/periodico/'. $adjuntos[$i]['id_adjunto'] .'"><img width="150" src="/' . $adjuntos[$i]['carpeta'] . $adjuntos[$i]['nombre_archivo'] . '" /></a>
+									'.$this->getMedia($adj).'
 								</li>';
 						}
 						$htmlAdjunto .= '</ul>';
@@ -171,10 +152,9 @@ class AdminNews extends Controller{
 						$imageUbicacion = '<img src="'. Util::ubicationDetail( $relatedNew['ubicacion'] )['image'] .'" />';
 
 						$htmlAdjunto .= '<ul class="adjunto-list">';
-						for($i = 0; $i < sizeof( $adjuntos ); $i++)
-						{
+						foreach ($adjuntos as $adj) {
 							$htmlAdjunto .= '<li class="adjunto-item">
-									<a href="/panel/new/encabezado/revista/'. $adjuntos[$i]['id_adjunto'] .'"><img width="150" src="/' . $adjuntos[$i]['carpeta'] . $adjuntos[$i]['nombre_archivo'] . '" /></a>
+									'.$this->getMedia($adj).'
 								</li>';
 						}
 						$htmlAdjunto .= '</ul>';
@@ -184,14 +164,6 @@ class AdminNews extends Controller{
 					$font = 'int';
 					$relatedNew = $this->noticiasRepository->getNewById( $id, $font );
 					if( is_array( $relatedNew ) ){
-						$tipo = explode('/', $adjunto['tipo'])[1];
-						$img_permitidas = ['jpg', 'png', 'jpeg', 'gif'];
-						if (!in_array($tipo, $img_permitidas)) {
-							$htmlAdjunto = "<div class='embed-responsive embed-responsive-16by9'>
-						  		<iframe class='embed-responsive-item' src='/{$adjunto['carpeta']}{$adjunto['nombre_archivo']}'></iframe>
-							</div>";
-						}
-
 						$html = '
 									<p>Hora de captura: <strong>' . $relatedNew['hora_publicacion'] . '</strong></p>
 									<p>URL: <a href="' . $relatedNew['url'] . '" target="_blank" >' . $relatedNew['url'] . '</a></p>							

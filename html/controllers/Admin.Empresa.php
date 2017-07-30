@@ -2,7 +2,8 @@
 
 use utilities\MediaDirectory;
 use utilities\Image as Imagen;
-
+// TODO: @Empresas validar que el email de la nueva empresa sea unico
+// TODO: @Cuenta Validar que en la tabla de cuentas el mail y el username sean unicos.
 class AdminEmpresa extends Controller
 {
 	private $temaRep;

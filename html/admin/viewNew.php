@@ -48,5 +48,11 @@
 	</div>
 	<div class="col-md-8">
 		<?= $htmlAdjunto ?>
+		<p>
+			<strong>Url del archivo:</strong>
+			<span>
+				<a href="<?= "http://{$_SERVER['HTTP_HOST']}/media/".without_accents(strtolower($newSelected['tipofuente']))."/{$newSelected['id']}" ?>"><?= "http://{$_SERVER['HTTP_HOST']}/media/".without_accents(strtolower($newSelected['tipofuente']))."/{$newSelected['id']}" ?></a>
+			</span>
+		</p>
 	</div>	
 </div>

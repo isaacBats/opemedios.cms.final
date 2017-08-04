@@ -606,3 +606,10 @@ $collection->attachRoute(new Route('/test/mail-block', array(
     '_controller' => 'AdminNews::testSendMail',
     'methods' => 'GET'
 )));
+
+// Test one mail  
+$collection->attachRoute(new Route('/test/mail', array(
+    '_controller' => 'AdminNews::testOneMail',
+    'parameters' => ['newId' => 598000],
+    'methods' => 'GET'
+)));

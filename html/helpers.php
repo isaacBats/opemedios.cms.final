@@ -77,6 +77,19 @@ function without_accents ($cadena){
     return utf8_encode($cadena);
 }
 
+function url_mini($url){
+    $longitud = strlen($url);
+    if($longitud > 45){
+        $longitud = $longitud - 30;
+        $parte_inicial = substr($url, 0, -$longitud);
+        $parte_final = substr($url, -15);
+        $nueva_url = $parte_inicial."[ ... ]".$parte_final;
+        return $nueva_url;
+    }else{
+        return $url;
+    }
+}
+
 
 /**
  * Header response type json  

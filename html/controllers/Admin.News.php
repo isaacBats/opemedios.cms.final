@@ -1,7 +1,7 @@
 <?php 
 
 use utilities\Util;
-
+// TODO: @Noticias Poner la url del archivo de media.
 class AdminNews extends Controller{
 
 	private $noticiasRepository;		
@@ -90,7 +90,7 @@ class AdminNews extends Controller{
 
 		if( isset( $_SESSION['admin'] ) ){
 			$fr = new FuentesRepository();
-			$newSelected = $this->noticiasRepository->getNewById($id); 
+			$newSelected = $this->noticiasRepository->getNewById($id);
 			$relatedNew = null ;
 
 			$adjuntos = $this->adjuntoRepo->getAdjunto( $id );
@@ -687,9 +687,8 @@ class AdminNews extends Controller{
 		$noticiaid = array_shift($resultado);
 		$empresaid = array_shift($resultado);
 		
-		$new = $this->noticiasRepository->getNewById( $noticiaid ); 	
-		$adjunto = $adjuntoRepo->getAdjunto( $noticiaid );
-
+		$new = $this->mapNewForEmail($this->noticiasRepository->getNewById($noticiaid));
+		
 		$tema  = $temRep->getThemaByEmpresaID( $empresaid );
 		$temaid = $tema[0]['id_tema'];
 
@@ -697,7 +696,7 @@ class AdminNews extends Controller{
 		$relatedNew = $this->noticiasRepository->getNewById( $noticiaid, $font );
 
 		ob_start();
-		require $this->adminviews . 'viewsEmails/oneNewEmail2.php';
+		require $this->adminviews . 'viewsEmails/oneNewEmail.php';
 		$body = ob_get_clean();
 		// echo $body; exit;
 
@@ -1159,10 +1158,6 @@ class AdminNews extends Controller{
 		$body = ob_get_clean();
 
 		echo $body; exit(); 
-		
-		// $mail = new Mail();
-		// $mail->setSubject('Bloque de Noticias Operadora de medios');
-		// $mail->setBody( $body );
 	}
 
 	private function mapNewsForEmail ($data)
@@ -1192,5 +1187,45 @@ class AdminNews extends Controller{
 				'nombre_bloque' => $row['name']
 			];
 		}, $data);	
+	}
+
+	public function testOneMail($newId)
+	{
+		$new = $this->mapNewForEmail($this->noticiasRepository->getNewById($newId));
+
+		ob_start();
+		require $this->adminviews . 'viewsEmails/oneNewEmail.php';
+		$body = ob_get_clean();
+
+		echo $body;
+	}
+
+	private function mapNewForEmail($data)
+	{
+		setlocale(LC_TIME, 'es_ES');
+		$date = new DateTime($data['fecha']);
+		$fecha = ucfirst(strftime('%B %d, %G', $date->getTimestamp()));
+		$urlOpemedios = "http://{$_SERVER['HTTP_HOST']}/noticia/".without_accents(strtolower($data['tipofuente']))."/{$data['id']}";
+		$complement = $this->noticiasRepository->getComplement($data['id'], $data['tipofuente_id']);
+		$costo = is_array($complement) ? $complement['costo'] : 0;
+		$url = is_array($complement) ? (isset($complement['url']) ? $complement['url'] : '') : '';
+		$adjunto = current($this->adjuntoRepo->getAdjunto($data['id']));
+		$file = "/{$adjunto['carpeta']}{$adjunto['nombre_archivo']}";
+		return [
+			'tipoFuente' => $data['tipofuente'],
+			'fecha' => $fecha,
+			'titulo' => $data['encabezado'],
+			'sintesis' => $data['sintesis'],
+			'sintesisCorta' => cortarTexto($data['sintesis'], 50),
+			'urlOpemedios' => $urlOpemedios,
+			'cb' => $costo,
+			'alcance' => $data['alcance'],
+			'autor' => $data['autor'],
+			'genero' => $data['genero'],
+			'tendencia' => $data['tendencia'],
+			'url' => $url,
+			'fuente' => $data['fuente'],
+			'path_archivo' => $file,
+		];
 	}
 }

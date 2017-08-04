@@ -1,6 +1,9 @@
 <?php 
 
+use utilities\Util;
+
 include_once("BaseRepository.php");
+require_once __DIR__ . '/../Utilities/Util.php';
 
 class NoticiasRepository extends BaseRepository{
 
@@ -340,6 +343,18 @@ class NoticiasRepository extends BaseRepository{
 
 	public function query($qry){
 		return $this->pdo->query($qry)->fetchAll(PDO::FETCH_ASSOC);
-	}	
+	}
+
+	public function getComplement($id, $type)
+	{
+		$pref = Util::tipoFuente($type - 1);
+		$stmt = $this->pdo->prepare("SELECT * FROM noticia_{$pref['pref']} WHERE id_noticia = :id");
+		$row = null;
+		if ($stmt->execute(['id' => $id])) {
+			$row = $stmt->rowCount() > 0 ? $stmt->fetch(PDO::FETCH_ASSOC) : false;
+		}
+		
+		return $row;
+	}
 
 }

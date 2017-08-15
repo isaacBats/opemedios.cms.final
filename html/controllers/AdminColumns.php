@@ -44,11 +44,11 @@ class AdminColumns extends Controller
 			$covers = $this->getCovers($tipo_portada, 'portada', date('Y-m-d'));
 
 			$this->header_admin( $titulo . ' - ', $this->css );
-				require $this->adminviews . 'portadasView.php';
+			require $this->adminviews . 'portadasView.php';
 			$this->footer_admin( $this->js );
 		}else{
-            header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
-        }
+      header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
+    }
 
 	}
 
@@ -408,5 +408,25 @@ class AdminColumns extends Controller
 		}else{
             header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
         }
+	}
+
+	public function selectCovers ()
+	{
+		if (isset($_SESSION['admin'])) {
+			
+			$getcovers = $this->portadasRepo->getCovers (date('Y-m-d'), Util::tipoPortada(1));
+			$covers = array();
+			
+			if($getcovers->exito && sizeof($getcovers->rows) > 0) {
+				$covers = $getcovers->rows;
+			}
+
+
+			$this->header_admin('Convertir a PDF - ');
+			require $this->adminviews . 'selectCoversView.php';
+			$this->footer_admin();
+		} else {
+      header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
+    }	
 	}
 }

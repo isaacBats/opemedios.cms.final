@@ -582,6 +582,11 @@ $collection->attachRoute(new Route('/panel/prensa/guardar-columna', array(
     'methods' => 'POST'
 )));
 
+$collection->attachRoute(new Route('/panel/prensa/generar-pdf', array(
+    '_controller' => 'AdminColumns::selectCovers',
+    'methods' => 'GET'
+)));
+
 // Reportes
 $collection->attachRoute(new Route('/panel/reports/clients', array(
     '_controller' => 'AdminReports::reportClientView',

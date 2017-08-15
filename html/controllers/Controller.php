@@ -138,33 +138,7 @@ class Controller
 	  return strtolower(preg_replace(array('/[^a-zA-Z0-9 -]/', '/[ -]+/', '/^-|-$/'), 
 	  	array('', '-', ''), without_accents($str))); 
 	}
-
-    public function generarPdf($res, $data, $template) {
-        $snappy = new Pdf('/usr/bin/wkhtmltopdf');
-        $pd = $res->mustache->loadTemplate($template);
-        $text = $pd->render($data);
-        header('Content-Type: application/pdf');
-        header('Content-Disposition: attachment; filename="' . $data['filename'] . '.pdf"');
-        echo $snappy->getOutputFromHtml($text, array(
-//            'orientation' => 'landscape',
-            'zoom' => 0.5,
-//            'page-height' => 10000,
-            'encoding' => 'utf-8'
-        ));
-    }
-
-    public function generarImage( $data, $template ) {
-        $snappy = new Image('/usr/bin/wkhtmltoimage');
-        header('Content-Type: image/jpeg');
-        header('Content-Disposition: attachment; filename="' . $filename . '.jpg"');
-        echo $snappy->getOutputFromHtml($template, array(
-//            'orientation' => 'landscape',
-            'zoom' => 0.5,
-//            'page-height' => 10000,
-            'encoding' => 'utf-8'
-        ));
-    }
-
+  
     /**
      * Render View method
      * @param  string $template Name of template

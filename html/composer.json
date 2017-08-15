@@ -2,6 +2,7 @@
     "require": {
         "dannyvankooten/php-router": "dev-master",
         "mustache/mustache": "^2.9",
-        "phpoffice/phpexcel": "^1.8"
+        "phpoffice/phpexcel": "^1.8",
+        "sun/pdf": "^1.0"
     }
 }

@@ -38,16 +38,20 @@
 					<article class="items-covers col-sm-12">
 					<?php foreach ($covers as $thumbCover): ?>
 							<figure class="items-img col-sm-3">
+								<label class="ckbox">
+									<input type="checkbox" name="cover_<?= $thumbCover['id'] ?>">
+									<span></span>
+								</label>
 								<div class="btn-group pull-right">
-	                                <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
-	                                    <i class="fa fa-chevron-down"></i>
-	                                </button>
-	                                <ul class="dropdown-menu slidedown">
-	                                    <li>
-	                                        <a href="javascript:void(0);" class="delete-portada" data-id="<?= $thumbCover['id'] ?>" data-toggle="modal" data-target="#myModal" ><i class="fa fa-times fa-fw"></i> Eliminar</a>
-	                                    </li>
-	                                </ul>
-	                            </div>
+	                  <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+	                      <i class="fa fa-chevron-down"></i>
+	                  </button>
+	                  <ul class="dropdown-menu slidedown">
+	                      <li>
+	                          <a href="javascript:void(0);" class="delete-portada" data-id="<?= $thumbCover['id'] ?>" data-toggle="modal" data-target="#myModal" ><i class="fa fa-times fa-fw"></i> Eliminar</a>
+	                      </li>
+	                  </ul>
+	              </div>
 								<img src="/<?= $thumbCover['thumb'] ?>" alt="<?= $titulo . ' - ' . $thumbCover['nombre_fuente'] ?>" width="180" heigth="240">
 								<figcaption class="items-descripcion">
 									<strong><?= $thumbCover['nombre_fuente'] ?></strong>
@@ -55,6 +59,7 @@
 								</figcaption>
 							</figure>
 					<?php endforeach; ?>
+						<button class="btn btn-info">Generar PDF con portadas</button>
 					</article>
 				<?php else: 
 						echo '<strong>No cuentas con '.$titulo.' para este día</strong>'; 

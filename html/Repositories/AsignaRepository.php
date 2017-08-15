@@ -24,10 +24,10 @@ class AsignaRepository extends BaseRepository
 
 		if ($stmt_news->execute())
 			$news = ($stmt_news->rowCount() > 0) ? $stmt_news->fetchAll(PDO::FETCH_ASSOC) : 0;
-
+		
 		if ($stmt_count->execute())
-			$count = ($stmt_couunt->rowCount() > 0) ? $stmt_couunt->fetch(PDO::FETCH_ASSOC) : 0;
-
+			$count = ($stmt_count->rowCount() > 0) ? $stmt_count->fetch(PDO::FETCH_ASSOC) : 0;
+		
 		return [
 			'rows' => (!$news) ? 0 : $news, 
 			'count' => (!$count) ? 0 : $count['count']

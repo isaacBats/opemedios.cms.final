@@ -59,7 +59,7 @@
 								</figcaption>
 							</figure>
 					<?php endforeach; ?>
-						<button class="btn btn-info">Generar PDF con portadas</button>
+						<button class="btn btn-info" id="savepdf">Generar PDF con portadas</button>
 					</article>
 				<?php else: 
 						echo '<strong>No cuentas con '.$titulo.' para este día</strong>'; 

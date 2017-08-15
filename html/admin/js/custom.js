@@ -971,6 +971,11 @@ $(document).ready(function(){
             });            
         });
     });
+
+    // Generar PDF's
+    $('#savepdf').on('click', function(){
+        alert('Seguimos trabajando en esta funcion. Gracias por la espera.')
+    })
     
 
 

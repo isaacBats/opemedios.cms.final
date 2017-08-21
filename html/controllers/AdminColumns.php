@@ -410,21 +410,21 @@ class AdminColumns extends Controller
         }
 	}
 
-	public function selectCovers ()
+	public function createPDF ()
 	{
 		if (isset($_SESSION['admin'])) {
+			$type = (int)$_POST['tipo_portada'];
 			
-			$getcovers = $this->portadasRepo->getCovers (date('Y-m-d'), Util::tipoPortada(1));
-			$covers = array();
-			
-			if($getcovers->exito && sizeof($getcovers->rows) > 0) {
-				$covers = $getcovers->rows;
+			if (sizeof($_POST) > 1) {
+				unset($_POST['tipo_portada']);
+				$coverIds = array();
+				foreach ($_POST as $key => $value) {
+					array_push($coverIds, (int)explode('_', $key)[1]);
+				}
 			}
+			
 
-
-			$this->header_admin('Convertir a PDF - ');
-			require $this->adminviews . 'selectCoversView.php';
-			$this->footer_admin();
+			vdd($_POST);
 		} else {
       header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
     }	

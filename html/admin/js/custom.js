@@ -769,8 +769,6 @@ $(document).ready(function(){
                 var datos = $formulario.serialize();
                 $.post( $formulario.attr('action'), datos, function(json){
                     if (json.exito) {
-                        console.log(json);
-                        debugger;
                         var $alert = $('.alert');
                         $alert.addClass(json.class).html(json.text).delay(3000).fadeOut('slow', function() {
                             window.location.reload();
@@ -974,8 +972,19 @@ $(document).ready(function(){
 
     // Generar PDF's
     $('#savepdf').on('click', function(){
-        alert('Seguimos trabajando en esta funcion. Gracias por la espera.')
-    })
+        $('#form-create-pdf').validate({
+            submitHandler: function(form){
+                var $formulario = $(form);
+                var datos = $formulario.serialize();
+                $.post( $formulario.attr('action'), datos, function(json){
+                    if (json.exito) {
+                        console.log(json);
+                        debugger;
+                    }
+                });
+            }
+        });
+    });
     
 
 

@@ -3,6 +3,6 @@
         "dannyvankooten/php-router": "dev-master",
         "mustache/mustache": "^2.9",
         "phpoffice/phpexcel": "^1.8",
-        "sun/pdf": "^1.0"
+        "knplabs/knp-snappy": "^0.5.0"
     }
 }

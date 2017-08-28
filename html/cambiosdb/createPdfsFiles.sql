@@ -1,0 +1,8 @@
+
+CREATE TABLE `files_pdfs` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `nombre` VARCHAR(150) NOT NULL,
+  `path_imagen` VARCHAR(250) NULL,
+  `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `id_UNIQUE` (`id` ASC));

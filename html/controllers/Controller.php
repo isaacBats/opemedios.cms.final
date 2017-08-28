@@ -1,8 +1,8 @@
 <?php 
 
+use utilities\Util;
 use Knp\Snappy\Image;
 use Knp\Snappy\Pdf;
-use utilities\Util;
 
 require_once __DIR__ . '/../Utilities/Opemedios.php';
 require_once __DIR__ . '/../Utilities/Image.php';
@@ -17,12 +17,20 @@ class Controller
 	public $bread = array();
 	public $views = "views/";
 	public $adminviews = "admin/";
+	protected $pdf;
 
 	
 	function __construct()
 	{
 		global $_config;
 		$this->pdo = new PDO($_config->db["dsn"], $_config->db["nombre_usuario"], $_config->db["password"], $_config->db["opciones"]);
+		$this->pdf = new Sun\PDF();
+	}
+
+	protected function generatePDF()
+	{
+		print_r($this->pdf);
+		return $this->pdf;
 	}
 
 	public function url( $url = ""){
@@ -36,6 +44,30 @@ class Controller
 
 	}
 
+	public function generarPdfFromHtml($template, $path) {
+      	$snappy = new Pdf('/usr/local/bin/wkhtmltopdf');
+      	$snappy->generateFromHtml($template, $path, ['zoom' => 0.5, 'encoding' => 'utf-8'], true);
+      	// header('Content-Type: application/pdf');
+      	// header('Content-Disposition: attachment; filename="' . $data['filename'] . '.pdf"');
+ //      	echo $snappy->getOutputFromHtml($text, array(
+ // //            'orientation' => 'landscape',
+ //             'zoom' => 0.5,
+ // //            'page-height' => 10000,
+ //             'encoding' => 'utf-8'
+ //      	));
+  	}
+ 
+    public function generarImage( $data, $template ) {
+        $snappy = new Image('/usr/local/bin/wkhtmltoimage');
+        header('Content-Type: image/jpeg');
+        header('Content-Disposition: attachment; filename="' . $filename . '.jpg"');
+        echo $snappy->getOutputFromHtml($template, array(
+ //            'orientation' => 'landscape',
+             'zoom' => 0.5,
+ //            'page-height' => 10000,
+             'encoding' => 'utf-8'
+        ));
+    }
 
 	function describe($database, $table , $value){
 		$sql = "SELECT column_name , column_type

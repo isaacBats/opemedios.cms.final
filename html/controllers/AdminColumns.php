@@ -18,11 +18,13 @@ class AdminColumns extends Controller
 	private $fuentesRepo;
 	private $js;
 	private $portadasRepo;
+	private $filesPdf;
 
 	function __construct()
 	{
 		$this->fuentesRepo = new FuentesRepository();
 		$this->portadasRepo = new PortadasRepository();
+		$this->filesPdf = new FilesPdfRepo();
 
 		$this->css = '';
 		$this->js = '
@@ -413,7 +415,7 @@ class AdminColumns extends Controller
 	public function createPDF ()
 	{
 		if (isset($_SESSION['admin'])) {
-			$type = (int)$_POST['tipo_portada'];
+			$type = Util::tipoPortada((int)$_POST['tipo_portada']);
 			
 			if (sizeof($_POST) > 1) {
 				unset($_POST['tipo_portada']);
@@ -421,10 +423,28 @@ class AdminColumns extends Controller
 				foreach ($_POST as $key => $value) {
 					array_push($coverIds, (int)explode('_', $key)[1]);
 				}
+				$covers = $this->portadasRepo->getCovers(null, $type, $coverIds);
+			} else {
+				$covers = $this->portadasRepo->getCovers(date('Y-m-d'), $type);
 			}
-			
 
-			vdd($_POST);
+			ob_start();
+			require $this->views . 'media/covers_pdf.php';
+			$body = ob_get_clean();
+			$path = $covers->rows[0]['imagen'];
+			$explode = explode('/', $path);
+			$fileName = "{$type}_Diarias_" . date('Ymd'). ".pdf";
+			$explode[sizeof($explode) -1] = $fileName;
+			$pathName = implode('/',$explode);
+			// vdd($body);
+			$this->generarPdfFromHtml($body, $pathName);
+			$file = $this->filesPdf->create(['nombre' => $fileName, 'path_imagen' => $pathName]);
+			if(is_array($file)) {
+				return json_response(['exito' => true]);
+			} else {
+				return json_response(['exito' => false]);
+			}
+
 		} else {
       header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
     }	

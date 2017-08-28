@@ -975,11 +975,21 @@ $(document).ready(function(){
         $('#form-create-pdf').validate({
             submitHandler: function(form){
                 var $formulario = $(form);
+                var $alert = $('.alert');
                 var datos = $formulario.serialize();
                 $.post( $formulario.attr('action'), datos, function(json){
                     if (json.exito) {
-                        console.log(json);
-                        debugger;
+                        $alert
+                            .addClass('alert-info')
+                            .html('Se ha creado un archivo PDF con exito!')
+                            .delay(3000)
+                            .fadeOut('slow');
+                    } else {
+                        $alert
+                            .addClass('alert-danger')
+                            .html('No se creo el archivo, intentalo mas tarde')
+                            .delay(3000)
+                            .fadeOut('slow');
                     }
                 });
             }

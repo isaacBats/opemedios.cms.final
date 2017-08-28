@@ -79,9 +79,17 @@ class PortadasRepository extends BaseRepository{
 		return $orden;
 	}
 
-	public function getCovers( $day, $type )
+	public function getCovers($day, $type, $ids = array())
 	{
-		$portadas = $this->pdo->query("SELECT * FROM portadas WHERE DATE_FORMAT(created_at, '%Y-%m-%d') = '{$day}' AND tipo_portada = '{$type}' ORDER BY orden DESC");
+		$qry = "SELECT * FROM portadas WHERE DATE_FORMAT(created_at, '%Y-%m-%d') = '{$day}' AND tipo_portada = '{$type}' ORDER BY orden DESC";
+		
+		if (sizeof($ids) > 0) {
+			$implode = implode(',', $ids);
+			$qry = "SELECT * FROM portadas WHERE id IN ({$implode}) AND tipo_portada = '{$type}' ORDER BY orden DESC";
+		}
+
+		$portadas = $this->pdo->query($qry);
+		
 
 		$result = new stdClass();
 

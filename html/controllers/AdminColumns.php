@@ -18,13 +18,13 @@ class AdminColumns extends Controller
 	private $fuentesRepo;
 	private $js;
 	private $portadasRepo;
-	private $filesPdf;
+	private $filesPdfRepo;
 
 	function __construct()
 	{
 		$this->fuentesRepo = new FuentesRepository();
 		$this->portadasRepo = new PortadasRepository();
-		$this->filesPdf = new FilesPdfRepo();
+		$this->filesPdfRepo = new FilesPdfRepo();
 
 		$this->css = '';
 		$this->js = '
@@ -42,7 +42,9 @@ class AdminColumns extends Controller
 			$titulo = 'Primeras Planas';
 			$action = '/panel/prensa/guardar-portada';
 			$tipo_portada = TipoPortadas::PRIMERAS_PLANAS;
-
+			$type = Util::tipoPortada($tipo_portada);
+			$pdf = $this->filesPdfRepo->getToday($type);
+			
 			$covers = $this->getCovers($tipo_portada, 'portada', date('Y-m-d'));
 
 			$this->header_admin( $titulo . ' - ', $this->css );
@@ -61,7 +63,9 @@ class AdminColumns extends Controller
 			$titulo = 'Portadas Financieras';
 			$action = '/panel/prensa/guardar-portada';
 			$tipo_portada = TipoPortadas::PORTADAS_FINANCIERAS;
-
+			$type = Util::tipoPortada($tipo_portada);
+			$pdf = $this->filesPdfRepo->getToday($type);
+			
 			$covers = $this->getCovers($tipo_portada, 'portada', date('Y-m-d'));
 
 			$this->header_admin( $titulo . ' - ', $this->css );
@@ -80,6 +84,8 @@ class AdminColumns extends Controller
 			$titulo = 'Cartones';
 			$action = '/panel/prensa/guardar-portada';
 			$tipo_portada = TipoPortadas::CARTONES;
+			$type = Util::tipoPortada($tipo_portada);
+			$pdf = $this->filesPdfRepo->getToday($type);
 
 			$covers = $this->getCovers($tipo_portada, 'portada', date('Y-m-d'));
 
@@ -102,6 +108,8 @@ class AdminColumns extends Controller
 			$titulo = 'Columnas Politicas';
 			$action = '/panel/prensa/guardar-columna';
 			$tipo_columna = TipoColumnas::COLUMNAS_POLITICAS;
+			$type = Util::tipoColumna($tipo_columna);
+			$pdf = $this->filesPdfRepo->getToday($type);
 
 			$covers = $this->getCovers($tipo_columna, 'columna', date('Y-m-d'));
 			
@@ -124,6 +132,8 @@ class AdminColumns extends Controller
 			$titulo = 'Columnas Financieras';
 			$action = '/panel/prensa/guardar-columna';
 			$tipo_columna = TipoColumnas::COLUMNAS_FINANCIERAS;
+			$type = Util::tipoColumna($tipo_columna);
+			$pdf = $this->filesPdfRepo->getToday($type);
 
 			$covers = $this->getCovers($tipo_columna, 'columna', date('Y-m-d'));
 			
@@ -436,13 +446,13 @@ class AdminColumns extends Controller
 			$fileName = "{$type}_Diarias_" . date('Ymd'). ".pdf";
 			$explode[sizeof($explode) -1] = $fileName;
 			$pathName = implode('/',$explode);
-			// vdd($body);
+			
 			$this->generarPdfFromHtml($body, $pathName);
-			$file = $this->filesPdf->create(['nombre' => $fileName, 'path_imagen' => $pathName]);
+			$file = $this->filesPdfRepo->create(['name' => $fileName, 'path_image' => $pathName, 'type' => $type]);
 			if(is_array($file)) {
 				return json_response(['exito' => true]);
 			} else {
-				return json_response(['exito' => false]);
+				return json_response(['exito' => false, 'error' => $file]);
 			}
 
 		} else {

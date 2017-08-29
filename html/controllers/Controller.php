@@ -17,14 +17,11 @@ class Controller
 	public $bread = array();
 	public $views = "views/";
 	public $adminviews = "admin/";
-	protected $pdf;
-
 	
 	function __construct()
 	{
 		global $_config;
 		$this->pdo = new PDO($_config->db["dsn"], $_config->db["nombre_usuario"], $_config->db["password"], $_config->db["opciones"]);
-		$this->pdf = new Sun\PDF();
 	}
 
 	protected function generatePDF()

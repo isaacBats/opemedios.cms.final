@@ -972,18 +972,22 @@ $(document).ready(function(){
 
     // Generar PDF's
     $('#savepdf').on('click', function(){
+        $('#page-wrapper').append('<div class="loader"></div>');
         $('#form-create-pdf').validate({
             submitHandler: function(form){
                 var $formulario = $(form);
                 var $alert = $('.alert');
                 var datos = $formulario.serialize();
                 $.post( $formulario.attr('action'), datos, function(json){
+                    $('.loader').remove();
                     if (json.exito) {
                         $alert
                             .addClass('alert-info')
                             .html('Se ha creado un archivo PDF con exito!')
                             .delay(3000)
-                            .fadeOut('slow');
+                            .fadeOut('slow', function(){
+                                window.location.reload();
+                            });
                     } else {
                         $alert
                             .addClass('alert-danger')
@@ -995,6 +999,10 @@ $(document).ready(function(){
             }
         });
     });
+
+    // $(window).load(function() {
+    //     $(".loader").fadeOut("slow");
+    // });
     
 
 

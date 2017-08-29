@@ -33,6 +33,11 @@
 					<input type="submit" class="btn btn-success" value="Cargar"> 
 				</form>
 			</div>
+			<?php if ($pdf): ?>
+			<div class="col-sm-12">
+				<a class="file-generate" href="/archivos/generados/pdf/<?= base64_encode("{$pdf['id']}_n".base64_encode($pdf['name'])) ?>" target="_blank" >Ver pdf generado</a>
+			</div>
+			<?php endif; ?>
 			<div class="col-sm-12">
 				<?php if( sizeof( $covers ) > 0 ): ?> 
 					<form method="post" action="/panel/prensa/generar-pdf" id="form-create-pdf" >

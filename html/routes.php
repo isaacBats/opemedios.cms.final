@@ -40,6 +40,11 @@ $collection->attachRoute(new Route('/sign-in', array(
     'methods' => 'POST'
 )));
 
+$collection->attachRoute(new Route('/archivos/generados/pdf/:key', array(
+    '_controller' => 'Plain::createdFiles',
+    'methods' => 'GET'
+)));
+
 // Usuario Perfil
     //Noticias 
 $collection->attachRoute(new Route('/noticias', array(

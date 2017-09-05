@@ -48,12 +48,22 @@
 					<input type="submit" class="btn btn-success pull-right" id="btn-submit" value="Cargar"> 
 				</form>			
 			</div>
-			<div class="col-sm-2"></div>
+			<?php if ($pdf): ?>
+			<div class="col-sm-12">
+				<a class="file-generate" href="/archivos/generados/pdf/<?= base64_encode("{$pdf['id']}_n".base64_encode($pdf['name'])) ?>" target="_blank" >Ver pdf generado</a>
+			</div>
+			<?php endif; ?>
 			<div class="col-sm-12">
 				<?php if( sizeof( $covers ) > 0 ): ?> 
-					<article class="items-covers col-sm-12">
-					<?php foreach ($covers as $thumbCover): ?>
+					<form method="post" action="/panel/prensa/generar-pdf-columns" id="form-create-pdf" >
+						<input type="hidden" name="tipo_columna" value="<?= $tipo_columna ?>">
+						<article class="items-covers col-sm-12">
+						<?php foreach ($covers as $thumbCover): ?>
 							<figure class="items-img col-xs-6 col-sm-6 col-md-4 col-lg-3">
+								<label class="ckbox">
+									<input type="checkbox" name="cover_<?= $thumbCover['id'] ?>">
+									<span></span>
+								</label>
 								<div class="btn-group pull-right">
 	                                <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
 	                                    <i class="fa fa-chevron-down"></i>
@@ -77,8 +87,10 @@
 									<p><?= $thumbCover['created_at'] ?></p>
 								</figcaption>
 							</figure>
-					<?php endforeach; ?>
-					</article>
+						<?php endforeach; ?>
+						<button class="btn btn-info" id="savepdf">Generar PDF con portadas</button>
+						</article>
+					</form>
 				<?php else: 
 						echo '<strong>No cuentas con '.$titulo.' para este día</strong>'; 
 					  endif; 

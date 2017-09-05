@@ -459,4 +459,42 @@ class AdminColumns extends Controller
       header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
     }	
 	}
+
+	public function createPDFColumns ()
+	{
+		if (isset($_SESSION['admin'])) {
+			$type = Util::tipoColumna((int)$_POST['tipo_columna']);
+			
+			if (sizeof($_POST) > 1) {
+				unset($_POST['tipo_columna']);
+				$coverIds = array();
+				foreach ($_POST as $key => $value) {
+					array_push($coverIds, (int)explode('_', $key)[1]);
+				}
+				$covers = $this->portadasRepo->getCoversColumnas(null, $type, $coverIds);
+			} else {
+				$covers = $this->portadasRepo->getCoversColumnas(date('Y-m-d'), $type);
+			}
+			// vdd([$typw,$covers]);
+			ob_start();
+			require $this->views . 'media/covers_pdf_columns.php';
+			$body = ob_get_clean();
+			$path = $covers->rows[0]['imagen'];
+			$explode = explode('/', $path);
+			$fileName = "{$type}_Diarias_" . date('Ymd'). ".pdf";
+			$explode[sizeof($explode) -1] = $fileName;
+			$pathName = implode('/',$explode);
+			
+			$this->generarPdfFromHtml($body, $pathName);
+			$file = $this->filesPdfRepo->create(['name' => $fileName, 'path_image' => $pathName, 'type' => $type]);
+			if(is_array($file)) {
+				return json_response(['exito' => true]);
+			} else {
+				return json_response(['exito' => false, 'error' => $file]);
+			}
+
+		} else {
+      header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
+    }	
+	}
 }

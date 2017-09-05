@@ -90,7 +90,6 @@ class PortadasRepository extends BaseRepository{
 
 		$portadas = $this->pdo->query($qry);
 		
-
 		$result = new stdClass();
 
 		if( $portadas ){
@@ -104,9 +103,16 @@ class PortadasRepository extends BaseRepository{
 		return $result;
 	}
 
-	public function getCoversColumnas ($day, $type)
+	public function getCoversColumnas ($day, $type, $ids = array())
 	{
-		$columnas = $this->pdo->prepare("SELECT * FROM columnas WHERE DATE_FORMAT(created_at, '%Y-%m-%d') = '{$day}' AND tipo_columna = '{$type}' ORDER BY created_at DESC");
+		$qry = "SELECT * FROM columnas WHERE DATE_FORMAT(created_at, '%Y-%m-%d') = '{$day}' AND tipo_columna = '{$type}' ORDER BY created_at DESC";
+
+		if (sizeof($ids) > 0) {
+			$implode = implode(',', $ids);
+			$qry = "SELECT * FROM columnas WHERE id IN ({$implode}) AND tipo_portada = '{$type}' ORDER BY orden DESC";
+		}
+
+		$columnas = $this->pdo->prepare($qry);
 
 		$result = new stdClass();
 

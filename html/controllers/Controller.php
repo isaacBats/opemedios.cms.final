@@ -18,16 +18,11 @@ class Controller
 	public $views = "views/";
 	public $adminviews = "admin/";
 	
+	
 	function __construct()
 	{
 		global $_config;
 		$this->pdo = new PDO($_config->db["dsn"], $_config->db["nombre_usuario"], $_config->db["password"], $_config->db["opciones"]);
-	}
-
-	protected function generatePDF()
-	{
-		print_r($this->pdf);
-		return $this->pdf;
 	}
 
 	public function url( $url = ""){
@@ -42,7 +37,8 @@ class Controller
 	}
 
 	public function generarPdfFromHtml($template, $path) {
-      	$snappy = new Pdf('/usr/local/bin/wkhtmltopdf');
+		$properties = parse_ini_file(__DIR__ . '/../config.ini');
+      	$snappy = new Pdf($properties['pathBinPDF']);
       	$snappy->generateFromHtml($template, $path, ['zoom' => 0.5, 'encoding' => 'utf-8'], true);
       	// header('Content-Type: application/pdf');
       	// header('Content-Disposition: attachment; filename="' . $data['filename'] . '.pdf"');
@@ -55,7 +51,8 @@ class Controller
   	}
  
     public function generarImage( $data, $template ) {
-        $snappy = new Image('/usr/local/bin/wkhtmltoimage');
+        $properties = parse_ini_file(__DIR__ . '/../config.ini');
+        $snappy = new Image($properties['pathBinImage']);
         header('Content-Type: image/jpeg');
         header('Content-Disposition: attachment; filename="' . $filename . '.jpg"');
         echo $snappy->getOutputFromHtml($template, array(

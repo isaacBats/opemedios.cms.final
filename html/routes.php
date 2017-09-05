@@ -30,6 +30,11 @@ $collection->attachRoute(new Route('/sign-in', array(
     'methods' => 'GET'
 )));
 
+$collection->attachRoute(new Route('/archivos/generados/pdf/:key', array(
+    '_controller' => 'Plain::createdFiles',
+    'methods' => 'GET'
+)));
+
 $collection->attachRoute(new Route('/sign-out', array(
     '_controller' => 'User::logout',
     'methods' => 'GET'
@@ -38,11 +43,6 @@ $collection->attachRoute(new Route('/sign-out', array(
 $collection->attachRoute(new Route('/sign-in', array(
     '_controller' => 'User::loginAction',
     'methods' => 'POST'
-)));
-
-$collection->attachRoute(new Route('/archivos/generados/pdf/:key', array(
-    '_controller' => 'Plain::createdFiles',
-    'methods' => 'GET'
 )));
 
 // Usuario Perfil

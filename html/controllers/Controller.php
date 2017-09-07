@@ -39,7 +39,7 @@ class Controller
 	public function generarPdfFromHtml($template, $path) {
 		$properties = parse_ini_file(__DIR__ . '/../config.ini');
       	$snappy = new Pdf($properties['pathBinPDF']);
-      	$snappy->generateFromHtml($template, $path, ['zoom' => 0.5, 'encoding' => 'utf-8'], true);
+      	$snappy->generateFromHtml($template, $path, ['zoom' => 0.9, 'encoding' => 'utf-8'], true);
       	// header('Content-Type: application/pdf');
       	// header('Content-Disposition: attachment; filename="' . $data['filename'] . '.pdf"');
  //      	echo $snappy->getOutputFromHtml($text, array(

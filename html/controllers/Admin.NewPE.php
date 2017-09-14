@@ -150,7 +150,7 @@ class AdminNewPE extends AdminNews{
 		return [ 'string' => $fraccion, 'float' => $float ];
 	}
 
-	// /panle/new/encabezado/:fuente/:adjuntoId
+	// /panel/new/encabezado/:fuente/:adjuntoId
 	public function previewHeader( $fuente, $adjuntoId )
 	{
 		if( isset( $_SESSION['admin'] ) )

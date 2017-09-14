@@ -4,13 +4,18 @@
 	</div>
 	<div class="col-sm-2 col-sm-offset-2 mt-50">
 		<div class="dropdown">
-		  <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+		  <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
 		    Acciones
 		    <span class="caret"></span>
 		  </button>
 		  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
 			<?php if( $font === 'per' || $font === 'rev' ): ?>
-			<li><a href="/panel/new/add-file/<?= $newSelected['id'] ?>">Agregar archivo</a></li>
+				<li><a href="/panel/new/add-file/<?= $newSelected['id'] ?>">Agregar Archivo</a></li>
+		    <li role="separator" class="divider"></li>
+		   <?php else: ?>
+		    <li><a href="javascript:void(0);" id="add-input-image">Agregar Archivo</a></li>
+		    <li><a href="javascript:void(0);" id="add-input-image">Editar Archivo</a></li>
+		    <li><a href="javascript:void(0);" id="add-input-image">Eliminar Archivo</a></li>
 		    <li role="separator" class="divider"></li>
 			<?php endif; ?>
 		    <li><a href="/panel/new/edit/<?= $newSelected['id'] ?>">Editar</a></li>
@@ -46,7 +51,17 @@
 			<?php endif; ?>
 		</div>
 	</div>
+	<div class="col-md-6">
+		<form action="/panel/new/adjunto-add/<?= $newSelected['id'] ?>" method="post" enctype="multipart/form-data" >
+			<div class="col-sm-6">
+				<label>Agregar un archivo</label>
+				<input type="file" name="adjunto" required />
+			</div>
+			<input type="submit" value="Cargar" class="btn btn-primary" />
+		</form>
+	</div>
 	<div class="col-md-8">
+	<?php if($adjuntos): ?>
 		<?= $htmlAdjunto ?>
 		<p>
 			<strong>Url del archivo:</strong>
@@ -54,5 +69,6 @@
 				<a href="<?= "http://{$_SERVER['HTTP_HOST']}/media/".without_accents(strtolower($newSelected['tipofuente']))."/{$newSelected['id']}" ?>"><?= "http://{$_SERVER['HTTP_HOST']}/media/".without_accents(strtolower($newSelected['tipofuente']))."/{$newSelected['id']}" ?></a>
 			</span>
 		</p>
-	</div>	
+	<?php endif; ?>	
+	</div>
 </div>

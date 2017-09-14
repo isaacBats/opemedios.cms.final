@@ -133,9 +133,9 @@ class AdminNews extends Controller{
 						
 						$htmlAdjunto .= '<ul class="adjunto-list">';
 						foreach ($adjuntos as $adj) {
-							$htmlAdjunto .= '<li class="adjunto-item">
+							$htmlAdjunto .= '<li class="adjunto-item"><a href="/panel/new/encabezado/periodico/'. $adj['id_adjunto'] .'">
 									'.$this->getMedia($adj).'
-								</li>';
+								</a></li>';
 						}
 						$htmlAdjunto .= '</ul>';
 					}
@@ -180,8 +180,14 @@ class AdminNews extends Controller{
         }
 	}
 
-	public function editNewView( $id ){
+	public function addAttachment ($publicId)
+	{
+		$adjunto = $_FILES['adjunto'];
+		vdd([$adjunto, $publicId]);
+	}
 
+	public function editNewView ($id) 
+	{
 		if( isset( $_SESSION['admin'] ) ){
 
 			$fr   = new FuentesRepository();

@@ -1000,6 +1000,13 @@ $(document).ready(function(){
         });
     });
 
+    // add adjunto
+    $('#add-input-image').on('click', function (event) {
+        event.preventDefault();
+        console.log('Vas a mostrar un input para agregar un archivo');
+        // $.post()
+    });
+
     // $(window).load(function() {
     //     $(".loader").fadeOut("slow");
     // });

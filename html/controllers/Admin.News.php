@@ -1,6 +1,7 @@
 <?php 
 
 use utilities\Util;
+use utilities\Image;
 // TODO: @Noticias Poner la url del archivo de media.
 class AdminNews extends Controller{
 
@@ -183,6 +184,8 @@ class AdminNews extends Controller{
 	public function addAttachment ($publicId)
 	{
 		$adjunto = $_FILES['adjunto'];
+		$image = new Image();
+		$image->saveFile($adjunto, $path, $adjunto['type']);
 		vdd([$adjunto, $publicId]);
 	}
 
@@ -419,18 +422,16 @@ class AdminNews extends Controller{
 		if( isset( $_SESSION['admin'] ) )
 		{
 			$adjuntos = $this->adjuntoRepo->getAdjunto( $id );
-			$encabezado = $this->encabezadoRepo->findByAdjuntoId( $adjuntos[0]['id_adjunto'] );
+
+			if (is_array($adjuntos) && sizeof($adjuntos) > 0) {
+				$encabezado = $this->encabezadoRepo->findByAdjuntoId( $adjuntos[0]['id_adjunto'] );
+			} else {
+				$encabezado = null;
+			}
 			$noticia = $this->noticiasRepository->getNewById( $id );
 
-			if( $noticia['tipofuente'] === 'Revista' )
-			{
-				$url = 'assets/data/noticias/revista/';
-			}
-			else
-			{
-				$url = 'assets/data/noticias/periodico/';				
-			}
-
+			$url = Util::pathMediaNews($noticia['tipofuente_id']);
+			
 			// si no existe un folder con el mes y el año se crea
 			$createdAt = new DateTime();
 			$folder = $createdAt->format('m-Y');
@@ -441,8 +442,12 @@ class AdminNews extends Controller{
 
 			$files = array();
 			if( $_FILES['primario']['name'][0] != '' ){
-				$files = array_map(function ($name, $type, $tmp_name, $error, $size) use ( $url, $encabezado ){
-					return ['name' => $name, 'type' => $type, 'tmp_name' => $tmp_name, 'error' => $error, 'size' => $size, 'slug' => $url, 'principal' => '0', 'encabezado' => $encabezado, ];
+				$files = array_map(function ($name, $type, $tmp_name, $error, $size) use ( $url, $encabezado ) {
+					if (is_null($encabezado)) {
+						return ['name' => $name, 'type' => $type, 'tmp_name' => $tmp_name, 'error' => $error, 'size' => $size, 'slug' => $url, 'principal' => '0' ];
+					} else {
+						return ['name' => $name, 'type' => $type, 'tmp_name' => $tmp_name, 'error' => $error, 'size' => $size, 'slug' => $url, 'principal' => '0', 'encabezado' => $encabezado, ];
+					}
 				}, $_FILES['primario']['name'], $_FILES['primario']['type'], $_FILES['primario']['tmp_name'], $_FILES['primario']['error'], $_FILES['primario']['size']);
 			}
 

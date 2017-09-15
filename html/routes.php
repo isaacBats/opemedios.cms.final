@@ -311,6 +311,11 @@ $collection->attachRoute(new Route('/panel/new/add-file/:id', array(
     'methods' => 'POST'
 )));
 
+$collection->attachRoute(new Route('/panel/new/adjunto-add/:publicId', array(
+    '_controller' => 'AdminNews::addAttachment',
+    'methods' => 'POST'
+)));
+
 $collection->attachRoute(new Route('/panel/new/send/:id', array(
     '_controller' => 'AdminNews::sendMailView',
     'methods' => 'GET'

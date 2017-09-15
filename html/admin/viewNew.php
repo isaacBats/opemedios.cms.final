@@ -9,15 +9,15 @@
 		    <span class="caret"></span>
 		  </button>
 		  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-			<?php if( $font === 'per' || $font === 'rev' ): ?>
+			<?php //if( $font === 'per' || $font === 'rev' ): ?>
 				<li><a href="/panel/new/add-file/<?= $newSelected['id'] ?>">Agregar Archivo</a></li>
 		    <li role="separator" class="divider"></li>
-		   <?php else: ?>
-		    <li><a href="javascript:void(0);" id="add-input-image">Agregar Archivo</a></li>
+		   <?php //else: ?>
+		    <!-- <li><a href="javascript:void(0);" id="add-input-image">Agregar Archivo</a></li>
 		    <li><a href="javascript:void(0);" id="add-input-image">Editar Archivo</a></li>
 		    <li><a href="javascript:void(0);" id="add-input-image">Eliminar Archivo</a></li>
-		    <li role="separator" class="divider"></li>
-			<?php endif; ?>
+		    <li role="separator" class="divider"></li> -->
+			<?php //endif; ?>
 		    <li><a href="/panel/new/edit/<?= $newSelected['id'] ?>">Editar</a></li>
 		    <li role="separator" class="divider"></li>
 		    <li><a href="/panel/new/send/<?= $newSelected['id'] ?>">Enviar</a></li>
@@ -51,15 +51,15 @@
 			<?php endif; ?>
 		</div>
 	</div>
-	<div class="col-md-6">
-		<form action="/panel/new/adjunto-add/<?= $newSelected['id'] ?>" method="post" enctype="multipart/form-data" >
+	<!-- <div class="col-md-6">
+		<form action="/panel/new/adjunto-add/<?php // echo $newSelected['id'] ?>" method="post" enctype="multipart/form-data" >
 			<div class="col-sm-6">
 				<label>Agregar un archivo</label>
 				<input type="file" name="adjunto" required />
 			</div>
 			<input type="submit" value="Cargar" class="btn btn-primary" />
 		</form>
-	</div>
+	</div> -->
 	<div class="col-md-8">
 	<?php if($adjuntos): ?>
 		<?= $htmlAdjunto ?>

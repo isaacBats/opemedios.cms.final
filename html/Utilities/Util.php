@@ -51,6 +51,24 @@ class Util
 		return $tipoFuente[ $tipoFuenteId ];
 	}
 
+	public static function pathMediaNews ($tipoFuenteId)
+	{
+		switch ($tipoFuenteId)
+		{
+			case 1:
+				return MediaDirectory::MEDIA_TELEVISION;
+			case 2:
+				return MediaDirectory::MEDIA_RADIO;
+			case 3:
+				return MediaDirectory::MEDIA_PERIODICO;
+			case 4:
+				return MediaDirectory::MEDIA_REVISTA;
+			case 5:
+				return MediaDirectory::MEDIA_INTERNET;
+			
+		}
+	}
+
 	public static function tipoReporte( $tipoFuenteId ){
 		$tipoReporte = [
 						['id' => 1, 'filename' => 'reporte_por_cliente', 'titulo' => 'Reporte por Ciente', 'descripcion' => 'Este reporte genera la información de las noticias por cliente', 'tema' => 'Reporte Excel', ], 

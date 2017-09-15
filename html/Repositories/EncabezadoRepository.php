@@ -31,7 +31,7 @@ class EncabezadoRepository extends BaseRepository
 		if( $stmt->execute() )
 		{
 			$result->exito = true;
-			$result->encabezado = $this->pdo->query( "SELECT * FROM {$this->table} WHERE id = " . $this->pdo->lastInsertId() )->fetch(\PDO::FETCH_ASSOC);
+			$result->encabezado = $this->findById($this->pdo->lastInsertId());
 		}
 		else
 		{

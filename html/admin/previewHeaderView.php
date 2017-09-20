@@ -131,6 +131,6 @@
 			</tr>
 		</table>
 	</header>
-	<figure id="img-principal">
-		<img src="/<?= $adjunto['carpeta'] . $adjunto['nombre_archivo'] ?>">
-	</figure>
+	<div id="img-principal">
+		<?= $this->getMedia($adjunto) ?>
+	</div>

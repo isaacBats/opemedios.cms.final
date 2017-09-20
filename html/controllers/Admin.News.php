@@ -96,6 +96,8 @@ class AdminNews extends Controller{
 
 			$adjuntos = $this->adjuntoRepo->getAdjunto( $id );
 			$adjunto = $adjuntos[0];
+			$fuenteUtil = Util::tipoFuente($newSelected['tipofuente_id'] - 1);
+			// vdd($fuenteUtil);
 
 			$htmlAdjunto = $this->getMedia($adjunto);
 
@@ -108,7 +110,16 @@ class AdminNews extends Controller{
 						$html = '
 									<p>Hora: <strong>' . $relatedNew['hora'] . '</strong></p>
 									<p>Duración: <strong>' . $relatedNew['duracion'] . '</strong></p>
-						';					
+						';
+						$htmlAdjunto .= '<ul class="adjunto-list">';
+						foreach ($adjuntos as $adj) {
+							$htmlAdjunto .= '<li class="adjunto-item">
+									<a href="/panel/new/encabezado/'.$fuenteUtil['url'].'/'.$adj['id_adjunto'].'"> 
+									<img class="img-responsive" src="/admin/images/'.$fuenteUtil['url'].'.png" alt="Opemedios - '.$fuenteUtil['url'].'">
+									</a>
+								</li>';
+						}
+						$htmlAdjunto .= '</ul>';					
 					}
 					break;
 				case '2':
@@ -118,7 +129,16 @@ class AdminNews extends Controller{
 						$html = '
 									<p>Hora: <strong>' . $relatedNew['hora'] . '</strong></p>
 									<p>Duración: <strong>' . $relatedNew['duracion'] . '</strong></p>
-						';					
+						';
+						$htmlAdjunto .= '<ul class="adjunto-list">';
+						foreach ($adjuntos as $adj) {
+							$htmlAdjunto .= '<li class="adjunto-item">
+									<a href="/panel/new/encabezado/'.$fuenteUtil['url'].'/'.$adj['id_adjunto'].'"> 
+									<img class="img-responsive" src="/admin/images/'.$fuenteUtil['url'].'.png" alt="Opemedios - '.$fuenteUtil['url'].'">
+									</a>
+								</li>';
+						}
+						$htmlAdjunto .= '</ul>';					
 					}
 					break;
 				case '3':
@@ -134,9 +154,9 @@ class AdminNews extends Controller{
 						
 						$htmlAdjunto .= '<ul class="adjunto-list">';
 						foreach ($adjuntos as $adj) {
-							$htmlAdjunto .= '<li class="adjunto-item"><a href="/panel/new/encabezado/periodico/'. $adj['id_adjunto'] .'">
+							$htmlAdjunto .= '<div style="width: 180px"><li class="adjunto-item"><a href="/panel/new/encabezado/periodico/'. $adj['id_adjunto'] .'">
 									'.$this->getMedia($adj).'
-								</a></li>';
+								</a></li></div>';
 						}
 						$htmlAdjunto .= '</ul>';
 					}
@@ -155,7 +175,9 @@ class AdminNews extends Controller{
 						$htmlAdjunto .= '<ul class="adjunto-list">';
 						foreach ($adjuntos as $adj) {
 							$htmlAdjunto .= '<li class="adjunto-item">
+									<a href="/panel/new/encabezado/revista/'.$adj['id_adjunto'].'"> 
 									'.$this->getMedia($adj).'
+									</a>
 								</li>';
 						}
 						$htmlAdjunto .= '</ul>';
@@ -169,9 +191,19 @@ class AdminNews extends Controller{
 									<p>Hora de captura: <strong>' . $relatedNew['hora_publicacion'] . '</strong></p>
 									<p>URL: <a href="' . $relatedNew['url'] . '" target="_blank" >' . $relatedNew['url'] . '</a></p>							
 						';
+						$htmlAdjunto .= '<ul class="adjunto-list">';
+						foreach ($adjuntos as $adj) {
+							$htmlAdjunto .= '<li class="adjunto-item">
+									<a href="/panel/new/encabezado/'.$fuenteUtil['url'].'/'.$adj['id_adjunto'].'"> 
+									<img class="img-responsive" src="/admin/images/'.$fuenteUtil['url'].'.png" alt="Opemedios - '.$fuenteUtil['url'].'">
+									</a>
+								</li>';
+						}
+						$htmlAdjunto .= '</ul>';
 					}
 					break;
 			}
+			// vdd($htmlAdjunto);
 			
 			$this->header_admin('Noticias de Hoy: ' . $newSelected['encabezado'] . ' - ' );
 			require $this->adminviews . 'viewNew.php';

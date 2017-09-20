@@ -167,7 +167,7 @@ class AdminNewPE extends AdminNews{
 
 			$fraccion = unserialize($encabezado['fraccion']);
 			$date = new \DateTime();
-			$fecha = $date->setTimestamp( $encabezado['fecha'] ); 
+			$fecha = $date->setTimestamp( $encabezado['fecha'] );
 
 			$this->header_admin('Vista previa adjunto de ' . ucfirst( $fuente ) . ' - ' );
 			require $this->adminviews . 'previewHeaderView.php';

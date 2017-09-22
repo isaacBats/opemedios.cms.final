@@ -7,12 +7,14 @@ class AdminNews extends Controller{
 
 	private $noticiasRepository;		
 	private $adjuntoRepo;
-	private $encabezadoRepo;		
+	private $encabezadoRepo;
+	private $acountRepo;		
 
 	public function __construct(){
 		$this->noticiasRepository = new NoticiasRepository();
 		$this->adjuntoRepo = new AdjuntoRepository();
 		$this->encabezadoRepo = new EncabezadoRepository();
+		$this->acountRepo = new CuentaRepository();
 	}
 
 	public function showNews(){
@@ -213,13 +215,15 @@ class AdminNews extends Controller{
         }
 	}
 
-	public function addAttachment ($publicId)
-	{
-		$adjunto = $_FILES['adjunto'];
-		$image = new Image();
-		$image->saveFile($adjunto, $path, $adjunto['type']);
-		vdd([$adjunto, $publicId]);
-	}
+	// POST: /panel/new/adjunto-add/:publicId
+	// view: viewNew # 54
+	// public function addAttachment ($publicId)
+	// {
+	// 	$adjunto = $_FILES['adjunto'];
+	// 	$image = new Image();
+	// 	$image->saveFile($adjunto, $path, $adjunto['type']);
+	// 	vdd([$adjunto, $publicId]);
+	// }
 
 	public function editNewView ($id) 
 	{
@@ -730,7 +734,7 @@ class AdminNews extends Controller{
 		$noticiaid = array_shift($resultado);
 		$empresaid = array_shift($resultado);
 		
-		$new = $this->mapNewForEmail($this->noticiasRepository->getNewById($noticiaid));
+		$new = $this->mapNewForEmail($this->noticiasRepository->getNewById($noticiaid), end($usuarios));
 		
 		$tema  = $temRep->getThemaByEmpresaID( $empresaid );
 		$temaid = $tema[0]['id_tema'];
@@ -746,7 +750,6 @@ class AdminNews extends Controller{
 		$mail = new Mail();
 		$mail->setSubject('Noticia Operadora de medios - ' . utf8_decode(ucfirst(strtolower($new['tipofuente']))));
 		$mail->setBody( $body );
-		// exit();
 		$noenviados = [];
 
 		foreach ($usuarios as $key => $email) {
@@ -1243,12 +1246,19 @@ class AdminNews extends Controller{
 		echo $body;
 	}
 
-	private function mapNewForEmail($data)
+	private function mapNewForEmail($data, $mail = false)
 	{
 		setlocale(LC_TIME, 'es_ES');
 		$date = new DateTime($data['fecha']);
 		$fecha = ucfirst(strftime('%B %d, %G', $date->getTimestamp()));
-		$urlOpemedios = "http://{$_SERVER['HTTP_HOST']}/noticia/".without_accents(strtolower($data['tipofuente']))."/{$data['id']}";
+		if ($mail) {
+			$acountUser = $this->acountRepo->getByEmail($mail);
+			$token = base64_encode(base64_encode($acountUser['id_cuenta']).'_'.base64_encode(time()));
+			$urlOpemedios = "http://{$_SERVER['HTTP_HOST']}/noticia/".without_accents(strtolower($data['tipofuente']))."/{$data['id']}?token={$token}";
+		} else {
+			$urlOpemedios = "http://{$_SERVER['HTTP_HOST']}/noticia/".without_accents(strtolower($data['tipofuente']))."/{$data['id']}";
+		}
+		// $token = ($user) ? : ;
 		$complement = $this->noticiasRepository->getComplement($data['id'], $data['tipofuente_id']);
 		$costo = is_array($complement) ? $complement['costo'] : 0;
 		$url = is_array($complement) ? (isset($complement['url']) ? $complement['url'] : '') : '';

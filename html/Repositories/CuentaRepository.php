@@ -86,6 +86,11 @@ class CuentaRepository extends BaseRepository{
 		return  $this->pdo->query("SELECT * FROM cuenta WHERE id_cuenta = $id")->fetch(PDO::FETCH_ASSOC);
 	}
 
+	public function getByEmail($email)
+	{	
+		return  $this->pdo->query("SELECT * FROM cuenta WHERE email = '{$email}'")->fetch(PDO::FETCH_ASSOC);
+	}
+
 	public function updateAcount($data)
 	{
 		$stmt = $this->pdo->prepare("UPDATE cuenta SET nombre = :nombre, apellidos = :apellidos, cargo = :cargo, telefono1 = :telefono1, telefono2 = :telefono2, email = :email, comentario = :comentario, username = :username, password = :password, id_empresa = :id_empresa, activo = :activo WHERE id_cuenta = :id_cuenta");

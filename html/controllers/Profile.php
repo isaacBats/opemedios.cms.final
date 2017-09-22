@@ -12,14 +12,16 @@ class Profile extends Controller{
 	private $company;
 	private $portadasRepo;
 	private $fuentesRepo;
+	private $acountRepo;
 
 	function __construct()
 	{
-		$this->perfilRepository = new PefilRepository ();
-		$this->asignaRepo = new AsignaRepository ();
-		$this->noticiasRepo = new NoticiasRepository ();
-		$this->portadasRepo = new PortadasRepository ();
-		$this->fuentesRepo = new FuentesRepository ();
+		$this->perfilRepository = new PefilRepository();
+		$this->asignaRepo = new AsignaRepository();
+		$this->noticiasRepo = new NoticiasRepository();
+		$this->portadasRepo = new PortadasRepository();
+		$this->fuentesRepo = new FuentesRepository();
+		$this->acountRepo = new CuentaRepository();
 		$this->temasId = $this->getTemesProfile();
 		$this->company = [
 			'id' => $_SESSION['user']['id_empresa'],
@@ -107,7 +109,22 @@ class Profile extends Controller{
 
 	public function detailNewView($fontType, $newId)
 	{
-		if(isset($_SESSION['user'])){
+		if (isset($_GET['token'])) {
+			$token = base64_decode($_GET['token']);
+			$explode = explode('_', $token);
+			$userID = base64_decode($explode[0]);
+			if ($userget = $this->acountRepo->get($userID)) {
+				$new = $this->noticiasRepo->getNewById($newId);
+				$media = $this->getMediaHTML($new['tipofuente_id'], $newId);
+	 			
+				if ($fontType === 'internet')
+					$newInternet = $this->noticiasRepo->getNewById($newId, 'int');
+
+				$this->renderViewClient('detailNew', $new['encabezado'] . ' - ', compact('new', 'media', 'newInternet'));
+				exit;
+			}
+
+		} elseif (isset($_SESSION['user'])) {
 			$new = $this->noticiasRepo->getNewById($newId);
 			$media = $this->getMediaHTML($new['tipofuente_id'], $newId);
  			

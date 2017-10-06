@@ -76,11 +76,11 @@ class AdminReports extends Controller
     {
         if(isset($_SESSION['admin'])){
 
-            $finicio = isset($_GET['finicio']) ? $_GET['finicio'] : date('Y-m-d');
-            $ffin = isset($_GET['ffin']) ? $_GET['ffin'] : date('Y-m-d');
+            $finicio = (isset($_GET['finicio']) && $_GET['finicio'] != '') ? $_GET['finicio'] : date('Y-m-d');
+            $ffin = (isset($_GET['ffin']) && $_GET['ffin'] != '') ? $_GET['ffin'] : date('Y-m-d');
 
             $news = $this->reportsRepo->reportForDay($finicio, $ffin);
-            $this->renderViewAdmin('reportTodayView', 'Reporte por día - ', compact('news'));
+            $this->renderViewAdmin('reportTodayView', 'Reporte por día - ', compact('news', 'finicio', 'ffin'));
         }else{
             header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
         }

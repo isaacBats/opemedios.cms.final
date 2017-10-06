@@ -22,7 +22,13 @@
     <div class="col-sm-12">
         <div class="panel panel-default">
             <div class="panel-heading">
-                Reporte de número de notas por usuarios Periodo de Busqueda de 2017-10-05
+                Reporte de número de notas por usuarios Periodo de Busqueda 
+                <?php 
+                    if ($data['finicio'] == $data['ffin']) {
+                      echo " de {$data['finicio']}";  
+                    } else {
+                        echo " desde {$data['finicio']} hasta {$data['ffin']}";
+                    } ?>
             </div>
             <div class="panel-body">
                 <div class="table-responsive">

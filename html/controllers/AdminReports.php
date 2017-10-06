@@ -71,4 +71,18 @@ class AdminReports extends Controller
             header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
         }
 	}
+
+    public function reportTodayView()
+    {
+        if(isset($_SESSION['admin'])){
+
+            $finicio = isset($_GET['finicio']) ? $_GET['finicio'] : date('Y-m-d');
+            $ffin = isset($_GET['ffin']) ? $_GET['ffin'] : date('Y-m-d');
+
+            $news = $this->reportsRepo->reportForDay($finicio, $ffin);
+            $this->renderViewAdmin('reportTodayView', 'Reporte por día - ', compact('news'));
+        }else{
+            header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
+        }
+    }
 }

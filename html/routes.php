@@ -614,7 +614,10 @@ $collection->attachRoute(new Route('/panel/reports/clients', array(
     'methods' => 'POST'
 )));
 
-
+$collection->attachRoute(new Route('/panel/reports/today', array(
+    '_controller' => 'AdminReports::reportTodayView',
+    'methods' => 'GET'
+)));
 
 // Reutas de prueba
 // $collection->attachRoute(new Route('/calcula-fraccion', array(

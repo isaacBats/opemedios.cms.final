@@ -181,6 +181,21 @@ class Controller
     }
 
     /**
+     * Render View for Admin method
+     * @param  string $template Name of template
+     * @param  string $title    Title of the page
+     * @param  array  $data     Data of the page
+     * @param  string $css      Include css's plus
+     * @param  string $js       Include JavaScript plus
+     */
+    public function renderViewAdmin($template, $title = '', $data = [], $css = '', $js = '') 
+    {
+        $this->header_admin($title, $css);
+		require $this->adminviews . $template . '.php';
+		$this->footer_admin($js);
+    }
+
+    /**
      * Render View method for Client
      * @param  string $template Name of template
      * @param  string $title    Title of the page

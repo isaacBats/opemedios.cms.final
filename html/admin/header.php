@@ -223,9 +223,9 @@
                                 <li>
                                     <a href="/panel/reports/clients">Noticias por Clientes</a>
                                 </li>
-                                <!-- <li>
+                                <li>
                                     <a href="/panel/reports/today">Reporte de Notas por día</a>
-                                </li> -->
+                                </li>
                             </ul>
                         </li>
                         <!-- <li>

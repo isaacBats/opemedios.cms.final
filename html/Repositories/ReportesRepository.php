@@ -3,10 +3,13 @@
 class ReportesRepository extends BaseRepository
 {
 	private $result;
+	private $now;
 
 	function __construct()
 	{
 		$this->result = new stdClass();
+		$this->now = date('Y-m-d');
+
 		parent::__construct();
 	}
 
@@ -41,5 +44,18 @@ class ReportesRepository extends BaseRepository
 		}
 
 		return $this->result;
+	}
+
+	public function reportForDay($finicio, $ffin)
+	{
+		// exit("SELECT count(*) AS 'Numero' FROM noticia WHERE fecha BETWEEN '{$finicio}' AND '{$ffin}'");
+		return $this->pdo->query("SELECT n.id_usuario AS ID, 
+				CONCAT(u.nombre, ' ', u.apellidos) AS Nombre, 
+				COUNT(*) AS 'Notas' 
+			FROM noticia n 
+			INNER JOIN usuario u ON n.id_usuario = u.id_usuario 
+			WHERE fecha BETWEEN '{$finicio}' AND '{$ffin}' 
+			GROUP BY n.id_usuario 
+			ORDER BY COUNT(*) DESC")->fetchAll(PDO::FETCH_ASSOC);
 	}
 }

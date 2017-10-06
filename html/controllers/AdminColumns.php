@@ -328,8 +328,8 @@ class AdminColumns extends Controller
 				$data['imagen'] = $newsImages['originName'];
 				$data['thumb'] = $newsImages['thumbName'];
 				$im = new Image();
-				$column['imagen'] = __APP__ . $column['imagen'];
-				$column['thumb'] = __APP__ .  $column['thumb'];
+				$column['imagen'] = $column['imagen'];
+				$column['thumb'] = $column['thumb'];
 				$imagesDelete = $im->deleteImage([$column['imagen'], $column['thumb']]);
 			} else {
 				$data['imagen'] = $column['imagen'];
@@ -367,8 +367,8 @@ class AdminColumns extends Controller
 			$deleteColumn = $this->portadasRepo->deleteColumna($id);
 			if ($deleteColumn->exito) {
 				$im = new Image();
-				$column['imagen'] = __APP__ . '/' .$column['imagen'];
-				$column['thumb'] = __APP__ . '/' .$column['thumb'];
+				$column['imagen'] = $column['imagen'];
+				$column['thumb'] = $column['thumb'];
 				$imagesDelete = $im->deleteImage([$column['imagen'], $column['thumb']]);
 				$rs->exito = true;
 				$rs->tipo = 'alert-info';
@@ -399,8 +399,8 @@ class AdminColumns extends Controller
 			$deleteCover = $this->portadasRepo->deletePortada($id);
 			if ($deleteCover->exito) {
 				$im = new Image();
-				$cover['imagen'] = __APP__ . '/' .$cover['imagen'];
-				$cover['thumb'] = __APP__ . '/' .$cover['thumb'];
+				$cover['imagen'] = $cover['imagen'];
+				$cover['thumb'] = $cover['thumb'];
 				$imagesDelete = $im->deleteImage([$cover['imagen'], $cover['thumb']]);
 				$rs->exito = true;
 				$rs->tipo = 'alert-info';

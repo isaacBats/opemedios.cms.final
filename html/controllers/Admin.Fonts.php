@@ -159,8 +159,8 @@ class AdminFonts extends Controller{
 				$newCover = $adminColumn->saveImages($_FILES['logo'], $this->path_media);
 				$im = new Image();
 				$imageExplode = explode('.', $font['logo']);
-				$old_image = __APP__ . $font['logo'];
-				$old_thumb = __APP__ . $imageExplode[0].'_thumb.'.$imageExplode[1];
+				$old_image = $font['logo'];
+				$old_thumb = $imageExplode[0].'_thumb.'.$imageExplode[1];
 				$imagesDelete = $im->deleteImage([$old_image, $old_thumb]);
 			}
 

@@ -129,7 +129,7 @@ class Image
     	$errors->count = 0;
     	
     	foreach ($files as $file) {
-    		if (!unlink($file)){
+    		if (!unlink(__OPEMEDIOS__ . $file)){
     			$errors->count ++;
     			$errors->file[] = $file;
     		}

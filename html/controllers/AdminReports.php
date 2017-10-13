@@ -26,11 +26,7 @@ class AdminReports extends Controller
 			$tiposFuente = is_array($tiposFuente) ? $tiposFuente : []; 
 
 			// echo '<pre>'; var_dump($empresas); exit;
-
-			$this->header_admin('Reporte por cliente - ');
-			require $this->adminviews . 'reportClienteView.php';
-			$this->footer_admin();
-
+            $this->renderViewAdmin('reportClienteView', 'Reporte por cliente - ', compact('empresas', 'tiposFuente'));
 		}else{
             header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
         }
@@ -66,7 +62,9 @@ class AdminReports extends Controller
 
     		}, $data);
 
-    		$reportExcel->setHeaders($encabezados)->make($results)->download('xlsx');
+    		$reportExcel->setHeaders($encabezados)
+                ->make($results)
+                ->download('xlsx');
 		}else{
             header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
         }

@@ -9,7 +9,7 @@
 			<label for="empresa">Selecciona un cliente</label>
 			<select class="select2 form-control" name="empresa" id="empresa" required >
 				<option value="">Clientes</option>
-				<?php foreach ($empresas->rows as $cliente): ?>
+				<?php foreach ($data['empresas']->rows as $cliente): ?>
 				<option value="<?= $cliente['id_empresa'] ?>"><?= $cliente['nombre'] ?></option>
 				<?php endforeach; ?>
 			</select>
@@ -24,16 +24,14 @@
 		</div>
 		<div class="form-group col-sm-8 col-sm-offset-2">
 		    <label for="tema">Tema</label>
-		     <select class="form-control" name="tema" id="tema" disabled="disabled" required >
-		        <option value="">Temas</option>
+		     <select class="select2 form-control" name="tema[]" id="tema" disabled="disabled" required multiple="multiple">
 		        <option value="0">Todos los temas</option>
 		    </select>
 		</div>
 		<div class="form-group col-sm-4 col-sm-offset-2">
 		    <label for="tendencia">Tendencia</label>
 		     <select class="form-control" name="tendencia" required >
-                 <option value="">Tendencia</option>
-                 <option value="0" >Todas las tendencias</option>
+                 <option value="0" selected>Todas las tendencias</option>
                  <option value="1" >Positiva</option>
                  <option value="2" >Neutral</option>
                  <option value="3" >Negativa</option>
@@ -42,9 +40,8 @@
 		<div class="form-group col-sm-4">
 		    <label for="tipo_fuente">Tipo de fuente</label>
 		     <select class="form-control" name="tipo_fuente" id="tipo_fuente" required >
-                 <option value="">Tipo de fuente</option>
-                 <option value="0" >Todos los tipos</option>
-                 <?php foreach ($tiposFuente as $tf): ?>
+                 <option value="0" selected>Todos los tipos</option>
+                 <?php foreach ($data['tiposFuente'] as $tf): ?>
                  <option value="<?= $tf['id_tipo_fuente'] ?>"><?= $tf['descripcion'] ?></option>
                  <?php endforeach; ?>
              </select>

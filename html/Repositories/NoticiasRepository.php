@@ -7,6 +7,15 @@ require_once __DIR__ . '/../Utilities/Util.php';
 
 class NoticiasRepository extends BaseRepository{
 
+	public function where(array $array)
+	{
+		return [
+			[0, 'Titulo del tema', 'Descripcion'],
+			[1, 'Titulo del tema 1', 'Descripcion'],
+			[2, 'Titulo del tema 2', 'Descripcion'],
+		];
+	}
+
 	public function showAllNews(){
 		
 		$query = $this->pdo->prepare("SELECT * FROM noticia ORDER BY id_noticia DESC LIMIT 30;");

@@ -20,4 +20,13 @@ class TemaRepository extends BaseRepository{
 
 		return $issues;
 	}
+
+	public function where(array $array)
+	{
+		return [
+			[0, 'Titulo del tema', 'Descripcion'],
+			[1, 'Titulo del tema 1', 'Descripcion'],
+			[2, 'Titulo del tema 2', 'Descripcion'],
+		];
+	}
 }

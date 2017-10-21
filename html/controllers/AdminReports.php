@@ -8,12 +8,18 @@ class AdminReports extends Controller
 	private $empresasRepo;
 	private $tipoFuenteRepo;
 	private $reportsRepo;
+    private $temaRepo;
+    private $noticiasRepo;
+    private $asignaRepo;
 
 	function __construct()
 	{
 		$this->empresasRepo = new EmpresaRepository();
 		$this->tipoFuenteRepo = new TipoFuenteRepository();
-		$this->reportsRepo = new ReportesRepository();
+        $this->reportsRepo = new ReportesRepository();
+        $this->temaRepo = new TemaRepository();
+        $this->noticiasRepo = new NoticiasRepository();
+		$this->asignaRepo = new AsignaRepository();
 	}
 
 	public function reportClientView()
@@ -37,15 +43,28 @@ class AdminReports extends Controller
 		if(isset($_SESSION['admin'])){
 			// echo '<pre>'; print_r($_POST); exit;
 
-			$empresa = $_POST['empresa'];
+			$idEmpresa = $_POST['empresa'];
 		    $fecha_inicio = $_POST['fecha_inicio'];
 		    $fecha_fin = $_POST['fecha_fin'];
-		    $tema = $_POST['tema'];
+		    $temasIds = $_POST['tema'];
 		    $tendencia = $_POST['tendencia'];
 		    $tipo_fuente = $_POST['tipo_fuente'];
 		    $fuente = isset($_POST['fuente']) ? $_POST['fuente'] : 0;
 		    $seccion = isset($_POST['seccion']) ? $_POST['seccion'] : 0;
 
+            // $empresa = $this->empresasRepo->get($idEmpresa)->rows;
+            $firstTheme = current($temasIds);
+            
+            if ($firstTheme == 0) {
+                $allThemes = $this->temaRepo->getThemaByEmpresaID($idEmpresa);
+                $temasIds = array_column($allThemes, 'id_tema');
+            }
+
+            $news = $this->map_news($this->getAssignments($idEmpresa, $temasIds, $tendencia), $fecha_inicio, $fecha_fin, $tipo_fuente, $fuente, $seccion);
+
+            vdd($news);
+            $temasInfo = $this->temaRepo->where(['id_tema' => $temas]);
+            vdd([$_POST, $temasInfo, $temasIds]);
 		    $encabezados = ['Medio','Fuente','Encabezado','Síntesis','Tendencia','Costo','Alcance','Fecha', 'Link'];
 
 		    $reportExcel = new ReportExcel(TipoReporte::REPORTE_CLIENTE);
@@ -69,6 +88,23 @@ class AdminReports extends Controller
             header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
         }
 	}
+
+    public function getAssignments($idEmpresa, $idTema, $tendencia)
+    {
+        $asigna = [
+            'id_noticia' => null,
+            'id_empresa' => $idEmpresa,
+            'id_tema' => $idTema,
+            'id_tendencia' => $tendencia
+        ];
+        return $this->asignaRepo->find($asigna);
+    }
+
+    private function map_news(array $assignments, $finicio, $ffin, $tfuente, $fuente, $seccion)
+    {
+        $newsId = array_column($assignments, 'id_noticia');
+        $news = $this->noticiasRepo->where(['id_noticia' => $newsId]);
+    } 
 
     public function reportTodayView()
     {

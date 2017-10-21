@@ -66,4 +66,48 @@ class AsignaRepository extends BaseRepository
 		return $totals;
 	}
 
+	public function find(array $data)
+	{
+		$qry = 'SELECT * FROM asigna WHERE 1 = 1 ';
+		$where = '';
+
+		if (!is_null($data['id_noticia'])) {
+			// if ()
+			$where = " AND ";
+		}
+
+		return [
+			[
+				'id_noticia' => 357386,
+				'id_empresa' => 450,
+				'id_tema' => 170,
+				'id_tendencia' => 1 
+			],
+			[
+				'id_noticia' => 357393,
+				'id_empresa' => 450,
+				'id_tema' => 170,
+				'id_tendencia' => 1 
+			],
+			[
+				'id_noticia' => 357394,
+				'id_empresa' => 450,
+				'id_tema' => 170,
+				'id_tendencia' => 1 
+			],
+			[
+				'id_noticia' => 357395,
+				'id_empresa' => 450,
+				'id_tema' => 170,
+				'id_tendencia' => 1 
+			],
+			[
+				'id_noticia' => 357396,
+				'id_empresa' => 450,
+				'id_tema' => 170,
+				'id_tendencia' => 1 
+			]
+		];
+	}
+
 }

@@ -7,8 +7,35 @@ require_once __DIR__ . '/../Utilities/Util.php';
 
 class NoticiasRepository extends BaseRepository{
 
-	public function where(array $array)
+	public function where(array $array, $type = 'AND')
 	{
+		$qry = "SELECT * FROM noticia WHERE 1 = 1 ";
+		$where = '';
+
+		if (isset($array['fecha_inicio']) && !is_null($array['fecha_inicio'])) {
+			$where .= " {$type} fecha >= {$array['fecha_inicio']} ";
+		}
+
+		if (isset($array['fecha_fin']) && !is_null($array['fecha_fin'])) {
+			$where .= " {$type} fecha <= {$array['fecha_fin']} ";
+		}
+
+		if (isset($array['id_tipo_fuente']) && !is_null($array['id_tipo_fuente'])) {
+
+			$where .= " {$type} " . ($array['id_tipo_fuente'] == 0) 
+				? " id_tipo_fuente in (1,2,3,4,5) " 
+				: " id_tipo_fuente = {$array['id_tipo_fuente']} ";
+		}
+
+		if (isset($array['id_fuente']) && !is_null($array['id_fuente'])) {
+			$where .= " {$type} id_fuente = {$array['id_fuente']} ";
+		}
+
+		if (isset($array['id_seccion']) && !is_null($array['id_seccion'])) {
+			$where .= " {$type} id_seccion = {$array['id_seccion']} ";
+		}
+
+		vdd($where);
 		return [
 			[0, 'Titulo del tema', 'Descripcion'],
 			[1, 'Titulo del tema 1', 'Descripcion'],

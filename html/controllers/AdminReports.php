@@ -62,7 +62,7 @@ class AdminReports extends Controller
 
             $news = $this->map_news($this->getAssignments($idEmpresa, $temasIds, $tendencia), $fecha_inicio, $fecha_fin, $tipo_fuente, $fuente, $seccion);
 
-            vdd($news);
+            vdd([$news, $temasIds]);
             $temasInfo = $this->temaRepo->where(['id_tema' => $temas]);
             vdd([$_POST, $temasInfo, $temasIds]);
 		    $encabezados = ['Medio','Fuente','Encabezado','Síntesis','Tendencia','Costo','Alcance','Fecha', 'Link'];
@@ -103,7 +103,15 @@ class AdminReports extends Controller
     private function map_news(array $assignments, $finicio, $ffin, $tfuente, $fuente, $seccion)
     {
         $newsId = array_column($assignments, 'id_noticia');
-        $news = $this->noticiasRepo->where(['id_noticia' => $newsId]);
+        $news = $this->noticiasRepo->where([
+            'id_noticia' => $newsId, 
+            'fecha_inicio' => $finicio, 
+            'fecha_fin' => $ffin,
+            'id_tipo_fuente' => $tfuente,
+            'id_fuente' => $fuente,
+            'id_seccion' => $seccion
+        ]);
+        vdd($news);
     } 
 
     public function reportTodayView()

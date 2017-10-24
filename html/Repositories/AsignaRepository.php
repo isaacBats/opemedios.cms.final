@@ -66,48 +66,50 @@ class AsignaRepository extends BaseRepository
 		return $totals;
 	}
 
+	private function toString($value, $key)
+	{
+		if (is_array($value)) {
+			return " {$key} in (" . implode(',', $value) .") ";
+		} else {
+			return " {$key} = {$value} ";
+		}
+	}
+
 	public function find(array $data)
 	{
 		$qry = 'SELECT * FROM asigna WHERE 1 = 1 ';
 		$where = '';
-
 		if (!is_null($data['id_noticia'])) {
-			// if ()
-			$where = " AND ";
+			$where .= ' AND ' . $this->toString($data['id_noticia'], 'id_noticia');
 		}
 
-		return [
-			[
-				'id_noticia' => 357386,
-				'id_empresa' => 450,
-				'id_tema' => 170,
-				'id_tendencia' => 1 
-			],
-			[
-				'id_noticia' => 357393,
-				'id_empresa' => 450,
-				'id_tema' => 170,
-				'id_tendencia' => 1 
-			],
-			[
-				'id_noticia' => 357394,
-				'id_empresa' => 450,
-				'id_tema' => 170,
-				'id_tendencia' => 1 
-			],
-			[
-				'id_noticia' => 357395,
-				'id_empresa' => 450,
-				'id_tema' => 170,
-				'id_tendencia' => 1 
-			],
-			[
-				'id_noticia' => 357396,
-				'id_empresa' => 450,
-				'id_tema' => 170,
-				'id_tendencia' => 1 
-			]
-		];
+		if (!is_null($data['id_empresa'])) {
+			$where .= ' AND ' . $this->toString($data['id_empresa'], 'id_empresa');
+		}
+
+		if (!is_null($data['id_tema'])) {
+			$where .= ' AND ' . $this->toString($data['id_tema'], 'id_tema');
+		}
+
+		if (!is_null($data['id_tendencia'])) {
+			if($data['id_tendencia'] == 0)
+				$where .= ' AND id_tendencia in (1,2,3)';
+			else
+				$where .= " AND id_tendencia = {$data['id_tendencia']}";
+		}
+		
+		$stmt = $this->pdo->prepare($qry . $where);
+		
+		try {
+			if($stmt->execute()) {
+				return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+			} else {
+				return false;
+			}
+			
+		} catch (Exception $e) {
+			echo "Error: => {$e->getMessage()}";
+		}
 	}
 
 }

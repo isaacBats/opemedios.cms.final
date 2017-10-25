@@ -21,6 +21,22 @@ class TemaRepository extends BaseRepository{
 		return $issues;
 	}
 
+	public function get($id) 
+	{
+		try {
+			$stmt = $this->pdo->prepare("SELECT * FROM tema WHERE id_tema = :idTema");
+			if ($stmt->execute([':idTema' => $id])) {
+				return $stmt->fetch(\PDO::FETCH_ASSOC);
+			} else {
+				return false;
+			}
+		} catch (Exception $e) {
+			$message = 'No se pudo obtener el tema. ' . PHP_EOL . 'Error: ' . $e->getMessage();
+			error_log($message, 0);
+			echo $message;
+		}
+	}
+
 	public function where(array $array)
 	{
 		return [

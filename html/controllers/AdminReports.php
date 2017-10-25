@@ -60,9 +60,9 @@ class AdminReports extends Controller
                 $temasIds = array_column($allThemes, 'id_tema');
             }
 
-            $news = $this->map_news($this->getAssignments($idEmpresa, $temasIds, $tendencia), $fecha_inicio, $fecha_fin, $tipo_fuente, $fuente, $seccion);
+            $assignments = $this->getAssignments($idEmpresa, $temasIds, $tendencia);
+            $news = $this->map_news($assignments, $fecha_inicio, $fecha_fin, $tipo_fuente, $fuente, $seccion);
 
-            vdd([$news, $temasIds]);
             $temasInfo = $this->temaRepo->where(['id_tema' => $temas]);
             vdd([$_POST, $temasInfo, $temasIds]);
 		    $encabezados = ['Medio','Fuente','Encabezado','Síntesis','Tendencia','Costo','Alcance','Fecha', 'Link'];

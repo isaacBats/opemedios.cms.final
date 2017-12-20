@@ -6,9 +6,11 @@ use utilities\UserState;
 
 class EmpresaRepository extends BaseRepository{
 
+	private $table = 'empresa';
+
 	public function filterEmpresas ( $criterio ){
 
-		$sql = "SELECT * FROM empresa WHERE nombre like '%$criterio%' OR contacto like '%$criterio%' OR email like '%$criterio%' OR giro like '%$criterio%'";
+		$sql = "SELECT * FROM {$this->table} WHERE nombre like '%$criterio%' OR contacto like '%$criterio%' OR email like '%$criterio%' OR giro like '%$criterio%'";
 
 		$query = $this->pdo->prepare($sql);
 		
@@ -19,7 +21,7 @@ class EmpresaRepository extends BaseRepository{
 
 	public function getEmpresaById ( $id ){
 
-		$sql = "SELECT * FROM empresa WHERE id_empresa = $id LIMIT 1";
+		$sql = "SELECT * FROM {$this->table} WHERE id_empresa = $id LIMIT 1";
 
 		$query = $this->pdo->prepare($sql);
 		
@@ -227,5 +229,18 @@ class EmpresaRepository extends BaseRepository{
 		}
 
 		return $rs;
+	}
+
+	/**
+	 * Delete Empresa
+	 * @param  integer $empresa Id of the Company
+	 * @return boolean	true = if remove, false = if error in the execution
+	 */
+	public function delete($empresa)
+	{
+		if ($this->pdo->exec("DELETE FROM {$this->table} WHERE id_empresa = {$empresa}"))
+			return true;
+		else 
+			return false;
 	}
 }

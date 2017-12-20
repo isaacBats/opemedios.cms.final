@@ -191,6 +191,7 @@ class Controller
     public function renderViewAdmin($template, $title = '', $data = [], $css = '', $js = '') 
     {
         $this->header_admin($title, $css);
+        extract($data);
 		require $this->adminviews . $template . '.php';
 		$this->footer_admin($js);
     }

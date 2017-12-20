@@ -492,6 +492,25 @@ $(document).ready(function(){
         });
     });
 
+    // elimina un cliente
+    $('.delete-client').on('click', function(event){
+        event.preventDefault()
+        var data = {};
+        var $modal = $('#modalForm');
+        var $eliminar = $modal.find('.modal-footer .btn-primary');
+        var $costumer = $(this).parent().siblings('td')[1].innerText;
+        var linkhref = $(this).attr('href');
+        $modal.find('#modalLabelForm').html('Vas a eliminar a ' + $costumer.toUpperCase());
+        $modal.find('.modal-body').html('Si eliminas este cliente vas a eliminar los temas y las cuentas que estan relacionadas al mismo. <br> ¿Estas seguro que deceas eliminar el cliente?');
+        var form = $modal.find('#modalFormForm');
+        form.attr({
+            action: linkhref,
+            method: 'POST'
+        });
+        $eliminar.html('Eliminar');
+        $modal.modal('show');
+    });
+
     //Cambia el estado de una seccion en una fuente
     $('.change-state').click(function( e ){
         e.preventDefault();

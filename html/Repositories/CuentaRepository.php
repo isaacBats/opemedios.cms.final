@@ -4,9 +4,11 @@ include_once("BaseRepository.php");
 
 class CuentaRepository extends BaseRepository{
 
+	private $table = 'cuenta';
+
 	public function getAcountsByCompany ( $company ){
 
-		$sql = "SELECT * FROM cuenta WHERE id_empresa = $company";
+		$sql = "SELECT * FROM {$this->table} WHERE id_empresa = $company";
 
 		$query = $this->pdo->prepare($sql);
 		
@@ -17,7 +19,7 @@ class CuentaRepository extends BaseRepository{
 
 	public function getAcountsActivesByCompany ( $company ){
 
-		$sql = "SELECT * FROM cuenta WHERE activo != 0 AND id_empresa = $company";
+		$sql = "SELECT * FROM {$this->table} WHERE activo != 0 AND id_empresa = $company";
 
 		$query = $this->pdo->prepare($sql);
 		
@@ -34,7 +36,7 @@ class CuentaRepository extends BaseRepository{
 	public function create( array $cuenta )
 	{
 		$result = new stdClass();
-		$qry = "INSERT INTO cuenta ( nombre, apellidos, telefono1, telefono2, email, cargo, comentario, username, password, activo, id_empresa ) VALUES( :nombre, :apellidos, :tel_casa, :tel_cel, :email, :cargo, :comentario, :username, :password, :activo, :empresa );";
+		$qry = "INSERT INTO {$this->table} ( nombre, apellidos, telefono1, telefono2, email, cargo, comentario, username, password, activo, id_empresa ) VALUES( :nombre, :apellidos, :tel_casa, :tel_cel, :email, :cargo, :comentario, :username, :password, :activo, :empresa );";
 		
 		$data = [
 					':nombre' 	  => $cuenta['nombre'],
@@ -71,7 +73,7 @@ class CuentaRepository extends BaseRepository{
 	{
 		$result = new stdClass();
 
-		if( $this->pdo->exec( "UPDATE cuenta SET activo = NOT activo WHERE id_cuenta = $cuentaId;" ) === 1 ){
+		if( $this->pdo->exec( "UPDATE {$this->table} SET activo = NOT activo WHERE id_cuenta = $cuentaId;" ) === 1 ){
 			$result->exito = TRUE;
 		}else{
 			$result->exito = FALSE;
@@ -83,17 +85,17 @@ class CuentaRepository extends BaseRepository{
 
 	public function get($id)
 	{	
-		return  $this->pdo->query("SELECT * FROM cuenta WHERE id_cuenta = $id")->fetch(PDO::FETCH_ASSOC);
+		return  $this->pdo->query("SELECT * FROM {$this->table} WHERE id_cuenta = $id")->fetch(PDO::FETCH_ASSOC);
 	}
 
 	public function getByEmail($email)
 	{	
-		return  $this->pdo->query("SELECT * FROM cuenta WHERE email = '{$email}'")->fetch(PDO::FETCH_ASSOC);
+		return  $this->pdo->query("SELECT * FROM {$this->table} WHERE email = '{$email}'")->fetch(PDO::FETCH_ASSOC);
 	}
 
 	public function updateAcount($data)
 	{
-		$stmt = $this->pdo->prepare("UPDATE cuenta SET nombre = :nombre, apellidos = :apellidos, cargo = :cargo, telefono1 = :telefono1, telefono2 = :telefono2, email = :email, comentario = :comentario, username = :username, password = :password, id_empresa = :id_empresa, activo = :activo WHERE id_cuenta = :id_cuenta");
+		$stmt = $this->pdo->prepare("UPDATE {$this->table} SET nombre = :nombre, apellidos = :apellidos, cargo = :cargo, telefono1 = :telefono1, telefono2 = :telefono2, email = :email, comentario = :comentario, username = :username, password = :password, id_empresa = :id_empresa, activo = :activo WHERE id_cuenta = :id_cuenta");
 
 		$result = new stdClass;
 		
@@ -105,5 +107,37 @@ class CuentaRepository extends BaseRepository{
 		}
 		
 		return $result;	
+	}
+
+	/**
+	 * Delete Cuenta
+	 * @param  integer $empresa Id of the Company
+	 * @return boolean	true = if remove, false = if error in the execution
+	 */
+	public function deleteFromEmpresa($empresa)
+	{
+		if ($this->pdo->exec("DELETE FROM {$this->table} WHERE id_empresa = {$empresa}"))
+			return true;
+		else 
+			return false;
+	}
+
+	/**
+	 * Delete Cuenta by Id
+	 * @param  integer $id of acount or array  $id = [] when are many acounts
+	 * @return boolean	true = if remove, false = if error in the execution
+	 */
+	public function deleteById($id)
+	{
+		if (is_array($id)) {
+			$qry = "DELETE FROM {$this->table} WHERE id_cuenta in (".implode(',', $id).")";
+		} else {
+			$qry = "DELETE FROM {$this->table} WHERE id_cuenta = {$id}";
+		}
+
+		if ($this->pdo->exec($qry))
+			return true;
+		else 
+			return false;
 	}
 }

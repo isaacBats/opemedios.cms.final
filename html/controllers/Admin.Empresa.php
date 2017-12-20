@@ -6,10 +6,35 @@ use utilities\Image as Imagen;
 // TODO: @Cuenta Validar que en la tabla de cuentas el mail y el username sean unicos.
 class AdminEmpresa extends Controller
 {
+	/**
+	 * TemaRepository
+	 * @var pdo
+	 */
 	private $temaRep;
+	
+	/**
+	 * EmpresaRepository
+	 * @var pdo
+	 */
 	private $empresaRepo;
+	
+	/**
+	 * UserRepository
+	 * @var pdo
+	 */
 	private $userRepo;
+	
+	/**
+	 * CuentaRepository
+	 * @var pdo
+	 */
 	private $cuentaRepo;
+	
+	/**
+	 * EmpresaTemaCuentaRepository
+	 * @var pdo
+	 */
+	private $empresaTemaCuentaRepo;
 
 	function __construct()
 	{
@@ -17,6 +42,7 @@ class AdminEmpresa extends Controller
 		$this->empresaRepo = new EmpresaRepository();
 		$this->userRepo    = new UsuarioRepository();
 		$this->cuentaRepo  = new CuentaRepository();
+		$this->empresaTemaCuentaRepo = new EmpresaTemaCuentaRepository();
 	}
 
 	/**
@@ -56,13 +82,34 @@ class AdminEmpresa extends Controller
 			$ini = $page + 1;
 			$end = ( $page + $limit >= $count ) ? $count : $page + $limit;
 
-			$this->header_admin('Clientes - ', $css);
-			require $this->adminviews . 'showClientsView.php';
-			$this->footer_admin( $js );
+			$this->renderViewAdmin('showClientsView', 'Clientes - ', compact('ini', 'end', 'count', 'clients', 'page', 'limit'), $css, $js);
 
 		}else{
             header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
         }
+	}
+
+	public function deleteClient($id)
+	{
+		$deletes = array();
+		// Obtengo las cuentas para despues eliminarlas
+		$cuentas = $this->empresaTemaCuentaRepo->getCuentasByEmpresa($id);
+		// eliminar de empresa_tema_cuenta
+		$deletes['empresaTemaCuenta'] = $this->empresaTemaCuentaRepo->deleteFromEmpresa($id);
+		// eliminar de tema
+		$deletes['tema'] = $this->temaRep->deleteFromEmpresa($id);
+		// eliminar de cuenta
+		// $deletes['cuenta'] = $this->cuentaRepo->deleteFromEmpresa($id);
+		$deletes['cuenta'] = $this->cuentaRepo->deleteById($cuentas);
+		// eliminar de empresa
+		$deletes['empresa'] = $this->empresaRepo->delete($id);
+		vdd($deletes);
+		
+		if (in_array(false, $deletes)) {
+			// hubo algun error
+		} else {
+			// todo ok
+		}
 	}
 
 	/**

@@ -452,6 +452,11 @@ $collection->attachRoute(new Route('/panel/client/:id', array(
     'methods' => 'GET'
 )));
 
+$collection->attachRoute(new Route('/panel/client/remove/:id', array(
+    '_controller' => 'AdminEmpresa::deleteClient',
+    'methods' => 'POST'
+)));
+
 $collection->attachRoute(new Route('/panel/client/tema/add', array(
     '_controller' => 'AdminEmpresa::addThemeAction',
     'methods' => 'POST'

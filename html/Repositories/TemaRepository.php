@@ -4,6 +4,12 @@ include_once("BaseRepository.php");
 
 class TemaRepository extends BaseRepository{
 
+	/**
+	 * Table name
+	 * @var string $table
+	 */
+	private $table = 'tema';
+
 	public function getThemaByEmpresaID( $id ){
 		
 		$issues = null;
@@ -24,7 +30,7 @@ class TemaRepository extends BaseRepository{
 	public function get($id) 
 	{
 		try {
-			$stmt = $this->pdo->prepare("SELECT * FROM tema WHERE id_tema = :idTema");
+			$stmt = $this->pdo->prepare("SELECT * FROM {$this->table} WHERE id_tema = :idTema");
 			if ($stmt->execute([':idTema' => $id])) {
 				return $stmt->fetch(\PDO::FETCH_ASSOC);
 			} else {
@@ -44,5 +50,18 @@ class TemaRepository extends BaseRepository{
 			[1, 'Titulo del tema 1', 'Descripcion'],
 			[2, 'Titulo del tema 2', 'Descripcion'],
 		];
+	}
+
+	/**
+	 * Delete Theme
+	 * @param  integer $empresa Id of the Company
+	 * @return boolean	true = if remove, false = if error in the execution
+	 */
+	public function deleteFromEmpresa($empresa)
+	{
+		if ($this->pdo->exec("DELETE FROM {$this->table} WHERE id_empresa = {$empresa}"))
+			return true;
+		else 
+			return false;
 	}
 }

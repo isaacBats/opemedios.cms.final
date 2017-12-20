@@ -9,7 +9,7 @@
 			<label for="empresa">Selecciona un cliente</label>
 			<select class="select2 form-control" name="empresa" id="empresa" required >
 				<option value="">Clientes</option>
-				<?php foreach ($data['empresas']->rows as $cliente): ?>
+				<?php foreach ($empresas->rows as $cliente): ?>
 				<option value="<?= $cliente['id_empresa'] ?>"><?= $cliente['nombre'] ?></option>
 				<?php endforeach; ?>
 			</select>
@@ -41,7 +41,7 @@
 		    <label for="tipo_fuente">Tipo de fuente</label>
 		     <select class="form-control" name="tipo_fuente" id="tipo_fuente" required >
                  <option value="0" selected>Todos los tipos</option>
-                 <?php foreach ($data['tiposFuente'] as $tf): ?>
+                 <?php foreach ($tiposFuente as $tf): ?>
                  <option value="<?= $tf['id_tipo_fuente'] ?>"><?= $tf['descripcion'] ?></option>
                  <?php endforeach; ?>
              </select>

@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    
+
     /* Cambia el lenguaje del datepicker a español */
         $.datepicker.regional['es'] = {
             closeText: 'Cerrar',
@@ -20,7 +20,7 @@ $(document).ready(function(){
         };
         $.datepicker.setDefaults($.datepicker.regional['es']);
 
-    
+
     // var moment = require('moment');
         moment.updateLocale('en', {
             longDateFormat : {
@@ -47,7 +47,7 @@ $(document).ready(function(){
         //     var fechaFin = $('#fechaFin');
         //     var date = new Date.prototype.getTime();
         //     console.log(date);
-        //     fechaInicio.val(date);            
+        //     fechaInicio.val(date);
 
         //     // fechaInicio.datetimepicker({
         //     //     format: 'YYYY-MM-D'
@@ -60,7 +60,7 @@ $(document).ready(function(){
 
         $("#selectFuente").select2({
           allowClear: true
-        }); 
+        });
 
     }catch(e){
         console.log(e);
@@ -68,20 +68,150 @@ $(document).ready(function(){
 
     try
     {
-        // Summernote
-        $('#summernote').summernote({
-            height: 200
-        });
+        CKEDITOR.replace( 'ckeditordiv', {
+            language: 'es',
+            toolbar: [
+                [ '-', 'NewPage', 'Preview', '-', 'Templates' ],
+                [ 'Cut', 'Copy', 'Paste', 'PasteText', '-', 'Undo', 'Redo' ],
+                '/',
+                [ 'Bold', 'Italic' ]
+            ]
+        } );
     }
     catch( err )
     {
-        console.log( err );
+        //console.log( err );
     }
-    
+
+    /* JOZ*/
+
+    $(document).on('paste', '#paste_here', function() {
+        setTimeout(function(){
+        var $content = $('#paste_here').val();
+            $('.note-editable').html($content);
+        },400);
+    });
+
+     $(document).on("keypress", '#paste_here', function(e) {
+       e.preventDefault();
+    });
+
+    $(document).on('paste', '.note-editable', function(e) {
+       e.preventDefault();
+    });
+
+    if ($('#op-datatable').length > 0) {
+        $(document).ready( function () {
+            $('#op-datatable').DataTable({
+                "pageLength": 50,
+                "language": {
+                    "lengthMenu": "Mostrando _MENU_ resultados por página.",
+                    "zeroRecords": "No se encontraron resultados.",
+                    "info": "Página _PAGE_ de _PAGES_",
+                    "infoEmpty": "No se encontraron resultados.",
+                    "search": "Buscar",
+                    "infoFiltered": "(Resultado de  un total de _MAX_ registros)",
+                    "paginate": {
+                        "previous": "Anterior",
+                        "next": "Siguiente",
+                    }
+                }
+            });
+        });
+    }
+
+    $('.deleteUser').on('click', function(event){
+        event.preventDefault()
+        var data = {};
+        var $costumer = $(this).parent().siblings('td')[1].innerText;
+        var linkhref = $(this).attr('href');
+        swal({
+          title: "Vas a eliminar a " + $costumer.toUpperCase(),
+          text: "¿Estas seguro de eliminar a este usuario?",
+          icon: "warning",
+          buttons: true,
+          dangerMode: true,
+        })
+        .then(function (doDelete) {
+          if (doDelete) {
+            $.post(linkhref).then(function (resp) {
+                if(resp.success) {
+                    swal("Operación correcta", resp.message, "success").then(function () {
+                        location.reload();
+                    })
+                }else{
+                    console.log('Error=> ', resp.error);
+                    swal("Error en la ación", resp.message, "info");
+                }
+            });
+          }
+        });
+    });
+
+    /*temas*/
+    $('.btn-edit-theme').on('click', function(){
+		//alert("tema");
+        var $btn = $(this);
+        var $idTr = $btn.data('id');
+        var $showForm = $('#trEditTheme' + $idTr);
+        $showForm.slideToggle();
+    });
+	
+	/*subtemas*/
+    $('.btn-edit-subtheme').on('click', function(){
+		//alert("subtema");
+        var $btn = $(this);
+        var $idTr = $btn.data('id');
+        var $showForm = $('#trEditsubTheme' + $idTr);
+        $showForm.slideToggle();
+    });
+
+  $('.sendEditTheme').on('click', function(e){
+            e.preventDefault();
+            var $btn = $(this);
+            var $idForm = $btn.data('id');
+            var $form = $('#editTopic' + $idForm);
+            var formData = $form.serialize();
+            var $url = $form.attr("action");
+
+            $.ajax({
+                url: $url,
+                type: 'POST',
+                data: formData,
+                success: function (resp) {
+                    if(resp.success) {
+                    swal("Operación correcta", resp.message, "success").then(function () {
+                        location.reload();
+                    })
+                    }else{
+                        console.log('Error=> ', resp.error);
+                        swal("Error en la ación", resp.message, "info");
+                    }
+                }
+            });
+    });
+	//cerrar tema
+   $('.cancelEditTheme').on('click', function(){
+        var $btn = $(this);
+        var $idTr = $btn.data('id');
+        var $showForm = $('#trEditTheme' + $idTr);
+        $showForm.slideToggle();
+    });
+	//cerrar subtema
+	$('.cancelEditsubTheme').on('click', function(){
+        var $btn = $(this);
+        var $idTr = $btn.data('id');
+        var $showForm = $('#trEditsubTheme' + $idTr);
+        $showForm.slideToggle();
+    });
+    /* /JOZ */
+
+
+
     $(".select2").select2({
       allowClear: true
-    });    
-    
+    });
+
     $(function() {
         $('.date_time').datetimepicker({
           pickDate: false
@@ -95,7 +225,6 @@ $(document).ready(function(){
 
     //  Valida extenciones de archivos
     $('input#primario').on('change', function(){
-        console.log($(this).val())
         var file = $(this).val().split('\\').pop()
         var ext = file.split('.').pop()
         var extPermitidas = ['pdf', 'jpg', 'jpeg', 'png', 'mp4', 'mp3']
@@ -149,14 +278,14 @@ $(document).ready(function(){
                     $ssecction.append('<option value="">Sección</option>');
                     $ssecction.append('<option value="">' + data + '</option>');
                 }else{
-                    $ssecction.append('<option value="">Sección</option>');                    
+                    $ssecction.append('<option value="">Sección</option>');
                     $.each( data, function (i, item){
                         $ssecction.append( $('<option>', {
                             value: item.id_seccion,
-                            text : item.nombre                            
+                            text : item.nombre
                         } ) );
                     } );
-                }                
+                }
             } );
         });
     });
@@ -171,18 +300,16 @@ $(document).ready(function(){
                 $stema.removeAttr('disabled');
                 $('option', $stema).remove();
                 if( typeof(data) == 'string' ){
-                    $stema.append('<option value="">Tema</option>');
                     $stema.append('<option value="">' + data + '</option>');
                 }else{
-                    $stema.append('<option value="">Tema</option>');                    
-                    $stema.append('<option value="0">Todos los temas</option>');                    
+                    $stema.append('<option value="0">Todos los temas</option>');
                     $.each( data, function (i, item){
                         $stema.append( $('<option>', {
                             value: item.id_tema,
-                            text : item.nombre                            
+                            text : item.nombre
                         } ) );
                     } );
-                }                
+                }
             } );
         });
     });
@@ -195,16 +322,16 @@ $(document).ready(function(){
                 $.get( '/panel/fonts/fonts-by-type/' + $elegido, function (data) {
                     var $sfuente = $('#fuente');
                     $sfuente.removeAttr('disabled');
-                    $('option', $sfuente).remove();                
-                    $sfuente.append('<option value="">Fuente</option>');                    
-                    $sfuente.append('<option value="0">Todas las fuentes</option>');                    
+                    $('option', $sfuente).remove();
+                    $sfuente.append('<option value="">Fuente</option>');
+                    $sfuente.append('<option value="0">Todas las fuentes</option>');
                     $.each( data, function (i, item){
                         $sfuente.append( $('<option>', {
                             value: item.id_fuente,
-                            text : item.nombre                            
+                            text : item.nombre
                         } ) );
-                    } );                
-                } );                
+                    } );
+                } );
             }
         });
     });
@@ -221,18 +348,18 @@ $(document).ready(function(){
                     $('option', $sseccion).remove();
                     if(typeof(data) == 'string'){
                         $sseccion.append('<option value="">Sección</option>');
-                        $sseccion.append('<option value="">' + data + '</option>');  
+                        $sseccion.append('<option value="">' + data + '</option>');
                     }else{
-                        $sseccion.append('<option value="">Sección</option>');                    
-                        $sseccion.append('<option value="0">Todas las secciones</option>');                    
+                        $sseccion.append('<option value="">Sección</option>');
+                        $sseccion.append('<option value="0">Todas las secciones</option>');
                         $.each( data, function (i, item){
                             $sseccion.append( $('<option>', {
                                 value: item.id_seccion,
-                                text : item.nombre                            
+                                text : item.nombre
                             } ) );
                         } );
-                    }                
-                } );                
+                    }
+                } );
             }
         });
     });
@@ -242,19 +369,19 @@ $(document).ready(function(){
     $('#add-new-secction').change( function(){
 
         var $seccion = $(this).val();
-        
+
         $.get( '/panel/seccion/autor/' + $seccion, function( autor ){
-            
+
             $('#autor').val(autor);
-            
+
         } );
     });
 
     /* Para el bloque de noticias */
-    
+
     //muestra el area para agregar una noticia al un bloque
     $('#checkBlock').change(addNewBlock);
-    
+
     function addNewBlock(){
         var $checkBlock = $('#checkBlock');
         var $panelBlock = $('#panelBloque');
@@ -278,14 +405,14 @@ $(document).ready(function(){
                     $stema.append('<option value="">Seleccione un tema</option>');
                     $stema.append('<option value="">' + data + '</option>');
                 }else{
-                    $stema.append('<option value="">Seleccione un tema</option>');                    
+                    $stema.append('<option value="">Seleccione un tema</option>');
                     $.each( data, function (i, item){
                         $stema.append( $('<option>', {
                             value: item.id_tema,
-                            text : item.nombre                            
+                            text : item.nombre
                         } ) );
                     } );
-                }                
+                }
             } );
         });
     });
@@ -295,29 +422,55 @@ $(document).ready(function(){
         $('#btn-guardar-tema').removeClass('disabled');
     });
 
-    /* Para crear un bloque */ 
+    /* Para crear un bloque */
 
     //Submit crear bloque
-    $('#form-block').validate({
-        submitHandler: function (form){
-            var $formulario = $(form);
-            var datos = $formulario.serialize();
-            $.post($formulario.attr('action'), datos, function (json) {
-                if (json.exito) {
-                    var $alert = $('.alert');
-                    $alert.addClass(json.tipo).html(json.mensaje).delay(3000).fadeOut('slow', function() {
-                        window.location = '/panel/news/blocks';
-                    });
-                }
+    $('#form-block').submit(function(e){
+            e.preventDefault();    
+            var formData = new FormData(this);
+            var txtBlockName = $(this).find("#blockName");
+            var txtEmpresa = $(this).find("#empresaId");
+
+            if (txtBlockName.val().length === 0 && txtEmpresa.val().length === 0 ) {
+                swal({
+                  text: "Ingresa los datos necesarios.",
+                  icon: "info",
+                  buttons: {
+                    text: "Continuar"
+                  },
+                  dangerMode: true,
+                });
+                return;
+            }
+
+            $.ajax({
+                url: '/panel/block/create',
+                type: 'POST',
+                data: formData,
+                success: function (resp) {
+                    if (resp.exito) {
+                        swal("Operación correcta", resp.mensaje, "success")
+                        .then(function (r) {
+                            window.location = '/panel/news/blocks';
+                        });
+                    }else{
+                        swal("Error", resp.mensaje, "error")
+                        .then(function (r) {
+                            window.location = '/panel/news/blocks';
+                        });
+                    }
+                },
+                cache: false,
+                contentType: false,
+                processData: false
             });
-        }
     });
 
 
     /** Para editar un bloque */
     //Activar formulario de edicion
     $('#block-edit').on('click', activarFormularioEditar);
-    
+
     //Descativar formulario de edicion
     $('#block-cancel').on('click', desactivarFormularioEditar);
 
@@ -344,7 +497,7 @@ $(document).ready(function(){
             $checkboxs.prop('checked', false);
         }
     });
-    
+
     function activarFormularioEditar(){
         var $botonCancelar = $('#block-cancel');
         var $botonEditar = $('#block-edit');
@@ -356,7 +509,7 @@ $(document).ready(function(){
         $formulario.removeClass('invisible');
         $fields.removeAttr('disabled');
     }
-    
+
     function desactivarFormularioEditar(){
         var $botonCancelar = $('#block-cancel');
         var $botonEditar = $('#block-edit');
@@ -395,7 +548,6 @@ $(document).ready(function(){
 
     //activar formulario para seleccionar contactos
     function activarSeleccionarContactos(){
-        // console.log('ouch');
         var $fields = $('#active-form-contacs');
         var $panelContactos = $('.row.panel-green');
 
@@ -403,20 +555,35 @@ $(document).ready(function(){
         $fields.removeAttr('disabled');
     }
     //Submit editar bloque
-    $('#form-block-edit').validate({
-        submitHandler: function (form){
-            var $formulario = $(form);
-            var datos = $formulario.serialize();
-            $.post($formulario.attr('action'), datos, function (json) {
-                if (json.exito) {
-                    var $alert = $('.alert');
-                    $alert.addClass(json.tipo).html(json.mensaje).delay(3000).fadeOut('slow', function() {
-                        window.location.reload();
+    $('#form-block-edit').submit(function (ev){
+        ev.preventDefault();
+        var datos = new FormData(this);
+        if (datos.get('empresaId').length === 0 && datos.get('blockName').length === 0 ) {
+                swal({
+                  text: "Ingresa los datos necesarios.",
+                  icon: "info",
+                  buttons: {
+                    text: "Continuar"
+                  },
+                  dangerMode: true,
+                });
+                return;
+            }
+
+            $.ajax({
+                url: '/panel/block/edit',
+                type: 'POST',
+                data: datos,
+                success: function (resp) {
+                    var alertType = resp.exito ? "success": "error";
+                    swal("Opemedios", resp.mensaje, alertType).then(function (r) {
+                        location.reload();
                     });
-                    $formulario.fadeOut('slow');
-                }
+                },
+                cache: false,
+                contentType: false,
+                processData: false
             });
-        }
     });
 
     //Submit enviar bloque
@@ -428,15 +595,14 @@ $(document).ready(function(){
             if( $checkboxs.length === 0){
                 alert('Debe seleccionar al menos un contacto');
             }else{
-                $.post($formulario.attr('action'), datos, function (json) {
-                    if (json.exito) {
-                        var $alert = $('.alert');
-                        $alert.addClass(json.tipo).html(json.mensaje).delay(3000).fadeOut('slow', function() {
-                            window.location.reload();
-                        });
+                $.post($formulario.attr('action'), datos, function (resp) {
+                    swal("Opemedios Newsletter", resp.mensaje, "success").then(function (){
+                        //location.reload();
+                        var url = "https://opemedios.mx/panel/news/records";
+                        $(location).attr('href',url);
                         $formulario.fadeOut('slow');
-                    }
-                });                
+                    })
+                });
             }
         }
     });
@@ -456,7 +622,7 @@ $(document).ready(function(){
                 $alert.removeClass(json.tipo);
                 $alert.removeAttr('style');
                 $alert.addClass(json.tipo).html(json.mensaje).delay(3000).fadeOut('slow', function(){
-                    boton.parent().parent().fadeOut('slow');                    
+                    boton.parent().parent().fadeOut('slow');
                 });
             }else{
                 $alert.removeAttr('style');
@@ -488,7 +654,7 @@ $(document).ready(function(){
                         window.location.reload();
                     });
                 }
-            });            
+            });
         });
     });
 
@@ -496,19 +662,29 @@ $(document).ready(function(){
     $('.delete-client').on('click', function(event){
         event.preventDefault()
         var data = {};
-        var $modal = $('#modalForm');
-        var $eliminar = $modal.find('.modal-footer .btn-primary');
         var $costumer = $(this).parent().siblings('td')[1].innerText;
         var linkhref = $(this).attr('href');
-        $modal.find('#modalLabelForm').html('Vas a eliminar a ' + $costumer.toUpperCase());
-        $modal.find('.modal-body').html('Si eliminas este cliente vas a eliminar los temas y las cuentas que estan relacionadas al mismo. <br> ¿Estas seguro que deceas eliminar el cliente?');
-        var form = $modal.find('#modalFormForm');
-        form.attr({
-            action: linkhref,
-            method: 'POST'
+        swal({
+          title: "Vas a eliminar a " + $costumer.toUpperCase(),
+          text: "Si eliminas este cliente vas a eliminar los temas y las cuentas que estan relacionadas al mismo. ¿Estas seguro que deceas eliminar el cliente?",
+          icon: "warning",
+          buttons: true,
+          dangerMode: true,
+        })
+        .then(function (doDelete) {
+          if (doDelete) {
+            $.post(linkhref).then(function (resp) {
+                if(resp.success) {
+                    swal("Operación correcta", resp.message, "success").then(function () {
+                        location.reload();
+                    })
+                }else{
+                    console.log('Error=> ', resp.error);
+                    swal("Error en la ación", resp.message, "info");
+                }
+            });
+          }
         });
-        $eliminar.html('Eliminar');
-        $modal.modal('show');
     });
 
     //Cambia el estado de una seccion en una fuente
@@ -532,11 +708,11 @@ $(document).ready(function(){
                         window.location.reload();
                     });
                 }
-            });            
+            });
         });
     });
 
-    //Actializa la pagina 
+    //Actializa la pagina
     $('#block-save').click(function(){ window.location.reload() });
 
     // Esconder aparecer formulario de seccion para las fuentes
@@ -634,8 +810,69 @@ $(document).ready(function(){
                         window.location.reload();
                     });
                 }
-            });            
+            });
         });
+    });
+
+    //Eliminar una cuenta de una Empresa
+    $('.rm-account-from-company').click(function( e ){
+        e.preventDefault();
+        var $href = $(this).data('href');
+        swal({
+          title: "Confirma operación",
+          text: "¿Seguro que quieres eliminar esta cuenta?",
+          icon: "warning",
+          buttons: true,
+          dangerMode: true,
+        })
+        .then(function (doDelete) {
+          if (doDelete) { 
+            $.get($href, function (resp) {
+                if (resp.exito) {
+                    swal("Éxito", resp.text, "success").then(function () {
+                        location.reload();
+                    }); 
+                }else{
+                    swal("Error, Intentalo más tarde", resp.text, "info").then(function () {
+                        location.reload();
+                    }); 
+                }       
+            });
+          }
+        });
+    });
+
+    $('.btn-rm-related-theme').click(function( e ){
+        e.preventDefault();
+        var $href = $(this).data('url');
+        swal({
+          title: "Confirma operación",
+          text: "¿Seguro que quieres eliminar este tema?",
+          icon: "warning",
+          buttons: true,
+          dangerMode: true,
+        })
+        .then(function (doDelete) {
+          if (doDelete) { 
+            $.get($href, function (resp) {
+                if (resp.exito) {
+                    swal("Éxito", resp.text, "success").then(function () {
+                        location.reload();
+                    }); 
+                }else{
+                    swal("Error, Intentalo más tarde", resp.text, "info").then(function () {
+                        location.reload();
+                    }); 
+                }       
+            });
+          }
+        });
+    });
+
+    $(".btn-show-related-theme").click(function (){
+        var name = $(this).data('name');
+        var desc = $(this).data('desc');
+        swal({ title: name, text: desc });
     });
 
     //Para editar los datos de una cuenta
@@ -654,17 +891,17 @@ $(document).ready(function(){
                 $('#comentarios').val(json.comentario).removeAttr('required').removeAttr('aria-required').validate(false);
                 $('#username').val(json.username).removeAttr('required').removeAttr('aria-required').validate(false);
                 $('#password').removeAttr('required').removeAttr('aria-required').validate(false);
-                
-                $('#acount-confirmation').val('Editar'); 
+
+                $('#acount-confirmation').val('Editar');
                 var $formulario = $('form#form-agrega-cuenta');
                 $formulario.attr('action', '/panel/client/cuenta/update/' + $id);
                 $('.form-agregar-cuenta').show('slow');
                 var posicion = $(".form-agregar-cuenta").offset().top;
                 $("html, body").animate({
                     scrollTop: posicion
-                }, 2000);    
+                }, 2000);
             }
-            
+
         });
 
 
@@ -740,12 +977,12 @@ $(document).ready(function(){
 
     // Esconder aparecer formulario de agregar una cuenta
     $('#agregarCuentaAction').on('click', function(){
-        
+
         $('.form-agregar-cuenta').slideToggle('slow');
         var posicion = $(".form-agregar-cuenta").offset().top;
         $("html, body").animate({
             scrollTop: posicion
-        }, 2000); 
+        }, 2000);
 
     });
 
@@ -804,7 +1041,7 @@ $(document).ready(function(){
         $('#user-edit').slideToggle();
     });
 
-    // muestra y oculta los contacos de un tema 
+    // muestra y oculta los contacos de un tema
     $('.btn-view-contacts').on('click', function()
    {
         var $btn = $(this);
@@ -818,7 +1055,7 @@ $(document).ready(function(){
             $btn.removeClass('d-danger');
             $btn.addClass('d-info');
         }
-        
+
         $cajita.slideToggle();
 
 
@@ -840,7 +1077,6 @@ $(document).ready(function(){
         $modal.find('.modal-body').html('Esta seguro que decea eliminar este archivo?.');
         $eliminar.html('Eliminar');
         $eliminar.click(function(){
-            console.log('ouch');
             $.post('/panel/new/encabezado/delete', data, function(json){
                 //if (json.exito) {
                     $modal.modal('toggle');
@@ -851,7 +1087,7 @@ $(document).ready(function(){
                         window.location = json.ruta;
                     });
                 //}
-            });            
+            });
         });
     });
 
@@ -876,7 +1112,7 @@ $(document).ready(function(){
         $modal.find('#myModalLabel').html('Eliminar Columna');
         $modal.find('.modal-body').html('Esta seguro que decea eliminar esta columna?');
         $eliminar.html('Eliminar');
-        
+
         $eliminar.click(function(){
             $.get('/panel/prensa/delete/column/' + id, function(json){
                 if (json.exito) {
@@ -887,7 +1123,7 @@ $(document).ready(function(){
                         window.location = json.url;
                     });
                 }
-            });            
+            });
         });
     });
 
@@ -902,7 +1138,7 @@ $(document).ready(function(){
         $modal.find('#myModalLabel').html('Eliminar Portada');
         $modal.find('.modal-body').html('Esta seguro que decea eliminar esta portada?');
         $eliminar.html('Eliminar');
-        
+
         $eliminar.click(function(){
             $.get('/panel/prensa/delete/cover/' + id, function(json){
                 if (json.exito) {
@@ -913,7 +1149,7 @@ $(document).ready(function(){
                         window.location = json.url;
                     });
                 }
-            });            
+            });
         });
     });
 
@@ -945,7 +1181,7 @@ $(document).ready(function(){
         $('#section-name').val($name);
         $('#section-author').val($author);
         $('#section-description').text($description);
-        $('#section-confirmation').text('Editar'); 
+        $('#section-confirmation').text('Editar');
         var $formulario = $('form#form-agrega-seccion');
         $formulario.attr('action', '/panel/font/section/edit/' + $id);
         $('.form-agregar-seccion').show('slow');
@@ -965,7 +1201,7 @@ $(document).ready(function(){
                 if (json.exito) {
                     window.location.reload();
                 }
-            });            
+            });
         });
     });
 
@@ -985,11 +1221,11 @@ $(document).ready(function(){
                 if (json.exito) {
                     window.location = '/panel/fonts/show-list';
                 }
-            });            
+            });
         });
     });
 
-    // Generar PDF's
+    // Generar PDF's, Sección PRENSA [primerasPlanas,Cartones,Columnas,...]
     $('#savepdf').on('click', function(){
         $('#page-wrapper').append('<div class="loader"></div>');
         $('#form-create-pdf').validate({
@@ -1004,8 +1240,10 @@ $(document).ready(function(){
                             .addClass('alert-info')
                             .html('Se ha creado un archivo PDF con exito!')
                             .delay(3000)
-                            .fadeOut('slow', function(){
-                                window.location.reload();
+                            .fadeOut('slow');
+                            swal("Opemedios", "Se ha creado un archivo PDF con exito!", "success")
+                            .then(function (){
+                                location.reload();
                             });
                     } else {
                         $alert
@@ -1013,6 +1251,10 @@ $(document).ready(function(){
                             .html('No se creo el archivo, intentalo mas tarde')
                             .delay(3000)
                             .fadeOut('slow');
+                            swal("Opemedios", "No se creo el archivo, intentalo mas tarde", "error")
+                            .then(function (){
+                                location.reload();
+                            });
                     }
                 });
             }
@@ -1022,19 +1264,81 @@ $(document).ready(function(){
     // add adjunto
     $('#add-input-image').on('click', function (event) {
         event.preventDefault();
-        console.log('Vas a mostrar un input para agregar un archivo');
         // $.post()
     });
 
     // $(window).load(function() {
     //     $(".loader").fadeOut("slow");
     // });
-    
+    /************ noticias enviadas a un cliente en un periodo de tiempo ************/
+    $("#searchNewsToClient").click(function (e) {
+        var form        = $('#form-nbc');
+        var data        = {};
+        data['id']      = form.find("#cliente_empresa").val() || undefined;
+        data['start']   = form.find("#startDate").val() || "";
+        data['end']     = form.find("#endDate").val() || ""; 
+        if (!data.id) {
+            return;
+        }
+        var prom = $.post('/panel/asignacion/noticias-por-cliente', data);
+        prom.then(
+            callbackSearch,
+            onErrorSearch
+        );
+    });
 
+    function callbackSearch(data) {
+        // Grab the template script
+        var htmlTemplate = $("#row-template").html();
+        // Compile the template
+        var STemplate = Handlebars.compile(htmlTemplate);
+        // Pass our data to the template
+        var theCompiledHtml = STemplate({'noticias': data.news});
+        // Add the compiled html to the page
+        $('#response-area').html(theCompiledHtml);
+        bindTableEdit(data);
+    }
+
+    function onErrorSearch(err){
+        alert("Surgio un error en la petición, intentalo más tarde");
+    }  
+
+    function bindTableEdit(data){
+        //buscar todas las tablas dentro de response-area
+        var container = $("#response-area");
+        var tablas = [];
+        for (var i = 0, tbls = Object.keys(data).length; i < tbls; i++) {
+            var selector = "#tbl-" + i;
+            doBindActions(selector, data.temas);
+        }
+    }
+
+    function doBindActions(tableId, cbxData, trends) {
+        $(tableId).Tabledit({
+            url: '/panel/asignacion/change-trend-theme',
+            columns: {
+                identifier: [0, 'id'],
+                editable: [ 
+                    [4, 'tema', JSON.stringify(cbxData)],
+                    [5, 'tendencia', '{"1": "Positiva", "2": "Neutral", "3": "Negativa"}']
+                ]
+            },
+            onSuccess: function(data, textStatus, jqXHR, row) {
+                if (data.action == "delete") {
+                    row.remove();
+                }
+            },
+            onFail: function(jqXHR, textStatus, errorThrown) {
+                console.log(jqXHR);
+                console.log(textStatus);
+                console.log(errorThrown);
+            }
+        });
+    }
 
     /********************** drag an drop  **************************/
 
-    
+
     /************************************************************/
 
     function flashAlerts(){
@@ -1042,13 +1346,159 @@ $(document).ready(function(){
     }
 
     flashAlerts();
+
+    $('[data-action="btn-remove-new"]').click(function (el) {
+        var key = $(this).attr("data-delete");
+        swal({
+          title: "Confirma operación",
+          text: "¿Seguro que quieres eliminar esta noticia?",
+          icon: "warning",
+          buttons: true,
+          dangerMode: true,
+        })
+        .then(function (doDelete) {
+          if (doDelete) { 
+            $.post('/panel/new/remove', {idNoticia: key}).then(function (resp) {
+                swal("Operación correcta", resp.mensaje, "success").then(function (){
+                    location.reload()
+                })
+            }, function (err) {
+                swal("Error", err.mensaje, "error").then(function (){
+                    location.reload()
+                })
+            })
+          }
+        });
+    });
+
+    $("#formReplace").submit(function(e) {
+        var url = '/panel/new/replace-attached';
+
+        e.preventDefault();    
+        var formData = new FormData(this);
+        var file = $(this).find("#newFileAttached");
+
+        if (!file.val()) {
+            swal({
+              title: "Campo obligatorio",
+              text: "No seleccionaste ningun archivo.",
+              icon: "info",
+              buttons: {
+                text: "Continuar"
+              },
+              dangerMode: true,
+            });
+            return;
+        }
+
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: formData,
+            success: function (data) {
+                if (data.success) {
+                    swal("Operación correcta", "Archivo reemplazado", "success")
+                    .then(function (r) {
+                        window.location.reload();
+                    });
+                }else{
+                    swal("Error", data.message, "error")
+                    .then(function (r) {
+                        window.location.reload();
+                    });
+                }
+            },
+            cache: false,
+            contentType: false,
+            processData: false
+        });
+    });
     
-    
+    $("#cancel-replacer").click(function (e) {
+        $("#aid-value").val("");
+        $("#nid-value").val("");
+        $("#newFileAttached").val(null);
 
+    });
 
+    $(".attach-replace").click(function (ev) {
+        var data = $(this).data();
+        var modal = $("#modalReplacer");
+        modal.find("#aid-value").val(data.fid);
+        modal.find("#nid-value").val(data.nid);
+        modal.find("#newFileAttached").val(null);
+    });
 
-    
+    //Rm blocks
+    $(".btn-rm-block").click(function (ev) {
+        var bid = $(this).data('bid') || "";
+        swal({
+          title: "Confirma operación",
+          text: "¿Seguro que quieres eliminar el newsletter?",
+          icon: "warning",
+          buttons: true,
+          dangerMode: true,
+        })
+        .then(function (willDelete) {
+          if (willDelete) {
+            $.post('/panel/news/blocks/delete', {bid: bid}).then(function (resp) {
+                if (resp.success) {
+                    swal("Operación correcta", resp.message, "success").then(function (){
+                        location.reload()
+                    })
+                }else{
+                    swal("Acción no completada", resp.message, "error").then(function (){
+                        location.reload();
+                    })
+                }
+            });
+          }
+        })
+    })
 
+    //resend blocks-newsletters
+    $(".btn-resend").click(function (e) {
+        e.preventDefault();
+        var bid = $(this).data('idbloque'),
+        eid = $(this).data('eid'),
+        idb = $(this).data('idb');
+        var contacts = new Promise(function (resolve, reject) {
+            $.post("/panel/newsletter/contacts", { bid: bid, eid: eid, idb: idb } ).then( function (data) {
+                resolve(data);
+            }).fail(function (err) {
+                reject(err);
+            })
+        });
+        contacts.then(renderContacts, function (err){
+            swal("Opemedios", "No se pudo realizar la consulta de contactos.", "Error").then(function (){
+                location.reload()
+            })
+        });
+    });
+
+    function renderContacts(data){
+        $("#stack-contacts").empty().append(data);
+    }
+
+    $("#formContactsResend").submit(function (ev) {
+        ev.preventDefault();
+        var datos = new FormData(this);
+        $.ajax({
+            url: '/panel/newsletter/resend',
+            type: 'POST',
+            data: datos,
+            success: function (resp) {
+                var alertType = resp.success ? "success": "error";
+                swal("Opemedios", resp.message, alertType)
+                .then(function () {
+                    if (resp.code != 201) 
+                        location.reload();
+                });
+            },
+            cache: false,
+            contentType: false,
+            processData: false
+        });
+    })
 
 }); /* DOCUMMENT READY */
-

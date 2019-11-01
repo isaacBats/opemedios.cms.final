@@ -19,7 +19,7 @@
 				Nos encantaría saber de usted. Interesados en trabajar juntos? Rellene el siguiente formulario con algo de información sobre su proyecto y yo pondremos en contacto con usted tan pronto como pueda. Por favor espere de un par de días para que responda.
 			</p>
 			<br>
-				<form>
+				<form class="f-contact">
 					<div class="row">
 						<div class="col-sm-4">
 							<input class="form-control" type="text" placeholder="Nombre">
@@ -71,6 +71,6 @@
 	</div>
 </div>	<!-- /container -->
 
-<section class="container-full top-space">
-	<div id="map"></div>
+<section class="container-full top-space f-map">
+	<div id="maps"></div>
 </section>

@@ -73,4 +73,18 @@ class AdjuntoRepository extends BaseRepository{
 		
 		return $result;
 	}
+
+	public function updateAdjunto($adjuntoId, $fileAttached)
+	{
+		$result = new stdClass();
+
+		$stmt = $this->pdo->prepare( "UPDATE adjunto SET nombre = :name, tipo = :fileType, nombre_archivo = :fileName WHERE id_adjunto = :aid LIMIT 1" );
+
+		$stmt->bindParam(':name', $fileAttached['name'], PDO::PARAM_STR);
+		$stmt->bindParam(':fileType', $fileAttached['type'], PDO::PARAM_STR);
+		$stmt->bindParam(':fileName', $fileAttached['createdName'], PDO::PARAM_STR);
+		$stmt->bindParam(':aid', $adjuntoId, PDO::PARAM_INT);
+		return $stmt->execute();
+		
+	}
 }

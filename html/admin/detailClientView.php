@@ -1,5 +1,5 @@
 <?= $this->flashAlerts('empresa'); ?>
-<div class="row" id="datos-cliente">
+<div class="row spacer-30" id="datos-cliente">
 	<div class="col-sm-12">
 		<h1 class="page-header"><?= $client['nombre'] ?></h1>
 		<div class="col-sm-offset-11">
@@ -7,7 +7,7 @@
 		</div>
 	</div>
 	<div class="col-md-6" id="logo-cliente">
-		<img src="/<?= $client['logo']  ?>" alt="<?= $client['nombre'] ?>" width="320">
+		<img src="/<?= $client['logo']  ?>" alt="<?= $client['nombre'] ?>" class="logo-company">
 		<a href="javascript:void(0);" class="col-sm-12" id="cambiar-imagen-cliente">Cambiar Imagen</a>
 	</div>
 	<div class="col-md-6" id="cambiar-logo-action" style="display: none">
@@ -192,7 +192,7 @@
 	        <div class="panel-body">
 	            <?php if( is_array( $thems ) ): ?>
 	            <div class="table-responsive">
-	                <table class="table table-striped">
+	                <table class="table">
 	                    <thead>
 	                        <tr>
 	                            <th>#</th>
@@ -202,31 +202,111 @@
 	                        </tr>
 	                    </thead>
 	                    <tbody>
-	                    	<?php foreach( $thems as $key => $theme ): ?>
+	                    	<?php foreach( $thems as $key => $theme ):?>
 		                        <tr>
 		                            <td><?= $key + 1 ?></td>
 		                            <td><?= $theme['nombre'] ?></td>
 		                            <td><?= $theme['descripcion'] ?></td>
-		                            <td class="menu-actions-icon">
-		                            	<ul>
-		                            		<li>
-		                            			<a class="d-success" href="javascript:void(0)"><i class="p5 fa fa-eye" style="font-size: 1.3em;"></i></a>
+		                            <td class="w-200">
+		                            			<a class="btn-show-related-theme" 
+		                            			data-name="<?=$theme['nombre']?>" 
+		                            			data-desc="<?=$theme['descripcion']?>" 
+		                            			href="javascript:void(0)">
+		                            			<i class="action-btn p5 fa fa-eye"></i></a>
+		                            			<a class="btn-rm-related-theme" href="javascript:void(0)" 
+												 data-url="/panel/client/cuenta/rm-theme?themeId=<?=$theme['id_tema']?>">
+		                            			<i class="action-btn p5 fa fa-trash-o"></i></a>
+		                            			<a class="btn-view-contacts" id="<?= $key + 1 ?>" data-id="<?= $key + 1 ?>" href="javascript:void(0)"><i class="action-btn p5 fa fa-group"></i></a>
+		                            			<a class="btn-edit-theme" data-id="<?= $key + 1 ?>" href="javascript:void(0)">
+		                            			<i class="action-btn p5 fa fa-pencil"></i></a>
+												<a class="btn-edit-subtheme" data-id="<?= $key + 1 ?>" href="javascript:void(0)">
+		                            			<i class="action-btn p5 fa fa-level-down"></i></a>
 		                            		</li>
-		                            		<li>
-		                            			<a class="d-warning" href="javascript:void(0)"><i class="p5 fa fa-trash-o" style="font-size: 1.3em;"></i></a>
-		                            		</li>
-		                            		<li>
-		                            			<a class="btn-view-contacts d-info" id="<?= $key + 1 ?>" data-id="<?= $key + 1 ?>" href="javascript:void(0)"><i class="p5 fa fa-group" style="font-size: 1.3em;"></i></a>
-		                            		</li>
-		                            	</ul>	                            	
+		                            	</ul>	
+																
 		                            </td>
+		                        </tr>
+								<?php
+								include "conexion.php"; 
+								//print "select * from subtema where id_tema=".$theme['id_tema']."<br>";
+								$sql = mysqli_query($conexion,"select * from subtema where id_tema=".$theme['id_tema']."");	
+								while ($row = mysqli_fetch_array($sql))
+								{				
+									//print "sdf:".$row['nombre']."<br>";	
+									?>
+									<tr>
+		                            <td><??></td>
+		                            <td><?print $row['nombre']; ?></td>
+		                            <td><?print $row['descripcion']; ?></td>
+		                            <!--<td class="w-200">
+		                            			<a class="btn-show-related-theme" 
+		                            			data-name="<?$theme['nombre']?>" 
+		                            			data-desc="<?=$theme['descripcion']?>" 
+		                            			href="javascript:void(0)">
+		                            			<i class="action-btn p5 fa fa-eye"></i></a>
+		                            			<a class="btn-rm-related-theme" href="javascript:void(0)" 
+												 data-url="/panel/client/cuenta/rm-theme?themeId=<??>">
+		                            			<i class="action-btn p5 fa fa-trash-o"></i></a>
+		                            			<a class="btn-view-contacts" id="<?= $key + 1 ?>" data-id="<?= $key + 1 ?>" href="javascript:void(0)"><i class="action-btn p5 fa fa-group"></i></a>
+		                            			<a class="btn-edit-theme" data-id="<?= $key + 1 ?>" href="javascript:void(0)">
+		                            			<i class="action-btn p5 fa fa-pencil"></i></a>
+												<a class="btn-edit-subtheme" data-id="<?= $key + 1 ?>" href="javascript:void(0)">
+		                            			<i class="action-btn p5 fa fa-level-down"></i></a>
+		                            		</li>
+		                            	</ul>																
+		                            </td>-->
+									</tr>
+									<?php
+								}
+								mysqli_free_result($sql); 
+								mysqli_close ($conexion);
+								?>		
+								
+		                        <tr style="display: none"  id="trEditTheme<?= $key + 1 ?>">
+		                        	<td></td>
+		                           	<td colspan="2">
+		                           		<form action="/panel/client/tema/edit" method="post" class="form-horizontal col-sm-6 pd-20"  id="editTopic<?= $key + 1 ?>">
+		                           			<input type="hidden" value="<?=$theme['id_tema']?>" name="id_tema">
+											<div class="form-group">
+												<label>Nombre Tema</label>
+												<input value="<?=$theme['nombre']?>"  required="required" class="form-control" name="nombre">
+											</div>
+											<div class="form-group">
+												<label>Descripción</label>
+												<textarea rows="5" required="required" class="form-control" name="descripcion"><?=$theme['descripcion']?></textarea> 	
+											</div>
+											<button class="btn btn-primary pull-right sendEditTheme" data-id="<?= $key + 1 ?>">Guardar</button>
+											<button class="btn btn-warning pull-right cancelEditTheme" data-id="<?= $key + 1 ?>" type="button" style="margin: 0 10px 0 0;">Cancelar</button>
+										</form>
+		                           	</td>
+		                           	<td></td>
+		                        </tr>
+								<!--Nuevo subtema-->
+								<tr style="display: none"  id="trEditsubTheme<?= $key + 1 ?>">
+		                        	<td></td>
+		                           	<td colspan="2">
+		                           		<form action="/panel/client/tema/edit" method="post" class="form-horizontal col-sm-6 pd-20"  id="editTopic<?= $key + 1 ?>">
+		                           			<input type="hidden" value="<?=$theme['id_tema']?>" name="id_tema">
+											<div class="form-group">
+												<label>Nombre Subtema</label>
+												<input value="<?=$theme['nombre']?>"  required="required" class="form-control" name="nombre">
+											</div>
+											<div class="form-group">
+												<label>Descripción</label>
+												<textarea rows="5" required="required" class="form-control" name="descripcion"><?=$theme['descripcion']?></textarea> 	
+											</div>
+											<button class="btn btn-primary pull-right sendEditsubTheme" data-id="<?= $key + 1 ?>">Guardar</button>
+											<button class="btn btn-warning pull-right cancelEditsubTheme" data-id="<?= $key + 1 ?>" type="button" style="margin: 0 10px 0 0;">Cancelar</button>
+										</form>
+		                           	</td>
+		                           	<td></td>
 		                        </tr>
 		                        <?php if( isset( $theme['contacts'] ) ): ?>
 		                        <tr style="display: none"  id="table<?= $key + 1 ?>">
 		                            <!-- Tabla para los contactos -->
 		                           	<td></td>
 		                           	<td colspan="2">
-			                            <table class="table table-striped table-bordered table-hover">
+			                            <table class="table table-striped table-bordered table-hover pd-20">
 			                            	<thead>
 			                            		<th>#</th>
 			                            		<th>Nombre</th>
@@ -245,6 +325,7 @@
 			                            	</tbody>
 			                            </table>
 			                        </td>
+			                        <td></td>
 			                        <!-- /Fin de la tabla de los contactos -->
 		                        </tr>
 		                    <?php endif; ?>
@@ -314,7 +395,9 @@
 		                            			<a class="d-info edit-acount" data-id="<?= $userData['id_cuenta'] ?>" href="javascript:void(0)"><i class="p5 fa fa-pencil" style="font-size: 1.3em;"></i></a>
 		                            		</li>
 		                            		<li>
-		                            			<a class="d-warning" href="javascript:void(0)"><i class="p5 fa fa-trash-o" style="font-size: 1.3em;"></i></a>
+		                            			<a class="d-warning rm-account-from-company" 
+		                            			href="javascript:void(0)" data-href="/panel/client/cuenta/rm-account?acount=<?= $userData['id_cuenta'] ?>"
+		                            			><i class="p5 fa fa-trash-o" style="font-size: 1.3em;"></i></a>
 		                            		</li>
 		                            		<li>
 		                            			<a href="javascript:void(0);" data-toggle="modal" data-target="#myModal" data-href="/panel/client/cuenta/change-state?acount=<?= $userData['id_cuenta'] ?>&action=<?= ($userData['activo']) ? 'desactivado' : 'activado' ?>" class="change-state-acount"><?= ($userData['activo']) ? 'Desactivar' : 'Activar'?></a>

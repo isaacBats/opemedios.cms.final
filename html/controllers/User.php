@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Clase para el perfil del usuario  
+ * Clase para el perfil del usuario
  */
 
 class User extends Controller {
@@ -50,32 +50,32 @@ class User extends Controller {
                 if ($lang == "es") {
                     $resultado->mensaje = "Su nueva contraseña se ha enviado";
                     $mail->Subject = "Nueva Contraseña";
-                    $mail->Body = '<p style="margin-bottom: 40px; width:100%; text-align:center;"><img src="http://www.alfonsomarinaebanista.com/imgs/mail/header_logo.png" '
+                    $mail->Body = '<p style="margin-bottom: 40px; width:100%; text-align:center;"><img src="https://www.alfonsomarinaebanista.com/imgs/mail/header_logo.png" '
                             . 'alt="ALFONSO MARINA EBANISTA"/></p>  <p style="margin-bottom: 20px;">GRACIAS POR REGISTRARTE EN <a style="color: #807562;" '
-                            . 'href="http://www.alfonsomarinaebanista.com">www.alfonsomarinaebanista.com</a></p>  <p style="margin-bottom: 20px;">  '
+                            . 'href="https://www.alfonsomarinaebanista.com">www.alfonsomarinaebanista.com</a></p>  <p style="margin-bottom: 20px;">  '
                             . 'Bienvenido a Alfonso Marina para profesionistas.<br />  '
                             . 'Favor de darle click al link inferior o copie el URL en su navegador para ingresar.  </p>  <p>  '
-                            . '<a style="color: #807562;" href="http://www.alfonsomarinaebanista.com/es/login.aspx">http://www.alfonsomarinaebanista.com/es/login.aspx</a>  '
+                            . '<a style="color: #807562;" href="https://www.alfonsomarinaebanista.com/es/login.aspx">https://www.alfonsomarinaebanista.com/es/login.aspx</a>  '
                             . '</p>  <p style="margin-bottom: 30px;">  Usuario: <strong>' . $user['nombreusuario'] . '</strong><br/>  Contraseña: <strong>' . $newPass . '</strong>  '
                             . '</p>  <p style="margin-bottom: 20px;">  Gracias,<br />  Alfonso Marina y Compañia.  </p>  <p style="margin-bottom: 20px;">'
-                            . '<img src="http://www.alfonsomarinaebanista.com/imgs/mail/logo_am_250_2.jpg" width="160px" alt="LOGO"/></p>';
+                            . '<img src="https://www.alfonsomarinaebanista.com/imgs/mail/logo_am_250_2.jpg" width="160px" alt="LOGO"/></p>';
                 } else {
                     $resultado->mensaje = "Your new password has been sent";
                     $mail->Subject = "New Password";
-                    $mail->Body = '<p style="margin-bottom: 40px; width:100%; text-align:center;"><img src="http://www.alfonsomarinaebanista.com/imgs/mail/header_logo.png" '
+                    $mail->Body = '<p style="margin-bottom: 40px; width:100%; text-align:center;"><img src="https://www.alfonsomarinaebanista.com/imgs/mail/header_logo.png" '
                             . 'alt="ALFONSO MARINA EBANISTA"/></p>  <p style="margin-bottom: 20px;">THANK YOU FOR REGISTERING ON <a style="color: #807562;" '
-                            . 'href="http://www.alfonsomarinaebanista.com">www.alfonsomarinaebanista.com</a></p>  <p style="margin-bottom: 20px;">  '
+                            . 'href="https://www.alfonsomarinaebanista.com">www.alfonsomarinaebanista.com</a></p>  <p style="margin-bottom: 20px;">  '
                             . 'Welcome to Alfonso Marina to the trade.<br />  Please follow the link below or copy-paste the URL into your browser to login.  </p>  <p>  '
-                            . '<a style="color: #807562;" href="http://www.alfonsomarinaebanista.com/en/login.aspx">http://www.alfonsomarinaebanista.com/en/login.aspx</a> '
+                            . '<a style="color: #807562;" href="https://www.alfonsomarinaebanista.com/en/login.aspx">https://www.alfonsomarinaebanista.com/en/login.aspx</a> '
                             . ' </p>  <p style="margin-bottom: 30px;">  Username: <strong>' . $user['nombreusuario'] . '</strong><br/>  Password: <strong>' . $newPass . '</strong>  '
                             . '</p>  <p style="margin-bottom: 20px;">  Thank you, <br/>  Alfonso Marina & Co.  </p>  <p style="margin-bottom: 20px;">'
-                            . '<img src="http://www.alfonsomarinaebanista.com/imgs/mail/logo_am_250_2.jpg" width="160px" alt="LOGO"/></p>';
+                            . '<img src="https://www.alfonsomarinaebanista.com/imgs/mail/logo_am_250_2.jpg" width="160px" alt="LOGO"/></p>';
                 }
                 $mail->Send();
                 $resultado->exito = true;
                 echo json_encode($resultado);
             } else {
-                $resultado->exito = false;                
+                $resultado->exito = false;
                 $resultado->mensaje = "El usuario no es correcto";
                 echo json_encode($resultado);
             }
@@ -93,9 +93,10 @@ class User extends Controller {
         if ($rs !== false) {
             $nr = $query->rowCount();
             if ($nr > 0) {
-                $user = $query->fetch(PDO::FETCH_ASSOC);                
+                $user = $query->fetch(PDO::FETCH_ASSOC);
                 if (isset($user["username"])) {
-                    if ($user["password"] == md5( $pass ) ) {
+                    if( password_verify( $pass, $user["password"] ) ) {
+                    //if ($user["password"] ==  $pass ) {
 
                         $queryTemas = $this->pdo->prepare('SELECT * FROM tema WHERE id_empresa = ' . $user['id_empresa']);
                         if( $queryTemas->execute() ){
@@ -160,7 +161,7 @@ class User extends Controller {
             require $this->views . "profile.php";
             $this->footer($lang);
         } else {
-            header("Location: http://{$_SERVER["HTTP_HOST"]}/login");
+            header("Location: https://{$_SERVER["HTTP_HOST"]}/login");
         }
     }
 
@@ -172,7 +173,7 @@ class User extends Controller {
             $resultado = new stdClass();
 
             $sql = "UPDATE usuarios SET
-						nombre = :nombre, 
+						nombre = :nombre,
 						apellidos = :apellidos,
 						empresa = :empresa,
 						puesto = :puesto,

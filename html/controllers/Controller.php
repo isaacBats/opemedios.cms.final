@@ -38,8 +38,10 @@ class Controller
 
 	public function generarPdfFromHtml($template, $path) {
 		$properties = parse_ini_file(__DIR__ . '/../config.ini');
-      	$snappy = new Pdf($properties['pathBinPDF']);
-      	$snappy->generateFromHtml($template, $path, ['zoom' => 0.9, 'encoding' => 'utf-8'], true);
+		//TODO change this param before to deploy to production app.
+				//$snappy = new Pdf($properties['pathBinPDFdevelopment']); //bin path for DEVELOPMENT
+				$snappy = new Pdf($properties['pathBinPDF']); //bin path for PRODUCTION
+				$snappy->generateFromHtml($template, $path, ['zoom' => 0.9, 'encoding' => 'utf-8'], true);
       	// header('Content-Type: application/pdf');
       	// header('Content-Disposition: attachment; filename="' . $data['filename'] . '.pdf"');
  //      	echo $snappy->getOutputFromHtml($text, array(
@@ -148,9 +150,7 @@ class Controller
      * @return string  A title
      */
     private function titleTab($title = ""){
-
-    	$title .= " Opemedios 2016";
-
+    	$title .= "";
     	return $title;
     }
 
@@ -178,6 +178,16 @@ class Controller
         $this->header($title, $css);
 		require $this->views . $template . '.php';
 		$this->footer($js);
+    }
+
+    public function renderNewView($template, $title = '', $data = [], $css = '', $js = '') 
+    {
+        //$this->header($title, $css);
+        $titleTab = $this->titleTab($title);
+		require $this->views."newheader.php";
+		require $this->views . $template . '.php';
+		//$this->footer($js);
+		require  $this->views."newfooter.php";	
     }
 
     /**
@@ -213,8 +223,14 @@ class Controller
 		require  $this->views."client/footer.client.php";
     }
 
-
-
+    public function renderViewShare($template, $title = '', $data = [], $css = '', $js = '') 
+    {
+        extract($data);
+        $titleTab = $this->titleTab($title);
+		require $this->views."client/headerShare.client.php";
+		require $this->views . 'client/'.$template . '.client.php';
+		require  $this->views."client/footerShare.client.php";
+    }
 
 	public function footer( $js = ''){
 		require  $this->views."footer.php";	
@@ -269,7 +285,8 @@ class Controller
 		$media_allowed_old = ['x-ms-wma', 'x-ms-wmv', 'mpeg3', 'mpeg4'];
 		$media_allowed = ['webm', 'mp4', 'ogv', 'ogg'];
 		$audio_allowed = ['mp3', 'wav', 'x-pn-wav', 'x-wav'];
-		$type = end(explode('/', $file['tipo']));
+		$aux = explode('/', $file['tipo']);
+		$type = end($aux);
 		
 		$html = "El sistema no soporta elementos de tipo <strong>{$type}</strong>";
 		if(in_array($type, $img_allowed)) {
@@ -318,9 +335,16 @@ class Controller
 
 		return $html;
 	}
+	public function encodeB64($a, $b = false) {
+		$slug = "";
+		if (!$b){
+			$slug = base64_encode($a);
+		}
+		$slug = base64_encode($a."_n".base64_encode($b));
+		return (substr($slug, -1) == "=") ? trim($slug, '='): $slug;
+	}
 		
 }
-
 	//  AUTOLOAD CONTROLLERS
 foreach( scandir( __DIR__ ) as $class ){
 	$buffer = explode("." , $class);

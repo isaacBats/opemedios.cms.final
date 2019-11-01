@@ -46,7 +46,16 @@
 		          	</tbody>
 		        </table>
 	      	</div>
-	    	<input type="submit" value="Enviar noticia" class="btn btn-primary btn-lg col-lg-3 col-md-offset-8">
+	      	<div class="form-inline">
+	      		<div class="form-group">
+	      			<a href="/panel/new/preview/<?=$noticiaid?>/<?=$company['id_empresa']?>" target="_blank" class="btn btn-info btn-lg">Vista previa</a>
+				  </div>
+				  <div class="form-group">
+				    <input type="submit" value="Enviar noticia" class="btn btn-primary btn-lg">
+				  </div>
+	      	</div>
+	      	<br><br>
 		</form>
 	</div>
+	<br>
 </div>

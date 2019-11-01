@@ -1,3 +1,4 @@
+<?php $dev_src = ""; ?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -10,29 +11,29 @@
     <title><?= $titleTab ?></title>
     
     <!-- Bootstrap Core CSS -->
-    <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href='<?=$dev_src;?>/assets/css/bootstrap.min.css' rel="stylesheet">
 
     <!-- Jquery-ui CSS -->
-    <link href="/admin/css/jquery-ui.css" rel="stylesheet">
+    <link href='<?=$dev_src;?>/admin/css/jquery-ui.css' rel="stylesheet">
 
     <!-- MetisMenu CSS -->
-    <link href="/assets/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+    <link href='<?=$dev_src;?>/assets/bower_components/metisMenu/dist/metisMenu.min.css' rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="/assets/css/sb-admin-2.css" rel="stylesheet">
+    <link href='<?=$dev_src;?>/assets/css/sb-admin-2.css' rel="stylesheet">
 
     <!-- Custom Fonts
     <link href="/assets/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     -->
-    <link rel="stylesheet" href="/assets/css/font-awesome.min.css">
+    <link rel="stylesheet" href='<?=$dev_src;?>/assets/css/font-awesome.min.css'>
 
     <!-- Select2 CSS -->
-    <link href="/assets/css/select2.min.css" rel="stylesheet">
-    <link href="/admin/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+    <link href='<?=$dev_src;?>/assets/css/select2.min.css' rel="stylesheet">
+    <link href='<?=$dev_src;?>/admin/css/bootstrap-datetimepicker.min.css' rel="stylesheet">
 
     <?= $stylesheet ?>
 
-    <link rel="stylesheet" type="text/css" href="/admin/css/admin.css">
+    <link rel="stylesheet" type="text/css" href='<?=$dev_src;?>/admin/css/admin.css'>
     
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -134,11 +135,22 @@
                                 <li>
                                     <a href="/panel/news/advanced-search">Búsqueda avanzada</a>
                                 </li>
-                                <li>
-                                    <a href="/panel/news/blocks">Bloques de noticias</a>
-                                </li>
                             </ul>
                             <!-- /.nav-second-level -->
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-newspaper-o fa-fw"></i> Newsletter<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="/panel/news/blocks">Actuales</a>
+                                </li>
+                                <li>
+                                    <a href="/panel/newsletters/historic">Historial</a>
+                                </li>
+                                <li>
+                                    <a href="/panel/news/records">Historial Nuevo</a>
+                                </li>
+                            </ul>
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-link fa-fw"></i> Fuentes<span class="fa arrow"></span></a>
@@ -209,14 +221,14 @@
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
-                        <!-- <li>
+                        <li>
                             <a href="#"><i class="fa fa-check-square-o fa-fw"></i> Asignación<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="flot.html">Noticias por Clientes</a>
+                                    <a href="/panel/asignacion/noticias-por-cliente">Noticias por Clientes</a>
                                 </li>
                             </ul>
-                        </li> -->
+                        </li>
                         <li>
                             <a href="#"><i class="fa fa-file-excel-o fa-fw"></i> Reportes<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
@@ -236,6 +248,7 @@
                                 </li>
                             </ul>
                         </li> -->
+                        <?php if (in_array($_SESSION['admin']['id_tipo_usuario'], [1]) ): ?>
                         <li>
                             <a href="#"><i class="glyphicon glyphicon-user"></i> Clientes<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
@@ -247,6 +260,8 @@
                                 </li>
                             </ul>
                         </li>
+                    <?php endif; ?>
+                    <?php if (in_array($_SESSION['admin']['id_tipo_usuario'], [1,2]) ): ?>
                         <li>
                             <a href="#"><i class="fa fa-users fa-fw"></i> Usuarios<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
@@ -257,7 +272,8 @@
                                     <a href="/panel/users">Administrar Usuarios</a>
                                 </li>
                             </ul>
-                        </li>                        
+                        </li>
+                    <?php endif; ?>                        
                     </ul>
                 </div>
                 <!-- /.sidebar-collapse -->

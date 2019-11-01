@@ -26,9 +26,15 @@
                                 <label>Encabezado:</label>
                                 <input class="form-control" placeholder="Encabezado" name="encabezado" required>
                             </div>
+                            <!--<div class="form-group col-sm-12 col-md-12 col-lg-12">
+                                <div class="alert alert-primary" role="alert">
+                                    <label>Pegar Síntesis:</label>
+                                    <textarea id="paste_here" class="form-control" rows="1"></textarea>
+                                </div>
+                            </div>-->
                             <div class="form-group col-sm-12 col-md-12 col-lg-12">
-                                <label>Síntesis:</label>
-                                <textarea id="summernote" class="form-control" name="sintesis" rows="10"></textarea>
+                                <label>Escribir o Editar Síntesis:</label>
+                                <textarea id="ckeditordiv" name="sintesis"></textarea>
                             </div>
                             <div class="col-sm-6 form-group">
                                 <label>Fuente:</label>
@@ -101,7 +107,7 @@
                             <div class="form-group col-sm-12">
                                 <div class="checkbox">
                                     <label>
-                                        <input type="checkbox" id="checkBlock"/>Incluir a bloque de noticias
+                                        <input type="checkbox" id="checkBlock"/>Incluir a Newsletters
                                     </label>
                                 </div>
                             </div>
@@ -144,6 +150,7 @@
                                                             } 
                                                       ?></label>
                                 <input type="file" id="primario" name="primario[]" multiple />
+                                <input type="hidden" name="MAX_FILE_SIZE" value="50000000000" />
                             </div>
                             <div class="col-sm-12 col-md-12 col-lg-12">
                                 <input type="submit" class="btn btn-primary" value="Guardar">

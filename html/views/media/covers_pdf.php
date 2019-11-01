@@ -9,11 +9,11 @@
       text-align: center;
     }
     .imagen {
-      max-width: 100%;
+      width: 100%;
     }
     .portada {
-      width: 800px;
-      margin: 25px auto;
+      width: 100%;
+      margin: 0 auto;
     }
   </style>
 </head>

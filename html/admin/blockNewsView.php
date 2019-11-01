@@ -1,18 +1,16 @@
 <div class="row">
     <div class="col-lg-12">
-        <h1 class="page-header">Bloques de noticias</h1>
+        <h1 class="page-header">Newsletters</h1>
     </div>    <!-- /.col-lg-12 -->
 </div>
 <div class="row">
     <div class="col-sm-12 col-md-12 col-lg-12 mb-20">
-        <form method="post" action="/panel/block/create" class="form-inline" id="form-block">
+        <form method="post" action="/panel/block/create" class="form-inline" enctype="multipart/form-data" id="form-block">
             <div class="form-group">
-                <!-- <label for="nombre del bloque">Nombre del bloque: </label> -->
-                <input class="form-control" name="blockName" placeholder="Nombre del bloque" required>                
+                <input class="form-control" name="blockName" id="blockName" placeholder="Nombre del Newsletter" required>
             </div>
             <div class="form-group">
-                <!-- <label for="empresa">Empresa: </label> -->
-                <select class="select2"  name="empresaId" required>
+                <select class="form-control"  name="empresaId" id="empresaId" required>
                     <option value="">Selecciona una Empresa</option>
                     <?php if( is_array( $companies->rows ) ) {
                             foreach ($companies->rows as $key => $empresa) { ?>
@@ -20,7 +18,17 @@
                     <?php } }?>
                 </select>                
             </div>
-            <input type="submit" class="btn btn-success" value="Crear bloque">
+            <div class="form-group">
+                    <div class="input-group">
+                        <label class="input-group-btn">
+                            <span class="btn btn-primary">
+                                Imagen del bloque <input name="banner-img" type="file" style="display: none;">
+                            </span>
+                        </label>
+                        <input type="text" class="form-control" readonly="">
+                    </div>
+            </div>
+            <input type="submit" class="btn btn-success" value="Crear Newsletter">
         </form>
     </div>
 </div>
@@ -28,7 +36,7 @@
 	<div class="col-lg-12">
         <div class="panel panel-default">
             <div class="panel-heading">
-                Bloques sin enviar
+                Newsletter sin enviar
             </div>
             <!-- /.panel-heading -->
             <div class="panel-body">
@@ -37,7 +45,8 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Nombre del bloque</th>
+                                <th>ID</th>
+                                <th>Nombre del Newsletter</th>
                                 <th>Empresa</th>
                                 <th>Acciones</th>
                             </tr>
@@ -52,13 +61,14 @@
                         				                        
                         				<tr>
 			                                <td><?= $key + 1 ?></td>
+                                            <td><?= $row['id'] ?></td>
 			                                <td><?= $row['name'] ?></td>
 			                                <td><?= $row['empresa'] ?></td>
 			                                <td>
-			                                	<a href="/panel/news/blocks/<?= $row['id'] ?>"><i class="fa fa-eye"></i> Ver bloque</a>	
-												<!-- <a href=""><i class="fa fa-pencil"></i></a>	
-												<a href=""><i class="fa fa-envelope-o"></i></a>	
-												<a href=""><i class="fa fa-trash-o"></i></a> -->
+			                                	<a href="/panel/news/blocks/<?= $row['id'] ?>"><i class="fa fa-eye"></i> Ver Newsletter</a>&nbsp;&nbsp;	
+												<a href="#" data-bid="<?=$row['id']?>" class="btn-rm-block">
+                                                    <i class="fa fa-trash-o"></i> Elimnar
+                                                </a>
 			                                </td>
 			                            </tr>
 

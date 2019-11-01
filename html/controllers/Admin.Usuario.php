@@ -1,4 +1,5 @@
 <?php
+use utilities\Util;
 
 class AdminUsuario extends Controller {
 
@@ -7,6 +8,9 @@ class AdminUsuario extends Controller {
     function __construct()
     {
         $this->usuariosRepo = new UsuarioRepository();
+        if(!Util::byPass("usuarios")){
+            header( "Location: https://{$_SERVER["HTTP_HOST"]}/panel/news");
+        }
     }
 
     public function showUsers() 
@@ -20,6 +24,8 @@ class AdminUsuario extends Controller {
                     <script src="/admin/js/vendors/purl/purl.min.js"></script>
                     <!-- Paginador con js --> 
                     <script src="/assets/js/panel.paginador.js"></script>
+                    <!-- Data Tables -->
+                    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
             ';
 
             $css = '
@@ -28,27 +34,26 @@ class AdminUsuario extends Controller {
                     <link href="/admin/css/panel.main.css" rel="stylesheet">
                     <!-- data tables bootstrap CSS -->
                     <link href="/admin/css/dataTables.bootstrap.css" rel="stylesheet">
+                    <!-- Data Tables --> 
+                    <link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet">
             ';
 
             $limit = isset( $_GET['numpp'] ) ? $_GET['numpp'] : 10;
             $page = isset( $_GET['page'] ) ? ( $_GET['page'] * $limit ) - $limit : 0;
 
-            $getUsers = $this->usuariosRepo->showAllUsers( $limit, $page);
+            $getUsers = $this->usuariosRepo->showAllUsers();
 
             if( $getUsers->exito ){
                 $users = $getUsers->rows;
                 $count = $getUsers->count;
             }
 
-            $ini = $page + 1;
-            $end = ( $page + $limit >= $count ) ? $count : $page + $limit;
-
             $this->header_admin('Usuarios - ', $css);
             require $this->adminviews . 'showUsersView.php';
             $this->footer_admin( $js );
 
         }else{
-            header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
+            header( "Location: https://{$_SERVER["HTTP_HOST"]}/panel/login");
         }
     }
 
@@ -64,7 +69,7 @@ class AdminUsuario extends Controller {
             $this->footer_admin( );
 
         }else{
-            header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
+            header( "Location: https://{$_SERVER["HTTP_HOST"]}/panel/login");
         }   
     }
 
@@ -73,7 +78,9 @@ class AdminUsuario extends Controller {
         if( isset( $_SESSION['admin'] ) ){
             
             $user = $this->usuariosRepo->get( $id );
-            $_POST['password'] = ( $_POST['password'] != '' ) ? md5( $_POST['password'] ) : $user['password'];
+            //$_POST['password'] = ( $_POST['password'] != '' ) ? md5( $_POST['password'] ) : $user['password'];
+            $_POST['password'] = password_hash($_POST['password'], PASSWORD_DEFAULT);
+
             $_POST['activo'] = isset( $_POST['activo'] ) ? 1 : 0;
             $_POST['id'] = $id;
             
@@ -82,7 +89,7 @@ class AdminUsuario extends Controller {
             $_SESSION['alerts']['usuario'] = $update;
             header( 'Location: ' . $_SERVER['HTTP_REFERER'] );
         }else{
-            header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
+            header( "Location: https://{$_SERVER["HTTP_HOST"]}/panel/login");
         }   
     }
 
@@ -97,7 +104,7 @@ class AdminUsuario extends Controller {
             $this->footer_admin( );
 
         }else{
-            header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
+            header( "Location: https://{$_SERVER["HTTP_HOST"]}/panel/login");
         }
     }
 
@@ -114,7 +121,8 @@ class AdminUsuario extends Controller {
                         'tipo_usuario' => 'required',
                      ];
             $_POST['activo'] = TRUE;
-            $_POST['password'] = md5( $_POST['password'] );
+            //$_POST['password'] = md5( $_POST['password'] );
+            $_POST['password'] = password_hash($_POST['password'], PASSWORD_DEFAULT);
             
             $user = $this->usuariosRepo->create( $_POST );
 
@@ -122,9 +130,31 @@ class AdminUsuario extends Controller {
             header( 'Location: /panel/users' );
 
         }else{
-            header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
+            header( "Location: https://{$_SERVER["HTTP_HOST"]}/panel/login");
         }
     }
+
+    /*joz*/
+    public function deleteUser( $id )
+    {
+        if( isset( $_SESSION['admin'] ) ){
+            $deleteUser = $this->usuariosRepo->deleteUser( $id );
+            if ($deleteUser->exito) {
+                $response->success = true;
+                $response->message = "Usuario eliminado correctamente.";
+            }
+            else {
+                $response->success = false;
+                $response->error = json_encode($deleteUser);
+                $response->message = "No se pudo eliminar al usuario, intentalo más tarde.";
+            }
+            header('Content-type: text/json');
+            echo json_encode($response);
+        }else{
+            header( "Location: https://{$_SERVER["HTTP_HOST"]}/panel/login");
+        }
+    }
+    /*/joz*/
 
     private function validateForm( $data, $rules )
     {

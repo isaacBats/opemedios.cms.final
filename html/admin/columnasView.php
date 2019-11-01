@@ -28,7 +28,7 @@
 					</div>
 					<div class="form-group">
 						<label>Contenido</label>
-						<textarea id="summernote" name="contenido">
+						<textarea id="ckeditordiv" name="contenido">
 							Redacta tu columna
 						</textarea>
 					</div>
@@ -50,7 +50,7 @@
 			</div>
 			<?php if ($pdf): ?>
 			<div class="col-sm-12">
-				<a class="file-generate" href="/archivos/generados/pdf/<?= base64_encode("{$pdf['id']}_n".base64_encode($pdf['name'])) ?>" target="_blank" >Ver pdf generado</a>
+				<a class="file-generate btn btn-primary" href="/archivos/generados/pdf/<?= $this->encodeB64($pdf['id'],$pdf['name']) ?>" target="_blank" >Ver pdf generado</a>
 			</div>
 			<?php endif; ?>
 			<div class="col-sm-12">

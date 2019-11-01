@@ -1,17 +1,17 @@
 <?php
 
-	// VENDORS 
+	// VENDORS
 	require_once( __DIR__.'/vendor/autoload.php' );
-	
-	
+
+
 	// LANG  MANNAGER
 	// $lang = isset($_GET["lang"])?$_GET["lang"]:"es";
 	// if( str_replace( "/".$lang ,"",$_SERVER["REQUEST_URI"] ) != $_SERVER["REQUEST_URI"] ){
-	// 	$_SERVER["REQUEST_URI"] = substr( $_SERVER["REQUEST_URI"], 3 );	
+	// 	$_SERVER["REQUEST_URI"] = substr( $_SERVER["REQUEST_URI"], 3 );
 	// }
-	
 
-	define('__OPEMEDIOS__', __DIR__ . "/");	
+
+	define('__OPEMEDIOS__', __DIR__ . "/");
 	// CONFIG
 	require_once( __DIR__.'/config.php' );
 

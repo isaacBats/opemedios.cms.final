@@ -15,6 +15,8 @@ Class Mail
 			
 		$this->mail = new PHPMailer();
 		$this->mail->isHTML(true);
+                $this->mail->CharSet = 'UTF-8';
+		
 		if ($serverMail == 'smtp') {
 			$this->mail->IsSMTP();
 			$this->mail->SMTPAuth = true;

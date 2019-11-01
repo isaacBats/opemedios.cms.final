@@ -1,16 +1,12 @@
 <?php 
 
-	
-	/**
-	* 
-	*/
 	class Plain extends Controller
 	{
 		
 		
 		public function homeView()
 		{			
-			$this->renderView('home', 'Inicio - ');
+			$this->renderNewView('home', 'Inicio - ');
 		}
 
 		public function about()
@@ -25,11 +21,7 @@
 
 		public function contact()
 		{
-			$js = '
-				<!-- Google Maps -->
-				<script src="https://maps.googleapis.com/maps/api/js?key=&amp;sensor=false&amp;extension=.js"></script> 
-				<script src="assets/js/google-map.js"></script>
-			';
+			$js = '';
 			$this->renderView('contact', 'Contacto - ', $data = [], '', $js);
 		}
 
@@ -43,11 +35,19 @@
 			$explode = explode('_', base64_decode($keyPdf));
 			$id = $explode[0];
 			$filesPdfRepo = new FilesPdfRepo();
-			$file = $filesPdfRepo->get($id);
+			$pdfFile = $filesPdfRepo->get($id);
+
+			header("Content-type:application/pdf");
 			
-			echo "<div style='width: 1200px; height: 800px;  margin: 0 auto;'>
-							<iframe src='http://{$_SERVER['HTTP_HOST']}/{$file['path_image']}' style='width:1200px; height: 800px;' frameborder='0'></iframe>
-						</div>";
+			header( "Content-Disposition: filename={$pdfFile['path_image']}");
+			$file = $pdfFile['path_image'];
+			$filename = $pdfFile['name'];
+			header('Content-type: application/pdf');
+			header('Content-Disposition: inline; filename="' . $filename . '"');
+			header('Content-Transfer-Encoding: binary');
+			header('Content-Length: ' . filesize($file));
+			header('Accept-Ranges: bytes');
+			@readfile($file);
 		}
 
 		public function no_found()

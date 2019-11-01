@@ -4,9 +4,9 @@
 	</div>
 </div>
 <div class="row">
-	<form method="post" action="">
+	<form method="post" action="" id="formBusquedaAvanzada">
 		<div class="form-group col-sm-8 col-sm-offset-2">
-			<label for="empresa">Selecciona un cliente</label>
+			<label for="empresa">Selecciona un cliente <span class="badge badge-danger" style="background-color:red">* campo obligatorio</span></label>
 			<select class="select2 form-control" name="empresa" id="empresa" required >
 				<option value="">Clientes</option>
 				<?php foreach ($empresas->rows as $cliente): ?>
@@ -16,17 +16,35 @@
 		</div>
 		<div class="form-group col-sm-4 col-sm-offset-2">
 			<label>Fecha inicio</label>
-			<input name="fecha_inicio" class="fechaNota form-control" value="<?= date('Y-m-d') ?>" />			
+			<input name="fecha_inicio" class="fechaNota form-control" value="<?= date('Y-m-d') ?>" readonly/>
 		</div>
 		<div class="form-group col-sm-4">
 			<label>Fecha final</label>
-			<input name="fecha_fin" class="fechaNota form-control" value="<?= date('Y-m-d') ?>" />			
+			<input name="fecha_fin" class="fechaNota form-control" value="<?= date('Y-m-d') ?>" readonly/>
 		</div>
 		<div class="form-group col-sm-8 col-sm-offset-2">
 		    <label for="tema">Tema</label>
-		     <select class="select2 form-control" name="tema[]" id="tema" disabled="disabled" required multiple="multiple">
+		     <select class="select2 form-control" name="tema[]" id="tema" disabled="disabled" required multiple >
 		        <option value="0">Todos los temas</option>
 		    </select>
+		</div>
+		<div class="form-group col-sm-4 col-sm-offset-2">
+		    <label for="genero">Genero</label>
+		     <select class="form-control" name="genero" required >
+           <option value="0" selected>Todos los Géneros</option>
+           <?php foreach ($generos as $genero): ?>
+					 <option value="<?= $genero['id_genero'] ?>"><?= $genero['descripcion'] ?></option>
+					 <?php endforeach; ?>
+        </select>
+		</div>
+		<div class="form-group col-sm-4">
+		    <label for="tipo_autor">Tipo de autor</label>
+		     <select class="form-control" name="tipo_autor" required >
+                 <option value="0" selected>Todos los tipos de Autor</option>
+                 <?php foreach ($tiposAutor as $autor): ?>
+				<option value="<?= $autor['id_tipo_autor'] ?>"><?= $autor['descripcion'] ?></option>
+				<?php endforeach; ?>
+             </select>
 		</div>
 		<div class="form-group col-sm-4 col-sm-offset-2">
 		    <label for="tendencia">Tendencia</label>
@@ -58,8 +76,9 @@
 		        <option value="">Sección</option>
 		    </select>
 		</div>
-		<div class="form-group smt-marg col-sm-8 col-sm-offset-8">
-			<input type="submit" value="Generar reporte" class="btn btn-primary">			
+		<div class="form-group smt-marg col-sm-8 col-sm-offset-2">
+			<input type="button" value="Generar reporte EXCEL" id="btnCreateReportXLS" name="btn-admin-xls" class="btn btn-success">
+			<input type="button" value="Generar reporte PDF" id="btnCreateReportPDF" name="btn-admin-pdf" class="btn btn-danger">
 		</div>
 	</form>
 </div>

@@ -1,0 +1,44 @@
+<div class="container top50">
+	<div class="row justify-content-center">
+		<div class="col-sm-10">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="<?=base_url('index.php/newsletters');?>">Newsletters</a></li>
+                 <li class="breadcrumb-item active" aria-current="page">Sectores</li>
+              </ol>
+			</nav>
+			<div class="card bg-white top50">
+				<div class="card-header text-right">
+					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#new_newsletter"><i class="fas fa-plus"></i> Nuevo</button>
+				</div>
+				<div class="card-body">
+					<div class="alert alert-danger hidden" role="alert" id="alert4">Newsletter Eliminado</div>
+					<div class="alert alert-success hidden" role="alert" id="alert2">Newsletter Enviado</div>
+					<table class="table text-center">
+						<thead>
+							<tr>
+								<th>id</th>
+								<th>Sector</th>
+								<th>Acciones</th>
+							</tr>
+						</thead>
+						<tbody>
+							<?php foreach ($sectores as $sector) {
+							echo
+								'<tr>
+									<td class="align-middle">'.$sector['id'].'</td>
+									<td class="align-middle">'.$sector['name'].'</td>
+									<td>
+										<a href="single_sector/'.$sector['id'].'"><button type="button" class="btn btn-primary"><i class="fas fa-edit"></i></button></a>
+
+										<a href="delete_sector/'.$sector['id'].'"><button type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i></button></a>
+
+									</td>
+								</tr>'; } ?>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -109,7 +109,7 @@ class PortadasRepository extends BaseRepository{
 
 		if (sizeof($ids) > 0) {
 			$implode = implode(',', $ids);
-			$qry = "SELECT * FROM columnas WHERE id IN ({$implode}) AND tipo_portada = '{$type}' ORDER BY orden DESC";
+			$qry = "SELECT * FROM columnas WHERE id IN ({$implode}) AND tipo_columna = '{$type}' ORDER BY created_at DESC";
 		}
 
 		$columnas = $this->pdo->prepare($qry);

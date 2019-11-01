@@ -12,11 +12,14 @@ class UsuarioRepository extends BaseRepository{
 		parent::__construct();
 	}
 
-	public function showAllUsers( $limit, $offset )
+	public function showAllUsers()
 	{
 		$users = new stdClass();
 
-		$stmt = $this->pdo->prepare(" SELECT * FROM usuario ORDER BY id_usuario DESC LIMIT $limit OFFSET $offset;");
+		/*JOZ*/
+		$stmt = $this->pdo->prepare(" SELECT * FROM usuario ORDER BY id_usuario DESC");
+		/*JOZ*/
+
 		if($stmt->execute()){
 			$users->exito = true;
 			$users->rows = ( $stmt->rowCount() > 0 ) ? $stmt->fetchAll( \PDO::FETCH_ASSOC) : 0;
@@ -129,4 +132,20 @@ class UsuarioRepository extends BaseRepository{
 
 		return $this->pdo->query( $qry )->fetchAll(PDO::FETCH_ASSOC);
 	}
+
+	/*joz*/
+	public function deleteUser( $id )
+	{
+		$rs = new stdClass();
+		$stmt = $this->pdo->prepare("DELETE FROM usuario WHERE id_usuario = :id");
+		if ($stmt->execute([':id' => $id])) {
+			$rs->exito = true;
+		} else {
+			$rs->exito = false;
+			$rs->error = $stmt->errorInfo()[2];
+		}
+		return $rs;
+	}
+	/*/joz*/
+
 }

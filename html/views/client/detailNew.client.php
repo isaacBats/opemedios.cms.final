@@ -1,87 +1,66 @@
 <!--Page Content -->
     <div class="container">
 
-        <!-- Portfolio Item Heading -->
-        <div class="row">
+        <div class="row padding-top-40">
             <div class="col-lg-12">
-                <h1 class="page-header"><?= $new['encabezado'] ?>
-                    <br>
-                    <small style="font-size: 12px"><?= getFechaLarga($new['fecha']) ?></small>
-                    <br>                
-                    <small><?= $media['icon'] ?> <?= $new['fuente'] .'('.$new['seccion'].')'?></small>
-                </h1>
+               <img class="thumbnail new" style="max-width: 220px;" src="<?=$new['thumbnail_empresa']?>" alt="">
+                <small style="position: absolute; right: 0px; top: 0px"><?= getFechaLarga($new['fecha']) ?></small>
             </div>
         </div>
-        <!-- /.row -->
+
+        <!-- NOTICIA HEADER -->
+        <div class="row spacer-20">
+            <div class="col-lg-12">
+                <h1 class="new"><?= $new['encabezado'] ?></h1>
+                <small style="font-size: 12px">SECCION: <?=$new['seccion']?></small>
+            </div>
+        </div>
+
+        <div class="row spacer-20">
+            <div class="col-lg-12">
+                <?=$new['sintesis']?>
+            </div>
+        </div>
+        <div class="row spacer-20">
+            <div class="col-lg-8">
+
+                <?php if (isset($_SESSION['user'])): ?>
+                <div class="col-lg-4">
+                    <p><span class="label-red">Autor:</span> <?= $new['autor'] ?></p>
+                    <p><span class="label-red">Alcance:</span> <?= number_format($new['alcance']) ?></p>
+                </div>
+                <div class="col-lg-4">
+                    <p><span class="label-red">Genero:</span> <?= $new['genero'] ?></p>
+                    <p><span class="label-red">Tendencia:</span> <?= $new['tendencia'] ?></p>
+                </div>
+                <div class="col-lg-4">
+                    <?php if (isset($noticiaTipoData)): ?>
+                       <!-- <p><span class="label-red">URL:</span> <a target="_blank" href="<?= $noticiaTipoData['url'] ?>">Ver pagina</a></p> -->
+                    <?php endif ?>
+                    <?php if (isset($noticiaTipoData)): ?>
+                        <p><span class="label-red">Costo beneficio:</span> <?=isset( $noticiaTipoData['costo']) ? "$".$noticiaTipoData['costo']: '$0' ?></p> 
+                    <?php endif ?>
+                    <?php if (isset($noticiaTipoData['porcentaje_pagina'])): ?>
+                        <p><span class="label-red">Tamaño de la nota:</span> <?=isset( $noticiaTipoData['porcentaje_pagina']) ? $noticiaTipoData['porcentaje_pagina']."%": '' ?> </p>
+                    <?php endif ?>
+                </div>
+                <?php endif ?>
+            </div>
+            <div class="col-lg-4 text-right">
+                <?php 
+                    $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+                ?>
+                <a href="https://facebook.com/sharer.php?u=<?=$new['share']?>" onclick="window.open(this.href, 'Share', 'width=480, height=500, left=24, top=24, scrollbars, resizable'); return false;" class="btn btn-facebook btn-sm">Facebook</a>
+                 <a href="https://twitter.com/intent/tweet?url=<?=$new['share']?>&text=<?=$new['encabezado'].' - '.$new['autor'].', '.$new['fuente'] ?>&via=DeMonitoreo" onclick="window.open(this.href, 'Share', 'width=480, height=500, left=24, top=24, scrollbars, resizable'); return false;" class="btn btn-twitter btn-sm">Twitter</a>
+            </div>
+        </div>
 
         <!-- Portfolio Item Row -->
         <div class="row">
-
-            <div class="col-md-8">
-                <!-- <img class="img-responsive" src="http://placehold.it/750x500" alt=""> -->
+            <div class="col-md-12">
                 <?= $media['file'] ?>
             </div>
-
-            <div class="col-md-4">
-                <!-- <h3>Sintesis</h3> -->
-                <p><?= $new['sintesis'] ?></p>
-                <!-- <h3>Detalles</h3> -->
-                <!-- <ul style="list-style: none">
-                    <li><span class="label-red">Autor:</span> <?php //echo $new['autor'] .'('.$new['tipoautor'].')'?></li>
-                    <li><span class="label-red">Alcance:</span> <?php //echo $new['alcance'] ?></li>
-                    <li><span class="label-red">Genero:</span> <?php //echo $new['genero'] ?></li>
-                    <li><span class="label-red">Tendencia:</span> <?php //echo $new['tendencia'] ?></li>
-                </ul> -->
-                <span class="label-red">Autor:</span> <?= $new['autor'] .'('.$new['tipoautor'].')'?>
-                <br>
-                <span class="label-red">Alcance:</span> <?= $new['alcance'] ?>
-                <br>
-                <span class="label-red">Genero:</span> <?= $new['genero'] ?>
-                <br>
-                <span class="label-red">Tendencia:</span> <?= $new['tendencia'] ?>
-                <?php if (isset($newInternet)): ?>
-                    <br>
-                    <span class="label-red">URL:</span> <a target="_blank" href="<?= $newInternet['url'] ?>">Ver pagina</a>                    
-                <?php endif ?>
-            </div>
-
         </div>
-        <!-- /.row -->
-
-        <!-- Related Projects Row -->
-        <!-- <div class="row">
-
-            <div class="col-lg-12">
-                <h3 class="page-header">Related Projects</h3>
-            </div>
-
-            <div class="col-sm-3 col-xs-6">
-                <a href="#">
-                    <img class="img-responsive portfolio-item" src="http://placehold.it/500x300" alt="">
-                </a>
-            </div>
-
-            <div class="col-sm-3 col-xs-6">
-                <a href="#">
-                    <img class="img-responsive portfolio-item" src="http://placehold.it/500x300" alt="">
-                </a>
-            </div>
-
-            <div class="col-sm-3 col-xs-6">
-                <a href="#">
-                    <img class="img-responsive portfolio-item" src="http://placehold.it/500x300" alt="">
-                </a>
-            </div>
-
-            <div class="col-sm-3 col-xs-6">
-                <a href="#">
-                    <img class="img-responsive portfolio-item" src="http://placehold.it/500x300" alt="">
-                </a>
-            </div>
-
-        </div> -->
-        <!-- /.row -->
         <hr>
-
     </div>
 <!-- /.container -->

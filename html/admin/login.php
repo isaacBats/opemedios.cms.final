@@ -7,7 +7,7 @@
   <meta name="author" content="">
   <!--<link rel="shortcut icon" href="../images/favicon.png" type="image/png">-->
 
-  <title>Administracion - Operadora de Medios Informativos</title>
+  <title>Administracion - OPEMEDIOS</title>
 
   <link rel="stylesheet" href="/admin/lib/fontawesome/css/font-awesome.css">
 
@@ -28,7 +28,7 @@
 
   <div class="panel signin">
     <div class="panel-heading">
-      <h1>Operadora de Medios Informativos</h1>
+      <h1>OPEMEDIOS</h1>
     </div>
     <div class="panel-body">
       <form action="/panel/login" method="post">
@@ -46,11 +46,11 @@
         </div>
         <br />
         <div class="form-group">
-          <button class="btn btn-success btn-quirk btn-block">Sign In</button>
+          <button class="btn btn-success btn-quirk btn-block">Entrar</button>
         </div>
       </form>
       <hr class="invisible">
-      
+
     </div>
   </div><!-- panel -->
 

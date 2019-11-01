@@ -1,5 +1,5 @@
 <!-- Page Content -->
-    <div class="container">
+    <div class="container op-content">
 
         <!-- Page Heading -->
         <div class="row card-company">
@@ -9,7 +9,6 @@
             <div class="col-sm-8 page-header card-company-name">
                 <h1><?= $this->getCompany()['name'] ?></h1>
                 <small class="card-filters">
-                        <!-- <a class="card-company-filters" href="javascript_void(0);">Noticias de hoy: <strong>10</strong></a> -->
                       Noticias de hoy: <strong><?= $countAsigned['today'] ?></strong> 
                     | Noticias del mes: <strong><?= $countAsigned['mounth'] ?></strong> 
                     | Total: <strong><?= $countAsigned['total'] ?></strong>
@@ -45,28 +44,44 @@
             </form>
         </div> 
 
-        <?php if($news != 0):
-                foreach ($news as $key => $notice): ?>            
-            <div class="row">
-                <div class="col-md-7 adjunto-icon color-<?= without_accents(strtolower($notice['tipofuente'])) ?>" >
-                    <a href="/noticia/<?= without_accents(strtolower($notice['tipofuente'])) .'/'. $notice['id'] ?>" class="adjunto-link">
-                        <!-- <img class="img-responsive" src="http://placehold.it/700x300" alt="" width="700" height="300"> -->
-                        <?= $notice['adjunto']['icon'] ?>
-                    </a>
+        <?php 
+            $num = 1;
+            if($news != 0):
+                foreach ($news as $key => $notice): ?>
+         <?php 
+            if ($num % 2 == 0) {
+              $addClassZebra = "f-zebra"; //ZEBRA CLASS
+            }
+            else {
+                $addClassZebra = NULL;
+            } 
+        ?>         
+            <div class="row <?=$addClassZebra?> f-col">
+                <div class="col-md-4">
+                    <div class="bloque-new item-center">
+                        <a class="img-responsive">
+                          <img src="<?= $notice['logo_fuente'] ?>">
+                        </a>
+                    </div>
                 </div>
-                <div class="col-md-5" style="margin-top: -30px;">
-                    <h3><?= $notice['encabezado'] ?></h3>
-                    <h4>
+                <div class="col-md-8">
+                    <h4 class="f-h4 text-muted">
                         <?= $notice['fuente'] ?>
-                        <br>
-                        <small class="text-muted">Autor: <?= $notice['autor'] ?></small>        
                     </h4>
-                    <p><?= cortarTexto($notice['sintesis'], 200) ?></p>
+                    <h3 class="f-h3">
+                        <?= $notice['encabezado'] ?>
+                    </h3>
+                    <p class="text-muted f-p">
+                         <?= $notice['empresa_fuente'] .' | Autor:'.$notice['autor'] ?>
+                    </p>
+                    <p class="f-p"><?= cortarTexto($notice['sintesis'], 200) ?></p>
                     <a class="btn btn-primary" href="/noticia/<?= without_accents(strtolower($notice['tipofuente'])) .'/'. $notice['id'] ?>">Ver más<span class="glyphicon glyphicon-chevron-right"></span></a>
                 </div>
             </div>
-            <hr>
-        <?php endforeach; 
+
+        <?php 
+            $num++;
+            endforeach; 
             else:
         ?>
 
@@ -78,41 +93,19 @@
                 Mostrando registros del <b><?= $ini ?></b> al <b><?= $end ?></b> de un total de <b><?= $count ?></b> registros.
             </p>
         </div>
-        <div class="col-md-6"><p id="bootpag_pag" data-count="<?= $count ?>"></p></div> 
-
-        
         <!-- Pagination -->
-        <!-- <div class="row text-center">
+        <?php if(isset($_GET['search'])): ?>
+        <!--<div class="row text-center">
             <div class="col-lg-12">
                 <ul class="pagination">
-                    <li>
-                        <a href="#">&laquo;</a>
-                    </li>
-                    <li class="active">
-                        <a href="#">1</a>
-                    </li>
-                    <li>
-                        <a href="#">2</a>
-                    </li>
-                    <li>
-                        <a href="#">3</a>
-                    </li>
-                    <li>
-                        <a href="#">4</a>
-                    </li>
-                    <li>
-                        <a href="#">5</a>
-                    </li>
-                    <li>
-                        <a href="#">&raquo;</a>
-                    </li>
+                    <li><a href="#">&laquo;</a></li>
+                    <?=$pagination?>
+                    <li><a href="#">&raquo;</a></li>
                 </ul>
             </div>
-        </div> -->
+        </div>-->
+        <?endif;?>
         <!-- /.row -->
-
         <hr>
-
-
     </div>
 <!-- /.container -->

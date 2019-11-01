@@ -16,7 +16,7 @@ class AdminTarifario extends Controller
 				require $this->adminviews . 'tarifarioAdminView.php';
 			$this->footer_admin(  );
 		}else{
-            header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
+            header( "Location: https://{$_SERVER["HTTP_HOST"]}/panel/login");
         }
 	}
 
@@ -85,7 +85,7 @@ class AdminTarifario extends Controller
 
 			
 		}else{
-            header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
+            header( "Location: https://{$_SERVER["HTTP_HOST"]}/panel/login");
         }
 	}
 }

@@ -52,7 +52,12 @@ class EmpresaRepository extends BaseRepository{
 	{
 		$empresas = new stdClass();
 
-		$stmt = $this->pdo->prepare(" SELECT * FROM empresa ORDER BY id_empresa DESC LIMIT $limit OFFSET $offset;");
+		//$stmt = $this->pdo->prepare(" SELECT * FROM empresa ORDER BY id_empresa DESC LIMIT $limit OFFSET $offset;");
+
+		/* JOZ */
+		$stmt = $this->pdo->prepare(" SELECT * FROM empresa ORDER BY id_empresa DESC");
+		/* /JOZ */
+		
 		if($stmt->execute()){
 			$empresas->exito = true;
 			$empresas->rows = ( $stmt->rowCount() > 0 ) ? $stmt->fetchAll( \PDO::FETCH_ASSOC) : 0;

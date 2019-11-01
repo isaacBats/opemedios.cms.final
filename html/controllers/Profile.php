@@ -2,6 +2,8 @@
 
 use utilities\TipoPortadas;
 use utilities\TipoColumnas;
+use utilities\Util;
+use utilities\MediaDirectory;
 
 class Profile extends Controller{
 
@@ -24,14 +26,14 @@ class Profile extends Controller{
 		$this->acountRepo = new CuentaRepository();
 		$this->temasId = $this->getTemesProfile();
 		$this->company = [
-			'id' => $_SESSION['user']['id_empresa'],
-			'name' => $_SESSION['user']['empresa'], 
-			'address' => $_SESSION['user']['direccion'],
-			'telephone' => $_SESSION['user']['tel_empresa'], 
-			'contact' => $_SESSION['user']['contacto_empresa'], 
-			'email' => $_SESSION['user']['email_empresa'], 
-			'logo' => $_SESSION['user']['logo_empresa'],
-			'giro' => $_SESSION['user']['giro'],
+			'id' => isset($_SESSION['user']['id_empresa']) ? $_SESSION['user']['id_empresa']: 0,
+			'name' => isset($_SESSION['user']['empresa']) ? $_SESSION['user']['empresa']: "", 
+			'address' => isset($_SESSION['user']['direccion']) ? $_SESSION['user']['direccion']: "",
+			'telephone' => isset($_SESSION['user']['tel_empresa']) ? $_SESSION['user']['tel_empresa']: "", 
+			'contact' => isset($_SESSION['user']['contacto_empresa']) ? $_SESSION['user']['contacto_empresa']: "", 
+			'email' => isset($_SESSION['user']['email_empresa']) ? $_SESSION['user']['email_empresa']: "", 
+			'logo' => isset($_SESSION['user']['logo_empresa']) ? $_SESSION['user']['logo_empresa']: "",
+			'giro' => isset($_SESSION['user']['giro']) ? $_SESSION['user']['giro']: "",
 		];
 	}
 
@@ -54,94 +56,107 @@ class Profile extends Controller{
 
 	public function showNews()
 	{
-		if( isset( $_SESSION['user'] ) ){			
-			
+		if( isset( $_SESSION['user'] ) ){
 			$limit = (isset($_GET['numpp'])) ? $_GET['numpp'] : 10;
 			$page = (isset($_GET['page'])) ? ( $_GET['page'] * $limit ) - $limit : 0;
 			$search = (isset($_GET['search'])) ? $_GET['search'] : NULL;
 
-			$js = '
-					<!-- Libreria jquery-bootpag --> 
-					<script src="/admin/js/vendors/bootstrap/jquery.bootpag.min.js"></script>
+			$js = "<!-- Libreria jquery-bootpag --> 
+					<script src='admin/js/vendors/bootstrap/jquery.bootpag.min.js'></script>
 					<!-- Libreria purl --> 
-					<script src="/admin/js/vendors/purl/purl.min.js"></script>
+					<script src='admin/js/vendors/purl/purl.min.js></script>
 					<!-- Paginador con js --> 
-					<script src="/assets/js/panel.paginador.js"></script>
-			';
+					<script src='assets/js/panel.paginador.js'></script>";
 
-			$css = '
-
-					<!-- panel_paginator CSS -->
-				    <link href="/admin/css/panel.main.css" rel="stylesheet">
+			$css = "<!-- panel_paginator CSS -->
+				    <link href='admin/css/panel.main.css' rel='stylesheet'>
 				    <!-- data tables bootstrap CSS -->
-				    <link href="/admin/css/dataTables.bootstrap.css" rel="stylesheet">
-			';
+				    <link href='admin/css/dataTables.bootstrap.css' rel='stylesheet'>";
 			
 			$asignations = $this->asignaRepo->findByThemeIdAndCompanyId($this->company['id'], $this->temasId, $search, $limit, $page);
-
-			$count = $asignations['count'];
+			$count = (int)$asignations['count'];
 			$ini = $page + 1;
-			$end = ( $page + $limit >= $count ) ? $count : $page + $limit;
-
+			$end = ( (int)$page + (int)$limit >= (int)$count ) ? (int)$count : (int)$page + (int)$limit;
 			if ($asignations['rows'] != 0) {
-				$news = array_map(function ($asigna){				
-					
-					$new = $this->noticiasRepo->getNewById($asigna['id_noticia']);
-					$new['adjunto'] = $this->getMediaHTML($new['tipofuente_id'], $new['id']);
-					return $new;
-
-				}, $asignations['rows']);
+				$keys = array_column($asignations['rows'], 'id_noticia');
+				$news = $this->noticiasRepo->getNewById($keys, null, true);
 			} else {
 				$news = $asignations['rows'];
 			}
-
-			
+			/*$prevPage = ( ($ini - $limit) <= 0 ) ? 1: $ini-$limit;
+			if($end >= $count){
+				$nextUrl = "#";
+			}else{
+				$nextPage = isset($_GET['page']) ? (int)$_GET['page']+1: "#";
+				$nextUrl = "/noticias?search={$search}&page={$nextPage}&numpp={$limit}";
+			}
+			$prevUrl = "/noticias?search={$search}&page={$prevPage}&numpp={$limit}";
+			$pagination = "<li><a href='{$prevUrl}'>prev</a></li><li><a href='{$nextUrl}'>next</a></li>";*/
 			$countAsigned = $this->asignaRepo->countNewsAsigned($this->company['id'], $this->temasId);
-
-
-
 			$this->renderViewClient('home', 'Noticias - ' . $_SESSION['user']['empresa'] . ' - ', compact('news', 'countAsigned', 'count', 'ini', 'end', 'css', 'js'));
 		}else{
-            header( "Location: http://{$_SERVER["HTTP_HOST"]}/sign-in");
+            header( "Location: https://{$_SERVER["HTTP_HOST"]}/sign-in");
         }
-
 	}
 
 	public function detailNewView($fontType, $newId)
 	{
-		if (isset($_GET['token'])) {
-			$token = base64_decode($_GET['token']);
-			$explode = explode('_', $token);
-			$userID = base64_decode($explode[0]);
-			if ($userget = $this->acountRepo->get($userID)) {
-				$new = $this->noticiasRepo->getNewById($newId);
+			if ($new = $this->noticiasRepo->getNewById($newId)) {	
 				$media = $this->getMediaHTML($new['tipofuente_id'], $newId);
-	 			
-				if ($fontType === 'internet')
-					$newInternet = $this->noticiasRepo->getNewById($newId, 'int');
-
-				$this->renderViewClient('detailNew', $new['encabezado'] . ' - ', compact('new', 'media', 'newInternet'));
+				$tipo =  Util::tipoFuente(intval($new['tipofuente_id']) -1);
+				$new['thumbnail_empresa'] = "https://{$_SERVER["HTTP_HOST"]}/" . $new['logo_fuente'];
+	 			$noticiaTipoData = $this->noticiasRepo->getNewById($newId, $tipo['pref']);
+	 			$new['share'] = "https://{$_SERVER["HTTP_HOST"]}/share/" . $tipo['url'] . "/" . $newId;
+				$this->renderViewClient('detailNew', $new['encabezado'] . ' - ', compact('new', 'media', 'noticiaTipoData'));
 				exit;
-			}
 
 		} elseif (isset($_SESSION['user'])) {
 			$new = $this->noticiasRepo->getNewById($newId);
 			$media = $this->getMediaHTML($new['tipofuente_id'], $newId);
- 			
-			if ($fontType === 'internet')
-				$newInternet = $this->noticiasRepo->getNewById($newId, 'int');
-
-			$this->renderViewClient('detailNew', $new['encabezado'] . ' - ', compact('new', 'media', 'newInternet'));
+			$tipo =  Util::tipoFuente(intval($new['tipofuente_id']) -1);
+			$new['thumbnail_empresa'] = "https://{$_SERVER["HTTP_HOST"]}/" . $new['logo_fuente'];
+			$noticiaTipoData = $this->noticiasRepo->getNewById($newId, $tipo['pref']);
+			$new['share'] = "https://{$_SERVER["HTTP_HOST"]}/share/" . $tipo['url'] . "/" . $newId;
+			$this->renderViewClient('detailNew', $new['encabezado'] . ' - ', compact('new', 'media', 'noticiaTipoData'));
 		}else{
-            header( "Location: http://{$_SERVER["HTTP_HOST"]}/sign-in");
+            header( "Location: https://{$_SERVER["HTTP_HOST"]}/sign-in");
+        }		
+	}
+
+	/*Vista al compartir */
+	public function detailShare($fontType, $newId)
+	{
+			if ($new = $this->noticiasRepo->getNewById($newId)) {	
+				$media = $this->getMediaHTML($new['tipofuente_id'], $newId);
+				$tipo =  Util::tipoFuente(intval($new['tipofuente_id']) -1);
+				$new['thumbnail_empresa'] = "https://{$_SERVER["HTTP_HOST"]}/" . $new['logo_fuente'];
+	 			$noticiaTipoData = $this->noticiasRepo->getNewById($newId, $tipo['pref']);
+	 			$new['share'] = "https://{$_SERVER["HTTP_HOST"]}/share/" . $tipo['url'] . "/" . $newId;
+				$this->renderViewShare('detailNew', $new['encabezado'] . ' - ', compact('new', 'media', 'noticiaTipoData'));
+				exit;
+		} elseif (isset($_SESSION['user'])) {
+			$new = $this->noticiasRepo->getNewById($newId);
+			$media = $this->getMediaHTML($new['tipofuente_id'], $newId);
+			$tipo =  Util::tipoFuente(intval($new['tipofuente_id']) -1);
+			$new['thumbnail_empresa'] = "https://{$_SERVER["HTTP_HOST"]}/" . $new['logo_fuente'];
+			$noticiaTipoData = $this->noticiasRepo->getNewById($newId, $tipo['pref']);
+			$new['share'] = "https://{$_SERVER["HTTP_HOST"]}/share/" . $tipo['url'] . "/" . $newId;
+			$this->renderViewClient('detailNew', $new['encabezado'] . ' - ', compact('new', 'media', 'noticiaTipoData'));
+		}else{
+            header( "Location: https://{$_SERVER["HTTP_HOST"]}/sign-in");
         }		
 	}
 
 	public function primerasPlanas ()
 	{
 		if( isset( $_SESSION['user'] ) ){
-			$js = '<script src="/assets/assets_client/js/lightbox.min.js"></script>';
-			$css = '<link href="/assets/assets_client/css/lightbox.min.css" rel="stylesheet">';
+			$js = "<script src='assets/assets_client/js/lightbox.min.js'></script>
+			<script src='//code.jquery.com/jquery-3.3.1.min.js'></script>
+<script src='https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js'></script>
+			";
+			$css = "<link href='assets/assets_client/css/lightbox.min.css' rel='stylesheet'>
+			<link rel='stylesheet' href='https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css' />
+			";
 			$date = isset($_GET['fecha']) ? $_GET['fecha'] : date('Y-m-d');
 
 			$title = 'Primeras Planas';
@@ -151,15 +166,18 @@ class Profile extends Controller{
 
 			$this->renderViewClient('covers', $title . ' - ', compact('title', 'covers'), $css, $js);
 		}else{
-            header( "Location: http://{$_SERVER["HTTP_HOST"]}/sign-in");
+            header( "Location: https://{$_SERVER["HTTP_HOST"]}/sign-in");
         }	
 	}
 
 	public function portadasFinancieras ()
 	{
 		if( isset( $_SESSION['user'] ) ){
-			$js = '<script src="/assets/assets_client/js/lightbox.min.js"></script>';
-			$css = '<link href="/assets/assets_client/css/lightbox.min.css" rel="stylesheet">';
+			$js = "<script src='assets/assets_client/js/lightbox.min.js'></script>
+			<script src='//code.jquery.com/jquery-3.3.1.min.js'></script>
+<script src='https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js'></script>";
+			$css = "<link href='assets/assets_client/css/lightbox.min.css' rel='stylesheet'>
+			<link rel='stylesheet' href='https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css' />";
 			$date = isset($_GET['fecha']) ? $_GET['fecha'] : date('Y-m-d');
 
 			$title = 'Portadas Financieras';
@@ -169,7 +187,7 @@ class Profile extends Controller{
 
 			$this->renderViewClient('covers', $title . ' - ', compact('title', 'covers'), $css, $js);
 		}else{
-            header( "Location: http://{$_SERVER["HTTP_HOST"]}/sign-in");
+            header( "Location: https://{$_SERVER["HTTP_HOST"]}/sign-in");
         }	
 	}
 
@@ -187,7 +205,7 @@ class Profile extends Controller{
 
 			$this->renderViewClient('covers', $title . ' - ', compact('title', 'covers'), $css, $js);
 		}else{
-            header( "Location: http://{$_SERVER["HTTP_HOST"]}/sign-in");
+            header( "Location: https://{$_SERVER["HTTP_HOST"]}/sign-in");
         }	
 	}
 
@@ -204,7 +222,7 @@ class Profile extends Controller{
 			
 			$this->renderViewClient('columns', $title . ' - ', compact('title', 'covers', 'segment'));
 		}else{
-            header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
+            header( "Location: https://{$_SERVER["HTTP_HOST"]}/panel/login");
         }
 	}
 
@@ -221,7 +239,7 @@ class Profile extends Controller{
 			
 			$this->renderViewClient('columns', $title . ' - ', compact('title', 'covers', 'segment'));
 		}else{
-            header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
+            header( "Location: https://{$_SERVER["HTTP_HOST"]}/panel/login");
         }
 	}
 
@@ -234,7 +252,7 @@ class Profile extends Controller{
 
 			$this->renderViewClient('columnDetail', $column['titulo'] . ' - ', compact('column', 'font'));
 		}else{
-            header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
+            header( "Location: https://{$_SERVER["HTTP_HOST"]}/panel/login");
         }
 	}
 

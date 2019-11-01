@@ -37,7 +37,7 @@
 
             <?php foreach ($covers as $cover): ?>
                 <div class="col-sm-3 col-xs-6" style="margin-bottom: 10px;">
-                    <a href="/<?= $cover['imagen'] ?>" data-lightbox="roadtrip">
+                    <a href="/<?= $cover['imagen'] ?>" data-fancybox="roadtrip">
                         <img class="img-responsive portfolio-item" src="/<?= $cover['imagen'] ?>" alt="<?= $cover['tipo_portada'] ?>" style="max-height: 350px;">
                         <figcaption class="items-descripcion">
                             <strong><?= $cover['nombre_fuente'] ?></strong>

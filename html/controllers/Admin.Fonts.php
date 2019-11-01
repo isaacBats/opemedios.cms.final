@@ -55,7 +55,7 @@ class AdminFonts extends Controller{
 			require $this->adminviews . 'showFonts.php';
 			$this->footer_admin( $js );
 		}else{
-            header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
+            header( "Location: https://{$_SERVER["HTTP_HOST"]}/panel/login");
         }
 	}
 
@@ -97,7 +97,7 @@ class AdminFonts extends Controller{
 			$this->footer_admin();
 					
 		}else{
-            header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
+            header( "Location: https://{$_SERVER["HTTP_HOST"]}/panel/login");
         }
 	}
 
@@ -109,7 +109,7 @@ class AdminFonts extends Controller{
 			require $this->adminviews . 'addFont.php';
 			$this->footer_admin();
 		}else{
-            header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
+            header( "Location: https://{$_SERVER["HTTP_HOST"]}/panel/login");
         }
 
 	}
@@ -140,7 +140,7 @@ class AdminFonts extends Controller{
 				throw new Exception($e->getMessage());
 			}
 		}else{
-            header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
+            header( "Location: https://{$_SERVER["HTTP_HOST"]}/panel/login");
         }		
 	}
 
@@ -210,7 +210,7 @@ class AdminFonts extends Controller{
 			header( 'Location: /panel/fonts/show-list');
 
 		}else{
-            header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
+            header( "Location: https://{$_SERVER["HTTP_HOST"]}/panel/login");
         }	
 	}
 
@@ -222,13 +222,13 @@ class AdminFonts extends Controller{
 	public function getSectionsByFontId ( $id ){
 		
 		$sections = null;
-		if( isset( $_SESSION['admin'] ) ){
+		//if( isset( $_SESSION['admin'] ) ){
 			$sections = $this->sectionRepository->getByFontId( $id );
 			header('Content-type: text/json');
 	        echo json_encode($sections);		
-		}else{
-            header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
-        }
+		//}else{
+          //  header( "Location: https://{$_SERVER["HTTP_HOST"]}/panel/login");
+        //}
 		
 	}
 
@@ -251,7 +251,7 @@ class AdminFonts extends Controller{
 			header('Content-type: text/json');
 	        echo json_encode($res);		
 		}else{
-            header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
+            header( "Location: https://{$_SERVER["HTTP_HOST"]}/panel/login");
         }
 	}
 
@@ -281,7 +281,7 @@ class AdminFonts extends Controller{
 			header('Content-type: text/json');
 	        echo json_encode($res);		
 		}else{
-            header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
+            header( "Location: https://{$_SERVER["HTTP_HOST"]}/panel/login");
         }	
 	}
 
@@ -308,7 +308,7 @@ class AdminFonts extends Controller{
 			header('Content-type: text/json');
 	        echo json_encode($res);
 		} else {
-            header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
+            header( "Location: https://{$_SERVER["HTTP_HOST"]}/panel/login");
 		}
 	}
 
@@ -327,7 +327,7 @@ class AdminFonts extends Controller{
 			header('Content-type: text/json');
 	        echo json_encode($row);
 		} else {
-            header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
+            header( "Location: https://{$_SERVER["HTTP_HOST"]}/panel/login");
 		}
 	}
 

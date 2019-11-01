@@ -20,7 +20,7 @@
 							<td style="color: #153643; font-family: Arial, sans-serif; font-size: 24px;"><?= $noticia['encabezado'] ?></td>				 
 						</tr>				 
 						<tr>
-							<td style="padding: 20px 0 30px 0; color: #153643; font-family: Arial, sans-serif; font-size: 16px; line-height: 20px;"><?= $noticia['sintesis'] ?></td>				 
+							<td style="padding: 20px 0 30px 0; color: #153643; font-family: Arial, sans-serif; font-size: 16px; line-height: 20px;"><?= utf8_decode($noticia['sintesis']) ?></td>				 
 						</tr>				 
 					<?php } ?>				 
 				</table>

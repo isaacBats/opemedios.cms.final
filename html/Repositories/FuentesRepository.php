@@ -131,4 +131,24 @@ class FuentesRepository extends BaseRepository{
 		
 		return false;
 	}
+
+	/**
+	 * Obtiene el orden en que deben ser puestas las imagenes enel pdf (merge)
+	 * @param  String $type tipo 
+	 * @return Array orden en que deben ir las imagenes
+	 */
+	public function getOrderPriority($type)
+	{
+		$order = [];
+		if (!isset($type)) {
+			return $order;
+		}
+		$q = "SELECT * FROM orderMergePdf WHERE LOWER(section) LIKE LOWER('{$type}') LIMIT 1";
+		$stmt = $this->pdo->prepare($q);
+		if ( $stmt->execute() ) {
+			$ids = $stmt->fetch(PDO::FETCH_ASSOC)['orderByIdFuente'];
+			$order = preg_split('/,/', $ids);
+		} 
+		return $order;
+	}
 }

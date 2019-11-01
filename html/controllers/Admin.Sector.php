@@ -20,7 +20,7 @@ class AdminSector extends Controller{
 			require $this->adminviews . 'addSector.php';
 			$this->footer_admin();
 		}else{
-            header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
+            header( "Location: https://{$_SERVER["HTTP_HOST"]}/panel/login");
         }
 		
 	}
@@ -69,7 +69,7 @@ class AdminSector extends Controller{
 			require $this->adminviews . 'showSectores.php';
 			$this->footer_admin();
 		}else{
-            header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
+            header( "Location: https://{$_SERVER["HTTP_HOST"]}/panel/login");
         }
 	}
 }

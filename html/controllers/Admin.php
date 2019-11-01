@@ -1,7 +1,7 @@
-<?php 
+<?php
 
 class AdminController extends Controller{
-	
+
 
 	function __construct()
 	{
@@ -28,7 +28,7 @@ class AdminController extends Controller{
 
 		$user = $this->pdo->quote( $_POST["username"] );
  		$pass = $_POST["password"];
- 			
+
 		$sql =  "SELECT * FROM usuario WHERE username LIKE LOWER(".$user.") ";
 		$query = $this->pdo->prepare($sql);
 		if( $query->execute() ){
@@ -36,20 +36,21 @@ class AdminController extends Controller{
 			if( $nr > 0 ){
 				$user = $query->fetchAll(PDO::FETCH_ASSOC);
 				if( isset( $user[0]["username"] ) ){
-					if($user[0]["password"] == md5( $pass ) ){
-						$_SESSION[ "admin"] = $user[0];	
-						header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/news");
+					if( password_verify( $pass, $user[0]["password"] ) ) {
+					//if($user[0]["password"] ==  $pass ){
+						$_SESSION[ "admin"] = $user[0];
+						header( "Location: https://{$_SERVER["HTTP_HOST"]}/panel/news");
 					}else{
-						header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
+						header( "Location: https://{$_SERVER["HTTP_HOST"]}/panel/login");
 					}
 				}else{
-					header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
+					header( "Location: https://{$_SERVER["HTTP_HOST"]}/panel/login");
 				}
 			}else{
-				header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
+				header( "Location: https://{$_SERVER["HTTP_HOST"]}/panel/login");
 			}
 		}else{
-			header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
+			header( "Location: https://{$_SERVER["HTTP_HOST"]}/panel/login");
 		}
 
 		require $this->adminviews."login.php";
@@ -57,9 +58,9 @@ class AdminController extends Controller{
 
 	public function dashboard(){
 		if( isset( $_SESSION['admin'] ) ){
-			header( "Location: ./panel/dashboard");			
+			header( "Location: ./panel/dashboard");
 		}else{
-            header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
+            header( "Location: https://{$_SERVER["HTTP_HOST"]}/panel/login");
         }
 	}
 }

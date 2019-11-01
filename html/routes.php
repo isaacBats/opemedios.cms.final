@@ -46,7 +46,7 @@ $collection->attachRoute(new Route('/sign-in', array(
 )));
 
 // Usuario Perfil
-    //Noticias 
+    //Noticias
 $collection->attachRoute(new Route('/noticias', array(
     '_controller' => 'Profile::showNews',
     'methods' => 'GET'
@@ -54,6 +54,12 @@ $collection->attachRoute(new Route('/noticias', array(
 
 $collection->attachRoute(new Route('/noticia/:fontType/:id', array(
     '_controller' => 'Profile::detailNewView',
+    'methods' => 'GET'
+)));
+
+    //Compartir Noticia
+$collection->attachRoute(new Route('/share/:fontType/:id', array(
+    '_controller' => 'Profile::detailShare',
     'methods' => 'GET'
 )));
 
@@ -139,7 +145,7 @@ $collection->attachRoute(new Route('/panel/font/delete/:id', array(
 )));
 
 
-//Fonts Television 
+//Fonts Television
 $collection->attachRoute(new Route('/panel/font/add/font-television', array(
     '_controller' => 'AdminFontTV::add',
     'methods' => 'GET'
@@ -150,7 +156,7 @@ $collection->attachRoute(new Route('/panel/font/add/font-television', array(
     'methods' => 'POST'
 )));
 
-//Fonts Radio 
+//Fonts Radio
 $collection->attachRoute(new Route('/panel/font/add/font-radio', array(
     '_controller' => 'AdminFontRD::add',
     'methods' => 'GET'
@@ -215,7 +221,7 @@ $collection->attachRoute(new Route('/panel/sector/show-list', array(
     'methods' => 'GET'
 )));
 
-//News Television 
+//News Television
 $collection->attachRoute(new Route('/panel/new/add/new-television', array(
     '_controller' => 'AdminNewTV::add',
     'methods' => 'GET'
@@ -226,7 +232,7 @@ $collection->attachRoute(new Route('/panel/new/television/save', array(
     'methods' => 'POST'
 )));
 
-//News Radio 
+//News Radio
 $collection->attachRoute(new Route('/panel/new/add/new-radio', array(
     '_controller' => 'AdminNewRD::add',
     'methods' => 'GET'
@@ -237,7 +243,7 @@ $collection->attachRoute(new Route('/panel/new/radio/save', array(
     'methods' => 'POST'
 )));
 
-//News Periodico 
+//News Periodico
 $collection->attachRoute(new Route('/panel/new/add/new-periodico', array(
     '_controller' => 'AdminNewPE::add',
     'methods' => 'GET'
@@ -263,7 +269,7 @@ $collection->attachRoute(new Route('/panel/new/encabezado/delete', array(
     'methods' => 'POST'
 )));
 
-//News Revista 
+//News Revista
 $collection->attachRoute(new Route('/panel/new/add/new-revista', array(
     '_controller' => 'AdminNewRE::add',
     'methods' => 'GET'
@@ -274,7 +280,7 @@ $collection->attachRoute(new Route('/panel/new/revista/save', array(
     'methods' => 'POST'
 )));
 
-//News Internet 
+//News Internet
 $collection->attachRoute(new Route('/panel/new/add/new-internet', array(
     '_controller' => 'AdminNewIN::add',
     'methods' => 'GET'
@@ -310,6 +316,11 @@ $collection->attachRoute(new Route('/panel/new/add-file/:id', array(
     '_controller' => 'AdminNews::addFileAction',
     'methods' => 'POST'
 )));
+//reemplazar un archivo adjunto
+$collection->attachRoute(new Route('/panel/new/replace-attached', array(
+    '_controller' => 'AdminNews::replaceFile',
+    'methods' => 'POST'
+)));
 
 // viewNew # 54 form for add file comment
 // $collection->attachRoute(new Route('/panel/new/adjunto-add/:publicId', array(
@@ -320,6 +331,11 @@ $collection->attachRoute(new Route('/panel/new/add-file/:id', array(
 $collection->attachRoute(new Route('/panel/new/send/:id', array(
     '_controller' => 'AdminNews::sendMailView',
     'methods' => 'GET'
+)));
+//delete a new
+$collection->attachRoute(new Route('/panel/new/remove', array(
+    '_controller' => 'AdminNews::removeNew',
+    'methods' => 'POST'
 )));
 
 $collection->attachRoute(new Route('/panel/new/send/client/filter', array(
@@ -337,6 +353,11 @@ $collection->attachRoute(new Route('/panel/new/send', array(
     'methods' => 'POST'
 )));
 
+$collection->attachRoute(new Route('/panel/new/preview/:idnoticia/:idempresa', array(
+    '_controller' => 'AdminNews::previewMail',
+    'methods' => 'GET'
+)));
+
 $collection->attachRoute(new Route('/panel/new/update-new', array(
     '_controller' => 'AdminNews::updateNew',
     'methods' => 'POST'
@@ -351,6 +372,25 @@ $collection->attachRoute(new Route('/panel/news/blocks', array(
     '_controller' => 'AdminNews::blockNewsView',
     'methods' => 'GET'
 )));
+
+/*Joz*/
+
+$collection->attachRoute(new Route('/panel/news/records', array(
+    '_controller' => 'AdminNews::blockNewsRecords',
+    'methods' => 'GET'
+)));
+
+$collection->attachRoute(new Route('/panel/news/blocks/records/:id', array(
+    '_controller' => 'AdminNews::detailBlockRecordsView',
+    'methods' => 'GET'
+)));
+
+$collection->attachRoute(new Route('/panel/news/block/records/send', array(
+    '_controller' => 'AdminNews::sendBlockRecords',
+    'methods' => 'POST'
+)));
+
+/*/joz*/
 
 $collection->attachRoute(new Route('/panel/block/create', array(
     '_controller' => 'AdminNews::createBlock',
@@ -382,6 +422,31 @@ $collection->attachRoute(new Route('/panel/news/block/send', array(
     'methods' => 'POST'
 )));
 
+$collection->attachRoute(new Route('/panel/news/blocks/delete', array(
+    '_controller' => 'AdminNews::rmBlock',
+    'methods' => 'POST'
+)));
+
+$collection->attachRoute(new Route('/panel/news/blocks/preview/:id', array(
+    '_controller' => 'AdminNews::mailPreviewBlock',
+    'methods' => 'GET'
+)));
+
+$collection->attachRoute(new Route('/panel/newsletters/historic', array(
+    '_controller' => 'Newsletters::index',
+    'methods' => 'GET'
+)));
+
+$collection->attachRoute(new Route('/panel/newsletter/contacts', array(
+    '_controller' => 'Newsletters::getContacts',
+    'methods' => 'POST'
+)));
+
+$collection->attachRoute(new Route('/panel/newsletter/resend', array(
+    '_controller' => 'Newsletters::resend',
+    'methods' => 'POST'
+)));
+
 // $collection->attachRoute(new Route('/panel/news/send-block', array(
 //     '_controller' => 'AdminNews::sendBlockAction',
 //     'methods' => 'POST'
@@ -394,7 +459,7 @@ $collection->attachRoute(new Route('/panel/get/seccion/:id', array(
     'methods' => 'GET'
 )));
 
-    // trae el nombre de un autor de una seccion 
+    // trae el nombre de un autor de una seccion
 $collection->attachRoute(new Route('/panel/seccion/autor/:seccion', array(
     '_controller' => 'AdminFonts::getAuthor',
     'methods' => 'GET'
@@ -462,6 +527,11 @@ $collection->attachRoute(new Route('/panel/client/tema/add', array(
     'methods' => 'POST'
 )));
 
+$collection->attachRoute(new Route('/panel/client/tema/edit', array(
+    '_controller' => 'AdminEmpresa::editTopic',
+    'methods' => 'POST'
+)));
+
 $collection->attachRoute(new Route('/panel/client/cuenta/add', array(
     '_controller' => 'AdminEmpresa::addAccountAction',
     'methods' => 'POST'
@@ -469,6 +539,16 @@ $collection->attachRoute(new Route('/panel/client/cuenta/add', array(
 
 $collection->attachRoute(new Route('/panel/client/cuenta/change-state', array(
     '_controller' => 'AdminEmpresa::changeStateAcount',
+    'methods' => 'GET'
+)));
+//remove account from company
+$collection->attachRoute(new Route('/panel/client/cuenta/rm-account', array(
+    '_controller' => 'AdminEmpresa::rmAccount',
+    'methods' => 'GET'
+)));
+
+$collection->attachRoute(new Route('/panel/client/cuenta/rm-theme', array(
+    '_controller' => 'AdminEmpresa::rmTheme',
     'methods' => 'GET'
 )));
 
@@ -523,6 +603,10 @@ $collection->attachRoute(new Route('/panel/user/edit/:id', array(
     'methods' => 'POST'
 )));
 
+$collection->attachRoute(new Route('/panel/user/delete/:id', array(
+    '_controller' => 'AdminUsuario::deleteUser',
+    'methods' => 'POST'
+)));
 
 //Tarifario
     //admin tariff
@@ -624,21 +708,40 @@ $collection->attachRoute(new Route('/panel/reports/today', array(
     'methods' => 'GET'
 )));
 
+$collection->attachRoute(new Route('/panel/asignacion/noticias-por-cliente', array(
+  '_controller' => 'AdminReports::getNewsByClient',
+  'methods'     => 'GET'
+)));
+
+$collection->attachRoute(new Route('/panel/asignacion/noticias-por-cliente', array(
+    '_controller'   => 'AdminReports::searchNewsByClient',
+    'methods'       => 'POST' 
+)));
+
+//acciones para cambiar [Tema o Tendencia de una noticia], eliminar noticia del portal.
+$collection->attachRoute(new Route('/panel/asignacion/change-trend-theme/', array(
+    '_controller'   => 'AdminNews::updateThemeTrend',
+    'methods'       => 'POST' 
+)));
+
+$collection->attachRoute(new Route('/reporte/cliente/', array(
+    '_controller'   => 'ClientReports::reportClientView',
+    'methods'       => 'GET' 
+)));
+
+$collection->attachRoute(new Route('/reporte/cliente/', array(
+    '_controller'   => 'ClientReports::getReportClient',
+    'methods'       => 'POST' 
+)));
 // Reutas de prueba
 // $collection->attachRoute(new Route('/calcula-fraccion', array(
 //     '_controller' => 'Image::obtieneCifras',
 //     'parameters' => ['new' => 'hola'],
 //     'methods' => 'GET'
 // )));
-// 
+//
 $collection->attachRoute(new Route('/test/mail-block', array(
     '_controller' => 'AdminNews::testSendMail',
     'methods' => 'GET'
 )));
 
-// Test one mail  
-$collection->attachRoute(new Route('/test/mail', array(
-    '_controller' => 'AdminNews::testOneMail',
-    'parameters' => ['newId' => 598000],
-    'methods' => 'GET'
-)));

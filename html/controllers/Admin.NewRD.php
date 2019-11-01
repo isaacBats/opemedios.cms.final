@@ -38,7 +38,7 @@ class AdminNewRD extends AdminNews{
 			$campos = ob_get_clean();
 			$this->addNew($campos, $this->fuente );
 		}else{
-            header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
+            header( "Location: https://{$_SERVER["HTTP_HOST"]}/panel/login");
         }
 	}
 
@@ -82,6 +82,8 @@ class AdminNewRD extends AdminNews{
 							if( $this->guardaArchivo( $origin, $this->getUrlArchivo() ) ){
 								$message = 'Archivo guardado en '. $this->getUrlArchivo() . $file->name;
 								array_push($archivosGuardados, $message);
+							}else{
+								die("no se pudo guardar el archivo.");
 							}							
 						}
 					}

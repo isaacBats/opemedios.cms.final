@@ -2,6 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta charset="utf-8" />
     <title>Noticia Opemedios</title>
   
      <!-- You can use Open Graph tags to customize link previews.
@@ -103,7 +104,7 @@
                 <img src="http://<?= $_SERVER['HTTP_HOST'] ?>/assets/images/logo_150X40.png" alt="Opemedios" width="120" class="header-image" />
               </td>
               <td align="center" style="font-size: 20px; padding-top: 5px;">
-                <?= $new['tipoFuente'] ?> / Noticia
+                <?= utf8_decode($new['tipoFuente']) ?> / Noticia
               </td>
             </tr>
             <tr>
@@ -119,19 +120,19 @@
                 <table border="0" cellpadding="0" cellspacing="0" width="100%">
                   <tr>
                     <td class="title" >
-                      <?= $new['titulo'] ?>
+                      <?= utf8_decode($new['titulo']) ?>
                       <hr class="hr-azul">
                       <hr class="hr-rojo">
                     </td>
                   </tr>
                   <tr>
                     <td>
-                      <strong>Fuente: <?= ucfirst(strtolower($new['fuente'])) ?></strong>
+                      <strong>Fuente: <?= utf8_decode(ucfirst(strtolower($new['fuente']))) ?></strong>
                     </td>
                   </tr>
                   <tr>
                     <td style="padding-top: 25px;">
-                      <?= $new['sintesis'] ?>
+                      <?= utf8_decode($new['sintesis']) ?>
                     </td>
                   </tr>
                   <tr>
@@ -157,7 +158,7 @@
                 <table border="0" cellpadding="0" cellspacing="0" width="100%">
                   <tr>
                     <td class="info-noticia" >
-                      <p>Reportero: <?= ucwords(strtolower($new['autor'])) ?></p>
+                      <p>Reportero: <?= utf8_decode(ucwords(strtolower($new['autor']))) ?></p>
                       <p>Genero: <?= $new['genero'] ?></p>
                       <p>Tendencia: <?= $new['tendencia'] ?></p>
                     </td>

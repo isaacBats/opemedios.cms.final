@@ -73,7 +73,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td class="h1" style="padding: 5px 0 0 0;">
-                                                        <?= $empresa['nombre']?>
+                                                        <?= utf8_decode($empresa['nombre'])?>
                                                     </td>
                                                 </tr>
                                             </table>
@@ -90,7 +90,7 @@
                         <?php foreach ($noticias as $tema => $news){ ?>
                         <tr>
                             <td class="h3">
-                                <?= $tema?>
+                                <?= utf8_decode($tema)?>
                             </td>
                         </tr>
                         <?php foreach ($news as $new) { ?>
@@ -99,17 +99,17 @@
                                 <table width="100%" border="0" cellspacing="0" cellpadding="0">
                                     <tr>
                                         <td class="h2">
-                                            <?= $new['encabezado'] ?>
+                                            <?= utf8_decode($new['encabezado']) ?>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="bodycopy">
-                                            <?= $new['sintesis'] ?>
+                                            <?= utf8_decode($new['sintesis']) ?>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="fuente">
-                                            <?= $new['fuente'] ?>
+                                            <?= utf8_decode($new['fuente']) ?>
                                         </td>
                                     </tr>
                                     <tr>

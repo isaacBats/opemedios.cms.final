@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 include_once("BaseRepository.php");
 
@@ -11,23 +11,23 @@ class TemaRepository extends BaseRepository{
 	private $table = 'tema';
 
 	public function getThemaByEmpresaID( $id ){
-		
+
 		$issues = null;
 
 		$query = $this->pdo->prepare('SELECT * FROM tema WHERE id_empresa = ' . $id);
-		
+
 		if($query->execute()){
 			$issues = ( $query->rowCount() > 0 ) ? $query->fetchAll(\PDO::FETCH_ASSOC) : 'No hay temas disponibles';
 		}else{
 			$error = $query->errorInfo();
-			$issues = 'Error al consultar las secciones para la fuente con id ' . $fontId . PHP_EOL;
+			$issues = 'Error al consultar las secciones para la fuente con id ' . $id . PHP_EOL;
 			$issues .= 'Code Error: ' . $error[1] . ' Error: ' . $error[2];
 		}
 
 		return $issues;
 	}
 
-	public function get($id) 
+	public function get($id)
 	{
 		try {
 			$stmt = $this->pdo->prepare("SELECT * FROM {$this->table} WHERE id_tema = :idTema");
@@ -61,7 +61,33 @@ class TemaRepository extends BaseRepository{
 	{
 		if ($this->pdo->exec("DELETE FROM {$this->table} WHERE id_empresa = {$empresa}"))
 			return true;
-		else 
+		else
 			return false;
 	}
+
+	public function deleteThemeById($id)
+	{
+		if ($this->pdo->exec("DELETE FROM {$this->table} WHERE id_tema = {$id}"))
+			return true;
+		else
+			return false;	
+	}
+
+	/*JOZ*/
+
+	public function updateTopic($data)
+	{
+		$stmt = $this->pdo->prepare("UPDATE tema SET nombre = :nombre, descripcion = :descripcion WHERE id_tema = :id_tema");
+		$result = new stdClass;
+		if ($stmt->execute($data)) {
+			$result->exito = TRUE;
+		}else{
+			$result->exito = FALSE;
+			$result->error = $this->pdo->errorInfo()[2];
+		}
+		return $result;	
+	}
+	/*/JOZ*/
+
+
 }

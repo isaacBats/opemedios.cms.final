@@ -51,6 +51,7 @@ class MediaDirectory extends PHPEnum
 	const MEDIA_INTERNET 	 = 'assets/data/noticias/internet/';
 	const LOGO_FUENTES		 = 'assets/data/fuentes/';
 	const LOGO_EMPRESA		 = 'assets/data/empresas/';
+	const LOGO_NEWSLETTERS	 = 'assets/data/banners-newsletter/';
 }
 
 class AuthorType extends PHPEnum

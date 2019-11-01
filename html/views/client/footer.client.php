@@ -8,33 +8,31 @@
                         <h3 class="widget-title">Contactanos</h3>
                         <div class="widget-body">
                             <p>+52 1 55 55846410<br>
-                                <a href="mailto:atencion@opemedios.com.mx">atencion@opemedios.com.mx</a><br>
-                                <br>
+                                <a href="mailto:atencion@opemedios.mx">atencion@opemedios.mx</a><br>
                                 Ures 69, Col. Roma Sur CP. 06760, México, DF, Del. Cuauhtémoc   
                             </p>    
                         </div>
                     </div>
 
+                    <!-- 2018 -->
                     <div class="col-md-6 widget">
-                        <h3 class="widget-title">Siguenos</h3>
                         <div class="widget-body">
-                            <p class="follow-me-icons">
-                                <a href="https://twitter.com/DeMonitoreo" target="_blank"><i class="fa fa-twitter fa-2"></i></a>
-                                <!-- <a href=""><i class="fa fa-dribbble fa-2"></i></a>
-                                <a href=""><i class="fa fa-github fa-2"></i></a> -->
-                                <a href="https://www.facebook.com/Opemedios-586086271483511/" target="_blank"><i class="fa fa-facebook fa-2"></i></a>
-                                <a href=""><i class="fa fa-instagram fa-2"></i></a>
-                            </p>    
+                            <div class="social">
+                                <div class="social-tw">
+                                    <a href="https://twitter.com/DeMonitoreo" target="_blank">
+                                        <i class="fab fa-twitter"></i>
+                                    </a>
+                                </div>
+                                <div class="social-fb">
+                                    <a href="https://www.facebook.com/OPEMEDIOS/" target="_blank">
+                                        <i class="fab fa-facebook-f"></i>
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                     </div>
+                    <!-- /2018 -->
 
-                    <!-- <div class="col-md-6 widget">
-                        <h3 class="widget-title">Text widget</h3>
-                        <div class="widget-body">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi, dolores, quibusdam architecto voluptatem amet fugiat nesciunt placeat provident cumque accusamus itaque voluptate modi quidem dolore optio velit hic iusto vero praesentium repellat commodi ad id expedita cupiditate repellendus possimus unde?</p>
-                            <p>Eius consequatur nihil quibusdam! Laborum, rerum, quis, inventore ipsa autem repellat provident assumenda labore soluta minima alias temporibus facere distinctio quas adipisci nam sunt explicabo officia tenetur at ea quos doloribus dolorum voluptate reprehenderit architecto sint libero illo et hic.</p>
-                        </div>
-                    </div> -->
 
                 </div> <!-- /row of widgets -->
             </div>
@@ -59,7 +57,7 @@
                     <div class="col-md-6 widget">
                         <div class="widget-body">
                             <p class="text-right">
-                                Copyright &copy; 2016, Opemedios. Designed by <a href="https://twitter.com/codeisaac" rel="designer">Isaac Daniel</a> 
+                                Copyright &copy; <?=date('Y')?>, Opemedios.</a> 
                             </p>
                         </div>
                     </div>
@@ -69,12 +67,13 @@
         </div>
 
 </footer>
+<?php $dev_src = ""; ?>
     <!-- JavaScript libs are placed at the end of the document so the pages load faster -->
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-    <script src="/assets/assets_client/js/headroom.min.js"></script>
-    <script src="/assets/assets_client/js/jQuery.headroom.min.js"></script>
-    <script src="/assets/assets_client/js/template.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+    <script src="<?=$dev_src?>/assets/assets_client/js/headroom.min.js"></script>
+    <script src="<?=$dev_src?>/assets/assets_client/js/jQuery.headroom.min.js"></script>    
+    <script src="<?=$dev_src?>/assets/assets_client/js/template.js"></script>
     <?= $js ?>
 </body>
 </html>

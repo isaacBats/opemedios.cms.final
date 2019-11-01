@@ -1,4 +1,5 @@
 <?php 
+date_default_timezone_set('America/Mexico_City');
 
 use utilities\Image;
 use utilities\TipoPortadas;
@@ -44,14 +45,14 @@ class AdminColumns extends Controller
 			$tipo_portada = TipoPortadas::PRIMERAS_PLANAS;
 			$type = Util::tipoPortada($tipo_portada);
 			$pdf = $this->filesPdfRepo->getToday($type);
-			
+
 			$covers = $this->getCovers($tipo_portada, 'portada', date('Y-m-d'));
 
 			$this->header_admin( $titulo . ' - ', $this->css );
 			require $this->adminviews . 'portadasView.php';
 			$this->footer_admin( $this->js );
 		}else{
-      header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
+      header( "Location: https://{$_SERVER["HTTP_HOST"]}/panel/login");
     }
 
 	}
@@ -72,7 +73,7 @@ class AdminColumns extends Controller
 				require $this->adminviews . 'portadasView.php';
 			$this->footer_admin( $this->js );
 		}else{
-            header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
+            header( "Location: https://{$_SERVER["HTTP_HOST"]}/panel/login");
         }
 
 	}
@@ -93,7 +94,7 @@ class AdminColumns extends Controller
 				require $this->adminviews . 'portadasView.php';
 			$this->footer_admin( $this->js );
 		}else{
-            header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
+            header( "Location: https://{$_SERVER["HTTP_HOST"]}/panel/login");
         }
 
 	}
@@ -101,10 +102,6 @@ class AdminColumns extends Controller
 	public function columnasPoliticas()
 	{
 		if( isset( $_SESSION['admin'] ) ){
-
-			$this->css .= '<link rel="stylesheet" href="/admin/lib/summernote/summernote.css">';
-			$this->js .= '<script src="/admin/lib/summernote/summernote.js"></script>';
-
 			$titulo = 'Columnas Politicas';
 			$action = '/panel/prensa/guardar-columna';
 			$tipo_columna = TipoColumnas::COLUMNAS_POLITICAS;
@@ -117,7 +114,7 @@ class AdminColumns extends Controller
 				require $this->adminviews . 'columnasView.php';
 			$this->footer_admin( $this->js );
 		}else{
-            header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
+            header( "Location: https://{$_SERVER["HTTP_HOST"]}/panel/login");
         }
 
 	}
@@ -125,10 +122,6 @@ class AdminColumns extends Controller
 	public function columnasFinancieras()
 	{
 		if( isset( $_SESSION['admin'] ) ){
-
-			$this->css .= '<link rel="stylesheet" href="/admin/lib/summernote/summernote.css">';
-			$this->js .= '<script src="/admin/lib/summernote/summernote.js"></script>';
-
 			$titulo = 'Columnas Financieras';
 			$action = '/panel/prensa/guardar-columna';
 			$tipo_columna = TipoColumnas::COLUMNAS_FINANCIERAS;
@@ -141,7 +134,7 @@ class AdminColumns extends Controller
 				require $this->adminviews . 'columnasView.php';
 			$this->footer_admin( $this->js );
 		}else{
-            header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
+            header( "Location: https://{$_SERVER["HTTP_HOST"]}/panel/login");
         }
 
 	}
@@ -186,7 +179,7 @@ class AdminColumns extends Controller
 			$_SESSION['alerts']['portada'] = $saveRow;
 			header( 'Location: ' . $_SERVER['HTTP_REFERER'] );
 		}else{
-            header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
+            header( "Location: https://{$_SERVER["HTTP_HOST"]}/panel/login");
         }		
 	}
 
@@ -209,7 +202,7 @@ class AdminColumns extends Controller
 			$_SESSION['alerts']['columnas'] = $saveRow;
 			header( 'Location: ' . $_SERVER['HTTP_REFERER'] );
 		}else{
-            header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
+            header( "Location: https://{$_SERVER["HTTP_HOST"]}/panel/login");
         }		
 	}
 
@@ -287,7 +280,7 @@ class AdminColumns extends Controller
 			require $this->adminviews . 'editColumnView.php';
 			$this->footer_admin( $this->js );
 		}else{
-            header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
+            header( "Location: https://{$_SERVER["HTTP_HOST"]}/panel/login");
         }				
 	}
 
@@ -303,7 +296,7 @@ class AdminColumns extends Controller
 			require $this->adminviews . 'columnView.php';
 			$this->footer_admin( $this->js );
 		}else{
-            header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
+            header( "Location: https://{$_SERVER["HTTP_HOST"]}/panel/login");
         }	
 	}
 
@@ -353,7 +346,7 @@ class AdminColumns extends Controller
 			header( 'Location: /panel/prensa/show/' . $typeColumn . '/' . $id);
 
 		}else{
-            header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
+            header( "Location: https://{$_SERVER["HTTP_HOST"]}/panel/login");
         }
 
 	}
@@ -386,7 +379,7 @@ class AdminColumns extends Controller
 			echo json_encode($rs); 
 
 		}else{
-            header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
+            header( "Location: https://{$_SERVER["HTTP_HOST"]}/panel/login");
         }
 	}
 
@@ -418,7 +411,7 @@ class AdminColumns extends Controller
 			echo json_encode($rs); 
 
 		}else{
-            header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
+            header( "Location: https://{$_SERVER["HTTP_HOST"]}/panel/login");
         }
 	}
 
@@ -438,9 +431,35 @@ class AdminColumns extends Controller
 				$covers = $this->portadasRepo->getCovers(date('Y-m-d'), $type);
 			}
 
+			$itemsPiority =  $this->fuentesRepo->getOrderPriority($type);
+
+			$filterCovers = [];
+			foreach ($covers->rows as $key => $cover) {
+			  if (in_array($cover['fuente_id'], $itemsPiority)) {
+			    //echo "se encontro: " . $cover['id'] . "\t" .  "en la posicion: " . $key . "\r";
+			    array_push($filterCovers, $cover);
+			    unset($covers->rows[$key]);
+			  }
+			}
+			$mergeCovers = [];
+			  //ordenar los de prioridad
+			foreach($itemsPiority as $clave => $id){
+				foreach($filterCovers as $key => $item) {
+					if ($item['fuente_id'] == $id) {
+						array_push($mergeCovers, $item);
+						array_splice($filterCovers, $key, 1);
+					}
+				}
+			}
+			//agregar los restantes
+			foreach($covers->rows as $key => $cover) {
+				array_push($mergeCovers, $cover);
+			}
+			$covers->rows = $mergeCovers;
 			ob_start();
 			require $this->views . 'media/covers_pdf.php';
 			$body = ob_get_clean();
+			
 			$path = $covers->rows[0]['imagen'];
 			$explode = explode('/', $path);
 			$fileName = "{$type}_Diarias_" . date('Ymd'). ".pdf";
@@ -456,7 +475,7 @@ class AdminColumns extends Controller
 			}
 
 		} else {
-      header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
+      header( "Location: https://{$_SERVER["HTTP_HOST"]}/panel/login");
     }	
 	}
 
@@ -475,10 +494,12 @@ class AdminColumns extends Controller
 			} else {
 				$covers = $this->portadasRepo->getCoversColumnas(date('Y-m-d'), $type);
 			}
+
 			// vdd([$typw,$covers]);
 			ob_start();
 			require $this->views . 'media/covers_pdf_columns.php';
 			$body = ob_get_clean();
+			
 			$path = $covers->rows[0]['imagen'];
 			$explode = explode('/', $path);
 			$fileName = "{$type}_Diarias_" . date('Ymd'). ".pdf";
@@ -494,7 +515,7 @@ class AdminColumns extends Controller
 			}
 
 		} else {
-      header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
+      header( "Location: https://{$_SERVER["HTTP_HOST"]}/panel/login");
     }	
 	}
 }

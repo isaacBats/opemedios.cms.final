@@ -48,7 +48,7 @@ class AdminNewRE extends AdminNews{
 			$campos = ob_get_clean();
 			$this->addNew($campos, $this->fuente );
 		}else{
-            header( "Location: http://{$_SERVER["HTTP_HOST"]}/panel/login");
+            header( "Location: https://{$_SERVER["HTTP_HOST"]}/panel/login");
         }
 	}
 

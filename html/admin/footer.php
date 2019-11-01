@@ -43,31 +43,33 @@
 
     </div>
     <!-- /#wrapper -->
+    <?php $dev_path = ""; ?>
     <!-- jQuery -->
-    <script src="/assets/bower_components/jquery/dist/jquery.min.js"></script>
-    <script src="/admin/js/jquery-ui.js" type="text/javascript"></script>
+    <script src='<?=$dev_path;?>/assets/bower_components/jquery/dist/jquery.min.js'></script>
+    <script src='<?=$dev_path?>/admin/js/jquery-ui.js' type='text/javascript'></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="/assets/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src='<?=$dev_path;?>/assets/bower_components/bootstrap/dist/js/bootstrap.min.js'></script>
     
     <!-- Metis Menu Plugin JavaScript -->
-    <script src="/assets/bower_components/metisMenu/dist/metisMenu.min.js"></script>
+    <script src='<?=$dev_path;?>/assets/bower_components/metisMenu/dist/metisMenu.min.js'></script>
 
     <!-- Custom Theme JavaScript -->
-    <script src="/assets/js/sb-admin-2.js"></script>
+    <script src='<?=$dev_path;?>/assets/js/sb-admin-2.js'></script>
     <!-- validate JavaScript -->
-    <script src="/admin/js/jquery.validate.js"></script>
+    <script src='<?=$dev_path;?>/admin/js/jquery.validate.js'></script>
 
     <!-- Select2 JavaScript -->
-    <script type="text/javascript" src="/assets/js/select2.min.js"></script>
-    <script type="text/javascript" src="/assets/bower_components/moment/min/moment.min.js"></script>
-    <script type="text/javascript" src="/admin/js/datetimepicker.js"></script>
-                    
-
+    <script type="text/javascript" src='<?=$dev_path;?>/assets/js/select2.min.js'></script>
+    <script type="text/javascript" src='<?=$dev_path;?>/assets/bower_components/moment/min/moment.min.js'></script>
+    <script type="text/javascript" src='<?=$dev_path;?>/admin/js/datetimepicker.js'></script>
+    <script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>
+    <!-- JS CKEDITOR -->
+    <script src="https://cdn.ckeditor.com/4.11.4/standard/ckeditor.js"></script>
     <?= $javaScripts  ?>
     
     <!-- Custom JS Admin -->
-    <script src="/admin/js/custom.js" type="text/javascript"></script>
+    <script src='<?=$dev_path;?>/admin/js/custom.js' type="text/javascript"></script>
     <script type="text/javascript">
         $(function() {
           $(document).on('change', ':file', function() {

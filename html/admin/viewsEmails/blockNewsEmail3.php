@@ -373,7 +373,7 @@
 									<!-- src="http://lorempixel.com/200/200/16/Font" --> 
 									<!-- <td class="small" width="20%" style="vertical-align: top; padding-right:10px;"><img src="/<?php //echo $value['logo_font'] ?>" /></td> -->
 									<td>
-										<h4><?= $value['title'] ?></h4>
+										<h4><?= utf8_decode($value['title']) ?></h4>
 										<p class=""><?= utf8_decode(cortarTexto($value['extract'], 150)) ?></p>
 										<p>
 											<small class="text-help">(

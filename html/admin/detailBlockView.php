@@ -3,17 +3,19 @@
         <h1 class="col-sm-6 col-md-8 col-lg-8"><?= $block->rows['name'] ?></h1>
         <button class="btn btn-primary pull-right mb-10 mt-20 ml-20 <?php if(isset($_GET['titulo'])) echo 'invisible'; ?>" id="block-add-new"><i class="fa fa-plus"></i> Agregar noticia</button>
         <a href="/panel/news/blocks/<?= $id ?>" class="btn btn-primary pull-right mb-10 mt-20 ml-20 <?php if(!isset($_GET['titulo'])) echo ' invisible'; ?>" id="block-save"><i class="fa fa-save"></i> Guardar</a>
-        <button class="btn btn-outline btn-default pull-right mb-10 mt-20" id="block-edit">Editar bloque</button>
+        <button class="btn btn-outline btn-default pull-right mb-10 mt-20" id="block-edit">Editar Newsletter</button>
         <button class="btn btn-outline btn-default pull-right mb-10 mt-20 invisible" id="block-cancel">Cancelar</button>
     </div>    <!-- /.col-lg-12 -->
 </div>
 <div class="row">
     <div class="col-sm-12 col-md-12 col-lg-12 mb-20">
-        <form method="post" action="/panel/block/edit" class="form-inline invisible" id="form-block-edit">
+        <form method="post" action="/panel/block/edit" 
+        		enctype="multipart/form-data" 
+        		class="form-inline invisible" id="form-block-edit">
         	<fieldset id="activ-form-edit" disabled>
 	            <input type="hidden" name="blockId" value="<?= base64_encode( $id ) ?>" />                
 	            <div class="form-group">
-	                <label for="nombre del bloque">Nombre del bloque: </label>
+	                <label for="nombre del bloque">Nombre del Newsletter: </label>
 	                <input class="form-control" name="blockName" value="<?= $block->rows['name'] ?>" required>                
 	            </div>
 	            <div class="form-group">
@@ -29,6 +31,16 @@
 	                    <?php } } }?>
 	                </select>                
 	            </div>
+	            <div class="form-group">
+                    <div class="input-group">
+                        <label class="input-group-btn">
+                            <span class="btn btn-primary">
+                                Imágen del bloque <input name="banner-img" type="file" style="display: none;">
+                            </span>
+                        </label>
+                        <input type="text" class="form-control" readonly="">
+                    </div>
+            	</div>
 	            <input type="submit" class="btn btn-success" value="Editar">
 	        </fieldset>
         </form>
@@ -170,7 +182,8 @@
         <div class="panel panel-default">
             <div class="panel-heading block-send">
                 <h3><?= $block->rows['empresa'] ?></h3>
-                <a href="javascript:void(0);" class="btn btn-success mt-10 pull-right" id="block-contactos-btn">Selecciona contactos para enviar bloque</a>
+                <a href="/panel/news/blocks/preview/<?=$id?>" target="_blank" class="btn btn-info mt-10 pull-right" style="margin: 10px;">Vista previa</a> 
+                <a href="javascript:void(0);" class="btn btn-success mt-10 pull-right" id="block-contactos-btn">Selecciona contactos para enviar Newsletter</a>
             </div><!-- /.panel-heading -->
             <div class="panel-body">
             <?php if( is_array( $noticiasBloque ) ) {
@@ -188,6 +201,7 @@
                                 	<dd><?= $noticia['fuente'] ?></dd>
                             	</dl>
                             	<a href="javascript:void(0);" data-bn="<?= base64_encode( $noticia['bnid'] ) ?>" data-toggle="modal" data-target="#myModal" class="block-remove-new">X</a>
+                            	<a href="/panel/new/view/<?=$noticia['noticiaId']?>" class="block-detail-new btn btn-info" target="_blank">Ver</a>
             				</article>
             <?php } } }else{ ?>
             	<div class="alert alert-success"><?= $noticiasBloque ?></div>
